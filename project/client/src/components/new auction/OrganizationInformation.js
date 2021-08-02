@@ -1,9 +1,13 @@
 import React from 'react';
 import { saveOrganizationDetails } from "../../store/actions/newAuction";
 import { connect } from "react-redux";
+import { Link, useRouteMatch, Route } from 'react-router-dom';
+
 const OrganizationInformation = (props) => {
     let oName = "";
-    let photos = [];
+    let photos = [];    
+    const {url,path} = useRouteMatch();
+
     return (
         <form>
             <label> The organization name</label>
@@ -12,7 +16,9 @@ const OrganizationInformation = (props) => {
             <label>Upload photos of the organization</label>
             {/* לשמור תמונות שהוא מעלה */}
             {/* <input type="button" value="upload photos" onChange={(e) => photos.push()} /> */}
-            <input type="button" value="Ok" onClick={() => { props.saveOrganizationDetails(oName) }} />
+             <Link to={`/4`}><input type="button" value="Ok" onClick={() => { props.saveOrganizationDetails(oName) }} /></Link>
+             <Link to={`/2`}>prev</Link>
+
         </form>);
  }
     //submit!!!!

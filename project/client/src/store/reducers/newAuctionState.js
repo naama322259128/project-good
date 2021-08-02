@@ -11,7 +11,8 @@ const initialState = {
     registrationEndDate: null,//תאריך סיום ההרשמה
     organizationName: "",
     organizationPhotos:null,
-    stage:0
+    stage:0,
+    finalStepModalIsOpen:false//האם להציג את המודל של האישור הסופי
 }
 export const newAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -96,6 +97,16 @@ export const newAuctionReducer = (state = initialState, action) => {
                 organizationName:action.payload
                 // organizationPhotos:action.payload.photos
             };
+        case actionTypes.SET_FINAL_STEP:
+            return{
+                ...state,
+                finalStepModalIsOpen:action.payload
+            }
+        case actionTypes.SAVE_DATA:
+            return{
+            ...state,
+            finalStepModalIsOpen:false
+        }
     }
     return state;
 }

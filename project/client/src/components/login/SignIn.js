@@ -1,61 +1,139 @@
-import { connect } from 'react';
-import React, { Component } from 'react'
-import { Input, Menu, Segment } from 'semantic-ui-react'
+import p from '../../img/profile.png';
+import React, { useState } from 'react';
+import { signIn } from '../../store/actions/signIn';
+import { connect } from 'react-redux';
+import "./Login.scss"
+import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import clsx from 'clsx';
+import LockRoundedIcon from '@material-ui/icons/LockRounded';
+import { makeStyles } from '@material-ui/core/styles';
+import FilledInput from '@material-ui/core/FilledInput';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3),
+  },
+  textField: {
+    width: '25ch',
+  },
+  input_pas_ma: {
+    color: '#8e8e95',
+    height:'4vh !important',
+    background: 'none !important',
+    color: '#8e8e95 !important',
+    width: '100% !important',
+    padding: '0vw !important',
+    borderBottomColor: '8e8e95 !important',
+    marginInline: '5% !important',
+    background: 'none !important',
+    // alignItems:'center !important'
+    alignSelf:'flex-end'
+
+  },
+  eye:{
+    color: '#8e8e95',
+
+  }
+}));
+
 const SignIn = (props) => {
-    let fullName = "";
-    let password = "";
-    return (<>
+  const [values, setValues] = React.useState({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false,
+  });
 
-        <div className="ui placeholder segment" >
-            <img src='../../img/profile.png' />
-            <div class="ui divided selection list">
-                <a class="item">
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
-                    Kumquats
-  </a>
-                <a class="item">
-                    <div class="ui purple horizontal label">Candy</div>
-                    Ice Cream
-  </a>
-                <a class="item">
-                    <div class="ui red horizontal label">Fruit</div>
-                    Orange
-  </a>
-                <a class="item">
-                    <div class="ui horizontal label">Dog</div>
-                    Poodle
-  </a>
-            </div>
-            <div className="ui two column very relaxed stackable grid">
-                <div className="column">
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
 
-                    <div className="ui form">
-                        <div className="field">
-                            <label>Username</label>
-                            <div className="ui left icon input">
-                                <input type="text" placeholder="Username" onChange={(e) => { fullName = e.target.value }} required="true" />
-                                <i className="user icon"></i>
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label>Password</label>
-                            <div className="ui left icon input">
-                                <input type="password" onChange={(e) => { password = e.target.value }} required="true" />
-                                <i className="lock icon"></i>
-                            </div>
-                        </div>
-                        <div className="ui blue submit button">Login</div>
-                    </div>
-                </div>
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
-            </div>
 
+
+  const classes = useStyles();
+  let [password, setPassword] = useState("");
+  let [email, setEmail] = useState("");
+
+  return (
+    <center>
+      <form className={classes.root} noValidate autoComplete="off">
+        <div>
+          <img className='profile_img' src={p}></img>
+          <div className={"inputs_btns"}>
+          <FilledInput
+            type={'text'}
+            placeholder="Email"
+            required
+            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+            variant="filled"
+            onChange={(e) => { setEmail(e.target.value) }}
+            startAdornment={
+              <InputAdornment position="start">
+                <i class="envelope icon"></i>
+              </InputAdornment>
+            }
+          />
+          <FilledInput
+            type={values.showPassword ? 'text' : 'password'}
+            onChange={handleChange('password')}
+            placeholder="Password"
+            required
+            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+            variant="filled"
+            onChange={(e) => { setPassword(e.target.value) }}
+            startAdornment={
+              <InputAdornment position="start">
+<i class="lock icon"></i>            
+              </InputAdornment>
+            }
+            endAdornment={
+              <InputAdornment position="end">
+                
+                <IconButton
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  className={classes.eye}
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+          <Button type="button" variant="contained" className={"login_btn"} onClick={() => props.signIn(password, email)}>Login</Button>
+          {password == "" ? <h2>Forgot Password?</h2> : null}
+          {/* <i class="eye slash outline icon"></i> */}
+
+          </div>
         </div>
-    </>
-    );
+
+      </form>
+    </center>
+  );
 }
-
-
-
-
-export default SignIn;
+const mapStateToProps = (state) => {
+  return {
+    
+  };
+}
+export default connect(mapStateToProps, {signIn })(SignIn);

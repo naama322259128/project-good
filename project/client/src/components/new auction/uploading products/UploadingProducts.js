@@ -1,17 +1,18 @@
 import {showAddProduct} from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { Link, useRouteMatch, Route } from 'react-router-dom';
 
 import  AddProduct  from "./AddProduct";
 import ProductsList from "./ProducstList";
 const UploadingProducts = (props) => {
-    const history = useHistory();
 
     return (<>
         <input type="button" className="ui button" onClick={props.showAddProduct} value="add product"/>
         <AddProduct />
         <ProductsList/>
-        <input type="button" value="Ok" onClick={history.push('/organizationInformation')}/>
+        <Link to={`/3`}><input type="button" value="Ok"/></Link>
+        <Link to={`/`}>prev</Link>
+
     </>);
 }
 

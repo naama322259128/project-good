@@ -2,13 +2,11 @@ const express=require("express");
 const mongoose=require("mongoose");
 const cors=require("cors");
 const user=require("./routes/user");
-const pricingGroup=require("./routes/pricingGroup");
 const product=require("./routes/product");
 const purchasePackage=require("./routes/purchasePackage");
-const sale=require("./routes/sale");
-const saleManager=require("./routes/saleManager");
-const siteManager=require("./routes/siteManager");
-const subscription=require("./routes/subscription");
+const auction=require("./routes/auction");
+// const archivalAuction=require("./routes/archivalAuction");
+
 
 mongoose.connect("mongodb://localhost:27017/projectDB").then(()=>{
     console.log("connected to mongoDB");    
@@ -17,15 +15,15 @@ mongoose.connect("mongodb://localhost:27017/projectDB").then(()=>{
 const app=express();
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/users",user);
-app.use("/pricingGroups",pricingGroup);
 app.use("/products",product);
 app.use("/purchasePackages",purchasePackage);
-app.use("/sales",sale);
-app.use("/saleManagers",saleManager);
-app.use("/siteManagers",siteManager);
-app.use("/subscriptions",subscription);
+app.use("/auctions",auction);
+//app.use("/archivalAuctions",archivalAuction);
+
+
 app.listen(5000, () => {
-    console.log("listening on port 5000")
+    console.log("listening on port 5000");
 })

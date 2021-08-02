@@ -18,6 +18,8 @@ const getById = async (req, res) => {
 
 const addAuction = async (req, res) => {
     let auction = req.body;
+    //לעדכן קוד אוטומטי
+    //auction.code=
     let newAuction = new Auction(auction);
     try {
         await newAuction.save();

@@ -1,4 +1,6 @@
-const ArchivalAuction = require("../models/archivalAuction");
+/*
+
+const ArchivalAuction = require("../models/archivalAuction")
 const mongoose = require("mongoose");
 
 const getAll = async (req, res) => {
@@ -39,3 +41,5 @@ const deleteArchivalAuction = async (req, res) => {
 module.exports = {
     getAll, getById, addArchivalAuction, deleteArchivalAuction
 }
+
+*/

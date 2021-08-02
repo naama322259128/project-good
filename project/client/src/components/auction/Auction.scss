@@ -1,0 +1,42 @@
+
+.glass{
+    background-color: rgba(226, 226, 226, 0.15) !important; 
+    backdrop-filter: blur(5px) !important;
+  }
+  /* The Modal (background) */
+  .modal2 {
+    // display: none; /* Hidden by default */
+    position: fixed !important; /* Stay in place */
+    z-index: 1 !important; /* Sit on top */
+    padding-top: 10vh !important; /* Location of the box */
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important; /* Full width */
+    height: 100% !important; /* Full height */
+    overflow: auto !important; /* Enable scroll if needed */
+    background-size: 100% 100% !important;
+  }
+  .scrolling.dimmable.dimmed>.dimmer{
+    overflow:hidden !important;
+  }
+  .ui.modal{
+    width: 60vw;
+    height: 60vh;
+    overflow: hidden;
+    margin: 0;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    left: 20vw;
+    top: 20vh;
+  }
+  .dimmed.dimmable>.ui.animating.dimmer, .dimmed.dimmable>.ui.visible.dimmer, .ui.active.dimmer{
+    backdrop-filter: blur(5px);
+    background-color: #0000003b ; 
+  }
+  img{
+    width: 30vw;
+    height: 15vw;
+  }
+  .ui.modal>.header{
+    border-bottom: none!important;
+  }

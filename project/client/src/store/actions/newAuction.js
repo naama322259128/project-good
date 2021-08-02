@@ -64,3 +64,11 @@ export const saveOrganizationDetails = (name) => {
         payload: name
     }
 }
+export const setLastModal=(b)=>{
+    console.log("bbb: "+b);
+    
+     return {
+        type: actionTypes.SET_FINAL_STEP,
+        payload: b
+    }
+}

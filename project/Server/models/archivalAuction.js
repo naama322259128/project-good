@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
-const auctionSchema = require("./auction").schema;
-const archivalAuctionSchema = new mongoose.Schema({ auctionSchema });
+const auction = require("./auction").Model;
 
-const ArchivalAuction = mongoose.model("Archivalauction", archivalAuctionSchema);
+const archivalAuctionSchema = new mongoose.Schema({ auction });
+
+const ArchivalAuction =  mongoose.model("Archivalauction", archivalAuctionSchema);
+
 module.exports = ArchivalAuction;
+

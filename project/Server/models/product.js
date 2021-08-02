@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
     code: { type: String, required: true },
@@ -9,8 +10,10 @@ const productSchema = new mongoose.Schema({
         type: mongoose.SchemaTypes.ObjectId, ref: 'User'
     },
     //קוד זוכה, מצביע לטבלת זוכים
+    //טבלת נרשמים: קוד לקוח+כמות כרטיסים
 });
 const Product = mongoose.model("Product", productSchema);
-/*module.exports.model = Product;
-module.exports.schema = productSchema;*/
+//module.exports.model = Product;
+//module.exports.schema = productSchema;
 module.exports = Product;
+

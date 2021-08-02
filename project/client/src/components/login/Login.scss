@@ -1,10 +1,15 @@
 body {
+  //text-align: center !important;
+
   font-family: Arial, Helvetica, sans-serif;
 }
-
+.glass{
+  background-color: rgba(226, 226, 226, 0.15);
+  backdrop-filter: blur(5px);
+}
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  // display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 10vh; /* Location of the box */
@@ -13,12 +18,7 @@ body {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  // background-color: rgb(0,0,0); /* Fallback color */
-  // background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
- background-image: url('../../img/background_login.png');
   background-size: 100% 100%;
-  // opacity:0.4;
-
 }
 
 /* Modal Content */
@@ -37,29 +37,26 @@ z-index: 30
   border-end-end-radius:4vh;
   border-end-start-radius:4vh;
   opacity:1.0 !important;
-
+color:#8e8e95 !important;
 }
 #login_top{
   background-image: url('../../img/login_top.gif');
 margin-bottom: 1vh;
  background-size: 100% 100%;
- height: 75%;
+ height: 65%;
  width: 100%; 
-  opacity:1.0 !important;
-
 }
 
 #btn_signup,#btn_signin{
     display: inline-block;
-  width: 50%;
-  text-align: center;
-color: white;
-font-size: 2vh;
-  height: 10%;
-  padding-top: 5%; 
-  //  opacity:1.0 !important;
-   //z-index
-
+    width: 50%;
+    text-align: center;
+    color: white;
+    font-size: 2vh;
+    height: 10%;
+    padding-top: 5%; 
+    cursor:pointer;
+    
 }
 #btn_signup{
 background-color: rgb(33,33,105);
@@ -70,8 +67,45 @@ border-start-end-radius:4vh;
   background-color: rgb(93,30,90);
   border-start-start-radius:4vh;
   }
-  
-img{
-  width: 10vw;
-  height: 5vh;
+.glass{
+  background-color: rgba(226, 226, 226, 0.15);
+  backdrop-filter: blur(5px);
+}
+.profile_img{
+  width: 12vw;
+  height: 24vh;
+}
+h2{
+  color: #8e8e95;
+  font-family:'Arial'!important;
+  font-style: initial;
+  top:20vw !important;
+  font-size: 1vw !important;
+  display:inline-block;
+  font-style: italic;
+}
+.login_btn{
+  color: #ffffff !important;
+  width:45%;
+  background-color: #5d1e5a !important;
+  height: 4vh !important;
+}
+
+.inputs_btns{
+  width:60%;
+  justify-content:space-between
+}
+
+.MuiFilledInput-root:before{
+border-color: #8e8e95 !important;
+}
+.MuiSvgIcon-root{
+  margin-bottom: 5%;
+}
+
+.MuiFilledInput-inputAdornedStart{
+align-self: flex-end
+}
+i.icon:before{
+  font-size: 1.3em;
 }

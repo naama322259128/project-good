@@ -16,19 +16,32 @@ const getById = async (req, res) => {
     return res.send(user);
 }
 
+// האם קיים משתמש בעל מייל כזה
+const isEmailExist = async (em) => {
+    let user = await User.find({ 'email': em });
+    if (user.length == 0) { return false; }
+    else { return true; }
+}
+//הוספת משתמש
 const addUser = async (req, res) => {
     let user = req.body;
-    let newUser = new User(user);
-    try {
-        await newUser.save();
-        console.log(newUser)
-        return res.send(newUser);
+    if (await isEmailExist(user.email) == true) {
+       console.log("This email is exist");
+        return res.send("This email is exist");
     }
-    catch (err) {
-        return res.status(400).send(err.message)
+    else {
+        let newUser = new User(user);
+        try {
+            await newUser.save();
+            return res.send(newUser);
+        }
+        catch (err) {
+            return res.status(400).send(err.message)
+        }
     }
-}
 
+}
+//עדכון משתמש
 const updateUser = async (req, res) => {
     let userBody = req.body;
     let { id } = req.params;
@@ -45,6 +58,7 @@ const updateUser = async (req, res) => {
     await user.save();
     return res.send(user);
 }
+
 const updateUserStatus = async (req, res) => {
     let { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -56,6 +70,7 @@ const updateUserStatus = async (req, res) => {
     await user.save();
     return res.send(user);
 }
+//מחיקת משתמש
 const deleteUser = async (req, res) => {
     let { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -67,9 +82,16 @@ const deleteUser = async (req, res) => {
     return res.send(user);
 }
 
-
+//בודקת האם משתמש קיים לפי סיסמא ומייל
+const isUserExsit = async (req, res) => {
+    let { password, email } = req.params;
+    let user = await User.find(e => { e.email == email && e.password == password });
+    if (!user)
+        return res.status(400).send("Incorrect details entered");
+    return res.send(user);
+}
 
 module.exports = {
-    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus
+    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExsit
 
 }
