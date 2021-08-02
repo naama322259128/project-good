@@ -1,0 +1,12 @@
+export const ADD_NEW_USER = "ADD_NEW_USER";//הוספת משתמש חדש
+export const SHOW_ADD_GROUP= "SHOW_ADD_GROUP";//AddGroup להראות את הקומפוננטה 
+export const SHOW_ADD_PACKAGE= "SHOW_ADD_PACKAGE";//AddPackage להראות את הקומפוננטה 
+export const ADD_GROUP= "ADD_GROUP";//הוספת מחיר לקבוצות תמחור
+export const ADD_PACKAGE= "ADD_PACKAGE";//
+export const DELETE_PACKAGE= "DELETE_PACKAGE";//
+export const DELETE_GROUP= "DELETE_GROUP";//
+export const ADD_PRODUCT= "ADD_PRODUCT";
+export const SHOW_ADD_PRODUCT= "SHOW_ADD_PRODUCT";
+export const DELETE_PRODUCT= "DELETE_PRODUCT";
+export const SAVE_AUCTION_DETAILS= "SAVE_AUCTION_DETAILS";
+export const SAVE_ORGANIZATION_DETAILS= "SAVE_ORGANIZATION_DETAILS";
