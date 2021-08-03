@@ -7,12 +7,12 @@ import { Provider } from 'react-redux';
 import { createStore,applyMiddleware,compose,combineReducers } from 'redux';
 import reducer from "./store/reducers/userState";
 import thunk from 'redux-thunk';
-import { newAuctionReducer, userReducer,existingAuctionReducer } from "./store/reducers";
+import { newAuctionReducer, userReducer,existingAuctionReducer,mainReducer } from "./store/reducers";
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const myStore = createStore(combineReducers({ auction: newAuctionReducer, user: userReducer, existingAuction:existingAuctionReducer}),
+const myStore = createStore(combineReducers({ auction: newAuctionReducer, user: userReducer, existingAuction:existingAuctionReducer,main:mainReducer}),
   composeEnhancers(
     applyMiddleware(thunk))
 );
@@ -31,8 +31,4 @@ ReactDOM.render(
 </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

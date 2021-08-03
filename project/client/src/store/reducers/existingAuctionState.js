@@ -5,6 +5,6 @@ const initialState = {
 }
 export const existingAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
-      }
+    }
     return state;
 }
