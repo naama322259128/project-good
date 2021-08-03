@@ -1,6 +1,11 @@
 import * as actionTypes from '../actionTypes';
 const initialState = {
-    productsList: [],//רשימת מוצרים של מכירה זו
+
+    productsList: [
+        { code: "111", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 },
+        { code: "111", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 },
+        { code: "111", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 }
+    ],//רשימת מוצרים של מכירה זו
 
 }
 export const existingAuctionReducer = (state = initialState, action) => {
