@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
     let auctions = await Auction.find();
     return res.send(auctions);
 }
-
+ 
 const getById = async (req, res) => {
     let { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
