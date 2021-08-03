@@ -22,15 +22,15 @@ const useStyles = makeStyles({
   },
 });
 
-const Product = () => {
+const Product = (props) => {
   const [open, setOpen] = React.useState(false)
   const classes = useStyles();
   let [cnt, setCnt] = useState(0);
-  let image_src = p;
-  let code = "555";
-  let description = "big and nice car. Mitzubishi outlander.";
-  let name = "car";
-  let price = 10;
+  let image_src = p;//עד שנעשה את הקטע של התמונות
+  let code = props.item.code;
+  let description = props.item.description;
+  let name = props.item.name;
+  let price = props.item.prices;
 
   return (
     <Modal
