@@ -22,8 +22,8 @@ const useStyles = makeStyles({
     height: 160,
   },
 });
-
-const Product = (props) => {
+//צפיה בסל
+const ViewCart = (props) => {
   const [open, setOpen] = React.useState(false)
   const classes = useStyles();
   let [cnt, setCnt] = useState(0);
@@ -73,4 +73,4 @@ const Product = (props) => {
 }
 
 
-export default connect(null, {addProductToCart})(Product);
+export default connect(null, {addProductToCart})(viewCart);
