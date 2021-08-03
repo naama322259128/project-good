@@ -11,7 +11,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import{addProductToCart} from '../../store/actions/user'
+import{DeleteProductFromCart} from '../../store/actions/user'
 
 const useStyles = makeStyles({
   root: {
@@ -25,12 +25,12 @@ const useStyles = makeStyles({
 const Cart = (props) => {
   const [open, setOpen] = React.useState(false)
   const classes = useStyles();
-  let [cnt, setCnt] = useState(0);
+  let [cnt, setCnt] = useState(props.item.cnt);
   let image_src = p;//עד שנעשה את הקטע של התמונות
-  let code = props.item.code;
-  let description = props.item.description;
-  let name = props.item.name;
-  let price = props.item.prices;
+  let code = props.item.product.code;
+  let description = props.item.product.description;
+  let name = props.item.product.name;
+  let price = props.item.product.prices;
 
   return (
     <Modal
@@ -49,10 +49,8 @@ const Cart = (props) => {
 
         {/* במקום כפתור עגלה לשים כפתור פח */}
           {/* הוסף לסל */}
-          <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon onClick={(e) => {e.stopPropagation();props.addProductToCart(props.item,cnt); }}/>
-          </IconButton>
-          <i class="trash icon"></i>
+
+          <i class="trash icon" onClick={(e)=>{e.stopPropagation();props.DeleteProductFromCart(code)}}></i>         
           {/* הורד כמות */}
           <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation();}}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
@@ -75,4 +73,4 @@ const Cart = (props) => {
 }
 
 
-export default connect(null, {addProductToCart})(Cart);
+export default connect(null, {DeleteProductFromCart})(Cart);

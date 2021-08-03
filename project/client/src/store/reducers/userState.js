@@ -32,6 +32,15 @@ export const userReducer = (state = initialState, action) => {
                     shoppingCart: arr
                 }
             }
+            case actionTypes.DELETE_PRODUCT_FROM_CART:
+                {
+                    let arr2 = state.shoppingCart.
+                    filter(p=>p.product.code!==action.payload)
+                    return {
+                        ...state,
+                        shoppingCart: arr2
+                    }
+                }
     }
 
     return state;
