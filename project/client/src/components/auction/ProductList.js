@@ -4,7 +4,7 @@ import Product from './Product'
 const ProductList = (props) => {
     return (<div>
         {props.arr.map((item) => {
-            return (<Product key={parseInt(item.code)} item={item}/>)
+            return (<Product key={parseInt(item.code)} item={item.product}/>)
         })}
     </div>);
 }

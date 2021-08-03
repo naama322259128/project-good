@@ -4,7 +4,7 @@ import Auction from './Auction'
 const AuctionList = (props) => {
     return (<div>
         {props.arr.map((item) => {
-            return (<Auction key={parseInt(item.code)} item={item}/>)
+            return (<Auction key={parseInt(item.product.code)} item={item.product}/>)
         })}
     </div>);
 }
