@@ -10,7 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
+import { connect } from "react-redux";
+import{addProductToCart} from '../../store/actions/user'
 
 
 const useStyles = makeStyles({
@@ -48,7 +49,7 @@ const Product = (props) => {
           />
           {/* הוסף לסל */}
           <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon onClick={(e) => {e.stopPropagation();addProductToCart(props.item); }}/>
+            <AddShoppingCartIcon onClick={(e) => {e.stopPropagation();props.addProductToCart(props.item); }}/>
           </IconButton>
           {/* הורד כמות */}
           <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation();}}  >-</IconButton>
@@ -71,4 +72,5 @@ const Product = (props) => {
   )
 }
 
-export default Product;
+
+export default connect(null, {addProductToCart})(Product);
