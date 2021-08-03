@@ -48,7 +48,7 @@ const Product = (props) => {
           />
           {/* הוסף לסל */}
           <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon onClick={(e) => {e.stopPropagation(); }}/>
+            <AddShoppingCartIcon onClick={(e) => {e.stopPropagation();addProductToCart(props.item); }}/>
           </IconButton>
           {/* הורד כמות */}
           <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation();}}  >-</IconButton>
