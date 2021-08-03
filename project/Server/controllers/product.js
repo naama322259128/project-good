@@ -5,6 +5,18 @@ const getAll = async (req, res) => {
     let product = await Product.find();
     return res.send(product);
 }
+
+//מחזירה את כל רשימת המוצרים לפי קוד מכירה
+const getAllProduct = async (req, res) => {
+    let { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.findById(id);
+    if (!auction)
+    return res.status(404).send("There is no auction with such an ID number");
+    return res.send(auction.productList);
+}
+
 const getById = async (req, res) => {
     let { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -30,5 +42,5 @@ const addProduct = async (req, res) => {
 
 
 module.exports = {
-    getAll, getById, addProduct
+    getAll, getById, addProduct, getAllProduct
 }
