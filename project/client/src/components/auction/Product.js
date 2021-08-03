@@ -66,9 +66,9 @@ const Product = () => {
       {"code: "+code}<br/>
         {description}<br/>
         <img src={image_src}></img>
-        <Button color='green' onClick={() => setOpen(false)}>
+        {/* <Button color='green' onClick={() => setOpen(false)}>
           <Icon name='checkmark' /> Yes
-        </Button>
+        </Button> */}
       </Modal.Content>
     </Modal>
   )
