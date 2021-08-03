@@ -48,14 +48,14 @@ const Product = (props) => {
           />
           {/* הוסף לסל */}
           <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon />
+            <AddShoppingCartIcon onClick={(e) => {e.stopPropagation(); }}/>
           </IconButton>
           {/* הורד כמות */}
-          <IconButton color="primary" onClick={() => { let c = cnt; if (cnt > 0) setCnt(c - 1) }}  >-</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation();}}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
           <h2>{cnt}</h2>
           {/* הוסף כמות */}
-          <IconButton color="primary" onClick={() => { let c = cnt; setCnt(c + 1) }}>+ </IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1);e.stopPropagation(); }}>+ </IconButton>
         </Card>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
