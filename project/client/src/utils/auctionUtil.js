@@ -12,6 +12,7 @@ export const addAuction = (auction) => {
             if (succ.status != 404)
                 dispatch(actions.setLastModal(false));
             //לאפס סטייט
+            
         })
     }     
 }
