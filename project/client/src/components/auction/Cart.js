@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 //צפיה בסל
-const ViewCart = (props) => {
+const Cart = (props) => {
   const [open, setOpen] = React.useState(false)
   const classes = useStyles();
   let [cnt, setCnt] = useState(0);
@@ -47,6 +47,8 @@ const ViewCart = (props) => {
             image={image_src}
             title="Contemplative Reptile"
           />
+
+        {/* במקום כפתור עגלה לשים כפתור פח */}
           {/* הוסף לסל */}
           <IconButton color="primary" aria-label="add to shopping cart">
             <AddShoppingCartIcon onClick={(e) => {e.stopPropagation();props.addProductToCart(props.item,cnt); }}/>
@@ -73,4 +75,4 @@ const ViewCart = (props) => {
 }
 
 
-export default connect(null, {addProductToCart})(viewCart);
+export default connect(null, {addProductToCart})(Cart);
