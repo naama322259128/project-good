@@ -7,13 +7,12 @@ import { Provider } from 'react-redux';
 import { createStore,applyMiddleware,compose,combineReducers } from 'redux';
 import reducer from "./store/reducers/userState";
 import thunk from 'redux-thunk';
-import { newAuctionReducer, userReducer } from "./store/reducers";
+import { newAuctionReducer, userReducer,existingAuctionReducer } from "./store/reducers";
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// const myStore = createStore(courseReducer);
-const myStore = createStore(combineReducers({ auction: newAuctionReducer, user: userReducer }),
+const myStore = createStore(combineReducers({ auction: newAuctionReducer, user: userReducer, existingAuction:existingAuctionReducer}),
   composeEnhancers(
     applyMiddleware(thunk))
 );
