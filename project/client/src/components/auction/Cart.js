@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
 import{addProductToCart} from '../../store/actions/user'
 
-
 const useStyles = makeStyles({
   root: {
     maxWidth: 300,
@@ -53,12 +52,13 @@ const Cart = (props) => {
           <IconButton color="primary" aria-label="add to shopping cart">
             <AddShoppingCartIcon onClick={(e) => {e.stopPropagation();props.addProductToCart(props.item,cnt); }}/>
           </IconButton>
+          <i class="trash icon"></i>
           {/* הורד כמות */}
           <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation();}}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
           <h2>{cnt}</h2>
           {/* הוסף כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1);e.stopPropagation(); }}>+ </IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1);e.stopPropagation(); }}>+</IconButton>
         </Card>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
