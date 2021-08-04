@@ -14,3 +14,9 @@ export const deleteProductFromCart = (code) => {
         payload: code
     }
 }
+export const setShowCart=(b)=>{
+      return {
+        type: actionTypes.SET_SHOW_CART,
+        payload: b
+    }
+}

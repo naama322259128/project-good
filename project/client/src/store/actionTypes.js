@@ -18,3 +18,5 @@ export const SET_FINAL_STEP="SET_FINAL_STEP"//האם להציג את המודל 
 export const SAVE_DATA="SAVE_DATA"//שמירת נתוני מכירה סינית חדשה במסד נתונים
 export const ADD_PRODUCT_TO_CART="ADD_PRODUCT_TO_CART"//הכנסת מוצר לסל
 export const DELETE_PRODUCT_FROM_CART="DELETE_PRODUCT_FROM_CART"//מחיקת מוצר מסל 
+
+export const SET_SHOW_CART="SET_SHOW_CART";//האם להציג רת הסל
