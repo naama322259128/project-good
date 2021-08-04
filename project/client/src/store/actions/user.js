@@ -8,7 +8,7 @@ export const addProductToCart = (product) => {
     }
 }
 //מחיקת מוצר מסל
-export const DeleteProductFromCart = (code) => {
+export const deleteProductFromCart = (code) => {
     return {
         type: actionTypes.DELETE_PRODUCT_FROM_CART,
         payload: code

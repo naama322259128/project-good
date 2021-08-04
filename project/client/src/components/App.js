@@ -11,7 +11,6 @@ import {BrowserRouter as Router,Route,Redirect,Switch} from 'react-router-dom';
 import Product from './auction/Product';
 import ProductList from './auction/ProductList';
 import Cart from './auction/Cart';
-import ViewCart from './auction/ViewCart';
 
 function App() {
   return (
@@ -27,7 +26,7 @@ function App() {
 //  <NewAuction/> 
 //<Product/>
 //  <ProductList/> 
-<ViewCart/>
+<Cart/>
 
 );
 }
