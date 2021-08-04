@@ -11,7 +11,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import{addProductToCart} from '../../store/actions/user'
+import { addProductToCart } from '../../store/actions/user'
 
 
 const useStyles = makeStyles({
@@ -39,6 +39,7 @@ const Product = (props) => {
       open={open}
       trigger={
         <Card className={classes.root} >
+          {name}
           <Typography gutterBottom variant="h5" component="h2">
             {price}
           </Typography>
@@ -49,14 +50,14 @@ const Product = (props) => {
           />
           {/* הוסף לסל */}
           <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon onClick={(e) => {e.stopPropagation();props.addProductToCart(props.item,cnt); }}/>
+            <AddShoppingCartIcon onClick={(e) => { e.stopPropagation(); props.addProductToCart(props.item, cnt); }} />
           </IconButton>
           {/* הורד כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation();}}  >-</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
           <h2>{cnt}</h2>
           {/* הוסף כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1);e.stopPropagation(); }}>+ </IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); e.stopPropagation(); }}>+ </IconButton>
         </Card>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
@@ -64,8 +65,8 @@ const Product = (props) => {
 
       <Header ><h1>{name}</h1></Header>
       <Modal.Content>
-      {"code: "+code}<br/>
-        {description}<br/>
+        {"code: " + code}<br />
+        {description}<br />
         <img src={image_src}></img>
       </Modal.Content>
     </Modal>
@@ -73,4 +74,4 @@ const Product = (props) => {
 }
 
 
-export default connect(null, {addProductToCart})(Product);
+export default connect(null, { addProductToCart })(Product);

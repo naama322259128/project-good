@@ -3,13 +3,11 @@ const initialState = {
     currentUser: null,
     loginIsOpen: false,
     shoppingCart: [
-        { cnt:1,   product:    { code: "111", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 }},
-        { cnt:4,   product:    { code: "222", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 }},
-        { cnt:18,   product:    { code: "333", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 }},
-        { cnt:3,   product:    { code: "444", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 }}
-
+        { cnt: 1, product: { code: "111", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
+        { cnt: 4, product: { code: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
+        { cnt: 18, product: { code: "333", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } }
     ],//סל מוצרים
-    showCart:false
+    showCart: false
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -33,22 +31,22 @@ export const userReducer = (state = initialState, action) => {
                     shoppingCart: arr
                 }
             }
-            case actionTypes.DELETE_PRODUCT_FROM_CART:
-                {
-                    let arr2 = state.shoppingCart.
-                    filter(p=>p.product.code!==action.payload)
-                    return {
-                        ...state,
-                        shoppingCart: arr2
-                    }
-                } 
-                 case actionTypes.SET_SHOW_CART:
-                {
-                    return {
-                        ...state,
-                        showCart: action.payload
-                    }
+        case actionTypes.DELETE_PRODUCT_FROM_CART:
+            {
+                let arr2 = state.shoppingCart.
+                    filter(p => p.product.code !== action.payload)
+                return {
+                    ...state,
+                    shoppingCart: arr2
                 }
+            }
+        case actionTypes.SET_SHOW_CART:
+            {
+                return {
+                    ...state,
+                    showCart: action.payload
+                }
+            }
     }
 
     return state;

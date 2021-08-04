@@ -11,20 +11,18 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Product from './auction/Product';
 import ProductList from './auction/ProductList';
 import Cart from './auction/Cart';
-import AuctionList from './auction/AuctionList';
 
 function App() {
   return (
-    // <Router>
-    //   <div>
-    //     <Switch>
-    //       <Route path="/" component={Home} />
-    //     </Switch>
-    //   </div>
-    // </Router>
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/" component={Home} />
+        </Switch>
+      </div>
+    </Router>
 
 
-<AuctionList/>
 
   );
 }

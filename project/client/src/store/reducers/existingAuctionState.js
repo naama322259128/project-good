@@ -1,16 +1,24 @@
 import * as actionTypes from '../actionTypes';
+import { allAuctions } from './mainState'
 const initialState = {
 
-    productsList: [
-        { code: "111", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 },
-        { code: "222", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 },
-         { code: "333", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15},
-        { code: "444", name:"aaa", image: "465", description: "osjqw jrngu3i", price: 15 }
-    ],//רשימת מוצרים של מכירה זו
-
+    productsList: []//רשימת מוצרים של מכירה זו
 }
 export const existingAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.SET_CURRENT_AUCTION:
+            {
+
+                let auc = allAuctions.find((element) => element.code === action.payload);
+                return {
+                    //אולי נצטרך להגדיר כאן עוד דברים
+                    ...state,
+                    //קיבלנו לכאן קוד מכירה
+                    //לקחת את מערך המוצרים של המכירה הזו מהשרת
+                    //רק בינתיים לקחתי מהסטייט המרכזי
+                    productsList: auc.productList
+                }
+            }
     }
     return state;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Auction.scss';
-import {  Header,  Modal } from 'semantic-ui-react';
+import { Header, Modal } from 'semantic-ui-react';
 import p from '../../img/car.jpg';
 import IconButton from '@material-ui/core/IconButton';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import{deleteProductFromCart} from '../../store/actions/user'
+import { deleteProductFromCart } from '../../store/actions/user'
 
 const useStyles = makeStyles({
   root: {
@@ -36,6 +36,7 @@ const ProductInCart = (props) => {
       open={open}
       trigger={
         <Card className={classes.root} >
+          {name}
           <Typography gutterBottom variant="h5" component="h2">
             {price}
           </Typography>
@@ -45,16 +46,16 @@ const ProductInCart = (props) => {
             title="Contemplative Reptile"
           />
 
-        {/* במקום כפתור עגלה לשים כפתור פח */}
+          {/* במקום כפתור עגלה לשים כפתור פח */}
           {/* הוסף לסל */}
 
-          <i class="trash icon" onClick={(e)=>{e.stopPropagation();props.deleteProductFromCart(code)}}></i>         
+          <i class="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(code) }}></i>
           {/* הורד כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation();}}  >-</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
           <h2>{cnt}</h2>
           {/* הוסף כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1);e.stopPropagation(); }}>+</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); e.stopPropagation(); }}>+</IconButton>
         </Card>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
@@ -62,8 +63,8 @@ const ProductInCart = (props) => {
 
       <Header ><h1>{name}</h1></Header>
       <Modal.Content>
-      {"code: "+code}<br/>
-        {description}<br/>
+        {"code: " + code}<br />
+        {description}<br />
         <img src={image_src}></img>
       </Modal.Content>
     </Modal>
@@ -71,4 +72,4 @@ const ProductInCart = (props) => {
 }
 
 
-export default connect(null, {deleteProductFromCart})(ProductInCart);
+export default connect(null, { deleteProductFromCart })(ProductInCart);
