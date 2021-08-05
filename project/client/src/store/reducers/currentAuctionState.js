@@ -4,7 +4,7 @@ const initialState = {
 
     productsList: []//רשימת מוצרים של מכירה זו
 }
-export const existingAuctionReducer = (state = initialState, action) => {
+export const currentAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_CURRENT_AUCTION:
             {

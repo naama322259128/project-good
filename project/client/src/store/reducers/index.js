@@ -1,4 +1,4 @@
 export  {newAuctionReducer}  from "./newAuctionState";
 export  {userReducer}  from "./userState";
-export  {existingAuctionReducer}  from "./existingAuctionState";
+export  {currentAuctionReducer}  from "./currentAuctionState";
 export  {mainReducer}  from "./mainState";
