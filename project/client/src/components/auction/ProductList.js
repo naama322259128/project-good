@@ -11,7 +11,7 @@ const ProductList = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        arr: state.existingAuction.productsList,
+        arr: state.currentAuction.productsList,
     }
 }
 
