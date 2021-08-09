@@ -18,7 +18,7 @@ const Home = (props) => {
     {/* זה מיורק רק זמנית */}
     {/* <button onClick={() => { props.setLogin(true); }}>Log in</button>
     {props.loginIsOpen == true ? (<Login />) : null} */}
-<header></header>
+    <header></header>
     <h1>home page</h1>
     <Switch>
       <Route path={`/current_auction`}><CurrentAuction /></Route>

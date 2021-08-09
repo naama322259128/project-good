@@ -20,3 +20,4 @@ export const ADD_PRODUCT_TO_CART="ADD_PRODUCT_TO_CART"//הכנסת מוצר לס
 export const DELETE_PRODUCT_FROM_CART="DELETE_PRODUCT_FROM_CART"//מחיקת מוצר מסל 
 
 export const SET_CURRENT_AUCTION="SET_CURRENT_AUCTION";//לאתחל את מערך המוצרים, ועוד נתונים של המכירה הנוכחית
+export const SET_CNT_PRODUCT_IN_CART="SET_CNT_PRODUCT_IN_CART";//עדכון כמות מוצר מתוך הסל

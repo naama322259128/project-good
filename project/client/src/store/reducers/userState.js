@@ -23,8 +23,12 @@ export const userReducer = (state = initialState, action) => {
             }
         case actionTypes.ADD_PRODUCT_TO_CART:
             {
-                let arr = [...state.shoppingCart, action.payload];
-
+                let code = action.payload.product.code;
+                let cnt = action.payload.cnt;
+                let index = state.shoppingCart.findIndex(item => item.product.code == code);
+                let arr = [...state.shoppingCart];
+                if (index == -1) arr.push(action.payload);
+                else arr[index].cnt += cnt;
                 return {
                     ...state,
                     shoppingCart: arr
@@ -39,7 +43,19 @@ export const userReducer = (state = initialState, action) => {
                     shoppingCart: arr2
                 }
             }
-     
+        case actionTypes.SET_CNT_PRODUCT_IN_CART:
+            {
+                debugger;
+                let code = action.payload.code;
+                let cnt = action.payload.cnt;
+                let index = state.shoppingCart.findIndex(item => item.product.code == code);
+                let arr = [...state.shoppingCart];
+                if (index != -1) arr[index].cnt = cnt;
+                return {
+                    ...state,
+                    shoppingCart: arr
+                }
+            }
     }
 
     return state;

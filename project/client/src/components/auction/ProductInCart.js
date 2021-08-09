@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import { deleteProductFromCart } from '../../store/actions/user'
+import { deleteProductFromCart,setCnt } from '../../store/actions/user'
 
 const useStyles = makeStyles({
   root: {
@@ -46,16 +46,14 @@ const ProductInCart = (props) => {
             title="Contemplative Reptile"
           />
 
-          {/* במקום כפתור עגלה לשים כפתור פח */}
-          {/* הוסף לסל */}
-
+          {/* פח */}
           <i class="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(code) }}></i>
           {/* הורד כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); props.setCnt(code,cnt); e.stopPropagation(); }}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
           <h2>{cnt}</h2>
           {/* הוסף כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); e.stopPropagation(); }}>+</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); props.setCnt(code,cnt); e.stopPropagation(); }}>+</IconButton>
         </Card>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
@@ -72,4 +70,4 @@ const ProductInCart = (props) => {
 }
 
 
-export default connect(null, { deleteProductFromCart })(ProductInCart);
+export default connect(null, { deleteProductFromCart ,setCnt})(ProductInCart);
