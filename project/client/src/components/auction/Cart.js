@@ -12,7 +12,7 @@ const Cart = (props) => {
         </div>);
 }
 const mapStateToProps = (state) => {
-    return {
+    return {  
         arr: state.user.shoppingCart,    }
 }
 
