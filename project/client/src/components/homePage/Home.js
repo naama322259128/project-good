@@ -26,7 +26,9 @@ const Home = (props) => {
       <Route path={`/cart`}><Cart /></Route>
       <Route path={`/`}><AuctionList /></Route>
     </Switch>
-  </div>);
+    <footer></footer>
+  </div>
+  );
 }
 const mapStateToProps = state => {
   return { loginIsOpen: state.user.loginIsOpen };
