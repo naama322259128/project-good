@@ -6,8 +6,7 @@ const initialState = {
         { cnt: 1, product: { code: "111", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 4, product: { code: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 18, product: { code: "333", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } }
-    ],//סל מוצרים
-    showCart: false
+    ]//סל מוצרים
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -40,13 +39,7 @@ export const userReducer = (state = initialState, action) => {
                     shoppingCart: arr2
                 }
             }
-        case actionTypes.SET_SHOW_CART:
-            {
-                return {
-                    ...state,
-                    showCart: action.payload
-                }
-            }
+     
     }
 
     return state;
