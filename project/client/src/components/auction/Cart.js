@@ -13,14 +13,9 @@ const Cart = (props) => {
         </div>);
 }
 const mapStateToProps = (state) => {
-<<<<<<< HEAD
-    return {  
-        arr: state.user.shoppingCart,    }
-=======
     return {
         arr: state.user.shoppingCart,
     }
->>>>>>> 7b5e9a66103c5886483e456c8964c5a37a4c3739
 }
 
 export default connect(mapStateToProps, {})(Cart);
