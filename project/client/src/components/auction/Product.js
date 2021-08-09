@@ -50,7 +50,7 @@ const Product = (props) => {
           />
           {/* הוסף לסל */}
           <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon onClick={(e) => { e.stopPropagation(); props.addProductToCart(props.item, cnt); }} />
+            <AddShoppingCartIcon onClick={(e) => { e.stopPropagation(); props.addProductToCart(props.item, cnt);setCnt(0); }} />
           </IconButton>
           {/* הורד כמות */}
           <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>

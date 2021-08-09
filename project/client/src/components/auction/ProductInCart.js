@@ -46,16 +46,14 @@ const ProductInCart = (props) => {
             title="Contemplative Reptile"
           />
 
-          {/* במקום כפתור עגלה לשים כפתור פח */}
-          {/* הוסף לסל */}
-
+          {/* פח */}
           <i class="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(code) }}></i>
           {/* הורד כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); props.setCount(code,cnt); e.stopPropagation(); }}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
           <h2>{cnt}</h2>
           {/* הוסף כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); e.stopPropagation(); }}>+</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); props.setCount(code,cnt); e.stopPropagation(); }}>+</IconButton>
         </Card>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}

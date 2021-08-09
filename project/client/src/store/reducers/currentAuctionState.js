@@ -1,7 +1,7 @@
 import * as actionTypes from '../actionTypes';
 import { allAuctions } from './mainState'
 const initialState = {
-
+    registrationEndDate: new Date(2021, 10, 9, 17, 0, 0),//תאריך אחרון להרשמה
     productsList: []//רשימת מוצרים של מכירה זו
 }
 export const currentAuctionReducer = (state = initialState, action) => {
