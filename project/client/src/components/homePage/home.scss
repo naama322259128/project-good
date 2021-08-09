@@ -16,10 +16,11 @@ display: inline-block;
    background-color: #f3e7f226 !important;
   width:10vw !important;   
   border-radius: 5vw !important;
-  margin-left: 80vw!important;
+  left: 80vw!important;
   height: 5vh !important;
-
-}
+position: fixed !important;
+top:5vh !important;
+z-index:5 !important}
 footer{
   background-image: url('../../img/footer.png');
   background-size: 100% 100%;
