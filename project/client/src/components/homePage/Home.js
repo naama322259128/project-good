@@ -5,6 +5,7 @@ import Login from '../login/Login';
 import { Link, useRouteMatch, Route, Switch } from 'react-router-dom';
 import AuctionList from './AuctionList';
 import CurrentAuction from '../auction/CurrentAuction';
+import Cart from '../auction/Cart';
 
 const Home = (props) => {
 
@@ -19,6 +20,7 @@ const Home = (props) => {
     <h1>home page</h1>
     <Switch>
       <Route path={`/current_auction`}><CurrentAuction /></Route>
+      <Route path={`/cart`}><Cart /></Route>
       <Route path={`/`}><AuctionList /></Route>
     </Switch>
   </div>);
