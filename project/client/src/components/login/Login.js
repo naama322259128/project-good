@@ -6,20 +6,9 @@ import {setLogin}from '../../store/actions/home'
 import { connect } from "react-redux";
 
 const Login = (props) => {
-  // const [isOpen, setIsOpen] = useState(true);
   
   const [show, setShow] = useState(<SignIn />);
-  // const myRef = React.createRef();
 
-/*
-  const openModal = () => {
-    setIsOpen(true);
-    // myRef.current.style.display = "block";
-  }
-  const closeModal = () => {
-    setIsOpen(false);
-    // myRef.current.style.display = "none";
-  }*/
   const signInShow = (e) => {
     setShow(<SignIn/>);
   } 
