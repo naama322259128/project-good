@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from "react-redux";
 import { setLogin } from '../../store/actions/home';
 import Login from '../login/Login';
+import './home.scss';
+
 import { Link, useRouteMatch, Route, Switch } from 'react-router-dom';
 import AuctionList from './AuctionList';
 import CurrentAuction from '../auction/CurrentAuction';
@@ -16,7 +18,7 @@ const Home = (props) => {
     {/* זה מיורק רק זמנית */}
     {/* <button onClick={() => { props.setLogin(true); }}>Log in</button>
     {props.loginIsOpen == true ? (<Login />) : null} */}
-
+<header></header>
     <h1>home page</h1>
     <Switch>
       <Route path={`/current_auction`}><CurrentAuction /></Route>
