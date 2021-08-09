@@ -8,6 +8,7 @@ import { Link, useRouteMatch, Route, Switch } from 'react-router-dom';
 import AuctionList from './AuctionList';
 import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
+import Button from '@material-ui/core/Button';
 
 const Home = (props) => {
 
@@ -16,10 +17,14 @@ const Home = (props) => {
     {/* log-out להוסיף כפתור התנתקות */}
 
     {/* זה מיורק רק זמנית */}
-    {/* <button onClick={() => { props.setLogin(true); }}>Log in</button>
-    {props.loginIsOpen == true ? (<Login />) : null} */}
 
-<header><div className="logo"> </div></header>
+<header>
+  <div className="logo"></div>
+  <Button type="button" className="btnLogin" onClick={() => { props.setLogin(true);}}>Login</Button>
+
+  {props.loginIsOpen == true ? (<Login />) : null} 
+
+</header>
   
     <Switch>
       <Route path={`/current_auction`}><CurrentAuction /></Route>
