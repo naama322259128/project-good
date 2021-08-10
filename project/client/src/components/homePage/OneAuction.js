@@ -10,9 +10,11 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     minWidth: 300,
     width: '100%',
+  
   },
   image: {
-    left: '5vw',
+    top: 50,
+    left: '10vw',
     position: 'relative',
     height: 250,
     [theme.breakpoints.down('xs')]: {
@@ -28,17 +30,17 @@ const useStyles = makeStyles((theme) => ({
         opacity: 0,
       },
       '& $imageTitle': {
-        border: '4px solid currentColor',
+        border: '1px solid currentColor',
       },
     },
   },
   focusVisible: {},
   imageButton: {
     position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    left: 20,
+    right: 20,
+    top: 15,
+    bottom:15,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -46,22 +48,22 @@ const useStyles = makeStyles((theme) => ({
   },
   imageSrc: {
     position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    left: 20,
+    right: 20,
+    top: 10,
+    bottom: 10,
     backgroundSize: 'cover',
-    backgroundPosition: 'center 40%',
+    backgroundPosition: 'center 27%',
   },
   //רקע
   imageBackdrop: {
     position: 'absolute',
-    left: 3,
-    right: 3,
-    top: 3,
-    bottom: 3,
+    left: 20,
+    right:20,
+    top:10,
+    bottom:10,
     backgroundColor: theme.palette.common.black,
-    opacity: 0.4,
+    opacity: 0.6,
     transition: theme.transitions.create('opacity'),
   },
   //הכיתוב
@@ -91,7 +93,8 @@ const OneAuction = (props) => {
       className={classes.image}
       focusVisibleClassName={classes.focusVisible}
       style={{
-        width: '30%',
+        width: '27%',
+       
       }}
     >
       <span
