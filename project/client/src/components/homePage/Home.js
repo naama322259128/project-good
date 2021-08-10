@@ -14,18 +14,29 @@ const Home = (props) => {
   return (<div>
 
     {/* log-out להוסיף כפתור התנתקות */}
-    <header>
-      <Link to={"/home"}>  <div className="logo" ></div></Link>
-      <Button type="button" className="btnLogin btn" onClick={() => {  window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>
-      <p>Construction  <br />auction easily</p>
-      <Button type="button" className="btnMoreInfo btn">More Info</Button>
-      <Link to={"/newAuction"}><Button type="button" className="btn btnNewAuction">NEW AUCTION</Button></Link>
-      {props.loginIsOpen == true ? (<Login />) : null}
+    <header className="home_header">
 
+      <Link to={"/home"}>  <div className="logo" ></div></Link>
+      <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>
+      <div id="home_text">
+        <h3>Build your </h3> 
+        <h5>chinese auction</h5>
+        <p>
+          If you dreamed of having your own Chinese auction,<br />
+          here you can easily do so.<br />
+          In a short, simple, light and convenient process,<br />
+          you will create your Chinese auction.
+        </p>
+        <Button type="button" className="btnMoreInfo btn">MORE INFO</Button>
+        <Link to={"/newAuction"}><Button type="button" className="btn btnNewAuction">BUILD CHINESE AUCTION</Button></Link>
+        {props.loginIsOpen == true ? (<Login />) : null}
+      </div>
+      <div id="right_pic"></div>
+      <div id="left_pic"></div>
     </header>
 
     <AuctionList />
-    <footer></footer>
+    <footer className="home_footer"></footer>
   </div>
   );
 }

@@ -46,16 +46,17 @@
     margin: 2vw !important;
   }
  .auction_header{
-    background-image: url('../../img/header_small.png');
-    background-size: 100% 100%;
-    height:36vh ;
+    background-size: 100%;
     width: 100vw;
+    height: 28vh;
+    background-image: url('../../img/header_small.png');
+    position: fixed;
+    background-repeat: no-repeat;
   }
  .auction_footer{
     background-image: url('../../img/footer.png');
-    background-size: 100% 100%;
-    height:20vh;
     width: 100vw;
-    position: absolute;
-bottom: 0vh;
+    height: 18vh;
+    background-size: 100% ;
+    background-repeat: no-repeat;
  }

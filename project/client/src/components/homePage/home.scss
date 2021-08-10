@@ -1,16 +1,11 @@
 
-header{
-  background-image: url('../../img/header.webp');
-  background-size: 100% 100%;
-  height:150vh;
-  width: 100vw;
-}
+
 .logo{
   background-image: url('../../img/logo.png');
   background-size: 100%;
   background-repeat: no-repeat;
 
-  height: 28vh;
+  height: 8vh;
   width: 18vw;
 display: inline-block;
 cursor: pointer;
@@ -18,7 +13,7 @@ margin-top: 3vh;
 margin-left: 2vw;
 }
 .btnLogin{
-  right: 2vw !important;
+  right: 3vw !important;
   top: 3vh !important;
    background-color: #f3e7f226 !important;
   display: inline-block !important;
@@ -30,29 +25,64 @@ margin-left: 2vw;
   position: absolute !important;
 
 }
-p{
-  color: white;
-  font-size: 12vh;
-  margin-left:17vw;
-  font-family: 'Centaur';
+#home_text>p{
   line-height:0.8 !important;
-}
-.btnMoreInfo{
-  background-color: #e29c26 !important ;
-left:33vw;
-}
-.btnNewAuction{
-  background-color: #e29c26 !important;
-  left:24vw;
+  color: white;
+  font-size: 3vh; 
+   font-family: 'Centaur';
+   text-align: right !important;
+   line-height:1 !important;
 
 }
-footer{
-  background-image: url('../../img/footer.png');
+#home_text>h5{
+  line-height:0.8 !important;
+  color: white;
+  font-size: 9vh; 
+   font-family: 'Centaur';
+   text-align: right !important;
+
+}#home_text>h3{
+  line-height:0.8 !important;
+  color: white;
+  font-size: 14vh; 
+   font-family: 'Centaur';
+   text-align: right !important;
+}
+#home_text{
+  width: 32%;
+  left:12%;
+  top:12%;
+  position: relative;
+  text-align: center;
+
+}
+.btnMoreInfo{
+left: 14% !important;
+width: 10vw !important;
+background-color: #e29c26 !important ;
+}
+.btnNewAuction{
+  right:0% !important;
+width: 16vw !important;
+background-color: #e29c26 !important ;
+}
+.home_header{
+  background-image: url('../../img/home_header_backgroung.png');
   background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height:136vh;
+  width: 100vw;
+  position: relative;
+}
+.home_footer{
+  background-image: url('../../img/footer.png');
+  background-size: 100%;
   height:50vh;
+  background-repeat: no-repeat;
   width: 100vw;
 
 }
+
 .glass{
     background-color: rgba(226, 226, 226, 0.15) !important; 
     backdrop-filter: blur(5px) !important;
@@ -94,8 +124,28 @@ footer{
   .ui.modal>.header{
     border-bottom: none!important;
   }
-  span.makeStyles-imageSrc-23 {
-    background-image: '../../img/oneAuctionImage.png'!important;
-    background-repeat: no-repeat !important;
-    background-size: 100% 100% !important;
+ 
+
+  #right_pic{  
+    position: absolute;
+    display: inline-block;
+    width: 45%;
+    height: 90%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    right: 0vw;
+    top: 4%;
+    background-image: url('../../img/right_header_home.webp');
+
+  }
+   #left_pic{
+    background-image: url('../../img/left_circle_header_home.webp');
+    position: absolute;
+    display: inline-block;
+    height: 50%;
+    width: 11%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    left: 0vw;
+    top: 52%
   }

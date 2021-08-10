@@ -11,8 +11,18 @@ const NewAuction = (props) => {
     return (<>
        <header className="new_auction_header">
             {/* log-out להוסיף כפתור התנתקות */}
+
+
+
             <Link to={"/home"}>  <div className="logo" ></div></Link>
         </header>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <h1>New Auction</h1>
         {/* ארבעת המלבנים */}
         <Router>
