@@ -16,7 +16,7 @@ const Home = (props) => {
     {/* log-out להוסיף כפתור התנתקות */}
     <header>
       <Link to={"/home"}>  <div className="logo" ></div></Link>
-      <Button type="button" className="btnLogin btn" onClick={() => { props.setLogin(true); }}>Login</Button>
+      <Button type="button" className="btnLogin btn" onClick={() => {  window.scrollTo(500, 0); props.setLogin(true); }}>Login</Button>
       <p>Back to<br />School</p>
       <Button type="button" className="btnMoreInfo btn">More Info</Button>
       {props.loginIsOpen == true ? (<Login />) : null}
