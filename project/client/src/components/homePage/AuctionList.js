@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import OneAuction from './OneAuction'
+import OneAuction from './OneAuction';
 import { setCurrentAuction } from '../../store/actions/currentAuction'
 import { Link } from 'react-router-dom';
 
