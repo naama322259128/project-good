@@ -4,6 +4,7 @@ import { Link, Route, useRouteMatch, Switch, useLocation, useHistory } from 'rea
 import AuctionList from '../homePage/AuctionList';
 import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
+import './Auction.scss';
 const Auction = (props) => {
     const { url, path } = useRouteMatch();
 

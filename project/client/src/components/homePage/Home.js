@@ -17,9 +17,9 @@ const Home = (props) => {
     <header>
       <Link to={"/home"}>  <div className="logo" ></div></Link>
       <Button type="button" className="btnLogin btn" onClick={() => {  window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>
-      <p>Back to<br />School</p>
+      <p>Construction  <br />auction easily</p>
       <Button type="button" className="btnMoreInfo btn">More Info</Button>
-      <Link to={"/newAuction"}><Button type="button" className="btnNewAuction btn">NEW AUCTION</Button></Link>
+      <Link to={"/newAuction"}><Button type="button" className="btn btnNewAuction">NEW AUCTION</Button></Link>
       {props.loginIsOpen == true ? (<Login />) : null}
 
     </header>
