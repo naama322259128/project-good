@@ -19,7 +19,7 @@ const Home = (props) => {
       <Link to={"/home"}>  <div className="logo" ></div></Link>
       <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>
       <div id="home_text">
-        <h3>Build your </h3> 
+        <h3>Build your </h3>
         <h5>chinese auction</h5>
         <p>
           If you dreamed of having your own Chinese auction,<br />
@@ -28,7 +28,11 @@ const Home = (props) => {
           you will create your Chinese auction.
         </p>
         <Button type="button" className="btnMoreInfo btn">MORE INFO</Button>
-        <Link to={"/newAuction"}><Button type="button" className="btn btnNewAuction">BUILD CHINESE AUCTION</Button></Link>
+        <Link to={props.currentUser ? "/newAuction" : '#'}>
+          <Button onClick={props.currentUser ? null : () => props.setLogin(true)} type="button" className="btn btnNewAuction">
+            BUILD CHINESE AUCTION
+          </Button>
+        </Link>
         {props.loginIsOpen == true ? (<Login />) : null}
       </div>
       <div id="right_pic"></div>
@@ -41,6 +45,9 @@ const Home = (props) => {
   );
 }
 const mapStateToProps = state => {
-  return { loginIsOpen: state.user.loginIsOpen };
+  return {
+    loginIsOpen: state.user.loginIsOpen,
+    currentUser: state.user.currentUser
+  };
 }
 export default connect(mapStateToProps, { setLogin })(Home);
