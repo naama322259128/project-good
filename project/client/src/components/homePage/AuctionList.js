@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Auction from './OneAuction'
+import {OneAuction} from './OneAuction'
 import { setCurrentAuction } from '../../store/actions/currentAuction'
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const AuctionList = (props) => {
                     onClick={() =>{props.setCurrentAuction(item.code)}}
                     // to={`/auction:${item.code}`}> לא צריך אבל יותר יפה
                     to={`/auction`}>
-                    <Auction key={parseInt(item.code)} item={item} />
+                    <OneAuction key={parseInt(item.code)} item={item} />
                 </Link>
             )
         })}
