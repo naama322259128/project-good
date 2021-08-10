@@ -9,7 +9,7 @@ const AuctionPricing = () => {
     return (
         <>
             <Packages />
-            <Link to={`/2`}> <input type="button" value="ok"/></Link>       
+            <Link to={`newAuction/2`}> <input type="button" value="ok"/></Link>       
         </>
     );
 }
