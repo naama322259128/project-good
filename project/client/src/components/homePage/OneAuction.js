@@ -1,6 +1,6 @@
 import React from 'react'
 import './home.scss';
-import p from '../../img/oneAuctionImage.png';
+import p from '../../img/auction_pic.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
@@ -97,10 +97,10 @@ const OneAuction = (props) => {
         >
           <span
             className={classes.imageSrc}
-            /*style={{
-              backgroundImage:'../../img/oneAuctionImage.png'
+            style={{
+              backgroundImage:{p}
               //לשנות לאייטם נקודה תמונה
-            }}*/
+            }}
           />
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>
