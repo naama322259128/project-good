@@ -1,14 +1,16 @@
 import { connect } from "react-redux";
 import ProductList from './ProductList'
 import Cart from "./Cart";
-import { Link } from 'react-router-dom';
+import { Link, Route, useRouteMatch, Switch, useLocation } from 'react-router-dom'
 import Clock from "./Clock";
 
 const CurrentAuction = (props) => {
+    const { url, path } = useRouteMatch();
+
     return (<>
-        <Link to={`/cart`}>Cart</Link>
+        <Link to={`auction/cart`}>Cart</Link>
         {/* כפתור שמעביר לצפיה בסל */}
-<Clock/>
+        <Clock />
         {/* כאן נוסיף גם שעון, אודות, וכו */}
         <ProductList />
     </>);

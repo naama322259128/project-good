@@ -15,20 +15,16 @@ const Home = (props) => {
   return (<div>
 
     {/* log-out להוסיף כפתור התנתקות */}
-<header>
-  <div className="logo"></div>
-  <Button type="button" className="btnLogin btn" onClick={() => { props.setLogin(true);}}>Login</Button>
-  <p>Back to<br/>School</p>
-  <Button type="button"  className="btnMoreInfo btn">More Info</Button>
-  {props.loginIsOpen == true ? (<Login />) : null} 
+    <header>
+      <Link to={"/home"}>  <div className="logo" ></div></Link>
+      <Button type="button" className="btnLogin btn" onClick={() => { props.setLogin(true); }}>Login</Button>
+      <p>Back to<br />School</p>
+      <Button type="button" className="btnMoreInfo btn">More Info</Button>
+      {props.loginIsOpen == true ? (<Login />) : null}
 
-</header>
-  
-    <Switch>
-      <Route path={`/current_auction`}><CurrentAuction /></Route>
-      <Route path={`/cart`}><Cart /></Route>
-      <Route path={`/`}><AuctionList2/></Route>
-    </Switch>
+    </header>
+
+    <AuctionList />
     <footer></footer>
   </div>
   );

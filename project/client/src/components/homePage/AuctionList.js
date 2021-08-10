@@ -10,7 +10,7 @@ const AuctionList = (props) => {
                 <Link key={parseInt(item.code)}
                     onClick={() =>{props.setCurrentAuction(item.code)}}
                     // to={`/auction:${item.code}`}> לא צריך אבל יותר יפה
-                    to={`/current_auction`}>
+                    to={`/auction`}>
                     <Auction key={parseInt(item.code)} item={item} />
                 </Link>
             )
