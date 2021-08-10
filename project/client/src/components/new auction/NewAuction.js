@@ -6,7 +6,7 @@ import AuctionPricing from './auction pricing/AuctionPricing';
 import UploadingProducts from './uploading products/UploadingProducts';
 import { BrowserRouter as Router, Link, useRouteMatch, Route, Switch } from 'react-router-dom'
 import FinalStep from './FinalStep';
-
+import './NewAuction.scss';
 const NewAuction = (props) => {
     return (<>
        <header className="new_auction_header">
