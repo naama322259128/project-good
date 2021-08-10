@@ -15,7 +15,14 @@ const Auction = (props) => {
             <Link to={"/home"}>  <div className="logo" ></div></Link>
         </header>
 
-
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
         <Switch>
             <Route path={`${path}/cart`}><Cart /></Route>
