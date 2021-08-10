@@ -16,15 +16,15 @@ margin-top: 5vh;
 margin-left: 2.5vw;
 }
 .btnLogin{
+  right: 2vw !important;
+  top: 3vh !important;
   color: #ffffff !important;   
    background-color: #f3e7f226 !important;
-  width:10vw !important;   
+  width:8vw !important;   
   border-radius: 5vw !important;
-  left: 85vw!important;
-  height: 5vh !important;
-position: fixed !important;
-top:5vh !important;
-z-index:5 !important}
+  display: inline-block !important;
+  position: absolute !important;
+}
 footer{
   background-image: url('../../img/footer.png');
   background-size: 100% 100%;

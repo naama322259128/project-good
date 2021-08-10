@@ -8,7 +8,6 @@ import AuctionList from './AuctionList';
 import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
 import Button from '@material-ui/core/Button';
-import AuctionList2 from './AuctionList2';
 
 const Home = (props) => {
 
