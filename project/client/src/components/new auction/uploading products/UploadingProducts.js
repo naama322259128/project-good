@@ -10,7 +10,7 @@ const UploadingProducts = (props) => {
         <input type="button" className="ui button" onClick={props.showAddProduct} value="add product"/>
         <AddProduct />
         <ProductsList/>
-        <Link to={`/3`}><input type="button" value="Ok"/></Link>
+        <Link to={`newAuction/3`}><input type="button" value="Ok"/></Link>
         <Link to={`/`}>prev</Link>
 
     </>);

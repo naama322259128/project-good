@@ -13,9 +13,9 @@ const NewAuction = (props) => {
         {/* ארבעת המלבנים */}
         <Router>
             <Switch>
-                <Route path="/2"><UploadingProducts /></Route>
-                <Route path="/3"><OrganizationInformation /></Route>
-                <Route path="/4"><AuctionInformation /></Route>
+                <Route path="newAuction/2"><UploadingProducts /></Route>
+                <Route path="newAuctio/3"><OrganizationInformation /></Route>
+                <Route path="newAuctio/4"><AuctionInformation /></Route>
                 <Route path="/"><AuctionPricing /></Route>
             </Switch>
         </Router>
