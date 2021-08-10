@@ -27,7 +27,7 @@ const Home = (props) => {
     <Switch>
       <Route path={`/current_auction`}><CurrentAuction /></Route>
       <Route path={`/cart`}><Cart /></Route>
-      <Route path={`/`}><AuctionList2/></Route>
+      <Route path={`/`}><AuctionList/></Route>
     </Switch>
     <footer></footer>
   </div>
