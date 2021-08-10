@@ -97,9 +97,10 @@ const OneAuction = (props) => {
         >
           <span
             className={classes.imageSrc}
-            style={{
-              backgroundImage: {p},//לשנות לאייטם נקודה תמונה
-            }}
+            /*style={{
+              backgroundImage:'../../img/oneAuctionImage.png'
+              //לשנות לאייטם נקודה תמונה
+            }}*/
           />
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>

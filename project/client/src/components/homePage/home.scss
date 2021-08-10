@@ -6,10 +6,14 @@ header{
 }
 .logo{
   background-image: url('../../img/לוגו\ נעמה\ ומיכל.png');
-  background-size: 100% 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
   height:30vh;
-  width: 30vw;
+  width: 20vw;
 display: inline-block;
+cursor: pointer;
+margin-top: 5vh;
+margin-left: 2.5vw;
 }
 .btnLogin{
   color: #ffffff !important;   
@@ -26,7 +30,6 @@ footer{
   background-size: 100% 100%;
   height:50vh;
   width: 100vw;
-
 }
 .glass{
     background-color: rgba(226, 226, 226, 0.15) !important; 
@@ -68,4 +71,9 @@ footer{
   }
   .ui.modal>.header{
     border-bottom: none!important;
+  }
+  span.makeStyles-imageSrc-23 {
+    background-image: '../../img/oneAuctionImage.png'!important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
   }
