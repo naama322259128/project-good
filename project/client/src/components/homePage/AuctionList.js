@@ -10,7 +10,7 @@ const AuctionList = (props) => {
                 <Link key={parseInt(item.code)}
                     onClick={() =>{props.setCurrentAuction(item.code)}}
                     // to={`/auction:${item.code}`}> לא צריך אבל יותר יפה
-                    to={`/auction`}>
+                    to={props.currentUser?`/auction`:'#'}>
                     <OneAuction key={parseInt(item.code)} item={item} />
                 </Link>
             )
@@ -21,6 +21,7 @@ const AuctionList = (props) => {
 const mapStateToProps = (state) => {
     return {
         arr: state.main.auctionsList,
+        currentUser:state.user.currentUser
     }
 }
 
