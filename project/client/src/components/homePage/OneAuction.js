@@ -1,6 +1,5 @@
 import React from 'react'
 import './home.scss';
-import p from '../../img/auction_pic.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   image: {
-      left:'5vw',
+    left: '5vw',
     position: 'relative',
     height: 250,
     [theme.breakpoints.down('xs')]: {
@@ -57,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   //רקע
   imageBackdrop: {
     position: 'absolute',
-    left:3,
+    left: 3,
     right: 3,
     top: 3,
     bottom: 3,
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0.4,
     transition: theme.transitions.create('opacity'),
   },
-//הכיתוב
+  //הכיתוב
   imageTitle: {
     position: 'relative',
     padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
@@ -86,36 +85,35 @@ const OneAuction = (props) => {
   const classes = useStyles();
 
   return (<>
-  <ButtonBase
-          focusRipple
-          key={props.item.name}
-          className={classes.image}
-          focusVisibleClassName={classes.focusVisible}
-          style={{
-            width: '30%',
-          }}
+    <ButtonBase
+      focusRipple
+      key={props.item.name}
+      className={classes.image}
+      focusVisibleClassName={classes.focusVisible}
+      style={{
+        width: '30%',
+      }}
+    >
+      <span
+        className={classes.imageSrc}
+        style={{
+          backgroundImage: `url(${props.item.image})`,
+          backgroundSize: '100% 100%'
+        }}
+      />
+      <span className={classes.imageBackdrop} />
+      <span className={classes.imageButton}>
+        <Typography
+          component="span"
+          variant="subtitle1"
+          color="inherit"
+          className={classes.imageTitle}
         >
-          <span
-            className={classes.imageSrc}
-            style={{
-              backgroundImage:`url(${props.item.image})`,
-              bacgroundSize:'100%'
-              //לשנות לפרופס נקודה אייטם נקודה תמונה
-            }}
-          />
-          <span className={classes.imageBackdrop} />
-          <span className={classes.imageButton}>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              className={classes.imageTitle}
-            >
-              {props.item.name}
-              <span className={classes.imageMarked} />
-            </Typography>
-          </span>
-        </ButtonBase>
+          {props.item.name}
+          <span className={classes.imageMarked} />
+        </Typography>
+      </span>
+    </ButtonBase>
 
   </>
   )
