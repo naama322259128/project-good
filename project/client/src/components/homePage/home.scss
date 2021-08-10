@@ -1,3 +1,4 @@
+
 header{
   background-image: url('../../img/header.png');
   background-size: 100% 100%;
@@ -18,12 +19,31 @@ margin-left: 2.5vw;
 .btnLogin{
   right: 2vw !important;
   top: 3vh !important;
-  color: #ffffff !important;   
    background-color: #f3e7f226 !important;
+  display: inline-block !important;
+}
+.btn{
+  color: #ffffff !important;   
   width:8vw !important;   
   border-radius: 5vw !important;
-  display: inline-block !important;
   position: absolute !important;
+
+}
+p{
+  color: white;
+  font-size: 12vh;
+  margin-left:25vw;
+  font-family: 'Centaur';
+  line-height:0.8 !important;
+}
+.btnMoreInfo{
+  background-color: #e29c26 !important ;
+left:33vw;
+}
+.btnNewAuction{
+  background-color: #e29c26 !important;
+  left:24vw;
+
 }
 footer{
   background-image: url('../../img/footer.png');
