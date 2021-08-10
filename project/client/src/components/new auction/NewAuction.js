@@ -9,18 +9,24 @@ import FinalStep from './FinalStep';
 
 const NewAuction = (props) => {
     return (<>
+       <header className="new_auction_header">
+            {/* log-out להוסיף כפתור התנתקות */}
+            <Link to={"/home"}>  <div className="logo" ></div></Link>
+        </header>
         <h1>New Auction</h1>
         {/* ארבעת המלבנים */}
         <Router>
             <Switch>
-                <Route path="newAuction/2"><UploadingProducts /></Route>
-                <Route path="newAuctio/3"><OrganizationInformation /></Route>
-                <Route path="newAuctio/4"><AuctionInformation /></Route>
-                <Route path="/"><AuctionPricing /></Route>
+                <Route path="/newAuction/2"><UploadingProducts /></Route>
+                <Route path="/newAuction/3"><OrganizationInformation /></Route>
+                <Route path="/newAuction/4"><AuctionInformation /></Route>
+                <Route path="/newAuction/"><AuctionPricing /></Route>
             </Switch>
         </Router>
 
         {props.isOpen ? <FinalStep /> : null}        {/* אישור סופי */}
+        <footer className="new_auction_footer"></footer>
+
     </>
     )
 }

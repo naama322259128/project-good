@@ -16,7 +16,7 @@ const AuctionInformation = (props) => {
         <input type="button" value="upload file"  onChange={(e) => details.regulations = e.target.value}/>
 
      <input type="button" value="Ok" onClick={()=>{props.saveAuctionDetails(details) ;props.setLastModal(true); } }/>
-     <Link to={`newAuction/3`}>prev</Link>
+     <Link to={`/newAuction/3`}>prev</Link>
 
     </form>);
     //submit!!!!
