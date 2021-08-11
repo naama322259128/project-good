@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { deletePackage } from '../../../../store/actions/newAuction';
 const PackagesList = (props) => {
     return (<><h1>Packages List</h1>
-        <div class="ui divided selection list">
+        <div className="ui divided selection list">
             {props.packagesList.map((item,index) => {
                 return (<div>
                     <h2>qty: {item.qty}</h2>

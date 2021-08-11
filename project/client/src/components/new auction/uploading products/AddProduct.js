@@ -1,15 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { addProduct } from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
+import Uploady from "@rpldy/uploady";
+import UploadButton from "@rpldy/upload-button";
+import UploadPreview from "@rpldy/upload-preview";
 
 const AddProduct = (props) => {
 
     const fileInputRef = useRef();
 
-    const handleChange = (event) => {
-        // do something with event data
-    }
+    let [img,setImg]=useState("");
     let newProduct = { img: "", prodName: "", prodDescription: "" };
+
+    const filterBySize = (file) => {
+        setImg(file.name);
+        console.log(img);
+        //לבדוק למה זה לא עובד       
+      newProduct.img = img;
+        return file.size <= 5242880;
+    };
     return ((props.showSetProduct) ? (
         <div className="field">
             <form>
@@ -17,8 +26,15 @@ const AddProduct = (props) => {
                 <textarea placeholder="product description"
                     onChange={(e) => newProduct.prodDescription = e.target.value} required="true"></textarea>
                 {/* כפתור להעלאת תמונה */}
-                <button onClick={() => fileInputRef.current.click()}> Custom File Input Button</button>
-                <input onChange={handleChange} multiple={false} ref={fileInputRef} type='file' hidden />
+
+                <Uploady
+                    destination={{ url: "my-server.com/upload" }}
+                    fileFilter={filterBySize}
+                    accept="image/*"
+                >
+                    <UploadButton />
+                    <UploadPreview />
+                </Uploady>
 
                 <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProduct(newProduct) }} />
             </form>

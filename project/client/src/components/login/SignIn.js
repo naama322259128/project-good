@@ -90,7 +90,7 @@ const SignIn = (props) => {
             onChange={(e) => { setEmail(e.target.value) }}
             startAdornment={
               <InputAdornment position="start">
-                <i class="envelope icon"></i>
+                <i className="envelope icon"></i>
               </InputAdornment>
             }
           />
@@ -104,7 +104,7 @@ const SignIn = (props) => {
             onChange={(e) => { setPassword(e.target.value) }}
             startAdornment={
               <InputAdornment position="start">
-<i class="lock icon"></i>            
+<i className="lock icon"></i>            
               </InputAdornment>
             }
             endAdornment={
@@ -122,7 +122,7 @@ const SignIn = (props) => {
           />
           <Button type="button" variant="contained" className={"login_btn"} onClick={() => props.signIn(password, email)}>Login</Button>
           {password == "" ? <h2>Forgot Password?</h2> : null}
-          {/* <i class="eye slash outline icon"></i> */}
+          {/* <i className="eye slash outline icon"></i> */}
 
           </div>
         </div>

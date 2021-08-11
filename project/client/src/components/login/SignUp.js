@@ -104,7 +104,7 @@ const SignUp = (props) => {
                             onChange={(e) => { userName = e.target.value }}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <i class="user icon"></i>
+                                    <i className="user icon"></i>
                                 </InputAdornment>
                             }
                         />
@@ -118,7 +118,7 @@ const SignUp = (props) => {
                             onChange={(e) => { email = e.target.value }}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <i class="envelope icon"></i>
+                                    <i className="envelope icon"></i>
                                 </InputAdornment>
                             }
                         />
@@ -132,7 +132,7 @@ const SignUp = (props) => {
                             onChange={(e) => { adress = e.target.value }}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <i class="map marker alternate icon"></i>
+                                    <i className="map marker alternate icon"></i>
                                 </InputAdornment>
                             }
                         />
@@ -146,7 +146,7 @@ const SignUp = (props) => {
                             onChange={(e) => { birthYear = e.target.value }}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <i class="calendar alternate outline icon"></i>
+                                    <i className="calendar alternate outline icon"></i>
                                 </InputAdornment>
                             }
                         />
@@ -160,7 +160,7 @@ const SignUp = (props) => {
                             onChange={(e) => { phone = e.target.value }}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <i class="mobile alternate icon"></i>
+                                    <i className="mobile alternate icon"></i>
                                 </InputAdornment>
                             }
                         />
@@ -174,7 +174,7 @@ const SignUp = (props) => {
                             onChange={(e) => { password = e.target.value }}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <i class="lock icon"></i>
+                                    <i className="lock icon"></i>
                                 </InputAdornment>
                             }
                             endAdornment={
