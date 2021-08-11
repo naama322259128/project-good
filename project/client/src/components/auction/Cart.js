@@ -6,7 +6,13 @@ import { Link} from 'react-router-dom'
 const Cart = (props) => {
     return (
         <div>
-            <h1>Cart</h1>
+            <br/>
+            <br/>
+            <br/>
+               <br/>
+            <br/>
+            <br/>
+            <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
             {props.arr.map((item) => {
                 return (<ProductInCart key={parseInt(item.product.code)} item={item} setCount={props.setCnt}/>)

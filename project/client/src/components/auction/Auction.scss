@@ -55,6 +55,8 @@
     background-image: url('../../img/header_small.png');
     position: fixed;
     background-repeat: no-repeat;
+    z-index: 200;
+
   }
  .auction_footer{
     background-image: url('../../img/footer.png');
