@@ -29,7 +29,9 @@ const getById = async (req, res) => {
 
 const addProduct = async (req, res) => {
     let product = req.body;
+    const url1 = req.protocol + '://' + req.get('host');
     let newProduct = new Product(product);
+    newProduct.image=url1 + '/public/' + req.file.filename;
     try {
         await newProduct.save();
         console.log(newProduct)

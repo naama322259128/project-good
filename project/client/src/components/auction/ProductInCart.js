@@ -47,7 +47,7 @@ const ProductInCart = (props) => {
           />
 
           {/* פח */}
-          <i class="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(code) }}></i>
+          <i className="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(code) }}></i>
           {/* הורד כמות */}
           <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); props.setCount(code,cnt); e.stopPropagation(); }}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
