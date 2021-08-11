@@ -5,6 +5,8 @@ import Login from '../login/Login';
 import './home.scss';
 import { Link, useRouteMatch, Route, Switch } from 'react-router-dom';
 import AuctionList from './AuctionList';
+import CurrentAuction from '../auction/CurrentAuction';
+import Cart from '../auction/Cart';
 import Button from '@material-ui/core/Button';
 import HomeFooter from './HomeFooter';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,7 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-
+import YourProfile from '../login/YourProfile';
 const options = [
   'Your profile',
   'Sign out'
@@ -36,7 +38,44 @@ const Home = (props) => {
     <header className="home_header">
 
       <Link to={"/home"}>  <div className="logo" ></div></Link>
+<<<<<<< HEAD
    {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}  
+=======
+      {/* פרופיל של הבחירה */}
+      { props.currentUser?     
+    <div>
+      <AccountCircleIcon
+        aria-label="more"
+        aria-controls="long-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <MoreVertIcon />
+      </AccountCircleIcon>
+     
+      <Menu
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: ITEM_HEIGHT * 4.5,
+            width: '20ch',
+          },
+        }}
+      >
+        {options.map((option) => (
+          <MenuItem key={option} selected={option === 'Your profile'?<YourProfile/>:null} onClick={handleClose}>
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
+    </div>:null}
+
+   {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>}  
+>>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>
@@ -48,7 +87,7 @@ const Home = (props) => {
         </p>
         <Button type="button" className="btnMoreInfo btn">MORE INFO</Button>
         <Link to={props.currentUser ? "/newAuction" : '#'}>
-          <Button onClick={props.currentUser ? null : () =>{ window.scrollTo(0, 900); props.setLogin(true)}} type="button" className="btn btnNewAuction">
+          <Button onClick={props.currentUser ? null : () => props.setLogin(true)} type="button" className="btn btnNewAuction">
             BUILD CHINESE AUCTION
           </Button>
         </Link>
