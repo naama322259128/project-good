@@ -145,10 +145,13 @@ input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.Mui
 }
  
 svg.MuiSvgIcon-root{
-  font-size: 3vh !important;
+  font-size: 1.2em !important;
   float: right !important;
 bottom: 0vh !important;
 right: 0vw !important;
 top: 0vh !important;
 color: #8e8e95 !important;
+}
+i.icon, i.icons {
+  font-size: 1.2em !important;
 }
