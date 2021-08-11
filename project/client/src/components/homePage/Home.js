@@ -36,43 +36,7 @@ const Home = (props) => {
     <header className="home_header">
 
       <Link to={"/home"}>  <div className="logo" ></div></Link>
-<<<<<<< HEAD
    {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}  
-=======
-      {
-        props.currentUser?     
-    <div>
-      <AccountCircleIcon
-        aria-label="more"
-        aria-controls="long-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        <MoreVertIcon />
-      </AccountCircleIcon>
-     
-      <Menu
-        id="long-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
-          },
-        }}
-      >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>:null}
-   {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>}  
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>

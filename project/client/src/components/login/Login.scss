@@ -3,15 +3,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .glass_login{
-  // background-color: rgba(226, 226, 226, 0.15);
-  background-color: rgba(33, 33, 33, 0.66) !important;
+  background-color: rgba(226, 226, 226, 0.15);
+  // background-color: rgba(33, 33, 33, 0.66) !important;
   backdrop-filter: blur(5px);
 }
 /* The Modal (background) */
 .modal_login {
   // display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 1 !important; /* Sit on top */
   padding-top: 10vh; /* Location of the box */
   left: 0;
   top: 0;
@@ -20,21 +20,16 @@ body {
   overflow: auto; /* Enable scroll if needed */
   background-size: 100% 100%;
 }
-
 /* Modal Content */
 .modal-content_login {
   opacity:1.0 !important;
   margin: auto;
   width:31%;
   height:80%;
-<<<<<<< HEAD
 //  height: auto !important;
 
 z-index: 30 !important;
 
-=======
-z-index: 30
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
 }
 #login_bottom{
   background-image: url('../../img/login_bottom.gif');
@@ -52,12 +47,8 @@ margin-bottom: 1vh;
  background-size: 100% ;
  height: 68%;
  width: 100%; 
-<<<<<<< HEAD
 
-=======
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
 }
-
 #btn_signup,#btn_signin{
     display: inline-block;
     width: 50%;
@@ -78,16 +69,15 @@ border-start-end-radius:4vh;
   background-color: rgb(93,30,90);
   border-start-start-radius:4vh;
   }
-
 .profile_img{
   width: 12vw;
   height: 24vh;
+  margin: auto;
 }
-h2{
+#forgot{
   color: #8e8e95;
   font-family:'Arial'!important;
   font-style: initial;
-<<<<<<< HEAD
   font-size:2vh !important;
 text-align: right; 
  font-style: italic;
@@ -104,23 +94,15 @@ text-align: right;
   margin-left: 17% !important;
   display: inline-block;
 
-=======
-  top:20vw !important;
-  font-size: 1vw !important;
-  display:inline-block;
-  font-style: italic;
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
 }
 .login_btn{
   color: #ffffff !important;
-  width:50%;
+  width:45% !important;
   background-color: #5d1e5a !important;
   height: 4vh !important;
-}
+  margin:auto !important;
+  margin-top:1.5vh !important;
 
-.inputs_btns{
-  width:60%;
-  justify-content:space-between
 }
 
 .MuiFilledInput-root:before{
@@ -129,11 +111,9 @@ border-color: #8e8e95 !important;
 .MuiSvgIcon-root{
   margin-bottom: 5%;
 }
-
 .MuiFilledInput-inputAdornedStart{
 align-self: flex-end
 }
-<<<<<<< HEAD
 
 
 
@@ -151,16 +131,15 @@ align-self: flex-end
   height: auto;
 }
  
-i.icon{
-  font-size: 1vh !important;
-  
-  margin-bottom: 90% !important;
+svg.MuiSvgIcon-root{
+  font-size: 3vh !important;
+  float: right !important;
+bottom: 0vh !important;
+right: 0vw !important;
+top: 0vh !important;
+
 }
 input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart {
   margin-left: 3% !important;
   margin-bottom: -2% !important;
-=======
-i.icon:before{
-  font-size: 1.3em;
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
 }
