@@ -69,7 +69,11 @@ const Home = (props) => {
             {option}
           </MenuItem>
         ))} */}
+<<<<<<< HEAD
         <Link to={'/profile'}><MenuItem key={'Your profile'} onClick={handleClose} >Your profile</MenuItem> </Link>
+=======
+        <Link to={'/your_profile'}><MenuItem key={'Your profile'} onClick={handleClose} >Your profile</MenuItem> </Link>
+>>>>>>> ebfb0add513286106b92ea1089d72ca640ce8a80
           <Link to={'/home'}><MenuItem key={'Sign out'} onClick={handleClose}>Sign out</MenuItem></Link> 
       </Menu>
     </div>:null}

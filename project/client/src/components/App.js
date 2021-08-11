@@ -14,7 +14,11 @@ function App() {
           <Route path={`/home`}><Home /></Route>
           <Route path={`/newAuction`}><NewAuction /></Route>
           <Route path={`/about`}><About /></Route>
+<<<<<<< HEAD
           <Route exact path={`/profile`}><YourProfile /></Route>
+=======
+          <Route exact path={`/your_profile`}><YourProfile /></Route>
+>>>>>>> ebfb0add513286106b92ea1089d72ca640ce8a80
           <Route exact path={`/`}><Home /></Route>
         </Switch>
       </div>
