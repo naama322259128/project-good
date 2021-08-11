@@ -6,7 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-
 const ITEM_HEIGHT = 48;
 
 const Profile = () => {
@@ -47,7 +46,7 @@ const Profile = () => {
             }}
         >
             <Link to={'/your_profile'}><MenuItem key={'Your profile'} onClick={handleClose} >Your profile</MenuItem> </Link>
-            <Link to={'/home'}><MenuItem key={'Sign out'} onClick={handleClose}>Sign out</MenuItem></Link> 
+            <Link to={'/home'}><MenuItem key={'Sign out'} onClick={handleClose }>Sign out</MenuItem></Link> 
         </Menu> </div >);
 }
 
