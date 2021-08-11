@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    width:'100%'
   },
   margin: {
     margin: theme.spacing(1),
@@ -30,17 +31,16 @@ const useStyles = makeStyles((theme) => ({
   },
   input_pas_ma: {
     color: '#8e8e95',
-    height:'4vh !important',
+    height: '4vh !important',
     background: 'none !important',
     color: '#8e8e95 !important',
-    width: '100% !important',
+    width: '70% !important',
     padding: '0vw !important',
     borderBottomColor: '8e8e95 !important',
-    marginInline: '5% !important',
     background: 'none !important',
-    // alignItems:'center !important'
-    alignSelf:'flex-end'
-
+    alignSelf: 'flex-end',
+    marginRight: 'auto',
+    marginLeft: 'auto'
   },
   eye:{
     color: '#8e8e95',
@@ -78,7 +78,6 @@ const SignIn = (props) => {
   return (
     <center>
       <form className={classes.root} noValidate autoComplete="off">
-        <div>
           <img className='profile_img' src={p}></img>
           <div className={"inputs_btns"}>
           <FilledInput
@@ -120,13 +119,13 @@ const SignIn = (props) => {
               </InputAdornment>
             }
           />
-          <Button type="button" variant="contained" className={"login_btn"} onClick={() => props.signIn(password, email)}>Login</Button>
-          {password == "" ? <h2>Forgot Password?</h2> : null}
+          <div id="div_of_sign_in_btn_and_forgot_btn">
+          <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => props.signIn(password, email)}>Login</Button>
+          {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
+          </div>
           {/* <i className="eye slash outline icon"></i> */}
 
           </div>
-        </div>
-
       </form>
     </center>
   );
