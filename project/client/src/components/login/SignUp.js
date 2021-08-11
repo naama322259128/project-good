@@ -96,7 +96,7 @@ const SignUp = (props) => {
                 <div className={"inputs_btns"}>
                     <FilledInput
                         type={'text'}
-                        placeholder="Username"
+                        placeholder="Name"
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"

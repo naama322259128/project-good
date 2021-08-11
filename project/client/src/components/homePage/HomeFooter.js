@@ -11,8 +11,8 @@ const HomeFooter = (props) => {
             <div id="contact_us"><p>CONTACT US</p></div>
             <div id="menu_footer">
                 <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
-                <Link to={"/home"} onClick={() => window.scrollTo(0, 1000)}><p className="menu_footer_link">AUCTIONS</p></Link>
-                <Link onClick={props.currentUser ? null : () => props.setLogin(true)} to={props.currentUser ? "/newAuction" : '#'}>
+                <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
+                <Link onClick={props.currentUser ? null : () => {window.scrollTo(0, 900);props.setLogin(true)}} to={props.currentUser ? "/newAuction" : '#'}>
                     <p className="menu_footer_link">BUILDING</p>
                 </Link>
                 <Link to={"/about"}><p className="menu_footer_link">ABOUT</p></Link>

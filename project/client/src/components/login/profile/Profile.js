@@ -40,9 +40,9 @@ export default function ControlledOpenSelect() {
       {/* <Button className={classes.button} onClick={handleOpen}>
         Open the select
       </Button> */}
-      <i class="user circle icon" onClick={handleOpen}></i>
+      <i class="user circle icon" onClick={handleOpen}>
       {/* <img src={profile} ></img> */}
-      <FormControl className={classes.formControl}>
+     
         {/* <InputLabel id="demo-controlled-open-select-label">{age}</InputLabel> */}
         <Select
           labelId="demo-controlled-open-select-label"
@@ -57,8 +57,7 @@ export default function ControlledOpenSelect() {
           <MenuItem value={10}>Ten</MenuItem> */}
           <MenuItem value={10}>Your profile</MenuItem>
           <MenuItem value={20}>Sign out</MenuItem>
-        </Select>
-      </FormControl>
+        </Select></i>
     </div>
   );
 }
