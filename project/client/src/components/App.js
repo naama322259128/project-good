@@ -14,7 +14,7 @@ function App() {
           <Route path={`/home`}><Home /></Route>
           <Route path={`/newAuction`}><NewAuction /></Route>
           <Route path={`/about`}><About /></Route>
-          <Route exact path={`/your profile`}><YourProfile /></Route>
+          <Route exact path={`/profile`}><YourProfile /></Route>
           <Route exact path={`/`}><Home /></Route>
         </Switch>
       </div>

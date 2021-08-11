@@ -8,7 +8,7 @@ const CurrentAuction = (props) => {
     const { url, path } = useRouteMatch();
 
     return (<>
-        <Link to={`auction/cart`}><h1>Cart</h1></Link>
+        <Link to={`/auction/cart`}><h1>Cart</h1></Link>
         {/* כפתור שמעביר לצפיה בסל */}
         <Clock />
         {/* כאן נוסיף גם שעון, אודות, וכו */}
