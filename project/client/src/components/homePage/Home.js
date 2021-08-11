@@ -7,16 +7,72 @@ import { Link, useRouteMatch, Route, Switch } from 'react-router-dom';
 import AuctionList from './AuctionList';
 import Button from '@material-ui/core/Button';
 import HomeFooter from './HomeFooter';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
+const options = [
+  'Your profile',
+  'Sign out'
+];
+const ITEM_HEIGHT = 48;
 
 const Home = (props) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (<>
 
-    {/* log-out להוסיף כפתור התנתקות */}
+
     <header className="home_header">
 
       <Link to={"/home"}>  <div className="logo" ></div></Link>
+<<<<<<< HEAD
    {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}  
+=======
+      {
+        props.currentUser?     
+    <div>
+      <AccountCircleIcon
+        aria-label="more"
+        aria-controls="long-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <MoreVertIcon />
+      </AccountCircleIcon>
+     
+      <Menu
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: ITEM_HEIGHT * 4.5,
+            width: '20ch',
+          },
+        }}
+      >
+        {options.map((option) => (
+          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
+    </div>:null}
+   {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>}  
+>>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>
