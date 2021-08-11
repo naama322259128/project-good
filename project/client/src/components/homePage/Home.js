@@ -46,6 +46,7 @@ const Home = (props) => {
         aria-controls="long-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        id="profileIcon"
       >
         <MoreVertIcon />
       </AccountCircleIcon>
