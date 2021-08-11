@@ -14,7 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-
+import YourProfile from '../login/YourProfile';
 const options = [
   'Your profile',
   'Sign out'
@@ -38,8 +38,8 @@ const Home = (props) => {
     <header className="home_header">
 
       <Link to={"/home"}>  <div className="logo" ></div></Link>
-      {
-        props.currentUser?     
+      {/* פרופיל של הבחירה */}
+      { props.currentUser?     
     <div>
       <AccountCircleIcon
         aria-label="more"
@@ -64,12 +64,13 @@ const Home = (props) => {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+          <MenuItem key={option} selected={option === 'Your profile'?<YourProfile/>:null} onClick={handleClose}>
             {option}
           </MenuItem>
         ))}
       </Menu>
     </div>:null}
+
    {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>}  
       <div id="home_text">
         <h3>Build your </h3>
