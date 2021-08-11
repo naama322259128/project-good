@@ -17,7 +17,9 @@ const AddProduct = (props) => {
         console.log(img);
         //לבדוק למה זה לא עובד       
       newProduct.img = img;
-        return file.size <= 5242880;
+      //מחזיר את התמונה
+        // return file.size <= 5242880;
+        return file;
     };
     return ((props.showSetProduct) ? (
         <div className="field">
