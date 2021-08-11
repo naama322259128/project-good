@@ -3,15 +3,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .glass_login{
-  // background-color: rgba(226, 226, 226, 0.15);
-  background-color: rgba(33, 33, 33, 0.66) !important;
+  background-color: rgba(226, 226, 226, 0.15);
+  // background-color: rgba(33, 33, 33, 0.66) !important;
   backdrop-filter: blur(5px);
 }
 /* The Modal (background) */
 .modal_login {
   // display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 1 !important; /* Sit on top */
   padding-top: 10vh; /* Location of the box */
   left: 0;
   top: 0;
@@ -20,14 +20,14 @@ body {
   overflow: auto; /* Enable scroll if needed */
   background-size: 100% 100%;
 }
-
 /* Modal Content */
 .modal-content_login {
   opacity:1.0 !important;
   margin: auto;
   width:31%;
   height:80%;
-z-index: 30
+z-index: 30 !important;
+
 }
 #login_bottom{
   background-image: url('../../img/login_bottom.gif');
@@ -45,8 +45,9 @@ margin-bottom: 1vh;
  background-size: 100% 100%;
  height: 65%;
  width: 100%; 
-}
+//  height: auto;
 
+}
 #btn_signup,#btn_signin{
     display: inline-block;
     width: 50%;
@@ -67,30 +68,46 @@ border-start-end-radius:4vh;
   background-color: rgb(93,30,90);
   border-start-start-radius:4vh;
   }
-
 .profile_img{
   width: 12vw;
   height: 24vh;
+  margin: auto;
 }
-h2{
+#forgot{
   color: #8e8e95;
   font-family:'Arial'!important;
   font-style: initial;
-  top:20vw !important;
-  font-size: 1vw !important;
-  display:inline-block;
-  font-style: italic;
+  font-size:2vh !important;
+text-align: right; 
+ font-style: italic;
+  top: 0% !important;
+  margin: auto !important;
+  width: 100%;
+}
+#div_of_sign_in_btn_and_forgot_btn{
+  width:70% !important;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap:1%;
+    margin-top:1.5vh !important;
+
+}
+.login_btn_sign_in{
+  color: #ffffff !important;
+  width:100% !important;
+  background-color: #5d1e5a !important;
+  height: 4vh !important;
+  margin:auto !important;
+  top: 0% !important;
 }
 .login_btn{
   color: #ffffff !important;
-  width:45%;
+  width:45% !important;
   background-color: #5d1e5a !important;
   height: 4vh !important;
-}
+  margin:auto !important;
+  margin-top:1.5vh !important;
 
-.inputs_btns{
-  width:60%;
-  justify-content:space-between
 }
 
 .MuiFilledInput-root:before{
@@ -99,10 +116,24 @@ border-color: #8e8e95 !important;
 .MuiSvgIcon-root{
   margin-bottom: 5%;
 }
-
 .MuiFilledInput-inputAdornedStart{
 align-self: flex-end
 }
 i.icon:before{
   font-size: 1.3em;
 }
+
+
+//עוטף את כל האינפוטים והכפתור אישור
+.inputs_btns{
+  width:100% !important;
+  padding-top: 8%;
+  padding-bottom: 8%;
+
+  display: grid;
+  grid-template-columns: auto;
+  padding: 2vh;
+  grid-row-gap:1%;
+
+}
+ 

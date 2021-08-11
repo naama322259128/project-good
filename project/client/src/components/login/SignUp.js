@@ -6,17 +6,18 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+// import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
-import LockRoundedIcon from '@material-ui/icons/LockRounded';
-import { MDBCloseIcon } from 'mdbreact';
-import LocalPhoneIcon from '@material-ui/icons/LocalPhone';
-import PersonIcon from '@material-ui/icons/Person';
-import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
-import PlaceIcon from '@material-ui/icons/Place';
-import TodayIcon from '@material-ui/icons/Today';
+// import LockRoundedIcon from '@material-ui/icons/LockRounded';
+// import { MDBCloseIcon } from 'mdbreact';
+// import LocalPhoneIcon from '@material-ui/icons/LocalPhone';
+// import PersonIcon from '@material-ui/icons/Person';
+// import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
+// import PlaceIcon from '@material-ui/icons/Place';
+// import TodayIcon from '@material-ui/icons/Today';
+import './Login.scss';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -36,13 +37,13 @@ const useStyles = makeStyles((theme) => ({
         height: '4vh !important',
         background: 'none !important',
         color: '#8e8e95 !important',
-        width: '100% !important',
+        width: '70% !important',
         padding: '0vw !important',
         borderBottomColor: '8e8e95 !important',
-        marginInline: '5% !important',
         background: 'none !important',
-        // alignItems:'center !important'
-        alignSelf: 'flex-end'
+        alignSelf: 'flex-end',
+        marginRight: 'auto',
+        marginLeft: 'auto'
 
     },
     eye: {
@@ -91,109 +92,100 @@ const SignUp = (props) => {
     return (
         <center>
             <form className={classes.root} noValidate autoComplete="off">
-                <div>
 
-                    <div className={"inputs_btns"}>
-                        <FilledInput
-                            type={'text'}
-                            placeholder="Username"
-                            required
-                            // value="x"
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { userName = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="user icon"></i>
-                                </InputAdornment>
-                            }
-                        />
-                        <FilledInput
-                            type={'text'}
-                            placeholder="Mail Adress"
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            required
-                            // value="s@gmail.com"
-                            onChange={(e) => { email = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="envelope icon"></i>
-                                </InputAdornment>
-                            }
-                        />
-                        <FilledInput
-                            type={'text'}
-                            placeholder="Adress"
-                            required
-                            // value="111"
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { adress = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="map marker alternate icon"></i>
-                                </InputAdornment>
-                            }
-                        />
-                        <FilledInput
-                            type={'text'}
-                            placeholder="Year Of Birth"
-                            required
-                            // value="2000"
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { birthYear = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="calendar alternate outline icon"></i>
-                                </InputAdornment>
-                            }
-                        />
-                        <FilledInput
-                            type={'text'}
-                            placeholder="Phone Number"
-                            // value="0523233232"
-                            required
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { phone = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="mobile alternate icon"></i>
-                                </InputAdornment>
-                            }
-                        />
-                        <FilledInput
-                            type={values.showPassword ? 'text' : 'password'}
-                            onChange={handleChange('password')}
-                            placeholder="Password"
-                            required
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { password = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="lock icon"></i>
-                                </InputAdornment>
-                            }
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        className={classes.eye}
-                                    >
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                        <Button type="button" variant="contained" className={"login_btn"} onClick={createUser}>Login</Button>
-
-                    </div>
+                <div className={"inputs_btns"}>
+                    <FilledInput
+                        type={'text'}
+                        placeholder="Username"
+                        required
+                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                        variant="filled"
+                        onChange={(e) => { userName = e.target.value }}
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <i className="user icon"></i>
+                            </InputAdornment>
+                        }
+                    />
+                    <FilledInput
+                        type={'text'}
+                        placeholder="Mail Adress"
+                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                        variant="filled"
+                        required
+                        onChange={(e) => { email = e.target.value }}
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <i className="envelope icon"></i>
+                            </InputAdornment>
+                        }
+                    />
+                    <FilledInput
+                        type={'text'}
+                        placeholder="Adress"
+                        required
+                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                        variant="filled"
+                        onChange={(e) => { adress = e.target.value }}
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <i className="map marker alternate icon"></i>
+                            </InputAdornment>
+                        }
+                    />
+                    <FilledInput
+                        type={'text'}
+                        placeholder="Year Of Birth"
+                        required
+                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                        variant="filled"
+                        onChange={(e) => { birthYear = e.target.value }}
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <i className="calendar alternate outline icon"></i>
+                            </InputAdornment>
+                        }
+                    />
+                    <FilledInput
+                        type={'text'}
+                        placeholder="Phone Number"
+                        required
+                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                        variant="filled"
+                        onChange={(e) => { phone = e.target.value }}
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <i className="mobile alternate icon"></i>
+                            </InputAdornment>
+                        }
+                    />
+                    <FilledInput
+                        type={values.showPassword ? 'text' : 'password'}
+                        onChange={handleChange('password')}
+                        placeholder="Password"
+                        required
+                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                        variant="filled"
+                        onChange={(e) => { password = e.target.value }}
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <i className="lock icon"></i>
+                            </InputAdornment>
+                        }
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    className={classes.eye}
+                                >
+                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                    />
+                    <Button type="button" variant="contained" className={"login_btn"} onClick={createUser}>Login</Button>
                 </div>
-
             </form>
         </center>
 
