@@ -1,5 +1,13 @@
 
-
+.MuiSvgIcon-root{
+  font-size: 3rem !important;
+  color: #5055aa !important;
+  position: absolute !important;
+  right: 5vw !important;
+  top: 3vh !important;
+  display: inline-block !important;
+  cursor: pointer;
+}
 .logo{
   background-image: url('../../img/logo.png');
   background-size: 100%;
