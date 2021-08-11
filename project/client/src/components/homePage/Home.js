@@ -8,10 +8,11 @@ import AuctionList from './AuctionList';
 import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
 import Button from '@material-ui/core/Button';
+import HomeFooter from './HomeFooter';
 
 const Home = (props) => {
 
-  return (<div>
+  return (<>
 
     {/* log-out להוסיף כפתור התנתקות */}
     <header className="home_header">
@@ -40,8 +41,8 @@ const Home = (props) => {
     </header>
 
     <AuctionList />
-    <footer className="home_footer"></footer>
-  </div>
+    <HomeFooter/>
+  </>
   );
 }
 const mapStateToProps = state => {
