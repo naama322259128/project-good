@@ -3,78 +3,19 @@ import { connect } from "react-redux";
 import { setLogin } from '../../store/actions/home';
 import Login from '../login/Login';
 import './home.scss';
-import { Link, useRouteMatch, Route, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuctionList from './AuctionList';
-import CurrentAuction from '../auction/CurrentAuction';
-import Cart from '../auction/Cart';
 import Button from '@material-ui/core/Button';
 import HomeFooter from './HomeFooter';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import YourProfile from '../login/YourProfile';
-const options = [
-  'Your profile',
-  'Sign out'
-];
-const ITEM_HEIGHT = 48;
-
+import Profile from '../login/Profile';
 const Home = (props) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (<>
-
-
     <header className="home_header">
-
       <Link to={"/home"}>  <div className="logo" ></div></Link>
       {/* פרופיל של הבחירה */}
-      { props.currentUser?     
-    <div>
-      <AccountCircleIcon
-        aria-label="more"
-        aria-controls="long-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        id="profileIcon"
-      >
-        <MoreVertIcon />
-      </AccountCircleIcon>
-     
-      <Menu
-        id="long-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
-          },
-        }}
-      >
-        {/* {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Your profile'?<YourProfile/>:null} onClick={handleClose}>
-            {option}
-          </MenuItem>
-        ))} */}
-        <Link to={'/your_profile'}><MenuItem key={'Your profile'} onClick={handleClose} >Your profile</MenuItem> </Link>
-          <Link to={'/home'}><MenuItem key={'Sign out'} onClick={handleClose}>Sign out</MenuItem></Link> 
-      </Menu>
-    </div>:null}
-
-   {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}  
+      {props.currentUser ? <Profile /> : null}
+      {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>
@@ -90,14 +31,14 @@ const Home = (props) => {
             BUILD CHINESE AUCTION
           </Button>
         </Link>
+        <i class="chevron down icon" id="iconDown" onClick={() => { window.scrollTo(0, 900) }}></i>
         {props.loginIsOpen == true ? (<Login />) : null}
       </div>
       <div id="right_pic"></div>
       <div id="left_pic"></div>
     </header>
-
     <AuctionList />
-    <HomeFooter/>
+    <HomeFooter />
   </>
   );
 }
