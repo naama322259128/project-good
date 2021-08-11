@@ -27,7 +27,7 @@ const Home = (props) => {
         </p>
         <Button type="button" className="btnMoreInfo btn">MORE INFO</Button>
         <Link to={props.currentUser ? "/newAuction" : '#'}>
-          <Button onClick={props.currentUser ? null : () => props.setLogin(true)} type="button" className="btn btnNewAuction">
+          <Button onClick={props.currentUser ? null : () => { window.scrollTo(0, 900);props.setLogin(true)}} type="button" className="btn btnNewAuction">
             BUILD CHINESE AUCTION
           </Button>
         </Link>

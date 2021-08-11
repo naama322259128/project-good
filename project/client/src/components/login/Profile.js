@@ -45,8 +45,9 @@ const Profile = () => {
                 },
             }}
         >
-            <Link to={'/your_profile'}><MenuItem key={'Your profile'} onClick={handleClose} >Your profile</MenuItem> </Link>
+            <Link to={'/your_profile'}><MenuItem key={'Your profile'} onClick={()=>{handleClose();alert(12)}} >Your profile</MenuItem> </Link>
             <Link to={'/home'}><MenuItem key={'Sign out'} onClick={handleClose }>Sign out</MenuItem></Link> 
+            
         </Menu> </div >);
 }
 
