@@ -18,7 +18,7 @@ const Home = (props) => {
     <header className="home_header">
 
       <Link to={"/home"}>  <div className="logo" ></div></Link>
-      <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>
+   {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>}  
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>
