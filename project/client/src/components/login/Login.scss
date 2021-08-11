@@ -27,14 +27,12 @@ body {
   margin: auto;
   width:31%;
   height:80%;
-<<<<<<< HEAD
+
 //  height: auto !important;
 
 z-index: 30 !important;
 
-=======
-z-index: 30
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
+
 }
 #login_bottom{
   background-image: url('../../img/login_bottom.gif');
@@ -52,10 +50,7 @@ margin-bottom: 1vh;
  background-size: 100% ;
  height: 68%;
  width: 100%; 
-<<<<<<< HEAD
 
-=======
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
 }
 
 #btn_signup,#btn_signin{
@@ -87,7 +82,6 @@ h2{
   color: #8e8e95;
   font-family:'Arial'!important;
   font-style: initial;
-<<<<<<< HEAD
   font-size:2vh !important;
 text-align: right; 
  font-style: italic;
@@ -103,13 +97,11 @@ text-align: right;
   height: 4vh !important;
   margin-left: 17% !important;
   display: inline-block;
-
-=======
   top:20vw !important;
   font-size: 1vw !important;
   display:inline-block;
   font-style: italic;
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
+
 }
 .login_btn{
   color: #ffffff !important;
@@ -133,7 +125,7 @@ border-color: #8e8e95 !important;
 .MuiFilledInput-inputAdornedStart{
 align-self: flex-end
 }
-<<<<<<< HEAD
+
 
 
 
@@ -159,8 +151,8 @@ i.icon{
 input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart {
   margin-left: 3% !important;
   margin-bottom: -2% !important;
-=======
+}
 i.icon:before{
   font-size: 1.3em;
->>>>>>> 3ce31f3097fbbd714c2652bf8b81498afcd22409
+
 }
