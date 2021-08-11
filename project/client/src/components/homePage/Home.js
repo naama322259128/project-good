@@ -68,8 +68,8 @@ const Home = (props) => {
             {option}
           </MenuItem>
         ))} */}
-           <MenuItem key={'Your profile'} onClick={handleClose}>Your profile</MenuItem> 
-           <MenuItem key={'Sign out'} onClick={handleClose}>Sign out</MenuItem>
+        <Link to={'/your profile'}><MenuItem key={'Your profile'} onClick={handleClose} >Your profile</MenuItem> </Link>
+          <Link to={'/home'}><MenuItem key={'Sign out'} onClick={handleClose}>Sign out</MenuItem></Link> 
       </Menu>
     </div>:null}
 
