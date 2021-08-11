@@ -9,33 +9,27 @@ import FinalStep from './FinalStep';
 import './NewAuction.scss';
 const NewAuction = (props) => {
     return (<>
-       <header className="new_auction_header">
+
+        <header id="new_auction_header">
             {/* log-out להוסיף כפתור התנתקות */}
-
-
-
             <Link to={"/home"}>  <div className="logo" ></div></Link>
         </header>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <h1>New Auction</h1>
-        {/* ארבעת המלבנים */}
-        <Router>
-            <Switch>
-                <Route path="/newAuction/2"><UploadingProducts /></Route>
-                <Route path="/newAuction/3"><OrganizationInformation /></Route>
-                <Route path="/newAuction/4"><AuctionInformation /></Route>
-                <Route path="/newAuction/"><AuctionPricing /></Route>
-            </Switch>
-        </Router>
 
-        {props.isOpen ? <FinalStep /> : null}        {/* אישור סופי */}
-        <footer className="new_auction_footer"></footer>
+        <section id="new_auction_section">
+            <h1>New Auction</h1>
+            {/* ארבעת המלבנים */}
+            <Router>
+                <Switch>
+                    <Route path="/newAuction/2"><UploadingProducts /></Route>
+                    <Route path="/newAuction/3"><OrganizationInformation /></Route>
+                    <Route path="/newAuction/4"><AuctionInformation /></Route>
+                    <Route path="/newAuction/"><AuctionPricing /></Route>
+                </Switch>
+            </Router>
+            {props.isOpen ? <FinalStep /> : null}        {/* אישור סופי */}
+        </section>
+
+        <footer id="new_auction_footer"></footer>
 
     </>
     )
@@ -43,7 +37,7 @@ const NewAuction = (props) => {
 const mapStateToProps = (state) => {
     return {
         isOpen: state.auction.finalStepModalIsOpen,
-        stage:state.auction.stage//איזה שלב אנחנו תבהליך
+        stage: state.auction.stage//איזה שלב אנחנו תבהליך
     };
 }
 export default connect(mapStateToProps, {})(NewAuction);

@@ -25,7 +25,11 @@ const Auction = (props) => {
 <br/>
 
         <Switch>
-            <Route path={`${path}/cart`}><Cart /></Route>
+        {/* <Route path={`${path}/cart`}><Cart /></Route>
+            <Route path={`${path}/auction_list`}><AuctionList /></Route>
+            <Route exact path={`${path}`}><CurrentAuction /></Route>  */}
+            
+            <Route path={`/auction/cart`}><Cart /></Route>
             <Route path={`${path}/auction_list`}><AuctionList /></Route>
             <Route exact path={`${path}`}><CurrentAuction /></Route>
         </Switch>
