@@ -15,8 +15,8 @@ const FinalStep = (props) => {
         orderList: null
     }
     return (
-        <div id="myModal" className="modal glass" onClick={()=>{props.setLastModal(false)}}>
-            <div className="modal-content">
+        <div id="myModal" className="modal_final_step glass_final_step" onClick={()=>{props.setLastModal(false)}}>
+            <div className="modal-content_final_step">
                 <h1>Are you sure the Chinese auction is ready?</h1>
                 <button onClick={() => props.addAuction(newAuction)}>Yes</button>
             </div>

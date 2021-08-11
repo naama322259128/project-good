@@ -20,8 +20,8 @@ const Login = (props) => {
   }
   return (
     <center>
-      <div id="myModal" className="modal glass" onClick={()=>props.setLogin(false)} >
-        <div className="modal-content"  onClick={click}>
+      <div id="myModal" className="modal_login glass_login" onClick={()=>props.setLogin(false)} >
+        <div className="modal-content_login"  onClick={click}>
           <div  id="btn_signin" onClick={signInShow} >SIGN IN</div>
           <div id="btn_signup" onClick={ signUpShow}>SIGN UP</div>
           <div id="login_top" >

@@ -59,12 +59,12 @@ margin-left: 2vw;
 .btnMoreInfo{
 left: 14% !important;
 width: 10vw !important;
-height: 6vh;
+height: 5vh;
 background-color: #d0d63e !important ;
 }
 .btnNewAuction{
   right:0% !important;
-  height:6vh;
+  height:5vh ;
 width: 16vw !important;
 background-color: #d0d63e !important ;
 
@@ -86,23 +86,23 @@ background-color: #d0d63e !important ;
 
 }
 
-.glass{
-    background-color: rgba(226, 226, 226, 0.15) !important; 
-    backdrop-filter: blur(5px) !important;
-  }
+// .glass{
+//     background-color: rgba(226, 226, 226, 0.15) !important; 
+//     backdrop-filter: blur(5px) !important;
+//   }
   /* The Modal (background) */
-  .modal2 {
-    // display: none; /* Hidden by default */
-    position: fixed !important; /* Stay in place */
-    z-index: 1 !important; /* Sit on top */
-    padding-top: 10vh !important; /* Location of the box */
-    left: 0 !important;
-    top: 0 !important;
-    width: 100% !important; /* Full width */
-    height: 100% !important; /* Full height */
-    overflow: auto !important; /* Enable scroll if needed */
-    background-size: 100% 100% !important;
-  }
+  // .modal2 {
+  //   // display: none; /* Hidden by default */
+  //   position: fixed !important; /* Stay in place */
+  //   z-index: 1 !important; /* Sit on top */
+  //   padding-top: 10vh !important; /* Location of the box */
+  //   left: 0 !important;
+  //   top: 0 !important;
+  //   width: 100% !important; /* Full width */
+  //   height: 100% !important; /* Full height */
+  //   overflow: auto !important; /* Enable scroll if needed */
+  //   background-size: 100% 100% !important;
+  // }
   .scrolling.dimmable.dimmed>.dimmer{
     overflow:hidden !important;
   }
