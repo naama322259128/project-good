@@ -63,11 +63,13 @@ const Home = (props) => {
           },
         }}
       >
-        {options.map((option) => (
+        {/* {options.map((option) => (
           <MenuItem key={option} selected={option === 'Your profile'?<YourProfile/>:null} onClick={handleClose}>
             {option}
           </MenuItem>
-        ))}
+        ))} */}
+           <MenuItem key={'Your profile'} onClick={handleClose}>Your profile</MenuItem> 
+           <MenuItem key={'Sign out'} onClick={handleClose}>Sign out</MenuItem>
       </Menu>
     </div>:null}
 
