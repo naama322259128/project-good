@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
-    width:'100%'
+    width: '100%'
   },
   margin: {
     margin: theme.spacing(1),
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
     marginLeft: 'auto'
   },
-  eye:{
+  eye: {
     color: '#8e8e95',
 
   }
@@ -78,8 +78,8 @@ const SignIn = (props) => {
   return (
     <center>
       <form className={classes.root} noValidate autoComplete="off">
-          <img className='profile_img' src={p}></img>
-          <div className={"inputs_btns"}>
+        <img className='profile_img' src={p}></img>
+        <div className={"inputs_btns"}>
           <FilledInput
             type={'text'}
             placeholder="Email"
@@ -103,12 +103,12 @@ const SignIn = (props) => {
             onChange={(e) => { setPassword(e.target.value) }}
             startAdornment={
               <InputAdornment position="start">
-<i className="lock icon"></i>            
+                <i className="lock icon"></i>
               </InputAdornment>
             }
             endAdornment={
               <InputAdornment position="end">
-                
+
                 <IconButton
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
@@ -118,21 +118,18 @@ const SignIn = (props) => {
                 </IconButton>
               </InputAdornment>
             }
-          />
-          <div id="div_of_sign_in_btn_and_forgot_btn">
-          <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => props.signIn(password, email)}>Login</Button>
-          {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
-          </div>
-          {/* <i className="eye slash outline icon"></i> */}
+          /> </div>
+            <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => props.signIn(password, email)}>Login</Button>
+            {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
 
-          </div>
+       
       </form>
     </center>
   );
 }
 const mapStateToProps = (state) => {
   return {
-    
+
   };
 }
-export default connect(mapStateToProps, {signIn })(SignIn);
+export default connect(mapStateToProps, { signIn })(SignIn);
