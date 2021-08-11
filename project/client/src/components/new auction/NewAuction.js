@@ -8,9 +8,9 @@ import { BrowserRouter as Router, Link, useRouteMatch, Route, Switch } from 'rea
 import FinalStep from './FinalStep';
 import './NewAuction.scss';
 const NewAuction = (props) => {
-    return (<div id="new_auction">
+    return (<>
 
-        <header className="new_auction_header">
+        <header id="new_auction_header">
             {/* log-out להוסיף כפתור התנתקות */}
             <Link to={"/home"}>  <div className="logo" ></div></Link>
         </header>
@@ -29,9 +29,9 @@ const NewAuction = (props) => {
             {props.isOpen ? <FinalStep /> : null}        {/* אישור סופי */}
         </section>
 
-        <footer className="new_auction_footer"></footer>
+        <footer id="new_auction_footer"></footer>
 
-    </div>
+    </>
     )
 }
 const mapStateToProps = (state) => {
