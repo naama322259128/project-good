@@ -61,12 +61,15 @@ margin-bottom: 1vh;
     
 }
 #btn_signup{
-background-color: rgb(33,33,105);
+
+background-image: url('../../img/login1.png');
+background-size: 100% ;
 border-start-end-radius:4vh;
 
 }
 #btn_signin{
-  background-color: rgb(93,30,90);
+  background-image: url('../../img/login2.png');
+  background-size: 100% ;
   border-start-start-radius:4vh;
   }
 .profile_img{
