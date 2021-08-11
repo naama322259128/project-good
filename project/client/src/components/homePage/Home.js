@@ -38,9 +38,6 @@ const Home = (props) => {
     <header className="home_header">
 
       <Link to={"/home"}>  <div className="logo" ></div></Link>
-<<<<<<< HEAD
-   {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}  
-=======
       {/* פרופיל של הבחירה */}
       { props.currentUser?     
     <div>
@@ -75,7 +72,6 @@ const Home = (props) => {
     </div>:null}
 
    {props.currentUser?null: <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 1000); props.setLogin(true); }}>Login</Button>}  
->>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>

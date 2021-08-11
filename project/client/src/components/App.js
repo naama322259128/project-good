@@ -4,10 +4,6 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Auction from '../components/auction/Auction';
 import NewAuction from '../components/new auction/NewAuction';
 import About from './main/About'
-<<<<<<< HEAD
-=======
-
->>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
 function App() {
   return (
     <Router>
@@ -20,18 +16,10 @@ function App() {
           <Route exact path={`/`}><Home /></Route>
         </Switch>
       </div>
-<<<<<<< HEAD
-    </Router>);
-}
-
-
-
-=======
 
     </Router>
   );
 }
 
->>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
 
 export default App;

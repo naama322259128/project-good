@@ -26,18 +26,10 @@ body {
   margin: auto;
   width:31%;
   height:80%;
-<<<<<<< HEAD
-=======
-
->>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
 //  height: auto !important;
 
 z-index: 30 !important;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
 }
 #login_bottom{
   background-image: url('../../img/login_bottom.gif');
@@ -101,13 +93,6 @@ text-align: right;
   height: 4vh !important;
   margin-left: 17% !important;
   display: inline-block;
-<<<<<<< HEAD
-=======
-  top:20vw !important;
-  font-size: 1vw !important;
-  display:inline-block;
-  font-style: italic;
->>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
 
 }
 .login_btn{
@@ -129,10 +114,6 @@ border-color: #8e8e95 !important;
 .MuiFilledInput-inputAdornedStart{
 align-self: flex-end
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
 
 
 
@@ -161,11 +142,12 @@ top: 0vh !important;
 input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart {
   margin-left: 3% !important;
   margin-bottom: -2% !important;
-<<<<<<< HEAD
-=======
 }
-i.icon:before{
-  font-size: 1.3em;
-
->>>>>>> 93ff1f06361bfe6c3041021d2dcd07d65bd3f337
+ 
+svg.MuiSvgIcon-root{
+  font-size: 3vh !important;
+  float: right !important;
+bottom: 0vh !important;
+right: 0vw !important;
+top: 0vh !important;
 }
