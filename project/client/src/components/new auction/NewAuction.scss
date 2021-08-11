@@ -36,8 +36,10 @@ body {
   width: 100vw;
   height: 28vh;
   background-image: url('../../img/header_small.png');
-  position: fixed;
   background-repeat: no-repeat;
+  z-index: 200;
+  margin-bottom:5vh !important;
+
 }
 .new_auction_footer{
   background-image: url('../../img/footer.png');
@@ -45,4 +47,20 @@ body {
   height: 18vh;
   background-size: 100% ;
   background-repeat: no-repeat;
+  // margin-bottom:0vh !important;
+  margin-top:5vh !important;
+position: static;
+bottom: 0vh !important;
 }
+#new_auction{
+  width:100vw !important;
+  height: 100vh !important;
+  background-attachment:pink; 
+
+}
+ #new_auction_section{
+  // position: relative;
+  width:100% !important;
+  margin-top: 5vh !important;
+}
+ 
