@@ -64,6 +64,14 @@ export const userReducer = (state = initialState, action) => {
                     shoppingCart: null
                 }
             }
+        case actionTypes.UPDATE_CURRENT_USER:
+            {
+                //עידכון משתמש נוכחי
+                return {
+                    ...state,
+                    currentUser:action.payload,
+                }
+            }
     }
 
     return state;
