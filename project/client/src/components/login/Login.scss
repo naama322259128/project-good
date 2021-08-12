@@ -108,13 +108,13 @@ text-align: right;
 
 }
 
-.MuiFilledInput-root:before{
+.inputs_btns .MuiFilledInput-root:before{
 border-color: #8e8e95 !important;
 }
-.MuiSvgIcon-root{
+.inputs_btns .MuiSvgIcon-root{
   margin-bottom: 5%;
 }
-.MuiFilledInput-inputAdornedStart{
+.inputs_btns .MuiFilledInput-inputAdornedStart{
 align-self: flex-end
 }
 
@@ -134,7 +134,7 @@ align-self: flex-end
   height: auto;
 }
  
-svg.MuiSvgIcon-root{
+.inputs_btns svg.MuiSvgIcon-root{
   font-size: 3vh !important;
   float: right !important;
 bottom: 0vh !important;
@@ -142,12 +142,9 @@ right: 0vw !important;
 top: 0vh !important;
 
 }
-input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart {
-  margin-left: 3% !important;
-  margin-bottom: -2% !important;
-}
- 
-svg.MuiSvgIcon-root{
+
+
+.inputs_btns svg.MuiSvgIcon-root{
   font-size: 1.2em !important;
   float: right !important;
 bottom: 0vh !important;
@@ -155,6 +152,12 @@ right: 0vw !important;
 top: 0vh !important;
 color: #8e8e95 !important;
 }
-i.icon, i.icons {
+.inputs_btns i.icon, i.icons {
   font-size: 1.2em !important;
+}
+
+.inputs_btns input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart 
+{
+  margin-left: 3% !important;
+  margin-bottom: -1% !important;
 }

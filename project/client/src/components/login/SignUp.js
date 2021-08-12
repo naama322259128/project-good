@@ -10,13 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
-// import LockRoundedIcon from '@material-ui/icons/LockRounded';
-// import { MDBCloseIcon } from 'mdbreact';
-// import LocalPhoneIcon from '@material-ui/icons/LocalPhone';
-// import PersonIcon from '@material-ui/icons/Person';
-// import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
-// import PlaceIcon from '@material-ui/icons/Place';
-// import TodayIcon from '@material-ui/icons/Today';
 import './Login.scss';
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,7 +42,11 @@ const useStyles = makeStyles((theme) => ({
     eye: {
         color: '#8e8e95',
 
-    }
+    },
+    placeholder_in_form:{
+        marginLeft:'3% !important',
+        marginBottom:' -2% !important'
+      }
 }));
 
 const SignUp = (props) => {
