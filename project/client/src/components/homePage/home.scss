@@ -84,7 +84,7 @@ width: 16vw !important;
 background-color: #d0d63e !important ;
 
 }
-.home_header{
+#home_header{
   background-image: url('../../img/home_header_backgroung.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -203,3 +203,13 @@ background-color: #d0d63e !important ;
   font-size: 1.7vh ;
 }
 
+#up_down_in_header{
+position: absolute !important;
+bottom: 28% !important;
+z-index: 5 !important;
+right: 49% !important;
+height: 4vh !important;
+width: 2vw !important;
+background-color: white !important;
+opacity: 0.2 !important;
+}

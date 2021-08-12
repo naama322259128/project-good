@@ -4,12 +4,18 @@ import './home.scss';
 import AuctionList from './AuctionList';
 import HomeFooter from './HomeFooter';
 import HomeHeader from './HomeHeader';
+
+
+
 const Home = (props) => {
 
   return (<>
     <HomeHeader />
     <AuctionList />
     <HomeFooter />
+
+
+
   </>
   );
 }
