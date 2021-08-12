@@ -8,7 +8,6 @@ export const getCurrentUser = (user) => {
     }
 }
 export const addUser = (user) => {
-    console.log("sign up");
 
     return (dispatch) => {
         axios.post("http://localhost:5000/users", user).then(succ => {
@@ -23,3 +22,24 @@ export const addUser = (user) => {
     }
 
 }
+export const deleteCurrentUser=()=>{
+    return{
+        type: actionTypes.DELETE_CURRENT_USER
+    }
+}
+export const deleteUser = (user) => {
+
+    return (dispatch) => {
+        axios.delete(`http://localhost:5000/users/${user._id}`).then(succ => {
+            console.log(user);
+            console.log(succ.data);
+            if (succ.status != 400) {
+                dispatch(deleteCurrentUser(succ.data));
+
+            }
+        
+        })
+    }
+
+}
+

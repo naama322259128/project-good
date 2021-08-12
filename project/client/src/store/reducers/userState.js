@@ -45,7 +45,6 @@ export const userReducer = (state = initialState, action) => {
             }
         case actionTypes.SET_CNT_PRODUCT_IN_CART:
             {
-                debugger;
                 let code = action.payload.code;
                 let cnt = action.payload.cnt;
                 let index = state.shoppingCart.findIndex(item => item.product.code == code);
@@ -54,6 +53,15 @@ export const userReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     shoppingCart: arr
+                }
+            }
+        case actionTypes.DELETE_CURRENT_USER:
+            {
+                //מחיקת משתמש האתר מחיקת עגלת הקניות
+                return {
+                    ...state,
+                    currentUser: null,
+                    shoppingCart: null
                 }
             }
     }
