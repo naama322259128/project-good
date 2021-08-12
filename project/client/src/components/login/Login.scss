@@ -44,7 +44,7 @@ color:#8e8e95 !important;
 #login_top{
   background-image: url('../../img/login_top.gif');
 margin-bottom: 1vh;
- background-size: 100% ;
+ background-size: 100% 100% ;
  height: 68%;
  width: 100%; 
 
@@ -63,13 +63,13 @@ margin-bottom: 1vh;
 #btn_signup{
 
 background-image: url('../../img/login1.png');
-background-size: 100% ;
+background-size: 100% 100%;
 border-start-end-radius:4vh;
 
 }
 #btn_signin{
   background-image: url('../../img/login2.png');
-  background-size: 100% ;
+  background-size: 100% 100%;
   border-start-start-radius:4vh;
   }
 .profile_img{
@@ -134,21 +134,14 @@ align-self: flex-end
   height: auto;
 }
  
-svg.MuiSvgIcon-root{
-  font-size: 3vh !important;
-  float: right !important;
-bottom: 0vh !important;
-right: 0vw !important;
-top: 0vh !important;
 
-}
 input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart {
   margin-left: 3% !important;
-  margin-bottom: -2% !important;
+  margin-bottom: -1% !important;
 }
  
 svg.MuiSvgIcon-root{
-  font-size: 1.2em !important;
+  font-size: 1.1em !important;
   float: right !important;
 bottom: 0vh !important;
 right: 0vw !important;
