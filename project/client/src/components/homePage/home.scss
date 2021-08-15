@@ -15,7 +15,8 @@
   margin-left: 35vw !important;
   cursor: pointer;
 }
-.logo{
+
+#logo_home_header{
   background-image: url('../../img/logo.png');
   background-size: 100%;
   background-repeat: no-repeat;
@@ -26,6 +27,12 @@ display: inline-block;
 cursor: pointer;
 margin-top: 3vh;
 margin-left: 2vw;
+}
+.logo_home_small_header{
+  height:5vh !important;
+  width: 11vw !important;
+margin-top: 1vh !important;
+margin-left: 1vw !important;
 }
 .btnLogin{
   right: 3vw !important;
@@ -92,6 +99,10 @@ background-color: #d0d63e !important ;
   width: 100vw;
   position: fixed !important;
   z-index: 200;
+}
+.small_home_header{
+  background-image: url('../../img/header_small.png') !important;
+  height:15vh !important;
 }
   .scrolling.dimmable.dimmed>.dimmer{
     overflow:hidden !important;
