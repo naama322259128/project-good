@@ -33,7 +33,7 @@ const HomeHeader = (props) => {
     } else {
       //הידר גדול
       x.classList.remove("small_home_header");
-      x.classList.remove("logo_home_small_header");
+      logo.classList.remove("logo_home_small_header");
       if (text && pic1 && pic2) {
         text.style.display = "block";
         pic1.style.display = "block";
