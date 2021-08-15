@@ -5,10 +5,9 @@ import Auction from '../components/auction/Auction';
 import NewAuction from '../components/new auction/NewAuction';
 import About from './main/About'
 import YourProfile from './login/YourProfile';
-import XX from './XX';
 function App() {
   return (
-    <Router>
+<Router>
     <div>
       <Switch>
         <Route path={`/auction`}><Auction /></Route>
@@ -20,6 +19,7 @@ function App() {
       </Switch>
     </div>
   </Router>  );
+
 }
 
 
