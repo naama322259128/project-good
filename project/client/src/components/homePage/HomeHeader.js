@@ -14,22 +14,24 @@ import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const HomeHeader = (props) => {
 
- /* useEffect(() => {
-    window.onscroll = () => {
-      if (window.pageYOffset < 200)
-        document.getElementById("home_header").style.height = '136vh';
-      if (window.pageYOffset > 400)
-        document.getElementById("home_header").style.height = '40vh';
+
+  useEffect(() => { window.addEventListener("scroll", handleScroll) }, []);
+
+  let handleScroll = () => {
+    if (window.scrollY > 20 || document.documentElement.scrollY > 20) {
+      document.getElementById("home_header").style.height = "20vh";
+    } else {
+      document.getElementById("home_header").style.height = "136vh";
     }
-  }, []);
-*/
+  };
+
   return (
     <header id="home_header">
       <Link to={"/home"}>  <div className="logo" ></div></Link>
       {/* פרופיל של הבחירה */}
       {props.currentUser ? <Profile /> : null}
       {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}
-      <div id="home_text">
+      {/* <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>
         <p>
@@ -48,12 +50,10 @@ const HomeHeader = (props) => {
             BUILD CHINESE AUCTION
           </Button>
         </Link>
-        {/* <i class="chevron down icon" id="iconDown" onClick={() => { window.scrollTo(0, 900) }}></i> */}
+      </div> */}
 
-      </div>
 
       {props.loginIsOpen == true ? (<Login />) : null}
-
 
       {/* <i class="chevron down icon" id="iconDown" onClick={() => { window.scrollTo(0, 900) }}></i> */}
 
@@ -61,8 +61,8 @@ const HomeHeader = (props) => {
         <UpIcon />
       </IconButton> */}
 
-      <div id="right_pic"></div>
-      <div id="left_pic"></div>
+      {/* <div id="right_pic"></div>
+      <div id="left_pic"></div> */}
     </header>)
 
 
