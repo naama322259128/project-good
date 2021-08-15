@@ -14,12 +14,12 @@ import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const HomeHeader = (props) => {
 
-
+//לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
   useEffect(() => { window.addEventListener("scroll", handleScroll) }, []);
 
   let handleScroll = () => {
     if (window.scrollY > 20 || document.documentElement.scrollY > 20) {
-      document.getElementById("home_header").style.height = "20vh";
+      document.getElementById("home_header").style.height = "15vh";
     } else {
       document.getElementById("home_header").style.height = "136vh";
     }
