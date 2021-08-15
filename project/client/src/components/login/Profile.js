@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-import{deleteUser} from "../../store/actions/signUp"
+import{deleteCurrentUser} from "../../store/actions/signUp"
 const ITEM_HEIGHT = 48;
 
 const Profile = (props) => {
@@ -16,7 +16,7 @@ const Profile = (props) => {
 const signOut=()=>{
   if( window.confirm("Are you sure you want to leave?"))
   {
-    props.deleteUser(props.currentUser);
+    props.deleteCurrentUser(props.currentUser);
   }
   
 }
@@ -64,4 +64,4 @@ const mapStateToProps = state => {
         currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, {deleteUser})(Profile);
+export default connect(mapStateToProps, {deleteCurrentUser})(Profile);
