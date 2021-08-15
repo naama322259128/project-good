@@ -14,24 +14,41 @@ import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const HomeHeader = (props) => {
 
-//לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
+  //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
   useEffect(() => { window.addEventListener("scroll", handleScroll) }, []);
 
   let handleScroll = () => {
-    if (window.scrollY > 20 || document.documentElement.scrollY > 20) {
-      document.getElementById("home_header").style.height = "15vh";
+    var x = document.getElementById("home_header");
+    var text = document.getElementById("home_text");
+    var pic1 = document.getElementById("right_pic");
+    var pic2 = document.getElementById("left_pic");
+    var logo = document.getElementById("logo_home_header");
+    if (window.scrollY > 26 || document.documentElement.scrollY > 26) {
+      //הידר קטן
+      x.classList.add("small_home_header");
+      text.style.display = "none";
+      pic1.style.display = "none";
+      pic2.style.display = "none";
+      logo.classList.add("logo_home_small_header");
     } else {
-      document.getElementById("home_header").style.height = "136vh";
+      //הידר גדול
+      x.classList.remove("small_home_header");
+      x.classList.remove("logo_home_small_header");
+      if (text && pic1 && pic2) {
+        text.style.display = "block";
+        pic1.style.display = "block";
+        pic2.style.display = "block";
+      }
     }
   };
 
-  return (
+  return (<>
     <header id="home_header">
-      <Link to={"/home"}>  <div className="logo" ></div></Link>
+      <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
       {/* פרופיל של הבחירה */}
       {props.currentUser ? <Profile /> : null}
       {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}
-      {/* <div id="home_text">
+      <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>
         <p>
@@ -50,20 +67,18 @@ const HomeHeader = (props) => {
             BUILD CHINESE AUCTION
           </Button>
         </Link>
-      </div> */}
+      </div>
 
 
       {props.loginIsOpen == true ? (<Login />) : null}
-
-      {/* <i class="chevron down icon" id="iconDown" onClick={() => { window.scrollTo(0, 900) }}></i> */}
 
       {/* <IconButton color="primary" component="span" onClick={() => { window.scrollTo(0, 900) }}id="up_down_in_header">
         <UpIcon />
       </IconButton> */}
 
-      {/* <div id="right_pic"></div>
-      <div id="left_pic"></div> */}
-    </header>)
+      <div id="right_pic"></div>
+      <div id="left_pic"></div>
+    </header></>)
 
 
 }
