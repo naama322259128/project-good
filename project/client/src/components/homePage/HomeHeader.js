@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { setLogin } from '../../store/actions/home';
 import Login from '../login/Login';
@@ -14,7 +14,16 @@ import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const HomeHeader = (props) => {
 
- return (
+ /* useEffect(() => {
+    window.onscroll = () => {
+      if (window.pageYOffset < 200)
+        document.getElementById("home_header").style.height = '136vh';
+      if (window.pageYOffset > 400)
+        document.getElementById("home_header").style.height = '40vh';
+    }
+  }, []);
+*/
+  return (
     <header id="home_header">
       <Link to={"/home"}>  <div className="logo" ></div></Link>
       {/* פרופיל של הבחירה */}
@@ -46,11 +55,11 @@ const HomeHeader = (props) => {
       {props.loginIsOpen == true ? (<Login />) : null}
 
 
-  {/* <i class="chevron down icon" id="iconDown" onClick={() => { window.scrollTo(0, 900) }}></i> */}
+      {/* <i class="chevron down icon" id="iconDown" onClick={() => { window.scrollTo(0, 900) }}></i> */}
 
-      <IconButton color="primary" component="span" onClick={() => { window.scrollTo(0, 900) }}id="up_down_in_header">
+      {/* <IconButton color="primary" component="span" onClick={() => { window.scrollTo(0, 900) }}id="up_down_in_header">
         <UpIcon />
-      </IconButton>
+      </IconButton> */}
 
       <div id="right_pic"></div>
       <div id="left_pic"></div>
