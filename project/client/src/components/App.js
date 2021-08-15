@@ -7,20 +7,19 @@ import About from './main/About'
 import YourProfile from './login/YourProfile';
 function App() {
   return (
-    <Router>
-      <div>
-        <Switch>
-          <Route path={`/auction`}><Auction /></Route>
-          <Route path={`/home`}><Home /></Route>
-          <Route path={`/newAuction`}><NewAuction /></Route>
-          <Route path={`/about`}><About /></Route>
-          <Route path={`/your_profile`}><YourProfile /></Route>
-          <Route exact path={`/`}><Home /></Route>
-        </Switch>
-      </div>
+<Router>
+    <div>
+      <Switch>
+        <Route path={`/auction`}><Auction /></Route>
+        <Route path={`/home`}><Home /></Route>
+        <Route path={`/newAuction`}><NewAuction/></Route>        
+        <Route path={`/about`}><About/></Route>        
+        <Route path={`/your_profile`}><YourProfile/></Route>        
+        <Route exact path={`/`}><Home /></Route>
+      </Switch>
+    </div>
+  </Router>  );
 
-    </Router>
-  );
 }
 
 
