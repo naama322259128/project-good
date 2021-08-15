@@ -12,7 +12,6 @@
   background-image: url('../../img/logo.png');
   background-size: 100%;
   background-repeat: no-repeat;
-
   height: 8vh;
   width: 18vw;
 display: inline-block;
@@ -20,11 +19,16 @@ cursor: pointer;
 margin-top: 3vh;
 margin-left: 2vw;
 }
-.logo_home_small_header{
+#logo_home_small_header{
+  background-image: url('../../img/logo.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+display: inline-block;
+cursor: pointer;
   height:5vh !important;
-  width: 11vw !important;
-margin-top: 1vh !important;
-margin-left: 1vw !important;
+  width: 8vw !important;
+margin-top: 1.5vh !important;
+margin-left: 4vw !important;
 }
 .btn{
   color: #ffffff !important;   
@@ -107,10 +111,10 @@ background-color: #d0d63e !important ;
   -moz-box-shadow:    inset 0 0 10px white;
   -webkit-box-shadow: inset 0 0 10px white;
   box-shadow:         inset 0 0 10px white;
-    height: 7vh !important; ;
+  height: 7vh !important; ;
   width: 100vw;
   position: fixed !important;
-  z-index: 500 !important;
+  z-index: 270 !important;
 }
   .scrolling.dimmable.dimmed>.dimmer{
     overflow:hidden !important;
@@ -160,10 +164,8 @@ background-color: #d0d63e !important ;
     top: 52%
   }
   .home_footer{
-
     background-image: url('../../img/footer_black.png');
     background-size: 100% 100%;
-
     height:50vh;
     background-repeat: no-repeat;
     width: 100vw;
