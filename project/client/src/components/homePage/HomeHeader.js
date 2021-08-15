@@ -27,12 +27,17 @@ const HomeHeader = (props) => {
   };
 
   return (<>
-    <div id="small_home_header">CHINESE AUCTIONS</div>
+    <div id="small_home_header">
+    <div id="logo_home_small_header" ></div>
+    {props.currentUser ? <Profile /> : null}
+      {props.currentUser ? null : <Button type="button" className="btnLogin btn"id="login_btn_small_header" onClick={() => { props.setLogin(true); }}>Login</Button>}
+
+    </div>
     <header id="home_header">
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
       {/* פרופיל של הבחירה */}
       {props.currentUser ? <Profile /> : null}
-      {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => { window.scrollTo(0, 900); props.setLogin(true); }}>Login</Button>}
+      {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => {props.setLogin(true); }}>Login</Button>}
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>
