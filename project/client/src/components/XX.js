@@ -7,8 +7,8 @@ const XX= ()=> {
   useEffect(() => {
     window.onscroll = () => {
       setOffset(window.pageYOffset)
-      if(window.pageYOffset==10){
-        
+      if(window.pageYOffset==20){
+
       }
     }
   }, []);
