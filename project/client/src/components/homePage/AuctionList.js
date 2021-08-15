@@ -6,27 +6,8 @@ import { setLogin } from '../../store/actions/home';
 
 const AuctionList = (props) => {
     return (<>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>    {/* זמני */}
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-        {props.arr.map((item) => {
+  
+       {props.arr.map((item) => {
             return (
                 <Link
                     key={parseInt(item.code)}

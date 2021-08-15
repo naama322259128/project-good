@@ -20,9 +20,9 @@ const HomeHeader = (props) => {
   let handleScroll = () => {
     var small = document.getElementById("small_home_header");
     if (window.scrollY > 26 || document.documentElement.scrollY > 26) {
-      small.style.display = "block";      //להוסיף את ההידר הקטן
+      if (small) small.style.display = "block";      //להוסיף את ההידר הקטן
     } else {
-      small.style.display = "none";      //להוריד את ההידר הקטן
+      if (small) small.style.display = "none";      //להוריד את ההידר הקטן
     }
   };
 
