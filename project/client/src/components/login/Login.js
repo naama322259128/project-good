@@ -4,9 +4,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import React, { useState } from 'react';
 import './Login.scss';
-import SignUp from './SignUp'
-import SignIn from './SignIn'
-import { setLogin } from '../../store/actions/home'
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+import { setLogin } from '../../store/actions/home';
 import { connect } from "react-redux";
 
 const useStyles = makeStyles({
