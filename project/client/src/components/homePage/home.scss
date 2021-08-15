@@ -97,12 +97,18 @@ background-color: #d0d63e !important ;
   background-repeat: no-repeat;
   height:136vh;
   width: 100vw;
-  position: fixed !important;
+  position: relative !important;
   z-index: 200;
 }
-.small_home_header{
-  background-image: url('../../img/header_small.png') !important;
-  height:15vh !important;
+#small_home_header{
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  // background-image: url('../../img/header_small.png');
+  background-color: tomato !important;
+  height: 12vh !important; ;
+  width: 100vw;
+  position: fixed !important;
+  z-index: 500 !important;
 }
   .scrolling.dimmable.dimmed>.dimmer{
     overflow:hidden !important;

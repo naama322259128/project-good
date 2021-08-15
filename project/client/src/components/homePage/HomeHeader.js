@@ -18,31 +18,16 @@ const HomeHeader = (props) => {
   useEffect(() => { window.addEventListener("scroll", handleScroll) }, []);
 
   let handleScroll = () => {
-    var x = document.getElementById("home_header");
-    var text = document.getElementById("home_text");
-    var pic1 = document.getElementById("right_pic");
-    var pic2 = document.getElementById("left_pic");
-    var logo = document.getElementById("logo_home_header");
+    var small = document.getElementById("small_home_header");
     if (window.scrollY > 26 || document.documentElement.scrollY > 26) {
-      //הידר קטן
-      x.classList.add("small_home_header");
-      text.style.display = "none";
-      pic1.style.display = "none";
-      pic2.style.display = "none";
-      logo.classList.add("logo_home_small_header");
+      small.style.display = "block";      //להוסיף את ההידר הקטן
     } else {
-      //הידר גדול
-      x.classList.remove("small_home_header");
-      logo.classList.remove("logo_home_small_header");
-      if (text && pic1 && pic2) {
-        text.style.display = "block";
-        pic1.style.display = "block";
-        pic2.style.display = "block";
-      }
+      small.style.display = "none";      //להוריד את ההידר הקטן
     }
   };
 
   return (<>
+    <div id="small_home_header">CHINESE AUCTIONS</div>
     <header id="home_header">
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
       {/* פרופיל של הבחירה */}
@@ -79,8 +64,6 @@ const HomeHeader = (props) => {
       <div id="right_pic"></div>
       <div id="left_pic"></div>
     </header></>)
-
-
 }
 
 

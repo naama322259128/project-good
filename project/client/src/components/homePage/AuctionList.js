@@ -9,6 +9,16 @@ const AuctionList = (props) => {
     <br/>
     <br/>
     <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <br/>    {/* זמני */}
     <br/>
     <br/>
