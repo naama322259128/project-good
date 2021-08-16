@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { addUser } from '../../store/actions/signUp';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -43,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
         color: '#8e8e95',
 
     },
-    placeholder_in_form:{
-        marginLeft:'3% !important',
-        marginBottom:' -2% !important'
-      }
+    placeholder_in_form: {
+        marginLeft: '3% !important',
+        marginBottom: ' -2% !important'
+    }
 }));
 
 const SignUp = (props) => {
@@ -72,13 +72,13 @@ const SignUp = (props) => {
 
 
 
-    //הרשמת משתמש חדש
+    //רישום משתמש חדש
     let password = "";
     let userName = "";
     let email = "";
     let phone = "";
     let adress = "";
-    let birthYear;
+    let birthYear = "";
     const createUser = () => {
         let newUser = { password, userName, email, phone, adress, birthYear };
         props.addUser(newUser);
@@ -88,7 +88,7 @@ const SignUp = (props) => {
 
     return (
         <center>
-            <form className={classes.root} noValidate autoComplete="off">
+            <form className={classes.root} noValidate autoComplete="off" >
 
                 <div className={"inputs_btns"}>
                     <FilledInput
@@ -103,10 +103,11 @@ const SignUp = (props) => {
                                 <i className="user icon"></i>
                             </InputAdornment>
                         }
+                        id="userName"
                     />
                     <FilledInput
                         type={'text'}
-                        placeholder="Mail Adress"
+                        placeholder="Email Adress"
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
                         required
@@ -116,6 +117,7 @@ const SignUp = (props) => {
                                 <i className="envelope icon"></i>
                             </InputAdornment>
                         }
+                        id="userEmail"
                     />
                     <FilledInput
                         type={'text'}
@@ -129,6 +131,7 @@ const SignUp = (props) => {
                                 <i className="map marker alternate icon"></i>
                             </InputAdornment>
                         }
+                        id="userAdress"
                     />
                     <FilledInput
                         type={'text'}
@@ -142,6 +145,7 @@ const SignUp = (props) => {
                                 <i className="calendar alternate outline icon"></i>
                             </InputAdornment>
                         }
+                        id="userYear"
                     />
                     <FilledInput
                         type={'text'}
@@ -155,6 +159,7 @@ const SignUp = (props) => {
                                 <i className="mobile alternate icon"></i>
                             </InputAdornment>
                         }
+                        id="userPhone"
                     />
                     <FilledInput
                         type={values.showPassword ? 'text' : 'password'}
@@ -180,9 +185,11 @@ const SignUp = (props) => {
                                 </IconButton>
                             </InputAdornment>
                         }
+                        id="userPassword"
                     />
                     <Button type="button" variant="contained" className={"login_btn"} onClick={createUser}>Login</Button>
                 </div>
+
             </form>
         </center>
 

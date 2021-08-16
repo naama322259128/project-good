@@ -11,7 +11,7 @@
 
 #logo_home_header{
   background-image: url('../../img/logo_white.png');
-  background-image: url('../../img/logo_green&blue.png');
+  // background-image: url('../../img/logo_green&blue.png');
   background-size:100% 100%;
   background-repeat: no-repeat;
   height: 9vh;
@@ -23,7 +23,7 @@ margin-left: 2vw;
 }
 #logo_home_small_header{
   background-image: url('../../img/logo_white.png');
-  background-image: url('../../img/logo_green&blue.png');
+  // background-image: url('../../img/logo_green&blue.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 display: inline-block;
@@ -46,7 +46,7 @@ margin-left: 4vw !important;
   right: 3vw !important;
   top: 3vh !important;
    background-color: #f3e7f226 !important;
-   background-color: #3ed646 !important;
+  //  background-color: #3ed646 !important;
   display: inline-block !important;
 }
 #login_btn_small_header{
@@ -58,7 +58,7 @@ padding: 0% !important;
 #home_text>p{
   line-height:0.8 !important;
   color: white;
-  color: black;
+  // color: black;
   font-size: 3vh; 
    font-family: 'Centaur';
    text-align: right !important;
@@ -68,7 +68,7 @@ padding: 0% !important;
 #home_text>h5{
   line-height:0.8 !important;
   color: white;
-  color: black;
+  // color: black;
   font-size: 9vh; 
    font-family: 'Centaur';
    text-align: right !important;
@@ -76,7 +76,7 @@ padding: 0% !important;
 }#home_text>h3{
   line-height:0.8 !important;
   color: white;
-  color: black;
+  // color: black;
   font-size: 14vh; 
    font-family: 'Centaur';
    text-align: right !important;
@@ -94,7 +94,7 @@ left: 14% !important;
 width: 10vw !important;
 height: 5vh;
 background-color: #d0d63e !important ;
-background-color: #3ed646 !important ;
+// background-color: #3ed646 !important ;
 
 }
 .btnNewAuction{
@@ -102,11 +102,11 @@ background-color: #3ed646 !important ;
   height:5vh ;
 width: 16vw !important;
 background-color: #d0d63e !important ;
-background-color: #3ed646 !important ;
+// background-color: #3ed646 !important ;
 
 }
 #home_header{
-  // background-image: url('../../img/home_header_backgroung.webp');
+  background-image: url('../../img/home_header_backgroung.webp');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   height:136vh;
