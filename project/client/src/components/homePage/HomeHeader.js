@@ -57,7 +57,7 @@ const HomeHeader = (props) => {
         </Link>
 
         <Link to={props.currentUser ? "/newAuction" : '#'}>
-          <Button onClick={props.currentUser ? null : () => {  props.setLogin(true) }} type="button" className="btn btnNewAuction">
+          <Button onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn btnNewAuction">
             BUILD CHINESE AUCTION
           </Button>
         </Link>
