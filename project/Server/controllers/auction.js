@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
     let auctions = await Auction.find();
     return res.send(auctions);
 }
- 
+
 const getById = async (req, res) => {
     let { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -42,7 +42,30 @@ const deleteAuction = async (req, res) => {
     return res.send(auction);
 }
 
+//לקבל את המכירה שיש לה הכי הרבה נרשמים
+const getMostSubscribers = async (req, res) => {
+
+    //db.exhibits.aggregate( [ { $unwind: "$tags" },  { $sortByCount: "$tags" } ] )
+    let sorted_arr = User.aggregate({ $sortByCount: "$password" });
+    //מציג סיסמה וכמה יש מאותה סיסמה
+    //מגיע ממוין
+    //לקחת את האחרון
+    // ? ואם כמה אחרונים באותה כמות נרשמים
+
+//https://docs.mongodb.com/manual/reference/operator/aggregation/sortByCount/#mongodb-pipeline-pipe.-sortByCount
+
+    let auction = await Auction.
+        if(!auction)
+    return res.status(404).send("");
+    console.log(auction);
+    return res.send(auction);
+}
+
+
 
 module.exports = {
     getAll, getById, addAuction, deleteAuction
 }
+
+//המכירה שש לה הכי הרבה הכנסות
+//המכירה שיש בה הכי קצת....
