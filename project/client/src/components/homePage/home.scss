@@ -1,3 +1,4 @@
+
 #profileIcon{
   font-size: 3rem !important;
   color:#5055aa !important;
@@ -9,10 +10,10 @@
 }
 
 #logo_home_header{
-  background-image: url('../../img/logo.png');
-  background-size: 100%;
+  background-image: url('../../img/logo_white.png');
+  background-size:100% 100%;
   background-repeat: no-repeat;
-  height: 8vh;
+  height: 9vh;
   width: 18vw;
 display: inline-block;
 cursor: pointer;
@@ -20,13 +21,13 @@ margin-top: 3vh;
 margin-left: 2vw;
 }
 #logo_home_small_header{
-  background-image: url('../../img/logo.png');
-  background-size: 100%;
+  background-image: url('../../img/logo_white.png');
+  background-size: 100% 100%;
   background-repeat: no-repeat;
 display: inline-block;
 cursor: pointer;
   height:5vh !important;
-  width: 8vw !important;
+  width: 10vw !important;
 margin-top: 1.5vh !important;
 margin-left: 4vw !important;
 }
