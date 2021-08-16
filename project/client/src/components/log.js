@@ -7,11 +7,9 @@ const Log = () => {
           Home
         </a>
         <a class="item">
-          Messages
+      Login
         </a>
-        <a class="item">
-          Friends
-        </a>
+       
       </div>
      
       </>

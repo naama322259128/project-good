@@ -17,6 +17,9 @@ const HomeHeader = (props) => {
   //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
   useEffect(() => { window.addEventListener("scroll", handleScroll) }, []);
 
+
+
+
   let handleScroll = () => {
     var small = document.getElementById("small_home_header");
     if (window.scrollY > 26 || document.documentElement.scrollY > 26) {
@@ -27,17 +30,18 @@ const HomeHeader = (props) => {
   };
 
   return (<>
-    <div id="small_home_header">
-    <div id="logo_home_small_header" ></div>
-    {props.currentUser ? <Profile /> : null}
-      {props.currentUser ? null : <Button type="button" className="btnLogin btn"id="login_btn_small_header" onClick={() => { props.setLogin(true); }}>Login</Button>}
 
+    <div id="small_home_header">
+      <div id="logo_home_small_header" ></div>
+      {props.currentUser ? <Profile /> : null}
+      {props.currentUser ? null : <Button type="button" className="btnLogin btn" id="login_btn_small_header" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}>Login</Button>}
     </div>
+
     <header id="home_header">
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
       {/* פרופיל של הבחירה */}
       {props.currentUser ? <Profile /> : null}
-      {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => {props.setLogin(true); }}>Login</Button>}
+      {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => { props.setLogin(true); }}>Login</Button>}
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>
@@ -53,18 +57,13 @@ const HomeHeader = (props) => {
         </Link>
 
         <Link to={props.currentUser ? "/newAuction" : '#'}>
-          <Button onClick={props.currentUser ? null : () => { window.scrollTo(0, 900); props.setLogin(true) }} type="button" className="btn btnNewAuction">
+          <Button onClick={props.currentUser ? null : () => {  props.setLogin(true) }} type="button" className="btn btnNewAuction">
             BUILD CHINESE AUCTION
           </Button>
         </Link>
       </div>
 
-
       {props.loginIsOpen == true ? (<Login />) : null}
-
-      {/* <IconButton color="primary" component="span" onClick={() => { window.scrollTo(0, 900) }}id="up_down_in_header">
-        <UpIcon />
-      </IconButton> */}
 
       <div id="right_pic"></div>
       <div id="left_pic"></div>

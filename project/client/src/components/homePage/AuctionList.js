@@ -11,7 +11,7 @@ const AuctionList = (props) => {
             return (
                 <Link
                     key={parseInt(item.code)}
-            onClick={props.currentUser ? () => { props.setCurrentAuction(item.code) ;window.scrollTo(0, 0);} :()=> {window.scrollTo(0, 900);props.setLogin(true)}}
+            onClick={props.currentUser ? () => { props.setCurrentAuction(item.code)} :()=> {window.scrollTo(0,0);props.setLogin(true)}}
                     to={props.currentUser ? `/auction` : '#'}>
                     <OneAuction key={parseInt(item.code)} item={item} />
                 </Link>
