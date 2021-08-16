@@ -22,7 +22,7 @@ const HomeHeader = (props) => {
 
   let handleScroll = () => {
     var small = document.getElementById("small_home_header");
-    if (window.scrollY > 26 || document.documentElement.scrollY > 26) {
+    if (window.scrollY > 900 || document.documentElement.scrollY > 900) {
       if (small) small.style.display = "block";      //להוסיף את ההידר הקטן
     } else {
       if (small) small.style.display = "none";      //להוריד את ההידר הקטן
