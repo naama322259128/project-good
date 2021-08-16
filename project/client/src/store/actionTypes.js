@@ -24,3 +24,4 @@ export const SET_CNT_PRODUCT_IN_CART="SET_CNT_PRODUCT_IN_CART";//עדכון כמ
 export const DELETE_CURRENT_USER="DELETE_CURRENT_USER"//מחיקת משתמש
 export const UPDATE_CURRENT_USER="UPDATE_CURRENT_USER"//עדכון משתמש
 export const RESET_STATE="RESET_STATE"//איפוס הסטייט לאחר בניית מכירה
+export const SET_YOUR_PROFILE="SET_YOUR_PROFILE"//האם להציג את הyour profile

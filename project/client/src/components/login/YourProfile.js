@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { updateUser } from '../../store/actions/signUp';
+import { updateUser } from '../../store/actions/signIn';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -10,6 +10,8 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
+import{setYourProfile} from '../../store/actions/signIn';
+
 import './Login.scss';
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -88,15 +90,24 @@ const YourProfile = (props) => {
         props.updateUser(user);
 
     };
-
+    const click = (e) => {
+        e.stopPropagation();
+      }
     return (
-        <center>
-            <form className={classes.root} noValidate autoComplete="off">
+         <center>
+      <div id="myModal" className="modal_login glass_login" onClick={() => props.setYourProfile(false)} >
+        <div className="modal-content_login" onClick={click}  >
+            <div className="form_your_profile">
+                <br/>
+                <br/>
+                
+                <h1 id="h1_Profile"> Your profile</h1>
+            <form className={classes.root} noValidate autoComplete="off" >
 
                 <div className={"inputs_btns"}>
                     <FilledInput
                         type={'text'}
-                        placeholder="Mail Adress"
+                        placeholder={props.currentUser.email}
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
                         required
@@ -109,7 +120,7 @@ const YourProfile = (props) => {
                     />
                     <FilledInput
                         type={'text'}
-                        placeholder="Adress"
+                        placeholder={props.currentUser.adress}
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
@@ -122,7 +133,7 @@ const YourProfile = (props) => {
                     />
                     <FilledInput
                         type={'text'}
-                        placeholder="Phone Number"
+                        placeholder={props.currentUser.phone}
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
@@ -136,7 +147,7 @@ const YourProfile = (props) => {
                     <FilledInput
                         type={values.showPassword ? 'text' : 'password'}
                         onChange={handleChange('password')}
-                        placeholder="Password"
+                        placeholder={props.currentUser.password}
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
@@ -158,9 +169,11 @@ const YourProfile = (props) => {
                             </InputAdornment>
                         }
                     />
-                    <Button type="button" variant="contained" className={"login_btn"} onClick={updateUser}>Update</Button>
+                    <Button type="button" variant="contained" className={"login_btn"} onClick={()=>{updateUser();props.setYourProfile(false)}}>Update</Button>
                 </div>
             </form>
+        </div></div></div>
+
         </center>
 
 
@@ -173,4 +186,4 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, { updateUser })(YourProfile);
+export default connect(mapStateToProps, { updateUser ,setYourProfile})(YourProfile);

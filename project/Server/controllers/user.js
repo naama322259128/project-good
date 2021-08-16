@@ -85,7 +85,7 @@ const deleteUser = async (req, res) => {
 //בודקת האם משתמש קיים לפי סיסמא ומייל
 const isUserExsit = async (req, res) => {
     let { password, email } = req.params;
-    let user = await User.find(e => { e.email == email && e.password == password });
+    let user = await User.findOne( { "password":password,"email":email});
     if (!user)
         return res.status(400).send("Incorrect details entered");
     return res.send(user);
