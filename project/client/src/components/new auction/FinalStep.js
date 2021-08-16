@@ -19,6 +19,7 @@ const FinalStep = (props) => {
             <div className="modal-content_final_step">
                 <h1>Are you sure the Chinese auction is ready?</h1>
                 <button onClick={() => props.addAuction(newAuction)}>Yes</button>
+                <button onClick={() => props.setLastModal(false)}>No</button>
             </div>
         </div>);
 }
