@@ -95,6 +95,7 @@ const SignUp = (props) => {
                         type={'text'}
                         placeholder="Username"
                         required
+                        value="Hila Gamliel"
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
                         onChange={(e) => { userName = e.target.value }}
