@@ -2,9 +2,10 @@ import React from 'react';
 import './NewAuction.scss';
 import { connect } from "react-redux";
 import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
-import { addAuction } from "../../utils/auctionUtil"; //שמירת כל הנתונים במסד
+import { createNewAuction } from "../../utils/auctionUtil"; //שמירת כל הנתונים במסד
 const FinalStep = (props) => {
     let newAuction = {
+        //לשנות את הסטטוס למנהל
         code: "צריך לשנות",
         name: props.organizationName,
         auctionManager: props.auctionManager,
@@ -14,11 +15,12 @@ const FinalStep = (props) => {
         productList: props.productsList,
         orderList: null
     }
+    
     return (
         <div id="myModal" className="modal_final_step glass_final_step" onClick={()=>{props.setLastModal(false)}}>
             <div className="modal-content_final_step">
                 <h1>Are you sure the Chinese auction is ready?</h1>
-                <button onClick={() => props.addAuction(newAuction)}>Yes</button>
+                <button onClick={() => props.createNewAuction(newAuction)}>Yes</button>
             </div>
         </div>);
 }
@@ -35,4 +37,4 @@ const mapStateToProps = (state) => {
         auctionManager: state.auction.currentUser
     };
 }
-export default connect(mapStateToProps, { setLastModal ,addAuction})(FinalStep);
+export default connect(mapStateToProps, { setLastModal ,createNewAuction})(FinalStep);
