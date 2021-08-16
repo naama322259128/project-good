@@ -166,16 +166,17 @@ background-color: #d0d63e !important ;
     top: 52%
   }
   .home_footer{
-    background-image: url('../../img/footer_black.png');
+    // background-image: url('../../img/footer_black.png');
+    background-color: #e4eabcfa;
     background-size: 100% 100%;
-    height:50vh;
+    height:40vh;
     background-repeat: no-repeat;
     width: 100vw;
     position: relative;
   }
   
  #logo_in_home_footer{
-    background-image: url('../../img/logo.png');
+    background-image: url('../../img/logo_white.png');
     background-size: 100%;
     background-repeat: no-repeat;
     position: absolute;
