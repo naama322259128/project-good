@@ -20,12 +20,8 @@ const FinalStep = (props) => {
         <div id="myModal" className="modal_final_step glass_final_step" onClick={()=>{props.setLastModal(false)}}>
             <div className="modal-content_final_step">
                 <h1>Are you sure the Chinese auction is ready?</h1>
-<<<<<<< HEAD
-                <button onClick={() => props.addAuction(newAuction)}>Yes</button>
-                <button onClick={() => props.setLastModal(false)}>No</button>
-=======
                 <button onClick={() => props.createNewAuction(newAuction)}>Yes</button>
->>>>>>> 7272d5b006f9437f37cf31394b61a83ec947c9e2
+                <button onClick={() => props.setLastModal(false)}>No</button>
             </div>
         </div>);
 }
