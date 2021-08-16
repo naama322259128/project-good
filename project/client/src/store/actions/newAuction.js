@@ -72,3 +72,8 @@ export const setLastModal=(b)=>{
         payload: b
     }
 }
+export const  resetState= () => {
+    return {
+        type: actionTypes.RESET_STATE
+    }
+}

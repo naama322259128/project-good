@@ -106,6 +106,19 @@ export const newAuctionReducer = (state = initialState, action) => {
             return{
             ...state,
             finalStepModalIsOpen:false
+        } 
+        case actionTypes.RESET_STATE:
+            //איפוס הסטייט לאחר בניית מכירה
+            return{
+            ...state,
+            pricesList: [],
+            packagesList:[],
+            productsList:[],
+            regulationsFile: null,
+            dateOfLottery: null,
+            registrationEndDate: null,
+            organizationName: "",
+            organizationPhotos:null,
         }
     }
     return state;

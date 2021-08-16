@@ -6,20 +6,20 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-import{deleteCurrentUser} from "../../store/actions/signUp";
-
+import { deleteCurrentUser } from "../../store/actions/signUp";
+import { resetState } from '../../store/actions/newAuction';
 const ITEM_HEIGHT = 48;
 const Profile = (props) => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-const signOut=()=>{
-  if( window.confirm("Are you sure you want to leave?"))
-  {
-    props.deleteCurrentUser(props.currentUser);
-  }
-  
-}
+    const signOut = () => {
+        if (window.confirm("Are you sure you want to leave?")) {
+            props.deleteCurrentUser(props.currentUser);
+            props.resetState();
+        }
+
+    }
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -54,8 +54,8 @@ const signOut=()=>{
             }}
         >
             <Link to={'/your_profile'}><MenuItem key={'Your profile'} onClick={handleClose}>Your profile</MenuItem> </Link>
-            <Link to={'/home'}><MenuItem key={'Sign out'} onClick={()=>{handleClose();signOut(); } }>Sign out</MenuItem></Link> 
-            
+            <Link to={'/home'}><MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem></Link>
+
         </Menu> </div >);
 }
 
@@ -64,4 +64,4 @@ const mapStateToProps = state => {
         currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, {deleteCurrentUser})(Profile);
+export default connect(mapStateToProps, { deleteCurrentUser, resetState })(Profile);
