@@ -8,8 +8,9 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/signUp";
 import { resetNewAuctionState } from '../../store/actions/newAuction';
-import{setYourProfile} from '../../store/actions/signIn';
+// import{setYourProfile} from '../../store/actions/signIn';
 import YourProfile from './YourProfile';
+
 const ITEM_HEIGHT = 48;
 const Profile = (props) => {
 
@@ -56,8 +57,8 @@ const Profile = (props) => {
             }}
         >
 
-{props.yourProfileIsOpen?<YourProfile/>:null}
-            <Link ><MenuItem key={'Your profile'} onClick={()=>{handleClose();props.setYourProfile(true);}}>Your profile</MenuItem> </Link>
+
+            <Link to={'./your_profile'}><MenuItem key={'Your profile'} onClick={()=>{handleClose();/*props.setYourProfile(true);*/}}>Your profile</MenuItem> </Link>
             <Link to={'/home'}><MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem></Link>
 
         </Menu> </div >);
@@ -65,9 +66,8 @@ const Profile = (props) => {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.user.currentUser,
-        yourProfileIsOpen:state.user.yourProfileIsOpen
+        currentUser: state.user.currentUser
 
     };
 }
-export default connect(mapStateToProps, { signOut, resetNewAuctionState,setYourProfile})(Profile);
+export default connect(mapStateToProps, { signOut, resetNewAuctionState/*,setYourProfile*/})(Profile);
