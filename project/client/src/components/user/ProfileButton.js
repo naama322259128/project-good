@@ -63,12 +63,11 @@ const ProfileButton = (props) => {
                 <MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem>
             </Link>
 
-<<<<<<< HEAD:project/client/src/components/login/Profile.js
-            <Link to={'./your_profile'}><MenuItem key={'Your profile'} onClick={()=>{handleClose();}}>Your profile</MenuItem> </Link>
-            <Link to={'/home'}><MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem></Link>
-=======
+            {/* <Link to={'./your_profile'}><MenuItem key={'Your profile'} onClick={()=>{handleClose();}}>Your profile</MenuItem> </Link>
+            <Link to={'/home'}><MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem></Link> */}
+
         </Menu>
->>>>>>> f8db560e952d09c146499ddfb897d5b4636d939b:project/client/src/components/user/ProfileButton.js
+
 
     </div >);
 }

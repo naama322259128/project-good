@@ -7,14 +7,11 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ProfileButton from '../user/ProfileButton';
 import IconButton from '@material-ui/core/IconButton';
-<<<<<<< HEAD
 import DownIcon from '@material-ui/icons/KeyboardArrowDown';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-=======
 
->>>>>>> f8db560e952d09c146499ddfb897d5b4636d939b
 
 
 const HomeHeader = (props) => {
@@ -44,7 +41,6 @@ const HomeHeader = (props) => {
     <div id="small_home_header">
 
       <div id="logo_home_small_header" ></div>
-<<<<<<< HEAD
       <Tabs
       value={value}
       onChange={handleChange}
@@ -52,16 +48,12 @@ const HomeHeader = (props) => {
       textColor="primary"
       centered
     >
-    {props.currentUser?<Profile /> : <Tab label="Login" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}/>}
+    {props.currentUser?<ProfileButton /> : <Tab label="Login" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}/>}
       <Tab label="Home" />
 
     </Tabs>
       {/* {props.currentUser ? <Profile /> : null}
       {props.currentUser ? null : <Button type="button" className="btnLogin btn" id="login_btn_small_header" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}>Login</Button>} */}
-=======
-      {props.currentUser ? <ProfileButton/> : null}
-      {props.currentUser ? null : <Button type="button" className="btnLogin btn" id="login_btn_small_header" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}>Login</Button>}
->>>>>>> f8db560e952d09c146499ddfb897d5b4636d939b
     </div>
 
     <header id="home_header">
