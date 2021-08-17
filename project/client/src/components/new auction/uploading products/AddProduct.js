@@ -10,7 +10,8 @@ const AddProduct = (props) => {
     const fileInputRef = useRef();
 
     let [img,setImg]=useState("");
-    let newProduct = { img: "", prodName: "", prodDescription: "" };
+    let newProduct = { img: "pic of prosuct", prodName: "", prodDescription: "" };//זמני בלבד
+    // let newProduct = { img: "", prodName: "", prodDescription: "" };
 
     const filterBySize = (file) => {
         setImg(file.name);
@@ -24,11 +25,12 @@ const AddProduct = (props) => {
     return ((props.showSetProduct) ? (
         <div className="field">
             <form>
-                <input placeholder="product name" type="text" onChange={(e) => newProduct.prodName = e.target.value} required="true" />
+                <input placeholder="product name" type="text" onChange={(e) => newProduct.prodName = e.target.value} required={true} />
                 <textarea placeholder="product description"
-                    onChange={(e) => newProduct.prodDescription = e.target.value} required="true"></textarea>
+                    onChange={(e) => newProduct.prodDescription = e.target.value} required={true}></textarea>
+                
+                
                 {/* כפתור להעלאת תמונה */}
-
                 <Uploady
                     destination={{ url: "my-server.com/upload" }}
                     fileFilter={filterBySize}
@@ -37,6 +39,7 @@ const AddProduct = (props) => {
                     <UploadButton />
                     <UploadPreview />
                 </Uploady>
+
 
                 <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProduct(newProduct) }} />
             </form>

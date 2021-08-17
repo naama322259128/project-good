@@ -6,8 +6,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-import { deleteCurrentUser } from "../../store/actions/signUp";
-import { resetState } from '../../store/actions/newAuction';
+import { signOut } from "../../store/actions/signUp";
+import { resetNewAuctionState } from '../../store/actions/newAuction';
 import{setYourProfile} from '../../store/actions/signIn';
 import YourProfile from './YourProfile';
 const ITEM_HEIGHT = 48;
@@ -17,8 +17,8 @@ const Profile = (props) => {
     const open = Boolean(anchorEl);
     const signOut = () => {
         if (window.confirm("Are you sure you want to leave?")) {
-            props.deleteCurrentUser(props.currentUser);
-            props.resetState();
+            props.signOut(props.currentUser);
+            props.resetNewAuctionState();//אם היה באמצע לבנות מכירה, הנתונים שלה ימחקו
         }
 
     }
@@ -70,4 +70,4 @@ const mapStateToProps = state => {
 
     };
 }
-export default connect(mapStateToProps, { deleteCurrentUser, resetState,setYourProfile})(Profile);
+export default connect(mapStateToProps, { signOut, resetNewAuctionState,setYourProfile})(Profile);

@@ -18,9 +18,12 @@ const getById = async (req, res) => {
 
 const addAuction = async (req, res) => {
     let auction = req.body;
+    console.log(auction);
     //לעדכן קוד אוטומטי
     //auction.code=
     let newAuction = new Auction(auction);
+    console.log(newAuction);
+
     try {
         await newAuction.save();
         console.log(newAuction)
@@ -52,7 +55,7 @@ const getMostSubscribers = async (req, res) => {
     //לקחת את האחרון
     // ? ואם כמה אחרונים באותה כמות נרשמים
 
-//https://docs.mongodb.com/manual/reference/operator/aggregation/sortByCount/#mongodb-pipeline-pipe.-sortByCount
+    //https://docs.mongodb.com/manual/reference/operator/aggregation/sortByCount/#mongodb-pipeline-pipe.-sortByCount
 
     let auction = await Auction.
         if(!auction)

@@ -8,7 +8,7 @@ const FinalStep = (props) => {
         //לשנות את הסטטוס למנהל
         code: "צריך לשנות",
         name: props.organizationName,
-        auctionManager: props.auctionManager,
+        auctionManager: props.currentUser,
         lotteriesDate: props.lotteriesDate,
         registrationEndDate: props.registrationEndDate,
         purchasePackage: props.packagesList,
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
         registrationEndDate: state.auction.registrationEndDate,//תאריך סיום ההרשמה
         organizationName: state.auction.organizationName,//שם ארגון
         organizationPhotos: state.auction.organizationPhotos,//תמונות הארגון
-        auctionManager: state.auction.currentUser
+        currentUser: state.user.currentUser
     };
 }
 export default connect(mapStateToProps, { setLastModal ,createNewAuction})(FinalStep);

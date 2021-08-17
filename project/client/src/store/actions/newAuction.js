@@ -64,16 +64,14 @@ export const saveOrganizationDetails = (name) => {
         payload: name
     }
 }
-export const setLastModal=(b)=>{
-    console.log("bbb: "+b);
-    
+export const setLastModal=(b)=>{   
      return {
         type: actionTypes.SET_FINAL_STEP,
         payload: b
     }
 }
-export const  resetState= () => {
+export const  resetNewAuctionState= () => {
     return {
-        type: actionTypes.RESET_STATE
+        type: actionTypes.RESET_NEW_AUCTION_STATE
     }
 }
