@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 // import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import FilledInput from '@material-ui/core/FilledInput';
 
 import './Login.scss';
@@ -169,7 +170,7 @@ const YourProfile = (props) => {
                             
                         }
                     />
-                    <Button type="button" variant="contained" className={"login_btn"} onClick={()=>{updateUser()}}>Update</Button>
+                 <Link to={`/home`}>   <Button type="button" variant="contained" className={"login_btn"} onClick={()=>{updateUser()}}>Update</Button></Link>
                 </div>
             </form>
         </div></div></div>

@@ -65,11 +65,16 @@ margin-bottom: 1vh;
  width: 100%; 
 
 }
+.PrivateTabIndicator-colorPrimary-11 {
+  background-color: #d0d63e;
+  height: 0.4vh;
+}
 #btn_signup,#btn_signin{
     display: inline-block;
     width: 50%;
     text-align: center;
     color: white;
+    background-color: #8e8e95;
     font-size: 2vh;
     height: 10%;
     padding-top: 5%; 
@@ -110,7 +115,6 @@ text-align: right;
   width:36% !important;
   // background-color: #5d1e5a !important;
 background-color: #d0d63e !important;
-
   height: 4vh !important;
   margin-left: 17% !important;
   display: inline-block;

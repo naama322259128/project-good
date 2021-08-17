@@ -9,10 +9,16 @@ import Profile from '../login/Profile';
 import IconButton from '@material-ui/core/IconButton';
 import DownIcon from '@material-ui/icons/KeyboardArrowDown';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
-
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 
 const HomeHeader = (props) => {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
   useEffect(() => { window.addEventListener("scroll", handleScroll) }, []);
@@ -32,9 +38,21 @@ const HomeHeader = (props) => {
   return (<>
 
     <div id="small_home_header">
+
       <div id="logo_home_small_header" ></div>
-      {props.currentUser ? <Profile /> : null}
-      {props.currentUser ? null : <Button type="button" className="btnLogin btn" id="login_btn_small_header" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}>Login</Button>}
+      <Tabs
+      value={value}
+      onChange={handleChange}
+      indicatorColor="primary"
+      textColor="primary"
+      centered
+    >
+    {props.currentUser?<Profile /> : <Tab label="Login" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}/>}
+      <Tab label="Home" />
+
+    </Tabs>
+      {/* {props.currentUser ? <Profile /> : null}
+      {props.currentUser ? null : <Button type="button" className="btnLogin btn" id="login_btn_small_header" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}>Login</Button>} */}
     </div>
 
     <header id="home_header">

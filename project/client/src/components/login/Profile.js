@@ -56,7 +56,7 @@ const Profile = (props) => {
         >
 
 
-            <Link to={'./your_profile'}><MenuItem key={'Your profile'} onClick={()=>{handleClose();props.setYourProfile(true);}}>Your profile</MenuItem> </Link>
+            <Link to={'./your_profile'}><MenuItem key={'Your profile'} onClick={()=>{handleClose();}}>Your profile</MenuItem> </Link>
             <Link to={'/home'}><MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem></Link>
 
         </Menu> </div >);
