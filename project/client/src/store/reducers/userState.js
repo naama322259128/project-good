@@ -2,7 +2,6 @@ import * as actionTypes from '../actionTypes';
 const initialState = {
     currentUser: null,
     loginIsOpen: false,
-    yourProfileIsOpen: false,//האם לפתוח את YourProfile
     shoppingCart: [
         { cnt: 1, product: { code: "111", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 4, product: { code: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
@@ -71,14 +70,6 @@ export const userReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     currentUser: action.payload,
-                }
-            }
-        case actionTypes.SET_YOUR_PROFILE:
-            {
-                //עידכון משתמש נוכחי
-                return {
-                    ...state,
-                    yourProfileIsOpen: action.payload,
                 }
             }
     }

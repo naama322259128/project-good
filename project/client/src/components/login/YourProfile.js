@@ -10,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
-import{setYourProfile} from '../../store/actions/signIn';
 
 import './Login.scss';
 const useStyles = makeStyles((theme) => ({
@@ -95,7 +94,7 @@ const YourProfile = (props) => {
       }
     return (
          <center>
-      <div id="myModal" className="modal_login glass_login" onClick={() => props.setYourProfile(false)} >
+      <div id="myModal" className="modal_login glass_login"  >
         <div className="modal-content_login" onClick={click}  >
             <div className="form_your_profile">
                 <br/>
@@ -167,9 +166,10 @@ const YourProfile = (props) => {
                                     {values.showPassword ? <Visibility /> : <VisibilityOff />}
                                 </IconButton>
                             </InputAdornment>
+                            
                         }
                     />
-                    <Button type="button" variant="contained" className={"login_btn"} onClick={()=>{updateUser();props.setYourProfile(false)}}>Update</Button>
+                    <Button type="button" variant="contained" className={"login_btn"} onClick={()=>{updateUser()}}>Update</Button>
                 </div>
             </form>
         </div></div></div>
@@ -186,4 +186,4 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, { updateUser ,setYourProfile})(YourProfile);
+export default connect(mapStateToProps, { updateUser })(YourProfile);

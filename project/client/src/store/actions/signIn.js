@@ -36,9 +36,4 @@ export const updateUser = (user) => {
 
 }
 
-export const setYourProfile = (s) => {
-    return {
-        type: actionTypes.SET_YOUR_PROFILE,
-        payload: s
-    }
-}
+
