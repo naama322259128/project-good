@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { setLogin } from '../../store/actions/home';
-import Login from '../login/Login';
+import Login from '../user/Login';
 import './home.scss';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import Profile from '../login/Profile';
+import ProfileButton from '../user/ProfileButton';
 import IconButton from '@material-ui/core/IconButton';
+<<<<<<< HEAD
 import DownIcon from '@material-ui/icons/KeyboardArrowDown';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+=======
+
+>>>>>>> f8db560e952d09c146499ddfb897d5b4636d939b
 
 
 const HomeHeader = (props) => {
@@ -40,6 +44,7 @@ const HomeHeader = (props) => {
     <div id="small_home_header">
 
       <div id="logo_home_small_header" ></div>
+<<<<<<< HEAD
       <Tabs
       value={value}
       onChange={handleChange}
@@ -53,13 +58,18 @@ const HomeHeader = (props) => {
     </Tabs>
       {/* {props.currentUser ? <Profile /> : null}
       {props.currentUser ? null : <Button type="button" className="btnLogin btn" id="login_btn_small_header" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}>Login</Button>} */}
+=======
+      {props.currentUser ? <ProfileButton/> : null}
+      {props.currentUser ? null : <Button type="button" className="btnLogin btn" id="login_btn_small_header" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}>Login</Button>}
+>>>>>>> f8db560e952d09c146499ddfb897d5b4636d939b
     </div>
 
     <header id="home_header">
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
-      {/* פרופיל של הבחירה */}
-      {props.currentUser ? <Profile /> : null}
+
+      {props.currentUser ? <ProfileButton /> : null}
       {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => { props.setLogin(true); }}>Login</Button>}
+
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>

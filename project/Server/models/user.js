@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         // }
     },
     birthYear: { type: Number, required:true },
-    adress: { type: String, required: true },
+    address: { type: String, required: true },
     status: {type:String, enum: ['USER', 'AUCTION_MANAGER', 'SITE_MANAGER'], required: true, default: 'USER' }
 
 });

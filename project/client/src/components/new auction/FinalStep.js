@@ -8,7 +8,7 @@ const FinalStep = (props) => {
         //לשנות את הסטטוס למנהל
         code: "צריך לשנות",
         name: props.organizationName,
-        auctionManager: props.auctionManager,
+        auctionManager: props.currentUser,
         lotteriesDate: props.lotteriesDate,
         registrationEndDate: props.registrationEndDate,
         purchasePackage: props.packagesList,
@@ -17,7 +17,7 @@ const FinalStep = (props) => {
     }
     
     return (
-        <div id="myModal" className="modal_final_step glass_final_step" onClick={()=>{props.setLastModal(false)}}>
+        <div className="glass_final_step" onClick={()=>{props.setLastModal(false)}}>
             <div className="modal-content_final_step">
                 <h1>Are you sure the Chinese auction is ready?</h1>
                 <button onClick={() => props.createNewAuction(newAuction)}>Yes</button>
@@ -25,6 +25,7 @@ const FinalStep = (props) => {
             </div>
         </div>);
 }
+
 const mapStateToProps = (state) => {
     return {
         pricesList: state.auction.pricesList,//רשימת מחירים
@@ -35,7 +36,9 @@ const mapStateToProps = (state) => {
         registrationEndDate: state.auction.registrationEndDate,//תאריך סיום ההרשמה
         organizationName: state.auction.organizationName,//שם ארגון
         organizationPhotos: state.auction.organizationPhotos,//תמונות הארגון
-        auctionManager: state.auction.currentUser
+        currentUser: state.user.currentUser
     };
 }
+
+
 export default connect(mapStateToProps, { setLastModal ,createNewAuction})(FinalStep);

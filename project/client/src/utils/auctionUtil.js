@@ -2,12 +2,13 @@ import * as actions from '../store/actions/newAuction';
 import axios from 'axios';
 
 export const createNewAuction = (auction) => {
-
+debugger;
   return (dispatch) => {
           axios.post(`http://localhost:5000/auctions`,auction).then(succ => {
             console.log(succ.data);
-            if (succ.status != 404)
-                dispatch(actions.setLastModal(false),actions.resetState());
+            if (succ.status != 404)//אם הצליח ליצור את המכירה, ימחק את נתוניה מהסטייט
+                dispatch(actions.setLastModal(false),actions.resetNewAuctionState());
+                //ולהחזיר לדף הבית
         })
     }  
     

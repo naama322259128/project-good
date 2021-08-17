@@ -21,6 +21,7 @@ export const DELETE_PRODUCT_FROM_CART="DELETE_PRODUCT_FROM_CART"//מחיקת מ�
 
 export const SET_CURRENT_AUCTION="SET_CURRENT_AUCTION";//לאתחל את מערך המוצרים, ועוד נתונים של המכירה הנוכחית
 export const SET_CNT_PRODUCT_IN_CART="SET_CNT_PRODUCT_IN_CART";//עדכון כמות מוצר מתוך הסל
-export const DELETE_CURRENT_USER="DELETE_CURRENT_USER"//מחיקת משתמש
-export const UPDATE_CURRENT_USER="UPDATE_CURRENT_USER"//עדכון משתמש
-export const RESET_STATE="RESET_STATE"//איפוס הסטייט לאחר בניית מכירה
+export const SIGN_OUT="SIGN_OUT"//יציאת משתמש
+export const UPDATE_CURRENT_USER="UPDATE_CURRENT_USER"//עדכון פרטי משתמש
+export const RESET_NEW_AUCTION_STATE="RESET_NEW_AUCTION_STATE"//איפוס הסטייט של מכירה חדשה לאחר בניית מכירה
+// export const SET_YOUR_PROFILE="SET_YOUR_PROFILE"//האם להציג את הyour profile

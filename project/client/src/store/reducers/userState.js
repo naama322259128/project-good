@@ -55,13 +55,15 @@ export const userReducer = (state = initialState, action) => {
                     shoppingCart: arr
                 }
             }
-        case actionTypes.DELETE_CURRENT_USER:
+        case actionTypes.SIGN_OUT:
             {
-                //מחיקת משתמש האתר מחיקת עגלת הקניות
+                //יציאת משתמש
+                //איפוס נתונים
                 return {
-                    ...state,
                     currentUser: null,
-                    shoppingCart: null
+                    loginIsOpen: false,
+                    yourProfileIsOpen: false,
+                    shoppingCart:null
                 }
             }
         case actionTypes.UPDATE_CURRENT_USER:

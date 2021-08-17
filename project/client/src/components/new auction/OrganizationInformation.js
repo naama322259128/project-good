@@ -12,7 +12,7 @@ const OrganizationInformation = (props) => {
         <form>
             <label> The organization name</label>
    
-            <input type="text" onChange={(e) => oName = e.target.value} required="true"/>
+            <input type="text" onChange={(e) => oName = e.target.value} required={true}/>
             <label>Upload photos of the organization</label>
             {/* לשמור תמונות שהוא מעלה */}
             {/* <input type="button" value="upload photos" onChange={(e) => photos.push()} /> */}
