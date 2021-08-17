@@ -5,7 +5,7 @@ import Auction from '../components/auction/Auction';
 import NewAuction from '../components/new auction/NewAuction';
 import About from './main/About'
 import { connect } from "react-redux";
-import YourProfile from './main/YourProfile';
+import YourProfile from './user/YourProfile';
 function App(props) {
 
   return (<div>

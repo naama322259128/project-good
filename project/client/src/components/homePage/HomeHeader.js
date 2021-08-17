@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { setLogin } from '../../store/actions/home';
-import Login from '../login/Login';
+import Login from '../user/Login';
 import './home.scss';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import ProfileButton from '../main/ProfileButton';
+import ProfileButton from '../user/ProfileButton';
 import IconButton from '@material-ui/core/IconButton';
 
 
