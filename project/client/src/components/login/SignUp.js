@@ -77,10 +77,10 @@ const SignUp = (props) => {
     let userName = "";
     let email = "";
     let phone = "";
-    let adress = "";
+    let address = "";
     let birthYear = "";
     const createUser = () => {
-        let newUser = { password, userName, email, phone, adress, birthYear };
+        let newUser = { password, userName, email, phone, address, birthYear };
         props.addUser(newUser);
         // אם ההוספה הצליחה
         // בסטייט נשנה את איז-אפן-מודל שיהיה פולס
@@ -107,7 +107,7 @@ const SignUp = (props) => {
                     />
                     <FilledInput
                         type={'text'}
-                        placeholder="Email Adress"
+                        placeholder="Email address"
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
                         required
@@ -121,17 +121,17 @@ const SignUp = (props) => {
                     />
                     <FilledInput
                         type={'text'}
-                        placeholder="Adress"
+                        placeholder="address"
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
-                        onChange={(e) => { adress = e.target.value }}
+                        onChange={(e) => { address = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="map marker alternate icon"></i>
                             </InputAdornment>
                         }
-                        id="userAdress"
+                        id="useraddress"
                     />
                     <FilledInput
                         type={'text'}

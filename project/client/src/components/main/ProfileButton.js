@@ -15,12 +15,12 @@ const ProfileButton = (props) => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-    const signOut = () => {
-        if (window.confirm("Are you sure you want to leave?")) {
-            props.signOut(props.currentUser);
-            props.resetNewAuctionState();//אם היה באמצע לבנות מכירה, הנתונים שלה ימחקו
-        }
 
+    const signOut = () => {
+        //if (window.confirm("Are you sure you want to leave?")) {
+            props.resetNewAuctionState();//אם היה באמצע לבנות מכירה, הנתונים שלה ימחקו
+            props.signOut(props.currentUser);
+       // }
     }
 
     const handleClick = (event) => {

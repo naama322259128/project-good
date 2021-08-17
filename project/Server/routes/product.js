@@ -4,6 +4,7 @@ const productController=require("../controllers/product");
 const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
 const DIR = './public/';
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, DIR);
@@ -25,6 +26,7 @@ var upload = multer({
         }
     }
 });
+
 route.get("/:auctionId",productController.getAllProduct)
 route.get("/",productController.getAll)
 route.get("/:id",productController.getById)

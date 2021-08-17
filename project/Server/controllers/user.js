@@ -54,7 +54,7 @@ const updateUser = async (req, res) => {
     user.fullName = userBody.fullName || user.fullName;
     user.phone = userBody.phone || user.phone;
     user.password = userBody.password || user.password;
-    user.adress = userBody.adress || user.adress;
+    user.address = userBody.address || user.address;
     await user.save();
     return res.send(user);
 }

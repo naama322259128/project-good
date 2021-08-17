@@ -1,28 +1,33 @@
 svg#profileIcon {
 }
 
-#profile_icon_in_small_header{
-    margin-top: 1vh !important;
-  }
+// #profile_icon_in_small_header{
+//   margin-top: 1vh !important;
+// }
   
-  #profileIcon{
-    font-size: 3rem !important;
-    color:#5055aa !important;
-    position: absolute !important;
-    right: 5vw !important;
-    top: 3vh !important;
-    display: inline-block !important;
-    cursor: pointer;
-  }  
+#profileIcon{
+  font-size: 3rem !important;
+  color:#5055aa !important;
+  position: absolute !important;
+  right: 5vw !important;
+  top: 3vh !important;
+  display: inline-block !important;
+  cursor: pointer;
+}  
 
-  #h1_Profile{
-    color: #d0d63e !important;
-    
-    }
-    .form_your_profile{
-      background-color: white;
-    margin-bottom: 1vh;
-     background-size: 100% 100% ;
-     height: 80%;
-     width: 100%;  
-    }
+#h1_Profile{
+  color: #d0d63e !important;
+}
+
+#update_user_details_form{
+  background-color: white;
+  margin-bottom: 1vh;
+  background-size: 100% 100% ;
+  height: 80%;
+  width: 100%;  
+  border: 2px solid black;
+}
+
+#update_details_btn{
+
+}

@@ -63,6 +63,7 @@ const YourProfile = (props) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
     const [values, setValues] = React.useState({
         amount: '',
         password: '',
@@ -72,109 +73,94 @@ const YourProfile = (props) => {
     });
 
     //עדכון משתמש קיים
-    let password = "";
-    let userName = "";
-    let email = "";
-    let phone = "";
-    let adress = "";
-    let birthYear;
-    let _id = "";
+    let password = props.currentUser.password;
+    let userName = props.currentUser.userName;
+    let email = props.currentUser.email;
+    let phone = props.currentUser.phone;
+    let address = props.currentUser.address;
+    let birthYear=props.currentUser.password;
+
     const updateUser = () => {
-        let user=props.currentUser;
-        user.password=password;
-        user.email=email;
-        user.phone=phone;
-        user.adress=adress;
-       
+        let user = props.currentUser;
+        user.password = password;
+        user.email = email;
+        user.phone = phone;
+        user.address = address;
         props.updateUser(user);
-
     };
-    const click = (e) => {
-        e.stopPropagation();
-      }
+
     return (
-         <center>
-      <div id="myModal" className="modal_login glass_login"  >
-        <div className="modal-content_login" onClick={click}  >
-            <div className="form_your_profile">
+      <center>
+          <br/>
+            <h1 id="h1_Profile"> Your profile</h1>
+            <form className={classes.root} autoComplete="off" id="update_user_details_form" >
+                <FilledInput
+                    type={'text'}
+                    className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                    variant="filled"
+                    required
+                    onChange={(e) => { email = e.target.value }}
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <i className="envelope icon"></i>
+                        </InputAdornment>
+                    }
+                />
+                <FilledInput
+                    type={'text'}
+                    required
+                    className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                    variant="filled"
+                    onChange={(e) => { address = e.target.value }}
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <i className="map marker alternate icon"></i>
+                        </InputAdornment>
+                    }
+                />
                 <br/>
-                <br/>
-                
-                <h1 id="h1_Profile"> Your profile</h1>
-            <form className={classes.root} noValidate autoComplete="off" >
+                <label>Phone</label>
+                <FilledInput
+                    type={'text'}
+                    required
+                    className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                    variant="filled"
+                    onChange={(e) => { phone = e.target.value }}
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <i className="mobile alternate icon"></i>
+                        </InputAdornment>
+                    }
+                />
+                <FilledInput
+                    type={values.showPassword ? 'text' : 'password'}
+                    onChange={handleChange('password')}
+                    required
+                    className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                    variant="filled"
+                    onChange={(e) => { password = e.target.value }}
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <i className="lock icon"></i>
+                        </InputAdornment>
+                    }
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                className={classes.eye}
+                            >
+                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>
 
-                <div className={"inputs_btns"}>
-                    <FilledInput
-                        type={'text'}
-                        placeholder={props.currentUser.email}
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        required
-                        onChange={(e) => { email = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="envelope icon"></i>
-                            </InputAdornment>
-                        }
-                    />
-                    <FilledInput
-                        type={'text'}
-                        placeholder={props.currentUser.adress}
-                        required
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        onChange={(e) => { adress = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="map marker alternate icon"></i>
-                            </InputAdornment>
-                        }
-                    />
-                    <FilledInput
-                        type={'text'}
-                        placeholder={props.currentUser.phone}
-                        required
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        onChange={(e) => { phone = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="mobile alternate icon"></i>
-                            </InputAdornment>
-                        }
-                    />
-                    <FilledInput
-                        type={values.showPassword ? 'text' : 'password'}
-                        onChange={handleChange('password')}
-                        placeholder={props.currentUser.password}
-                        required
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        onChange={(e) => { password = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="lock icon"></i>
-                            </InputAdornment>
-                        }
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    className={classes.eye}
-                                >
-                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                            
-                        }
-                    />
-                    <Button type="button" variant="contained" className={"login_btn"} onClick={()=>{updateUser()}}>Update</Button>
-                </div>
+                    }
+                />
+                <Button type="button" variant="contained" id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
             </form>
-        </div></div></div>
 
-        </center>
+        </center >
 
 
     );
