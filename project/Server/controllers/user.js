@@ -83,7 +83,7 @@ const deleteUser = async (req, res) => {
 }
 
 //בודקת האם משתמש קיים לפי סיסמא ומייל
-const isUserExsit = async (req, res) => {
+const isUserExist = async (req, res) => {
     let { password, email } = req.params;
     let user = await User.findOne( { "password":password,"email":email});
     if (!user)
@@ -92,6 +92,6 @@ const isUserExsit = async (req, res) => {
 }
 
 module.exports = {
-    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExsit
+    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist
 
 }

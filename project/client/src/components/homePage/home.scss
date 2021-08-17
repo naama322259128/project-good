@@ -1,14 +1,4 @@
 
-#profileIcon{
-  font-size: 3rem !important;
-  color:#5055aa !important;
-  position: absolute !important;
-  right: 5vw !important;
-  top: 3vh !important;
-  display: inline-block !important;
-  cursor: pointer;
-}
-
 #logo_home_header{
   background-image: url('../../img/logo_white.png');
   // background-image: url('../../img/logo_green&blue.png');
@@ -26,12 +16,12 @@ margin-left: 2vw;
   // background-image: url('../../img/logo_green&blue.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-display: inline-block;
-cursor: pointer;
+  display: inline-block;
+  cursor: pointer;
   height:5vh !important;
   width: 10vw !important;
-margin-top: 1.5vh !important;
-margin-left: 4vw !important;
+  margin-top: 1.5vh !important;
+  margin-left: 4vw !important;
 }
 .btn{
   color: #ffffff !important;   
@@ -51,9 +41,9 @@ margin-left: 4vw !important;
 }
 #login_btn_small_header{
   top: 2vh !important;
-height: 3vh !important;
-font-size: 1vh !important;
-padding: 0% !important;
+  height: 3vh !important;
+  font-size: 1vh !important;
+  padding: 0% !important;
 }
 #home_text>p{
   line-height:0.8 !important;
@@ -63,8 +53,8 @@ padding: 0% !important;
    font-family: 'Centaur';
    text-align: right !important;
    line-height:1 !important;
-
 }
+
 #home_text>h5{
   line-height:0.8 !important;
   color: white;
@@ -73,7 +63,8 @@ padding: 0% !important;
    font-family: 'Centaur';
    text-align: right !important;
 
-}#home_text>h3{
+}
+#home_text>h3{
   line-height:0.8 !important;
   color: white;
   // color: black;
@@ -81,29 +72,28 @@ padding: 0% !important;
    font-family: 'Centaur';
    text-align: right !important;
 }
+
 #home_text{
   width: 32%;
   left:12%;
   top:12%;
   position: relative;
   text-align: center;
-
 }
-.btnMoreInfo{
-left: 14% !important;
-width: 10vw !important;
-height: 5vh;
-background-color: #d0d63e !important ;
-// background-color: #3ed646 !important ;
 
+.btnMoreInfo{
+  left: 14% !important;
+  width: 10vw !important;
+  height: 5vh;
+  background-color: #d0d63e !important ;
+  // background-color: #3ed646 !important ;
 }
 .btnNewAuction{
   right:0% !important;
   height:5vh ;
-width: 16vw !important;
-background-color: #d0d63e !important ;
-// background-color: #3ed646 !important ;
-
+  width: 16vw !important;
+  background-color: #d0d63e !important ;
+  // background-color: #3ed646 !important ;
 }
 #home_header{
   background-image: url('../../img/home_header_backgroung.webp');

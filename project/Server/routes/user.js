@@ -4,7 +4,7 @@ const userController=require("../controllers/user");
 
 route.get("/",userController.getAll)
 route.get("/:id",userController.getById)
-route.get("/signIn/:password&:email",userController.isUserExsit)
+route.get("/signIn/:password&:email",userController.isUserExist)
 route.post("/",userController.addUser)
 route.put("/:id",userController.updateUser)
 route.delete("/:id",userController.deleteUser)

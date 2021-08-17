@@ -1,3 +1,4 @@
+import './main.scss';
 import { connect } from 'react-redux';
 import React from 'react';
 import { updateUser } from '../../store/actions/signIn';
@@ -11,7 +12,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 
-import './Login.scss';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',

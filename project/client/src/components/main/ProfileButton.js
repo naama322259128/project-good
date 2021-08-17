@@ -1,5 +1,5 @@
 import React from 'react';
-import '../homePage/home.scss';
+import './main.scss';
 import { Link } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,10 +9,9 @@ import { connect } from "react-redux";
 import { signOut } from "../../store/actions/signUp";
 import { resetNewAuctionState } from '../../store/actions/newAuction';
 // import{setYourProfile} from '../../store/actions/signIn';
-import YourProfile from './YourProfile';
 
 const ITEM_HEIGHT = 48;
-const Profile = (props) => {
+const ProfileButton = (props) => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -56,12 +55,17 @@ const Profile = (props) => {
                 },
             }}
         >
+            <Link to={'/your_profile'}>
+                <MenuItem key={'Your profile'} onClick={() => { handleClose(); }}>Your profile</MenuItem>
+            </Link>
 
+            <Link to={'/home'}>
+                <MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem>
+            </Link>
 
-            <Link to={'./your_profile'}><MenuItem key={'Your profile'} onClick={()=>{handleClose();/*props.setYourProfile(true);*/}}>Your profile</MenuItem> </Link>
-            <Link to={'/home'}><MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem></Link>
+        </Menu>
 
-        </Menu> </div >);
+    </div >);
 }
 
 const mapStateToProps = state => {
@@ -70,4 +74,4 @@ const mapStateToProps = state => {
 
     };
 }
-export default connect(mapStateToProps, { signOut, resetNewAuctionState/*,setYourProfile*/})(Profile);
+export default connect(mapStateToProps, { signOut, resetNewAuctionState/*,setYourProfile*/ })(ProfileButton);

@@ -5,10 +5,8 @@ import Login from '../login/Login';
 import './home.scss';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import Profile from '../login/Profile';
+import ProfileButton from '../main/ProfileButton';
 import IconButton from '@material-ui/core/IconButton';
-import DownIcon from '@material-ui/icons/KeyboardArrowDown';
-import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 
 
@@ -33,15 +31,16 @@ const HomeHeader = (props) => {
 
     <div id="small_home_header">
       <div id="logo_home_small_header" ></div>
-      {props.currentUser ? <Profile /> : null}
+      {props.currentUser ? <ProfileButton/> : null}
       {props.currentUser ? null : <Button type="button" className="btnLogin btn" id="login_btn_small_header" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }}>Login</Button>}
     </div>
 
     <header id="home_header">
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
-      {/* פרופיל של הבחירה */}
-      {props.currentUser ? <Profile /> : null}
+
+      {props.currentUser ? <ProfileButton /> : null}
       {props.currentUser ? null : <Button type="button" className="btnLogin btn" onClick={() => { props.setLogin(true); }}>Login</Button>}
+
       <div id="home_text">
         <h3>Build your </h3>
         <h5>chinese auction</h5>

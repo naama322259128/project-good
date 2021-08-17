@@ -2,9 +2,13 @@ body {
     //text-align: center !important;
     font-family: Arial, Helvetica, sans-serif;
   }
-  
+
+  .glass_final_step{
+    background-color: rgba(226, 226, 226, 0.15);
+    backdrop-filter: blur(5px);
+
   /* The Modal (background) */
-  .modal_final_step {
+
     // display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -26,10 +30,6 @@ body {
     z-index: 30
   }
 
-  .glass_final_step{
-    background-color: rgba(226, 226, 226, 0.15);
-    backdrop-filter: blur(5px);
-  }
 
  #new_auction_header{
   background-size: 100%;

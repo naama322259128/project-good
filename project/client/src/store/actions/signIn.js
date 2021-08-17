@@ -1,6 +1,9 @@
 import axios from 'axios';
 import * as actionTypes from '../actionTypes';
 import { getCurrentUser } from './signUp'
+
+
+
 export const signIn = (password, email) => {
     // let details = { password:password, email:email};
     return (dispatch) => {

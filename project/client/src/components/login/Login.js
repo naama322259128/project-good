@@ -39,7 +39,7 @@ const Login = (props) => {
   }
   return (
     <center>
-      <div id="myModal" className="modal_login glass_login" onClick={() => props.setLogin(false)} >
+      <div className="glass_login" onClick={() => props.setLogin(false)} >
         <div className="modal-content_login" onClick={click}>
     <Tabs
       value={value}
