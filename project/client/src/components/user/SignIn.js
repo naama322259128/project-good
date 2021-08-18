@@ -13,6 +13,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import LoginGoogle from './LoginGoogle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,13 +120,13 @@ const SignIn = (props) => {
               </InputAdornment>
             }
           /> </div>
-            <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => {
-              props.signIn(password, email)
-            }
-              }>Login</Button>
-            {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
+        <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => {
+          props.signIn(password, email)
+        }
+        }>Login</Button>
+        {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
+        <LoginGoogle />
 
-       
       </form>
     </center>
   );
