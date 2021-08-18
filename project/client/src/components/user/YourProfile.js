@@ -94,6 +94,7 @@ const YourProfile = (props) => {
     return (
         <center>
             <br />
+
             <h1 id="h1_Profile"> Your profile</h1>
             <form className={classes.root} autoComplete="off" id="update_user_details_form" >
 

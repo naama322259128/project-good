@@ -12,7 +12,6 @@ const FinalStep = (props) => {
         registrationEndDate: props.registrationEndDate,
         purchasePackage: props.packagesList,
         productList: props.productsList,
-        orderList: []
     }
     
     return (
