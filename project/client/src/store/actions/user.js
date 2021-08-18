@@ -9,17 +9,17 @@ export const addProductToCart = (product,cnt) => {
     }
 }
 //מחיקת מוצר מסל
-export const deleteProductFromCart = (code) => {
+export const deleteProductFromCart = (_id) => {
     return {
         type: actionTypes.DELETE_PRODUCT_FROM_CART,
-        payload: code
+        payload: _id
     }
 }
 
-export const setCnt = (code,cnt) => {
+export const setCnt = (_id,cnt) => {
     return {
         type: actionTypes.SET_CNT_PRODUCT_IN_CART,
-        payload: {code:code,cnt:cnt}
+        payload: {_id:_id,cnt:cnt}
     }
 }
 

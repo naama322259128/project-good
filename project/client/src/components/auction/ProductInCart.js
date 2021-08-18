@@ -25,10 +25,10 @@ const ProductInCart = (props) => {
   const classes = useStyles();
   let [cnt, setCnt] = useState(props.item.cnt);
   let image_src = p;//עד שנעשה את הקטע של התמונות
-  let code = props.item.product.code;
   let description = props.item.product.description;
   let name = props.item.product.name;
   let price = props.item.product.prices;
+  let _id=props.item.product._id;
 
   return (
     <Modal
@@ -47,13 +47,13 @@ const ProductInCart = (props) => {
           />
 
           {/* פח */}
-          <i className="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(code) }}></i>
+          <i className="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(_id) }}></i>
           {/* הורד כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); props.setCount(code,cnt); e.stopPropagation(); }}  >-</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); props.setCount(_id,cnt); e.stopPropagation(); }}  >-</IconButton>
           {/* הכמות הנוכחית מרותו מוצר */}
           <h2>{cnt}</h2>
           {/* הוסף כמות */}
-          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); props.setCount(code,cnt); e.stopPropagation(); }}>+</IconButton>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); props.setCount(_id,cnt); e.stopPropagation(); }}>+</IconButton>
         </Card>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
@@ -61,7 +61,6 @@ const ProductInCart = (props) => {
 
       <Header ><h1>{name}</h1></Header>
       <Modal.Content>
-        {"code: " + code}<br />
         {description}<br />
         <img src={image_src}></img>
       </Modal.Content>

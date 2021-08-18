@@ -10,10 +10,10 @@ const AuctionList = (props) => {
        {props.arr.map((item) => {
             return (
                 <Link
-                    key={parseInt(item.code)}
-            onClick={props.currentUser ? () => { props.setCurrentAuction(item.code)} :()=> {window.scrollTo(0,0);props.setLogin(true)}}
+                    key={parseInt(item._id)}
+            onClick={props.currentUser ? () => { props.setCurrentAuction(item._id)} :()=> {window.scrollTo(0,0);props.setLogin(true)}}
                     to={props.currentUser ? `/auction` : '#'}>
-                    <OneAuction key={parseInt(item.code)} item={item} />
+                    <OneAuction key={parseInt(item._id)} item={item} />
                 </Link>
             )
         })}

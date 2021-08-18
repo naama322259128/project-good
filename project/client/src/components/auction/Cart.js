@@ -14,8 +14,8 @@ const Cart = (props) => {
             <br/>
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
-            {props.arr.map((item) => {
-                return (<ProductInCart key={parseInt(item.product.code)} item={item} setCount={props.setCnt}/>)
+            {props.arr.map((item,index) => {
+                return (<ProductInCart key={parseInt(index)} item={item} setCount={props.setCnt}/>)
             })}
         </div>);
 }

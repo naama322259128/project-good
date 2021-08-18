@@ -3,9 +3,9 @@ const initialState = {
     currentUser: null,
     loginIsOpen: false,
     shoppingCart: [
-        { cnt: 1, product: { code: "111", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
-        { cnt: 4, product: { code: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
-        { cnt: 18, product: { code: "333", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } }
+        { cnt: 1, product: { _id: "111", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
+        { cnt: 4, product: { _id: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
+        { cnt: 18, product: { _id: "333", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } }
     ]//סל מוצרים
 }
 export const userReducer = (state = initialState, action) => {
@@ -23,9 +23,9 @@ export const userReducer = (state = initialState, action) => {
             }
         case actionTypes.ADD_PRODUCT_TO_CART:
             {
-                let code = action.payload.product.code;
+                let _id = action.payload.product._id;
                 let cnt = action.payload.cnt;
-                let index = state.shoppingCart.findIndex(item => item.product.code == code);
+                let index = state.shoppingCart.findIndex(item => item.product._id == _id);
                 let arr = [...state.shoppingCart];
                 if (index == -1) arr.push(action.payload);
                 else arr[index].cnt += cnt;
@@ -37,7 +37,7 @@ export const userReducer = (state = initialState, action) => {
         case actionTypes.DELETE_PRODUCT_FROM_CART:
             {
                 let arr2 = state.shoppingCart.
-                    filter(p => p.product.code !== action.payload)
+                    filter(p => p.product._id !== action.payload)
                 return {
                     ...state,
                     shoppingCart: arr2
@@ -45,9 +45,9 @@ export const userReducer = (state = initialState, action) => {
             }
         case actionTypes.SET_CNT_PRODUCT_IN_CART:
             {
-                let code = action.payload.code;
+                let _id = action.payload._id;
                 let cnt = action.payload.cnt;
-                let index = state.shoppingCart.findIndex(item => item.product.code == code);
+                let index = state.shoppingCart.findIndex(item => item.product._id == _id);
                 let arr = [...state.shoppingCart];
                 if (index != -1) arr[index].cnt = cnt;
                 return {

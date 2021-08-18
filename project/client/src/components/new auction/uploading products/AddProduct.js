@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import Uploady from "@rpldy/uploady";
 import UploadButton from "@rpldy/upload-button";
 import UploadPreview from "@rpldy/upload-preview";
+import   p from '../../../img/car.jpg';
 
 const AddProduct = (props) => {
 
     const fileInputRef = useRef();
 
     let [img,setImg]=useState("");
-    let newProduct = { img: "pic of prosuct", prodName: "", prodDescription: "" };//זמני בלבד
-    // let newProduct = { img: "", prodName: "", prodDescription: "" };
+    let newProduct = { img: p, prodName: "", prodDescription: "" };
 
     const filterBySize = (file) => {
         setImg(file.name);

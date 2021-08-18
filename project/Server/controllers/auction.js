@@ -20,8 +20,7 @@ const addAuction = async (req, res) => {
     let auction = req.body;
     console.log("auction-----------------------------------------------------------------------------------------------");
     console.log(auction);
-    //לעדכן קוד אוטומטי
-    //auction.code=
+
     let newAuction = new Auction(auction);
     console.log("newAuction created------------------------------");
     console.log(newAuction);

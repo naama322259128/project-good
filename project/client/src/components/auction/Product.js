@@ -28,7 +28,6 @@ const Product = (props) => {
   const classes = useStyles();
   let [cnt, setCnt] = useState(0);
   let image_src = p;//עד שנעשה את הקטע של התמונות
-  let code = props.item.code;
   let description = props.item.description;
   let name = props.item.name;
   let price = props.item.prices;
@@ -65,7 +64,6 @@ const Product = (props) => {
 
       <Header ><h1>{name}</h1></Header>
       <Modal.Content>
-        {"code: " + code}<br />
         {description}<br />
         <img src={image_src}></img>
       </Modal.Content>

@@ -1,7 +1,6 @@
 
 const mongoose = require("mongoose");
 const purchasePackage = new mongoose.Schema({
-    code: { type: String, default:"sss"/*, required:true */},
     ticketsQuantity: { type: Number/*, required:true*/ }   ,//כמות כרטיסים
     discountPercenrages: { type: Number/*, required:true*/ }//אחוזי הנחה
 });

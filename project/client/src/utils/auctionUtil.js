@@ -2,7 +2,7 @@ import * as actions from '../store/actions/newAuction';
 import axios from 'axios';
 
 export const createNewAuction = (auction) => {
-debugger;
+
   return (dispatch) => {
           axios.post(`http://localhost:5000/auctions`,auction).then(succ => {
             console.log(succ.data);

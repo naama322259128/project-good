@@ -9,7 +9,7 @@ export const currentAuctionReducer = (state = initialState, action) => {
         case actionTypes.SET_CURRENT_AUCTION:
             {
 
-                let auc = allAuctions.find((element) => element.code === action.payload);
+                let auc = allAuctions.find((element) => element._id === action.payload);
                 return {
                     //אולי נצטרך להגדיר כאן עוד דברים
                     ...state,

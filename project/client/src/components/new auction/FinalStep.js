@@ -6,10 +6,9 @@ import { createNewAuction } from "../../utils/auctionUtil"; //שמירת כל ה
 const FinalStep = (props) => {
     let newAuction = {
         //לשנות את הסטטוס למנהל
-        code: "צריך לשנות",
         name: props.organizationName,
         auctionManager: props.currentUser,
-        lotteriesDate: props.lotteriesDate,
+        lotteriesDate: props.dateOfLottery,
         registrationEndDate: props.registrationEndDate,
         purchasePackage: props.packagesList,
         productList: props.productsList,

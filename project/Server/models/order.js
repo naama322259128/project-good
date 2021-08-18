@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
-    code: { type: Number, required: true },
     userId: {
         type: mongoose.SchemaTypes.ObjectId, ref: 'User'
     },//קוד לקוח, מצביע לטבלת משתמשים
-    productCode: {
+    productId: {
         type: mongoose.SchemaTypes.ObjectId, ref: 'Product'
     },//קוד מוצר, מצביע לטבלת מוצרים
     ticketsQuantity: { type: Number, required: true }
