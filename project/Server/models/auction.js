@@ -1,23 +1,31 @@
 
 const mongoose = require("mongoose");
-const PurchasePackage = require("./purchasePackage").schema;
-const OrderSchema = require("./order").schema;
-const ProductSchema = require("./product").schema;
-const auctionSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    auctionManager: { type: mongoose.SchemaTypes.ObjectId, ref: 'auctionManager', required: true },//managerId
-    startDate: { type: Date, default:new Date()/*, required: true */},   //תאריך ביצוע ההגרלות
-    lotteriesDate: { type: Date/*, required: true */},   //תאריך ביצוע ההגרלות
-    registrationEndDate: { type: Date, required: true },
-    purchasePackage: { type: [PurchasePackage], required: true },
-    //productList: { type: [ProductSchema] , required: true },
-    productList:[ {
-        _id:mongoose.SchemaTypes.ObjectId,
-        name:String,
 
+const auctionSchema = new mongoose.Schema({
+    name: String,
+    auctionManager: { type: mongoose.SchemaTypes.ObjectId, ref: 'auctionManager', required: true },//managerId
+    registrationStartDate: { type: Date, default: new Date() },   //תאריך התחלה
+    lotteriesDate: Date,   //תאריך ביצוע ההגרלות
+    registrationEndDate: Date,//תאריך סיום הרשמה
+    status: {type:String, enum: ['DONE', 'NOT_DONE'],default: 'NOT_DONE' },
+    purchasePackage: [{
+        _id: mongoose.SchemaTypes.ObjectId,
+        ticketsQuantity:  Number,//כמות כרטיסים
+        discountPercenrages:  Number,//אחוזי הנחה
+        gift:[String]
+    }],
+    productList: [{
+        _id: mongoose.SchemaTypes.ObjectId,
+        name: String,
+        image: String,
+        description: String,
+        price: Number,
+        includedInPackages:{ type: Boolean, default: true }, 
+        winnerId: { type: mongoose.SchemaTypes.ObjectId, ref: 'User' },
     }]
+
 });
-const Auction = mongoose.model("auction", auctionSchema);
+const Auction = mongoose.model("Auction", auctionSchema);
 module.exports = Auction;
 
 
