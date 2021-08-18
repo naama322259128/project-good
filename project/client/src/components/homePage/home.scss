@@ -99,12 +99,6 @@ margin-left: 2vw;
   z-index: 200;
 }
 #small_home_header{
-  // background-size: 100%;
-  // background-repeat: no-repeat;
-   // background-image: url('../../img/home_small_header_backgroung.png');
-  // -moz-box-shadow:    inset 0 0 10px white;
-  // -webkit-box-shadow: inset 0 0 10px white;
-  // box-shadow:         inset 0 0 10px white;
   background-color: #ffffff;
   height: 9vh !important;
   width: 100vw;
@@ -171,7 +165,8 @@ margin-left: 2vw;
     top: 52%
   }
   .home_footer{
-     background-image: url('../../img/footer_dbdcf7.png');
+    //  background-image: url('../../img/footer_dbdcf7.png');
+    background-color: #3e2626;
     background-size: 100% 100%;
     height:40vh;
     background-repeat: no-repeat;
