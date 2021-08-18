@@ -27,7 +27,6 @@ const addAuction = async (req, res) => {
     console.log(newAuction);
 
     try {
-        //נופל כאן
         await newAuction.save();
         console.log("newAuction saved------------------------------");
         return res.send(newAuction);
