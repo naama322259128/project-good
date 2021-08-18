@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const auction = require("./auction").Model;
+const auction = require("./auction");
 
 const archivalAuctionSchema = new mongoose.Schema({ auction });
 

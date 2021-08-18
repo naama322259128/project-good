@@ -1,4 +1,4 @@
-const Auction = require("../models/Auction").model;
+const Auction = require("../models/auction");
 const mongoose = require("mongoose");
 
 const getAll = async (req, res) => {
@@ -18,18 +18,22 @@ const getById = async (req, res) => {
 
 const addAuction = async (req, res) => {
     let auction = req.body;
+    console.log("auction-----------------------------------------------------------------------------------------------");
     console.log(auction);
     //לעדכן קוד אוטומטי
     //auction.code=
     let newAuction = new Auction(auction);
+    console.log("newAuction created------------------------------");
     console.log(newAuction);
 
     try {
+        //נופל כאן
         await newAuction.save();
-        console.log(newAuction)
+        console.log("newAuction saved------------------------------");
         return res.send(newAuction);
     }
     catch (err) {
+        console.log(err.message)
         return res.status(400).send(err.message)
     }
 }

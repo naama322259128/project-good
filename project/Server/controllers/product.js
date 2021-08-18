@@ -13,7 +13,7 @@ const getAllProduct = async (req, res) => {
         return res.status(404).send("Invalid ID number");
     let auction = await Auction.findById(id);
     if (!auction)
-    return res.status(404).send("There is no auction with such an ID number");
+        return res.status(404).send("There is no auction with such an ID number");
     return res.send(auction.productList);
 }
 
@@ -27,6 +27,7 @@ const getById = async (req, res) => {
     return res.send(product);
 }
 
+/*
 const addProduct = async (req, res) => {
     let product = req.body;
     const url1 = req.protocol + '://' + req.get('host');
@@ -40,9 +41,20 @@ const addProduct = async (req, res) => {
     catch (err) {
         return res.status(400).send(err.message)
     }
+}*/
+
+
+const addProduct = async (req, res) => {
+    let product = req.body;
+    let newProduct = new Product(product);
+    try {
+        await newProduct.save();
+        return res.send(newProduct);
+    }
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
 }
-
-
 module.exports = {
     getAll, getById, addProduct, getAllProduct
 }

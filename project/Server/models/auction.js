@@ -1,8 +1,8 @@
 
 const mongoose = require("mongoose");
-const PurchasePackage = require("./purchasePackage").Schema;
-const OrderSchema = require("./order").Schema;
-const ProductSchema = require("./product").Schema;
+const PurchasePackage = require("./purchasePackage").schema;
+const OrderSchema = require("./order").schema;
+const ProductSchema = require("./product").schema;
 const auctionSchema = new mongoose.Schema({
     code: { type: String, required: true },
     name: { type: String, required: true },

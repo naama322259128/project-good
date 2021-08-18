@@ -13,7 +13,7 @@ const FinalStep = (props) => {
         registrationEndDate: props.registrationEndDate,
         purchasePackage: props.packagesList,
         productList: props.productsList,
-        orderList: null
+        orderList: []
     }
     
     return (
