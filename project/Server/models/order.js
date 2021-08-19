@@ -3,16 +3,20 @@ const orderSchema = new mongoose.Schema({
     userId: {
         type: mongoose.SchemaTypes.ObjectId, ref: 'User'
     },//קוד לקוח, מצביע לטבלת משתמשים
-    orderDetails: [
+    orderDetails: [{
         productId: {
             type: mongoose.SchemaTypes.ObjectId, ref: 'Product'
         },//קוד מוצר, מצביע לטבלת מוצרים
-        ticketsQuantity: { type: Number, required: true },
-    ],
+        ticketsQuantity: { type: Number, required: true }
+    }],
     paymentCode: { type: String, required: true },
     amountToPay: { type: Number, required: true },
-    auctionCode: { type: String, required: true },
-    giftCode: [ String ]
+    auctionId: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Auction',
+        required: true
+    },
+    giftCode: [String]
 
 });
 const Order = mongoose.model("Order", orderSchema);

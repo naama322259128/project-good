@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
-   password: { type: String, required: true },
+    password: { type: String, required: true },
     userName: { type: String, required: true },
     email: {
         type: String,
@@ -18,10 +18,10 @@ const userSchema = new mongoose.Schema({
         //     message: props => `${props.value} is not a valid phone number!`
         // }
     },
-    birthYear: { type: Number, required:true },
+    birthYear: { type: Number, required: true },
     address: { type: String, required: true },
-    status: {type:String, enum: ['USER', 'AUCTION_MANAGER', 'SITE_MANAGER'], required: true, default: 'USER' }
-
+    status: { type: String, enum: ['USER', 'AUCTION_MANAGER', 'SITE_MANAGER'], required: true, default: 'USER' },
+    Confidentiality: { type: Boolean, default: false }
 });
 const User = mongoose.model("User", userSchema);
 module.exports = User;

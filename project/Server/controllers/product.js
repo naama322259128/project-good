@@ -43,18 +43,6 @@ const addProduct = async (req, res) => {
     }
 }
 
-
-// const addProduct = async (req, res) => {
-//     let product = req.body;
-//     let newProduct = new Product(product);
-//     try {
-//         await newProduct.save();
-//         return res.send(newProduct);
-//     }
-//     catch (err) {
-//         return res.status(400).send(err.message)
-//     }
-// }
 module.exports = {
     getAll, getById, addProduct, getAllProduct
 }
