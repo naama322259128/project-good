@@ -50,11 +50,11 @@ export const updateUser = (user) => {
 
 //מביא את כל המכירות של המנהל הזה
 export const getAuctionsArray = (user) => {
-    //למהההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההה
-    let manager_id='611c2f2e18f13934fc07bc27';
-    // let manager_id=user._id;
+/*************************************************************************************************************************/
+    //let manager_id='611c2f2e18f13934fc07bc27';
+     let manager_id=user._id;
     return (dispatch) => {
-        axios.get(`http://localhost:5000/auctions/${manager_id}`).then(succ => {
+        axios.get(`http://localhost:5000/auctions/getAuctionsByManagerId/${manager_id}`).then(succ => {
             console.log(succ.data);
             //if (succ.status != 400) dispatch();
         })

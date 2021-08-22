@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema({
         ref: 'Auction',
         required: true
     },
-    giftCode: [String],
+    giftCodes: [String],
     orderDate: { type: Date, default: new Date() }
 });
 const Order = mongoose.model("Order", orderSchema);
