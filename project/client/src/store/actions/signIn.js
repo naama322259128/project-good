@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from '../actionTypes';
-import { getCurrentUser } from './signUp'
+import { setCurrentUser } from './signUp'
 
 
 
@@ -10,7 +10,7 @@ export const signIn = (password, email) => {
         axios.get(`http://localhost:5000/users/signIn/${password}&${email}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
-                dispatch(getCurrentUser(succ.data));
+                dispatch(setCurrentUser(succ.data));
         })
     }
 }

@@ -6,11 +6,12 @@ const initialState = {
         { cnt: 1, product: { _id: "111", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 4, product: { _id: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 18, product: { _id: "333", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } }
-    ]//סל מוצרים
+    ],//סל מוצרים
+    auctionsArray:[]
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.GET_CURRENT_USER:
+        case actionTypes.SET_CURRENT_USER:
             return {
                 ...state,
                 currentUser: action.payload,
@@ -74,6 +75,7 @@ export const userReducer = (state = initialState, action) => {
                     currentUser: action.payload,
                 }
             }
+
     }
 
     return state;

@@ -11,7 +11,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const SAVE_AUCTION_DETAILS = "SAVE_AUCTION_DETAILS";
 export const SAVE_ORGANIZATION_DETAILS = "SAVE_ORGANIZATION_DETAILS";
 
-export const GET_CURRENT_USER = "GET_CURRENT_USER";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_LOGIN="SET_LOGIN";//האם להציג את הלוגין
 
 export const SET_FINAL_STEP="SET_FINAL_STEP"//האם להציג את המודל של אישור סיום בניית המכירה

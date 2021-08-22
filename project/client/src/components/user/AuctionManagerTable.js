@@ -11,7 +11,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-
+import getAuctionsArray from '../../store/actions/user'
 const columns = [
     { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
     {
@@ -130,7 +130,8 @@ const AuctionManagerTable = () => {
 }
 const mapStateToProps = (state) => {
     return {
-
+        //כל המכירות השייכות לאותו מנהל
+        arr: state.user.auctionsArray
     };
 }
 export default connect(mapStateToProps, {})(AuctionManagerTable);

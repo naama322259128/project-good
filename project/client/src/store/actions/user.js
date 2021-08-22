@@ -2,10 +2,10 @@ import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 
 //הוספת מוצר לסל
-export const addProductToCart = (product,cnt) => {
+export const addProductToCart = (product, cnt) => {
     return {
         type: actionTypes.ADD_PRODUCT_TO_CART,
-        payload: {cnt:cnt,product:product}
+        payload: { cnt: cnt, product: product }
     }
 }
 //מחיקת מוצר מסל
@@ -16,10 +16,10 @@ export const deleteProductFromCart = (_id) => {
     }
 }
 
-export const setCnt = (_id,cnt) => {
+export const setCnt = (_id, cnt) => {
     return {
         type: actionTypes.SET_CNT_PRODUCT_IN_CART,
-        payload: {_id:_id,cnt:cnt}
+        payload: { _id: _id, cnt: cnt }
     }
 }
 
@@ -45,4 +45,16 @@ export const updateUser = (user) => {
         })
     }
 
+}
+
+
+//מביא את כל המכירות של המנהל הזה
+export const getAuctionsArray = (user) => {
+    let manager_id=user._id;
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/auctions/${manager_id}`).then(succ => {
+            console.log(succ.data);
+            //if (succ.status != 400) dispatch();
+        })
+    }
 }

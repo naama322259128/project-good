@@ -66,10 +66,21 @@ const getMostSubscribers = async (req, res) => {
     return res.send(auction);
 }
 
+//לקבל במערך את כל המכירות השייכות למנהל שנשלח
+const getAuctionsByManagerId = async (req, res) => {
+    let { manager_id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(manager_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.find({ 'auctionManager': manager_id });
+    if (!auction)
+        return res.status(404).send("There is no auction with such an manager ID number");
+    return res.send(auction);
+}
+
 
 
 module.exports = {
-    getAll, getById, addAuction, deleteAuction
+    getAll, getById, addAuction, deleteAuction, getAuctionsByManagerId
 }
 
 //המכירה שש לה הכי הרבה הכנסות
