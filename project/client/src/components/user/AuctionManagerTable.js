@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment'
-
+import Button from '@material-ui/core/Button';
+import './tables.scss'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -14,66 +15,75 @@ import TableRow from '@material-ui/core/TableRow';
 
 import { getAuctionsArray } from '../../store/actions/user'
 
-const columns = [
-    { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
-    {
-        id: 'start_date',
-        label: 'Start Date',
-        minWidth: 170,
-        align: 'right',
-        // format: (value) => moment(value).format('D/MM/YYYY')
-    },
-    {
-        id: 'end_date',
-        label: 'Lotteries date',
-        minWidth: 170,
-        align: 'right',
-        //  format: (value) =>moment(value).format('D/MM/YYYY')
-    },
-    {
-        id: 'done',
-        label: 'Done',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toFixed(2),
-    },
-    {
-        id: 'options',
-        label: 'Options',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toFixed(2),
-    }
-];
-
-function createData(name, start_date, end_date, done) {
-    const options = "to add buttons"
-    return { name, start_date, end_date, done, options };
-}
-
-/*const rows = [
-    // TODO: sort by date
-    // TODO: למה צריך לעשות כאן את המומנט
-    createData('לזכות ברגע', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false'),
-    createData('הרבה נחת', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false'),
-    createData('ועל גמילות חסדים', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true')
-];*/
-
-const rows = getAuctionsArray().map((item) => {
-    return createData(item.name, item.registrationStartDate, item.lotteriesDate, item.status);
-});
 
 
 const useStyles = makeStyles({
     root: {
-        width: '60%',
+        width: '80%',
     },
     container: {
         maxHeight: 440,
-    },
+    }
 });
 
 const AuctionManagerTable = (props) => {
+    const columns = [
+        { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
+        {
+            id: 'start_date',
+            label: 'Start Date',
+            minWidth: 170,
+            align: 'right',
+            // format: (value) => moment(value).format('D/MM/YYYY')
+        },
+        {
+            id: 'end_date',
+            label: 'Lotteries date',
+            minWidth: 170,
+            align: 'right',
+            //  format: (value) =>moment(value).format('D/MM/YYYY')
+        },
+        {
+            id: 'done',
+            label: 'Done',
+            minWidth: 170,
+            align: 'right',
+            format: (value) => value.toFixed(2),
+        },
+        {
+            id: 'options',
+            label: 'Options',
+            minWidth: 170,
+            align: 'right',
+            format: (value) => value.toFixed(2),
+        }
+    ];
+    const options = <div className="optionsBtn">
+        <Button>Edit</Button>
+        <Button>Delete</Button>
+        <Button>Statistics</Button>
+        <Button>Results</Button>
+        <Button>Lottery approval</Button>
+    </div>
+
+    function createData(name, start_date, end_date, done) {
+        return { name, start_date, end_date, done, options };
+    }
+
+    const rows = [
+        // TODO: sort by date
+        // TODO: למה צריך לעשות כאן את המומנט
+        createData('לזכות ברגע', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false'),
+        createData('הרבה נחת', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false'),
+        createData('ועל גמילות חסדים', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true')
+    ];
+
+
+    /* const rows = props.getAuctionsArray().map((item) => {
+        return createData(item.name, item.registrationStartDate, item.lotteriesDate, item.status);
+    });*/
+
+
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -93,7 +103,7 @@ const AuctionManagerTable = (props) => {
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
+                        <TableHead className='auctionManagerTableCls'>
                             <TableRow>
                                 {columns.map((column) => (
                                     <TableCell
