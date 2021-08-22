@@ -1,11 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment'
-<<<<<<< HEAD
-=======
 import Button from '@material-ui/core/Button';
 import './tables.scss'
->>>>>>> 18880aaa807e48c9c8b1b7c1f914d6db0060cef4
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
