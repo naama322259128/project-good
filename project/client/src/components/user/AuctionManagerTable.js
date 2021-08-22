@@ -11,7 +11,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import getAuctionsArray from '../../store/actions/user'
 const columns = [
     { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
     {
@@ -51,6 +50,7 @@ function createData(name, start_date, end_date, done) {
 
 const rows = [
     // TODO: sort by date
+
     createData('לזכות ברגע', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false'),
     createData('הרבה נחת', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false'),
     createData('ועל גמילות חסדים', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true')
@@ -130,8 +130,6 @@ const AuctionManagerTable = () => {
 }
 const mapStateToProps = (state) => {
     return {
-        //כל המכירות השייכות לאותו מנהל
-        arr: state.user.auctionsArray
     };
 }
 export default connect(mapStateToProps, {})(AuctionManagerTable);
