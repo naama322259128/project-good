@@ -13,7 +13,7 @@ const auctionSchema = new mongoose.Schema({
         name: String,
         ticketsQuantity: Number,//כמות כרטיסים
         discountPercenrages: Number,//אחוזי הנחה
-        gift: [String]
+        gifts: [String]
     }],
     productList: [{
         _id: mongoose.SchemaTypes.ObjectId,
