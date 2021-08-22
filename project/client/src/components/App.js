@@ -10,7 +10,6 @@ import AuctionManagerTable from './user/AuctionManagerTable';
 function App(props) {
 
   return (<div>
-    {/* <AuctionManagerTable/> */}
     <Router>
       <div>
         <Switch>

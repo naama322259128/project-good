@@ -7,7 +7,6 @@ import UserTable from './UserTable';
 
 const YourProfile = (props) => {
     return (<>
-        <h1>Your Profile</h1>
         {props.currentUser.status === 'USER' ? (<UserTable />) : props.currentUser.status === 'AUCTION_MANAGER' ? (<AuctionManagerTable />) : (<SiteManagerTable />)}
     </>
     );

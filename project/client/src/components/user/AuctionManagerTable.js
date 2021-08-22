@@ -19,15 +19,14 @@ const columns = [
         label: 'Start Date',
         minWidth: 170,
         align: 'right',
-        format: (value) => moment(value).format('D/MM/YYYY')
+        // format: (value) => moment(value).format('D/MM/YYYY')
     },
     {
         id: 'end_date',
         label: 'End date',
         minWidth: 170,
         align: 'right',
-        format: (value) => moment(value).format('D/MM/YYYY')
-        ,
+        //  format: (value) =>moment(value).format('D/MM/YYYY')
     },
     {
         id: 'done',
@@ -52,9 +51,9 @@ function createData(name, start_date, end_date, done) {
 
 const rows = [
     // TODO: sort by date
-    createData('לזכות ברגע', new Date(2021, 7, 1), new Date(2021, 9, 1), 'false'),
-    createData('הרבה נחת', new Date(2021, 8, 1), new Date(2021, 10, 1), 'false'),
-    createData('ועל גמילות חסדים', new Date(2020, 10, 1), new Date(2020, 12, 1), 'true')
+    createData('לזכות ברגע', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false'),
+    createData('הרבה נחת', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false'),
+    createData('ועל גמילות חסדים', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true')
 ];
 
 const useStyles = makeStyles({
