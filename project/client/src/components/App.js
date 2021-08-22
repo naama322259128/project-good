@@ -4,22 +4,23 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Auction from '../components/auction/Auction';
 import NewAuction from '../components/new auction/NewAuction';
 import About from './main/About'
-import { connect } from "react-redux";
 import YourProfile from './user/YourProfile';
-import AuctionManagerProfile from './user/AuctionManagerProfile';
+import UpdateDetails from './user/UpdateDetails';
+import AuctionManagerTable from './user/AuctionManagerTable';
 function App(props) {
 
   return (<div>
-    {/* <AuctionManagerProfile/> */}
+    {/* <AuctionManagerTable/> */}
     <Router>
       <div>
         <Switch>
           <Route path={`/auction`}><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
-          <Route path={`/newAuction`}><NewAuction /></Route>
+          <Route path={`/new_auction`}><NewAuction /></Route>
           <Route path={`/about`}><About /></Route>
           <Route path={`/your_profile`}><YourProfile /></Route>
-          <Route exact path={`/`}><Home /></Route>
+          <Route path={`/update_your_details`}><UpdateDetails /></Route>
+          <Route path={`/`}><Home /></Route>
         </Switch>
       </div>
     </Router>
@@ -28,4 +29,4 @@ function App(props) {
 }
 
 
- export default App;
+export default App;

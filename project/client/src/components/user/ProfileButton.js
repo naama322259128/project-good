@@ -18,9 +18,9 @@ const ProfileButton = (props) => {
 
     const signOut = () => {
         //if (window.confirm("Are you sure you want to leave?")) {
-            props.resetNewAuctionState();//אם היה באמצע לבנות מכירה, הנתונים שלה ימחקו
-            props.signOut(props.currentUser);
-       // }
+        props.resetNewAuctionState();//אם היה באמצע לבנות מכירה, הנתונים שלה ימחקו
+        props.signOut(props.currentUser);
+        // }
     }
 
     const handleClick = (event) => {
@@ -59,12 +59,15 @@ const ProfileButton = (props) => {
                 <MenuItem key={'Your profile'} onClick={() => { handleClose(); }}>Your profile</MenuItem>
             </Link>
 
+
+            <Link to={'/update_your_details'}>
+                <MenuItem key={'Update your details'} onClick={() => { handleClose(); }}>Update your details</MenuItem>
+            </Link>
+
             <Link to={'/home'}>
                 <MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem>
             </Link>
 
-            {/* <Link to={'./your_profile'}><MenuItem key={'Your profile'} onClick={()=>{handleClose();}}>Your profile</MenuItem> </Link>
-            <Link to={'/home'}><MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem></Link> */}
 
         </Menu>
 

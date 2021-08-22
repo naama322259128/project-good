@@ -12,7 +12,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-const AuctionManagerProfile = (props) => {
+const UpdateAuctionDetails = (props) => {
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
 
@@ -50,7 +50,7 @@ const AuctionManagerProfile = (props) => {
     const useStyles = makeStyles((theme) => ({
         root: {
             backgroundColor: theme.palette.background.paper,
-            width: 500,
+            width: '80vw'
         },
     }));
 
@@ -69,7 +69,7 @@ const AuctionManagerProfile = (props) => {
     return (
         <div className={classes.root}>
 
-            <h1>אזור אישי של מנהל מכירה</h1>
+            <h1>Update your Chinese auction details</h1>
             <AppBar position="static" color="default">
                 <Tabs
                     value={value}
@@ -79,9 +79,9 @@ const AuctionManagerProfile = (props) => {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                 >
-                    <Tab label="Item One" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
+                    <Tab label="Purchase packages" {...a11yProps(0)} />
+                    <Tab label="Products" {...a11yProps(1)} />
+                    <Tab label="Details" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
             <SwipeableViews
@@ -90,13 +90,27 @@ const AuctionManagerProfile = (props) => {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                    Item One
+                Purchase packages
+                Purchase packages
+                Purchase packages
+                Purchase packages
+                Purchase packages
+                Purchase packages
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    Item Two
+                ProductsProductsProductsProductsProductsProductsProductsProductsProducts
+                ProductsProductsProductsProductsProductsProductsProductsProductsProducts
+                ProductsProductsProductsProductsProductsProductsProductsProductsProducts
+                ProductsProductsProductsProductsProductsProductsProductsProductsProducts
+                ProductsProductsProductsProductsProductsProductsProductsProductsProducts
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                    Item Three
+                DetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetails
+                DetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetails
+                DetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetails
+                DetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetails
+                DetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetails
+                DetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetailsDetails
                 </TabPanel>
             </SwipeableViews>
         </div>)
@@ -106,4 +120,4 @@ const mapStateToProps = (state) => {
 
     };
 }
-export default connect(mapStateToProps, {})(AuctionManagerProfile);
+export default connect(mapStateToProps, {})(UpdateAuctionDetails);

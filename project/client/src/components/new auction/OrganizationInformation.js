@@ -16,8 +16,8 @@ const OrganizationInformation = (props) => {
             <label>Upload photos of the organization</label>
             {/* לשמור תמונות שהוא מעלה */}
             {/* <input type="button" value="upload photos" onChange={(e) => photos.push()} /> */}
-             <Link to={`/newAuction/4`}><input type="button" value="Ok" onClick={() => { props.saveOrganizationDetails(oName) }} /></Link>
-             <Link to={`/newAuction/2`}>prev</Link>
+             <Link to={`/new_auction/4`}><input type="button" value="Ok" onClick={() => { props.saveOrganizationDetails(oName) }} /></Link>
+             <Link to={`/new_auction/2`}>prev</Link>
 
         </form>);
  }

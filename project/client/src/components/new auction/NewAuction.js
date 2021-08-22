@@ -20,10 +20,10 @@ const NewAuction = (props) => {
             {/* ארבעת המלבנים */}
             <Router>
                 <Switch>
-                    <Route path="/newAuction/2"><UploadingProducts /></Route>
-                    <Route path="/newAuction/3"><OrganizationInformation /></Route>
-                    <Route path="/newAuction/4"><AuctionInformation /></Route>
-                    <Route path="/newAuction/"><AuctionPricing /></Route>
+                    <Route path="/new_auction/2"><UploadingProducts /></Route>
+                    <Route path="/new_auction/3"><OrganizationInformation /></Route>
+                    <Route path="/new_auction/4"><AuctionInformation /></Route>
+                    <Route path="/new_auction/"><AuctionPricing /></Route>
                 </Switch>
             </Router>
             {props.isOpen ? <FinalStep /> : null}        {/* אישור סופי */}

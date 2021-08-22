@@ -1,4 +1,4 @@
-const PurchasePackage = require("../models/purchasePackage");
+//const PurchasePackage = require("../models/purchasePackage");
 
 const mongoose = require("mongoose");
 const getAll = async (req, res) => {
