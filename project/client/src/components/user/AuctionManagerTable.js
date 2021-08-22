@@ -11,6 +11,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+
+import { getAuctionsArray } from '../../store/actions/user'
+
 const columns = [
     { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
     {
@@ -22,7 +25,7 @@ const columns = [
     },
     {
         id: 'end_date',
-        label: 'End date',
+        label: 'Lotteries date',
         minWidth: 170,
         align: 'right',
         //  format: (value) =>moment(value).format('D/MM/YYYY')
@@ -48,13 +51,18 @@ function createData(name, start_date, end_date, done) {
     return { name, start_date, end_date, done, options };
 }
 
-const rows = [
+/*const rows = [
     // TODO: sort by date
-
+    // TODO: למה צריך לעשות כאן את המומנט
     createData('לזכות ברגע', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false'),
     createData('הרבה נחת', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false'),
     createData('ועל גמילות חסדים', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true')
-];
+];*/
+
+const rows = getAuctionsArray().map((item) => {
+    return createData(item.name, item.registrationStartDate, item.lotteriesDate, item.status);
+});
+
 
 const useStyles = makeStyles({
     root: {
@@ -65,7 +73,7 @@ const useStyles = makeStyles({
     },
 });
 
-const AuctionManagerTable = () => {
+const AuctionManagerTable = (props) => {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -132,4 +140,4 @@ const mapStateToProps = (state) => {
     return {
     };
 }
-export default connect(mapStateToProps, {})(AuctionManagerTable);
+export default connect(mapStateToProps, { getAuctionsArray })(AuctionManagerTable);
