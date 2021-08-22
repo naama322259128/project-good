@@ -9,8 +9,8 @@ const orderSchema = new mongoose.Schema({
         },//קוד מוצר, מצביע לטבלת מוצרים
         ticketsQuantity: { type: Number, required: true }
     }],
-    paymentCode: { type: String, required: true },
-    amountToPay: { type: Number, required: true },
+    paymentCode: { type: String, required: true },//קוד תשלום
+    amountToPay: { type: Number, required: true },//סכום
     auctionId: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Auction',

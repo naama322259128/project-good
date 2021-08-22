@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment'
-
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
