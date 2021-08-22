@@ -74,6 +74,7 @@ const getAuctionsByManagerId = async (req, res) => {
     let auction = await Auction.find({ 'auctionManager': manager_id });
     if (!auction)
         return res.status(404).send("There is no auction with such an manager ID number");
+    if(auction==undefined)return res.send([]);
     return res.send(auction);
 }
 

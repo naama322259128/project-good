@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     birthYear: { type: Number, required: true },
     address: { type: String, required: true },
     status: { type: String, enum: ['USER', 'AUCTION_MANAGER', 'SITE_MANAGER'], required: true, default: 'USER' },
-    Confidentiality: { type: Boolean, default: false }
+    Confidentiality: { type: Boolean, default: false }//חסוי או לא חסוי
 });
 const User = mongoose.model("User", userSchema);
 module.exports = User;

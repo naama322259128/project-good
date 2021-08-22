@@ -70,18 +70,18 @@ const AuctionManagerTable = (props) => {
         return { name, start_date, end_date, done, options };
     }
 
-    const rows = [
+    /*const rows = [
         // TODO: sort by date
         // TODO: למה צריך לעשות כאן את המומנט
         createData('לזכות ברגע', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false'),
         createData('הרבה נחת', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false'),
         createData('ועל גמילות חסדים', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true')
-    ];
+    ];*/
 
 
-    /* const rows = props.getAuctionsArray().map((item) => {
+    const rows = props.getAuctionsArray(props.currentUser).map((item) => {
         return createData(item.name, item.registrationStartDate, item.lotteriesDate, item.status);
-    });*/
+    });
 
 
     const classes = useStyles();
@@ -148,6 +148,7 @@ const AuctionManagerTable = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
+        currentUser: state.user.currentUser
     };
 }
 export default connect(mapStateToProps, { getAuctionsArray })(AuctionManagerTable);

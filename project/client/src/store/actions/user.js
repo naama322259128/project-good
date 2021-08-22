@@ -60,3 +60,26 @@ export const getAuctionsArray = (user) => {
         })
     }
 }
+//מראה את הטבלה ההזמנות של משתמש קיים 
+//של משתמש קיים ומחזירה את ההזמנות של אותו משתמש _id מקבלת  
+export const getOrdersList= (user) => {
+    let id = user._id;
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/orders/orderList/${id}`).then(succ => {
+            if (succ.status != 400)
+                return succ.data;
+        })
+    }
+}
+//בלחיצה על כפתור הצג הזמנה 
+//של הזמנה ומחזירה את ההזמנה_id מקבלת 
+export const getOrderById = (order) => {
+    let id = order._id;
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/orders/${id}`).then(succ => {
+            if (succ.status != 400)
+                return succ.data;
+        })
+    }
+}
+
