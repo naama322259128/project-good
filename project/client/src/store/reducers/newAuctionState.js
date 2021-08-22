@@ -69,7 +69,6 @@ export const newAuctionReducer = (state = initialState, action) => {
             }
         }
         case actionTypes.ADD_PRODUCT: {
-
             let arr = [...state.productsList, action.payload];
             return {
                 ...state,

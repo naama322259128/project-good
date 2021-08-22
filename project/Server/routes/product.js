@@ -30,7 +30,6 @@ var upload = multer({
 route.get("/:auctionId",productController.getAllProduct)
 route.get("/",productController.getAll)
 route.get("/:id",productController.getById)
-// route.post("/",productController.addProduct)
 route.post("/",upload.single("image"),productController.addProduct)
 
 module.exports=route;
