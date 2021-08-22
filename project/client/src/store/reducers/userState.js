@@ -7,7 +7,11 @@ const initialState = {
         { cnt: 4, product: { _id: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 18, product: { _id: "333", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } }
     ],//סל מוצרים
-    auctionsArray:[]
+    auctionsArray: [],
+    deleteAuctionModal: false,
+    editAuctionModal: false,
+    approvalAuctionModal: false,
+    selected_auction_to_options: null  //המכירה שנבחרה לצורך מחיקה/עריכה/אישור וזה יהיה רק ע''י מכירה
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -64,7 +68,7 @@ export const userReducer = (state = initialState, action) => {
                     currentUser: null,
                     loginIsOpen: false,
                     yourProfileIsOpen: false,
-                    shoppingCart:null
+                    shoppingCart: null
                 }
             }
         case actionTypes.UPDATE_CURRENT_USER:
@@ -75,7 +79,33 @@ export const userReducer = (state = initialState, action) => {
                     currentUser: action.payload,
                 }
             }
-
+        case actionTypes.SET_EDIT_AUCTION_MODAL: {
+            return {
+                ...state,
+                editAuctionModal: action.payload.b,
+                selected_auction_to_options:action.payload._id
+            }
+        }
+        case actionTypes.SET_APPROVAL_AUCTION_MODAL: {
+            return {
+                ...state,
+                approvalAuctionModal: action.payload.b,
+                selected_auction_to_options:action.payload._id
+            }
+        }
+        case actionTypes.SET_DELETE_AUCTION_MODAL: {
+            return {
+                ...state,
+                deleteAuctionModal: action.payload.b,
+                selected_auction_to_options:action.payload._id
+            }
+        }
+        case actionTypes.SET_SELECTED_AUCTION_TO_OPTIONS: {
+            return {
+                ...state,
+                selected_auction_to_options: action.payload
+            }
+        }
     }
 
     return state;
