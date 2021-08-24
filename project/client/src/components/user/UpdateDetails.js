@@ -1,4 +1,4 @@
-import './User.scss';
+import './yourProfile.scss'
 import { connect } from 'react-redux';
 import React from 'react';
 import { updateUser } from '../../store/actions/user';
@@ -7,7 +7,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-// import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';

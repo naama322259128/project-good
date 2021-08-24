@@ -54,10 +54,6 @@ margin-bottom: 1vh;
  width: 100%; 
 
 }
-.PrivateTabIndicator-colorPrimary-11 {
-  background-color: #21ba45;
-  height: 0.4vh;
-}
 #btn_signup,#btn_signin{
     display: inline-block;
     width: 50%;
@@ -123,9 +119,7 @@ background-color: #21ba45 !important;
 .inputs_btns .MuiFilledInput-root:before{
 border-color: #8e8e95 !important;
 }
-.inputs_btns .MuiSvgIcon-root{
-  margin-bottom: 5%;
-}
+
 .inputs_btns .MuiFilledInput-inputAdornedStart{
 align-self: flex-end
 }
@@ -144,16 +138,6 @@ align-self: flex-end
   height: auto;
 }
  
-
-
-input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart {
-  margin-left: 3% !important;
-  margin-bottom: -1% !important;
-}
- 
-svg.MuiSvgIcon-root{
-  font-size: 1.1em !important;
-}
 
 .inputs_btns svg.MuiSvgIcon-root{
   font-size: 3vh !important;
@@ -184,38 +168,4 @@ svg.MuiSvgIcon-root{
 }
 
 
-
-/*******************************  Your Profile  ************************************/
-svg#profileIcon {
-}
-
-// #profile_icon_in_small_header{
-//   margin-top: 1vh !important;
-// }
-  
-#profileIcon{
-  font-size: 3rem !important;
-  color:#5055aa !important;
-  position: absolute !important;
-  right: 5vw !important;
-  top: 3vh !important;
-  display: inline-block !important;
-  cursor: pointer;
-}  
-
-#h1_Profile{
-  color: #21ba45 !important;
-}
-
-#update_user_details_form{
-  background-color: white;
-  margin-bottom: 1vh;
-  background-size: 100% 100% ;
-  height: 80%;
-  width: 100%;  
-  border: 2px solid black;
-}
-
-#update_details_btn{
-
-}
+  //כשמקבל ערכים שמורים מהדפדפן (סיסמה ומייל) הוא נצבע בצבע שונה

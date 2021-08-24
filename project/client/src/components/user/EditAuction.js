@@ -1,7 +1,6 @@
-import './User.scss';
+import './yourProfile.scss'
 import { connect } from 'react-redux';
 import React from 'react';
-import { updateUser } from '../../store/actions/user';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -11,8 +10,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 
-import { setEditAuctionModal } from '../../store/actions/user'
-import EditMsg from './EditMsg'
+import {setEditAuctionModal } from '../../store/actions/user'
+import EditModal from './EditModal'
 
 
 
@@ -47,7 +46,7 @@ const EditAuction = (props) => {
 
     return (
         <>
-        {props.show_edit?<EditMsg/>:null}
+        {props.show_edit?<EditModal/>:null}
             <center>
                 <br />
                 <h1 >Edit chinese auction details</h1>

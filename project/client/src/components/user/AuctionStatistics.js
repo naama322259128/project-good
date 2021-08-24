@@ -1,4 +1,4 @@
-import './User.scss';
+import './yourProfile.scss'
 import { connect } from 'react-redux';
 import React from 'react';
 

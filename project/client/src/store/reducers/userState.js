@@ -11,7 +11,8 @@ const initialState = {
     deleteAuctionModal: false,
     editAuctionModal: false,
     approvalAuctionModal: false,
-    selected_auction_to_options: null  //המכירה שנבחרה לצורך מחיקה/עריכה/אישור וזה יהיה רק ע''י מכירה
+    disapprovalAuctionModal: false,
+selected_auction_to_options: null  //המכירה שנבחרה לצורך מחיקה/עריכה/אישור וזה יהיה רק ע''י מכירה
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -90,6 +91,13 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 approvalAuctionModal: action.payload.b,
+                selected_auction_to_options:action.payload._id
+            }
+        }
+         case actionTypes.SET_DISAPPROVAL_AUCTION_MODAL: {
+            return {
+                ...state,
+                disapprovalAuctionModal: action.payload.b,
                 selected_auction_to_options:action.payload._id
             }
         }

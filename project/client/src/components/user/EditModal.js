@@ -1,3 +1,5 @@
+
+import './yourProfile.scss'
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
@@ -8,33 +10,33 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { approvalAuction } from '../../store/actions/user'
-import { setApprovalAuctionModal } from '../../store/actions/user'
-const ApprovalMsg = (props) => {
+import {updateAuction, setEditAuctionModal } from '../../store/actions/user'
+const EditModal = (props) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
+    let auction = {};
 
     return (
         <div>
             <Dialog
                 fullScreen={fullScreen}
                 open={true}
-                onClick={() => props.setApprovalAuctionModal(false)}
-                onClose={() => props.setApprovalAuctionModal(false)}
+                onClick={() => props.setEditAuctionModal(false)}
+                onClose={() => props.setEditAuctionModal(false)}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">{"Approval"}</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">{"Edit"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Are you shure you want to approval this chinese auction?
+                        Are you shure you want to edit this chinese auction?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={() => props.setApprovalAuctionModal(false)} color="primary">
+                    <Button autoFocus onClick={() => props.setEditAuctionModal(false)} color="primary">
                         Cancle
                     </Button>
-                    <Button onClick={() => { props.approvalAuction(props.auction_id); props.setApprovalAuctionModal(false) }} color="primary" autoFocus>
+                    <Button onClick={() => { props.updateAuction(props.auction_id,auction); props.setEditAuctionModal(false) }} color="primary" autoFocus>
                         Ok
                     </Button>
                 </DialogActions>
@@ -47,7 +49,4 @@ const mapStateToProps = (state) => {
         auction_id:state.user.selected_auction_to_options
     };
 }
-export default connect(mapStateToProps, { setApprovalAuctionModal,approvalAuction })(ApprovalMsg);
-
-
-
+export default connect(mapStateToProps, { setEditAuctionModal,updateAuction })(EditModal);

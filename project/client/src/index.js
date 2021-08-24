@@ -9,7 +9,7 @@ import reducer from "./store/reducers/userState";
 import thunk from 'redux-thunk';
 import { newAuctionReducer, userReducer,currentAuctionReducer,mainReducer } from "./store/reducers";
 
-
+// בס"ד
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const myStore = createStore(combineReducers({ auction: newAuctionReducer, user: userReducer,currentAuction:currentAuctionReducer,main:mainReducer}),
@@ -18,11 +18,6 @@ const myStore = createStore(combineReducers({ auction: newAuctionReducer, user: 
 );
 
 ReactDOM.render(
-  // <React.StrictMode>
-  //   <Provider store={createStore(reducer, applyMiddleware(thunk))}>
-  //     <App />
-  //   </Provider>
-  // </React.StrictMode>,
   <React.StrictMode>
   <Provider store={myStore}>
     <App />

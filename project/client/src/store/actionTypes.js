@@ -28,6 +28,7 @@ export const RESET_NEW_AUCTION_STATE="RESET_NEW_AUCTION_STATE"//איפוס הס�
 
 export const SET_DELETE_AUCTION_MODAL="SET_DELETE_AUCTION_MODAL";//האם להציג מודל אישור מחיקת מכירה
 export const SET_EDIT_AUCTION_MODAL="SET_EDIT_AUCTION_MODAL";//האם להציג מודל אישור עריכת מכירה
+export const SET_DISAPPROVAL_AUCTION_MODAL="SET_DISAPPROVAL_AUCTION_MODAL"//האם להציג מודל אישור לא לאשר מכירה
 export const SET_APPROVAL_AUCTION_MODAL="SET_APPROVAL_AUCTION_MODAL";//האם להציג מודל אישור אישור מכירה
 export const SET_SELECTED_AUCTION_TO_OPTIONS="SET_SELECTED_AUCTION_TO_OPTIONS"//איזו מכירה תימחק/תתעדכן/תאושר
 

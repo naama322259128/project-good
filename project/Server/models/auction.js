@@ -2,7 +2,11 @@
 const mongoose = require("mongoose");
 
 const auctionSchema = new mongoose.Schema({
+
+    //מה עם הנתונים על הארגון שלו
+
     name: String,
+    organizationName: String,
     auctionManager: { type: mongoose.SchemaTypes.ObjectId, ref: 'auctionManager', required: true },//managerId
     registrationStartDate: { type: Date, default: new Date() },   //תאריך התחלה
     lotteriesDate: Date,   //תאריך ביצוע ההגרלות
@@ -24,7 +28,8 @@ const auctionSchema = new mongoose.Schema({
         includedInPackages: { type: Boolean, default: true },
         winnerId: { type: mongoose.SchemaTypes.ObjectId, ref: 'User' },
         auctionId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Auction' },
-    }]
+    }],
+    lotteryApproval:{type:Boolean,default:false}
 
 });
 const Auction = mongoose.model("Auction", auctionSchema);

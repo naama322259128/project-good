@@ -78,10 +78,41 @@ const getAuctionsByManagerId = async (req, res) => {
     return res.send(auction);
 }
 
+//לקבל האם המכירה מאושרת
+const getAuctionIsApproved = async (req, res) => {
+    let { _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(a_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.find({ '_id': _id });
+    if (!auction)
+        return res.status(404).send("There is no auction with such an manager ID number");
+    return res.send(auction.lotteryApproval);
+}
+
+
+//לאשר/לא לאשר מכירה
+const approvalAuction = async (req, res) => {
+    let { a_id } = rea.params;
+    let { status } = rea.params;
+    if (!mongoose.Types.ObjectId.isValid(a_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
+}
+
+//האם המכירה התבצעה
+const getAuctionIsDone = async (req, res) => {
+    let { _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(a_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.find({ '_id': _id });
+    if (!auction)
+        return res.status(404).send("There is no auction with such an manager ID number");
+    return res.send(auction.status);
+}
 
 
 module.exports = {
-    getAll, getById, addAuction, deleteAuction, getAuctionsByManagerId
+    getAll, getById, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction,getAuctionIsDone
 }
 
 //המכירה שש לה הכי הרבה הכנסות

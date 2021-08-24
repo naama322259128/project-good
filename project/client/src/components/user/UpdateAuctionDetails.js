@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import './User.scss';
 import { connect } from "react-redux";
+import './yourProfile.scss'
 
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';

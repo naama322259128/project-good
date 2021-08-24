@@ -1,4 +1,4 @@
-import './User.scss';
+import './yourProfile.scss'
 import { connect } from 'react-redux';
 import React from 'react';
 import SiteManagerTable from './SiteManagerTable';
@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Link, useRouteMatch, Route, Switch } from 'rea
 import EditAuction from './EditAuction'
 import AuctionResults from './AuctionResults'
 import AuctionStatistics from './AuctionStatistics'
+import ApprovalModal from './ApprovalModal';
 const YourProfile = (props) => {
     return (<>
         <Switch>

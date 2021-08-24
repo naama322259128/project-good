@@ -6,6 +6,8 @@ import UploadButton from "@rpldy/upload-button";
 import UploadPreview from "@rpldy/upload-preview";
 import   p from '../../../img/car.jpg';
 
+// להוסיף מחיר!!!!!!!!!!!!
+
 const AddProduct = (props) => {
 
     const fileInputRef = useRef();
@@ -26,6 +28,7 @@ const AddProduct = (props) => {
         <div className="field">
             <form>
                 <input placeholder="product name" type="text" onChange={(e) => newProduct.prodName = e.target.value} required={true} />
+                
                 <textarea placeholder="product description"
                     onChange={(e) => newProduct.prodDescription = e.target.value} required={true}></textarea>
                 
