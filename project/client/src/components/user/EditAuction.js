@@ -1,4 +1,4 @@
-import './yourProfile.scss'
+import './yourProfile.scss';
 import { connect } from 'react-redux';
 import React from 'react';
 import Visibility from '@material-ui/icons/Visibility';
@@ -9,9 +9,9 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
-
 import {setEditAuctionModal } from '../../store/actions/user'
 import EditModal from './EditModal'
+import { Link } from 'react-router-dom';
 
 
 
@@ -50,6 +50,8 @@ const EditAuction = (props) => {
             <center>
                 <br />
                 <h1 >Edit chinese auction details</h1>
+              <Link to={"/edit_products"}><Button id="btn_product">Products</Button></Link>  
+
                 <form className={classes.root} autoComplete="off" >
                     <FilledInput
                         type={'text'}

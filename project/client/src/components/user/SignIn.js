@@ -124,6 +124,8 @@ const SignIn = (props) => {
           props.signIn(password, email)
         }
         }>Login</Button>
+
+
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
         <LoginGoogle />
 
