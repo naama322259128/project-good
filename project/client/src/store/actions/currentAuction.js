@@ -7,3 +7,4 @@ export const setCurrentAuction=(auctionCode)=>{
         payload: auctionCode
     }
 }
+
