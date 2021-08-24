@@ -25,3 +25,9 @@ export const SIGN_OUT="SIGN_OUT"//יציאת משתמש
 export const UPDATE_CURRENT_USER="UPDATE_CURRENT_USER"//עדכון פרטי משתמש
 export const RESET_NEW_AUCTION_STATE="RESET_NEW_AUCTION_STATE"//איפוס הסטייט של מכירה חדשה לאחר בניית מכירה
 // export const SET_YOUR_PROFILE="SET_YOUR_PROFILE"//האם להציג את הyour profile
+
+export const SET_DELETE_AUCTION_MODAL="SET_DELETE_AUCTION_MODAL";//האם להציג מודל אישור מחיקת מכירה
+export const SET_EDIT_AUCTION_MODAL="SET_EDIT_AUCTION_MODAL";//האם להציג מודל אישור עריכת מכירה
+export const SET_APPROVAL_AUCTION_MODAL="SET_APPROVAL_AUCTION_MODAL";//האם להציג מודל אישור אישור מכירה
+export const SET_SELECTED_AUCTION_TO_OPTIONS="SET_SELECTED_AUCTION_TO_OPTIONS"//איזו מכירה תימחק/תתעדכן/תאושר
+
