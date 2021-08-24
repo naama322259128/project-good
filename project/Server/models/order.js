@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema({
         ticketsQuantity: { type: Number, required: true }
     }],
     paymentCode: { type: String, required: true },//קוד תשלום
-    amountToPay: { type: Number, required: true },//סכום
+    amountToPay: { type: Number, required: true },// סכום לתשלום
     auctionId: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Auction',
