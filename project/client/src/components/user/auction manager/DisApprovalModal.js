@@ -8,9 +8,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { setApprovalAuctionModal, approvalAuction } from '../../../store/actions/user'
-import '../yourProfile.scss'
-const ApprovalModal = (props) => {
+import { approvalAuction, setDisApprovalAuctionModal } from '../../../store/actions/user'
+import './auctionManager.scss'
+const DisApprovalModal = (props) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -20,23 +20,24 @@ const ApprovalModal = (props) => {
             <Dialog
                 fullScreen={fullScreen}
                 open={true}
-                onClick={() => props.setApprovalAuctionModal(false)}
-                onClose={() => props.setApprovalAuctionModal(false)}
+                onClick={() => props.setDisApprovalAuctionModal(false)}
+                onClose={() => props.setDisApprovalAuctionModal(false)}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">{"Approval"}</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">{"Disapproval"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Are you shure you want to approval this chinese auction?
+                        Are you shure you want to disapproval this chinese auction?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" size="medium" onClick={() => props.setApprovalAuctionModal(false)} color="primary">
+                    <Button variant="contained" size="medium" onClick={() => props.setDisApprovalAuctionModal(false)} color="primary">
                         Cancle
                     </Button>
-                    <Button variant="contained" size="medium" onClick={() => { props.approvalAuction(props.auction_id, true); props.setApprovalAuctionModal(false) }} color="primary">
-                        Ok
+                    <Button variant="contained" size="medium" onClick={() => { props.approvalAuction(props.auction_id, false); props.setApprovalAuctionModal(false) }} color="primary">
+                        Cancle
                     </Button>
+
                 </DialogActions>
             </Dialog>
         </div>
@@ -47,7 +48,7 @@ const mapStateToProps = (state) => {
         auction_id: state.user.selected_auction_to_options
     };
 }
-export default connect(mapStateToProps, { setApprovalAuctionModal, approvalAuction })(ApprovalModal);
+export default connect(mapStateToProps, { setDisApprovalAuctionModal, approvalAuction })(DisApprovalModal);
 
 
 

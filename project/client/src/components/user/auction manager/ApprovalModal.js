@@ -8,10 +8,9 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { setDeleteAuctionModal,deleteAuction} from '../../../store/actions/user'
-import '../yourProfile.scss'
-
-const DeleteModal = (props) => {
+import { setApprovalAuctionModal, approvalAuction } from '../../../store/actions/user'
+import './auctionManager.scss'
+const ApprovalModal = (props) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -21,21 +20,21 @@ const DeleteModal = (props) => {
             <Dialog
                 fullScreen={fullScreen}
                 open={true}
-                onClick={() => props.setDeleteAuctionModal(false)}
-                onClose={() => props.setDeleteAuctionModal(false)}
+                onClick={() => props.setApprovalAuctionModal(false)}
+                onClose={() => props.setApprovalAuctionModal(false)}
                 aria-labelledby="responsive-dialog-title"
             >
-                <DialogTitle id="responsive-dialog-title">{"Delete"}</DialogTitle>
+                <DialogTitle id="responsive-dialog-title">{"Approval"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Are you shure you want to delete this chinese auction?
+                        Are you shure you want to approval this chinese auction?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={() => props.setDeleteAuctionModal(false)} color="primary">
+                    <Button variant="contained" size="medium" onClick={() => props.setApprovalAuctionModal(false)} color="primary">
                         Cancle
                     </Button>
-                    <Button onClick={() => { props.deleteAuction(props.auction_id); props.setDeleteAuctionModal(false) }} color="primary" autoFocus>
+                    <Button variant="contained" size="medium" onClick={() => { props.approvalAuction(props.auction_id, true); props.setApprovalAuctionModal(false) }} color="primary">
                         Ok
                     </Button>
                 </DialogActions>
@@ -45,7 +44,10 @@ const DeleteModal = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        auction_id:state.user.selected_auction_to_options
+        auction_id: state.user.selected_auction_to_options
     };
 }
-export default connect(mapStateToProps, { setDeleteAuctionModal,deleteAuction })(DeleteModal);
+export default connect(mapStateToProps, { setApprovalAuctionModal, approvalAuction })(ApprovalModal);
+
+
+

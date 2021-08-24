@@ -1,4 +1,4 @@
-import '../yourProfile.scss'
+import './auctionManager.scss'
 import { connect } from 'react-redux';
 import React from 'react';
 

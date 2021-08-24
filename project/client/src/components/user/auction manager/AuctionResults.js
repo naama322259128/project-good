@@ -1,6 +1,7 @@
 import '../yourProfile.scss'
 import { connect } from 'react-redux';
 import React from 'react';
+import './auctionManager.scss'
 
 
 const AuctionResults = (props) => {

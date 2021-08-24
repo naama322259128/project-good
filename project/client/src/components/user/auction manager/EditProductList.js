@@ -1,3 +1,5 @@
+import './auctionManager.scss'
+
 //עריכת רשימת מוצרים של מנהל מכירה
 const EditProductList = () => {
     return ( 

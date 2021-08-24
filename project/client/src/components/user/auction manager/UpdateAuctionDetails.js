@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { connect } from "react-redux";
-import '../yourProfile.scss'
+import './auctionManager.scss'
 
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
