@@ -9,7 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-
+import './yourProfile.scss'
 const columns = [
     { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
     { id: 'order_date', label: 'Order Date', minWidth: 100 },

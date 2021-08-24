@@ -7,6 +7,7 @@ const ProductsList = (props) => {
                 return (<div key={index}>
                     <h2>{item.prodDescription}</h2>
                     <h2>{item.prodName}</h2>
+ {/* להוסיף מחיר!!!!!!!!!!!! */}
                     <input key={index} className="tiny ui button" type="button" value="Delete" onClick={() => { props.deleteProduct(item) }} />
                 </div>
                 )

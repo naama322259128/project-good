@@ -102,6 +102,12 @@ export const setApprovalAuctionModal = (b, _id) => {
         payload: { b: b, _id: _id }
     }
 }
+export const setDisApprovalAuctionModal = (b, _id) => {
+    return {
+        type: actionTypes.SET_DISAPPROVAL_AUCTION_MODAL,
+        payload: { b: b, _id: _id }
+    }
+}
 export const setSelectedAuctionToOptions = (_id) => {
     return {
         type: actionTypes.SET_SELECTED_AUCTION_TO_OPTIONS,
@@ -136,14 +142,42 @@ export const updateAuction = (_id, auction) => {
         payload: false
     }
 }
-export const approvalAuction = (_id) => {
-    //TODO
-    alert("approvaled!!");
+export const approvalAuction = (a_id, status) => {
+    // TODO       put/get ??
+    if (status) alert("approved!!");
+    else alert("disapproved")
     return {
         //זה סתם רק בגלל השגיאה
         //לעשות עדכון במסד נתונים
         //ואז למחוק את הרטרן הזה
         type: actionTypes.SET_APPROVAL_AUCTION_MODAL,
         payload: false
+    }
+
+    /* return (dispatch) => {
+         axios.put(`http://localhost:5000/auctions/approvalAuction/${a_id}&${status}`).then(succ => {
+             console.log(succ.data);
+             //if (succ.status != 400) dispatch();
+         })
+     }*/
+}
+
+//האם ההגרלות מאושרות
+export const isAuctionApproved = (_id) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/auctions/getAuctionIsApproved/${_id}`).then(succ => {
+            console.log(succ.data);
+            //if (succ.status != 400) dispatch();
+        })
+    }
+}
+
+//האם ההגרלות התבצעו
+export const getAuctionIsDone = (_id) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/auctions/getAuctionIsDone/${_id}`).then(succ => {
+            console.log(succ.data);
+            //if (succ.status != 400) dispatch();
+        })
     }
 }
