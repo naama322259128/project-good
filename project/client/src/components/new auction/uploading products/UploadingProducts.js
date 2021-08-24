@@ -1,6 +1,5 @@
 import {showAddProduct} from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
-import { Link, useRouteMatch, Route } from 'react-router-dom';
 
 import  AddProduct  from "./AddProduct";
 import ProductsList from "./ProducstList";
@@ -10,9 +9,6 @@ const UploadingProducts = (props) => {
         <input type="button" className="ui button" onClick={props.showAddProduct} value="add product"/>
         <AddProduct />
         <ProductsList/>
-        <Link to={`/new_auction/3`}><input type="button" value="Ok"/></Link>
-        <Link to={`/new_auction/`}>prev</Link>
-
     </>);
 }
 
