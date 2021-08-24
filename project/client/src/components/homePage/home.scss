@@ -28,25 +28,24 @@ margin-left: 2vw;
   width:8vw !important;   
   border-radius: 5vw !important;
   position: absolute !important;
-  cursor: pointer !important;   
+  cursor: pointer !important;     
+  // background-color: #3ed646 !important ;
+
   background-color: #21ba45 !important ;
 }
 #btnMoreInfo{
   left: 14% !important;
   width: 10vw !important;
   height: 5vh;
-  // background-color: #3ed646 !important ;
 }
 #btnNewAuction{
   right:0% !important;
   height:5vh ;
   width: 16vw !important;
-  // background-color: #3ed646 !important ;
 }
 #btnLogin{
   right: 3vw !important;
   top: 3vh !important;
-  //  background-color: #3ed646 !important;
   display: inline-block !important;
 }
 #home_text>p{

@@ -2,8 +2,6 @@ import React from 'react';
 import { saveAuctionDetails } from "../../store/actions/newAuction";
 import { setLastModal } from "../../store/actions/newAuction";
 import { connect } from "react-redux";
-import { useHistory } from 'react-router-dom';
-import { Link, useRouteMatch, Route } from 'react-router-dom';
 import './NewAuction.scss'
 
 const AuctionInformation = (props) => {
@@ -16,8 +14,6 @@ const AuctionInformation = (props) => {
         <input type="button" value="upload file"  onChange={(e) => details.regulations = e.target.value}/>
 
      <input type="button" value="Ok" onClick={()=>{props.saveAuctionDetails(details) ;props.setLastModal(true); } }/>
-     <Link to={`/new_auction/3`}>prev</Link>
-
     </form>);
     //submit!!!!
     //לבדוק שהתאריכים תקינים
