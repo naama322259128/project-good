@@ -75,7 +75,17 @@ export const newAuctionReducer = (state = initialState, action) => {
                 productsList: arr,
                 showSetProduct: false
             }
-        }
+        } 
+        //מעדכן את רשימת מוצרים
+        // case actionTypes.PRODUCT_LIST: {
+        //     let arr = [...state.productsList, action.payload];
+        //     return {
+        //         ...state,
+        //         productsList: arr,
+        //         showSetProduct: false
+        //     }
+        // }
+        
         case actionTypes.DELETE_PRODUCT:
             let arr4 = state.productsList.
                 filter(p => p !== action.payload);

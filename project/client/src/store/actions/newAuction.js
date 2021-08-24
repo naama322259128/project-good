@@ -34,6 +34,40 @@ export const deletePackage = (p) => {
         payload: p
     }
 }
+//--------------------------------------------------------------
+//הניתובים לשרת לא נכונים צריך לכתוב אותם עפ"י מ שנכתוב בשרת
+
+//מקבלת קוד מכירה ומוצר ומוסיפה בהתאם
+//נשתמש בה גם ליצירת מכירה חדשה 
+//וגם להוספת מוצרים במכירה קיימת
+// export const addProduct = (id, product) => {
+//     return (dispatch) => {
+//        let newProduct={id:id,product:product}
+//         axios.post(`http://localhost:5000/auctions`,newProduct).then(succ => {
+//             console.log(succ.data);
+//             if (succ.status != 400)
+//                 dispatch(console.log(succ.data));
+//         })
+//     }
+// }
+
+// מחזירה רשימת מוצרים עפ"י קוד מכירה 
+// export const getProductList = (id) => {
+//     return (dispatch) => {
+//         axios.get(`http://localhost:5000/auctions/${id}`).then(succ => {
+//             console.log(succ.data);
+//             if (succ.status != 400)
+//                 dispatch(productList(succ.data));//לעדכן את רשימת המוצרים בסטייט
+//         })
+//     }
+// }
+
+// export const productList=(p)=>{
+//   return{
+//       type:actionTypes.PRODUCT_LIST,
+//       payload:p
+//   }
+// }
 
 export const addProduct = (p) => {
     return {
@@ -64,13 +98,13 @@ export const saveOrganizationDetails = (name) => {
         payload: name
     }
 }
-export const setLastModal=(b)=>{   
-     return {
+export const setLastModal = (b) => {
+    return {
         type: actionTypes.SET_FINAL_STEP,
         payload: b
     }
 }
-export const  resetNewAuctionState= () => {
+export const resetNewAuctionState = () => {
     return {
         type: actionTypes.RESET_NEW_AUCTION_STATE
     }

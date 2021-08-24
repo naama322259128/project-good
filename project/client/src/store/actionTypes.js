@@ -30,5 +30,6 @@ export const SET_DELETE_AUCTION_MODAL="SET_DELETE_AUCTION_MODAL";//האם להצ
 export const SET_EDIT_AUCTION_MODAL="SET_EDIT_AUCTION_MODAL";//האם להציג מודל אישור עריכת מכירה
 export const SET_DISAPPROVAL_AUCTION_MODAL="SET_DISAPPROVAL_AUCTION_MODAL"//האם להציג מודל אישור לא לאשר מכירה
 export const SET_APPROVAL_AUCTION_MODAL="SET_APPROVAL_AUCTION_MODAL";//האם להציג מודל אישור אישור מכירה
-export const SET_SELECTED_AUCTION_TO_OPTIONS="SET_SELECTED_AUCTION_TO_OPTIONS"//איזו מכירה תימחק/תתעדכן/תאושר
 
+export const SET_SELECTED_AUCTION_TO_OPTIONS="SET_SELECTED_AUCTION_TO_OPTIONS"//איזו מכירה תימחק/תתעדכן/תאושר
+export const PRODUCT_LIST="PRODUCT_LIST"// מעדכנת את רשימת המוצרים בסטייט 
