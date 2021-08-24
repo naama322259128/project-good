@@ -11,7 +11,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
-import { Link, useRouteMatch, Route } from 'react-router-dom';
+import FinalStep from './FinalStepModal';
+import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,7 +48,7 @@ const NewAuction = (props) => {
     const [skipped, setSkipped] = React.useState(new Set());
     const steps = getSteps();
 
-    const isStepOptional = (step) => { return step === 1; };
+    const isStepOptional = (step) => { return true };//האם השלב הזה אופציונלי
 
     const isStepSkipped = (step) => { return skipped.has(step); };
 
@@ -97,7 +98,6 @@ const NewAuction = (props) => {
                 {steps.map((label, index) => {
                     const stepProps = {};
                     const labelProps = {};
-                    if (isStepOptional(index)) { labelProps.optional = <Typography variant="caption">Optional</Typography>; }
                     if (isStepSkipped(index)) { stepProps.completed = false; }
                     return (
                         <Step key={label} {...stepProps}>
@@ -110,11 +110,10 @@ const NewAuction = (props) => {
                 {activeStep === steps.length ? (
                     <div>
                         <Typography className={classes.instructions}>
-                            All steps completed - you&apos;re finished
+                            {props.isOpen ? <FinalStep /> : null}
                         </Typography>
                         <Button onClick={handleReset} className={classes.button}>
-                            Reset
-                        </Button>
+                            Reset</Button>
                     </div>
                 ) : (
                     <div>
@@ -123,25 +122,22 @@ const NewAuction = (props) => {
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Back
                             </Button>
-                            {isStepOptional(activeStep) && (
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={handleSkip}
-                                    className={classes.button}
-                                >
-                                    Skip
-                                </Button>
-                            )}
-
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={handleNext}
+                                onClick={handleSkip}
+                                className={classes.button}
+                            >
+                                Skip</Button>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={activeStep == steps.length - 1 ? (() => { handleNext(); props.setLastModal(true) }) : handleNext()}
                                 className={classes.button}
                             >
                                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             </Button>
+
                         </div>
                     </div>
                 )}
@@ -155,9 +151,8 @@ const NewAuction = (props) => {
 const mapStateToProps = (state) => {
     return {
         isOpen: state.auction.finalStepModalIsOpen,
-        stage: state.auction.stage//איזה שלב אנחנו תבהליך
     };
 }
-export default connect(mapStateToProps, {})(NewAuction);
+export default connect(mapStateToProps, { setLastModal })(NewAuction);
 
 
