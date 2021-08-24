@@ -3,6 +3,7 @@ import ProductList from './ProductList'
 import Cart from "./Cart";
 import { Link, Route, useRouteMatch, Switch, useLocation } from 'react-router-dom'
 import Clock from "./Clock";
+import './Auction.scss';
 
 const CurrentAuction = (props) => {
     const { url, path } = useRouteMatch();

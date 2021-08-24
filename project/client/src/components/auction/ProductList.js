@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Product from './Product'
+import './Auction.scss';
 
 const ProductList = (props) => {
 

@@ -119,7 +119,9 @@ background-color: #21ba45 !important;
 .inputs_btns .MuiFilledInput-root:before{
 border-color: #8e8e95 !important;
 }
-
+.inputs_btns .MuiSvgIcon-root{
+  margin-bottom: 5%;
+}
 .inputs_btns .MuiFilledInput-inputAdornedStart{
 align-self: flex-end
 }
@@ -139,6 +141,12 @@ align-self: flex-end
 }
  
 
+
+// input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart {
+//   margin-left: 3% !important;
+//   margin-bottom: -1% !important;
+// }
+ 
 .inputs_btns svg.MuiSvgIcon-root{
   font-size: 3vh !important;
   float: right !important;
@@ -168,4 +176,3 @@ align-self: flex-end
 }
 
 
-  //כשמקבל ערכים שמורים מהדפדפן (סיסמה ומייל) הוא נצבע בצבע שונה

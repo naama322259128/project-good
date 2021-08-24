@@ -3,6 +3,7 @@ import OneAuction from './OneAuction';
 import { setCurrentAuction } from '../../store/actions/currentAuction'
 import { Link } from 'react-router-dom';
 import { setLogin } from '../../store/actions/home';
+import './home.scss';
 
 const AuctionList = (props) => {
     return (<>

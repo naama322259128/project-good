@@ -4,7 +4,7 @@ import { setLastModal } from "../../store/actions/newAuction";
 import { connect } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Link, useRouteMatch, Route } from 'react-router-dom';
-
+import './NewAuction.scss'
 
 const AuctionInformation = (props) => {
     let details={ lotteryDate:null, registrationEndDate:null, regulations:null}

@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import ProductInCart from './ProductInCart'
 import { setCnt } from '../../store/actions/user'
 import { Link} from 'react-router-dom'
+import './Auction.scss';
 
 const Cart = (props) => {
     return (

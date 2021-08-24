@@ -1,5 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
+import './Auction.scss';
+
 class Clock extends React.Component {
     constructor(props) {
         super(props);
