@@ -6,7 +6,6 @@ import NewAuction from '../components/new auction/NewAuction';
 import About from './main/About'
 import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
-import AuctionManagerTable from './user/AuctionManagerTable';
 import EditProducts from './user/manager auction/EditProducts';
 function App(props) {
 
