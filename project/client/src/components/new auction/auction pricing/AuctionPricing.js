@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Packages from './purchasing packages/Packages';
+import Packages from './Packages';
 //תמחור מחירה
 
 const AuctionPricing = () => {

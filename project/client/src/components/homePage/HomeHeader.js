@@ -6,9 +6,6 @@ import './home.scss';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ProfileButton from '../user/ProfileButton';
-import IconButton from '@material-ui/core/IconButton';
-import DownIcon from '@material-ui/icons/KeyboardArrowDown';
-import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 

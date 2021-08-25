@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/pickers": "^3.3.10",
     "@rpldy/upload-button": "^0.13.3",
     "@rpldy/upload-preview": "^0.13.3",
     "@rpldy/uploady": "^0.13.3",
@@ -13,6 +15,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
+    "date-fns": "^2.23.0",
     "mdbreact": "^5.0.2",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",

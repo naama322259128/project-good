@@ -12,7 +12,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
-import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
+import { setLastModal,savePricingInDb,saveProductsInDb,saveOrganizationDetailsInDb,saveAuctionDetailsInDb } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,6 +43,20 @@ const getStepContent = (step) => {
             return 'Unknown step';
     }
 }
+const getStepFunc = (step) => {
+    switch (step) {
+        case 0:
+            return;
+        case 1:
+            return <UploadingProducts />;
+        case 2:
+            return <OrganizationInformation />;
+        case 3:
+            return <AuctionInformation />;
+        default:
+            return 'Unknown step';
+    }
+}
 const NewAuction = (props) => {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -53,6 +68,19 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
+
+        switch (activeStep) {
+            case 0:
+                return props.savePricingInDb(props.packagesList);
+            case 1:
+                return props.saveProductsInDb(props.productsList);
+            case 2:
+                return props.saveOrganizationDetailsInDb({oName:props.oTxt,oTxt:props.txt,oPhotos:props.photos});
+            case 3:
+                return () => { props.saveAuctionDetailsInDb({startDate:props.startDate,endDate:props.loteryDate,terms:props.terms}); props.setLastModal(true) }
+        }
+
+
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());
@@ -92,13 +120,14 @@ const NewAuction = (props) => {
         <br />
         <center><h1>Build Your own chinese auction</h1></center>
         <br />
-
         <div className={classes.root}>
             <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => {
                     const stepProps = {};
                     const labelProps = {};
-                    if (isStepSkipped(index)) { stepProps.completed = false; }
+                    if (isStepSkipped(index)) {
+                        stepProps.completed = false;
+                    }
                     return (
                         <Step key={label} {...stepProps}>
                             <StepLabel {...labelProps}>{label}</StepLabel>
@@ -109,40 +138,35 @@ const NewAuction = (props) => {
             <div>
                 {activeStep === steps.length ? (
                     <div>
-                        <Typography className={classes.instructions}>
-                            {props.isOpen ? <FinalStep /> : null}
-                        </Typography>
-                        <Button onClick={handleReset} className={classes.button}>
-                            Reset</Button>
+                        <Typography className={classes.instructions}>{props.isOpen ? <FinalStep /> : null}</Typography>
+                        <Button onClick={handleBack} className={classes.button}>Back</Button>
+                        <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>
                 ) : (
                     <div>
                         <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                         <div>
-                            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                                Back
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleSkip}
-                                className={classes.button}
-                            >
-                                Skip</Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={activeStep == steps.length - 1 ? (() => { handleNext(); props.setLastModal(true) }) : handleNext()}
-                                className={classes.button}
-                            >
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
+                            {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
+                            {isStepOptional(activeStep) && (
+                                <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
+                            )}
 
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleNext}
+                                className={classes.button}
+                            >
+                                {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
+                            </Button>
                         </div>
                     </div>
                 )}
             </div>
         </div>
+
+
+
         <footer id="new_auction_footer"></footer>
 
     </>
@@ -151,8 +175,17 @@ const NewAuction = (props) => {
 const mapStateToProps = (state) => {
     return {
         isOpen: state.auction.finalStepModalIsOpen,
+        oName:state.auction.organizationName,
+        oTxt:state.auction.organizationTxt,
+        oPhotos:state.auction.organizationPhotos,
+        productsList:state.auction.productsList,
+        packagesList:state.auction.packagesList,
+
+        startDate:state.auction.registrationStartDate,
+        endDate:state.auction.registrationEndDate,
+        loteryDate:state.auction.dateOfLottery,
+        terms:state.auction.terms
     };
 }
-export default connect(mapStateToProps, { setLastModal })(NewAuction);
-
-
+export default connect(mapStateToProps, { setLastModal,savePricingInDb,saveProductsInDb,saveOrganizationDetailsInDb,saveAuctionDetailsInDb })(NewAuction);
+// לעשות עיצוב לחלק שאנו נמצאות בו עכשיו
