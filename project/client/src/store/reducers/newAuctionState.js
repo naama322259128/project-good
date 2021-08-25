@@ -13,7 +13,7 @@ const initialState = {
     organizationTxt: "",
     organizationPhotos: [],
     terms:"",
-    finalStepModalIsOpen: false//האם להציג את המודל של האישור הסופי
+    finalStepModalIsOpen: true//האם להציג את המודל של האישור הסופי
 }
 export const newAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -126,7 +126,7 @@ export const newAuctionReducer = (state = initialState, action) => {
                 organizationName: "",
                 organizationTxt: "",
                 organizationPhotos: [],
-                finalStepModalIsOpen: false,
+                finalStepModalIsOpen: true,
                 terms:""
             }
     }
