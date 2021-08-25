@@ -7,6 +7,7 @@ import About from './main/About'
 import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
 import EditProducts from './user/auction manager/EditProducts';
+import AuctionInformation from './new auction/AuctionInformation';
 function App(props) {
 
   return (<div>
@@ -22,7 +23,10 @@ function App(props) {
           <Route path={`/`}><Home /></Route>
         </Switch>
       </div>
-    </Router>
+    </Router>        
+    
+    {/* <AuctionInformation/> */}
+
   </div>);
 
 }

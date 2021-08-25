@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 const OrganizationInformation = (props) => {
     return (<form>
+               {/* <TextField id="standard-basic" label="Dccc" /> */}
+
         <label> The organization name</label>
         <input type="text" onChange={(e) => props.setOrganizationName(e.target.value)} required={true} />
         <area onChange={(e)=>props.setOrganizationText(e.target.value)}>
