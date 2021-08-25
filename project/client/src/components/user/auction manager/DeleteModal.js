@@ -45,7 +45,7 @@ const DeleteModal = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        auction_id:state.user.selected_auction_to_options
+        auction_id:state.auctionManager.selected_auction_to_options
     };
 }
 export default connect(mapStateToProps, { setDeleteAuctionModal,deleteAuction })(DeleteModal);

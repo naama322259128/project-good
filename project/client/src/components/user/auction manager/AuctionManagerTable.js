@@ -165,9 +165,9 @@ const AuctionManagerTable = (props) => {
 const mapStateToProps = (state) => {
     return {
         currentUser: state.user.currentUser,
-        show_delete: state.user.deleteAuctionModal,
-        show_approval: state.user.approvalAuctionModal,
-        show_disapproval: state.user.disapprovalAuctionModal
+        show_delete: state.auctionManager.deleteAuctionModal,
+        show_approval: state.auctionManager.approvalAuctionModal,
+        show_disapproval: state.auctionManager.disapprovalAuctionModal
     };
 }
 export default connect(mapStateToProps, { setDeleteAuctionModal, setSelectedAuctionToOptions, setDisApprovalAuctionModal, getAuctionIsDone, setApprovalAuctionModal, approvalAuction, getAuctionsArray, isAuctionApproved })(AuctionManagerTable);

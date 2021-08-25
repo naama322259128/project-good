@@ -115,8 +115,8 @@ const EditAuction = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        auction_id: state.user.selected_auction_to_options,
-        show_edit: state.user.editAuctionModal
+        auction_id: state.auctionManager.selected_auction_to_options,
+        show_edit: state.auctionManager.editAuctionModal
     };
 }
 export default connect(mapStateToProps, { setEditAuctionModal })(EditAuction);
