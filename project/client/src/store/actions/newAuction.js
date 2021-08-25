@@ -66,10 +66,12 @@ export const setTerms=(date)=>{
 //מקבלת קוד מכירה ומוצר ומוסיפה בהתאם
 //נשתמש בה גם ליצירת מכירה חדשה 
 //וגם להוספת מוצרים במכירה קיימת
+
+
 export const addProductToDb = (id, product) => {
     return (dispatch) => {
-        let newProduct = { id: id, product: product }
-        axios.post(`http://localhost:5000/auctions`, newProduct).then(succ => {
+        // let newProduct = { id: id, product: product }
+        axios.post(`http://localhost:5000/product/${id}`, product).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data));
@@ -105,6 +107,7 @@ export const addPackageToDb = (id, product) => {
         })
     }
 }
+
 export const addProduct = (p) => {
     return {
         type: actionTypes.ADD_PRODUCT,

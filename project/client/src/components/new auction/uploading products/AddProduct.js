@@ -1,50 +1,42 @@
 import React, { useRef, useState } from 'react';
-import { addProduct } from "./../../../store/actions/newAuction";
+import { addProduct, addProductToDb } from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
-import Uploady from "@rpldy/uploady";
-import UploadButton from "@rpldy/upload-button";
-import UploadPreview from "@rpldy/upload-preview";
-import   p from '../../../img/car.jpg';
+
+import p from '../../../img/car.jpg';
 
 // להוסיף מחיר!!!!!!!!!!!!
 
 const AddProduct = (props) => {
 
-    const fileInputRef = useRef();
+    const onChangeHandler = (event) => {setSelectedFile(event.target.files[0]);}
+    const onClickHandler = () => {
+        const data = new FormData()
+        data.append('file', selectedFile);
+        newProduct.img = data;
+        props.addProductToDb("6126723e8fdc3e3a90517719", newProduct);
+    }
 
-    let [img,setImg]=useState("");
-    let newProduct = { img: p, prodName: "", prodDescription: "" };
+    const [selectedFile, setSelectedFile] = useState(null);
 
-    const filterBySize = (file) => {
-        setImg(file.name);
-        console.log(img);
-        //לבדוק למה זה לא עובד       
-      newProduct.img = img;
-      //מחזיר את התמונה
-        // return file.size <= 5242880;
-        return file;
-    };
+    let newProduct = { img:null, prodName: "", prodDescription: "" };
+
+
     return ((props.showSetProduct) ? (
         <div className="field">
             <form>
                 <input placeholder="product name" type="text" onChange={(e) => newProduct.prodName = e.target.value} required={true} />
-                
+
                 <textarea placeholder="product description"
                     onChange={(e) => newProduct.prodDescription = e.target.value} required={true}></textarea>
-                
-                
+
+
                 {/* כפתור להעלאת תמונה */}
-                <Uploady
-                    destination={{ url: "my-server.com/upload" }}
-                    fileFilter={filterBySize}
-                    accept="image/*"
-                >
-                    <UploadButton />
-                    <UploadPreview />
-                </Uploady>
+                <input type="file" name="file" onChange={(e)=>{;onChangeHandler(e)}} />
+                <button type="button" class="btn btn-success btn-block" onClick={(e) => onClickHandler(e)}>Upload</button>
 
 
-                <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProduct(newProduct) }} />
+
+                {/* <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProduct(newProduct) }} /> */}
             </form>
         </div>
     ) : null)
@@ -54,4 +46,4 @@ const mapStateToProps = (state) => {
         showSetProduct: state.auction.showSetProduct
     };
 }
-export default connect(mapStateToProps, { addProduct })(AddProduct);
+export default connect(mapStateToProps, { addProduct, addProductToDb })(AddProduct);

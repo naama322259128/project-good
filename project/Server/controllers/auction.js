@@ -16,6 +16,10 @@ const getById = async (req, res) => {
     return res.send(auction);
 }
 
+
+
+
+
 const addAuction = async (req, res) => {
     let auction = req.body;
     console.log("auction-----------------------------------------------------------------------------------------------");
@@ -35,6 +39,29 @@ const addAuction = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
+
+const addProduct = async (req, res) => {
+    let product = req.body;
+    const url1 = req.protocol + '://' + req.get('host');
+    product.image=url1 + '/public/' + req.file.filename;
+    try {
+        var auction = await Auction.findOne({_id:req.query.id});
+        console.log(auction);
+        if(!auction.productList) 
+            auction.productList=[];
+        auction.productList.push(product);    
+        await auction.save();
+        return res.send(auction);
+    }
+    catch (err) {
+        console.log(err.message)
+        return res.status(400).send(err.message)
+    }
+}
+
+
+
+
 
 const deleteAuction = async (req, res) => {
     let { id } = req.params;
@@ -112,7 +139,7 @@ const getAuctionIsDone = async (req, res) => {
 
 
 module.exports = {
-    getAll, getById, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction,getAuctionIsDone
+    getAll, getById, addProduct,addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone
 }
 
 //המכירה שש לה הכי הרבה הכנסות
