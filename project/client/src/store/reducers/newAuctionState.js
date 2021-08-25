@@ -106,22 +106,10 @@ export const newAuctionReducer = (state = initialState, action) => {
                 ...state,
                 productsList: arr4,
             };
-        case actionTypes.SAVE_AUCTION_DETAILS:
-            return {
-                ...state,
-                regulationsFile: action.payload.regulations,
-                dateOfLottery: action.payload.lotteryDate,
-                registrationEndDate: action.payload.registrationEndDate
-            };
         case actionTypes.SET_FINAL_STEP:
             return {
                 ...state,
                 finalStepModalIsOpen: action.payload
-            }
-        case actionTypes.SAVE_DATA:
-            return {
-                ...state,
-                finalStepModalIsOpen: false
             }
         case actionTypes.RESET_NEW_AUCTION_STATE:
             //איפוס הסטייט לאחר בניית מכירה

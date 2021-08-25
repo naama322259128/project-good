@@ -2,17 +2,12 @@ import * as actionTypes from '../actionTypes';
 const initialState = {
     currentUser: null,
     loginIsOpen: false,
-    shoppingCart: [
+    shoppingCart: [    //סל מוצרים
         { cnt: 1, product: { _id: "111", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 4, product: { _id: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 18, product: { _id: "333", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } }
-    ],//סל מוצרים
-    auctionsArray: [],
-    deleteAuctionModal: false,
-    editAuctionModal: false,
-    approvalAuctionModal: false,
-    disapprovalAuctionModal: false,
-selected_auction_to_options: null  //המכירה שנבחרה לצורך מחיקה/עריכה/אישור וזה יהיה רק ע''י מכירה
+    ],
+    auctionsArray: []//מה זה
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -72,50 +67,13 @@ export const userReducer = (state = initialState, action) => {
                     shoppingCart: null
                 }
             }
-        case actionTypes.UPDATE_CURRENT_USER:
-            {
-                //עידכון משתמש נוכחי
-                return {
-                    ...state,
-                    currentUser: action.payload,
-                }
-            }
-        case actionTypes.SET_EDIT_AUCTION_MODAL: {
+        case actionTypes.UPDATE_CURRENT_USER: {
+            //עידכון משתמש נוכחי
             return {
                 ...state,
-                editAuctionModal: action.payload.b,
-                selected_auction_to_options:action.payload._id
-            }
-        }
-        case actionTypes.SET_APPROVAL_AUCTION_MODAL: {
-            return {
-                ...state,
-                approvalAuctionModal: action.payload.b,
-                selected_auction_to_options:action.payload._id
-            }
-        }
-         case actionTypes.SET_DISAPPROVAL_AUCTION_MODAL: {
-            return {
-                ...state,
-                disapprovalAuctionModal: action.payload.b,
-                selected_auction_to_options:action.payload._id
-            }
-        }
-        case actionTypes.SET_DELETE_AUCTION_MODAL: {
-            return {
-                ...state,
-                deleteAuctionModal: action.payload.b,
-                selected_auction_to_options:action.payload._id
-            }
-        }
-        case actionTypes.SET_SELECTED_AUCTION_TO_OPTIONS: {
-            return {
-                ...state,
-                selected_auction_to_options: action.payload
+                currentUser: action.payload,
             }
         }
     }
-
     return state;
 }
-// export default userReducer;

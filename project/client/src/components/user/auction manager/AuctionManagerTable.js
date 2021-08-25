@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import DeleteModal from './DeleteModal'
 import ApprovalModal from './ApprovalModal'
 import DisApprovalModal from './DisApprovalModal'
-import { getAuctionsArray,setDeleteAuctionModal,setApprovalAuctionModal,setDisApprovalAuctionModal,approvalAuction,setSelectedAuctionToOptions,getAuctionIsDone,isAuctionApproved } from '../../../store/actions/user'
+import { getAuctionsArray, setDeleteAuctionModal, setApprovalAuctionModal, setDisApprovalAuctionModal, approvalAuction, setSelectedAuctionToOptions, getAuctionIsDone, isAuctionApproved } from '../../../store/actions/auctionManager'
 import IconButton from '@material-ui/core/IconButton';
 import edit from '../../../img/icons/edit-file.png'
 import st from '../../../img/icons/stadistics.png'
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
 
 const AuctionManagerTable = (props) => {
     const columns = [
-        { id: 'name', label: 'Organization Name', minWidth: 80 },
+        { id: 'name', label: 'Name', minWidth: 80 },
         {
             id: 'start_date',
             label: 'Start Date',
@@ -80,7 +80,7 @@ const AuctionManagerTable = (props) => {
 
     }
 
-    function createData(name, start_date, end_date, done, _id) {
+    function createData(name1, name2, start_date, end_date, done, _id) {
         let isApproved = props.isAuctionApproved(_id);
         let isDone = props.getAuctionIsDone(_id);
         let options = <div className="optionsBtn">
@@ -92,20 +92,20 @@ const AuctionManagerTable = (props) => {
                 title="Approval lottery"
                 disabled={isDone}//אם המכירה בוצעה לא ניתן לשנות
             />
-            <Link onClick={() => props.setSelectedAuctionToOptions(_id)}  to={isDone?'#':`/your_profile/edit_auction`}><IconButton disabled={isDone} title="Edit"><img className="my_icon" src={edit} ></img></IconButton></Link>
-            <Link onClick={() => props.setSelectedAuctionToOptions(_id)} to={isDone?`/your_profile/results`:'#'}><IconButton title="Results"  disabled={!isDone}><img className="my_icon" src={results} ></img></IconButton></Link>
+            <Link onClick={() => props.setSelectedAuctionToOptions(_id)} to={isDone ? '#' : `/your_profile/edit_auction`}><IconButton disabled={isDone} title="Edit"><img className="my_icon" src={edit} ></img></IconButton></Link>
+            <Link onClick={() => props.setSelectedAuctionToOptions(_id)} to={isDone ? `/your_profile/results` : '#'}><IconButton title="Results" disabled={!isDone}><img className="my_icon" src={results} ></img></IconButton></Link>
             <Link onClick={() => props.setSelectedAuctionToOptions(_id)} to={`/your_profile/statistics`}><IconButton title="Statistics"><img className="my_icon" src={st} ></img></IconButton></Link>
-            <IconButton onClick={() => deleteAuction(_id)} title="Delete"  disabled={isDone} ><img className="my_icon" src={de} ></img></IconButton>
+            <IconButton onClick={() => deleteAuction(_id)} title="Delete" disabled={isDone} ><img className="my_icon" src={de} ></img></IconButton>
         </div>
-
+        let name = name2 + " - " + name1;
         return { name, start_date, end_date, done, options };
     }
 
     const rows = [
         // TODO: למה צריך לעשות כאן את המומנט
-        createData('לזכות ברגע', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false', 231321312),
-        createData('הרבה נחת', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false', 3123123132),
-        createData('ועל גמילות חסדים', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true', 435435524)
+        createData('לזכות ברגע', 'עזר מציון', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false', 231321312),
+        createData('הרבה נחת', 'סמינר אלקיים', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false', 3123123132),
+        createData('ועל גמילות חסדים', 'בית כנסת חזון עובדיה', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true', 435435524)
     ];
 
     // TODO: sort by date
@@ -118,7 +118,7 @@ const AuctionManagerTable = (props) => {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     return (
-        <center>        
+        <center>
             {props.show_delete ? <DeleteModal /> : null}
             {props.show_approval ? <ApprovalModal /> : null}
             {props.show_disapproval ? <DisApprovalModal /> : null}

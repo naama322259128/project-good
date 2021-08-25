@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { approvalAuction, setDisApprovalAuctionModal } from '../../../store/actions/user'
+import { approvalAuction, setDisApprovalAuctionModal } from '../../../store/actions/auctionManager'
 import './auctionManager.scss'
 const DisApprovalModal = (props) => {
     const theme = useTheme();

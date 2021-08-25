@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { setDeleteAuctionModal,deleteAuction} from '../../../store/actions/user'
+import { setDeleteAuctionModal,deleteAuction} from '../../../store/actions/auctionManager'
 import './auctionManager.scss'
 
 const DeleteModal = (props) => {

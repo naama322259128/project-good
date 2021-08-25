@@ -36,7 +36,30 @@ export const setOrganizationPhotos = (pic) => {
         payload: pic
     }
 }
-
+export const setDateOfStart=(date)=>{
+        return {
+        type: actionTypes.SET_START_DATE,
+        payload: date
+    }
+}
+export const setDateOfEnd=(date)=>{
+        return {
+        type: actionTypes.SET_END_DATE,
+        payload: date
+    }
+}
+export const setDateOfLotery=(date)=>{
+        return {
+        type: actionTypes.SET_LOTERY_DATE,
+        payload: date
+    }
+}
+export const setTerms=(date)=>{
+        return {
+        type: actionTypes.SET_LOTERY_DATE,
+        payload: date
+    }
+}
 //--------------------------------------------------------------
 //הניתובים לשרת לא נכונים צריך לכתוב אותם עפ"י מ שנכתוב בשרת
 
@@ -99,12 +122,7 @@ export const deleteProduct = (p) => {
         payload: p
     }
 }
-export const saveAuctionDetails = (auctionDetails) => {
-    return {
-        type: actionTypes.SAVE_AUCTION_DETAILS,
-        payload: auctionDetails
-    }
-}
+
 export const setLastModal = (b) => {
     return {
         type: actionTypes.SET_FINAL_STEP,

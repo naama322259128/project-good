@@ -1,7 +1,7 @@
 import './auctionManager.scss'
 import { connect } from 'react-redux';
 import React from 'react';
-import { setEditAuctionModal } from '../../../store/actions/user'
+import { setEditAuctionModal } from '../../../store/actions/auctionManager'
 import EditModal from './EditModal'
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -12,6 +12,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import EditProducts from './EditProducts'
+import EditAouctionDetails from './EditAouctionDetails'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -98,7 +99,7 @@ const EditAuction = (props) => {
                     >
                         <TabPanel value={value} index={0} dir={theme.direction}><EditProducts/></TabPanel>
                         <TabPanel value={value} index={1} dir={theme.direction}>Packeges............</TabPanel>
-                        <TabPanel value={value} index={2} dir={theme.direction}>Details.............</TabPanel>
+                        <TabPanel value={value} index={2} dir={theme.direction}><EditAouctionDetails/></TabPanel>
                     </SwipeableViews>
                 </div>
 
