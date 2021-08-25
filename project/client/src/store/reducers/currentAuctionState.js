@@ -8,6 +8,7 @@ export const currentAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_CURRENT_AUCTION:
             {
+
                 let auc = allAuctions.find((element) => element._id === action.payload);
                 return {
                     //אולי נצטרך להגדיר כאן עוד דברים
@@ -17,7 +18,6 @@ export const currentAuctionReducer = (state = initialState, action) => {
                     //רק בינתיים לקחתי מהסטייט המרכזי
                     productsList: auc.productList
                 }
-                
             }
     }
     return state;

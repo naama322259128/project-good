@@ -6,8 +6,8 @@ import NewAuction from '../components/new auction/NewAuction';
 import About from './main/About'
 import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
-import EditProducts from './user/auction manager/EditProducts';
-import AuctionInformation from './new auction/AuctionInformation';
+import AuctionManagerTable from './user/AuctionManagerTable';
+import EditProducts from './user/manager auction/EditProducts';
 function App(props) {
 
   return (<div>
@@ -20,13 +20,11 @@ function App(props) {
           <Route path={`/about`}><About /></Route>
           <Route path={`/your_profile`}><YourProfile /></Route>
           <Route path={`/update_your_details`}><UpdateDetails /></Route>
+           <Route path={`/edit_products`}><EditProducts/></Route>
           <Route path={`/`}><Home /></Route>
         </Switch>
       </div>
-    </Router>        
-    
-    {/* <AuctionInformation/> */}
-
+    </Router>
   </div>);
 
 }

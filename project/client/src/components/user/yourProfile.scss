@@ -6,14 +6,14 @@
     top: 3vh !important;
     display: inline-block !important;
     cursor: pointer;
-   }  
-  // #btn_product{
-  //   color: #ffffff !important;
-  //   width:7% !important;
-  // background-color: #21ba45 !important;
-  //   height: 5vh !important;
+  }  
+  #btn_product{
+    color: #ffffff !important;
+    width:7% !important;
+  background-color: #21ba45 !important;
+    height: 5vh !important;
 
-  // }
+  }
   #h1_Profile{
     color: #21ba45 !important;
   }
@@ -26,4 +26,16 @@
     width: 100%;  
     border: 2px solid black;
   }
-
+.my_icon{
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    user-select: none;
+}
+.my_icon:not(:root) {
+    overflow: hidden;
+}

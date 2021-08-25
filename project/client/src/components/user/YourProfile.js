@@ -1,15 +1,14 @@
 import './yourProfile.scss'
 import { connect } from 'react-redux';
 import React from 'react';
-import SiteManagerTable from './site manager/SiteManagerTable';
-import AuctionManagerTable from './auction manager/AuctionManagerTable';
+import SiteManagerTable from './SiteManagerTable';
+import AuctionManagerTable from './AuctionManagerTable';
 import UserTable from './UserTable';
 import { BrowserRouter as Router, Link, useRouteMatch, Route, Switch } from 'react-router-dom'
-import EditAuction from './auction manager/EditAuction'
-import EditProducts from './auction manager/EditProducts'
-import AuctionResults from './auction manager/AuctionResults'
-import AuctionStatistics from './auction manager/AuctionStatistics'
-
+import EditAuction from './EditAuction'
+import AuctionResults from './AuctionResults'
+import AuctionStatistics from './AuctionStatistics'
+import ApprovalModal from './ApprovalModal';
 const YourProfile = (props) => {
     return (<>
         <Switch>
