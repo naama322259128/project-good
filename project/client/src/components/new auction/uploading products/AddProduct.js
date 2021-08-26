@@ -16,7 +16,7 @@ const AddProduct = (props) => {
         props.addProductToDb("6126723e8fdc3e3a90517719", newProduct);
     }
 
-    const [selectedFile, setSelectedFile] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
 
     let newProduct = { img:null, prodName: "", prodDescription: "" };
 
