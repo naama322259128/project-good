@@ -8,28 +8,32 @@ import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
 import EditProducts from './user/auction manager/EditProducts';
 import AuctionInformation from './new auction/AuctionInformation';
+import AddProduct from './new auction/uploading products/AddProduct';
 function App(props) {
 
-  return (<div>
-    <Router>
-      <div>
-        <Switch>
-          <Route path={`/auction`}><Auction /></Route>
-          <Route path={`/home`}><Home /></Route>
-          <Route path={`/new_auction`}><NewAuction /></Route>
-          <Route path={`/about`}><About /></Route>
-          <Route path={`/your_profile`}><YourProfile /></Route>
-          <Route path={`/update_your_details`}><UpdateDetails /></Route>
-          <Route path={`/`}><Home /></Route>
-        </Switch>
-      </div>
-    </Router>        
-    
-    {/* <AuctionInformation/> */}
-
-  </div>);
+  return (
+    <AddProduct/>
+  );
 
 }
 
 
 export default App;
+// {/* <div>
+//     <Router>
+//       <div>
+//         <Switch>
+//           <Route path={`/auction`}><Auction /></Route>
+//           <Route path={`/home`}><Home /></Route>
+//           <Route path={`/new_auction`}><NewAuction /></Route>
+//           <Route path={`/about`}><About /></Route>
+//           <Route path={`/your_profile`}><YourProfile /></Route>
+//           <Route path={`/update_your_details`}><UpdateDetails /></Route>
+//           <Route path={`/`}><Home /></Route>
+//         </Switch>
+//       </div>
+//     </Router>        
+    
+//     {/* <AuctionInformation/> */}
+
+//   </div> */}

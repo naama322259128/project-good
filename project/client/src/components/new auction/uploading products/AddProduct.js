@@ -16,7 +16,7 @@ const AddProduct = (props) => {
         props.addProductToDb("6126723e8fdc3e3a90517719", newProduct);
     }
 
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState("");
 
     let newProduct = { img:null, prodName: "", prodDescription: "" };
 
@@ -31,7 +31,7 @@ const AddProduct = (props) => {
 
 
                 {/* כפתור להעלאת תמונה */}
-                <input type="file" name="file" onChange={(e)=>{;onChangeHandler(e)}} />
+                <input type="file" name="file" onChange={(e)=>{onChangeHandler(e)}} />
                 <button type="button" class="btn btn-success btn-block" onClick={(e) => onClickHandler(e)}>Upload</button>
 
 
