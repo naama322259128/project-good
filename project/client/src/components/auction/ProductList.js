@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 const ProductList = (props) => {
     useEffect(() => { props.updateCurrentAuction(localStorage.getItem("currentAuction")) }, [])
 
+    
     return (<div> 
         {props.arr.map((item) => {
             return (<Product key={parseInt(item._id)} item={item} />)

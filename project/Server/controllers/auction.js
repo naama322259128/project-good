@@ -18,11 +18,8 @@ const getById = async (req, res) => {
 
 
 
-
-
 const addAuction = async (req, res) => {
     let auction = req.body;
-    console.log("auction-----------------------------------------------------------------------------------------------");
     console.log(auction);
 
     let newAuction = new Auction(auction);
@@ -58,9 +55,6 @@ const addProduct = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
-
-
-
 
 
 const deleteAuction = async (req, res) => {
