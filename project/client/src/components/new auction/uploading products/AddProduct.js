@@ -10,6 +10,7 @@ const AddProduct = (props) => {
 
     const onChangeHandler = (event) => {setSelectedFile(event.target.files[0]);}
     const onClickHandler = () => {
+        debugger;
         const data = new FormData()
         data.append('file', selectedFile);
         newProduct.img = data;

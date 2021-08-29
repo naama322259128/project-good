@@ -1,6 +1,12 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 
+export const setLocalStorage = (item, value) => {
+    localStorage.setItem(item, value);
+}
+export const getLocalStorage = (item) => {
+    return localStorage.getItem(item);
+}
 export const showAddPackage = () => {
     return {
         type: actionTypes.SHOW_ADD_PACKAGE
@@ -36,26 +42,26 @@ export const setOrganizationPhotos = (pic) => {
         payload: pic
     }
 }
-export const setDateOfStart=(date)=>{
-        return {
+export const setDateOfStart = (date) => {
+    return {
         type: actionTypes.SET_START_DATE,
         payload: date
     }
 }
-export const setDateOfEnd=(date)=>{
-        return {
+export const setDateOfEnd = (date) => {
+    return {
         type: actionTypes.SET_END_DATE,
         payload: date
     }
 }
-export const setDateOfLotery=(date)=>{
-        return {
+export const setDateOfLotery = (date) => {
+    return {
         type: actionTypes.SET_LOTERY_DATE,
         payload: date
     }
 }
-export const setTerms=(date)=>{
-        return {
+export const setTerms = (date) => {
+    return {
         type: actionTypes.SET_LOTERY_DATE,
         payload: date
     }

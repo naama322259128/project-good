@@ -43,20 +43,6 @@ const getStepContent = (step) => {
             return 'Unknown step';
     }
 }
-const getStepFunc = (step) => {
-    switch (step) {
-        case 0:
-            return;
-        case 1:
-            return <UploadingProducts />;
-        case 2:
-            return <OrganizationInformation />;
-        case 3:
-            return <AuctionInformation />;
-        default:
-            return 'Unknown step';
-    }
-}
 const NewAuction = (props) => {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);

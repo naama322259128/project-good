@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import { addPackage } from '../../../store/actions/newAuction';
+
 const AddPackage = (props) => {
+
     let newPackage = { qty: "", discount: 0 };
     let checkQty = () => {
         let tmp = props.packagesList.filter(p => p.qty === newPackage.qty);
@@ -13,8 +15,12 @@ const AddPackage = (props) => {
         if (newPackage.discount < 2) document.getElementById("discountInput").style.borderColor = "red";
         else document.getElementById("discountInput").style.borderColor = "";
     }
-    return (props.showSetPackage ? (
-        <form>
+    let savePackageInLocalStorage = () => {
+        let arr = localStorage.getItem('packagesList');
+        arr.push(newPackage)
+    }
+    return (/*props*/localStorage.getItem('showSetPackage') ? (
+        <form >
             <div className="ui equal width form">
                 <div className="fields">
                     <div className="field">
@@ -28,14 +34,14 @@ const AddPackage = (props) => {
                     </div>
                 </div>
             </div>
-            <button className="positive ui button" onClick={() => { props.addPackage(newPackage) }}>Add</button>
+            <button className="positive ui button" onClick={() => { savePackageInLocalStorage(newPackage); }}>Add</button>
         </form>
     ) : null);
 }
 const mapStateToProps = (state) => {
     return {
-        showSetPackage: state.auction.showSetPackage,
-        packagesList: state.auction.packagesList
+        //showSetPackage: state.auction.showSetPackage,
+        //packagesList: state.auction.packagesList
     };
 }
 export default connect(mapStateToProps, { addPackage })(AddPackage);
