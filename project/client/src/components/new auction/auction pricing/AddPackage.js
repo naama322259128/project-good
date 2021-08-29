@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-
+import { setPackagesList, showAddPackage } from '../../../store/actions/newAuction'
 const AddPackage = (props) => {
 
-    useEffect(() => { }, [localStorage.getItem('showSetPackageBtn')])
     let newPackage = { qty: "", discount: 0 };
     let checkQty = () => {
-        let tmp = props.packagesList.filter(p => p.qty === newPackage.qty);
+        let tmp = localStorage.getItem('packagesList').filter(p => p.qty === newPackage.qty);
         console.log(tmp);
         if (tmp.length != 0 || newPackage.qty < 2) document.getElementById("qtyInput").style.borderColor = "red";
         else document.getElementById("qtyInput").style.borderColor = "";
@@ -19,9 +18,14 @@ const AddPackage = (props) => {
     let addPackageToLS = () => {
         let arr = localStorage.getItem('packagesList');
         arr.push(newPackage)
+
+        localStorage.setItem("packagesList", arr)//האם צריך שורה זו
+        props.setPackagesList(arr);
+
         localStorage.setItem('showSetPackageBtn', true);
+        props.showAddPackage(true);
     }
-    return (localStorage.getItem('showSetPackageBtn') ? (
+    return (props.showSetPackage ? (
         <form >
             <div className="ui equal width form">
                 <div className="fields">
@@ -41,11 +45,10 @@ const AddPackage = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        //showSetPackage: state.auction.showSetPackage,
-        //packagesList: state.auction.packagesList
+        showSetPackage: state.auction.showSetPackage
     };
 }
-export default connect(mapStateToProps, {})(AddPackage);
+export default connect(mapStateToProps, { setPackagesList, showAddPackage })(AddPackage);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable

@@ -15,14 +15,14 @@ const Cart = (props) => {
             <br />
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
-            {localStorage.getItem("prodactsInCart").map((item, index) => {
+            {props.arr.map((item, index) => {
                 return (<ProductInCart key={parseInt(index)} item={item} setCount={props.setCnt} />)
             })}
         </div>);
 }
 const mapStateToProps = (state) => {
     return {
-        // arr: state.user.shoppingCart,
+        arr: state.user.shoppingCart,
     }
 }
 

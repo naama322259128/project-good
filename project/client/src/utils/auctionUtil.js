@@ -13,7 +13,7 @@ export const createNewAuction = (auction) => {
 }
 
 //מחזירה את רשימת המכירות הקיימות במסד נתונים 
-export const getAuctionList = () => {
+export const getAuctionsList = () => {
   return axios.get(`http://localhost:5000/auctions`)
 }
 

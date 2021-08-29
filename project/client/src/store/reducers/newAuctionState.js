@@ -2,7 +2,6 @@ import * as actionTypes from '../actionTypes';
 const initialState = {
     packagesList: [],//רשימת חבילות
     productsList: [],//רשימ מוצרים
-    //showSetPrice: false,//האם להציג את קומפוננטת קביעת מחיר לקבוצה AddGroup
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
     showSetProduct: true,//האם להציג את קומפוננטת  AddProduct
     regulationsFile: null,//קובץ תקנון
@@ -12,7 +11,7 @@ const initialState = {
     organizationName: "",
     organizationTxt: "",
     organizationPhotos: [],
-    terms:"",
+    terms: "",
     finalStepModalIsOpen: true//האם להציג את המודל של האישור הסופי
 }
 export const newAuctionReducer = (state = initialState, action) => {
@@ -90,15 +89,19 @@ export const newAuctionReducer = (state = initialState, action) => {
             }
         }
         //מעדכן את רשימת מוצרים
-        // case actionTypes.PRODUCT_LIST: {
-        //     let arr = [...state.productsList, action.payload];
-        //     return {
-        //         ...state,
-        //         productsList: arr,
-        //         showSetProduct: false
-        //     }
-        // }
-
+        case actionTypes.SET_PRODUCTS_LIST: {
+            return {
+                ...state,
+                productsList:  action.payload,
+            }
+        }
+        //מעדכן את רשימת החבילות
+        case actionTypes.SET_PACKAGES_LIST: {
+            return {
+                ...state,
+                packagesList:  action.payload,
+            }
+        }
         case actionTypes.DELETE_PRODUCT:
             let arr4 = state.productsList.
                 filter(p => p !== action.payload);
@@ -127,7 +130,7 @@ export const newAuctionReducer = (state = initialState, action) => {
                 organizationTxt: "",
                 organizationPhotos: [],
                 finalStepModalIsOpen: true,
-                terms:""
+                terms: ""
             }
     }
     return state;

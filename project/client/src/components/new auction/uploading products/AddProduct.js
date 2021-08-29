@@ -1,30 +1,37 @@
 import React, { useRef, useState, useEffect } from 'react';
-// import { addProduct, addProductToDb } from "./../../../store/actions/newAuction";
+import { addProduct, showAddProduct, setProductsList/*, addProductToDb*/ } from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
 
 import p from '../../../img/car.jpg';
 
 const AddProduct = (props) => {
 
-    useEffect(() => { }, [localStorage.getItem('showSetProductBtn')])
+    useEffect(() => {
+        props.showAddProduct(localStorage.getItem('showSetProductBtn'));
+        props.setProductsList(localStorage.getItem('prouctsList'));
+    }, [])
     const onChangeHandler = (event) => { setSelectedFile(event.target.files[0]); }
     const onClickHandler = () => {
         debugger;
         const data = new FormData()
         data.append('file', selectedFile);
         newProduct.img = data;
-        props.addProductToDb("6126723e8fdc3e3a90517719", newProduct);
+        //props.addProductToDb("6126723e8fdc3e3a90517719", newProduct);
+        //TODO: לשמור בלוקלסטורג'
     }
     let addProductToLS = () => {
         let arr = localStorage.getItem('prouctsList');
-        arr.push(newProduct)
+        arr.push(newProduct);
+        props.addProduct(newProduct);
+
         localStorage.setItem('showSetProductBtn', true);
+        props.showSetProduct(true);
     }
     const [selectedFile, setSelectedFile] = useState(null);
 
     let newProduct = { img: null, prodName: "", prodDescription: "", price: 0, includedInPackages: true };
 
-    return (localStorage.getItem('showSetPackageBtn') ? (
+    return (props.showSetProduct ? (
         <div className="field">
             <form>
                 <input placeholder="product name" type="text" onChange={(e) => newProduct.prodName = e.target.value} required={true} />
@@ -49,7 +56,8 @@ const AddProduct = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        //  showSetProduct: state.auction.showSetProduct
+        showSetProduct: state.auction.showSetProduct,
+        // arr: state.auction.productsList
     };
 }
-export default connect(mapStateToProps, { /*addProduct, addProductToDb */})(AddProduct);
+export default connect(mapStateToProps, { addProduct, showAddProduct, setProductsList/*, addProductToDb */ })(AddProduct);

@@ -12,9 +12,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
-import { setLastModal, savePricingInDb, saveProductsInDb, saveOrganizationDetailsInDb, saveAuctionDetailsInDb } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
+import { setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { Link } from 'react-router-dom'
 import { updateCurrentUser } from '../../store/actions/user'
+//בשביל הריענון נשמור גם בסטייט וגם ובלוכלסטורג'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,10 +48,16 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
-        localStorage.setItem("showSetProductBtn", true);
-        localStorage.setItem("productsList", []);
-        localStorage.setItem("showSetPackageBtn", true);
-        localStorage.setItem("packagesList", []);
+        props.updateCurrentUser(localStorage.getItem("currentUser"))
+        if (localStorage.getItem("showSetProductBtn")) localStorage.setItem("showSetProductBtn", true);
+        if (localStorage.getItem("productsList")) localStorage.setItem("productsList", []);
+        if (localStorage.getItem("showSetPackageBtn")) localStorage.setItem("showSetPackageBtn", true);
+        if (localStorage.getItem("packagesList")) localStorage.setItem("packagesList", []);
+
+        props.showAddProduct(localStorage.getItem("showSetProductBtn"));
+        props.showAddPackage(localStorage.getItem("showSetProductBtn"));
+        props.setProductsList(localStorage.getItem("productsList"));
+        props.setPackagesList(localStorage.getItem("packagesList"));
     }, []);
 
     const classes = useStyles();
@@ -63,18 +70,6 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
-
-        switch (activeStep) {
-            case 0:
-                return props.savePricingInDb(props.packagesList);
-            case 1:
-                return props.saveProductsInDb(props.productsList);
-            case 2:
-                return props.saveOrganizationDetailsInDb({ oName: props.oTxt, oTxt: props.txt, oPhotos: props.photos });
-            case 3:
-                return () => { props.saveAuctionDetailsInDb({ startDate: props.startDate, endDate: props.loteryDate, terms: props.terms }); props.setLastModal(true) }
-        }
-
 
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
@@ -90,8 +85,6 @@ const NewAuction = (props) => {
 
     const handleSkip = () => {
         if (!isStepOptional(activeStep)) {
-            // You probably want to guard against something like this,
-            // it should never occur unless someone's actively trying to break something.
             throw new Error("You can't skip a step that isn't optional.");
         }
 
@@ -104,7 +97,6 @@ const NewAuction = (props) => {
     };
 
     const handleReset = () => { setActiveStep(0); };
-    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
 
     return (<>
 
@@ -171,17 +163,17 @@ const NewAuction = (props) => {
 const mapStateToProps = (state) => {
     return {
         isOpen: state.auction.finalStepModalIsOpen,
-        oName: state.auction.organizationName,
-        oTxt: state.auction.organizationTxt,
-        oPhotos: state.auction.organizationPhotos,
-        productsList: state.auction.productsList,
-        packagesList: state.auction.packagesList,
-
-        startDate: state.auction.registrationStartDate,
-        endDate: state.auction.registrationEndDate,
-        loteryDate: state.auction.dateOfLottery,
-        terms: state.auction.terms
+        /*    oName: state.auction.organizationName,
+            oTxt: state.auction.organizationTxt,
+            oPhotos: state.auction.organizationPhotos,
+            productsList: state.auction.productsList,
+            packagesList: state.auction.packagesList,
+    
+            startDate: state.auction.registrationStartDate,
+            endDate: state.auction.registrationEndDate,
+            loteryDate: state.auction.dateOfLottery,
+            terms: state.auction.terms*/
     };
 }
-export default connect(mapStateToProps, { updateCurrentUser,setLastModal, savePricingInDb, saveProductsInDb, saveOrganizationDetailsInDb, saveAuctionDetailsInDb })(NewAuction);
+export default connect(mapStateToProps, { updateCurrentUser, setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

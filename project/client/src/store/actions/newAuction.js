@@ -61,6 +61,18 @@ export const setTerms = (date) => {
         payload: date
     }
 }
+export const setProductsList = (arr) => {
+    return {
+        type: actionTypes.SET_PRODUCTS_LIST,
+        payload: arr
+    }
+}
+export const setPackagesList = (arr) => {
+    return {
+        type: actionTypes.SET_PACKAGES_LIST,
+        payload: arr
+    }
+}
 //--------------------------------------------------------------
 //הניתובים לשרת לא נכונים צריך לכתוב אותם עפ"י מ שנכתוב בשרת
 
@@ -91,12 +103,7 @@ export const addProductToDb = (id, product) => {
 //     }
 // }
 
-// export const productList=(p)=>{
-//   return{
-//       type:actionTypes.PRODUCT_LIST,
-//       payload:p
-//   }
-// }
+
 export const addPackageToDb = (id, product) => {
     //סתם העתקתי
     return (dispatch) => {

@@ -1,15 +1,20 @@
 //רשימת חבילות רכישה קיימות
 import { useEffect } from "react";
 import { connect } from "react-redux";
+import { setPackagesList, } from '../../../store/actions/newAuction'
+
 const PackagesList = (props) => {
 
-    useEffect(() => { }, [localStorage.getItem("packagesList")]);
+    useEffect(() => { props.setPackagesList(localStorage.getItem("packagesList")); }, []);
 
-    let deletePackage = (p) => { localStorage.getItem("packagesList").remove(p); }
+    let deletePackage = (p) => {
+        localStorage.getItem("packagesList").remove(p);
+        props.setPackagesList(localStorage.getItem("packagesList"));
+    }
 
     return (<>
         <div className="ui divided selection list">
-            {localStorage.getItem("packagesList").map((item, index) => {
+            {props.packagesList.map((item, index) => {
                 return (<div key={index}>
                     <h2>qty: {item.qty}</h2>
                     <h2>discount: {item.discount}</h2>
@@ -22,7 +27,7 @@ const PackagesList = (props) => {
 }
 const myMapStateToProps = (state) => {
     return {
-        //packagesList: state.auction.packagesList
+        packagesList: state.auction.packagesList
     }
 }
-export default connect(myMapStateToProps, {})(PackagesList);
+export default connect(myMapStateToProps, { setPackagesList })(PackagesList);

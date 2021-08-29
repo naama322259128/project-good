@@ -3,21 +3,21 @@ import Product from './Product'
 import './Auction.scss';
 import { updateCurrentAuction } from '../../store/actions/currentAuction'
 import React, { useEffect } from 'react';
-
+import { getProducts } from '../../store/actions/currentAuction'
 const ProductList = (props) => {
-    useEffect(() => { props.updateCurrentAuction(localStorage.getItem("currentAuction")) }, [])
 
-    
-    return (<div> 
-        {props.arr.map((item) => {
+    useEffect(() => { props.updateCurrentAuction(localStorage.getItem("currentAuction")) }, [])
+    //TODO: איך הפונקציה תתרענן בעת הוספת מוצר למסד ?
+    return (<div>
+        {props.getProducts(localStorage.getItem("currentAuction")._id).map((item) => {
             return (<Product key={parseInt(item._id)} item={item} />)
-        })} 
+        })}
     </div>);
 }
 const mapStateToProps = (state) => {
     return {
-        arr: state.currentAuction.productsList,
+        //arr: state.currentAuction.productsList,
     }
 }
 
-export default connect(mapStateToProps, {updateCurrentAuction})(ProductList);
+export default connect(mapStateToProps, { updateCurrentAuction, getProducts })(ProductList);

@@ -28,7 +28,8 @@ export const SET_LOTERY_DATE="SET_LOTERY_DATE";
 export const SET_TERMS="SET_TERMS"
 export const SET_FINAL_STEP="SET_FINAL_STEP"//האם להציג את המודל של אישור סיום בניית המכירה
 export const RESET_NEW_AUCTION_STATE="RESET_NEW_AUCTION_STATE"//איפוס הסטייט של מכירה חדשה לאחר בניית מכירה
-export const PRODUCT_LIST="PRODUCT_LIST"// מעדכנת את רשימת המוצרים בסטייט 
+export const SET_PRODUCTS_LIST="SET_PRODUCTS_LIST"// מעדכנת את רשימת המוצרים בסטייט 
+export const SET_PACKAGES_LIST="SET_PACKAGES_LIST"// מעדכנת את רשימת החבילות בסטייט 
 
 
 /******************************************   AUCTION MANGER   ****************************************************/

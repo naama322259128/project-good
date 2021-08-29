@@ -120,9 +120,7 @@ const SignIn = (props) => {
               </InputAdornment>
             }
           /> </div>
-        <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => {
-          props.signIn(password, email)
-        }
+        <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => { props.signIn(password, email) }
         }>Login</Button>
 
 

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import './home.scss';
-import AuctionList from './AuctionList';
+import AuctionsList from './AuctionsList';
 import HomeFooter from './HomeFooter';
 import HomeHeader from './HomeHeader';
 import React, { useEffect } from "react";
@@ -11,7 +11,7 @@ const Home = (props) => {
 
   return (<>
     <HomeHeader />
-    <AuctionList />
+    <AuctionsList />
     <HomeFooter />
   </>
   );

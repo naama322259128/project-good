@@ -10,13 +10,22 @@ import EditProducts from './user/auction manager/EditProducts';
 import AuctionInformation from './new auction/AuctionInformation';
 import AddProduct from './new auction/uploading products/AddProduct';
 import React, { useEffect, useState } from "react";
-// import {updateCurrentAuctionToShow}from '../../store/actions/user'
+import { updateCurrentUser } from '../store/actions/user'
+import { connect } from "react-redux";
+
+// במקום לעשות בכל פונקציה רענון מהלוקל סטורג'
+//אפשר לעשות פונקציה שתופעל בעת רענון
+//ולהדים את האיוונט ליסנר הזה באפפ
+
+
 
 function App(props) {
-  //const [user, setUser] = useState("");
+
   useEffect(() => {
-    localStorage.setItem("currentUser", "");
-    //localStorage.setItem("login", false);
+    let x = localStorage.getItem("currentUser")
+    if (x == "" || x == undefined) localStorage.setItem("currentUser", "");
+    props.updateCurrentUser(localStorage.getItem("currentUser"));
+
   }, [])
 
   return (
@@ -32,13 +41,12 @@ function App(props) {
           <Route path={`/`}><Home /></Route>
         </Switch>
       </Router>
-
-      {/* <AuctionInformation/> */}
-
     </div >
   );
 
 }
 
 
-export default App;
+const mapStateToProps = state => {
+}
+export default connect(mapStateToProps, { updateCurrentUser })(App);

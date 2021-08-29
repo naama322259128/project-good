@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
-// import { setLogin } from '../../store/actions/home';
 import Login from '../user/Login';
 import './home.scss';
 import { Link } from 'react-router-dom';
@@ -9,6 +8,7 @@ import ProfileButton from '../user/ProfileButton';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { setLogin } from '../../store/actions/home'
+import { updateCurrentUser } from '../../store/actions/user'
 
 
 const HomeHeader = (props) => {
@@ -18,7 +18,10 @@ const HomeHeader = (props) => {
   };
   //TODO:
   //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
-  useEffect(() => { window.addEventListener("scroll", handleScroll) }, []);
+  useEffect(() => {
+    props.updateCurrentUser(localStorage.getItem("currentUser"));
+    window.addEventListener("scroll", handleScroll)
+  }, []);
 
   let handleScroll = () => {
     var small = document.getElementById("small_home_header");
@@ -42,7 +45,7 @@ const HomeHeader = (props) => {
         textColor="primary"
         centered
       >
-        {localStorage.getItem("currentUser") ? <ProfileButton /> : <Tab label="Login" onClick={() => { window.scrollTo(0, 0); props.setLogin(true) }} />}
+        {props.currentUser ? <ProfileButton /> : <Tab label="Login" onClick={() => { window.scrollTo(0, 0); props.setLogin(true) }} />}
         <Tab label="Home" />
 
       </Tabs>
@@ -51,7 +54,7 @@ const HomeHeader = (props) => {
     <header id="home_header">
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
 
-      {localStorage.getItem("currentUser") ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { props.setLogin(true) }}>Login</Button>}
+      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { props.setLogin(true) }}>Login</Button>}
       {props.loginIsOpen ? (<Login />) : null}
 
       <div id="home_text">
@@ -68,8 +71,8 @@ const HomeHeader = (props) => {
           <Button type="button" className="btn" id="btnMoreInfo">MORE INFO</Button>
         </Link>
 
-        <Link to={localStorage.getItem("currentUser") ? "/new_auction" : '#'}>
-          <Button onClick={localStorage.getItem("currentUser") ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
+        <Link to={props.currentUser ? "/new_auction" : '#'}>
+          <Button onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
             BUILD CHINESE AUCTION
           </Button>
         </Link>
@@ -89,4 +92,4 @@ const mapStateToProps = state => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { setLogin })(HomeHeader);
+export default connect(mapStateToProps, { setLogin,updateCurrentUser })(HomeHeader);

@@ -2,11 +2,12 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import './home.scss';
 import { setLogin } from '../../store/actions/home';
-import { useState } from "react";
+import { useEffect} from "react";
+import { updateCurrentUser } from '../../store/actions/user'
 
 
 const HomeFooter = (props) => {
-    
+    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")); }, []);
     return (
         <footer className="home_footer">
             <div id="logo_in_home_footer" ></div>
@@ -14,7 +15,7 @@ const HomeFooter = (props) => {
             <div id="menu_footer">
                 <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
                 <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
-                <Link onClick={localStorage.getItem("currentUser") ? null : () => { window.scrollTo(0, 0);props.setLogin(true) }} to={localStorage.getItem("currentUser") ? "/new_auction" : '#'}>
+                <Link onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
                     <p className="menu_footer_link">BUILDING</p>
                 </Link>
                 <Link to={"/about"}><p className="menu_footer_link">ABOUT</p></Link>
@@ -33,10 +34,10 @@ const HomeFooter = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        // currentUser: state.user.currentUser
+        currentUser: state.user.currentUser
     }
 }
 
-export default connect(mapStateToProps, {setLogin})(HomeFooter);
+export default connect(mapStateToProps, { setLogin,updateCurrentUser })(HomeFooter);
 
 

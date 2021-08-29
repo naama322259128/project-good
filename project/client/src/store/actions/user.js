@@ -11,20 +11,20 @@ export const addProductToCart = (product, count) => {
     if (index == -1) localStorage.getItem("prodactsInCart").push({ cnt: count, product: _id });
     else localStorage.getItem("prodactsInCart")[index].cnt += count;
 
-    /* return {
-         type: actionTypes.ADD_PRODUCT_TO_CART,
-         payload: { cnt: cnt, product: product }
-     }*/
+    return {
+        type: actionTypes.ADD_PRODUCT_TO_CART,
+        payload: { cnt: count, product: product }
+    }
 }
 //מחיקת מוצר מסל
 export const deleteProductFromCart = (_id) => {
 
     let arr = localStorage.getItem("prodactsInCart").filter(p => p.product._id !== _id);
     localStorage.setItem("prodactsInCart", arr);
-    /*return {
+    return {
         type: actionTypes.DELETE_PRODUCT_FROM_CART,
         payload: _id
-    }*/
+    }
 }
 
 export const setCnt = (_id, cnt) => {
@@ -33,10 +33,10 @@ export const setCnt = (_id, cnt) => {
     let arr = [...localStorage.getItem("prodactsInCart")];
     if (index != -1) arr[index].cnt = cnt;
 
-    /*return {
+    return {
         type: actionTypes.SET_CNT_PRODUCT_IN_CART,
         payload: { _id: _id, cnt: cnt }
-    }*/
+    }
 }
 
 export const updateCurrentUser = (user) => {

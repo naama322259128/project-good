@@ -7,7 +7,7 @@ export const setCurrentAuction = (auctionId) => {
     axios.get(`http://localhost:5000/auctions/${auctionId}`).then(succ => {
       console.log(succ.data);
       if (succ.status != 400)
-        dispatch(updateCurrentAuction(succ.data), localStorage.setItem('currentAuction', (succ.data)));
+        dispatch(updateCurrentAuction(succ.data), localStorage.setItem('currentAuction',succ.data));
     })
   }
 }
@@ -17,4 +17,7 @@ export const updateCurrentAuction = (auction) => {
     type: actionTypes.SET_CURRENT_AUCTION,
     payload: auction
   }
+}
+export const getProducts=(auction_id)=>{
+  //axios.
 }
