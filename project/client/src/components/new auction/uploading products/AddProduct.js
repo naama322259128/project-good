@@ -11,6 +11,7 @@ const AddProduct = (props) => {
     const onChangeHandler = (event) => {setSelectedFile(event.target.files[0]);}
     const onClickHandler = () => {
         const data = new FormData()
+        
         data.append('file', selectedFile);
         newProduct.img = data;
         props.addProductToDb("6126723e8fdc3e3a90517719", newProduct);

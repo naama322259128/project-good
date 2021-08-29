@@ -60,9 +60,6 @@ const addProduct = async (req, res) => {
 }
 
 
-
-
-
 const deleteAuction = async (req, res) => {
     let { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
