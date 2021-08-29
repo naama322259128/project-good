@@ -194,7 +194,7 @@ const SignUp = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user.currentUser
+        //currentUser: state.user.currentUser
     };
 }
 export default connect(mapStateToProps, { addUser })(SignUp);

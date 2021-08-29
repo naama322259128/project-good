@@ -38,8 +38,8 @@ export const updateUser = (user) => {
             console.log(user);
             console.log(succ.data);
             if (succ.status != 400) {
-                dispatch(updateCurrentUser(succ.data));
-
+                // dispatch(updateCurrentUser(succ.data));
+                dispatch(dispatch(localStorage.setItem('currentUser', succ.data)));
             }
 
         })
@@ -72,7 +72,9 @@ export const getOrderById = (order) => {
     }
 }
 
-
+export const signOut = () => {
+    localStorage.clear();
+}
 
 
 

@@ -16,7 +16,7 @@ const YourProfile = (props) => {
             <Route path={'/your_profile/edit_auction'}><EditAuction /></Route>
             <Route path={'/your_profile/statistics'}>< AuctionStatistics /></Route>
             <Route path={'/your_profile/results'}><AuctionResults/></Route>
-            <Route path={'/your_profile'}>  {props.currentUser.status === 'USER' ? (<UserTable />) : props.currentUser.status === 'AUCTION_MANAGER' ? (<AuctionManagerTable />) : (<SiteManagerTable />)}</Route>
+            <Route path={'/your_profile'}>  {localStorage.getItem("currentUser").status === 'USER' ? (<UserTable />) : localStorage.getItem("currentUser").status === 'AUCTION_MANAGER' ? (<AuctionManagerTable />) : (<SiteManagerTable />)}</Route>
         </Switch>
     </>
     );
@@ -24,7 +24,7 @@ const YourProfile = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user.currentUser
+        //currentUser: state.user.currentUser
     };
 }
 export default connect(mapStateToProps, {})(YourProfile);

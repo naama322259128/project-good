@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './User.scss';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
-import { setLogin } from '../../store/actions/home';
+// import { setLogin } from '../../store/actions/home';
 import { connect } from "react-redux";
 
 const useStyles = makeStyles({
@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 
 const Login = (props) => {
 
+  useEffect(() => { }, [localStorage.getItem("showLogin")])
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -38,19 +39,19 @@ const Login = (props) => {
   }
   return (
     <center>
-      <div className="glass_login" onClick={() => props.setLogin(false)} >
+      <div className="glass_login" onClick={() => localStorage.setItem("showLogin", false)} >
         <div className="modal-content_login" onClick={click}>
-    <Tabs
-      value={value}
-      onChange={handleChange}
-      indicatorColor="primary"
-      textColor="primary"
-      centered
-    >
-      <Tab label="SIGN IN"  id="btn_signin" onClick={signInShow}/>
-      <Tab label="SIGN UP" id="btn_signup" onClick={signUpShow}/>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="SIGN IN" id="btn_signin" onClick={signInShow} />
+            <Tab label="SIGN UP" id="btn_signup" onClick={signUpShow} />
 
-    </Tabs>
+          </Tabs>
           <div id="login_top" >
             {show}
           </div>
@@ -67,4 +68,4 @@ const mapStateToProps = (state) => {
 
   };
 }
-export default connect(mapStateToProps, { setLogin })(Login);
+export default connect(mapStateToProps, { /*setLogin*/ })(Login);

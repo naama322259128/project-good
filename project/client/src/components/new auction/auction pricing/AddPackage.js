@@ -1,8 +1,9 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
-import { addPackage } from '../../../store/actions/newAuction';
 
 const AddPackage = (props) => {
 
+    useEffect(() => { }, [localStorage.getItem('showSetPackageBtn')])
     let newPackage = { qty: "", discount: 0 };
     let checkQty = () => {
         let tmp = props.packagesList.filter(p => p.qty === newPackage.qty);
@@ -15,11 +16,12 @@ const AddPackage = (props) => {
         if (newPackage.discount < 2) document.getElementById("discountInput").style.borderColor = "red";
         else document.getElementById("discountInput").style.borderColor = "";
     }
-    let savePackageInLocalStorage = () => {
+    let addPackageToLS = () => {
         let arr = localStorage.getItem('packagesList');
         arr.push(newPackage)
+        localStorage.setItem('showSetPackageBtn', true);
     }
-    return (/*props*/localStorage.getItem('showSetPackage') ? (
+    return (localStorage.getItem('showSetPackageBtn') ? (
         <form >
             <div className="ui equal width form">
                 <div className="fields">
@@ -30,11 +32,10 @@ const AddPackage = (props) => {
                     <div className="field">
                         <label>Discount percentages</label>
                         <input id="discountInput" type="number" min="2" required={(newPackage.qty > 0)} onChange={(e) => { newPackage.discount = e.target.value; checkDiscount() }} />
-
                     </div>
                 </div>
             </div>
-            <button className="positive ui button" onClick={() => { savePackageInLocalStorage(newPackage); }}>Add</button>
+            <button className="positive ui button" onClick={() => { addPackageToLS(newPackage); }}>Add</button>
         </form>
     ) : null);
 }
@@ -44,7 +45,7 @@ const mapStateToProps = (state) => {
         //packagesList: state.auction.packagesList
     };
 }
-export default connect(mapStateToProps, { addPackage })(AddPackage);
+export default connect(mapStateToProps, {})(AddPackage);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable

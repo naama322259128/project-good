@@ -109,7 +109,7 @@ const AuctionManagerTable = (props) => {
     ];
 
     // TODO: sort by date
-    /*const rows = props.getAuctionsArray(props.currentUser).map((item) => {
+    /*const rows = props.getAuctionsArray(localStorage.getItem("currentUser")).map((item) => {
         return createData(item.name, item.registrationStartDate, item.lotteriesDate, item.status);
     });*/
 

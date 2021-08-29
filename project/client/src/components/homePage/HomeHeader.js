@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
-import { setLogin } from '../../store/actions/home';
+// import { setLogin } from '../../store/actions/home';
 import Login from '../user/Login';
 import './home.scss';
 import { Link } from 'react-router-dom';
@@ -46,7 +46,7 @@ const HomeHeader = (props) => {
         textColor="primary"
         centered
       >
-        {props.currentUser ? <ProfileButton /> : <Tab label="Login" onClick={() => { window.scrollTo(0, 0); props.setLogin(true); }} />}
+        {localStorage.getItem("currentUser") ? <ProfileButton /> : <Tab label="Login" onClick={() => { window.scrollTo(0, 0); localStorage.setItem("showLogin", true)  }} />}
         <Tab label="Home" />
 
       </Tabs>
@@ -55,8 +55,8 @@ const HomeHeader = (props) => {
     <header id="home_header">
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
 
-      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { props.setLogin(true); }}>Login</Button>}
-      {props.loginIsOpen == true ? (<Login />) : null}
+      {localStorage.getItem("currentUser") ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { localStorage.setItem("showLogin", true) }}>Login</Button>}
+      {    localStorage.getItem("showLogin") == true ? (<Login />) : null}
 
       <div id="home_text">
         <h3>Build your </h3>
@@ -72,8 +72,8 @@ const HomeHeader = (props) => {
           <Button type="button" className="btn" id="btnMoreInfo">MORE INFO</Button>
         </Link>
 
-        <Link to={props.currentUser ? "/new_auction" : '#'}>
-          <Button onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn"id="btnNewAuction">
+        <Link to={localStorage.getItem("currentUser")? "/new_auction" : '#'}>
+          <Button onClick={localStorage.getItem("currentUser") ? null : () => { window.scrollTo(0, 0); localStorage.setItem("showLogin", true)  }} type="button" className="btn"id="btnNewAuction">
             BUILD CHINESE AUCTION
           </Button>
         </Link>
@@ -89,8 +89,8 @@ const HomeHeader = (props) => {
 
 const mapStateToProps = state => {
   return {
-    loginIsOpen: state.user.loginIsOpen,
-    currentUser: state.user.currentUser
+    //loginIsOpen: state.user.loginIsOpen,
+    //currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { setLogin })(HomeHeader);
+export default connect(mapStateToProps, { /*setLogin*/ })(HomeHeader);

@@ -9,29 +9,30 @@ import UpdateDetails from './user/UpdateDetails';
 import EditProducts from './user/auction manager/EditProducts';
 import AuctionInformation from './new auction/AuctionInformation';
 import AddProduct from './new auction/uploading products/AddProduct';
-import React from "react";
+import React, { useEffect } from "react";
 
 function App(props) {
-
+  useEffect(() => {
+    localStorage.setItem("currentUser", null);
+  }, [])
   return (
     <div>
       <Router>
         <div>
-          <Switch>
-            <Route path={`/auction`}><Auction /></Route>
-            <Route path={`/home`}><Home /></Route>
-            <Route path={`/new_auction`}><NewAuction /></Route>
-            <Route path={`/about`}><About /></Route>
-            <Route path={`/your_profile`}><YourProfile /></Route>
-            <Route path={`/update_your_details`}><UpdateDetails /></Route>
-            <Route path={`/`}><Home /></Route>
-          </Switch>
+          {localStorage.getItem("currentUser") ? (
+            <Switch><Route path={`/auction`} ><Auction /></Route>
+              <Route path={`/home`}><Home /></Route>
+              <Route path={`/new_auction`}><NewAuction /></Route>
+              <Route path={`/about`}><About /></Route>
+              <Route path={`/your_profile`}><YourProfile /></Route>
+              <Route path={`/update_your_details`}><UpdateDetails /></Route></Switch>) :
+            <Route path={`/`}><Home /></Route>}
         </div>
       </Router>
 
       {/* <AuctionInformation/> */}
 
-    </div>
+    </div >
   );
 
 }

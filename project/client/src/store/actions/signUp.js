@@ -15,19 +15,19 @@ export const addUser = (user) => {
             console.log(user);
             console.log(succ.data);
             if (succ.status != 400) {
-                  
-                dispatch(setCurrentUser(succ.data),localStorage.setItem('currentUser', JSON.stringify(succ.data)));
+                dispatch(/*localStorage.clear();*/localStorage.setItem('currentUser', succ.data));
+                // dispatch(setCurrentUser(succ.data),localStorage.setItem('currentUser', JSON.stringify(succ.data)));
             }
-        
+
         })
     }
 }
 
-export const signOut=()=>{
-    return{
+/*export const signOut = () => {
+    return {
         type: actionTypes.SIGN_OUT
     }
-}
+}*/
 // export const deleteUser = (user) => {
 
 //     return (dispatch) => {
@@ -38,7 +38,7 @@ export const signOut=()=>{
 //                 dispatch(deleteCurrentUser(succ.data));
 
 //             }
-        
+
 //         })
 //     }
 

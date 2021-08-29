@@ -171,3 +171,13 @@ export const saveAuctionDetailsInDb = (obj, _id) => {
         })
     }
 }
+
+export const beManager = (_id) => {
+    return (dispatch) => {
+        axios.post(`http://localhost:5000/users/beManager/:${_id}`).then(succ => {
+            console.log(succ.data);
+            if (succ.status != 400)
+                dispatch(console.log(succ.data));
+        })
+    }
+}

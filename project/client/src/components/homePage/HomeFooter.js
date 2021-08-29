@@ -12,7 +12,7 @@ const HomeFooter = (props) => {
             <div id="menu_footer">
                 <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
                 <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
-                <Link onClick={props.currentUser ? null : () => {window.scrollTo(0,0);props.setLogin(true)}} to={props.currentUser ? "/new_auction" : '#'}>
+                <Link onClick={localStorage.getItem("currentUser") ? null : () => {window.scrollTo(0,0);localStorage.setItem("showLogin",true)}} to={localStorage.getItem("currentUser") ? "/new_auction" : '#'}>
                     <p className="menu_footer_link">BUILDING</p>
                 </Link>
                 <Link to={"/about"}><p className="menu_footer_link">ABOUT</p></Link>
@@ -31,10 +31,10 @@ const HomeFooter = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user.currentUser
+       // currentUser: state.user.currentUser
     }
 }
 
-export default connect(mapStateToProps, {setLogin})(HomeFooter);
+export default connect(mapStateToProps, {/*setLogin*/})(HomeFooter);
 
 

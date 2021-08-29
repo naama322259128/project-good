@@ -26,7 +26,7 @@ const isEmailExist = async (em) => {
 const addUser = async (req, res) => {
     let user = req.body;
     if (await isEmailExist(user.email) == true) {
-       console.log("This email is exist");
+        console.log("This email is exist");
         return res.send("This email is exist");
     }
     else {
@@ -85,13 +85,21 @@ const deleteUser = async (req, res) => {
 //בודקת האם משתמש קיים לפי סיסמא ומייל
 const isUserExist = async (req, res) => {
     let { password, email } = req.params;
-    let user = await User.findOne( { "password":password,"email":email});
+    let user = await User.findOne({ "password": password, "email": email });
     if (!user)
         return res.status(400).send("Incorrect details entered");
     return res.send(user);
 }
 
+const beManager = async (req, res) => {
+    let { _id } = req.params;
+    let doc = await User.findOneAndUpdate({ _id: _id }, { status: 'AUCTION_MANAGER' });
+    if (!doc)
+        return res.status(400).send("Incorrect details entered");
+    return res.send(doc);
+}
+
 module.exports = {
-    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist
+    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager
 
 }

@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-import { signOut } from "../../store/actions/signUp";
+import { signOut } from "../../store/actions/user";
 import { resetNewAuctionState } from '../../store/actions/newAuction';
 // import{setYourProfile} from '../../store/actions/signIn';
 
@@ -15,13 +15,6 @@ const ProfileButton = (props) => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-
-    const signOut = () => {
-        //if (window.confirm("Are you sure you want to leave?")) {
-        props.resetNewAuctionState();//אם היה באמצע לבנות מכירה, הנתונים שלה ימחקו
-        props.signOut(props.currentUser);
-        // }
-    }
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -65,7 +58,7 @@ const ProfileButton = (props) => {
             </Link>
 
             <Link to={'/home'}>
-                <MenuItem key={'Sign out'} onClick={() => { handleClose(); signOut(); }}>Sign out</MenuItem>
+                <MenuItem key={'Sign out'} onClick={() => { handleClose(); props.signOut(); }}>Sign out</MenuItem>
             </Link>
 
 
@@ -77,8 +70,8 @@ const ProfileButton = (props) => {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.user.currentUser
+       // currentUser: state.user.currentUser
 
     };
 }
-export default connect(mapStateToProps, { signOut, resetNewAuctionState/*,setYourProfile*/ })(ProfileButton);
+export default connect(mapStateToProps, { signOut, /*resetNewAuctionState*/ })(ProfileButton);
