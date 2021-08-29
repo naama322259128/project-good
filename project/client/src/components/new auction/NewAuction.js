@@ -14,6 +14,7 @@ import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 import { setLastModal, savePricingInDb, saveProductsInDb, saveOrganizationDetailsInDb, saveAuctionDetailsInDb } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { Link } from 'react-router-dom'
+import { updateCurrentUser } from '../../store/actions/user'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,7 +51,6 @@ const NewAuction = (props) => {
         localStorage.setItem("productsList", []);
         localStorage.setItem("showSetPackageBtn", true);
         localStorage.setItem("packagesList", []);
-        localStorage.setItem("showLastModal", true);
     }, []);
 
     const classes = useStyles();
@@ -104,6 +104,7 @@ const NewAuction = (props) => {
     };
 
     const handleReset = () => { setActiveStep(0); };
+    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
 
     return (<>
 
@@ -133,7 +134,7 @@ const NewAuction = (props) => {
             <div>
                 {activeStep === steps.length ? (
                     <div>
-                        <Typography className={classes.instructions}>{localStorage.getItem("showLastModal") ? <FinalStep /> : null}</Typography>
+                        <Typography className={classes.instructions}>{props.isOpen ? <FinalStep /> : null}</Typography>
                         <Button onClick={handleBack} className={classes.button}>Back</Button>
                         <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>
@@ -169,7 +170,7 @@ const NewAuction = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        //isOpen: state.auction.finalStepModalIsOpen,
+        isOpen: state.auction.finalStepModalIsOpen,
         oName: state.auction.organizationName,
         oTxt: state.auction.organizationTxt,
         oPhotos: state.auction.organizationPhotos,
@@ -182,5 +183,5 @@ const mapStateToProps = (state) => {
         terms: state.auction.terms
     };
 }
-export default connect(mapStateToProps, { setLastModal, savePricingInDb, saveProductsInDb, saveOrganizationDetailsInDb, saveAuctionDetailsInDb })(NewAuction);
+export default connect(mapStateToProps, { updateCurrentUser,setLastModal, savePricingInDb, saveProductsInDb, saveOrganizationDetailsInDb, saveAuctionDetailsInDb })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

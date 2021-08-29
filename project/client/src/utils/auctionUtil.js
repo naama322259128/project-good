@@ -7,7 +7,7 @@ export const createNewAuction = (auction) => {
           axios.post(`http://localhost:5000/auctions`,auction).then(succ => {
             console.log(succ.data);
             if (succ.status != 404)//אם הצליח ליצור את המכירה, ימחק את נתוניה מהסטייט
-                dispatch(actions.setLastModal(false),actions.resetNewAuctionState());
+                dispatch(actions.setLastModal(false),actions.resetNewAuctionState());//?
                 //ולהחזיר לדף הבית
         })
     }  

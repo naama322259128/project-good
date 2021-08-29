@@ -15,7 +15,7 @@ export const addUser = (user) => {
             console.log(user);
             console.log(succ.data);
             if (succ.status != 400) {
-                dispatch(/*localStorage.clear();*/localStorage.setItem('currentUser', succ.data));
+                dispatch(localStorage.clear(),setCurrentUser(succ.data),localStorage.setItem('currentUser', succ.data)/*,localStorage.setItem("login",true)*/);
                 // dispatch(setCurrentUser(succ.data),localStorage.setItem('currentUser', JSON.stringify(succ.data)));
             }
 
@@ -23,11 +23,7 @@ export const addUser = (user) => {
     }
 }
 
-/*export const signOut = () => {
-    return {
-        type: actionTypes.SIGN_OUT
-    }
-}*/
+
 // export const deleteUser = (user) => {
 
 //     return (dispatch) => {

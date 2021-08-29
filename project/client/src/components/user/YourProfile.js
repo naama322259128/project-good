@@ -1,6 +1,6 @@
 import './yourProfile.scss'
 import { connect } from 'react-redux';
-import React from 'react';
+import React,{useEffect} from 'react';
 import SiteManagerTable from './site manager/SiteManagerTable';
 import AuctionManagerTable from './auction manager/AuctionManagerTable';
 import UserTable from './UserTable';
@@ -9,8 +9,11 @@ import EditAuction from './auction manager/EditAuction'
 import EditProducts from './auction manager/EditProducts'
 import AuctionResults from './auction manager/AuctionResults'
 import AuctionStatistics from './auction manager/AuctionStatistics'
+import { updateCurrentUser } from '../../store/actions/user'
 
 const YourProfile = (props) => {
+    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
+
     return (<>
         <Switch>
             <Route path={'/your_profile/edit_auction'}><EditAuction /></Route>
@@ -27,4 +30,4 @@ const mapStateToProps = (state) => {
         //currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, {})(YourProfile);
+export default connect(mapStateToProps, {updateCurrentUser})(YourProfile);

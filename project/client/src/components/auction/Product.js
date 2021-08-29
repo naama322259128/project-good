@@ -1,4 +1,3 @@
-import React from 'react'
 import './Auction.scss';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 import p from '../../img/car.jpg';
@@ -12,6 +11,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
 import { addProductToCart } from '../../store/actions/user'
+import React,{useEffect} from 'react';
+import { updateCurrentAuction } from '../../store/actions/currentAuction'
 
 
 const useStyles = makeStyles({
@@ -31,6 +32,7 @@ const Product = (props) => {
   let description = props.item.description;
   let name = props.item.name;
   let price = props.item.prices;
+  useEffect(() => { props.updateCurrentAuction(localStorage.getItem("currentAuction")) }, [])
 
   return (
     <Modal
@@ -72,4 +74,4 @@ const Product = (props) => {
 }
 
 
-export default connect(null, { addProductToCart })(Product);
+export default connect(null, { addProductToCart ,updateCurrentAuction})(Product);

@@ -1,19 +1,23 @@
 import { connect } from "react-redux";
-import ProductList from './ProductList'
+import ProductList from './ProductList';
+import React, { useEffect } from 'react';
 import Cart from "./Cart";
-import { Link, Route, useRouteMatch, Switch, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Clock from "./Clock";
 import './Auction.scss';
+import { updateCurrentAuction } from '../../store/actions/currentAuction'
 
 const CurrentAuction = (props) => {
-    const { url, path } = useRouteMatch();
+    useEffect(() => { 
+    localStorage.setItem("prodactsInCart",[]);
+    props.updateCurrentAuction(localStorage.getItem("currentAuction")) }, [])
 
     return (<>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <Link to={`/auction/cart`}><h1>Cart</h1></Link>
         {/* כפתור שמעביר לצפיה בסל */}
         <Clock />
@@ -26,5 +30,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {})(CurrentAuction);
+export default connect(mapStateToProps, { updateCurrentAuction })(CurrentAuction);
 

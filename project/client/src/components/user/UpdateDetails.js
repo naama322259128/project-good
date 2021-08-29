@@ -1,6 +1,6 @@
 import './yourProfile.scss'
 import { connect } from 'react-redux';
-import React from 'react';
+import React,{useEffect} from 'react';
 import { updateUser } from '../../store/actions/user';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
+import { updateCurrentUser } from '../../store/actions/user'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UpdateDetails = (props) => {
+    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
+
     const classes = useStyles();
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -216,4 +219,4 @@ const mapStateToProps = (state) => {
         //currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, { updateUser })(UpdateDetails);
+export default connect(mapStateToProps, {updateCurrentUser, updateUser })(UpdateDetails);

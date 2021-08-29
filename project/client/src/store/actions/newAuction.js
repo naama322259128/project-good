@@ -1,12 +1,7 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 
-export const setLocalStorage = (item, value) => {
-    localStorage.setItem(item, value);
-}
-export const getLocalStorage = (item) => {
-    return localStorage.getItem(item);
-}
+
 export const showAddPackage = () => {
     return {
         type: actionTypes.SHOW_ADD_PACKAGE

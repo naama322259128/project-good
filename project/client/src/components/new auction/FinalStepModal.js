@@ -45,10 +45,8 @@ const FinalStep = (props) => {
         localStorage.removeItem("terms");
         localStorage.removeItem("showSetProductBtn");
         localStorage.removeItem("showSetPackageBtn");
-        localStorage.removeItem("showLastModal");
 
     }
-    useEffect(() => { }, [localStorage.getItem("showLastModal")])
     /*let newAuction = {
         //לשנות את הסטטוס למנהל
         name: props.organizationName,
@@ -66,8 +64,8 @@ const FinalStep = (props) => {
         <Dialog
             fullScreen={fullScreen}
             open={true}
-            onClick={() => localStorage.setItem("showLastModal", false)}
-            onClose={() => localStorage.setItem("showLastModal", false)}
+            onClick={() => props.setLastModal(false)}
+            onClose={() => props.setLastModal(false)}
             aria-labelledby="responsive-dialog-title"
         >
             <DialogTitle id="responsive-dialog-title">{"Ok"}</DialogTitle>
@@ -77,10 +75,10 @@ const FinalStep = (props) => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button variant="contained" size="medium" onClick={localStorage.setItem("showLastModal", false)} color="primary">
+                <Button variant="contained" size="medium" onClick={props.setLastModal(false)} color="primary">
                     Cancle
                 </Button>
-                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { addNewAuctionToDB();/*props.createNewAuction(newAuction);*/localStorage.setItem("showLastModal", false) }} color="primary">
+                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { addNewAuctionToDB();/*props.createNewAuction(newAuction);*/props.setLastModal(true) }} color="primary">
                     Ok
                 </Button></Link>
             </DialogActions>
@@ -99,7 +97,6 @@ const mapStateToProps = (state) => {
         organizationName: state.auction.organizationName,//שם ארגון
         organizationPhotos: state.auction.organizationPhotos,//תמונות הארגון*/
         currentUser: state.user.currentUser,
-        //isShow: state.auction.finalStepModalIsOpen
     };
 }
 

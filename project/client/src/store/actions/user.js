@@ -1,26 +1,42 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
+import { setCurrentUser } from './signUp'
 
 //הוספת מוצר לסל
-export const addProductToCart = (product, cnt) => {
-    return {
-        type: actionTypes.ADD_PRODUCT_TO_CART,
-        payload: { cnt: cnt, product: product }
-    }
+export const addProductToCart = (product, count) => {
+
+    let _id = product._id;
+
+    let index = localStorage.getItem("prodactsInCart").findIndex(item => item.product._id == _id);
+    if (index == -1) localStorage.getItem("prodactsInCart").push({ cnt: count, product: _id });
+    else localStorage.getItem("prodactsInCart")[index].cnt += count;
+
+    /* return {
+         type: actionTypes.ADD_PRODUCT_TO_CART,
+         payload: { cnt: cnt, product: product }
+     }*/
 }
 //מחיקת מוצר מסל
 export const deleteProductFromCart = (_id) => {
-    return {
+
+    let arr = localStorage.getItem("prodactsInCart").filter(p => p.product._id !== _id);
+    localStorage.setItem("prodactsInCart", arr);
+    /*return {
         type: actionTypes.DELETE_PRODUCT_FROM_CART,
         payload: _id
-    }
+    }*/
 }
 
 export const setCnt = (_id, cnt) => {
-    return {
+
+    let index = localStorage.getItem("prodactsInCart").findIndex(item => item.product._id == _id);
+    let arr = [...localStorage.getItem("prodactsInCart")];
+    if (index != -1) arr[index].cnt = cnt;
+
+    /*return {
         type: actionTypes.SET_CNT_PRODUCT_IN_CART,
         payload: { _id: _id, cnt: cnt }
-    }
+    }*/
 }
 
 export const updateCurrentUser = (user) => {
@@ -39,7 +55,7 @@ export const updateUser = (user) => {
             console.log(succ.data);
             if (succ.status != 400) {
                 // dispatch(updateCurrentUser(succ.data));
-                dispatch(dispatch(localStorage.setItem('currentUser', succ.data)));
+                dispatch(dispatch(setCurrentUser(succ.data), localStorage.setItem('currentUser', succ.data)));
             }
 
         })
@@ -74,6 +90,9 @@ export const getOrderById = (order) => {
 
 export const signOut = () => {
     localStorage.clear();
+    return {
+        type: actionTypes.SIGN_OUT
+    }
 }
 
 

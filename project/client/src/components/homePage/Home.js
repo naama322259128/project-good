@@ -4,16 +4,15 @@ import AuctionList from './AuctionList';
 import HomeFooter from './HomeFooter';
 import HomeHeader from './HomeHeader';
 import React, { useEffect } from "react";
+import { updateCurrentUser } from '../../store/actions/user'
 
 const Home = (props) => {
-  useEffect(() => { localStorage.setItem("showLogin", false); }, [])
+  useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
+
   return (<>
     <HomeHeader />
     <AuctionList />
     <HomeFooter />
-
-
-
   </>
   );
 }
@@ -21,4 +20,4 @@ const mapStateToProps = state => {
   return {
   };
 }
-export default connect(mapStateToProps, {})(Home);
+export default connect(mapStateToProps, {updateCurrentUser})(Home);
