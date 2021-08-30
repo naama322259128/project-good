@@ -4,11 +4,13 @@ import AuctionsList from './AuctionsList';
 import HomeFooter from './HomeFooter';
 import HomeHeader from './HomeHeader';
 import React, { useEffect } from "react";
-import { updateCurrentUser } from '../../store/actions/user'
+import { updateUserState,setItemsInLocalStorage } from '../../store/actions/user'
 
 const Home = (props) => {
-  useEffect(() => { props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser"))) }, [])
-
+  useEffect(() => {
+    window.addEventListener('storage', props.updateUserState);
+    props.setItemsInLocalStorage();
+  }, [])
   return (<>
     <HomeHeader />
     <AuctionsList />
@@ -20,4 +22,4 @@ const mapStateToProps = state => {
   return {
   };
 }
-export default connect(mapStateToProps, {updateCurrentUser})(Home);
+export default connect(mapStateToProps, {updateUserState,setItemsInLocalStorage})(Home);

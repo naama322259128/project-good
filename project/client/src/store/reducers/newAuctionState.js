@@ -4,7 +4,6 @@ const initialState = {
     productsList: [],//רשימ מוצרים
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
     showSetProduct: true,//האם להציג את קומפוננטת  AddProduct
-    regulationsFile: null,//קובץ תקנון
     dateOfLottery: null,//תאריך ביצוע ההגרלות
     registrationEndDate: null,//תאריך סיום ההרשמה
     registrationStartDate: null,//תאריך תחילת ההרשמה
@@ -92,14 +91,14 @@ export const newAuctionReducer = (state = initialState, action) => {
         case actionTypes.SET_PRODUCTS_LIST: {
             return {
                 ...state,
-                productsList:  action.payload,
+                productsList: action.payload,
             }
         }
         //מעדכן את רשימת החבילות
         case actionTypes.SET_PACKAGES_LIST: {
             return {
                 ...state,
-                packagesList:  action.payload,
+                packagesList: action.payload,
             }
         }
         case actionTypes.DELETE_PRODUCT:
@@ -114,6 +113,21 @@ export const newAuctionReducer = (state = initialState, action) => {
                 ...state,
                 finalStepModalIsOpen: action.payload
             }
+        case actionTypes.UPDATE_NEW_AUCTION_STATE:
+            return {
+                ...state,
+                packagesList: action.payload.packagesList,
+                productsList: action.payload.productsList,
+                showSetPackage: action.payload.showAddPackage,
+                showSetProduct: action.payload.showAddProduct,
+                dateOfLottery: action.payload.dateOfLotery,
+                registrationEndDate: action.payload.dateOfEnd,
+                registrationStartDate: action.payload.dateOfStart,
+                organizationName: action.payload.organizationName,
+                organizationTxt: action.payload.organizationText,
+                organizationPhotos: action.payload.organizationPhotos,
+                terms: action.payload.terms,
+            }
         case actionTypes.RESET_NEW_AUCTION_STATE:
             //איפוס הסטייט לאחר בניית מכירה
             return {
@@ -123,7 +137,6 @@ export const newAuctionReducer = (state = initialState, action) => {
                 //showSetPrice: false,
                 showSetPackage: false,
                 showSetProduct: true,
-                regulationsFile: null,
                 dateOfLottery: null,
                 registrationEndDate: null,
                 organizationName: "",

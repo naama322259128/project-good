@@ -4,7 +4,7 @@ import { setCurrentAuction } from '../../store/actions/currentAuction'
 import { Link } from 'react-router-dom';
 import './home.scss';
 import { setLogin } from "../../store/actions/home";
-import { getAuctionsList } from "../../utils/auctionUtil";
+import { getAuctionsList } from "../../utils/auctionUtils";
 import React, { useEffect, useState } from "react";
 import { updateCurrentUser } from '../../store/actions/user'
 

@@ -4,7 +4,6 @@ import { setCurrentUser } from './signUp'
 
 //הוספת מוצר לסל
 export const addProductToCart = (product, count) => {
-
     let _id = product._id;
     let arr = JSON.parse(localStorage.getItem("prodactsInCart"));
     let index = arr.findIndex(item => item.product._id == _id);
@@ -49,7 +48,6 @@ export const updateCurrentUser = (user) => {
 
 export const updateUser = (user) => {
     console.log(user);
-
     return (dispatch) => {
         axios.put(`http://localhost:5000/users/${user._id}`, user).then(succ => {
             console.log(user);
@@ -61,10 +59,7 @@ export const updateUser = (user) => {
 
         })
     }
-
 }
-
-
 
 //מראה את הטבלה ההזמנות של משתמש קיים 
 //של משתמש קיים ומחזירה את ההזמנות של אותו משתמש _id מקבלת  
@@ -96,5 +91,27 @@ export const signOut = () => {
     }
 }
 
+export const updateShoppingCart = (arr) => {
+    return {
+        type: actionTypes.UPDATE_SHOPPING_CART,
+        payload: arr
+    }
+}
 
+export const updateUserState = () => {
+    //עדכון הסטייט לפי הנתונים שבלוקלסטורג'
+    updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+    return {
+        type: actionTypes.UPDATE_USER_STATE,
+        payload: JSON.parse(localStorage.getItem("prodactsInCart"))
+    };
+}
 
+export const setItemsInLocalStorage = () => {
+    if (localStorage.getItem("currentUser") === null) {
+        localStorage.setItem("currentUser", "");
+        localStorage.setItem("prodactsInCart", JSON.stringify([]));
+
+    } return {};
+
+}

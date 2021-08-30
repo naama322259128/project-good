@@ -1,6 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
-
+import { updateCurrentUser } from './user'
 //מביא את כל המכירות של המנהל הזה
 export const getAuctionsArray = (user) => {
     //let manager_id='611c2f2e18f13934fc07bc27';
@@ -43,7 +43,6 @@ export const setSelectedAuctionToOptions = (_id) => {
         payload: _id
     }
 }
-
 export const deleteAuction = (_id) => {
     //TODO
     alert("deleted!!");
@@ -55,7 +54,6 @@ export const deleteAuction = (_id) => {
         payload: false
     }
 }
-
 export const updateAuction = (_id, auction) => {
     //TODO
     alert("updated!!");
@@ -86,7 +84,6 @@ export const approvalAuction = (a_id, status) => {
          })
      }*/
 }
-
 //האם ההגרלות מאושרות
 export const isAuctionApproved = (_id) => {
     return (dispatch) => {
@@ -96,7 +93,6 @@ export const isAuctionApproved = (_id) => {
         })
     }
 }
-
 //האם ההגרלות התבצעו
 export const getAuctionIsDone = (_id) => {
     return (dispatch) => {
@@ -105,4 +101,20 @@ export const getAuctionIsDone = (_id) => {
             //if (succ.status != 400) dispatch();
         })
     }
+}
+export const updateAuctionManagerState = () => {
+    //TODO: אפשר?
+    updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+    return {
+        type: actionTypes.UPDATE_AUCTION_MANAGER_STATE,
+        payload: JSON.parse(localStorage.getItem("selected_auction_to_options"))
+    };
+}
+
+export const setItemsInLocalStorage = () => {
+    if (localStorage.getItem("selected_auction_to_options") === null) {
+        localStorage.setItem("selected_auction_to_options", "");
+    }
+    return {};
+
 }

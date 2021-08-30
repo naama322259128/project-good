@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { beManager, setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
-import { createNewAuction } from "../../utils/auctionUtil"; //שמירת כל הנתונים במסד
+import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
 import { Link } from 'react-router-dom'
 
 const FinalStep = (props) => {

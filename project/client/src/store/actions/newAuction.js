@@ -1,10 +1,12 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
+import { updateCurrentUser } from './user'
 
 
-export const showAddPackage = () => {
+export const showAddPackage = (b) => {
     return {
-        type: actionTypes.SHOW_ADD_PACKAGE
+        type: actionTypes.SHOW_ADD_PACKAGE,
+        payload: b
     }
 }
 export const addPackage = (p) => {
@@ -182,4 +184,39 @@ export const beManager = (_id) => {
                 dispatch(console.log(succ.data));
         })
     }
+}
+
+
+export const updateNewAuctioinState = () => {
+    updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+    let obj =
+    {
+        showAddPackage: localStorage.getItem("showSetPackageBtn"),
+        showAddProduct: localStorage.getItem("showSetProductBtn"),
+        organizationName: JSON.parse(localStorage.getItem("organizationName")),
+        organizationText: JSON.parse(localStorage.getItem("organizationText")),
+        organizationPhotos: JSON.parse(localStorage.getItem("organizationPhotos")),
+        dateOfStart: JSON.parse(localStorage.getItem("DateOfStart")),
+        dateOfEnd: JSON.parse(localStorage.getItem("DateOfEnd")),
+        dateOfLotery: JSON.parse(localStorage.getItem("DateOfLotery")),
+        terms: JSON.parse(localStorage.getItem("terms")),
+        productsList: JSON.parse(localStorage.getItem("productsList")),
+        packagesList: JSON.parse(localStorage.getItem("packagesList"))
+    }
+    return {
+        type: actionTypes.UPDATE_NEW_AUCTION_STATE,
+        payload: obj
+    }
+}
+
+
+export const setItemsInLocalStorage = () => {
+    if (localStorage.getItem("showSetProductBtn") === null) {
+        localStorage.setItem("showSetProductBtn", true);
+        localStorage.setItem("productsList", JSON.stringify([]));
+        localStorage.setItem("showSetPackageBtn", true);
+        localStorage.setItem("packagesList", JSON.stringify([]));
+    }
+    return {};
+
 }

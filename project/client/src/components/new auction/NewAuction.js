@@ -14,7 +14,7 @@ import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 import { setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { Link } from 'react-router-dom'
-import { updateCurrentUser } from '../../store/actions/user'
+import { updateNewAuctioinState,setItemsInLocalStorage } from '../../store/actions/newAuction'
 //בשביל הריענון נשמור גם בסטייט וגם ובלוכלסטורג'
 
 const useStyles = makeStyles((theme) => ({
@@ -48,17 +48,9 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
-        props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")))
-        if (localStorage.getItem("showSetProductBtn")) localStorage.setItem("showSetProductBtn", true);
-        if (localStorage.getItem("productsList")) localStorage.setItem("productsList", JSON.stringify([]));
-        if (localStorage.getItem("showSetPackageBtn")) localStorage.setItem("showSetPackageBtn", true);
-        if (localStorage.getItem("packagesList")) localStorage.setItem("packagesList",JSON.stringify( []));
-
-        props.showAddProduct(JSON.parse(localStorage.getItem("showSetProductBtn")));
-        props.showAddPackage(JSON.parse(localStorage.getItem("showSetProductBtn")));
-        props.setProductsList(JSON.parse(localStorage.getItem("productsList")));
-        props.setPackagesList(JSON.parse(localStorage.getItem("packagesList")));
-    }, []);
+        window.addEventListener('storage', props.updateNewAuctioinState);
+        props.setItemsInLocalStorage();
+    }, [])
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -175,5 +167,5 @@ const mapStateToProps = (state) => {
             terms: state.auction.terms*/
     };
 }
-export default connect(mapStateToProps, { updateCurrentUser, setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList })(NewAuction);
+export default connect(mapStateToProps, { updateNewAuctioinState,setItemsInLocalStorage , setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

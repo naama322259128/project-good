@@ -42,6 +42,13 @@ export const auctionManagerReducer = (state = initialState, action) => {
                 selected_auction_to_options: action.payload
             }
         }
+        case actionTypes.UPDATE_AUCTION_MANAGER_STATE: {
+            return {
+                //זה בנפרד כי בטח נוסיף עוד דברים לעדכון
+                ...state,
+                selected_auction_to_options: action.payload
+            }
+        } 
     }
 
     return state;
