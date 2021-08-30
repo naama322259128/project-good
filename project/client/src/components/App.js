@@ -12,10 +12,11 @@ import PackagesList from './new auction/auction pricing/PackagesList';
 import { updateUserState, setItemsInLocalStorage } from '../store/actions/user'
 function App(props) {
   useEffect(() => {
-    window.addEventListener('storage', props.updateUserState);
-    window.location.addEventListener('reload', props.updateUserState);
+    window.addEventListener('storage', props.updateUserState);//מעדכנת את הסטייט מתי שינוי בסטורג
+    window.location.addEventListener('reload', props.updateUserState);//מתי שיהיה טעינה בדפדפן אז נעדכן את הסטטי
     props.setItemsInLocalStorage();
   }, [])
+
   //להוסיף אדד-איונט-ליסנר לרענון הדפדפן
   return (
     <div>
