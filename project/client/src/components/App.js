@@ -9,14 +9,14 @@ import UpdateDetails from './user/UpdateDetails';
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PackagesList from './new auction/auction pricing/PackagesList';
-import { updateUserState, setItemsInLocalStorage } from '../store/actions/user'
+import { updateUserState } from '../store/actions/user'
+import { setUserItemsInLS } from '../utils/userUtils'
 function App(props) {
   useEffect(() => {
     window.addEventListener('storage', props.updateUserState);
-    window.location.addEventListener('reload', props.updateUserState);
-    props.setItemsInLocalStorage();
+    window.addEventListener('reload', props.updateUserState);
+    props.setUserItemsInLS();
   }, [])
-  //להוסיף אדד-איונט-ליסנר לרענון הדפדפן
   return (
     <div>
       <Router>
@@ -39,4 +39,4 @@ function App(props) {
 
 const mapStateToProps = state => {
 }
-export default connect(mapStateToProps, { setItemsInLocalStorage, updateUserState })(App);
+export default connect(mapStateToProps, { setUserItemsInLS, updateUserState })(App);

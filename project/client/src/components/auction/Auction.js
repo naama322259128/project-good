@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { Link, Route, useRouteMatch, Switch } from 'react-router-dom'
-import { setItemsInLocalStorage, updateCurrentAuctionState } from '../../store/actions/currentAuction'
+import {  updateCurrentAuctionState } from '../../store/actions/currentAuction'
+import {setCurrentAuctionItemsInLS}from '../../utils/auctionUtils'
 import AuctionsList from '../homePage/AuctionsList';
 import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
@@ -10,8 +11,8 @@ const Auction = (props) => {
     const { url, path } = useRouteMatch();
     useEffect(() => {
         window.addEventListener('storage', props.updateCurrentAuctionState);
-        window.location.addEventListener('reload', props.updateCurrentAuctionState);
-        props.setItemsInLocalStorage();
+        window.addEventListener('reload', props.updateCurrentAuctionState);
+        props.setCurrentAuctionItemsInLS();
     }, [])
     return (<div>
 
@@ -40,4 +41,4 @@ const Auction = (props) => {
 }
 const mapStateToProps = state => {
 }
-export default connect(mapStateToProps, {  setItemsInLocalStorage, updateCurrentAuctionState })(Auction);
+export default connect(mapStateToProps, {  setCurrentAuctionItemsInLS, updateCurrentAuctionState })(Auction);

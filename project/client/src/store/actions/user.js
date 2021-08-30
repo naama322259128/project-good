@@ -107,11 +107,3 @@ export const updateUserState = () => {
     };
 }
 
-export const setItemsInLocalStorage = () => {
-    if (localStorage.getItem("currentUser") === null) {
-        localStorage.setItem("currentUser", "");
-        localStorage.setItem("prodactsInCart", JSON.stringify([]));
-
-    } return {};
-
-}

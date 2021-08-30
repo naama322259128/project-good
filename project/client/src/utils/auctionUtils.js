@@ -17,3 +17,8 @@ export const getAuctionsList = () => {
   return axios.get(`http://localhost:5000/auctions`)
 }
 
+export const setCurrentAuctionItemsInLS = () => {
+  if (localStorage.getItem("currentAuction") === null) {
+    localStorage.setItem("currentAuction", "");
+  }
+}

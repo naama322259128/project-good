@@ -209,14 +209,3 @@ export const updateNewAuctioinState = () => {
     }
 }
 
-
-export const setItemsInLocalStorage = () => {
-    if (localStorage.getItem("showSetProductBtn") === null) {
-        localStorage.setItem("showSetProductBtn", true);
-        localStorage.setItem("productsList", JSON.stringify([]));
-        localStorage.setItem("showSetPackageBtn", true);
-        localStorage.setItem("packagesList", JSON.stringify([]));
-    }
-    return {};
-
-}
