@@ -10,11 +10,3 @@ export const updateSiteManagerState = () => {
         payload: ""
     }
 }
-
-export const setItemsInLocalStorage = () => {
-    /* if (localStorage.getItem("") === null) {
-         localStorage.setItem("", "");
-     }*/
-    return {};
-
-}

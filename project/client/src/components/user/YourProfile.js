@@ -4,32 +4,32 @@ import React, { useEffect } from 'react';
 import SiteManagerTable from './site manager/SiteManagerTable';
 import AuctionManagerTable from './auction manager/AuctionManagerTable';
 import UserTable from './UserTable';
-import { BrowserRouter as Router, Link, useRouteMatch, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router,  Route, Switch } from 'react-router-dom'
 import EditAuction from './auction manager/EditAuction'
 import EditProducts from './auction manager/EditProducts'
 import AuctionResults from './auction manager/AuctionResults'
 import AuctionStatistics from './auction manager/AuctionStatistics'
-import { updateUserState, setItemsInLocalStorage as set1 } from '../../store/actions/user'
-import { updateSiteManagerState, setItemsInLocalStorage as set2 } from '../../store/actions/siteManager'
-import { updateAuctionManagerState, setItemsInLocalStorage as set3 } from '../../store/actions/auctionManager'
-
+import { setUserItemsInLS, setAuctionManagerItemsInLS, setSiteManagerItemsInLS } from '../../utils/userUtils'
+import { updateUserState } from '../../store/actions/user'
+import { updateSiteManagerState } from '../../store/actions/siteManager'
+import { updateAuctionManagerState } from '../../store/actions/auctionManager'
 const YourProfile = (props) => {
     useEffect(() => {
         props.updateUserState();
         let s = props.currentUser.status;
         if (s === 'SITE_MANAGER') {
             window.addEventListener('storage', props.updateSiteManagerState);
-            window.location.addEventListener('reload', props.updateSiteManagerState);
-            props.set2();
+            window.addEventListener('reload', props.updateSiteManagerState);
+            props.setSiteManagerItemsInLS();
         } else if (s === 'AUCTION_MANAGER') {
             window.addEventListener('storage', props.updateAuctionManagerState);
-            window.location.addEventListener('reload', props.updateAuctionManagerState);
-            props.set3();
+            window.addEventListener('reload', props.updateAuctionManagerState);
+            props.setAuctionManagerItemsInLS();
 
         } else {
             window.addEventListener('storage', props.updateUserState);
-            window.location.addEventListener('reload', props.updateUserState);
-            props.set1();
+            window.addEventListener('reload', props.updateUserState);
+            props.setUserItemsInLS();
         }
     }, [])
     return (<>
@@ -48,4 +48,4 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, { updateUserState, updateSiteManagerState, updateAuctionManagerState, set1, set2, set3, })(YourProfile);
+export default connect(mapStateToProps, { updateUserState, updateSiteManagerState, updateAuctionManagerState, setUserItemsInLS, setAuctionManagerItemsInLS, setSiteManagerItemsInLS })(YourProfile);

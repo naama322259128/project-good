@@ -28,10 +28,3 @@ export const updateCurrentAuctionState = () => {
     payload: JSON.parse(localStorage.getItem("currentAuction"))
   }
 }
-export const setItemsInLocalStorage = () => {
-  if (localStorage.getItem("currentAuction") === null) {
-    localStorage.setItem("currentAuction", "");
-  }
-  return {};
-
-}

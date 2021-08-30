@@ -9,8 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
-import { updateUserState, setItemsInLocalStorage, updateUser } from '../../store/actions/user'
-
+import { updateUserState, updateUser } from '../../store/actions/user'
+import {setUserItemsInLS}from '../../utils/userUtils'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -53,8 +53,8 @@ const UpdateDetails = (props) => {
 
     useEffect(() => {
         window.addEventListener('storage', props.updateUserState);
-        window.location.addEventListener('reload', props.updateUserState);
-        props.setItemsInLocalStorage();
+        window.addEventListener('reload', props.updateUserState);
+        props.setUserItemsInLS();
     }, [])
 
     const classes = useStyles();
@@ -223,4 +223,4 @@ const mapStateToProps = (state) => {
         //currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, { updateUser, updateUserState, setItemsInLocalStorage })(UpdateDetails);
+export default connect(mapStateToProps, { updateUser, updateUserState, setUserItemsInLS })(UpdateDetails);

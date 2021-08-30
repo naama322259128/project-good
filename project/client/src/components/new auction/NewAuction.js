@@ -14,9 +14,8 @@ import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 import { setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { Link } from 'react-router-dom'
-import { updateNewAuctioinState,setItemsInLocalStorage } from '../../store/actions/newAuction'
-//בשביל הריענון נשמור גם בסטייט וגם ובלוכלסטורג'
-
+import { updateNewAuctioinState } from '../../store/actions/newAuction'
+import {setNewAuctionItemsInLS}from '../../utils/newAuctionUtils'
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -49,8 +48,8 @@ const NewAuction = (props) => {
 
     useEffect(() => {
         window.addEventListener('storage', props.updateNewAuctioinState);
-        window.location.addEventListener('reload', props.updateNewAuctioinState);
-        props.setItemsInLocalStorage();
+        window.addEventListener('reload', props.updateNewAuctioinState);
+        props.setNewAuctionItemsInLS();
     }, [])
 
     const classes = useStyles();
@@ -168,5 +167,5 @@ const mapStateToProps = (state) => {
             terms: state.auction.terms*/
     };
 }
-export default connect(mapStateToProps, { updateNewAuctioinState,setItemsInLocalStorage , setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList })(NewAuction);
+export default connect(mapStateToProps, { updateNewAuctioinState,setNewAuctionItemsInLS , setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

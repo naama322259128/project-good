@@ -111,10 +111,3 @@ export const updateAuctionManagerState = () => {
     };
 }
 
-export const setItemsInLocalStorage = () => {
-    if (localStorage.getItem("selected_auction_to_options") === null) {
-        localStorage.setItem("selected_auction_to_options", "");
-    }
-    return {};
-
-}
