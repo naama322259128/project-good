@@ -15,8 +15,7 @@ export const addUser = (user) => {
             console.log(user);
             console.log(succ.data);
             if (succ.status != 400) {
-                dispatch(localStorage.clear(),setCurrentUser(succ.data),localStorage.setItem('currentUser',succ.data));
-                // dispatch(setCurrentUser(succ.data),localStorage.setItem('currentUser', succ.data));
+                dispatch(localStorage.clear(),setCurrentUser(succ.data),localStorage.setItem('currentUser',JSON.stringify(succ.data)));
             }
 
         })

@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { updateCurrentUser } from '../../store/actions/user'
 
 const Home = (props) => {
-  useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
+  useEffect(() => { props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser"))) }, [])
 
   return (<>
     <HomeHeader />

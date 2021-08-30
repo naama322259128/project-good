@@ -8,8 +8,9 @@ const PackagesList = (props) => {
     useEffect(() => { props.setPackagesList(localStorage.getItem("packagesList")); }, []);
 
     let deletePackage = (p) => {
-        localStorage.getItem("packagesList").remove(p);
-        props.setPackagesList(localStorage.getItem("packagesList"));
+        let x = JSON.parse(localStorage.getItem("packagesList")).remove(p);
+        localStorage.setItem("packagesList", JSON.stringify(x))
+        props.setPackagesList(x);
     }
 
     return (<>

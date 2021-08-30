@@ -48,16 +48,16 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
-        props.updateCurrentUser(localStorage.getItem("currentUser"))
+        props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")))
         if (localStorage.getItem("showSetProductBtn")) localStorage.setItem("showSetProductBtn", true);
-        if (localStorage.getItem("productsList")) localStorage.setItem("productsList", []);
+        if (localStorage.getItem("productsList")) localStorage.setItem("productsList", JSON.stringify([]));
         if (localStorage.getItem("showSetPackageBtn")) localStorage.setItem("showSetPackageBtn", true);
-        if (localStorage.getItem("packagesList")) localStorage.setItem("packagesList", []);
+        if (localStorage.getItem("packagesList")) localStorage.setItem("packagesList",JSON.stringify( []));
 
-        props.showAddProduct(localStorage.getItem("showSetProductBtn"));
-        props.showAddPackage(localStorage.getItem("showSetProductBtn"));
-        props.setProductsList(localStorage.getItem("productsList"));
-        props.setPackagesList(localStorage.getItem("packagesList"));
+        props.showAddProduct(JSON.parse(localStorage.getItem("showSetProductBtn")));
+        props.showAddPackage(JSON.parse(localStorage.getItem("showSetProductBtn")));
+        props.setProductsList(JSON.parse(localStorage.getItem("productsList")));
+        props.setPackagesList(JSON.parse(localStorage.getItem("packagesList")));
     }, []);
 
     const classes = useStyles();

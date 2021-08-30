@@ -19,19 +19,19 @@ const FinalStep = (props) => {
 
         //הוספה למסד נתונים
         let newAuction;
-        newAuction.registrationStartDate = localStorage.getItem("DateOfStart");
-        newAuction.lotteriesDate = localStorage.getItem("DateOfLotery");
-        newAuction.registrationEndDate = localStorage.getItem("DateOfEnd");
-        newAuction.purchasePackage = localStorage.getItem("packagesList");
-        newAuction.productList = localStorage.getItem("productsList");
-        newAuction.organizationName = localStorage.getItem("organizationName");
-        newAuction.organizationText = localStorage.getItem("organizationText");
-        newAuction.organizationPhotos = localStorage.getItem("organizationPhotos");
-        newAuction.terms = localStorage.getItem("terms");
+        newAuction.registrationStartDate = JSON.parse(localStorage.getItem("DateOfStart"));
+        newAuction.lotteriesDate =JSON.parse( localStorage.getItem("DateOfLotery"));
+        newAuction.registrationEndDate = JSON.parse(localStorage.getItem("DateOfEnd"));
+        newAuction.purchasePackage = JSON.parse(localStorage.getItem("packagesList"));
+        newAuction.productList = JSON.parse(localStorage.getItem("productsList"));
+        newAuction.organizationName = JSON.parse(localStorage.getItem("organizationName"));
+        newAuction.organizationText = JSON.parse(localStorage.getItem("organizationText"));
+        newAuction.organizationPhotos = JSON.parse(localStorage.getItem("organizationPhotos"));
+        newAuction.terms = JSON.parse(localStorage.getItem("terms"));
         props.createNewAuction(newAuction);
 
         //לשנות את הסטטוס שלו למנהל
-        props.beManager(localStorage.getItem("currentUser")._id);
+        props.beManager(JSON.parse(localStorage.getItem("currentUser"))._id);
 
         //לפנות את הלוכל-סטורג'
         localStorage.removeItem("DateOfStart");

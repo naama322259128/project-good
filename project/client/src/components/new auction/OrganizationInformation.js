@@ -8,9 +8,9 @@ const OrganizationInformation = (props) => {
     let organizationPhotos = [];
 
     useEffect(() => { // componentWillUnmount
-        localStorage.setItem("organizationName", organizationName);
-        localStorage.setItem("organizationText", organizationText);
-        localStorage.setItem("organizationPhotos", organizationPhotos);
+        localStorage.setItem("organizationName",JSON.stringify( organizationName));
+        localStorage.setItem("organizationText", JSON.stringify(organizationText));
+        localStorage.setItem("organizationPhotos", JSON.stringify(organizationPhotos));
     });
 
     return (<form>

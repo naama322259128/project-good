@@ -7,7 +7,7 @@ import { updateCurrentUser } from '../../store/actions/user'
 
 
 const HomeFooter = (props) => {
-    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")); }, []);
+    useEffect(() => { props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser"))); }, []);
     return (
         <footer className="home_footer">
             <div id="logo_in_home_footer" ></div>

@@ -24,7 +24,7 @@ function App(props) {
   useEffect(() => {
     let x = localStorage.getItem("currentUser")
     if (x == "" || x == undefined) localStorage.setItem("currentUser", "");
-    props.updateCurrentUser(localStorage.getItem("currentUser"));
+    props.updateCurrentUser(JSON.parse(x));
 
   }, [])
 

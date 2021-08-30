@@ -8,7 +8,7 @@ import Cart from '../auction/Cart';
 import './Auction.scss';
 const Auction = (props) => {
     const { url, path } = useRouteMatch();
-    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
+    useEffect(() => { props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser"))) }, [])
     return (<div>
 
         <header className="auction_header">

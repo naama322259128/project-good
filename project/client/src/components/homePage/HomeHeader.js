@@ -19,7 +19,7 @@ const HomeHeader = (props) => {
   //TODO:
   //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
   useEffect(() => {
-    props.updateCurrentUser(localStorage.getItem("currentUser"));
+    props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
     window.addEventListener("scroll", handleScroll)
   }, []);
 

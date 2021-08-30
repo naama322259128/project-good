@@ -5,7 +5,7 @@ const AddPackage = (props) => {
 
     let newPackage = { qty: "", discount: 0 };
     let checkQty = () => {
-        let tmp = localStorage.getItem('packagesList').filter(p => p.qty === newPackage.qty);
+        let tmp = JSON.parse(localStorage.getItem('packagesList')).filter(p => p.qty === newPackage.qty);
         console.log(tmp);
         if (tmp.length != 0 || newPackage.qty < 2) document.getElementById("qtyInput").style.borderColor = "red";
         else document.getElementById("qtyInput").style.borderColor = "";
@@ -19,7 +19,7 @@ const AddPackage = (props) => {
         let arr = localStorage.getItem('packagesList');
         arr.push(newPackage)
 
-        localStorage.setItem("packagesList", arr)//האם צריך שורה זו
+        localStorage.setItem("packagesList", JSON.stringify(arr))//האם צריך שורה זו
         props.setPackagesList(arr);
 
         localStorage.setItem('showSetPackageBtn', true);

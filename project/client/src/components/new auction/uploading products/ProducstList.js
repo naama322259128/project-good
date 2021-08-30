@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { deleteProduct, setProductsList } from '../../../store/actions/newAuction'
 const ProductsList = (props) => {
 
-    let deleteProduct = (p) => { localStorage.getItem("productsList").remove(p); props.deleteProduct(p) }
-    useEffect(() => { props.setProductsList(localStorage.getItem("productsList")); }, []);
+    let deleteProduct = (p) => { JSON.parse(localStorage.getItem("productsList")).remove(p); props.deleteProduct(p) }
+    useEffect(() => { props.setProductsList(JSON.parse(localStorage.getItem("productsList"))); }, []);
     
     return (<><h1>ProductsList</h1>
         <div className="ui divided selection list">

@@ -7,7 +7,7 @@ export const signIn = (password, email) => {
         axios.get(`http://localhost:5000/users/signIn/${password}&${email}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
-                dispatch(setCurrentUser(succ.data), localStorage.setItem('currentUser',succ.data));
+                dispatch(setCurrentUser(succ.data), localStorage.setItem('currentUser',JSON.stringify(succ.data)));
         })
     }
 }

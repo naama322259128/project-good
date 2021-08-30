@@ -12,7 +12,7 @@ import AuctionStatistics from './auction manager/AuctionStatistics'
 import { updateCurrentUser } from '../../store/actions/user'
 
 const YourProfile = (props) => {
-    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
+    useEffect(() => { props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser"))) }, [])
 
     return (<>
         <Switch>

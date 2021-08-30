@@ -8,7 +8,7 @@ const AddProduct = (props) => {
 
     useEffect(() => {
         props.showAddProduct(localStorage.getItem('showSetProductBtn'));
-        props.setProductsList(localStorage.getItem('prouctsList'));
+        props.setProductsList(JSON.parse(localStorage.getItem('prouctsList')));
     }, [])
     const onChangeHandler = (event) => { setSelectedFile(event.target.files[0]); }
     const onClickHandler = () => {
@@ -20,7 +20,7 @@ const AddProduct = (props) => {
         //TODO: לשמור בלוקלסטורג'
     }
     let addProductToLS = () => {
-        let arr = localStorage.getItem('prouctsList');
+        let arr = JSON.parse(localStorage.getItem('prouctsList'));
         arr.push(newProduct);
         props.addProduct(newProduct);
 

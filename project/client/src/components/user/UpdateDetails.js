@@ -1,6 +1,6 @@
 import './yourProfile.scss'
 import { connect } from 'react-redux';
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { updateUser } from '../../store/actions/user';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UpdateDetails = (props) => {
-    useEffect(() => { props.updateCurrentUser(localStorage.getItem("currentUser")) }, [])
+    useEffect(() => { props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser"))) }, [])
 
     const classes = useStyles();
     const handleChange = (prop) => (event) => {
@@ -76,15 +76,16 @@ const UpdateDetails = (props) => {
     });
 
     //עדכון משתמש קיים
-    let password = localStorage.getItem("currentUser").password;
-    let userName = localStorage.getItem("currentUser").userName;
-    let email = localStorage.getItem("currentUser").email;
-    let phone = localStorage.getItem("currentUser").phone;
-    let address = localStorage.getItem("currentUser").address;
-    let birthYear = localStorage.getItem("currentUser").birthYear;
+    let u = JSON.parse(localStorage.getItem("currentUser"));
+    let password = u.password;
+    let userName = u.userName;
+    let email = u.email;
+    let phone = u.phone;
+    let address = u.address;
+    let birthYear = u.birthYear;
 
     const updateUser = () => {
-        let user = localStorage.getItem("currentUser");
+        let user = JSON.parse(localStorage.getItem("currentUser"));
         user.password = password;
         user.email = email;
         user.phone = phone;
@@ -219,4 +220,4 @@ const mapStateToProps = (state) => {
         //currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, {updateCurrentUser, updateUser })(UpdateDetails);
+export default connect(mapStateToProps, { updateCurrentUser, updateUser })(UpdateDetails);
