@@ -13,19 +13,10 @@ import { updateUserState } from '../store/actions/user'
 import { setUserItemsInLS } from '../utils/userUtils'
 function App(props) {
   useEffect(() => {
-<<<<<<< HEAD
-    window.addEventListener('storage', props.updateUserState);//מעדכנת את הסטייט מתי שינוי בסטורג
-    window.location.addEventListener('reload', props.updateUserState);//מתי שיהיה טעינה בדפדפן אז נעדכן את הסטטי
-    props.setItemsInLocalStorage();
+    // window.addEventListener('storage', props.updateUserState);
+    // window.addEventListener('reload', props.updateUserState);
+    // props.setUserItemsInLS();
   }, [])
-
-  //להוסיף אדד-איונט-ליסנר לרענון הדפדפן
-=======
-    window.addEventListener('storage', props.updateUserState);
-    window.addEventListener('reload', props.updateUserState);
-    props.setUserItemsInLS();
-  }, [])
->>>>>>> 85e3a164308c3df250dc4e35076bacb553891d1a
   return (
     <div>
       <Router>
@@ -44,8 +35,6 @@ function App(props) {
   );
 
 }
-
-
 const mapStateToProps = state => {
 }
 export default connect(mapStateToProps, { setUserItemsInLS, updateUserState })(App);
