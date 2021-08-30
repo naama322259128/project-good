@@ -13,6 +13,7 @@ import { updateUserState, setItemsInLocalStorage } from '../store/actions/user'
 function App(props) {
   useEffect(() => {
     window.addEventListener('storage', props.updateUserState);
+    window.location.addEventListener('reload', props.updateUserState);
     props.setItemsInLocalStorage();
   }, [])
   //להוסיף אדד-איונט-ליסנר לרענון הדפדפן

@@ -10,6 +10,7 @@ const Auction = (props) => {
     const { url, path } = useRouteMatch();
     useEffect(() => {
         window.addEventListener('storage', props.updateCurrentAuctionState);
+        window.location.addEventListener('reload', props.updateCurrentAuctionState);
         props.setItemsInLocalStorage();
     }, [])
     return (<div>

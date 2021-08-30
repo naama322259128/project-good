@@ -49,6 +49,7 @@ const NewAuction = (props) => {
 
     useEffect(() => {
         window.addEventListener('storage', props.updateNewAuctioinState);
+        window.location.addEventListener('reload', props.updateNewAuctioinState);
         props.setItemsInLocalStorage();
     }, [])
 

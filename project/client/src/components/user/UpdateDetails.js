@@ -53,6 +53,7 @@ const UpdateDetails = (props) => {
 
     useEffect(() => {
         window.addEventListener('storage', props.updateUserState);
+        window.location.addEventListener('reload', props.updateUserState);
         props.setItemsInLocalStorage();
     }, [])
 

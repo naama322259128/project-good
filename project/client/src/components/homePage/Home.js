@@ -9,6 +9,7 @@ import { updateUserState,setItemsInLocalStorage } from '../../store/actions/user
 const Home = (props) => {
   useEffect(() => {
     window.addEventListener('storage', props.updateUserState);
+    window.location.addEventListener('reload', props.updateUserState);
     props.setItemsInLocalStorage();
   }, [])
   return (<>

@@ -19,13 +19,16 @@ const YourProfile = (props) => {
         let s = props.currentUser.status;
         if (s === 'SITE_MANAGER') {
             window.addEventListener('storage', props.updateSiteManagerState);
+            window.location.addEventListener('reload', props.updateSiteManagerState);
             props.set2();
         } else if (s === 'AUCTION_MANAGER') {
             window.addEventListener('storage', props.updateAuctionManagerState);
+            window.location.addEventListener('reload', props.updateAuctionManagerState);
             props.set3();
 
         } else {
             window.addEventListener('storage', props.updateUserState);
+            window.location.addEventListener('reload', props.updateUserState);
             props.set1();
         }
     }, [])
