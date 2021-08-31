@@ -97,7 +97,7 @@ const UpdateDetails = (props) => {
             <center>
                 <br />
 
-                <h1 id="h1_Profile">Update your details</h1>
+                <h1 id="h1_profile">Update your details</h1>
                 <form className={classes.root} autoComplete="off" id="update_user_details_form" >
 
                     <FilledInput

@@ -27,12 +27,12 @@ const HomeHeader = (props) => {
     if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
       document.getElementById("smallHeader").style.top = "0";
     } else {
-      document.getElementById("smallHeader").style.top = "-50px";
+      document.getElementById("smallHeader").style.top = "-500px";
     }
   }
   return (<>
     <header id="home_header" >
-      <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
+      <Link to={"/home"} id="logo_home_header" > </Link>
 
       {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { props.setLogin(true) }}>Login</Button>}
       {props.loginIsOpen ? (<Login />) : null}
@@ -47,15 +47,11 @@ const HomeHeader = (props) => {
           you will create your Chinese auction.
         </p>
 
-        <Link to={"/about"}>
-          <Button type="button" className="btn" id="btnMoreInfo">MORE INFO</Button>
-        </Link>
+          <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
 
-        <Link to={props.currentUser ? "/new_auction" : '#'}>
-          <Button onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
+          <Button href={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
             BUILD CHINESE AUCTION
           </Button>
-        </Link>
       </div>
 
 
@@ -63,7 +59,8 @@ const HomeHeader = (props) => {
       <div id="left_pic"></div>
     </header>
     <div id="smallHeader">
-      <h2>My Header</h2>
+      <div href={"/home"} id="logo_home_small_header" >  </div>
+      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="login_btn_small_header" onClick={() => { props.setLogin(true) }}>Login</Button>}
     </div>
   </>)
 }

@@ -1,8 +1,8 @@
 
 #logo_home_header{
-  background-image: url('../../img/logo_white.png');
-  // background-image: url('../../img/logo_green&blue.png');
-  background-size:100% 100%;
+  // background-image: url('../../img/logo_white.png');
+  background-image: url('../../img/logo_orange&7376c0&white.png');
+  background-size:100%;
   background-repeat: no-repeat;
   height: 9vh;
   width: 18vw;
@@ -11,18 +11,7 @@ cursor: pointer;
 margin-top: 3vh;
 margin-left: 2vw;
 }
-#logo_home_small_header{
-  background-image: url('../../img/logo_white.png');
-  // background-image: url('../../img/logo_green&blue.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  display: inline-block;
-  cursor: pointer;
-  height:5vh !important;
-  width: 10vw !important;
-  margin-top: 1.5vh !important;
-  margin-left: 4vw !important;
-}
+
 .btn{
   color: #ffffff !important;   
   width:8vw !important;   
@@ -31,7 +20,9 @@ margin-left: 2vw;
   cursor: pointer !important;     
   // background-color: #3ed646 !important ;
 
-  background-color: #21ba45 !important ;
+  // background-color: #21ba45 !important ;//ירוק
+  // background-color: #c9d032 !important ;//חרדל
+  background-color: #eb8030 !important ;//כתום
 }
 #btnMoreInfo{
   left: 14% !important;
@@ -86,31 +77,14 @@ margin-left: 2vw;
 
 #home_header{
   background-image: url('../../img/home_header_backgroung.webp');
-  background-size: 100% 100%;
+  background-size: 100%;
   background-repeat: no-repeat;
   height:136vh;
   width: 100vw;
   position: relative !important;
   z-index: 200;
 }
-#small_home_header{
-  background-color: #ffffffd4;
-  height:10vh !important;
-  width: 100vw;
-  position: fixed !important;
-  box-shadow: 0px -4px 9px 0px #0e0e0e;
-  z-index: 270 !important;
-  display: none;
-}
-  // .scrolling.dimmable.dimmed>.dimmer{
-  //   overflow:hidden !important;
-  // }
-    #login_btn_small_header {
-    top: 2vh !important;
-    height: 4vh !important;
-    font-size: 1.6vh !important;
-    padding: 0% !important;
-}
+
 
   #right_pic{  
     position: absolute;
@@ -147,7 +121,7 @@ margin-left: 2vw;
   }
   
  #logo_in_home_footer{
-    background-image: url('../../img/logo_white.png');
+    background-image: url('../../img/logo_orange&black&blue.png');
     background-size: 100%;
     background-repeat: no-repeat;
     position: absolute;
@@ -200,12 +174,30 @@ margin-left: 2vw;
   cursor: pointer;
 }
 
-#smallHeader {
-    background-color: #333;
+#smallHeader {  
+    // background-color: #262b96;//כחול
+    background-color: #dbdcf7;
     position: fixed;
-    top: -50px;
+    top: -500px;
     width: 100%;
     display: block;
-    transition: top 0.7s;
+    transition: top 0.4s;
     height: 8vh;
+}
+    #login_btn_small_header {
+      cursor: pointer;
+      right: 3.6vw !important;
+      top: 1.8vh;
+}
+#logo_home_small_header{
+  background-image: url('../../img/logo_orange&black&blue.png');
+  
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display: inline-block;
+  cursor: pointer;
+  height:5vh !important;
+  width: 10vw !important;
+  margin-left: 3.6vw !important;
+  margin-top: 1.4vh;
 }
