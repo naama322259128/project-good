@@ -94,16 +94,7 @@ export const addProductToDb = (id, product) => {
     }
 }
 
-// מחזירה רשימת מוצרים עפ"י קוד מכירה 
-// export const getProductListFromDb = (id) => {
-//     return (dispatch) => {
-//         axios.get(`http://localhost:5000/auctions/${id}`).then(succ => {
-//             console.log(succ.data);
-//             if (succ.status != 400)
-//                 dispatch(productList(succ.data));//לעדכן את רשימת המוצרים בסטייט
-//         })
-//     }
-// }
+
 
 
 export const addPackageToDb = (id, product) => {
@@ -188,11 +179,12 @@ export const beManager = (_id) => {
 
 
 export const updateNewAuctioinState = () => {
+    alert("updateNewAuctioinState");
     updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
     let obj =
     {
-        showAddPackage: localStorage.getItem("showSetPackageBtn"),
-        showAddProduct: localStorage.getItem("showSetProductBtn"),
+        showSetPackage: localStorage.getItem("showSetPackageBtn"),
+        showSetProduct: localStorage.getItem("showSetProductBtn"),
         organizationName: JSON.parse(localStorage.getItem("organizationName")),
         organizationText: JSON.parse(localStorage.getItem("organizationText")),
         organizationPhotos: JSON.parse(localStorage.getItem("organizationPhotos")),

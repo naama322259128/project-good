@@ -24,12 +24,10 @@ const YourProfile = (props) => {
         } else if (s === 'AUCTION_MANAGER') {
             window.addEventListener('storage', props.updateAuctionManagerState);
             window.addEventListener('reload', props.updateAuctionManagerState);
-            props.setAuctionManagerItemsInLS();
+           props.setAuctionManagerItemsInLS();
 
         } else {
             window.addEventListener('storage', props.updateUserState);
-            window.addEventListener('reload', props.updateUserState);
-            props.setUserItemsInLS();
         }
     }, [])
     return (<>

@@ -101,6 +101,7 @@ export const updateShoppingCart = (arr) => {
 export const updateUserState = () => {
     //עדכון הסטייט לפי הנתונים שבלוקלסטורג'
     updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+    alert("updateUserState")
     return {
         type: actionTypes.UPDATE_USER_STATE,
         payload: JSON.parse(localStorage.getItem("prodactsInCart"))

@@ -8,21 +8,6 @@ export const setCurrentUser = (user) => {
     }
 }
 
-// //אלוי נעביר את זה ליוטילס
-export const addUser = (user) => {
-    return (dispatch) => {
-        axios.post("http://localhost:5000/users", user).then(succ => {
-            console.log(user);
-            console.log(succ.data);
-            if (succ.status != 400) {
-                dispatch(localStorage.clear(),setCurrentUser(succ.data),localStorage.setItem('currentUser',JSON.stringify(succ.data)));
-            }
-
-        })
-    }
-}
-
-
 // export const deleteUser = (user) => {
 
 //     return (dispatch) => {

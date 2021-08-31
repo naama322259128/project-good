@@ -19,6 +19,8 @@ export const  getAuctionsList =async () => {
 
 export const  setCurrentAuctionItemsInLS = async() => {
   if (localStorage.getItem("currentAuction") === null) {
-    localStorage.setItem("currentAuction", "");
+    localStorage.setItem("currentAuction", JSON.stringify(""));
   }
+  return { type: 22 }
+
 }

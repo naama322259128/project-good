@@ -13,10 +13,8 @@ const AuctionsList = (props) => {
 
     //הכנסת רשימה של כל המכירות הקיימות במסד נתונים
     useEffect(() => {
-        props.updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
         getAuctionsList().then(succ => { setAuctionsList(succ.data) })
     }, []);
-
 
     return (<>
         {auctionsList && auctionsList.map((item) => {

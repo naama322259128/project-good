@@ -51,12 +51,6 @@ const useStyles = makeStyles((theme) => ({
 
 const UpdateDetails = (props) => {
 
-    useEffect(() => {
-        window.addEventListener('storage', props.updateUserState);
-        window.addEventListener('reload', props.updateUserState);
-        props.setUserItemsInLS();
-    }, [])
-
     const classes = useStyles();
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });

@@ -8,12 +8,6 @@ import './Auction.scss';
 import { updateCurrentAuction } from '../../store/actions/currentAuction'
 
 const CurrentAuction = (props) => {
-    useEffect(() => {
-        if (!JSON.parse(localStorage.getItem("prodactsInCart")))
-            localStorage.setItem("prodactsInCart", JSON.stringify([]));
-        props.updateCurrentAuction(JSON.parse(localStorage.getItem("currentAuction")))
-    }, [])
-
     return (<>
         <br />
         <br />

@@ -20,12 +20,12 @@ const AddPackage = (props) => {
         arr.push(newPackage)
 
         localStorage.setItem("packagesList", JSON.stringify(arr))//האם צריך שורה זו
-        props.setPackagesList(arr);
+        //props.setPackagesList(arr);
 
         localStorage.setItem('showSetPackageBtn', true);
-        props.showAddPackage(true);
+        //props.showAddPackage(true);
     }
-    return (props.showSetPackage ? (
+    return (props.isShow ? (
         <form >
             <div className="ui equal width form">
                 <div className="fields">
@@ -45,7 +45,7 @@ const AddPackage = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        showSetPackage: state.auction.showSetPackage
+        isShow: state.auction.showSetPackage 
     };
 }
 export default connect(mapStateToProps, { setPackagesList, showAddPackage })(AddPackage);

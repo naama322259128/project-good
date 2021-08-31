@@ -7,7 +7,7 @@ export const setCurrentAuction = (auctionId) => {
     axios.get(`http://localhost:5000/auctions/${auctionId}`).then(succ => {
       console.log(succ.data);
       if (succ.status != 400)
-        dispatch(updateCurrentAuction(succ.data), localStorage.setItem('currentAuction', JSON.stringify(succ.data)));
+        dispatch(/*updateCurrentAuction(succ.data),*/ localStorage.setItem('currentAuction', JSON.stringify(succ.data)));
     })
   }
 }
@@ -18,9 +18,17 @@ export const updateCurrentAuction = (auction) => {
     payload: auction
   }
 }
+
 export const getProducts = (auction_id) => {
-  //axios.
+  return (dispatch) => {
+    axios.get(`http://localhost:5000/auctions/${auction_id}`).then(succ => {
+      console.log(succ.data);
+      if (succ.status != 400)
+        dispatch(console.log(succ.data));//לעדכן את רשימת המוצרים בסטייט
+    })
+  }
 }
+
 export const updateCurrentAuctionState = () => {
   updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
   return {

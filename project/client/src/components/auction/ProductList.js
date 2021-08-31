@@ -6,10 +6,9 @@ import React, { useEffect } from 'react';
 import { getProducts } from '../../store/actions/currentAuction'
 const ProductList = (props) => {
 
-    useEffect(() => { props.updateCurrentAuction(JSON.parse(JSON.parse(localStorage.getItem("currentAuction")))) }, [])
     //TODO: איך הפונקציה תתרענן בעת הוספת מוצר למסד ?
     return (<div>
-        {props.getProducts(localStorage.getItem("currentAuction")._id).map((item) => {
+        {props.getProducts(JSON.parse(localStorage.getItem("currentAuction"))._id).map((item) => {
             return (<Product key={parseInt(item._id)} item={item} />)
         })}
     </div>);

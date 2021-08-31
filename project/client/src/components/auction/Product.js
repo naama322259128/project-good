@@ -32,7 +32,6 @@ const Product = (props) => {
   let description = props.item.description;
   let name = props.item.name;
   let price = props.item.prices;
-  useEffect(() => { props.updateCurrentAuction(JSON.parse(localStorage.getItem("currentAuction"))) }, [])
 
   return (
     <Modal

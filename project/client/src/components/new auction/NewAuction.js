@@ -12,10 +12,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
-import { setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { Link } from 'react-router-dom'
 import { updateNewAuctioinState } from '../../store/actions/newAuction'
-import {setNewAuctionItemsInLS}from '../../utils/newAuctionUtils'
+import { setNewAuctionItemsInLS } from '../../utils/newAuctionUtils'
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -167,5 +166,5 @@ const mapStateToProps = (state) => {
             terms: state.auction.terms*/
     };
 }
-export default connect(mapStateToProps, { updateNewAuctioinState,setNewAuctionItemsInLS , setLastModal, showAddProduct, showAddPackage, setProductsList, setPackagesList })(NewAuction);
+export default connect(mapStateToProps, { updateNewAuctioinState, setNewAuctionItemsInLS })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

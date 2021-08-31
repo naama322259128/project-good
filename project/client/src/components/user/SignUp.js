@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react';
-import { addUser } from '../../store/actions/signUp';
+import { addUser } from '../../utils/userUtils';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';

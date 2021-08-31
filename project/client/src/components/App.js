@@ -13,9 +13,11 @@ import { updateUserState } from '../store/actions/user'
 import { setUserItemsInLS } from '../utils/userUtils'
 function App(props) {
   useEffect(() => {
-    // window.addEventListener('storage', props.updateUserState);
-    // window.addEventListener('reload', props.updateUserState);
-    // props.setUserItemsInLS();
+    window.addEventListener('storage', () => props.updateUserState());//?
+    window.addEventListener('click', () => alert("click from window.addEventListener('click')"));//good
+    window.addEventListener('reload', () => props.updateUserState());//?
+    props.setUserItemsInLS();//?
+    //לא נכתוב את הפונקציות הללו בקומפוננטות נוספות כי הקומפוננטות בתוך אפפ
   }, [])
   return (
     <div>
@@ -23,7 +25,6 @@ function App(props) {
         <Switch>
           <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
-          {/* <Route path={`/new_auction`}><PackagesList /></Route> */}
           <Route path={`/new_auction`}><NewAuction /></Route>
           <Route path={`/about`}><About /></Route>
           <Route path={`/your_profile`}><YourProfile /></Route>
