@@ -5,8 +5,6 @@ import './home.scss';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ProfileButton from '../user/ProfileButton';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import { setLogin } from '../../store/actions/home'
 import { updateCurrentUser } from '../../store/actions/user'
 
@@ -21,7 +19,6 @@ const HomeHeader = (props) => {
   useEffect(() => {
     window.addEventListener("scroll", changeHeader)
     return () => {
-      alert()
       window.removeEventListener('scroll', changeHeader);
     };
   }, []);
@@ -66,8 +63,8 @@ const HomeHeader = (props) => {
       <div id="left_pic"></div>
     </header>
     <div id="smallHeader">
-      <div href={"/home"} id="logo_home_small_header" >  </div>
-      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="login_btn_small_header" onClick={() => { props.setLogin(true) }}>Login</Button>}
+      <Link to={"/home"} id="logo_home_small_header" ></Link>
+      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="login_btn_small_header" onClick={() => props.setLogin(true)}>Login</Button>}
     </div>
   </>)
 }
