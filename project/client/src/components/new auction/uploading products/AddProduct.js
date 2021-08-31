@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect } from 'react';
 import { addProduct, showAddProduct, setProductsList/*, addProductToDb*/ } from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
 
-import p from '../../../img/car.jpg';
-
 const AddProduct = (props) => {
 
     useEffect(() => {

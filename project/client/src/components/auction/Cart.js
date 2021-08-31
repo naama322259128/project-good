@@ -3,14 +3,12 @@ import ProductInCart from './ProductInCart'
 import { setCnt } from '../../store/actions/user'
 import { Link } from 'react-router-dom'
 import './Auction.scss';
+import Button from '@material-ui/core/Button';
+
 
 const Cart = (props) => {
     return (
         <div>
-            <br />
-            <br />
-            <br />
-            <br />
             <br />
             <br />
             <h1>Cart Component</h1>
@@ -18,6 +16,7 @@ const Cart = (props) => {
             {props.arr.map((item, index) => {
                 return (<ProductInCart key={parseInt(index)} item={item} setCount={props.setCnt} />)
             })}
+            <Button>pay</Button>
         </div>);
 }
 const mapStateToProps = (state) => {

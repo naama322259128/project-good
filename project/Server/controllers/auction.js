@@ -131,6 +131,10 @@ const getAuctionIsDone = async (req, res) => {
     return res.send(auction.status);
 }
 
+// const sortProductsByName=async(req,res)=>{
+//     let productList = await Auction.find({}).sort({""});
+//     return res.send(productList);
+// }
 
 module.exports = {
     getAll, getById, addProduct,addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone

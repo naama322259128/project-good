@@ -13,9 +13,9 @@ import { updateUserState } from '../store/actions/user'
 import { setUserItemsInLS } from '../utils/userUtils'
 function App(props) {
   useEffect(() => {
-    window.addEventListener('storage', props.updateUserState);
-    window.addEventListener('reload', props.updateUserState);
-    props.setUserItemsInLS();
+    // window.addEventListener('storage', props.updateUserState);
+    // window.addEventListener('reload', props.updateUserState);
+    // props.setUserItemsInLS();
   }, [])
   return (
     <div>
@@ -35,8 +35,6 @@ function App(props) {
   );
 
 }
-
-
 const mapStateToProps = state => {
 }
 export default connect(mapStateToProps, { setUserItemsInLS, updateUserState })(App);

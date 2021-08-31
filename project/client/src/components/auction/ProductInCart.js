@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import { deleteProductFromCart } from '../../store/actions/user'
+import { deleteProductFromCart } from '../../store/actions/user';
 
 const useStyles = makeStyles({
   root: {

@@ -12,11 +12,12 @@ import { useTheme } from '@material-ui/core/styles';
 import { beManager, setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
 import { Link } from 'react-router-dom'
+import Auction from '../../models/auction';
 
 const FinalStep = (props) => {
 
     let addNewAuctionToDB = () => {
-
+      
         //הוספה למסד נתונים
         let newAuction;
         newAuction.registrationStartDate = JSON.parse(localStorage.getItem("DateOfStart"));
