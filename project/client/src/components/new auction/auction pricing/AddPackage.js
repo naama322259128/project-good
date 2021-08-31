@@ -45,7 +45,7 @@ const AddPackage = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        isShow: state.auction.showSetPackage 
+        isShow: state.auction.showSetPackage
     };
 }
 export default connect(mapStateToProps, { setPackagesList, showAddPackage })(AddPackage);
@@ -53,3 +53,8 @@ export default connect(mapStateToProps, { setPackagesList, showAddPackage })(Add
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable
 //להציג מסגרת אדומה אם לחץ מספר שלילי
+
+// showAddPackage פונקציה שמקבלת פרמטר בוליאני ומגדירה את 
+// המשתנה הבוליאני showSetPackage שבסטייט
+
+// showSetPackageBtn משתנה בוליאני בלוקלסטורג'

@@ -179,7 +179,6 @@ export const beManager = (_id) => {
 
 
 export const updateNewAuctioinState = () => {
-    alert("updateNewAuctioinState");
     updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
     let obj =
     {

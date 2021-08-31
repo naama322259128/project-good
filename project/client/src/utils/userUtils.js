@@ -21,7 +21,7 @@ export const setAuctionManagerItemsInLS = () => {
 }
 
 export const setUserItemsInLS = () => {
-    alert("setUserItemsInLS");
+    //alert("setUserItemsInLS");
     let user = localStorage.getItem("currentUser");
     if (user === null || user === "") {
         localStorage.setItem("currentUser", JSON.stringify(""));

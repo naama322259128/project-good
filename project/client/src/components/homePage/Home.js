@@ -9,6 +9,13 @@ import { setUserItemsInLS } from '../../utils/userUtils'
 const Home = (props) => {
   return (<>
     <HomeHeader />
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <AuctionsList />
     <HomeFooter />
   </>

@@ -19,37 +19,19 @@ const HomeHeader = (props) => {
   //TODO:
   //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", myFunction)
   }, []);
 
-  let handleScroll = () => {
-    var small = document.getElementById("small_home_header");
-    if (window.scrollY > 900 || document.documentElement.scrollY > 900) {
-      if (small) small.style.display = "block";      //להוסיף את ההידר הקטן
+  let myFunction = () => {
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+    if (window.pageYOffset > sticky) {
+      header.classList.add("sticky");
+    } else {
+      header.classList.remove("sticky");
     }
-    else if (small) small.style.display = "none";           //להוריד את ההידר הקטן
-
-  };
-
+  }
   return (<>
-
-    <div id="small_home_header">
-
-      <div id="logo_home_small_header" ></div>
-
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
-        {props.currentUser ? <ProfileButton /> : <Tab label="Login" onClick={() => { window.scrollTo(0, 0); props.setLogin(true) }} />}
-        <Tab label="Home" />
-
-      </Tabs>
-    </div>
-
     <header id="home_header">
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
 
@@ -81,6 +63,9 @@ const HomeHeader = (props) => {
       <div id="right_pic"></div>
       <div id="left_pic"></div>
     </header>
+    <div class="header" id="myHeader">
+      <h2>My Header</h2>
+    </div>
   </>)
 }
 
@@ -91,4 +76,4 @@ const mapStateToProps = state => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { setLogin,updateCurrentUser })(HomeHeader);
+export default connect(mapStateToProps, { setLogin, updateCurrentUser })(HomeHeader);
