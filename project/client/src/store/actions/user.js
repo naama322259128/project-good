@@ -108,3 +108,28 @@ export const updateUserState = () => {
     };
 }
 
+
+//הוספת הזמנה
+
+export const addOrder = (order) => {
+    return (dispatch) => {
+        axios.post(`http://localhost:5000/orders`, order).then(succ => {
+            console.log(succ.data);
+            if (succ.status != 400)
+                dispatch(console.log(succ.data));
+        })
+    }
+}
+
+//מחזירה הזמנה עפ"י קוד משתמש ומכירה
+
+export const getOrderByToUserCodeAndAuction = (user_id, auction_id) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/orders/${user_id}&${auction_id}`).then(succ => {
+            if (succ.status != 400) {
+                const arr = (succ.data).orderDetails;
+                dispatch(localStorage.setItem("prodactsInCart", JSON.stringify(arr)));
+            }
+        })
+    }
+}

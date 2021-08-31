@@ -10,6 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
 import { deleteProductFromCart } from '../../store/actions/user';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +31,7 @@ const ProductInCart = (props) => {
   let price = props.item.product.prices;
   let _id=props.item.product._id;
 
+    
   return (
     <Modal
       closeIcon

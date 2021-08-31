@@ -53,6 +53,17 @@ const getOrderListByIdUser = async (req, res) => {
         return res.status(404).send("There is no orders with such an ID user");
     return res.send(orders);
 }
+
+
+//מחזירה הזמנה עפ"י קוד משתמש ומכירה
+const getOrderByToUserCodeAndAuction = async (req, res) => {
+    let { user_id, auction_id } = req.params;
+    let user = await Order.findOne({ "userId": user_id, "auctionId": auction_id });
+    if (!user)
+        return res.status(400).send("Incorrect details entered");
+    return res.send(user);
+}
+
 module.exports = {
-    getAll, getById, addOrder, deleteOrder,getOrderListByIdUser
+    getAll, getById, addOrder, deleteOrder, getOrderListByIdUser, getOrderByToUserCodeAndAuction
 }
