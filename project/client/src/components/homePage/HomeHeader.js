@@ -20,14 +20,21 @@ const HomeHeader = (props) => {
   //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
   useEffect(() => {
     window.addEventListener("scroll", changeHeader)
+    return () => {
+      alert()
+      window.removeEventListener('scroll', changeHeader);
+    };
   }, []);
 
   const changeHeader = () => {
-    let height = 910//הגובה של ההידר הגדול
-    if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
-      document.getElementById("smallHeader").style.top = "0";
-    } else {
-      document.getElementById("smallHeader").style.top = "-500px";
+    let s = document.getElementById("smallHeader");
+    if (s != null) {
+      let height = 910//הגובה של ההידר הגדול
+      if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
+        if (s != null) s.style.top = "0";
+      } else {
+        if (s != null) s.style.top = "-500px";
+      }
     }
   }
   return (<>
@@ -47,11 +54,11 @@ const HomeHeader = (props) => {
           you will create your Chinese auction.
         </p>
 
-          <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
+        <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
 
-          <Button href={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
-            BUILD CHINESE AUCTION
-          </Button>
+        <Button href={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
+          BUILD CHINESE AUCTION
+        </Button>
       </div>
 
 
