@@ -19,20 +19,19 @@ const HomeHeader = (props) => {
   //TODO:
   //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
   useEffect(() => {
-    window.addEventListener("scroll", myFunction)
+    window.addEventListener("scroll", changeHeader)
   }, []);
 
-  let myFunction = () => {
-    var header = document.getElementById("myHeader");
-    var sticky = header.offsetTop;
-    if (window.pageYOffset > sticky) {
-      header.classList.add("sticky");
+  const changeHeader = () => {
+    let height = 910//הגובה של ההידר הגדול
+    if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
+      document.getElementById("smallHeader").style.top = "0";
     } else {
-      header.classList.remove("sticky");
+      document.getElementById("smallHeader").style.top = "-50px";
     }
   }
   return (<>
-    <header id="home_header">
+    <header id="home_header" >
       <Link to={"/home"}>  <div id="logo_home_header" ></div></Link>
 
       {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { props.setLogin(true) }}>Login</Button>}
@@ -63,7 +62,7 @@ const HomeHeader = (props) => {
       <div id="right_pic"></div>
       <div id="left_pic"></div>
     </header>
-    <div class="header" id="myHeader">
+    <div id="smallHeader">
       <h2>My Header</h2>
     </div>
   </>)

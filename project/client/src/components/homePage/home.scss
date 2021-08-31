@@ -200,25 +200,12 @@ margin-left: 2vw;
   cursor: pointer;
 }
 
-.header {
-  //small header
-  padding: 10px 16px ;
-  background: #555;
-  color: #f1f1f1;
-  display: none;
-}
-
-.content {
-  padding: 16px;
-}
-
-.sticky {
-  position: fixed;
-  top: 0;
-display: block;
-  width: 100%;
-}
-
-.sticky + .content {
-  padding-top: 102px;
+#smallHeader {
+    background-color: #333;
+    position: fixed;
+    top: -50px;
+    width: 100%;
+    display: block;
+    transition: top 0.7s;
+    height: 8vh;
 }
