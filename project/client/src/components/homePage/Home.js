@@ -7,10 +7,6 @@ import React, { useEffect } from "react";
 import { updateUserState } from '../../store/actions/user'
 import { setUserItemsInLS } from '../../utils/userUtils'
 const Home = (props) => {
-  useEffect(() => {
-    window.addEventListener('storage', props.updateUserState);
-    props.setUserItemsInLS();
-  }, [])
   return (<>
     <HomeHeader />
     <AuctionsList />
