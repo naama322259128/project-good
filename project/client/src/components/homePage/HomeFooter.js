@@ -21,7 +21,7 @@ const HomeFooter = (props) => {
             </div>
             <div id="text_footer">
                 <p>  Building Chinese auctions,<br />
-                    And a database of all sales built.<br />
+                    And a database of all auctions built.<br />
                     The site is used by the masses<br />
                     And is gaining momentum among the general public.<br />
                     The site has gained worldwide publicity<br />

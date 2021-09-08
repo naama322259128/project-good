@@ -13,7 +13,7 @@ const AuctionPricing = (props) => {
         {/* חבילת רכישה היא כמות כרטיסים ממכלול הכרטיסים במכירה הפומבית,
      במחיר מוזל לפי אחוזי ההנחה שתקבע */}
         <label>Purchase package is the quantity of tickets from the set of tickets at the auction,
-            at a discounted price according to the percentage of the discount you will determine</label>
+            at a discounted price according to the percentage of the discount you will determine.</label>
         {props.isShow && <button className="positive ui button" onClick={setBtn1}>Add new Package</button>}
         {<PackagesList />}
         {<AddPackage />}

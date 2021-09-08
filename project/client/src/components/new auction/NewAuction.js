@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const getSteps = () => { return ['Pricing', 'Adding products', 'Organization details', 'Chinese Auction Details']; }
+const getSteps = () => { return ['Purchase packages', 'Adding products', 'Organization details', 'Chinese Auction Details']; }
 const getStepContent = (step) => {
     switch (step) {
         case 0:
@@ -91,10 +91,7 @@ const NewAuction = (props) => {
 
     return (<>
 
-        {/* <header id="new_auction_header">
-            {/* log-out להוסיף כפתור התנתקות */}
-        {/* <Link to={"/home"}>  <div className="logo" ></div></Link>
-        </header> */}
+
         <br />
         <br />
         <center><h1>Build Your own chinese auction</h1></center>
