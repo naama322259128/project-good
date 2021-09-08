@@ -26,7 +26,7 @@ const HomeHeader = (props) => {
   const changeHeader = () => {
     let s = document.getElementById("smallHeader");
     if (s != null) {
-      let height = 910//הגובה של ההידר הגדול
+      let height = 900//הגובה של ההידר הגדול
       if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
         if (s != null) s.style.top = "0";
       } else {
