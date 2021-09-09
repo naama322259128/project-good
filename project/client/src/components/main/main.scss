@@ -1,31 +1,41 @@
 #logo-about{
 width: 28vw;
 height: auto;
-margin-top: 5vh;
+margin-top: 10vh;
 }
 #txt-about{
     width: 67vw;
     margin-top: 2vh;
     text-align: left !important;
 }
+#build-video{
+    margin-top: 3vh;
+    margin-bottom: 2vh;  
+
+}
+#build-video[poster]{
+
+}
 #all-steps{
     //כל השלבים בפנים
-    text-align: left;
-    width: 67vw;
+    width: 70%;
+    margin-top:8vh;
+    text-align: left !important;
+
 }
 .one-step{
     //שלב אחד ביצירת מכירה
     width: 100%;
-    height: 36vh;
+    height: 42vh;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 2fr 3fr;
     grid-column-gap: 0.2vw;
     grid-row-gap: 1vw;
     margin-bottom: 2vh;
+
 }
 div.one-step div{   
     
-    background-color: pink;
     display: flex;
     // justify-content: center;//האמצע מימין ושמאל
     // align-items: center;//האמצע מלמעלה ולמטה
@@ -34,3 +44,26 @@ div.one-step div{
     font-weight: 200;
     transition: all .3s ease;
 }    
+div.one-step h3{   
+    margin-bottom:3vh;
+}
+
+#small-footer{
+    background-image: url('../../img/footer_dbdcf7_small.png');
+   background-size: 100%;
+   height:22vh;
+   background-repeat: no-repeat;
+   width: 100vw;
+   position: relative;
+ }
+#logo_in_footer{
+   background-image: url('../../img/logo_orange&black&blue.png');
+   background-size: 100%;
+   background-repeat: no-repeat;
+   position: absolute;
+   height: 7vh;
+   width: 12vw;
+   display: inline-block;
+   top: 42%;
+   right: 14%;
+} 

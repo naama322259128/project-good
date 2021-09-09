@@ -8,14 +8,8 @@ import ProfileButton from '../user/ProfileButton';
 import { setLogin } from '../../store/actions/home'
 import { updateCurrentUser } from '../../store/actions/user'
 
-
 const HomeHeader = (props) => {
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  //TODO:
-  //לעשות גם רימוב-איוונט-ליסנר בעת שהקומפוננטה עוזבת
+  
   useEffect(() => {
     window.addEventListener("scroll", changeHeader)
     return () => {
@@ -24,7 +18,7 @@ const HomeHeader = (props) => {
   }, []);
 
   const changeHeader = () => {
-    let s = document.getElementById("smallHeader");
+    let s = document.getElementById("small-header");
     if (s != null) {
       let height = 900//הגובה של ההידר הגדול
       if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
@@ -62,10 +56,10 @@ const HomeHeader = (props) => {
       <div id="right_pic"></div>
       <div id="left_pic"></div>
     </header>
-    <div id="smallHeader">
+    <header id="small-header">
       <Link to={"/home"} id="logo_home_small_header" ></Link>
       {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="login_btn_small_header" onClick={() => props.setLogin(true)}>Login</Button>}
-    </div>
+  </header>  
   </>)
 }
 

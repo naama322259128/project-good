@@ -173,9 +173,7 @@ margin-left: 2vw;
   font-size: 1.7vh ;  
   cursor: pointer;
 }
-
-#smallHeader {  
-    // background-color: #262b96;//כחול
+#small-header{
     background-color: #dbdcf7;
     position: fixed;
     top: -500px;
@@ -184,14 +182,14 @@ margin-left: 2vw;
     transition: top 0.4s;
     height: 8vh;
 }
-    #login_btn_small_header {
+
+#login_btn_small_header {
       cursor: pointer;
       right: 3.6vw !important;
       top: 1.8vh;
 }
 #logo_home_small_header{
   background-image: url('../../img/logo_orange&black&blue.png');
-  
   background-size: 100%;
   background-repeat: no-repeat;
   display: inline-block;
