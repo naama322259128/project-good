@@ -5,10 +5,9 @@ import p from '../../img/logo_orange&black&blue.png'
 import video from '../../img/vvv.mp4'
 import img from '../../img/iii.webp'
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import ProfileButton from '../user/ProfileButton';
 import { setLogin } from '../../store/actions/home'
 import SmallFooter from "./SmallFooter";
+import SmallHeader from "./SmallHeader";
 const About = (props) => {
 
   useEffect(() => {
@@ -19,8 +18,9 @@ const About = (props) => {
   }, []);
   const changeHeader = () => {
     let s = document.getElementById("small-header");
+    debugger;
     if (s != null) {
-      let height = 10
+      let height = 5
       if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
         if (s != null) s.style.top = "0";
       } else {
@@ -29,12 +29,8 @@ const About = (props) => {
     }
   }
   return (<>
-    <header id="small-header">
-      <Link to={"/home"} id="logo_home_small_header" ></Link>
-      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="login_btn_small_header" onClick={() => props.setLogin(true)}>Login</Button>}
-    </header>
+    <SmallHeader/>
     <center>
-
       <img src={p} id="logo-about" />
       {/* <h1>About Us</h1> */}
 

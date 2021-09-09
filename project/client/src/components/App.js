@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import PackagesList from './new auction/auction pricing/PackagesList';
 import { updateUserState } from '../store/actions/user'
 import { setUserItemsInLS } from '../utils/userUtils'
+import AboutAuction from './auction/about/AboutAuction'
 function App(props) {
   useEffect(() => {
     //storage  storageChange  
@@ -24,15 +25,16 @@ function App(props) {
   return (
     <div>
       <Router>
-        <Switch>
-          <Route path={`/auction`} ><Auction /></Route>
+        <AboutAuction/>
+        {/*<Switch>
+           <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
           <Route path={`/new_auction`}><NewAuction /></Route>
           <Route path={`/about`}><About /></Route>
           <Route path={`/your_profile`}><YourProfile /></Route>
           <Route path={`/update_your_details`}><UpdateDetails /></Route>
           <Route path={`/`}><Home /></Route>
-        </Switch>
+        </Switch> */}
       </Router>
     </div >
   );

@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ProfileButton from '../user/ProfileButton';
 import { setLogin } from '../../store/actions/home'
-import { updateCurrentUser } from '../../store/actions/user'
+import SmallHeader from '../main/SmallHeader';
 
 const HomeHeader = (props) => {
-  
+
   useEffect(() => {
     window.addEventListener("scroll", changeHeader)
     return () => {
@@ -56,10 +56,7 @@ const HomeHeader = (props) => {
       <div id="right_pic"></div>
       <div id="left_pic"></div>
     </header>
-    <header id="small-header">
-      <Link to={"/home"} id="logo_home_small_header" ></Link>
-      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="login_btn_small_header" onClick={() => props.setLogin(true)}>Login</Button>}
-  </header>  
+    <SmallHeader />
   </>)
 }
 
@@ -70,4 +67,4 @@ const mapStateToProps = state => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { setLogin, updateCurrentUser })(HomeHeader);
+export default connect(mapStateToProps, { setLogin })(HomeHeader);
