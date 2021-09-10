@@ -12,6 +12,7 @@ import PackagesList from './new auction/auction pricing/PackagesList';
 import { updateUserState } from '../store/actions/user'
 import { setUserItemsInLS } from '../utils/userUtils'
 import AboutAuction from './auction/about/AboutAuction'
+import ContactForm from './main/ContactForm';
 function App(props) {
   useEffect(() => {
     //storage  storageChange  
@@ -25,7 +26,8 @@ function App(props) {
   return (
     <div>
       <Router>
-        <AboutAuction/>
+        {/* <AboutAuction/> */}
+        <ContactForm/>
         {/*<Switch>
            <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
