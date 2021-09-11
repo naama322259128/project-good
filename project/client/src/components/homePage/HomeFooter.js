@@ -1,16 +1,16 @@
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import './home.scss';
-import { setLogin } from '../../store/actions/home';
-import { useEffect} from "react";
+import { setLogin, setShowContactForm } from '../../store/actions/home';
+import { useEffect } from "react";
 import { updateCurrentUser } from '../../store/actions/user'
-
+import ContactForm from '../main/ContactForm'
 
 const HomeFooter = (props) => {
     return (
         <footer className="home_footer">
             <div id="logo_in_home_footer" ></div>
-            <div id="contact_us"><p>CONTACT US</p></div>
+            <div id="contact_us" onClick={() => props.setShowContactForm(true)}><p>CONTACT US</p></div>
             <div id="menu_footer">
                 <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
                 <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
@@ -28,15 +28,17 @@ const HomeFooter = (props) => {
                     Thanks to its uniqueness.
                 </p>
             </div>
+            {props.showForm && <ContactForm />}
         </footer>
     );
 }
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user.currentUser
+        currentUser: state.user.currentUser,
+        showForm: state.main.showContactForm
     }
 }
 
-export default connect(mapStateToProps, { setLogin,updateCurrentUser })(HomeFooter);
+export default connect(mapStateToProps, { setLogin, updateCurrentUser, setShowContactForm })(HomeFooter);
 
 

@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from "react-redux";
 import { Form, Input, TextArea, Button } from 'semantic-ui-react';
 import './main.scss';
 import Swal from 'sweetalert2';
 import emailjs from 'emailjs-com';
+import { setShowContactForm } from '../../store/actions/home';
 
 const SERVICE_ID = "**************";
 const TEMPLATE_ID = "*******";
 const USER_ID = "****************";
-const ContactForm = () => {
+const ContactForm = (props) => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -26,11 +28,12 @@ const ContactForm = () => {
                     text: error.text,
                 })
             });
+        props.setShowContactForm(false);
         e.target.reset()
     };
     return (
-        <div className=' App'>
-            <Form onSubmit={handleOnSubmit}>
+        <div id='contactDiv'>
+            <Form id="contactForm" onSubmit={handleOnSubmit}>
                 <Form.Field
                     id='form-input-control-email'
                     control={Input}
@@ -64,4 +67,9 @@ const ContactForm = () => {
         </div >
     );
 }
-export default ContactForm;
+const mapStateToProps = (state) => {
+    return {
+    }
+}
+
+export default connect(mapStateToProps, { setShowContactForm })(ContactForm);

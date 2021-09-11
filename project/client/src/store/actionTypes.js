@@ -11,6 +11,7 @@ export const UPDATE_CURRENT_USER="UPDATE_CURRENT_USER"//עדכון פרטי מש
 export const UPDATE_SHOPPING_CART="UPDATE_SHOPPING_CART"
 // export const SET_YOUR_PROFILE="SET_YOUR_PROFILE"//האם להציג את הyour profile
 export const UPDATE_USER_STATE="UPDATE_USER_STATE"
+export const SET_SHOW_CONTACT_FORM="SET_SHOW_CONTACT_FORM"
 
 
 /******************************************   NEW AUCTION   ****************************************************/
