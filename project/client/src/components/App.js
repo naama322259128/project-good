@@ -28,6 +28,7 @@ function App(props) {
       <Router>
         {/* <AboutAuction/> */}
         {/* <ContactForm/> */}
+
         <Switch>
           <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
