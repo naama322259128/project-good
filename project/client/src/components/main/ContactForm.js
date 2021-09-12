@@ -6,9 +6,11 @@ import Swal from 'sweetalert2';
 import emailjs from 'emailjs-com';
 import { setShowContactForm } from '../../store/actions/home';
 
-const SERVICE_ID = "**************";
-const TEMPLATE_ID = "*******";
-const USER_ID = "****************";
+const SERVICE_ID = "service_2itn7f5";
+const TEMPLATE_ID = "template_e5upbvj";
+const USER_ID = "user_mLQkiwydyACg1oMa4TONi";
+
+
 const ContactForm = (props) => {
 
     const handleOnSubmit = (e) => {
@@ -32,7 +34,17 @@ const ContactForm = (props) => {
         e.target.reset()
     };
     return (
+
+
+
+
+
         <div id='contactDiv'>
+
+
+
+
+
             <Form id="contactForm" onSubmit={handleOnSubmit}>
                 <Form.Field
                     id='form-input-control-email'
@@ -66,9 +78,12 @@ const ContactForm = (props) => {
             </Form>
         </div >
     );
+
+
 }
 const mapStateToProps = (state) => {
     return {
+
     }
 }
 
