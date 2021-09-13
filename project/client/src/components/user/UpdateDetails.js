@@ -214,7 +214,6 @@ const UpdateDetails = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        //currentUser: state.user.currentUser
     };
 }
 export default connect(mapStateToProps, { updateUser, updateUserState, setUserItemsInLS })(UpdateDetails);

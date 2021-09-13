@@ -18,20 +18,20 @@ const ContactForm = (props) => {
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, USER_ID)
             .then((result) => {
                 console.log(result.text);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Message Sent Successfully'
-                })
+                /* Swal.fire({
+                     icon: 'success',
+                     title: 'Message Sent Successfully'
+                 })*/
             }, (error) => {
                 console.log(error.text);
-                Swal.fire({
+                /*Swal.fire({
                     icon: 'error',
                     title: 'Ooops, something went wrong',
                     text: error.text,
-                })
+                })*/
             });
-        props.setShowContactForm(false);
-        e.target.reset()
+        //props.setShowContactForm(false);
+        // e.target.reset()
     };
     return (
 
@@ -46,31 +46,34 @@ const ContactForm = (props) => {
 
 
             <Form id="contactForm" onSubmit={handleOnSubmit}>
-                <Form.Field
-                    id='form-input-control-email'
-                    control={Input}
-                    label='Email'
-                    name='user_email'
-                    placeholder='Email…'
-                    required
-                    icon='mail'
-                    iconPosition='left'
-                />
+
+
+
                 <Form.Field
                     id='form-input-control-last-name'
                     control={Input}
                     label='Name'
-                    name='user_name'
+                    name='from_name'
                     placeholder='Name…'
                     required
                     icon='user circle'
                     iconPosition='left'
                 />
                 <Form.Field
+                    id='form-input-control-email'
+                    control={Input}
+                    label='Email'
+                    name='from_email'
+                    placeholder='Email…'
+                    required
+                    icon='mail'
+                    iconPosition='left'
+                />
+                <Form.Field
                     id='form-textarea-control-opinion'
                     control={TextArea}
                     label='Message'
-                    name='user_message'
+                    name='message'
                     placeholder='Message…'
                     required
                 />

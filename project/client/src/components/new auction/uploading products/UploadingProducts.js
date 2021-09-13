@@ -19,5 +19,5 @@ const mapStateToProps = (state) => {
 
     };
 }
-export default connect(mapStateToProps, { /*showAddProduct*/ })(UploadingProducts);
+export default connect(mapStateToProps, {})(UploadingProducts);
 

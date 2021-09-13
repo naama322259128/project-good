@@ -5,13 +5,7 @@ import { setPackagesList, } from '../../../store/actions/newAuction'
 
 const PackagesList = (props) => {
 
-    //let [arr, setArr] = useState(JSON.parse(localStorage.getItem("packagesList")))
-    // useEffect(() => {
-    //     setArr(JSON.parse(localStorage.getItem("packagesList")));
-    //     props.setPackagesList(JSON.parse(localStorage.getItem("packagesList")));
-    // }, []);
-
-    let deletePackage = (p) => {
+   let deletePackage = (p) => {
         let x = JSON.parse(localStorage.getItem("packagesList")).remove(p);
         localStorage.setItem("packagesList", JSON.stringify(x))
         //props.setPackagesList(x);
@@ -19,7 +13,7 @@ const PackagesList = (props) => {
 
     return (<>
         <div className="ui divided selection list">
-            {/*arr && arr*/props.packagesList.map((item, index) => {
+            {props.packagesList.map((item, index) => {
                 return (<div key={index}>
                     <h2>qty: {item.qty}</h2>
                     <h2>discount: {item.discount}</h2>

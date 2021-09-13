@@ -9,6 +9,7 @@ import ContactForm from '../main/ContactForm'
 const HomeFooter = (props) => {
     return (
         <footer className="home_footer">
+            {props.showForm && <ContactForm />}
             <div id="logo_in_home_footer" ></div>
             <div id="contact_us" onClick={() => props.setShowContactForm(true)}><p>CONTACT US</p></div>
             <div id="menu_footer">
@@ -28,7 +29,6 @@ const HomeFooter = (props) => {
                     Thanks to its uniqueness.
                 </p>
             </div>
-            {props.showForm && <ContactForm />}
         </footer>
     );
 }

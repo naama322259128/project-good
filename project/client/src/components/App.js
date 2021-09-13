@@ -13,23 +13,31 @@ import { updateUserState } from '../store/actions/user'
 import { setUserItemsInLS } from '../utils/userUtils'
 import AboutAuction from './auction/about/AboutAuction'
 import ContactForm from './main/ContactForm';
+import StateCounter from './StateCounter';
 function App(props) {
-  useEffect(() => {
+
+ useEffect(() => {
+
+
+    
     //storage  storageChange  
-    window.addEventListener("storage", () => props.updateUserState());//?
+    //window.addEventListener("storage", () => props.updateUserState());//?
     // window.addEventListener('click', () => alert("click from window.addEventListener('click')"));//good
-    window.addEventListener('reload', () => props.updateUserState());//?
-    window.onstorage = () => { alert("storage") };
+    //window.addEventListener('reload', () => props.updateUserState());//?
+    //window.onstorage = () => { alert("storage") };//doesn't do also it
 
     props.setUserItemsInLS();//good
   }, [])
   return (
     <div>
       <Router>
+        <button onClick={()=>localStorage.setItem("dd",770)}>lllllllllllllllll</button>
         {/* <AboutAuction/> */}
         {/* <ContactForm/> */}
 
-        <Switch>
+<StateCounter/>
+
+        {/* <Switch>
           <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
           <Route path={`/new_auction`}><NewAuction /></Route>
@@ -37,7 +45,7 @@ function App(props) {
           <Route path={`/your_profile`}><YourProfile /></Route>
           <Route path={`/update_your_details`}><UpdateDetails /></Route>
           <Route path={`/`}><Home /></Route>
-        </Switch>
+        </Switch> */}
       </Router>
     </div >
   );

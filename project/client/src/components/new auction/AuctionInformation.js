@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { setDateOfLotery, setDateOfEnd, setTerms, setDateOfStart } from "../../store/actions/newAuction";
 import { connect } from "react-redux";
 import './NewAuction.scss'
 import { makeStyles } from '@material-ui/core/styles';
@@ -106,4 +105,4 @@ const AuctionInformation = (props) => {
     //למה התאריכים לא נשמרים בסטייט
 }
 
-export default connect(null, { /*setDateOfLotery, setDateOfEnd, setTerms, setDateOfStart */ })(AuctionInformation);
+export default connect(null, { })(AuctionInformation);

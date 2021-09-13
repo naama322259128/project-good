@@ -7,7 +7,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/user";
-import { resetNewAuctionState } from '../../store/actions/newAuction';
 // import{setYourProfile} from '../../store/actions/signIn';
 
 const ITEM_HEIGHT = 48;
@@ -70,8 +69,6 @@ const ProfileButton = (props) => {
 
 const mapStateToProps = state => {
     return {
-       // currentUser: state.user.currentUser
-
     };
 }
-export default connect(mapStateToProps, { signOut, /*resetNewAuctionState*/ })(ProfileButton);
+export default connect(mapStateToProps, { signOut})(ProfileButton);

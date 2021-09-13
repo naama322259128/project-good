@@ -48,15 +48,7 @@ const FinalStep = (props) => {
         localStorage.removeItem("showSetPackageBtn");
 
     }
-    /*let newAuction = {
-        //לשנות את הסטטוס למנהל
-        name: props.organizationName,
-        auctionManager: props.currentUser,
-        lotteriesDate: props.dateOfLottery,
-        registrationEndDate: props.registrationEndDate,
-        purchasePackage: props.packagesList,
-        productList: props.productsList,
-    }*/
+
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -79,7 +71,7 @@ const FinalStep = (props) => {
                 <Button variant="contained" size="medium" onClick={props.setLastModal(false)} color="primary">
                     Cancle
                 </Button>
-                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { addNewAuctionToDB();/*props.createNewAuction(newAuction);*/props.setLastModal(true) }} color="primary">
+                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { addNewAuctionToDB();props.setLastModal(true) }} color="primary">
                     Ok
                 </Button></Link>
             </DialogActions>
@@ -89,14 +81,6 @@ const FinalStep = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        /*pricesList: state.auction.pricesList,//רשימת מחירים
-        packagesList: state.auction.packagesList,// רשימת חבילות
-        productsList: state.auction.productsList,//רשימת מוצרים
-        regulationsFile: state.auction.regulationsFile,//קובץ תקנון
-        dateOfLottery: state.auction.dateOfLottery,//תאריך ביצוע ההגרלות
-        registrationEndDate: state.auction.registrationEndDate,//תאריך סיום ההרשמה
-        organizationName: state.auction.organizationName,//שם ארגון
-        organizationPhotos: state.auction.organizationPhotos,//תמונות הארגון*/
         currentUser: state.user.currentUser,
     };
 }

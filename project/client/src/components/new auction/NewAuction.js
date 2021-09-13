@@ -46,8 +46,8 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
-        window.addEventListener('storage', props.updateNewAuctioinState);
-        window.addEventListener('reload', props.updateNewAuctioinState);
+        //window.addEventListener('storage', props.updateNewAuctioinState);
+        //window.addEventListener('reload', props.updateNewAuctioinState);
         props.setNewAuctionItemsInLS();
     }, [])
 
@@ -151,16 +151,7 @@ const NewAuction = (props) => {
 const mapStateToProps = (state) => {
     return {
         isOpen: state.auction.finalStepModalIsOpen,
-        /*    oName: state.auction.organizationName,
-            oTxt: state.auction.organizationTxt,
-            oPhotos: state.auction.organizationPhotos,
-            productsList: state.auction.productsList,
-            packagesList: state.auction.packagesList,
-    
-            startDate: state.auction.registrationStartDate,
-            endDate: state.auction.registrationEndDate,
-            loteryDate: state.auction.dateOfLottery,
-            terms: state.auction.terms*/
+
     };
 }
 export default connect(mapStateToProps, { updateNewAuctioinState, setNewAuctionItemsInLS })(NewAuction);

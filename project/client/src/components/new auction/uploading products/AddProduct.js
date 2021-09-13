@@ -55,7 +55,6 @@ const AddProduct = (props) => {
 const mapStateToProps = (state) => {
     return {
         showSetProduct: state.auction.showSetProduct,
-        // arr: state.auction.productsList
     };
 }
-export default connect(mapStateToProps, { addProduct, showAddProduct, setProductsList/*, addProductToDb */ })(AddProduct);
+export default connect(mapStateToProps, { addProduct, showAddProduct, setProductsList })(AddProduct);
