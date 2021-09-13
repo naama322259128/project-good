@@ -1,22 +1,29 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { setPackagesList, showAddPackage } from '../../../store/actions/newAuction'
-const AddPackage = (props) => {
+// import { setPackagesList, showAddPackage } from '../../../store/actions/newAuction'
+import { useStorageReducer } from 'react-storage-hooks';
+import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../../store/reducers/newAuctionState.js'
+import * as actionTypes from '../../../store/actionTypes'
 
+const AddPackage = (props) => {
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
+        reducer,//רדיוסר
+        newAuctionState //מה הסטייט שיהיה בלוקל סטורג' וזה גם הסטייט הכללי
+    );
     let newPackage = { qty: "", discount: 0 };
     let checkQty = () => {
-        debugger;
-        let tmp = JSON.parse(localStorage.getItem('newAuction'));
-        tmp = tmp['packagesList'].filter(p => p.qty === newPackage.qty);
-
-        if (tmp.length != 0 || newPackage.qty < 2) document.getElementById("qtyInput").style.borderColor = "red";
+        let tmp = state.packagesList.filter(p => p.qty === newPackage.qty);//פילטר מחזיר רק את אלה שעונים לתנאי
+        if (tmp.length > 0 || newPackage.qty < 2) document.getElementById("qtyInput").style.borderColor = "red";
         else document.getElementById("qtyInput").style.borderColor = "";
+        document.getElementById("qtyInput").disabled = true;
     }
     let checkDiscount = () => {
         if (newPackage.discount < 2) document.getElementById("discountInput").style.borderColor = "red";
         else document.getElementById("discountInput").style.borderColor = "";
     }
-    let addPackageToLS = () => {
+    /*let addPackageToLS = () => {
         let arr = localStorage.getItem('packagesList');
         arr.push(newPackage)
 
@@ -25,7 +32,7 @@ const AddPackage = (props) => {
 
         localStorage.setItem('showSetPackageBtn', true);
         //props.showAddPackage(true);
-    }
+    }*/
     return (
         <form >
             <div className="ui equal width form">
@@ -40,15 +47,24 @@ const AddPackage = (props) => {
                     </div>
                 </div>
             </div>
-            <button className="positive ui button" onClick={() => { addPackageToLS(newPackage); }}>Add</button>
-        </form>
+            <button className="positive ui button"
+                disabled={newPackage.qty == "" || newPackage.qty == "0" || newPackage.discount < 2}
+                onClick={() => {
+                    dispatch({
+                        type: actionTypes.ADD_PACKAGE,
+                        payload: newPackage
+                    })
+                    /*addPackageToLS(newPackage);*/
+                }}>Add</button>
+        </form >
     );
 }
 const mapStateToProps = (state) => {
     return {
+        // arr: state.auction.packagesList
     };
 }
-export default connect(mapStateToProps, { setPackagesList, showAddPackage })(AddPackage);
+export default connect(mapStateToProps, {/* setPackagesList, showAddPackage*/ })(AddPackage);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable

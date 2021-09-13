@@ -12,12 +12,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
-import { Link } from 'react-router-dom'
-import { updateNewAuctioinState } from '../../store/actions/newAuction'
+// import { updateNewAuctioinState } from '../../store/actions/newAuction'
 // import { setNewAuctionItemsInLS } from '../../utils/newAuctionUtils'
-
 import { useStorageReducer } from 'react-storage-hooks';
 import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../store/reducers/newAuctionState.js'
+import * as actionTypes from '../../store/actionTypes'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,11 +48,17 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
-    useEffect(() => {
-        //window.addEventListener('storage', props.updateNewAuctioinState);
-        //window.addEventListener('reload', props.updateNewAuctioinState);
-        //props.setNewAuctionItemsInLS();
-    }, [])
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
+        reducer,//רדיוסר
+        newAuctionState //מה הסטייט שיהיה בלוקל סטור' וזה גם הסטייט הכללי
+    );
+    //useEffect(() => {
+    //window.addEventListener('storage', props.updateNewAuctioinState);
+    //window.addEventListener('reload', props.updateNewAuctioinState);
+    //props.setNewAuctionItemsInLS();
+    // }, [])
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -71,7 +76,9 @@ const NewAuction = (props) => {
             newSkipped = new Set(newSkipped.values());
             newSkipped.delete(activeStep);
         }
-
+        //מתי לעשות את השמירה של המכירה 
+        //או חלקים ממנה (מוצרים/חבילות וכו' בנפרד),
+        // בכל לחיצה כאן, או כשעוזב את הקומפוננטה הזו? או אחר
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
     };
@@ -118,7 +125,7 @@ const NewAuction = (props) => {
             <div>
                 {activeStep === steps.length ? (
                     <div>
-                        <Typography className={classes.instructions}>{props.isOpen ? <FinalStep /> : null}</Typography>
+                        <Typography className={classes.instructions}>{state.finalStepModalIsOpen ? <FinalStep /> : null}</Typography>
                         <Button onClick={handleBack} className={classes.button}>Back</Button>
                         <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>
@@ -154,9 +161,9 @@ const NewAuction = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        isOpen: state.auction.finalStepModalIsOpen,
+        // isOpen: state.auction.finalStepModalIsOpen,
 
     };
 }
-export default connect(mapStateToProps, { updateNewAuctioinState/*, setNewAuctionItemsInLS*/ })(NewAuction);
+export default connect(mapStateToProps, { /*updateNewAuctioinState, setNewAuctionItemsInLS*/ })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

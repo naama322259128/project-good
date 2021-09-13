@@ -176,7 +176,7 @@ export const beManager = (_id) => {
     }
 }
 
-
+/*
 export const updateNewAuctioinState = () => {
     updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
     let obj =
@@ -198,4 +198,4 @@ export const updateNewAuctioinState = () => {
         payload: obj
     }
 }
-
+*/
