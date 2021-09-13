@@ -24,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
 const AuctionInformation = (props) => {
 
     useEffect(() => { // componentWillUnmount
-        localStorage.setItem("DateOfLotery", JSON.stringify(selectedDate1));
+     /*   localStorage.setItem("DateOfLotery", JSON.stringify(selectedDate1));
         localStorage.setItem("DateOfStart", JSON.stringify(selectedDate2));
         localStorage.setItem("DateOfEnd", JSON.stringify(selectedDate3));
         localStorage.setItem("terms", JSON.stringify(terms));
-        localStorage.setItem("auctionName", JSON.stringify(name));
+        localStorage.setItem("auctionName", JSON.stringify(name));*/
     });
 
     const classes = useStyles();

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const setNewAuctionItemsInLS = () => {
+/*export const setNewAuctionItemsInLS = () => {
     if (localStorage.getItem("showSetProductBtn") === null) {
         localStorage.setItem("showSetProductBtn", true);
         localStorage.setItem("productsList", JSON.stringify([]));
@@ -9,4 +9,4 @@ export const setNewAuctionItemsInLS = () => {
     }
     return { type: 22 }
 
-}
+}*/

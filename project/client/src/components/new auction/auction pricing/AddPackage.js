@@ -5,11 +5,12 @@ const AddPackage = (props) => {
 
     let newPackage = { qty: "", discount: 0 };
     let checkQty = () => {
-        let tmp = JSON.parse(localStorage.getItem('packagesList')).filter(p => p.qty === newPackage.qty);
-        console.log(tmp);
+        debugger;
+        let tmp = JSON.parse(localStorage.getItem('newAuction'));
+        tmp = tmp['packagesList'].filter(p => p.qty === newPackage.qty);
+
         if (tmp.length != 0 || newPackage.qty < 2) document.getElementById("qtyInput").style.borderColor = "red";
         else document.getElementById("qtyInput").style.borderColor = "";
-
     }
     let checkDiscount = () => {
         if (newPackage.discount < 2) document.getElementById("discountInput").style.borderColor = "red";
@@ -25,7 +26,7 @@ const AddPackage = (props) => {
         localStorage.setItem('showSetPackageBtn', true);
         //props.showAddPackage(true);
     }
-    return (props.isShow ? (
+    return (
         <form >
             <div className="ui equal width form">
                 <div className="fields">
@@ -41,11 +42,10 @@ const AddPackage = (props) => {
             </div>
             <button className="positive ui button" onClick={() => { addPackageToLS(newPackage); }}>Add</button>
         </form>
-    ) : null);
+    );
 }
 const mapStateToProps = (state) => {
     return {
-        isShow: state.auction.showSetPackage
     };
 }
 export default connect(mapStateToProps, { setPackagesList, showAddPackage })(AddPackage);

@@ -14,7 +14,11 @@ import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 import { Link } from 'react-router-dom'
 import { updateNewAuctioinState } from '../../store/actions/newAuction'
-import { setNewAuctionItemsInLS } from '../../utils/newAuctionUtils'
+// import { setNewAuctionItemsInLS } from '../../utils/newAuctionUtils'
+
+import { useStorageReducer } from 'react-storage-hooks';
+import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../store/reducers/newAuctionState.js'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -45,10 +49,17 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        "newAuction",//שם המשתנה בלוקל סטורגוהוא יכיל את כל הסטייט
+        reducer,//רדיוסר
+        { ...newAuctionState }//אתחול ראשוני של הסטייט הכללי, וזה גם מה שיהיה בלוקלסטורג
+    );
+
     useEffect(() => {
         //window.addEventListener('storage', props.updateNewAuctioinState);
         //window.addEventListener('reload', props.updateNewAuctioinState);
-        props.setNewAuctionItemsInLS();
+        //props.setNewAuctionItemsInLS();
     }, [])
 
     const classes = useStyles();
@@ -154,5 +165,5 @@ const mapStateToProps = (state) => {
 
     };
 }
-export default connect(mapStateToProps, { updateNewAuctioinState, setNewAuctionItemsInLS })(NewAuction);
+export default connect(mapStateToProps, { updateNewAuctioinState/*, setNewAuctionItemsInLS*/ })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

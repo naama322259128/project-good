@@ -1,5 +1,6 @@
 import * as actionTypes from '../actionTypes';
-const initialState = {
+
+export const initialState = {
     packagesList: [],//רשימת חבילות
     productsList: [],//רשימ מוצרים
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
@@ -16,6 +17,7 @@ const initialState = {
 export const newAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SHOW_ADD_PACKAGE: {
+           //להציג את הטופס של הוספת חבילה חדשה
             return {
                 ...state,
                 showSetPackage: true

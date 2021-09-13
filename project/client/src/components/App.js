@@ -16,10 +16,10 @@ import ContactForm from './main/ContactForm';
 import StateCounter from './StateCounter';
 function App(props) {
 
- useEffect(() => {
+  useEffect(() => {
 
 
-    
+
     //storage  storageChange  
     //window.addEventListener("storage", () => props.updateUserState());//?
     // window.addEventListener('click', () => alert("click from window.addEventListener('click')"));//good
@@ -31,12 +31,10 @@ function App(props) {
   return (
     <div>
       <Router>
-        <button onClick={()=>localStorage.setItem("dd",770)}>lllllllllllllllll</button>
         {/* <AboutAuction/> */}
         {/* <ContactForm/> */}
 
-<StateCounter/>
-
+        <NewAuction />
         {/* <Switch>
           <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
