@@ -22,5 +22,4 @@ export const  setCurrentAuctionItemsInLS = async() => {
     localStorage.setItem("currentAuction", JSON.stringify(""));
   }
   return { type: 22 }
-
 }
