@@ -17,7 +17,7 @@ export const initialState = {
 export const newAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SHOW_ADD_PACKAGE: {
-           //להציג את הטופס של הוספת חבילה חדשה
+            //להציג את הטופס של הוספת חבילה חדשה
             return {
                 ...state,
                 showSetPackage: true

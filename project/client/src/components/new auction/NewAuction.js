@@ -49,13 +49,6 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        "newAuction",//שם המשתנה בלוקל סטורגוהוא יכיל את כל הסטייט
-        reducer,//רדיוסר
-        { ...newAuctionState }//אתחול ראשוני של הסטייט הכללי, וזה גם מה שיהיה בלוקלסטורג
-    );
-
     useEffect(() => {
         //window.addEventListener('storage', props.updateNewAuctioinState);
         //window.addEventListener('reload', props.updateNewAuctioinState);

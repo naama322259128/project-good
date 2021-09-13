@@ -3,10 +3,9 @@ import axios from 'axios';
 import { updateCurrentUser } from './user'
 
 
-export const showAddPackage = (b) => {
+export const showAddPackage = () => {
     return {
-        type: actionTypes.SHOW_ADD_PACKAGE,
-        payload: b
+        type: actionTypes.SHOW_ADD_PACKAGE
     }
 }
 export const addPackage = (p) => {
