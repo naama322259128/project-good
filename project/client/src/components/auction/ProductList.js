@@ -15,7 +15,7 @@ const ProductList = (props) => {
             return (<Product key={parseInt(item._id)} item={item} />)
         })} */}
 
-        {props.getProducts(JSON.parse(localStorage.getItem("currentAuction")).currnetAuction._id).map((item) => {
+        {props.getProducts(JSON.parse(localStorage.getItem("currentAuction")).currnetAuction).map((item) => {
             return (<Product key={parseInt(item._id)} item={item} />)
         })}
 

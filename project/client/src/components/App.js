@@ -17,9 +17,6 @@ import StateCounter from './StateCounter';
 function App(props) {
 
   useEffect(() => {
-
-
-
     //storage  storageChange  
     //window.addEventListener("storage", () => props.updateUserState());//?
     // window.addEventListener('click', () => alert("click from window.addEventListener('click')"));//good
@@ -31,8 +28,7 @@ function App(props) {
   return (
     <div>
       <Router>
-        <Auction />
-        {/* <Switch>
+        <Switch>
           <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
           <Route path={`/new_auction`}><NewAuction /></Route>
@@ -40,7 +36,7 @@ function App(props) {
           <Route path={`/your_profile`}><YourProfile /></Route>
           <Route path={`/update_your_details`}><UpdateDetails /></Route>
           <Route path={`/`}><Home /></Route>
-        </Switch> */}
+        </Switch>
       </Router>
     </div >
   );
