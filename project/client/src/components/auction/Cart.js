@@ -5,32 +5,41 @@ import { Link } from 'react-router-dom'
 import './Auction.scss';
 import { useState } from "react";
 import Button from '@material-ui/core/Button';
-import { addOrder } from '../../store/actions/user';
+import { addOrderToDB } from '../../store/actions/user';
 import Order from '../../models/order';
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes'
 
 const Cart = (props) => {
-    const [sum, setSum] = useState(0);
-    //תשלום
+
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'user',
+        reducer,
+        userState
+    );
+
     const amountToPay = () => {
-        props.arr.map((item) => {
-            setSum(item.cnt * item.product.price);
-        })
+        let sum = 0;
+        state.shoppingCart.map((item) => { sum = item.cnt * item.product.price });
         return sum;
     }
 
-    //סיום הזמנה
     const OrderCompletion = () => {
-
-        //אובייקט מסוג Order
-        const order = new Order((JSON.parse(localStorage.getItem("currentUser")))._id,
-            JSON.parse(localStorage.getItem("prodactsInCart")),
-            "",
+        const newOrder = new Order(
+            state.currentUser,
+            state.shoppingCart,
+            "",//אחרי זה להכניס קוד תשלום
             amountToPay(),
-            (JSON.parse(localStorage.getItem("currentAuction")))._id,
-            []
-        )
-        props.addOrder(order);
-
+            JSON.parse(localStorage.getItem("currentAcution")).currentAuction,
+            [],//להוסיף בחירת מתנות
+            new Date()
+        );
+        dispatch({
+            type: actionTypes.ADD_ORDER,
+            payload: newOrder
+        })
     }
 
     return (
@@ -39,8 +48,8 @@ const Cart = (props) => {
             <br />
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
-            {props.arr.map((item, index) => {
-                return (<ProductInCart key={parseInt(index)} item={item} setCount={props.setCnt} />)
+            {state.shoppingCart.map((item, index) => {
+                return (<ProductInCart key={parseInt(index)} item={item} /*setCount={props.setCnt}*/ />)
             })}
             {/* כפתור אישור פה יועבר כל בסל מהלוקל סטורג למסד נתונים*/}
             <Button onClick={OrderCompletion}>OK</Button>
@@ -50,8 +59,8 @@ const Cart = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        arr: state.user.shoppingCart,
+        // arr: state.user.shoppingCart,
     }
 }
 
-export default connect(mapStateToProps, { setCnt, addOrder })(Cart);
+export default connect(mapStateToProps, { /*setCnt, addOrderToDB*/ })(Cart);

@@ -1,5 +1,5 @@
 import * as actionTypes from '../actionTypes';
-const initialState = {
+export const initialState = {
     currentUser: null,
     loginIsOpen: false,
     shoppingCart: [    //סל מוצרים

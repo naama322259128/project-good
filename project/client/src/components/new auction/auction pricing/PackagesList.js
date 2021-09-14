@@ -13,6 +13,7 @@ const PackagesList = (props) => {
     //props.setPackagesList(x);
     //}
     const [state, dispatch, writeError] = useStorageReducer(
+        //צריך לבדוק שהכרנט יוסר תואם למידע בלוקל סטורג
         localStorage,
         'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
         reducer,//רדיוסר

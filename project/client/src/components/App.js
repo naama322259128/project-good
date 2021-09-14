@@ -31,10 +31,7 @@ function App(props) {
   return (
     <div>
       <Router>
-        {/* <AboutAuction/> */}
-        {/* <ContactForm/> */}
-
-        <NewAuction />
+        <Auction />
         {/* <Switch>
           <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>

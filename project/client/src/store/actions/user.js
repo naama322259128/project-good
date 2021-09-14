@@ -83,7 +83,12 @@ export const getOrderById = (order) => {
         })
     }
 }
-
+export const addOrderToState = (order) => {
+    return {
+        type: actionTypes.ADD_ORDER,
+        payload: order
+    }
+}
 export const signOut = () => {
     localStorage.clear();
     return {
@@ -110,8 +115,7 @@ export const updateUserState = () => {
 
 
 //הוספת הזמנה
-
-export const addOrder = (order) => {
+export const addOrderToDB = (order) => {
     return (dispatch) => {
         axios.post(`http://localhost:5000/orders`, order).then(succ => {
             console.log(succ.data);

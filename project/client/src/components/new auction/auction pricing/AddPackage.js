@@ -12,12 +12,11 @@ const AddPackage = (props) => {
         reducer,//רדיוסר
         newAuctionState //מה הסטייט שיהיה בלוקל סטורג' וזה גם הסטייט הכללי
     );
-    let newPackage = { qty: "", discount: 0 };
+    let newPackage = { qty: 0, discount: 0 };
     let checkQty = () => {
         let tmp = state.packagesList.filter(p => p.qty === newPackage.qty);//פילטר מחזיר רק את אלה שעונים לתנאי
         if (tmp.length > 0 || newPackage.qty < 2) document.getElementById("qtyInput").style.borderColor = "red";
         else document.getElementById("qtyInput").style.borderColor = "";
-        document.getElementById("qtyInput").disabled = true;
     }
     let checkDiscount = () => {
         if (newPackage.discount < 2) document.getElementById("discountInput").style.borderColor = "red";
@@ -48,7 +47,7 @@ const AddPackage = (props) => {
                 </div>
             </div>
             <button className="positive ui button"
-                disabled={newPackage.qty == "" || newPackage.qty == "0" || newPackage.discount < 2}
+                // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
                 onClick={() => {
                     dispatch({
                         type: actionTypes.ADD_PACKAGE,
