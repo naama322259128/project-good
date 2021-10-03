@@ -24,7 +24,6 @@ const HomeHeader = (props) => {
 
   useEffect(() => {
     window.addEventListener("scroll", changeHeader);
-    props.setCurrentUser(state.currentUser)//הגדרת המשתמש הנוכחי בסטייט הפנימי לפי הסטייט שלא מתאפס ברענון
     return () => { window.removeEventListener('scroll', changeHeader); };
   }, []);
 
@@ -42,8 +41,12 @@ const HomeHeader = (props) => {
     <header id="home_header" >
       <Link to={"/home"} id="logo_home_header" />
 
-      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { props.setLogin(true) }}>Login</Button>}
-      {props.loginIsOpen ? (<Login />) : null}
+      {state.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin"
+        onClick={() => {
+          dispatch({ type: actionTypes.SET_LOGIN, payload: true  /*props.setLogin(true) */ })
+        }}>Login</Button>}
+
+      {state.loginIsOpen ? (<Login />) : null}
 
       <div id="home_text">
         <h3>Build your </h3>
@@ -57,7 +60,16 @@ const HomeHeader = (props) => {
 
         <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
 
-        <Button href={state.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
+        <Button
+          href={state.currentUser ? "/new_auction" : '#'}
+          onClick={state.currentUser ?
+            null :
+            () => {
+              window.scrollTo(0, 0);
+              dispatch({ type: actionTypes.SET_LOGIN, payload: true })
+            }
+          }
+          type="button" className="btn" id="btnNewAuction">
           BUILD CHINESE AUCTION
         </Button>
       </div>
@@ -73,8 +85,8 @@ const HomeHeader = (props) => {
 
 const mapStateToProps = state => {
   return {
-    loginIsOpen: state.user.loginIsOpen,
-    currentUser: state.user.currentUser
+    // loginIsOpen: state.user.loginIsOpen,
+    // currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, {setCurrentUser, setLogin })(HomeHeader);
+export default connect(mapStateToProps, { setCurrentUser, setLogin })(HomeHeader);

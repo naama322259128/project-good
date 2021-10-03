@@ -55,13 +55,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = (props) => {
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'user',
-        reducer,
-        userState
-    );
-
+ 
     const classes = useStyles();
     const handleChange = (prop) => (event) => { setValues({ ...values, [prop]: event.target.value }); };
     const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }); };
@@ -75,6 +69,12 @@ const SignUp = (props) => {
     });
 
 
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'user',
+        reducer,
+        userState
+      );
 
     //רישום משתמש חדש
     let password = "";
@@ -87,13 +87,20 @@ const SignUp = (props) => {
     const createUser = () => {
         //מה עם סטטוס וחיסיון
         let newUser = new User(password, userName, email, birthYear, address, phone, 3);
-        props.addUser(newUser);//מגדיר בסטייט ובסטורג
+        props.addUser(newUser);
+
+                {/* 
+        לאחר הלחיצה המשתמש החדש נשמר בסטייט שמתאפס בטעינה מחדש ולא בסטייט שנשמר לפי הסטורג
+אולי נעשה אחרי שהפונקציה הזו סיימה, דיספאצ' לסטייט שנשמר 
+*/}
+
     };
 
     return (
         <center>
             <form className={classes.root} noValidate autoComplete="off" >
                 <div className={"inputs_btns"}>
+
                     <FilledInput
                         type={'text'}
                         placeholder="Name"

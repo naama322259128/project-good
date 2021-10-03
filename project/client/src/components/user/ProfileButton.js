@@ -6,12 +6,21 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-import { signOut } from "../../store/actions/user";
+// import { signOut } from "../../store/actions/user";
 // import{setYourProfile} from '../../store/actions/signIn';
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
 
 const ITEM_HEIGHT = 48;
 const ProfileButton = (props) => {
-
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'user',
+        reducer,
+        userState
+      );
+    
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -24,10 +33,9 @@ const ProfileButton = (props) => {
     };
 
     const out = () => {
-        //TODO: חשוב מאוד, כדאי לשמור לו נתונים לפני שמוחקים לו הכל
         handleClose();
-        props.signOut();//מאפס נתונים בסטייט
-        localStorage.setItem("user", null) //איפוס הנתונים בלוקלסטורג
+        //TODO: חשוב מאוד, האם לשמור לו נתונים לפני שמוחקים לו הכל
+        dispatch({ type: actionTypes.SIGN_OUT }) //איפוס הנתונים בלוקלסטורג ובסטייט
     }
 
     return (<div>
@@ -78,4 +86,4 @@ const mapStateToProps = state => {
     return {
     };
 }
-export default connect(mapStateToProps, { signOut })(ProfileButton);
+export default connect(mapStateToProps, {/* signOut*/ })(ProfileButton);

@@ -1,4 +1,3 @@
-// import {axios} from 'axios';
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 export const setCurrentUser = (user) => {
@@ -23,4 +22,3 @@ export const setCurrentUser = (user) => {
 //     }
 
 // }
-

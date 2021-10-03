@@ -73,9 +73,6 @@ const SignIn = (props) => {
   const handleMouseDownPassword = (event) => { event.preventDefault(); };
 
 
-
-
-
   const classes = useStyles();
   let [password, setPassword] = useState("");
   let [email, setEmail] = useState("");
@@ -127,7 +124,10 @@ const SignIn = (props) => {
         </div>
         <Button type="button" variant="contained" className={"login_btn_sign_in"}
           onClick={() => { props.signIn(password, email); }}>Login</Button>
-
+        {/* 
+        לאחר הלחיצה המשתמש החדש נשמר בסטייט שמתאפס בטעינה מחדש ולא בסטייט שנשמר לפי הסטורג
+אולי נעשה אחרי שהפונקציה הזו סיימה, דיספאצ' לסטייט שנשמר 
+*/}
 
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
         <LoginGoogle />
