@@ -34,7 +34,7 @@ const FinalStep = (props) => {
         props.createNewAuction(newAuction);
 
         //לשנות את הסטטוס שלו למנהל
-        props.beManager(JSON.parse(localStorage.getItem("currentUser"))._id);
+        props.beManager(JSON.parse(localStorage.getItem("user").currentUser)._id);
 
         //לפנות את הלוכל-סטורג'
         localStorage.removeItem("DateOfStart");

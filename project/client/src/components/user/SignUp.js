@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react';
-import { addUser } from '../../utils/userUtils';//הוספת משתמש למאגר, והגדרתו בסטייט ובסטורג
+import { addUser } from '../../utils/userUtils';//הוספת משתמש למאגר, והגדרתו בסטורג ובסטייט
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -12,6 +12,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 import './User.scss';
 import User from '../../models/user'
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,20 +55,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = (props) => {
-
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'user',
+        reducer,
+        userState
+    );
 
     const classes = useStyles();
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-
-    const handleClickShowPassword = () => {
-        setValues({ ...values, showPassword: !values.showPassword });
-    };
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    const handleChange = (prop) => (event) => { setValues({ ...values, [prop]: event.target.value }); };
+    const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }); };
+    const handleMouseDownPassword = (event) => { event.preventDefault(); };
     const [values, setValues] = React.useState({
         amount: '',
         password: '',
@@ -86,14 +86,13 @@ const SignUp = (props) => {
 
     const createUser = () => {
         //מה עם סטטוס וחיסיון
-        let newUser = new User(password, userName, email, birthYear, address, phone,3);
-        props.addUser(newUser);
+        let newUser = new User(password, userName, email, birthYear, address, phone, 3);
+        props.addUser(newUser);//מגדיר בסטייט ובסטורג
     };
 
     return (
         <center>
             <form className={classes.root} noValidate autoComplete="off" >
-
                 <div className={"inputs_btns"}>
                     <FilledInput
                         type={'text'}
@@ -156,7 +155,7 @@ const SignUp = (props) => {
                         onChange={(e) => { phone = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
-                                <i className="mobile alternate icon"></i>
+                                <i className="mobile alternate icon"/>
                             </InputAdornment>
                         }
                     />
@@ -170,7 +169,7 @@ const SignUp = (props) => {
                         onChange={(e) => { password = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
-                                <i className="lock icon"></i>
+                                <i className="lock icon"/>
                             </InputAdornment>
                         }
                         endAdornment={

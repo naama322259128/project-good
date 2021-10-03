@@ -8,13 +8,24 @@ import ProfileButton from '../user/ProfileButton';
 import { setLogin } from '../../store/actions/home'
 import SmallHeader from '../main/SmallHeader';
 import User from '../../models/user'
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
+import { setCurrentUser } from '../../store/actions/signUp'
+
+
 const HomeHeader = (props) => {
+  const [state, dispatch, writeError] = useStorageReducer(
+    localStorage,
+    'user',
+    reducer,
+    userState
+  );
 
   useEffect(() => {
-    window.addEventListener("scroll", changeHeader)
-    return () => {
-      window.removeEventListener('scroll', changeHeader);
-    };
+    window.addEventListener("scroll", changeHeader);
+    props.setCurrentUser(state.currentUser)//הגדרת המשתמש הנוכחי בסטייט הפנימי לפי הסטייט שלא מתאפס ברענון
+    return () => { window.removeEventListener('scroll', changeHeader); };
   }, []);
 
   const changeHeader = () => {
@@ -23,9 +34,8 @@ const HomeHeader = (props) => {
       let height = 900//הגובה של ההידר הגדול
       if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
         if (s != null) s.style.top = "0";
-      } else {
-        if (s != null) s.style.top = "-500px";
       }
+      else if (s != null) s.style.top = "-500px";
     }
   }
   return (<>
@@ -47,7 +57,7 @@ const HomeHeader = (props) => {
 
         <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
 
-        <Button href={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
+        <Button href={state.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
           BUILD CHINESE AUCTION
         </Button>
       </div>
@@ -67,4 +77,4 @@ const mapStateToProps = state => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { setLogin })(HomeHeader);
+export default connect(mapStateToProps, {setCurrentUser, setLogin })(HomeHeader);

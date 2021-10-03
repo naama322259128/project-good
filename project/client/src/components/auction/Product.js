@@ -10,7 +10,6 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import { addProductToCart } from '../../store/actions/user'
 import React, { useEffect } from 'react';
 import { updateCurrentAuction } from '../../store/actions/currentAuction'
 import { useStorageReducer } from 'react-storage-hooks';
@@ -68,7 +67,6 @@ const Product = (props) => {
                   payload: { cnt: cnt, product: props.item }
                 });
                 setCnt(0);
-                /*props.addProductToCart(props.item, cnt);*/
               }} />
           </IconButton>
 
@@ -93,4 +91,4 @@ const Product = (props) => {
 }
 
 
-export default connect(null, { /*addProductToCart,*/ updateCurrentAuction })(Product);
+export default connect(null, { updateCurrentAuction })(Product);

@@ -1,8 +1,8 @@
-// האם להציג את הלוגין נקבע לפי הסטייט שמגיע בפרופס
+// האם להציג את הלוגין ואת כפתור בלוגיןנקבע לפי הסטייט שמגיע בפרופס
 
 // כאשר יכנס משתמש נשמור את פרטיו בשני מקומות
 // 1. בלוקל סטורג
-// 2. בסטייט דרך הפונקציה שמגיעה בפרופס
+// 2. בסטייט
 // כי אם לא משתמשים ביוז-סטורג'-רדיוכר
 // אז אין סינכרון בין הסטייט ללוקל סטורג' והתצוגה לא מתעדכנת
 
@@ -17,8 +17,6 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import { setLogin } from '../../store/actions/home';
 import { connect } from "react-redux";
-import { useStorageReducer } from 'react-storage-hooks';
-import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
 
 const useStyles = makeStyles({
   root: {
@@ -30,12 +28,6 @@ const useStyles = makeStyles({
 
 const Login = (props) => {
 
-  const [state, dispatch, writeError] = useStorageReducer(
-    localStorage,
-    'user',
-    reducer,
-    userState
-  );
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);

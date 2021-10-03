@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
-import { updateUser } from '../../store/actions/user'
+import { updateUser } from '../../store/actions/user'//מעדכן בסטייט ובסטורג
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -72,7 +72,7 @@ const UpdateDetails = (props) => {
     });
 
     //עדכון משתמש קיים
-    let u = JSON.parse(localStorage.getItem("currentUser"));
+    let u = JSON.parse(localStorage.getItem("user")).currentUser;
     let password = u.password;
     let userName = u.userName;
     let email = u.email;
@@ -81,7 +81,7 @@ const UpdateDetails = (props) => {
     let birthYear = u.birthYear;
 
     const updateUser = () => {
-        let user = JSON.parse(localStorage.getItem("currentUser"));
+        let user = JSON.parse(localStorage.getItem("user")).currentUser;
         user.password = password;
         user.email = email;
         user.phone = phone;

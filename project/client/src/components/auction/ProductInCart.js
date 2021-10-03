@@ -9,7 +9,6 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import { deleteProductFromCart } from '../../store/actions/user';
 import Button from '@material-ui/core/Button';
 import { useStorageReducer } from 'react-storage-hooks';
 import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
@@ -97,4 +96,4 @@ const ProductInCart = (props) => {
 }
 
 
-export default connect(null, { /*deleteProductFromCart*/ })(ProductInCart);
+export default connect(null, {  })(ProductInCart);
