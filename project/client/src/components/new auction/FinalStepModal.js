@@ -17,6 +17,8 @@ import Auction from '../../models/auction';
 const FinalStep = (props) => {
 
     let addNewAuctionToDB = () => {
+
+        //לשנות דחוף את הפונקציה הזו
       
         //הוספה למסד נתונים
         let newAuction;

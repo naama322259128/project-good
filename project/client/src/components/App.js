@@ -9,22 +9,12 @@ import UpdateDetails from './user/UpdateDetails';
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PackagesList from './new auction/auction pricing/PackagesList';
-import { updateUserState } from '../store/actions/user'
-import { setUserItemsInLS } from '../utils/userUtils'
+
 import AboutAuction from './auction/about/AboutAuction'
 import ContactForm from './main/ContactForm';
 import StateCounter from './StateCounter';
 function App(props) {
 
-  useEffect(() => {
-    //storage  storageChange  
-    //window.addEventListener("storage", () => props.updateUserState());//?
-    // window.addEventListener('click', () => alert("click from window.addEventListener('click')"));//good
-    //window.addEventListener('reload', () => props.updateUserState());//?
-    //window.onstorage = () => { alert("storage") };//doesn't do also it
-
-    props.setUserItemsInLS();//good
-  }, [])
   return (
     <div>
       <Router>
@@ -44,4 +34,4 @@ function App(props) {
 }
 const mapStateToProps = state => {
 }
-export default connect(mapStateToProps, { setUserItemsInLS, updateUserState })(App);
+export default connect(mapStateToProps, { })(App);

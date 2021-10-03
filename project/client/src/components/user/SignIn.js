@@ -1,6 +1,6 @@
 import p from '../../img/profile.png';
 import React, { useState } from 'react';
-import { signIn } from '../../store/actions/signIn';
+import { signIn } from '../../store/actions/signIn';//אם המשתמש קיים במאגר, הוא יוגדר בסטייט ובסטורג והלוגין יסגר
 import { connect } from 'react-redux';
 import "./User.scss"
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
@@ -79,7 +79,7 @@ const SignIn = (props) => {
   return (
     <center>
       <form className={classes.root} noValidate autoComplete="off">
-        <img className='profile_img' src={p}></img>
+        <img className='profile_img' src={p} />
         <div className={"inputs_btns"}>
           <FilledInput
             type={'text'}
@@ -120,8 +120,7 @@ const SignIn = (props) => {
               </InputAdornment>
             }
           /> </div>
-        <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => { props.signIn(password, email) }
-        }>Login</Button>
+        <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => { props.signIn(password, email) }}>Login</Button>
 
 
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}

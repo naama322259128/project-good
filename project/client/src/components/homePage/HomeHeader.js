@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import ProfileButton from '../user/ProfileButton';
 import { setLogin } from '../../store/actions/home'
 import SmallHeader from '../main/SmallHeader';
-
+import User from '../../models/user'
 const HomeHeader = (props) => {
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const HomeHeader = (props) => {
   }
   return (<>
     <header id="home_header" >
-      <Link to={"/home"} id="logo_home_header" > </Link>
+      <Link to={"/home"} id="logo_home_header" />
 
       {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { props.setLogin(true) }}>Login</Button>}
       {props.loginIsOpen ? (<Login />) : null}
@@ -53,8 +53,8 @@ const HomeHeader = (props) => {
       </div>
 
 
-      <div id="right_pic"></div>
-      <div id="left_pic"></div>
+      <div id="right_pic" />
+      <div id="left_pic" />
     </header>
     <SmallHeader />
   </>)

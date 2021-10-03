@@ -4,8 +4,7 @@ import AuctionsList from './AuctionsList';
 import HomeFooter from './HomeFooter';
 import HomeHeader from './HomeHeader';
 import React, { useEffect } from "react";
-import { updateUserState } from '../../store/actions/user'
-import { setUserItemsInLS } from '../../utils/userUtils'
+
 const Home = (props) => {
   return (<>
     <HomeHeader />
@@ -45,4 +44,4 @@ const mapStateToProps = state => {
   return {
   };
 }
-export default connect(mapStateToProps, { updateUserState, setUserItemsInLS })(Home);
+export default connect(mapStateToProps, { })(Home);

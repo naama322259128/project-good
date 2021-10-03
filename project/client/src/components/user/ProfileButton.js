@@ -23,6 +23,13 @@ const ProfileButton = (props) => {
         setAnchorEl(null);
     };
 
+    const out = () => {
+        //TODO: חשוב מאוד, כדאי לשמור לו נתונים לפני שמוחקים לו הכל
+        handleClose();
+        props.signOut();//מאפס נתונים בסטייט
+        localStorage.setItem("user", null) //איפוס הנתונים בלוקלסטורג
+    }
+
     return (<div>
         <AccountCircleIcon
             aria-label="more"
@@ -48,16 +55,16 @@ const ProfileButton = (props) => {
             }}
         >
             <Link to={'/your_profile'}>
-                <MenuItem key={'Your profile'} onClick={() => { handleClose(); }}>Your profile</MenuItem>
+                <MenuItem key={'Your profile'} onClick={handleClose}>Your profile</MenuItem>
             </Link>
 
 
             <Link to={'/update_your_details'}>
-                <MenuItem key={'Update your details'} onClick={() => { handleClose(); }}>Update your details</MenuItem>
+                <MenuItem key={'Update your details'} onClick={handleClose}>Update your details</MenuItem>
             </Link>
 
             <Link to={'/home'}>
-                <MenuItem key={'Sign out'} onClick={() => { handleClose(); props.signOut(); }}>Sign out</MenuItem>
+                <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>
             </Link>
 
 
@@ -71,4 +78,4 @@ const mapStateToProps = state => {
     return {
     };
 }
-export default connect(mapStateToProps, { signOut})(ProfileButton);
+export default connect(mapStateToProps, { signOut })(ProfileButton);

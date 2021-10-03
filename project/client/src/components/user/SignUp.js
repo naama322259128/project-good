@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react';
-import { addUser } from '../../utils/userUtils';
+import { addUser } from '../../utils/userUtils';//הוספת משתמש למאגר, והגדרתו בסטייט ובסטורג
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -11,6 +11,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 import './User.scss';
+import User from '../../models/user'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -50,6 +52,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = (props) => {
+
+
     const classes = useStyles();
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -79,11 +83,11 @@ const SignUp = (props) => {
     let phone = "";
     let address = "";
     let birthYear = "";
+
     const createUser = () => {
-        let newUser = { password, userName, email, phone, address, birthYear };
+        //מה עם סטטוס וחיסיון
+        let newUser = new User(password, userName, email, birthYear, address, phone,3);
         props.addUser(newUser);
-        // אם ההוספה הצליחה
-        // בסטייט נשנה את איז-אפן-מודל שיהיה פולס
     };
 
     return (
@@ -194,7 +198,7 @@ const SignUp = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        //currentUser: state.user.currentUser
+        currentUser: state.user.currentUser
     };
 }
 export default connect(mapStateToProps, { addUser })(SignUp);

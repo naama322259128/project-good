@@ -22,9 +22,7 @@ const Auction = (props) => {
              log-out להוסיף כפתור התנתקות
             <Link to={"/home"}>  <div className="logo" ></div></Link>
         </header> */}
-
-
-
+        
         <br />
         <br />
         <br />

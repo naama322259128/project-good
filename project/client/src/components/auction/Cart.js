@@ -14,6 +14,7 @@ import * as actionTypes from '../../store/actionTypes'
 const Cart = (props) => {
 
     const [state, dispatch, writeError] = useStorageReducer(
+        // בעצם כבר יש כזה שדה בלוקל סטורג' , הוא נוצר בעת הלוגין
         localStorage,
         'user',
         reducer,
@@ -26,7 +27,7 @@ const Cart = (props) => {
         return sum;
     }
 
-    const OrderCompletion = () => {
+    const orderCompletion = () => {
         const newOrder = new Order(
             state.currentUser,
             state.shoppingCart,
@@ -48,11 +49,12 @@ const Cart = (props) => {
             <br />
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
+
             {state.shoppingCart.map((item, index) => {
                 return (<ProductInCart key={parseInt(index)} item={item} /*setCount={props.setCnt}*/ />)
             })}
-            {/* כפתור אישור פה יועבר כל בסל מהלוקל סטורג למסד נתונים*/}
-            <Button onClick={OrderCompletion}>OK</Button>
+            <Button onClick={orderCompletion}>OK</Button>{/* כפתור אישור פה יועבר כל בסל מהלוקל סטורג למסד נתונים*/}
+
             {amountToPay()}
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);
