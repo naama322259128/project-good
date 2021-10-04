@@ -1,6 +1,6 @@
 import p from '../../img/profile.png';
 import React, { useState, useEffect } from 'react';
-import { signIn } from '../../store/actions/signIn';//אם המשתמש קיים במאגר, הוא יוגדר בסטייט ובסטורג והלוגין יסגר
+import { signIn } from '../../store/actions/signIn';
 import { connect } from 'react-redux';
 import "./User.scss"
 import clsx from 'clsx';
@@ -123,11 +123,17 @@ const SignIn = (props) => {
           />
         </div>
         <Button type="button" variant="contained" className={"login_btn_sign_in"}
-          onClick={() => { props.signIn(password, email); }}>Login</Button>
-        {/* 
-        לאחר הלחיצה המשתמש החדש נשמר בסטייט שמתאפס בטעינה מחדש ולא בסטייט שנשמר לפי הסטורג
-אולי נעשה אחרי שהפונקציה הזו סיימה, דיספאצ' לסטייט שנשמר 
-*/}
+          onClick={() => {
+            signIn(password, email).then(
+              succ => {
+                dispatch({
+                  type: actionTypes.SET_CURRENT_USER,
+                  payload: succ.data  
+                })
+              })
+
+          }}>Login</Button>
+
 
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
         <LoginGoogle />
@@ -140,4 +146,4 @@ const mapStateToProps = (state) => {
   return {
   };
 }
-export default connect(mapStateToProps, { signIn })(SignIn);
+export default connect(mapStateToProps, { /*signIn*/ })(SignIn);

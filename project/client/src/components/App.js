@@ -7,20 +7,19 @@ import About from './main/About'
 import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
 import React from "react";
-
 function App() {
   return (
-      <Router>
-        <Switch>
-          <Route path={`/auction`} ><Auction /></Route>
-          <Route path={`/home`}><Home /></Route>
-          <Route path={`/new_auction`}><NewAuction /></Route>
-          <Route path={`/about`}><About /></Route>
-          <Route path={`/your_profile`}><YourProfile /></Route>
-          <Route path={`/update_your_details`}><UpdateDetails /></Route>
-          <Route path={`/`}><Home /></Route>
-        </Switch>
-      </Router>
+    <Router>
+      <Switch>
+        <Route path={`/auction`} ><Auction /></Route>
+        <Route path={`/home`}><Home /></Route>
+        <Route path={`/new_auction`}><NewAuction /></Route>
+        <Route path={`/about`}><About /></Route>
+        <Route path={`/your_profile`}><YourProfile /></Route>
+        <Route path={`/update_your_details`}><UpdateDetails /></Route>
+        <Route path={`/`}><Home /></Route>
+      </Switch>
+    </Router>
   );
 }
 
