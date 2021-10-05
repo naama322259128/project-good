@@ -1,3 +1,5 @@
+//TODO: בכל פעם שמתחיל מכירה חדשה למחוק את מה שיש סלוקלסטורג של מכירה חדשה
+//localStorage.removeItem("newAuction");
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import AuctionInformation from './AuctionInformation';
@@ -14,6 +16,8 @@ import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 // import { updateNewAuctioinState } from '../../store/actions/newAuction'
 // import { setNewAuctionItemsInLS } from '../../utils/newAuctionUtils'
+import { beManager } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
+
 import { useStorageReducer } from 'react-storage-hooks';
 import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../store/reducers/newAuctionState.js'
 import * as actionTypes from '../../store/actionTypes'
@@ -48,17 +52,19 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
+
     const [state, dispatch, writeError] = useStorageReducer(
         localStorage,
         'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
         reducer,//רדיוסר
         newAuctionState //מה הסטייט שיהיה בלוקל סטור' וזה גם הסטייט הכללי
     );
-    //useEffect(() => {
-    //window.addEventListener('storage', props.updateNewAuctioinState);
-    //window.addEventListener('reload', props.updateNewAuctioinState);
-    //props.setNewAuctionItemsInLS();
-    // }, [])
+    useEffect(() => {
+        //TODO: האם זה אמור להיות כאן או באחד הכפתורים קודם, אולי לא מכיר את הדיספאצ
+        //ומה עם שגיאה 400?
+        //לשנות את הסטטוס שלו למנהל  
+        beManager(state.currentUser._id).then(succ => dispatch({ type: actionTypes.SET_CURRENT_USER, payload: succ.data }))
+    }, [])
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -70,7 +76,16 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
-
+        switch (activeStep) {
+            case 0:
+                return //שמירת תמחור מכירה במסד נתונים;
+            case 1:
+                return //שמירת העלאת מוצרים במסד נתונים;
+            case 2:
+                return//שמירת מידע על הארגון במסד נתונים; 
+            case 3:
+                return//שמירת מידע על המכירה במסד נתונים;
+        }
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());

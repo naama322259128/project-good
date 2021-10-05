@@ -78,7 +78,7 @@ export const newAuctionReducer = (state = initialState, action) => {
         case actionTypes.SHOW_ADD_PRODUCT: {
             return {
                 ...state,
-                showSetProduct: true
+                showSetProduct: action.payload
             }
         }
         case actionTypes.ADD_PRODUCT: {

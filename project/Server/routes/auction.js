@@ -9,5 +9,6 @@ route.get("/:id", auctionController.getById)
 route.post("/", auctionController.addAuction)
 route.delete("/:id", auctionController.deleteAuction)
 route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
+route.put("/publicationApproval/:id&status", auctionController.publicationApproval)
 
 module.exports = route;

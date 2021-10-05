@@ -120,6 +120,15 @@ const approvalAuction = async (req, res) => {
     let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
 }
 
+//האם לאשר הצגת מכירה 
+const publicationApproval = async (req, res) => {
+    let { a_id } = rea.params;
+    let { status } = rea.params;
+    if (!mongoose.Types.ObjectId.isValid(a_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.findOneAndUpdate({ '_id': a_id}, { 'publicationApproval': status })
+}
+
 //האם המכירה התבצעה
 const getAuctionIsDone = async (req, res) => {
     let { _id } = req.params;
@@ -136,8 +145,9 @@ const getAuctionIsDone = async (req, res) => {
 //     return res.send(productList);
 // }
 
+
 module.exports = {
-    getAll, getById, addProduct,addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone
+    getAll, getById, addProduct,addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone,publicationApproval
 }
 
 //המכירה שש לה הכי הרבה הכנסות

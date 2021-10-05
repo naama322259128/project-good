@@ -46,7 +46,7 @@ const HomeHeader = (props) => {
           dispatch({ type: actionTypes.SET_LOGIN, payload: true  /*props.setLogin(true) */ })
         }}>Login</Button>}
 
-      {state.loginIsOpen ? (<Login />) : null}
+      {state.loginIsOpen ? <Login /> : null}
 
       <div id="home_text">
         <h3>Build your </h3>
@@ -63,8 +63,8 @@ const HomeHeader = (props) => {
         <Button
           href={state.currentUser ? "/new_auction" : '#'}
           onClick={state.currentUser ?
-            null :
-            () => {
+            localStorage.removeItem("newAuction")  //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
+            : () => {
               window.scrollTo(0, 0);
               dispatch({ type: actionTypes.SET_LOGIN, payload: true })
             }

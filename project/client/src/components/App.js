@@ -7,9 +7,12 @@ import About from './main/About'
 import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
 import React from "react";
+import StateCounter from './StateCounter'
+import AuctionInformation from './new auction/AuctionInformation';
 function App() {
   return (
-    <Router>
+
+     <Router>
       <Switch>
         <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
@@ -18,7 +21,7 @@ function App() {
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
         <Route path={`/`}><Home /></Route>
-      </Switch>
+      </Switch> 
     </Router>
   );
 }

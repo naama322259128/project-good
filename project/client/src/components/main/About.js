@@ -29,7 +29,7 @@ const About = (props) => {
     }
   }
   return (<>
-    <SmallHeader/>
+    <SmallHeader />
     <center>
       <img src={p} id="logo-about" />
       {/* <h1>About Us</h1> */}
@@ -51,7 +51,8 @@ const About = (props) => {
         <p><b>What? </b>Build a Chinese auction so that others can buy tickets for the prizes they are interested in from the catalog.</p>
         <p><b>Why? </b>The money with which they purchased the tickets will allow you to continue your operations and reach new destinations.</p>
         <p><b>How? </b>Choose a name for your Chinese auction, set prizes, prices and dates, tell about your organization / purpose. Confirm the auction and the auction in the air!</p>
-        <b>Want to get started?</b> <Link to={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? null : () => props.setLogin(true)}>Click here!</Link>
+        <b>Want to get started?</b>
+        <Link to={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? localStorage.removeItem("newAuction") : () => props.setLogin(true)}>Click here!</Link>
       </div>
 
       <h2>Building a Chinese auction:</h2>
@@ -103,7 +104,7 @@ const About = (props) => {
 
     </center>
 
-    <SmallFooter/>
+    <SmallFooter />
   </>);
 }
 

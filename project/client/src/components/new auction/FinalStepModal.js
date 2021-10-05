@@ -9,46 +9,18 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { beManager, setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
+import { beManager, setLastModal, publicationApproval } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
 import { Link } from 'react-router-dom'
 import Auction from '../../models/auction';
 
 const FinalStep = (props) => {
 
-    let addNewAuctionToDB = () => {
-
-        //לשנות דחוף את הפונקציה הזו
-      
-        //הוספה למסד נתונים
-        let newAuction;
-        newAuction.registrationStartDate = JSON.parse(localStorage.getItem("DateOfStart"));
-        newAuction.lotteriesDate =JSON.parse( localStorage.getItem("DateOfLotery"));
-        newAuction.registrationEndDate = JSON.parse(localStorage.getItem("DateOfEnd"));
-        newAuction.purchasePackage = JSON.parse(localStorage.getItem("packagesList"));
-        newAuction.productList = JSON.parse(localStorage.getItem("productsList"));
-        newAuction.organizationName = JSON.parse(localStorage.getItem("organizationName"));
-        newAuction.organizationText = JSON.parse(localStorage.getItem("organizationText"));
-        newAuction.organizationPhotos = JSON.parse(localStorage.getItem("organizationPhotos"));
-        newAuction.terms = JSON.parse(localStorage.getItem("terms"));
-        props.createNewAuction(newAuction);
-
-        //לשנות את הסטטוס שלו למנהל
-        props.beManager(JSON.parse(localStorage.getItem("user").currentUser)._id);
-
-        //לפנות את הלוכל-סטורג'
-        localStorage.removeItem("DateOfStart");
-        localStorage.removeItem("DateOfLotery");
-        localStorage.removeItem("DateOfEnd");
-        localStorage.removeItem("packagesList");
-        localStorage.removeItem("productsList");
-        localStorage.removeItem("organizationName");
-        localStorage.removeItem("organizationText");
-        localStorage.removeItem("organizationPhotos");
-        localStorage.removeItem("terms");
-        localStorage.removeItem("showSetProductBtn");
-        localStorage.removeItem("showSetPackageBtn");
-
+    let publicationApproval = () => {//אישור פירסום
+        //אם קיים שדה _id
+        props.publicationApproval(JSON.parse(localStorage.getItem("newAuction"))._id, true);
+        //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
+        localStorage.removeItem("newAuction");
     }
 
     const theme = useTheme();
@@ -66,14 +38,14 @@ const FinalStep = (props) => {
             <DialogTitle id="responsive-dialog-title">{"Ok"}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Are you shure the Chinese auction is ready?
+                    Do you want your sale to be displayed on the site?
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button variant="contained" size="medium" onClick={props.setLastModal(false)} color="primary">
-                    Cancle
+                    Not yet
                 </Button>
-                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { addNewAuctionToDB();props.setLastModal(true) }} color="primary">
+                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { publicationApproval(); props.setLastModal(true) }} color="primary">
                     Ok
                 </Button></Link>
             </DialogActions>
@@ -88,4 +60,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { beManager, setLastModal, createNewAuction })(FinalStep);
+export default connect(mapStateToProps, { beManager, setLastModal, createNewAuction, pubicationApproval })(FinalStep);

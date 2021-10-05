@@ -114,9 +114,10 @@ export const addProduct = (p) => {
         payload: p
     }
 }
-export const showAddProduct = () => {
+export const showAddProduct = (b) => {
     return {
         type: actionTypes.SHOW_ADD_PRODUCT,
+        payload: b
     }
 }
 export const deleteProduct = (p) => {
@@ -167,15 +168,13 @@ export const saveAuctionDetailsInDb = (obj, _id) => {
 }
 
 export const beManager = (_id) => {
-    return (dispatch) => {
-        axios.post(`http://localhost:5000/users/beManager/:${_id}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data));
-        })
-    }
+    return axios.post(`http://localhost:5000/users/beManager/:${_id}`)
 }
+// אישור פירסום מכירה 
 
+export const publicationApproval=(a_id,status)=>{
+    return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)  
+}
 /*
 export const updateNewAuctioinState = () => {
     updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));

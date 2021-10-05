@@ -34,6 +34,7 @@ const Login = (props) => {
 
   return (
     <center>
+  
       <div className="glass_login" onClick={() => dispatch({ type: actionTypes.SET_LOGIN, payload: false /*props.setLogin(false)*/ })}>
         <div className="modal-content_login" onClick={click}>
           <Tabs
