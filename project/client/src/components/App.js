@@ -33,9 +33,8 @@ function App(props) {
       <Router>
         {/* <AboutAuction/> */}
         {/* <ContactForm/> */}
-
-        <NewAuction />
-        {/* <Switch>
+        {/* <NewAuction /> */}
+        <Switch>
           <Route path={`/auction`} ><Auction /></Route>
           <Route path={`/home`}><Home /></Route>
           <Route path={`/new_auction`}><NewAuction /></Route>
@@ -43,7 +42,7 @@ function App(props) {
           <Route path={`/your_profile`}><YourProfile /></Route>
           <Route path={`/update_your_details`}><UpdateDetails /></Route>
           <Route path={`/`}><Home /></Route>
-        </Switch> */}
+        </Switch>
       </Router>
     </div >
   );
