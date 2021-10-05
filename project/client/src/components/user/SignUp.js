@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react';
-import { addUser } from '../../utils/userUtils';
+import { addUser } from '../../utils/userUtils';//הוספת משתמש למאגר, והגדרתו בסטורג ובסטייט
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -11,6 +11,11 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 import './User.scss';
+import User from '../../models/user'
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -50,18 +55,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = (props) => {
+ 
     const classes = useStyles();
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-
-    const handleClickShowPassword = () => {
-        setValues({ ...values, showPassword: !values.showPassword });
-    };
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    const handleChange = (prop) => (event) => { setValues({ ...values, [prop]: event.target.value }); };
+    const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }); };
+    const handleMouseDownPassword = (event) => { event.preventDefault(); };
     const [values, setValues] = React.useState({
         amount: '',
         password: '',
@@ -71,6 +69,12 @@ const SignUp = (props) => {
     });
 
 
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'user',
+        reducer,
+        userState
+      );
 
     //רישום משתמש חדש
     let password = "";
@@ -79,18 +83,24 @@ const SignUp = (props) => {
     let phone = "";
     let address = "";
     let birthYear = "";
+
     const createUser = () => {
-        let newUser = { password, userName, email, phone, address, birthYear };
+        //מה עם סטטוס וחיסיון
+        let newUser = new User(password, userName, email, birthYear, address, phone, 3);
         props.addUser(newUser);
-        // אם ההוספה הצליחה
-        // בסטייט נשנה את איז-אפן-מודל שיהיה פולס
+
+                {/* 
+        לאחר הלחיצה המשתמש החדש נשמר בסטייט שמתאפס בטעינה מחדש ולא בסטייט שנשמר לפי הסטורג
+אולי נעשה אחרי שהפונקציה הזו סיימה, דיספאצ' לסטייט שנשמר 
+*/}
+
     };
 
     return (
         <center>
             <form className={classes.root} noValidate autoComplete="off" >
-
                 <div className={"inputs_btns"}>
+
                     <FilledInput
                         type={'text'}
                         placeholder="Name"
@@ -152,7 +162,7 @@ const SignUp = (props) => {
                         onChange={(e) => { phone = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
-                                <i className="mobile alternate icon"></i>
+                                <i className="mobile alternate icon"/>
                             </InputAdornment>
                         }
                     />
@@ -166,7 +176,7 @@ const SignUp = (props) => {
                         onChange={(e) => { password = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
-                                <i className="lock icon"></i>
+                                <i className="lock icon"/>
                             </InputAdornment>
                         }
                         endAdornment={
@@ -194,7 +204,7 @@ const SignUp = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        //currentUser: state.user.currentUser
+        currentUser: state.user.currentUser
     };
 }
 export default connect(mapStateToProps, { addUser })(SignUp);

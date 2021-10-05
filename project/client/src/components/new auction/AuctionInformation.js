@@ -23,14 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 const AuctionInformation = (props) => {
 
-    useEffect(() => { // componentWillUnmount
-     /*   localStorage.setItem("DateOfLotery", JSON.stringify(selectedDate1));
-        localStorage.setItem("DateOfStart", JSON.stringify(selectedDate2));
-        localStorage.setItem("DateOfEnd", JSON.stringify(selectedDate3));
-        localStorage.setItem("terms", JSON.stringify(terms));
-        localStorage.setItem("auctionName", JSON.stringify(name));*/
-    });
-
     const classes = useStyles();
     const [selectedDate1, setSelectedDate1] = React.useState(new Date());//lotery
     const [selectedDate2, setSelectedDate2] = React.useState(new Date());//start
@@ -102,7 +94,6 @@ const AuctionInformation = (props) => {
     //submit!!!!
     //לבדוק שהתאריכים תקינים
     //סיום ההרשמה ולפני ביצוע ההגרלות
-    //למה התאריכים לא נשמרים בסטייט
 }
 
 export default connect(null, { })(AuctionInformation);

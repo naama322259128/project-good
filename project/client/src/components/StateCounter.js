@@ -1,18 +1,30 @@
 import React from 'react';
-import { useStorageState } from 'react-storage-hooks';
-
+import { useStorageReducer } from 'react-storage-hooks';
+ 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'inc':
+      return { count: state.count + 1 };
+    case 'dec':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+ 
 function StateCounter() {
-  const [count, setCount, writeError] = useStorageState(
+  const [state, dispatch, writeError] = useStorageReducer(
     localStorage,
-    'state-counter',
-    0
+    'reducer-counter',
+    reducer,
+    { count: 0 }
   );
-
+ 
   return (
     <>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>+</button>
-      <button onClick={() => setCount(count - 1)}>-</button>
+      <p>You clicked {state.count} times</p>
+      <button onClick={() => dispatch({ type: 'inc' })}>+</button>
+      <button onClick={() => dispatch({ type: 'dec' })}>-</button>
       {writeError && (
         <pre>Cannot write to localStorage: {writeError.message}</pre>
       )}

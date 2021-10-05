@@ -102,6 +102,8 @@ export const getAuctionIsDone = (_id) => {
         })
     }
 }
+
+/*
 export const updateAuctionManagerState = () => {
     //TODO: אפשר?
     updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
@@ -110,4 +112,4 @@ export const updateAuctionManagerState = () => {
         payload: JSON.parse(localStorage.getItem("selected_auction_to_options"))
     };
 }
-
+*/

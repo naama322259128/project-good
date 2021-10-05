@@ -7,14 +7,24 @@ import Button from '@material-ui/core/Button';
 import ProfileButton from '../user/ProfileButton';
 import { setLogin } from '../../store/actions/home'
 import SmallHeader from '../main/SmallHeader';
+import User from '../../models/user'
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
+import { setCurrentUser } from '../../store/actions/signUp'
+
 
 const HomeHeader = (props) => {
+  const [state, dispatch, writeError] = useStorageReducer(
+    localStorage,
+    'user',
+    reducer,
+    userState
+  );
 
   useEffect(() => {
-    window.addEventListener("scroll", changeHeader)
-    return () => {
-      window.removeEventListener('scroll', changeHeader);
-    };
+    window.addEventListener("scroll", changeHeader);
+    return () => { window.removeEventListener('scroll', changeHeader); };
   }, []);
 
   const changeHeader = () => {
@@ -23,17 +33,20 @@ const HomeHeader = (props) => {
       let height = 900//הגובה של ההידר הגדול
       if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
         if (s != null) s.style.top = "0";
-      } else {
-        if (s != null) s.style.top = "-500px";
       }
+      else if (s != null) s.style.top = "-500px";
     }
   }
   return (<>
     <header id="home_header" >
-      <Link to={"/home"} id="logo_home_header" > </Link>
+      <Link to={"/home"} id="logo_home_header" />
 
-      {props.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin" onClick={() => { props.setLogin(true) }}>Login</Button>}
-      {props.loginIsOpen ? (<Login />) : null}
+      {state.currentUser ? <ProfileButton /> : <Button type="button" className="btn" id="btnLogin"
+        onClick={() => {
+          dispatch({ type: actionTypes.SET_LOGIN, payload: true  /*props.setLogin(true) */ })
+        }}>Login</Button>}
+
+      {state.loginIsOpen ? <Login /> : null}
 
       <div id="home_text">
         <h3>Build your </h3>
@@ -47,14 +60,23 @@ const HomeHeader = (props) => {
 
         <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
 
-        <Button href={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} type="button" className="btn" id="btnNewAuction">
+        <Button
+          href={state.currentUser ? "/new_auction" : '#'}
+          onClick={state.currentUser ?
+            localStorage.removeItem("newAuction")  //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
+            : () => {
+              window.scrollTo(0, 0);
+              dispatch({ type: actionTypes.SET_LOGIN, payload: true })
+            }
+          }
+          type="button" className="btn" id="btnNewAuction">
           BUILD CHINESE AUCTION
         </Button>
       </div>
 
 
-      <div id="right_pic"></div>
-      <div id="left_pic"></div>
+      <div id="right_pic" />
+      <div id="left_pic" />
     </header>
     <SmallHeader />
   </>)
@@ -63,8 +85,8 @@ const HomeHeader = (props) => {
 
 const mapStateToProps = state => {
   return {
-    loginIsOpen: state.user.loginIsOpen,
-    currentUser: state.user.currentUser
+    // loginIsOpen: state.user.loginIsOpen,
+    // currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { setLogin })(HomeHeader);
+export default connect(mapStateToProps, { setCurrentUser, setLogin })(HomeHeader);

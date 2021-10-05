@@ -1,5 +1,5 @@
 import * as actionTypes from '../actionTypes';
-const initialState = {
+export const initialState = {
     currentUser: null,
     loginIsOpen: false,
     shoppingCart: [    //סל מוצרים
@@ -73,14 +73,14 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 currentUser: action.payload,
             }
-        }
+            }
         case actionTypes.UPDATE_USER_STATE: {
             //עידכון משתמש נוכחי
             return {
                 ...state,
                 shoppingCart: action.payload,
             }
-        }
+            }
     }
     return state;
 }

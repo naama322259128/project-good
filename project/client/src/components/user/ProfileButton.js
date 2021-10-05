@@ -6,12 +6,21 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-import { signOut } from "../../store/actions/user";
+// import { signOut } from "../../store/actions/user";
 // import{setYourProfile} from '../../store/actions/signIn';
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
 
 const ITEM_HEIGHT = 48;
 const ProfileButton = (props) => {
-
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'user',
+        reducer,
+        userState
+      );
+    
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -22,6 +31,12 @@ const ProfileButton = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const out = () => {
+        handleClose();
+        //TODO: חשוב מאוד, האם לשמור לו נתונים לפני שמוחקים לו הכל
+        dispatch({ type: actionTypes.SIGN_OUT }) //איפוס הנתונים בלוקלסטורג ובסטייט
+    }
 
     return (<div>
         <AccountCircleIcon
@@ -48,16 +63,16 @@ const ProfileButton = (props) => {
             }}
         >
             <Link to={'/your_profile'}>
-                <MenuItem key={'Your profile'} onClick={() => { handleClose(); }}>Your profile</MenuItem>
+                <MenuItem key={'Your profile'} onClick={handleClose}>Your profile</MenuItem>
             </Link>
 
 
             <Link to={'/update_your_details'}>
-                <MenuItem key={'Update your details'} onClick={() => { handleClose(); }}>Update your details</MenuItem>
+                <MenuItem key={'Update your details'} onClick={handleClose}>Update your details</MenuItem>
             </Link>
 
             <Link to={'/home'}>
-                <MenuItem key={'Sign out'} onClick={() => { handleClose(); props.signOut(); }}>Sign out</MenuItem>
+                <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>
             </Link>
 
 
@@ -71,4 +86,4 @@ const mapStateToProps = state => {
     return {
     };
 }
-export default connect(mapStateToProps, { signOut})(ProfileButton);
+export default connect(mapStateToProps, {/* signOut*/ })(ProfileButton);

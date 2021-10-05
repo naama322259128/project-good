@@ -24,6 +24,7 @@ const isEmailExist = async (em) => {
 }
 //הוספת משתמש
 const addUser = async (req, res) => {
+    console.log(user)
     let user = req.body;
     if (await isEmailExist(user.email) == true) {
         console.log("This email is exist");

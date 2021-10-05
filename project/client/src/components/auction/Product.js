@@ -10,10 +10,11 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import { addProductToCart } from '../../store/actions/user'
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { updateCurrentAuction } from '../../store/actions/currentAuction'
-
+import { useStorageReducer } from 'react-storage-hooks';
+import { currentAuctionReducer as reducer, initialState as currentAuctionState } from '../../store/reducers/currentAuctionState'
+import * as actionTypes from '../../store/actionTypes'
 
 const useStyles = makeStyles({
   root: {
@@ -25,6 +26,14 @@ const useStyles = makeStyles({
 });
 
 const Product = (props) => {
+
+  const [state, dispatch, writeError] = useStorageReducer(
+    localStorage,
+    'currentAuction',
+    reducer,
+    currentAuctionState
+  );
+
   const [open, setOpen] = React.useState(false)
   const classes = useStyles();
   let [cnt, setCnt] = useState(0);
@@ -50,14 +59,23 @@ const Product = (props) => {
           />
           {/* הוסף לסל */}
           <IconButton color="primary" aria-label="add to shopping cart">
-            <AddShoppingCartIcon onClick={(e) => { e.stopPropagation(); props.addProductToCart(props.item, cnt);setCnt(0); }} />
+            <AddShoppingCartIcon
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch({
+                  type: actionTypes.ADD_PRODUCT_TO_CART,
+                  payload: { cnt: cnt, product: props.item }
+                });
+                setCnt(0);
+              }} />
           </IconButton>
-          {/* הורד כמות */}
+
           <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>
-          {/* הכמות הנוכחית מרותו מוצר */}
+
           <h2>{cnt}</h2>
-          {/* הוסף כמות */}
+
           <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); e.stopPropagation(); }}>+ </IconButton>
+
         </Card>}
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
@@ -73,4 +91,4 @@ const Product = (props) => {
 }
 
 
-export default connect(null, { addProductToCart ,updateCurrentAuction})(Product);
+export default connect(null, { updateCurrentAuction })(Product);

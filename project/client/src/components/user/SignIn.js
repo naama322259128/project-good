@@ -1,11 +1,9 @@
 import p from '../../img/profile.png';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { signIn } from '../../store/actions/signIn';
 import { connect } from 'react-redux';
 import "./User.scss"
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import clsx from 'clsx';
-import LockRoundedIcon from '@material-ui/icons/LockRounded';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 import Visibility from '@material-ui/icons/Visibility';
@@ -14,6 +12,9 @@ import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import LoginGoogle from './LoginGoogle';
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,18 +59,18 @@ const SignIn = (props) => {
     showPassword: false,
   });
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const [state, dispatch, writeError] = useStorageReducer(
+    localStorage,
+    'user',
+    reducer,
+    userState
+  );
 
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
+  const handleChange = (prop) => (event) => { setValues({ ...values, [prop]: event.target.value }); };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }); };
 
+  const handleMouseDownPassword = (event) => { event.preventDefault(); };
 
 
   const classes = useStyles();
@@ -79,7 +80,7 @@ const SignIn = (props) => {
   return (
     <center>
       <form className={classes.root} noValidate autoComplete="off">
-        <img className='profile_img' src={p}></img>
+        <img className='profile_img' src={p} />
         <div className={"inputs_btns"}>
           <FilledInput
             type={'text'}
@@ -119,21 +120,30 @@ const SignIn = (props) => {
                 </IconButton>
               </InputAdornment>
             }
-          /> </div>
-        <Button type="button" variant="contained" className={"login_btn_sign_in"} onClick={() => { props.signIn(password, email) }
-        }>Login</Button>
+          />
+        </div>
+        <Button type="button" variant="contained" className={"login_btn_sign_in"}
+          onClick={() => {
+            signIn(password, email).then(
+              succ => {
+                dispatch({
+                  type: actionTypes.SET_CURRENT_USER,
+                  payload: succ.data  
+                })
+              })
+
+          }}>Login</Button>
 
 
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
         <LoginGoogle />
 
       </form>
-    </center>
+    </center >
   );
 }
 const mapStateToProps = (state) => {
   return {
-
   };
 }
-export default connect(mapStateToProps, { signIn })(SignIn);
+export default connect(mapStateToProps, { /*signIn*/ })(SignIn);

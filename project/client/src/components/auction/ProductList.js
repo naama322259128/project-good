@@ -7,13 +7,18 @@ import { getProducts } from '../../store/actions/currentAuction';
 import Button from '@material-ui/core/Button';
 
 const ProductList = (props) => {
+    // ? הצגת מוצרים ישירות מהמסד נתונים, איך נרענן אם מישהו יוסיף מוצר למסד
+    // ? הצגת פרטי מוצר במכירה ישירות מהמסד, איך נרענן אם מנהל מכירה יעדכן פרטי מוצר
 
-    //TODO: איך הפונקציה תתרענן בעת הוספת מוצר למסד ?
     return (<div>
-        {props.getProducts(JSON.parse(localStorage.getItem("currentAuction"))._id).map((item) => {
+        {/* {props.getProducts(JSON.parse(localStorage.getItem("currentAuction"))._id).map((item) => {
+            return (<Product key={parseInt(item._id)} item={item} />)
+        })} */}
+
+        {props.getProducts(JSON.parse(localStorage.getItem("currentAuction")).currnetAuction).map((item) => {
             return (<Product key={parseInt(item._id)} item={item} />)
         })}
-      
+
     </div>
     );
 }
@@ -23,4 +28,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { updateCurrentAuction, getProducts })(ProductList);
+export default connect(mapStateToProps, { /*updateCurrentAuction,*/ getProducts })(ProductList);

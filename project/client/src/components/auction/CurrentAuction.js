@@ -6,8 +6,17 @@ import { Link } from 'react-router-dom'
 import Timer from "./Timer";
 import './Auction.scss';
 import { updateCurrentAuction } from '../../store/actions/currentAuction'
+import { useStorageReducer } from 'react-storage-hooks';
+import { currentAuctionReducer as reducer, initialState as currentState } from '../../store/reducers/currentAuctionState.js'
+import * as actionTypes from '../../store/actionTypes'
 
 const CurrentAuction = (props) => {
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'currentAuction',
+        reducer,
+        currentState
+    );
     return (<>
         <br />
         <br />
