@@ -74,39 +74,7 @@ export const setPackagesList = (arr) => {
         payload: arr
     }
 }
-//--------------------------------------------------------------
-//הניתובים לשרת לא נכונים צריך לכתוב אותם עפ"י מ שנכתוב בשרת
 
-//מקבלת קוד מכירה ומוצר ומוסיפה בהתאם
-//נשתמש בה גם ליצירת מכירה חדשה 
-//וגם להוספת מוצרים במכירה קיימת
-
-
-export const addProductToDb = (id, product) => {
-    return (dispatch) => {
-        // let newProduct = { id: id, product: product }
-        axios.post(`http://localhost:5000/product/${id}`, product).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data));
-        })
-    }
-}
-
-
-
-
-export const addPackageToDb = (id, product) => {
-    //סתם העתקתי
-    return (dispatch) => {
-        let newProduct = { id: id, product: product }
-        axios.post(`http://localhost:5000/auctions`, newProduct).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data));
-        })
-    }
-}
 
 export const addProduct = (p) => {
     return {
@@ -139,34 +107,7 @@ export const resetNewAuctionState = () => {
     }
 }
 
-
-
-/*******************************************  שמירה במסד נתונים ***********************************************/
-export const saveProductsInDb = (arr) => { for (var i = 0; i < arr.length; i++)addProductToDb(arr[i]); }
-export const savePricingInDb = (arr) => { for (var i = 0; i < arr.length; i++)addPackageToDb(arr[i]); }
-export const saveOrganizationDetailsInDb = (obj, _id) => {
-    return (dispatch) => {
-        //אם הביא נאלים יכנס נאלים
-        //האם חוקי
-        axios.post(`http://localhost:5000/auctions/setOrganizationDetails/:${obj}&:/${_id}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data));
-        })
-    }
-}
-export const saveAuctionDetailsInDb = (obj, _id) => {
-    return (dispatch) => {
-        //אם הביא נאלים יכנס נאלים
-        //האם חוקי
-        axios.post(`http://localhost:5000/auctions/setAuctionDetails/:${obj}&:/${_id}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data));
-        })
-    }
-}
-
+//להפוך סטטוס של משתמש רגיל למנהל
 export const beManager = (_id) => {
     return axios.post(`http://localhost:5000/users/beManager/:${_id}`)
 }
@@ -175,29 +116,6 @@ export const beManager = (_id) => {
 export const pubicationApproval=(a_id,status)=>{
     return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)  
 }
-/*
-export const updateNewAuctioinState = () => {
-    updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
-    let obj =
-    {
-        showSetPackage: localStorage.getItem("showSetPackageBtn"),
-        showSetProduct: localStorage.getItem("showSetProductBtn"),
-        organizationName: JSON.parse(localStorage.getItem("organizationName")),
-        organizationText: JSON.parse(localStorage.getItem("organizationText")),
-        organizationPhotos: JSON.parse(localStorage.getItem("organizationPhotos")),
-        dateOfStart: JSON.parse(localStorage.getItem("DateOfStart")),
-        dateOfEnd: JSON.parse(localStorage.getItem("DateOfEnd")),
-        dateOfLotery: JSON.parse(localStorage.getItem("DateOfLotery")),
-        terms: JSON.parse(localStorage.getItem("terms")),
-        productsList: JSON.parse(localStorage.getItem("productsList")),
-        packagesList: JSON.parse(localStorage.getItem("packagesList"))
-    }
-    return {
-        type: actionTypes.UPDATE_NEW_AUCTION_STATE,
-        payload: obj
-    }
-}
-*/
 
 //--------------שמירת נתוני מכירה לפי שלבים
 
