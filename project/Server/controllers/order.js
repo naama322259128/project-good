@@ -64,6 +64,35 @@ const getOrderByToUserCodeAndAuction = async (req, res) => {
     return res.send(user);
 }
 
+
+
+// המכירה שמכרה הכי הרבה כרטיסים
+const getAuctionSoldMostTickets = async (req, res) => {
+
+    //לעבור על טבלת הזמנות
+    //בכל הזמנה לסכום את הכמויות של הכרטיסים מוצרים
+    let list= await Order.aggregate([
+        { $unwind: "$orderDetails" },
+        {
+            $group: {
+                _id: "$auctionId",
+                Value: { $sum: "$orderDetails.ticketsQuantity" }
+            }
+        },
+        {
+            $group: {
+                _id: 0,
+                Details: { $push: { Details: "$_id", Value: "$Value" } }
+            }
+
+        },
+        { $project: { Details: 1, _id: 0 } }
+    ])
+    //אם יש כמה מכירות שהן המקסימום?
+    // return list.
+}
+
+
 module.exports = {
     getAll, getById, addOrder, deleteOrder, getOrderListByIdUser, getOrderByToUserCodeAndAuction
 }
