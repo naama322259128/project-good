@@ -12,6 +12,6 @@ route.post("/setOrganizationInformation/:details", auctionController.addOrganiza
 route.post("/setAuctionInformation/:details", auctionController.addAuctionInformation)
 route.delete("/:id", auctionController.deleteAuction)
 route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
-route.put("/publicationApproval/:id&status", auctionController.publicationApproval)
+route.put("/publicationApproval/:a_id&status", auctionController.publicationApproval)
 
 module.exports = route;

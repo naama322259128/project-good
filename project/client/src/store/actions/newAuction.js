@@ -231,6 +231,7 @@ export const saveOrganizationInformation = (details) => {
         })
     }
 }
+
 //מידע על המכירה
 export const saveAuctionInformation = (details) => {
     return (dispatch) => {
