@@ -18,19 +18,12 @@ const getById = async (req, res) => {
 
 const addAuction = async (req, res) => {
     let auction = req.body;
-    console.log(auction);
-
     let newAuction = new Auction(auction);
-    console.log("newAuction created------------------------------");
-    console.log(newAuction);
-
     try {
         await newAuction.save();
-        console.log("newAuction saved------------------------------");
         return res.send(newAuction);
     }
     catch (err) {
-        console.log(err.message)
         return res.status(400).send(err.message)
     }
 }
@@ -52,6 +45,20 @@ const addProduct = async (req, res) => {
         console.log(err.message)
         return res.status(400).send(err.message)
     }
+}
+
+const deleteProduct=async(req,res)=>{
+
+    //לבדוק
+    let { auction_id } = req.params;
+    let { product_id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(auction_id)&&!mongoose.Types.ObjectId.isValid(product_id))
+        return res.status(404).send("Invalid ID number");
+    let user = await Auction.findByIdAndRemove(id);
+    if (!user)
+        return res.status(404).send("There is no user with such an ID number");
+    console.log(user);
+    return res.send(user);
 }
 
 const deleteAuction = async (req, res) => {
@@ -91,8 +98,8 @@ const getAuctionIsApproved = async (req, res) => {
 
 //לאשר/לא לאשר מכירה
 const approvalAuction = async (req, res) => {
-    let { a_id } = rea.params;
-    let { status } = rea.params;
+    let { a_id } = req.params;
+    let { status } = req.params;
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
     let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
@@ -100,8 +107,8 @@ const approvalAuction = async (req, res) => {
 
 //האם לאשר פרסום מכירה 
 const publicationApproval = async (req, res) => {
-    let { a_id } = rea.params;
-    let { status } = rea.params;
+    let { a_id } = req.params;
+    let { status } = req.params;
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
     let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
@@ -125,27 +132,99 @@ const getAuctionIsDone = async (req, res) => {
 
 
 //---------------------------שמירת תהליך הקמת מכירה
-//מה נכון לעשות?
-const addPackages = async (req, res) => {
 
+const addPackages = async (req, res) => {
+    let { _id } = req.params;
+    let { packages } = req.params;
+    let newAuction = new Auction();
+    try {
+        if (!mongoose.Types.ObjectId.isValid(_id))
+            return res.status(404).send("Invalid ID number");
+        if (_id && mongoose.Types.ObjectId.isValid(_id)) {
+            newAuction = await Auction.find({ '_id': _id });
+            if (!newAuction)
+                return res.status(404).send("There is no auction with such an manager ID number");
+            console.log(newAuction);
+        }
+        newAuction.purchasePackage = packages;
+        await newAuction.save();
+    }
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
 }
 const addProducts = async (req, res) => {
-
+    let { _id } = req.params;
+    let { products } = req.params;
+    let newAuction = new Auction();
+    try {
+        if (!mongoose.Types.ObjectId.isValid(_id))
+            return res.status(404).send("Invalid ID number");
+        if (_id && mongoose.Types.ObjectId.isValid(_id)) {
+            newAuction = await Auction.find({ '_id': _id });
+            if (!newAuction)
+                return res.status(404).send("There is no auction with such an manager ID number");
+            console.log(newAuction);
+        }
+        //לבדוק איך נכון להוסיף רשימת מוצרים
+        products.forEach((p) => { addProduct({ p, _id }); });
+        // newAuction.productList = products;
+        await newAuction.save();
+    }
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
 }
 const addOrganizationInformation = async (req, res) => {
-
+    let { _id } = req.params;
+    let { details } = req.params;
+    let newAuction = new Auction();
+    try {
+        if (!mongoose.Types.ObjectId.isValid(_id))
+            return res.status(404).send("Invalid ID number");
+        if (_id && mongoose.Types.ObjectId.isValid(_id)) {
+            newAuction = await Auction.find({ '_id': _id });
+            if (!newAuction)
+                return res.status(404).send("There is no auction with such an manager ID number");
+            console.log(newAuction);
+        }
+        newAuction.organizationName=details.organizationName;
+        newAuction.organizationText=details.organizationText;
+        //לשמור כמו התמונות
+        newAuction.organizationPhotos=details.organizationPhotos;
+        await newAuction.save();
+    }
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
 }
 const addAuctionInformation = async (req, res) => {
-
+    let { _id } = req.params;
+    let { details } = req.params;
+    let newAuction = new Auction();
+    try {
+        if (!mongoose.Types.ObjectId.isValid(_id))
+            return res.status(404).send("Invalid ID number");
+        if (_id && mongoose.Types.ObjectId.isValid(_id)) {
+            newAuction = await Auction.find({ '_id': _id });
+            if (!newAuction)
+                return res.status(404).send("There is no auction with such an manager ID number");
+            console.log(newAuction);
+        }
+        newAuction.registrationStartDate = details.registrationStartDate;
+        newAuction.registrationEndDate = details.registrationEndDate;
+        newAuction.lotteriesDate = details.lotteriesDate;
+        await newAuction.save();
+    }
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
 }
 
 
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
-<<<<<<< HEAD
-=======
     , addPackages, addProducts, addOrganizationInformation, addAuctionInformation
->>>>>>> 5f1c8fe9c9af30bd99a9baa9ccaaeb66aa08dce1
 }
 
 //המכירה שש לה הכי הרבה הכנסות

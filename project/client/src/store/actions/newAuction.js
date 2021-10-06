@@ -120,9 +120,9 @@ export const pubicationApproval=(a_id,status)=>{
 //--------------שמירת נתוני מכירה לפי שלבים
 
 //תמחור מכירה
-export const savePackages = (packages) => {
+export const savePackages = (_id,packages) => {
     return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/setPackages/:${packages}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/setPackages/${_id}&${packages}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data));
@@ -130,9 +130,9 @@ export const savePackages = (packages) => {
     }
 }
 //העלאת מוצרים
-export const saveProducts = (products) => {
+export const saveProducts = (_id,products) => {
     return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/setProducts/:${products}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/setProducts/${_id}&${products}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data));
@@ -140,9 +140,9 @@ export const saveProducts = (products) => {
     }
 }
 //מידע על הארגון
-export const saveOrganizationInformation = (details) => {
+export const saveOrganizationInformation = (_id,details) => {
     return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/setOrganizationInformation/:${details}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/setOrganizationInformation/${_id}&${details}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data));
@@ -151,9 +151,9 @@ export const saveOrganizationInformation = (details) => {
 }
 
 //מידע על המכירה
-export const saveAuctionInformation = (details) => {
+export const saveAuctionInformation = (_id,details) => {
     return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/setAuctionInformation/:${details}`).then(succ => {
+        axios.post(`http://localhost:5000/auctions/setAuctionInformation/${_id}&${details}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data));
