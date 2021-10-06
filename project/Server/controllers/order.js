@@ -86,7 +86,8 @@ const getAuctionSoldMostTickets = async (req, res) => {
         //     }
 
         // },
-        // { $project: { Details: 1, _id: 0 } }
+        // { $project: { Details: 1, _id: 0 } 
+    }
     ])
 
     if (!list) return res.status(404).send("There is no orders with such an ID user");
@@ -97,5 +98,5 @@ const getAuctionSoldMostTickets = async (req, res) => {
 
 
 module.exports = {
-    getAll, getById, addOrder, deleteOrder, getOrderListByIdUser, getOrderByToUserCodeAndAuction
+    getAll, getById, addOrder, deleteOrder, getOrderListByIdUser, getOrderByToUserCodeAndAuction,getAuctionSoldMostTickets
 }

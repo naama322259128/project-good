@@ -224,7 +224,7 @@ const addAuctionInformation = async (req, res) => {
 
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
-    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation
+    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation,deleteProduct
 }
 
 //המכירה שש לה הכי הרבה הכנסות
