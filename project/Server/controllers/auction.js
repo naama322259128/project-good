@@ -16,8 +16,6 @@ const getById = async (req, res) => {
     return res.send(auction);
 }
 
-
-
 const addAuction = async (req, res) => {
     let auction = req.body;
     console.log(auction);
@@ -40,13 +38,13 @@ const addAuction = async (req, res) => {
 const addProduct = async (req, res) => {
     let product = req.body;
     const url1 = req.protocol + '://' + req.get('host');
-    product.image=url1 + '/public/' + req.file.filename;
+    product.image = url1 + '/public/' + req.file.filename;
     try {
-        var auction = await Auction.findOne({_id:req.query.id});
+        var auction = await Auction.findOne({ _id: req.query.id });
         console.log(auction);
-        if(!auction.productList) 
-            auction.productList=[];
-        auction.productList.push(product);    
+        if (!auction.productList)
+            auction.productList = [];
+        auction.productList.push(product);
         await auction.save();
         return res.send(auction);
     }
@@ -55,7 +53,6 @@ const addProduct = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
-
 
 const deleteAuction = async (req, res) => {
     let { id } = req.params;
@@ -68,24 +65,6 @@ const deleteAuction = async (req, res) => {
     return res.send(auction);
 }
 
-//לקבל את המכירה שיש לה הכי הרבה נרשמים
-const getMostSubscribers = async (req, res) => {
-
-    //db.exhibits.aggregate( [ { $unwind: "$tags" },  { $sortByCount: "$tags" } ] )
-    let sorted_arr = User.aggregate({ $sortByCount: "$password" });
-    //מציג סיסמה וכמה יש מאותה סיסמה
-    //מגיע ממוין
-    //לקחת את האחרון
-    // ? ואם כמה אחרונים באותה כמות נרשמים
-
-    //https://docs.mongodb.com/manual/reference/operator/aggregation/sortByCount/#mongodb-pipeline-pipe.-sortByCount
-
-    let auction = await Auction.
-        if(!auction)
-    return res.status(404).send("");
-    console.log(auction);
-    return res.send(auction);
-}
 
 //לקבל במערך את כל המכירות השייכות למנהל שנשלח
 const getAuctionsByManagerId = async (req, res) => {
@@ -99,7 +78,7 @@ const getAuctionsByManagerId = async (req, res) => {
     return res.send(auction);
 }
 
-//לקבל האם המכירה מאושרת
+//לקבל האם ההגרלות של המכירה מאושרות
 const getAuctionIsApproved = async (req, res) => {
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(a_id))
@@ -110,7 +89,6 @@ const getAuctionIsApproved = async (req, res) => {
     return res.send(auction.lotteryApproval);
 }
 
-
 //לאשר/לא לאשר מכירה
 const approvalAuction = async (req, res) => {
     let { a_id } = rea.params;
@@ -120,16 +98,16 @@ const approvalAuction = async (req, res) => {
     let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
 }
 
-//האם לאשר הצגת מכירה 
+//האם לאשר פרסום מכירה 
 const publicationApproval = async (req, res) => {
     let { a_id } = rea.params;
     let { status } = rea.params;
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
-    let auction = await Auction.findOneAndUpdate({ '_id': a_id}, { 'publicationApproval': status })
+    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
 }
 
-//האם המכירה התבצעה
+//האם ההגרלות בוצעו
 const getAuctionIsDone = async (req, res) => {
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(a_id))
@@ -147,9 +125,12 @@ const getAuctionIsDone = async (req, res) => {
 
 
 module.exports = {
-    getAll, getById, addProduct,addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone,publicationApproval
+    getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
 }
 
 //המכירה שש לה הכי הרבה הכנסות
 //המכירה שיש בה הכי קצת....
 
+
+
+// https://www.tutorialspoint.com/mongodb-aggregation-to-sum-individual-properties-on-an-object-in-an-array-across-documents

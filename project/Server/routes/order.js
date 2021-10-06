@@ -10,4 +10,6 @@ route.get("/:user_id&:auction_id",orderController.getOrderByToUserCodeAndAuction
 route.post("/",orderController.addOrder)
 route.delete("/:id",orderController.deleteOrder)
 
+route.get("/max")
+
 module.exports=route;
