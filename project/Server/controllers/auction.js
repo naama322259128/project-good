@@ -124,8 +124,28 @@ const getAuctionIsDone = async (req, res) => {
 // }
 
 
+//---------------------------שמירת תהליך הקמת מכירה
+//מה נכון לעשות?
+const addPackages = async (req, res) => {
+
+}
+const addProducts = async (req, res) => {
+
+}
+const addOrganizationInformation = async (req, res) => {
+
+}
+const addAuctionInformation = async (req, res) => {
+
+}
+
+
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
+<<<<<<< HEAD
+=======
+    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation
+>>>>>>> 5f1c8fe9c9af30bd99a9baa9ccaaeb66aa08dce1
 }
 
 //המכירה שש לה הכי הרבה הכנסות
