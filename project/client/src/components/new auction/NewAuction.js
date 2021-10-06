@@ -16,13 +16,13 @@ import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 // import { updateNewAuctioinState } from '../../store/actions/newAuction'
 // import { setNewAuctionItemsInLS } from '../../utils/newAuctionUtils'
-import { beManager } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
+import { beManager } from "../../utils/newAuctionUtils";
 
 import { useStorageReducer } from 'react-storage-hooks';
 import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../store/reducers/newAuctionState.js'
 import * as actionTypes from '../../store/actionTypes'
 
-import { savePackages, saveAuctionInformation, saveProducts, saveOrganizationInformation } from '../../store/actions/newAuction'
+import { savePackages, saveAuctionInformation, saveProducts, saveOrganizationInformation } from '../../utils/newAuctionUtils'
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -9,14 +9,16 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { beManager, setLastModal, pubicationApproval } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
+import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
+import { pubicationApproval } from "../../utils/newAuctionUtils"
+import { beManager } from "../../utils/newAuctionUtils";
 import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
 import { Link } from 'react-router-dom'
 import Auction from '../../models/auction';
 
 const FinalStep = (props) => {
 
-    const pubicationApproval= () => {//אישור פירסום
+    const pubicationApproval = () => {//אישור פירסום
         //אם קיים שדה _id
         props.pubicationApproval(JSON.parse(localStorage.getItem("newAuction"))._id, true);
         //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
