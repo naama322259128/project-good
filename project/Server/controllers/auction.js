@@ -40,13 +40,13 @@ const addAuction = async (req, res) => {
 const addProduct = async (req, res) => {
     let product = req.body;
     const url1 = req.protocol + '://' + req.get('host');
-    product.image=url1 + '/public/' + req.file.filename;
+    product.image = url1 + '/public/' + req.file.filename;
     try {
-        var auction = await Auction.findOne({_id:req.query.id});
+        var auction = await Auction.findOne({ _id: req.query.id });
         console.log(auction);
-        if(!auction.productList) 
-            auction.productList=[];
-        auction.productList.push(product);    
+        if (!auction.productList)
+            auction.productList = [];
+        auction.productList.push(product);
         await auction.save();
         return res.send(auction);
     }
@@ -126,7 +126,7 @@ const publicationApproval = async (req, res) => {
     let { status } = rea.params;
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
-    let auction = await Auction.findOneAndUpdate({ '_id': a_id}, { 'publicationApproval': status })
+    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
 }
 
 //האם המכירה התבצעה
@@ -146,8 +146,25 @@ const getAuctionIsDone = async (req, res) => {
 // }
 
 
+//---------------------------שמירת תהליך הקמת מכירה
+//מה נכון לעשות?
+const addPackages = async (req, res) => {
+
+}
+const addProducts = async (req, res) => {
+
+}
+const addOrganizationInformation = async (req, res) => {
+
+}
+const addAuctionInformation = async (req, res) => {
+
+}
+
+
 module.exports = {
-    getAll, getById, addProduct,addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone,publicationApproval
+    getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
+    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation
 }
 
 //המכירה שש לה הכי הרבה הכנסות
