@@ -1,6 +1,7 @@
 import * as actionTypes from '../actionTypes';
 
 export const initialState = {
+    _id:"",
     packagesList: [],//רשימת חבילות
     productsList: [],//רשימ מוצרים
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage

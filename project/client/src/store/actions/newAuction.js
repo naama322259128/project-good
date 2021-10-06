@@ -107,6 +107,7 @@ export const resetNewAuctionState = () => {
     }
 }
 
+<<<<<<< HEAD
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManager = (_id) => {
     return axios.post(`http://localhost:5000/users/beManager/:${_id}`)
@@ -160,3 +161,5 @@ export const saveAuctionInformation = (_id,details) => {
         })
     }
 }
+=======
+>>>>>>> dbf1b474eb141747133f69b2d684d9add251e45f

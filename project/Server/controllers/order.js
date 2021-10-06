@@ -71,23 +71,26 @@ const getAuctionSoldMostTickets = async (req, res) => {
 
     //לעבור על טבלת הזמנות
     //בכל הזמנה לסכום את הכמויות של הכרטיסים מוצרים
-    let list= await Order.aggregate([
+    let list = await Order.aggregate([
         { $unwind: "$orderDetails" },
         {
             $group: {
                 _id: "$auctionId",
-                Value: { $sum: "$orderDetails.ticketsQuantity" }
+                count: { $sum: "$orderDetails.ticketsQuantity" }
             }
-        },
-        {
-            $group: {
-                _id: 0,
-                Details: { $push: { Details: "$_id", Value: "$Value" } }
-            }
+        // },
+        // {
+        //     $group: {
+        //         _id: 0,
+        //         Details: { $push: { Details: "$_id", Value: "$Value" } }
+        //     }
 
-        },
-        { $project: { Details: 1, _id: 0 } }
+        // },
+        // { $project: { Details: 1, _id: 0 } }
     ])
+
+    if (!list) return res.status(404).send("There is no orders with such an ID user");
+    return res.send(list);
     //אם יש כמה מכירות שהן המקסימום?
     // return list.
 }
