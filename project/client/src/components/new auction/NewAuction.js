@@ -22,6 +22,8 @@ import { useStorageReducer } from 'react-storage-hooks';
 import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../store/reducers/newAuctionState.js'
 import * as actionTypes from '../../store/actionTypes'
 
+import { savePackages, saveAuctionInformation, saveProducts, saveOrganizationInformation } from '../../store/actions/newAuction'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -52,7 +54,6 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
-
     const [state, dispatch, writeError] = useStorageReducer(
         localStorage,
         'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
@@ -78,7 +79,7 @@ const NewAuction = (props) => {
     const handleNext = () => {
         switch (activeStep) {
             case 0:
-                return //שמירת תמחור מכירה במסד נתונים;
+                return savePackages(state._id, state.packagesList);//שמירת תמחור מכירה במסד נתונים;
             case 1:
                 return //שמירת העלאת מוצרים במסד נתונים;
             case 2:

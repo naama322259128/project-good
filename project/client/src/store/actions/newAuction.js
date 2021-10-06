@@ -171,9 +171,9 @@ export const beManager = (_id) => {
     return axios.post(`http://localhost:5000/users/beManager/:${_id}`)
 }
 // אישור פירסום מכירה 
-            
-export const pubicationApproval=(a_id,status)=>{
-    return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)  
+
+export const pubicationApproval = (a_id, status) => {
+    return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)
 }
 /*
 export const updateNewAuctioinState = () => {
@@ -202,9 +202,9 @@ export const updateNewAuctioinState = () => {
 //--------------שמירת נתוני מכירה לפי שלבים
 
 //תמחור מכירה
-export const savePackages = (packages) => {
+export const savePackages = (auction_id, packages) => {
     return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/setPackages/:${packages}`).then(succ => {
+        axios.post(`http://localhost:5000/auctions/setPackages/:${auction_id}&${packages}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data));
