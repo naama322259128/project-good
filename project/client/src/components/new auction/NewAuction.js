@@ -64,7 +64,7 @@ const NewAuction = (props) => {
         //TODO: האם זה אמור להיות כאן או באחד הכפתורים קודם, אולי לא מכיר את הדיספאצ
         //ומה עם שגיאה 400?
         //לשנות את הסטטוס שלו למנהל  
-        beManager(state.currentUser._id).then(succ => dispatch({ type: actionTypes.SET_CURRENT_USER, payload: succ.data }))
+        // beManager(state.currentUser._id).then(succ => dispatch({ type: actionTypes.SET_CURRENT_USER, payload: succ.data }))
     }, [])
 
     const classes = useStyles();

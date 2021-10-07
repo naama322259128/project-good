@@ -113,14 +113,14 @@ export const beManager = (_id) => {
 }
 
 // אישור פירסום מכירה            
-export const pubicationApproval=(a_id,status)=>{
-    return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)  
+export const pubicationApproval = (a_id, status) => {
+    return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)
 }
 
 //--------------שמירת נתוני מכירה לפי שלבים
 
 //תמחור מכירה
-export const savePackages = (_id,packages) => {
+export const savePackages = (_id, packages) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/setPackages/${_id}&${packages}`).then(succ => {
             console.log(succ.data);
@@ -131,7 +131,7 @@ export const savePackages = (_id,packages) => {
 }
 
 //העלאת מוצרים
-export const saveProducts = (_id,products) => {
+export const saveProducts = (_id, products) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/setProducts/${_id}&${products}`).then(succ => {
             console.log(succ.data);
@@ -142,7 +142,7 @@ export const saveProducts = (_id,products) => {
 }
 
 //מידע על הארגון
-export const saveOrganizationInformation = (_id,details) => {
+export const saveOrganizationInformation = (_id, details) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/setOrganizationInformation/${_id}&${details}`).then(succ => {
             console.log(succ.data);
@@ -153,7 +153,7 @@ export const saveOrganizationInformation = (_id,details) => {
 }
 
 //מידע על המכירה
-export const saveAuctionInformation = (_id,details) => {
+export const saveAuctionInformation = (_id, details) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/setAuctionInformation/${_id}&${details}`).then(succ => {
             console.log(succ.data);
@@ -161,4 +161,28 @@ export const saveAuctionInformation = (_id,details) => {
                 dispatch(console.log(succ.data));
         })
     }
+
 }
+//למחוק ישירות מהמסד נתונים
+//מקבלת קוד מכירה וקוד חבילה ומוחקת מהמסד נתונים
+// export const deletePackage = (_id,package_id) => {
+//     return (dispatch) => {
+//         axios.delete(`http://localhost:5000/auction/deletePackage/${_id}&${package_id}`).then(succ => {
+//             console.log(succ.data);
+//             if (succ.status != 400) {
+//                 dispatch(console.log(succ.data));
+//             }
+//         })}
+
+// }
+
+// export const deleteProduct = (_id,product_id) => {
+//     return (dispatch) => {
+//         axios.delete(`http://localhost:5000/auction/deleteProduct/${_id}&${product_id}`).then(succ => {
+//             console.log(succ.data);
+//             if (succ.status != 400) {
+//                 dispatch(console.log(succ.data));
+//             }
+//         })}
+
+// }

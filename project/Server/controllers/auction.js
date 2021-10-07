@@ -60,6 +60,19 @@ const deleteProduct=async(req,res)=>{
     console.log(user);
     return res.send(user);
 }
+const deletePackage=async(req,res)=>{
+
+    //לבדוק
+    let { auction_id } = req.params;
+    let { package_id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(auction_id)&&!mongoose.Types.ObjectId.isValid(package_id))
+        return res.status(404).send("Invalid ID number");
+    let user = await Auction.findByIdAndRemove(id);
+    if (!user)
+        return res.status(404).send("There is no user with such an ID number");
+    console.log(user);
+    return res.send(user);
+}
 
 const deleteAuction = async (req, res) => {
     let { id } = req.params;
@@ -224,7 +237,7 @@ const addAuctionInformation = async (req, res) => {
 
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
-    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation,deleteProduct
+    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation,deleteProduct,deletePackage
 }
 
 //המכירה שש לה הכי הרבה הכנסות
