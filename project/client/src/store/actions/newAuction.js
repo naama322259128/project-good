@@ -107,13 +107,12 @@ export const resetNewAuctionState = () => {
     }
 }
 
-<<<<<<< HEAD
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManager = (_id) => {
     return axios.post(`http://localhost:5000/users/beManager/:${_id}`)
 }
-// אישור פירסום מכירה 
-            
+
+// אישור פירסום מכירה            
 export const pubicationApproval=(a_id,status)=>{
     return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)  
 }
@@ -130,6 +129,7 @@ export const savePackages = (_id,packages) => {
         })
     }
 }
+
 //העלאת מוצרים
 export const saveProducts = (_id,products) => {
     return (dispatch) => {
@@ -140,6 +140,7 @@ export const saveProducts = (_id,products) => {
         })
     }
 }
+
 //מידע על הארגון
 export const saveOrganizationInformation = (_id,details) => {
     return (dispatch) => {
@@ -154,12 +155,10 @@ export const saveOrganizationInformation = (_id,details) => {
 //מידע על המכירה
 export const saveAuctionInformation = (_id,details) => {
     return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/setAuctionInformation/${_id}&${details}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/setAuctionInformation/${_id}&${details}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data));
         })
     }
 }
-=======
->>>>>>> dbf1b474eb141747133f69b2d684d9add251e45f

@@ -81,11 +81,24 @@ const NewAuction = (props) => {
             case 0:
                 return savePackages(state._id, state.packagesList);//שמירת תמחור מכירה במסד נתונים;
             case 1:
-                return //שמירת העלאת מוצרים במסד נתונים;
-            case 2:
-                return//שמירת מידע על הארגון במסד נתונים; 
-            case 3:
-                return//שמירת מידע על המכירה במסד נתונים;
+                return saveProducts(state._id, state.productsList);//שמירת העלאת מוצרים במסד נתונים;
+            case 2: {
+                let organizationDetails = {
+                    organizationName: state.organizationName,
+                    organizationTxt: state.organizationTxt,
+                    organizationPhotos: state.organizationPhotos
+                };
+                return saveOrganizationInformation(state._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
+            }
+            case 3: {
+                let auctionDetails = {
+                    dateOfLottery: state.dateOfLottery,
+                    registrationEndDate: state.registrationEndDate,
+                    registrationStartDate: state.registrationStartDate
+                };
+                return saveAuctionInformation(state._id, auctionDetails);//שמירת מידע על המכירה במסד נתונים;
+
+            }
         }
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
@@ -146,25 +159,25 @@ const NewAuction = (props) => {
                         <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>
                 ) : (
-                    <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                         <div>
-                            {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
-                            {isStepOptional(activeStep) && (
-                                <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
-                            )}
+                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                            <div>
+                                {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
+                                {isStepOptional(activeStep) && (
+                                    <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
+                                )}
 
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleNext}
-                                className={classes.button}
-                            >
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
-                            </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleNext}
+                                    className={classes.button}
+                                >
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
+                                </Button>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
             </div>
         </div>
 
