@@ -98,7 +98,7 @@ export const getAuctionIsDone = (_id) => {
     return (dispatch) => {
         axios.get(`http://localhost:5000/auctions/getAuctionIsDone/${_id}`).then(succ => {
             console.log(succ.data);
-            //if (succ.status != 400) dispatch();
+            if (succ.status != 400) dispatch();
         })
     }
 }

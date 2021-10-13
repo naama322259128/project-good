@@ -45,7 +45,7 @@ const UserTable = () => {
 
     const createData = (order,name,a_name, order_date, sum) => {
 
-        const options =<div><OrderDetails item={order}/> <Button>Lottery results</Button><Button>Add order</Button></div> 
+        const options =<div><OrderDetails item={order}/> <Button>Add order</Button></div> 
         console.log("create data");
         return { name, a_name,order_date, sum, options };
     }
@@ -89,14 +89,6 @@ const UserTable = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
 
     return (
         <center>
@@ -135,15 +127,7 @@ const UserTable = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
+               
             </Paper>
         </center>
     );
