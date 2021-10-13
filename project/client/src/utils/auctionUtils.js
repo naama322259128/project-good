@@ -1,6 +1,9 @@
 import * as actions from '../store/actions/newAuction';
 import axios from 'axios';
-
+export const getAuctionById = (_id) => {
+  return axios.get(`http://localhost:5000/auctions/${_id}`)
+  
+}
 export const createNewAuction = (auction) => {
   return (dispatch) => {
     axios.post(`http://localhost:5000/auctions`, auction).then(succ => {
@@ -17,11 +20,7 @@ export const getAuctionsList = async () => {
   return axios.get(`http://localhost:5000/auctions`)
 }
 export const getAuctionName = async (_id) => {
-  return (dispatch) => {
-    axios.get(`http://localhost:5000/auctions/getName/:${_id}`).then(succ => {
-      console.log(succ.data);
-      if (succ.status != 400)
-        dispatch({});
-    })
-  }
+
+  return axios.get(`http://localhost:5000/auctions/getName/${_id}`)
+
 }

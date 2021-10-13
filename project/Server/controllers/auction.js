@@ -249,7 +249,8 @@ const getWinnersList = async (req, res) => {
 
 const getAuctionName = async (req, res) => {
     let { _id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Invalid ID number");
+    if (!mongoose.Types.ObjectId.isValid(_id))
+     return res.status(404).send("Invalid ID number");
     let auction = await Auction.findById(_id);
     if (!auction) return res.status(404).send("There is no auction with such an ID number");
     return res.send(auction.name);

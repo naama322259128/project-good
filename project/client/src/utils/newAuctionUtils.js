@@ -47,7 +47,7 @@ export const saveOrganizationInformation = (details) => {
 //מידע על המכירה
 export const saveAuctionInformation = (details) => {
     return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/setAuctionInformation/:${details}`).then(succ => {
+        axios.post(`http://localhost:5000/auctions/setAuctionInformation/`,details).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data));

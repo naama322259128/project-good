@@ -16,5 +16,5 @@ route.delete("/deletePackage/:auction_id&package_id", auctionController.deletePa
 route.delete("/deleteProduct/:auction_id&product_id", auctionController.deleteProduct)
 route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
 route.put("/publicationApproval/:a_id&status", auctionController.publicationApproval)
-
+route.post("/",auctionController.addAuction)
 module.exports = route;
