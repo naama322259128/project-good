@@ -14,28 +14,7 @@ export const addUser = (user) => {
     }
 }
 
-/*
-export const setAuctionManagerItemsInLS = () => {
-    if (localStorage.getItem("selected_auction_to_options") === null) {
-        localStorage.setItem("selected_auction_to_options", JSON.stringify(""));
-    }
-    return { type: 22 }
+export const getUserOrdersList = async (_id) => {
+    return axios.get(`http://localhost:5000/orders/userOrdersList/:${_id}`)
 }
-export const setUserItemsInLS = () => {
-    //alert("setUserItemsInLS");
-    let user = localStorage.getItem("currentUser");
-    if (user === null || user === "") {
-        localStorage.setItem("currentUser", JSON.stringify(""));
-        localStorage.setItem("prodactsInCart", JSON.stringify([]));
-    }
-    return { type: 22 }
-}
-export const setSiteManagerItemsInLS = () => {
-    // if (localStorage.getItem("") === null) {
-     //    localStorage.setItem("", JSON.stringify(""));
-     //}
-    return { type: 22 }
-
-}
-*/
 

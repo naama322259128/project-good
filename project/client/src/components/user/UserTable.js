@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -10,6 +10,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import './yourProfile.scss'
+import { getUserOrdersList } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
+import { getAuctionName } from '../../utils/auctionUtils'//מחזירה את שם המכירה
+
 const columns = [
     { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
     { id: 'order_date', label: 'Order Date', minWidth: 100 },
@@ -36,16 +39,14 @@ const columns = [
     // },
 ];
 
-function createData(name,order_date, sum) {
+function createData(name, order_date, sum) {
     const options = "to add buttons"
-    return { name, order_date,sum,options};
+    return { name, order_date, sum, options };
 }
 
 const rows = [
-    createData('Ezer Mizyon', "02/08/2021",150),
-    createData('Yad And Shem',"11/08/2021",100),
-    
-  
+    // createData('Ezer Mizyon', "02/08/2021",150),
+    // createData('Yad And Shem',"11/08/2021",100),
 ];
 
 const useStyles = makeStyles({
@@ -58,6 +59,16 @@ const useStyles = makeStyles({
 });
 
 const AuctionManagerTable = () => {
+    useEffect(() => {
+        debugger;
+        getUserOrdersList(JSON.parse(localStorage.user).currentUser._id).then(succ => {
+            let arr = [];
+            succ.data.map((item) => {
+                arr.push(createData(/*getAuctionName(item.auctionId)*/2, item.orderDate, item.amountToPay))
+            })
+        })
+    }, [])
+
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -73,51 +84,51 @@ const AuctionManagerTable = () => {
 
     return (
         <center>
-       
-        <Paper className={classes.root}>
-            <TableContainer className={classes.container}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                            return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                    {columns.map((column) => {
-                                        const value = row[column.id];
-                                        return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
-                                            </TableCell>
-                                        );
-                                    })}
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </Paper>
+
+            <Paper className={classes.root}>
+                <TableContainer className={classes.container}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                                return (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        {columns.map((column) => {
+                                            const value = row[column.id];
+                                            return (
+                                                <TableCell key={column.id} align={column.align}>
+                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper>
         </center>
     );
 }

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { Link, Route, useRouteMatch, Switch } from 'react-router-dom'
 import { updateCurrentAuctionState } from '../../store/actions/currentAuction'
-import { setCurrentAuctionItemsInLS } from '../../utils/auctionUtils'
 import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
 import './Auction.scss';
@@ -11,11 +10,7 @@ import SmallFooter from '../main/SmallFooter';
 
 const Auction = (props) => {
     // const { url, path } = useRouteMatch();
-    // useEffect(() => {
-    //     window.addEventListener('storage', props.updateCurrentAuctionState);
-    //     window.addEventListener('reload', props.updateCurrentAuctionState);
-    //     props.setCurrentAuctionItemsInLS();
-    // }, [])
+
     return (<>
         <SmallHeader />
         {/* <header className="auction_header">
@@ -45,4 +40,4 @@ const Auction = (props) => {
 }
 const mapStateToProps = state => {
 }
-export default connect(mapStateToProps, { setCurrentAuctionItemsInLS, updateCurrentAuctionState })(Auction);
+export default connect(mapStateToProps, {  updateCurrentAuctionState })(Auction);

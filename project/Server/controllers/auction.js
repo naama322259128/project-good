@@ -47,12 +47,12 @@ const addProduct = async (req, res) => {
     }
 }
 
-const deleteProduct=async(req,res)=>{
+const deleteProduct = async (req, res) => {
 
     //לבדוק
     let { auction_id } = req.params;
     let { product_id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(auction_id)&&!mongoose.Types.ObjectId.isValid(product_id))
+    if (!mongoose.Types.ObjectId.isValid(auction_id) && !mongoose.Types.ObjectId.isValid(product_id))
         return res.status(404).send("Invalid ID number");
     let user = await Auction.findByIdAndRemove(id);
     if (!user)
@@ -60,12 +60,12 @@ const deleteProduct=async(req,res)=>{
     console.log(user);
     return res.send(user);
 }
-const deletePackage=async(req,res)=>{
+const deletePackage = async (req, res) => {
 
     //לבדוק
     let { auction_id } = req.params;
     let { package_id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(auction_id)&&!mongoose.Types.ObjectId.isValid(package_id))
+    if (!mongoose.Types.ObjectId.isValid(auction_id) && !mongoose.Types.ObjectId.isValid(package_id))
         return res.status(404).send("Invalid ID number");
     let user = await Auction.findByIdAndRemove(id);
     if (!user)
@@ -201,10 +201,10 @@ const addOrganizationInformation = async (req, res) => {
                 return res.status(404).send("There is no auction with such an manager ID number");
             console.log(newAuction);
         }
-        newAuction.organizationName=details.organizationName;
-        newAuction.organizationText=details.organizationText;
+        newAuction.organizationName = details.organizationName;
+        newAuction.organizationText = details.organizationText;
         //לשמור כמו התמונות
-        newAuction.organizationPhotos=details.organizationPhotos;
+        newAuction.organizationPhotos = details.organizationPhotos;
         await newAuction.save();
     }
     catch (err) {
@@ -234,15 +234,34 @@ const addAuctionInformation = async (req, res) => {
     }
 }
 
+//קבל רשימת זוכים
+const getWinnersList = async (req, res) => {
+    let { _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(a_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.find({ '_id': _id });
+    if (!auction)
+        return res.status(404).send("There is no auction with such an ID number");
+    let arr;
+    auction.productList.map((item) => { arr.push({ productName: item.name, winnerId: winnerId }) });
+    return res.send(arr);
+}
+
+const getAuctionName = async (req, res) => {
+    let { _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Invalid ID number");
+    let auction = await Auction.findById(_id);
+    if (!auction) return res.status(404).send("There is no auction with such an ID number");
+    return res.send(auction.name);
+}
 
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
-    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation,deleteProduct,deletePackage
+    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation, deleteProduct, deletePackage, getWinnersList, getAuctionName
 }
 
 //המכירה שש לה הכי הרבה הכנסות
 //המכירה שיש בה הכי קצת....
-
 
 
 // https://www.tutorialspoint.com/mongodb-aggregation-to-sum-individual-properties-on-an-object-in-an-array-across-documents

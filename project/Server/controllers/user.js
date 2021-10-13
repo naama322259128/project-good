@@ -100,6 +100,8 @@ const beManager = async (req, res) => {
     return res.send(doc);
 }
 
+
+
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager
 

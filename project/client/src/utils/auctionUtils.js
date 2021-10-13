@@ -13,13 +13,15 @@ export const createNewAuction = (auction) => {
 }
 
 //מחזירה את רשימת המכירות הקיימות במסד נתונים 
-export const  getAuctionsList =async () => {
+export const getAuctionsList = async () => {
   return axios.get(`http://localhost:5000/auctions`)
 }
-
-export const  setCurrentAuctionItemsInLS = async() => {
-  if (localStorage.getItem("currentAuction") === null) {
-    localStorage.setItem("currentAuction", JSON.stringify(""));
+export const getAuctionName = async (_id) => {
+  return (dispatch) => {
+    axios.get(`http://localhost:5000/auctions/getName/:${_id}`).then(succ => {
+      console.log(succ.data);
+      if (succ.status != 400)
+        dispatch({});
+    })
   }
-  return { type: 22 }
 }

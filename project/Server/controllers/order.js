@@ -42,18 +42,14 @@ const deleteOrder = async (req, res) => {
     return res.send(order);
 }
 
-//פונקציה שמחזירה רשימה הזמנות 
-//של משתמש מסוים
-const getOrderListByIdUser = async (req, res) => {
-    let { userId } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(userId))
+//מחזירה הזמנות של משתמש
+const getUserOrdersList = async (req, res) => {
+    let { _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send("Invalid ID number");
-    let orders = await Order.find({ "userId": userId });//לבדוק אם ככה שואלים
-    if (!orders)
-        return res.status(404).send("There is no orders with such an ID user");
+    let orders = await Order.find({ "userId": _id });//לבדוק אם ככה שואלים
     return res.send(orders);
 }
-
 
 //מחזירה הזמנה עפ"י קוד משתמש ומכירה
 const getOrderByToUserCodeAndAuction = async (req, res) => {
@@ -63,8 +59,6 @@ const getOrderByToUserCodeAndAuction = async (req, res) => {
         return res.status(400).send("Incorrect details entered");
     return res.send(user);
 }
-
-
 
 // המכירה שמכרה הכי הרבה כרטיסים
 const getAuctionSoldMostTickets = async (req, res) => {
@@ -78,16 +72,16 @@ const getAuctionSoldMostTickets = async (req, res) => {
                 _id: "$auctionId",
                 count: { $sum: "$orderDetails.ticketsQuantity" }
             }
-        // },
-        // {
-        //     $group: {
-        //         _id: 0,
-        //         Details: { $push: { Details: "$_id", Value: "$Value" } }
-        //     }
+            // },
+            // {
+            //     $group: {
+            //         _id: 0,
+            //         Details: { $push: { Details: "$_id", Value: "$Value" } }
+            //     }
 
-        // },
-        // { $project: { Details: 1, _id: 0 } 
-    }
+            // },
+            // { $project: { Details: 1, _id: 0 } 
+        }
     ])
 
     if (!list) return res.status(404).send("There is no orders with such an ID user");
@@ -96,7 +90,6 @@ const getAuctionSoldMostTickets = async (req, res) => {
     // return list.
 }
 
-
 module.exports = {
-    getAll, getById, addOrder, deleteOrder, getOrderListByIdUser, getOrderByToUserCodeAndAuction,getAuctionSoldMostTickets
+    getAll, getById, addOrder, deleteOrder, getUserOrdersList, getOrderByToUserCodeAndAuction, getAuctionSoldMostTickets
 }
