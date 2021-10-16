@@ -109,7 +109,7 @@ export const resetNewAuctionState = () => {
 
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManager = (_id) => {
-    return axios.post(`http://localhost:5000/users/beManager/:${_id}`)
+    return axios.post(`http://localhost:5000/users/beManager`,_id)
 }
 
 // אישור פירסום מכירה            

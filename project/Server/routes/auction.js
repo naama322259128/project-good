@@ -5,7 +5,7 @@ route.get("/", auctionController.getAll)
 route.get("/getAuctionIsApproved/:_id", auctionController.getAuctionIsApproved)
 route.get("/getAuctionsByManagerId/:manager_id", auctionController.getAuctionsByManagerId)
 route.get("/getAuctionIsDone/:_id", auctionController.getAuctionIsDone)
-route.get("/getName/:_id", auctionController.getAuctionName)
+route.get("/getWinnersList/:_id", auctionController.getWinnersList)
 route.get("/:id", auctionController.getById)
 route.put("/setPackages/:_id&:packages", auctionController.addPackages)
 route.put("/setProducts/:_id&:products", auctionController.addProducts)
@@ -16,5 +16,5 @@ route.delete("/deletePackage/:auction_id&package_id", auctionController.deletePa
 route.delete("/deleteProduct/:auction_id&product_id", auctionController.deleteProduct)
 route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
 route.put("/publicationApproval/:a_id&status", auctionController.publicationApproval)
-
+route.post("/",auctionController.addAuction)
 module.exports = route;

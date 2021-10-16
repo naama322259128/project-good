@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -11,61 +11,77 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import './yourProfile.scss'
 import { getUserOrdersList } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
-import { getAuctionName } from '../../utils/auctionUtils'//מחזירה את שם המכירה
+import { getAuctionById } from '../../utils/auctionUtils'//מחזירה את שם המכירה
+import { Button } from '@material-ui/core';
+import OrderDetails from './OrderDetails';
 
-const columns = [
-    { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
-    { id: 'order_date', label: 'Order Date', minWidth: 100 },
-    {
-        id: 'sum',//
-        label: 'Sum',//מה יהיה רשום
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'options',
-        label: 'Options',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    // {
-    //     id: 'density',
-    //     label: 'Density',
-    //     minWidth: 170,
-    //     align: 'right',
-    //     format: (value) => value.toFixed(2),
-    // },
-];
 
-function createData(name, order_date, sum) {
-    const options = "to add buttons"
-    return { name, order_date, sum, options };
-}
+const UserTable = () => {
+    const columns = [
+        { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
+        {
+            id: 'i_name',
+            label: 'Organization name',
+            minWidth: 170,
+            align: 'right',
+            format: (value) => value.toFixed(2),
+        },
+        { id: 'order_date', label: 'Order Date', minWidth: 100 },
+        {
+            id: 'sum',//
+            label: 'Sum',//מה יהיה רשום
+            minWidth: 170,
+            align: 'right',
+            format: (value) => value.toLocaleString('en-US'),
+        },
+        {
+            id: 'options',
+            label: 'Options',
+            minWidth: 170,
+            align: 'right',
+            format: (value) => value.toLocaleString('en-US'),
+        }
+    ];
 
-const rows = [
-    // createData('Ezer Mizyon', "02/08/2021",150),
-    // createData('Yad And Shem',"11/08/2021",100),
-];
+    const createData = (order,name,a_name, order_date, sum) => {
 
-const useStyles = makeStyles({
-    root: {
-        width: '100%',
-    },
-    container: {
-        maxHeight: 440,
-    },
-});
+        const options =<div><OrderDetails item={order}/> <Button>Add order</Button></div> 
+        console.log("create data");
+        return { name, a_name,order_date, sum, options };
+    }
 
-const AuctionManagerTable = () => {
+    const [rows, setRows] = useState([]);
+
+
+    /*[
+        createData('Ezer Mizyon', "02/08/2021",150),
+        createData('Yad And Shem',"11/08/2021",100),
+    ];*/
+
+    const useStyles = makeStyles({
+        root: {
+            width: '100%',
+        },
+        container: {
+            maxHeight: 440,
+        },
+    });
+
     useEffect(() => {
-        debugger;
         getUserOrdersList(JSON.parse(localStorage.user).currentUser._id).then(succ => {
             let arr = [];
+            let auctionName;
             succ.data.map((item) => {
-                arr.push(createData(/*getAuctionName(item.auctionId)*/2, item.orderDate, item.amountToPay))
-            })
+                console.log(item.auctionId);
+                //getAuctionById(item.auctionId).then(succ =>
+                arr.push(createData(item,/*succ.data.name*/55,77, item.orderDate, item.amountToPay))
+                //)
+
+                console.log("auctionName");
+                console.log(auctionName);
+
+            });
+            setRows(arr);
         })
     }, [])
 
@@ -73,14 +89,6 @@ const AuctionManagerTable = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
 
     return (
         <center>
@@ -119,15 +127,7 @@ const AuctionManagerTable = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
+               
             </Paper>
         </center>
     );
@@ -137,4 +137,4 @@ const mapStateToProps = (state) => {
 
     };
 }
-export default connect(mapStateToProps, {})(AuctionManagerTable);
+export default connect(mapStateToProps, {})(UserTable);
