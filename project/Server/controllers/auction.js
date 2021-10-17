@@ -246,9 +246,9 @@ const getWinnersList = async (req, res) => {
     let arr = [];
     //auction.productList.map(item => arr.push({ productName: item.name, winnerId: item.winnerId }));
 
-    /*
+
     //אופציה א
-    await auction.productList.map(async (item) => {
+    -await auction.productList.map(async (item) => {
         console.log("item:   " + item)
         if (item) {
             let name = "Anonymous";
@@ -260,8 +260,7 @@ const getWinnersList = async (req, res) => {
             }
         }
     })
-        console.log("arr:   " + arr);
-*/
+    console.log("arr:   " + arr);
     /*
         //אופציה ב
         //הכל חוזר אנונימי
@@ -283,23 +282,48 @@ const getWinnersList = async (req, res) => {
 
 
     //אופציה ג
-    let gg2 = auction.productList.map(async (item) => {
-        console.log("item:   " + item)
-        if (item) {
-            let name = "Anonymous";
-            let winner = await User.findById(item.winnerId);
-            if (winner) {
-                if (winner.confidentiality == false) { name = await winner.userName; }
-                console.log("name:   " + name)
-                return { productName: item.name, winnerName: name };
+    /* let gg2 = auction.productList.map(async (item) => {
+            console.log("item:   " + item)
+            if (item) {
+                let name = "Anonymous";
+                let winner = await User.findById(item.winnerId);
+                if (winner) {
+                    if (winner.confidentiality == false) { name = await winner.userName; }
+                    console.log("name:   " + name);
+                    return { productName: item.name, winnerName: name };
+                }
             }
-        }
-        return;
-    })
-    console.log("gg2:   " + gg2);
-    return res.send(gg2);
+            return;
+        })
+        console.log("gg2:   " + gg2);
+    */
+    //אופציה ד
+    /*var myPromise = new Promise(function (resolve, reject) {
+        // resolve('promise resolved');
+        resolve(
+
+            auction.productList.map(async (item) => {
+                console.log("item:   " + item)
+                if (item) {
+                    let name = "Anonymous";
+                    let winner =await User.findById(item.winnerId);
+                    if (winner) {
+                        if (winner.confidentiality == false) { name = winner.userName; }
+                        console.log("name:   " + name)
+                        arr.push({ productName: item.name, winnerName: name });
+                    }
+                }
+            }))
+    });
+
+    myPromise.then(function (data) {
+        console.log("ss" + arr)
+    }, function (error) {
+        //fail
+    })*/
+    // return res.send(gg2);
     // return res.send(gg);
-    // return res.send(arr);
+    return res.send(arr);
 }
 
 

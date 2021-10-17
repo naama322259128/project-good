@@ -1,4 +1,5 @@
 const Order = require("../models/order");
+const Auction = require("../models/auction");
 
 const mongoose = require("mongoose");
 
@@ -94,6 +95,26 @@ const getAuctionSoldMostTickets = async (req, res) => {
     // return list.
 }
 
+const getOrderDetails = async (req, res) => {
+    let { _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Invalid ID number");
+    let order = await Order.findById(_id);//ההזמנה המדוברת
+    if (!order) return res.status(404).send("There is no order with such an ID number");
+    let arr = [];//מערך הכטיסים בהזמנה
+    let auction = await Auction.findById(order.auctionId);//המכירה שממנה עשו את ההזמנה
+    console.log(auctioin);
+
+    //מעבר על מערך פרטי הזמנה
+    order.orderDetails.map(async (item) => {
+        let p = auction.productList.find(x => { return x._id == item.productId });//מציאת המוצר שאליו קנו כרטיסים
+        if (p) arr.push({ product: p.name, ticketsQuantity: item.ticketsQuantity });//שם המוצר
+        else arr.push({ product: "", ticketsQuantity: item.ticketsQuantity });
+    });
+
+    let obj = { details: arr, gifts: oredr.gifts }
+    return res.send(obj);
+}
+
 module.exports = {
-    getAll, getById, addOrder, deleteOrder, getUserOrdersList, getOrderByToUserCodeAndAuction, getAuctionSoldMostTickets
+    getAll, getById, addOrder, deleteOrder, getUserOrdersList, getOrderByToUserCodeAndAuction, getAuctionSoldMostTickets, getOrderDetails
 }

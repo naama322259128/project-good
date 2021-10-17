@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { getOrderDetails } from '../../utils/orderUtils'
 import { getWinnersList } from '../../utils/auctionUtils'
 import { getAuctionIsDone } from '../../store/actions/auctionManager';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,7 +25,18 @@ export default function OrderOptions(props) {
   const id = open ? 'simple-popover' : undefined;
 
   let [winnersList, setWinnersList] = useState([]);
-  useEffect(() => { getWinnersList("615dcef171ffd48b48935b38"/*props.order.auctionId*/).then(succ => { setWinnersList(succ.data); }) }, []);
+  let [details, setDetails] = useState([]);
+  let [gifts, setGifts] = useState([]);
+  useEffect(() => {
+    getWinnersList("615dcef171ffd48b48935b38"/*props.order.auctionId*/).then(succ => { setWinnersList(succ.data); })
+    getOrderDetails("615dd49e71ffd48b48935b3c"/*props.order._id*/).then(succ => {
+      let arr = [];
+      succ.data.orderDetails.map(item => { arr.push({product:}) })
+      console.log(details);
+      setGifts(succ.data.giftCodes);
+    })
+
+  }, []);
 
   return (
     <div>
@@ -39,7 +51,14 @@ export default function OrderOptions(props) {
           horizontal: 'left',
         }}
       >
-        <Typography sx={{ p: 2 }}><table>{props.order._id}</table></Typography>
+        <Typography sx={{ p: 2 }}>
+          <table>
+            <th>Order details:</th>
+            {details.map(item => { return <tr><td>{item.product}</td><td>* {item.ticketsQuantity}</td></tr> })}
+            <th>Order gifts:</th>
+            <tr>{gifts.map(item => { return <td>{item}</td> })}</tr>
+          </table>
+        </Typography>
       </Popover>
       <IconButton aria-describedby={id} variant="contained" onClick={handleClick} /*disabled={getAuctionIsDone(props.order.auctionId) == false}*/><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
       <Popover
