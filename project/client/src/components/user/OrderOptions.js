@@ -155,12 +155,6 @@ const list = (anchor) => (
           horizontal: 'left',
         }}
       >
-<<<<<<< HEAD
-        <Typography sx={{ p: 2 }}><div>{props.order.orderDetails.map((item) =>{
-          console.log(item.ticketsQuantity);
-          
-        } )}</div></Typography>
-=======
         <Typography sx={{ p: 2 }}>
           <table>
             <th>Order details:</th>
@@ -169,7 +163,6 @@ const list = (anchor) => (
             <tr>{gifts.map(item => { return <td>{item}</td> })}</tr>
           </table>
         </Typography>
->>>>>>> f34aa18d4c66efdbae731e60c69ab76514c66efa
       </Popover>
       <IconButton aria-describedby={id} variant="contained" onClick={handleClick} /*disabled={getAuctionIsDone(props.order.auctionId) == false}*/><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
       <Popover
