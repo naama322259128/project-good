@@ -41,9 +41,9 @@ const UserTable = () => {
     ];
 
     const createData = (order, name, a_name, order_date, sum) => {
-console.log(order.orderDetails);
+        console.log(order.orderDetails);
 
-        const options = <OrderOptions order={order} key={order._id}/>;
+        const options = <OrderOptions order={order} key={order._id} />;
         const n = name + " : " + a_name;
         return { n, order_date, sum, options };
     }
@@ -58,7 +58,7 @@ console.log(order.orderDetails);
 
     const useStyles = makeStyles({
         root: {
-            width: '80%',
+            width: '60%',
         },
         container: {
             maxHeight: 440,
@@ -85,46 +85,45 @@ console.log(order.orderDetails);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
 
+    const style1 = { marginLeft: '36vw', marginTop: '4vh' }
     return (
-        <center>
+        <Paper className={classes.root} style={style1}>
+            <TableContainer className={classes.container} >
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            {columns.map((column) => (
+                                <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth }}
+                                >
+                                    {column.label}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            return (
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    {columns.map((column) => {
+                                        const value = row[column.id];
+                                        return (
+                                            <TableCell key={column.id} align={column.align}>
+                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                            </TableCell>
+                                        );
+                                    })}
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
-            <Paper className={classes.root}>
-                <TableContainer className={classes.container}>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                </TableCell>
-                                            );
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+        </Paper>
 
-            </Paper>
-        </center>
     );
 }
 const mapStateToProps = (state) => {
