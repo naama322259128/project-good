@@ -26,10 +26,7 @@ const isEmailExist = async (em) => {
 const addUser = async (req, res) => {
     console.log(user)
     let user = req.body;
-    if (await isEmailExist(user.email) == true) {
-        console.log("This email is exist");
-        return res.send("This email is exist");
-    }
+    if (await isEmailExist(user.email) == true) return res.send("This email is exist");
     else {
         let newUser = new User(user);
         try {

@@ -13,17 +13,14 @@ import './yourProfile.scss'
 import { getUserOrdersList } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
 import { getAuctionById } from '../../utils/auctionUtils'//מחזירה את שם המכירה
 import { Button } from '@material-ui/core';
-import OrderDetails from './OrderDetails';
-
-
+import OrderOptions from './OrderOptions';
 const UserTable = () => {
     const columns = [
-        { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
         {
-            id: 'i_name',
-            label: 'Organization name',
+            id: 'name',
+            label: 'Name',
             minWidth: 170,
-            align: 'right',
+            align: 'left',
             format: (value) => value.toFixed(2),
         },
         { id: 'order_date', label: 'Order Date', minWidth: 100 },
@@ -31,23 +28,24 @@ const UserTable = () => {
             id: 'sum',//
             label: 'Sum',//מה יהיה רשום
             minWidth: 170,
-            align: 'right',
+            align: 'left',
             format: (value) => value.toLocaleString('en-US'),
         },
         {
             id: 'options',
             label: 'Options',
             minWidth: 170,
-            align: 'right',
+            align: 'left',
             format: (value) => value.toLocaleString('en-US'),
         }
     ];
 
-    const createData = (order,name,a_name, order_date, sum) => {
+    const createData = (order, name, a_name, order_date, sum) => {
 
-        const options =<div><OrderDetails item={order}/> <Button>Add order</Button></div> 
-        console.log("create data");
-        return { name, a_name,order_date, sum, options };
+
+        const options = <OrderOptions order={order} />;
+        const n = name + " : " + a_name;
+        return { n, order_date, sum, options };
     }
 
     const [rows, setRows] = useState([]);
@@ -60,7 +58,7 @@ const UserTable = () => {
 
     const useStyles = makeStyles({
         root: {
-            width: '100%',
+            width: '80%',
         },
         container: {
             maxHeight: 440,
@@ -74,12 +72,9 @@ const UserTable = () => {
             succ.data.map((item) => {
                 console.log(item.auctionId);
                 //getAuctionById(item.auctionId).then(succ =>
-                arr.push(createData(item,/*succ.data.name*/55,77, item.orderDate, item.amountToPay))
+                //ניתן להסתפק בשליחת ההזמנה בלבד
+                arr.push(createData(item,/*succ.data.name*/55, 77, item.orderDate, item.amountToPay))
                 //)
-
-                console.log("auctionName");
-                console.log(auctionName);
-
             });
             setRows(arr);
         })
@@ -127,7 +122,7 @@ const UserTable = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-               
+
             </Paper>
         </center>
     );

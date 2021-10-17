@@ -48,6 +48,10 @@ const getUserOrdersList = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send("Invalid ID number");
     let orders = await Order.find({ "userId": _id });//לבדוק אם ככה שואלים
+    // orders.map(item => {
+    //     item.name = Auction.findOne('_id': _id)
+    // })
+    //TODO להמשיך
     return res.send(orders);
 }
 
