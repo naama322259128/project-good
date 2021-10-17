@@ -84,7 +84,7 @@ export default function OrerDetails(props) {
                     <TableBody>
                         {props.details.map((row, index) => (
                             <TableRow key={index}>
-                                <TableCell component="th" scope="row">{row.ticketsQuantity} * {row.product}</TableCell>
+                                <TableCell component="th" scope="row">{row.ticketsQuantity} * {row.productId.name}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

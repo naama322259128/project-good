@@ -40,21 +40,13 @@ const UserTable = () => {
         }
     ];
 
-    const createData = (order, name, a_name, order_date, sum) => {
-        console.log(order.orderDetails);
-
+    const createData = (order) => {
         const options = <OrderOptions order={order} key={order._id} />;
-        const n = name + " : " + a_name;
-        return { n, order_date, sum, options };
+        const n = order.auctionId.organizationName + " : " + order.auctionId.name;
+        return { n, order.orderDate, order.amountToPay, options };
     }
 
     const [rows, setRows] = useState([]);
-
-
-    /*[
-        createData('Ezer Mizyon', "02/08/2021",150),
-        createData('Yad And Shem',"11/08/2021",100),
-    ];*/
 
     const useStyles = makeStyles({
         root: {
@@ -68,14 +60,7 @@ const UserTable = () => {
     useEffect(() => {
         getUserOrdersList(JSON.parse(localStorage.user).currentUser._id).then(succ => {
             let arr = [];
-            let auctionName;
-            succ.data.map((item) => {
-                console.log(item.auctionId);
-                //getAuctionById(item.auctionId).then(succ =>
-                //ניתן להסתפק בשליחת ההזמנה בלבד
-                arr.push(createData(item,/*succ.data.name*/55, 77, item.orderDate, item.amountToPay))
-                //)
-            });
+            succ.data.map((o) => { arr.push(createData(o)) });
             setRows(arr);
         })
     }, [])
