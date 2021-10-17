@@ -1,5 +1,6 @@
 const Auction = require("../models/auction");
 const User = require("../models/user");
+const Order = require("../models/order");
 const mongoose = require("mongoose");
 const { addUser } = require("./user");
 
@@ -246,9 +247,9 @@ const getWinnersList = async (req, res) => {
     let arr = [];
     //auction.productList.map(item => arr.push({ productName: item.name, winnerId: item.winnerId }));
 
-    /*
+
     //אופציה א
-    await auction.productList.map(async (item) => {
+    -await auction.productList.map(async (item) => {
         console.log("item:   " + item)
         if (item) {
             let name = "Anonymous";
@@ -260,8 +261,7 @@ const getWinnersList = async (req, res) => {
             }
         }
     })
-        console.log("arr:   " + arr);
-*/
+    console.log("arr:   " + arr);
     /*
         //אופציה ב
         //הכל חוזר אנונימי
@@ -283,29 +283,84 @@ const getWinnersList = async (req, res) => {
 
 
     //אופציה ג
-    let gg2 = auction.productList.map(async (item) => {
-        console.log("item:   " + item)
-        if (item) {
-            let name = "Anonymous";
-            let winner = await User.findById(item.winnerId);
-            if (winner) {
-                if (winner.confidentiality == false) { name = await winner.userName; }
-                console.log("name:   " + name)
-                return { productName: item.name, winnerName: name };
+    /* let gg2 = auction.productList.map(async (item) => {
+            console.log("item:   " + item)
+            if (item) {
+                let name = "Anonymous";
+                let winner = await User.findById(item.winnerId);
+                if (winner) {
+                    if (winner.confidentiality == false) { name = await winner.userName; }
+                    console.log("name:   " + name);
+                    return { productName: item.name, winnerName: name };
+                }
             }
-        }
-        return;
-    })
-    console.log("gg2:   " + gg2);
-    return res.send(gg2);
+            return;
+        })
+        console.log("gg2:   " + gg2);
+    */
+    //אופציה ד
+    /*var myPromise = new Promise(function (resolve, reject) {
+        // resolve('promise resolved');
+        resolve(
+
+            auction.productList.map(async (item) => {
+                console.log("item:   " + item)
+                if (item) {
+                    let name = "Anonymous";
+                    let winner =await User.findById(item.winnerId);
+                    if (winner) {
+                        if (winner.confidentiality == false) { name = winner.userName; }
+                        console.log("name:   " + name)
+                        arr.push({ productName: item.name, winnerName: name });
+                    }
+                }
+            }))
+    });
+
+    myPromise.then(function (data) {
+        console.log("ss" + arr)
+    }, function (error) {
+        //fail
+    })*/
+    // return res.send(gg2);
     // return res.send(gg);
-    // return res.send(arr);
+    return res.send(arr);
 }
 
+//בצע הגרלות
+const performLotteries = async (req, res) => {
+    let { _id } = req.params;
+    let orders = await Order.find({ 'auctionId': _id });
+    let auction = await Auction.findById(_id);
+    let lott = [];      //[{ userId: "", productId: "" },{ userId: "", productId: "" },{ userId: "", productId: "" }...]
+    console.log(orders);
+    orders.map(order => {//מעבר כל כל ההזמנות
+        let orders_details = order.orderDetails;//הפרטים של ההזמנה 
+        let user_id = order.userId//קוד נרשם
+        orders_details.map(details => {
+            let qty = details.ticketsQuantity;//מספר כרטיסים
+            let prodId = details.productId//קוד מוצר
+            for (var i = 0; i < qty; i++)lott.push({ userId: user_id, productId: prodId });//הכנסה למערך כמספר הכרטיסים שקנה
+        })
+    });
 
+    //ההגרלות
+    // let products = auctoin.productList;//המוצרים של המכירה הזו
+    // console.log(products);
+    // products.map(pro => {//מעבר על כל המוצרים
+    //     productId = pro._id;//קוד מוצר
+    //     let arr = lott.filter(l => { return l.productId === productId });//כל הכרטיסים למוצר הזה
+    //     let rnd = Math.floor(Math.random() * arr.length);//ההגרלה!!!
+    //     let winnerId = arr[rnd].userId;//הזוכה
+    //     pro.winnerId = winnerId;//רישום הזוכה
+    // })
+
+    await auction.save();
+    res.send(auction);
+}
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
-    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation, deleteProduct, deletePackage, getWinnersList
+    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation, deleteProduct, deletePackage, getWinnersList, performLotteries
 }
 
 //המכירה שש לה הכי הרבה הכנסות

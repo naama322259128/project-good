@@ -29,7 +29,7 @@
     width: 100%;  
     border: 2px solid black;
   }
-
+/************************************************** userTable *****************************************************/
   .table_options_icon{
     fill: currentColor;
     width: 1em;
@@ -42,4 +42,7 @@
 }
 .table_options_icon:not(:root) {
     overflow: hidden;
+}
+td{
+  border: black 5px solid;
 }
