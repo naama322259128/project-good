@@ -43,7 +43,10 @@ const UserTable = () => {
     const createData = (order) => {
         const options = <OrderOptions order={order} key={order._id} />;
         const n = order.auctionId.organizationName + " : " + order.auctionId.name;
-        return { n, order.orderDate, order.amountToPay, options };
+        let d = order.orderDate;
+        let sum = order.amountToPay;
+        debugger;
+        return { n, d, sum, options };
     }
 
     const [rows, setRows] = useState([]);
@@ -58,11 +61,11 @@ const UserTable = () => {
     });
 
     useEffect(() => {
-        getUserOrdersList(JSON.parse(localStorage.user).currentUser._id).then(succ => {
+        getUserOrdersList("611c2f2e18f13934fc07bc27"/*JSON.parse(localStorage.user).currentUser._id*/).then(succ => {
             let arr = [];
             succ.data.map((o) => { arr.push(createData(o)) });
             setRows(arr);
-        })
+        });
     }, [])
 
     const classes = useStyles();
