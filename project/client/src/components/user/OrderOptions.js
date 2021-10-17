@@ -41,7 +41,7 @@ export default function OrderOptions(props) {
       >
         <Typography sx={{ p: 2 }}><table>{props.order._id}</table></Typography>
       </Popover>
-      <IconButton aria-describedby={id} variant="contained" onClick={handleClick} /*disabled={getAuctionIsDone(props.order.auctionId) == false}*/><img title="Auction results" className="table_options_icon" src={results} /></IconButton>
+      <IconButton aria-describedby={id} variant="contained" onClick={handleClick} /*disabled={getAuctionIsDone(props.order.auctionId) == false}*/><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
       <Popover
         id={id}
         open={open}
