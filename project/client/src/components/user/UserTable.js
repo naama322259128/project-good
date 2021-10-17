@@ -41,9 +41,9 @@ const UserTable = () => {
     ];
 
     const createData = (order, name, a_name, order_date, sum) => {
+console.log(order.orderDetails);
 
-
-        const options = <OrderOptions order={order} />;
+        const options = <OrderOptions order={order} key={order._id}/>;
         const n = name + " : " + a_name;
         return { n, order_date, sum, options };
     }
