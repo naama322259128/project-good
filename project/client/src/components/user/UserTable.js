@@ -40,25 +40,20 @@ const UserTable = () => {
         }
     ];
 
-    const createData = (order, name, a_name, order_date, sum) => {
-console.log(order.orderDetails);
-
-        const options = <OrderOptions order={order} key={order._id}/>;
-        const n = name + " : " + a_name;
-        return { n, order_date, sum, options };
+    const createData = (order) => {
+        const options = <OrderOptions order={order} key={order._id} />;
+        const n = order.auctionId.organizationName + " : " + order.auctionId.name;
+        let d = order.orderDate;
+        let sum = order.amountToPay;
+        debugger;
+        return { n, d, sum, options };
     }
 
     const [rows, setRows] = useState([]);
 
-
-    /*[
-        createData('Ezer Mizyon', "02/08/2021",150),
-        createData('Yad And Shem',"11/08/2021",100),
-    ];*/
-
     const useStyles = makeStyles({
         root: {
-            width: '80%',
+            width: '60%',
         },
         container: {
             maxHeight: 440,
@@ -66,18 +61,11 @@ console.log(order.orderDetails);
     });
 
     useEffect(() => {
-        getUserOrdersList(JSON.parse(localStorage.user).currentUser._id).then(succ => {
+        getUserOrdersList("611c2f2e18f13934fc07bc27"/*JSON.parse(localStorage.user).currentUser._id*/).then(succ => {
             let arr = [];
-            let auctionName;
-            succ.data.map((item) => {
-                console.log(item.auctionId);
-                //getAuctionById(item.auctionId).then(succ =>
-                //ניתן להסתפק בשליחת ההזמנה בלבד
-                arr.push(createData(item,/*succ.data.name*/55, 77, item.orderDate, item.amountToPay))
-                //)
-            });
+            succ.data.map((o) => { arr.push(createData(o)) });
             setRows(arr);
-        })
+        });
     }, [])
 
     const classes = useStyles();
@@ -85,46 +73,43 @@ console.log(order.orderDetails);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
 
+    const style1 = { marginLeft: '36vw', marginTop: '4vh' }
     return (
-        <center>
-
-            <Paper className={classes.root}>
-                <TableContainer className={classes.container}>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                </TableCell>
-                                            );
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-
-            </Paper>
-        </center>
+        <Paper className={classes.root} style={style1}>
+            <TableContainer className={classes.container} >
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            {columns.map((column) => (
+                                <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth }}
+                                >
+                                    {column.label}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            return (
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    {columns.map((column) => {
+                                        const value = row[column.id];
+                                        return (
+                                            <TableCell key={column.id} align={column.align}>
+                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                            </TableCell>
+                                        );
+                                    })}
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Paper>
     );
 }
 const mapStateToProps = (state) => {

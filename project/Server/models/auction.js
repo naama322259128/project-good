@@ -17,8 +17,7 @@ const auctionSchema = new mongoose.Schema({
         gifts: [String]
     }],
     productList: [{
-        // _id: mongoose.SchemaTypes.ObjectId,
-        _id: String,
+        _id: mongoose.SchemaTypes.ObjectId,
         name: String,
         image: String,
         description: String,

@@ -146,7 +146,6 @@ const getAuctionIsDone = async (req, res) => {
 //     return res.send(productList);
 // }
 
-
 //---------------------------שמירת תהליך הקמת מכירה
 
 const addPackages = async (req, res) => {
@@ -238,93 +237,13 @@ const addAuctionInformation = async (req, res) => {
 }
 
 //קבל רשימת זוכים
-const getWinnersList = async (req, res) => {
+const getAuctionWithWinners = async (req, res) => {
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send("Invalid ID number");
-    let auction = await Auction.findOne({ '_id': _id });
+    let auction = await Auction.findOne({ '_id': _id }).populate([{ path: "productList.winnerId", select: "userName confidentiality" }]);
     if (!auction) return res.status(404).send("There is no auction with such an ID number");
-    let arr = [];
-    //auction.productList.map(item => arr.push({ productName: item.name, winnerId: item.winnerId }));
-
-
-    //אופציה א
-    -await auction.productList.map(async (item) => {
-        console.log("item:   " + item)
-        if (item) {
-            let name = "Anonymous";
-            let winner = await User.findById(item.winnerId);
-            if (winner) {
-                if (winner.confidentiality == false) { name = await winner.userName; }
-                console.log("name:   " + name)
-                await arr.push({ productName: item.name, winnerName: name });
-            }
-        }
-    })
-    console.log("arr:   " + arr);
-    /*
-        //אופציה ב
-        //הכל חוזר אנונימי
-        let gg = auction.productList.map((item) => {
-            console.log("item:   " + item)
-            if (item) {
-                let name = "Anonymous";
-                let winner = User.findById(item.winnerId);
-                if (winner) {
-                    if (winner.confidentiality == false) { name = winner.userName; }
-                    console.log("name:   " + name)
-                    return { productName: item.name, winnerName: name };
-                }
-            }
-            return;
-        })
-        console.log("gg:   " + gg);
-    */
-
-
-    //אופציה ג
-    /* let gg2 = auction.productList.map(async (item) => {
-            console.log("item:   " + item)
-            if (item) {
-                let name = "Anonymous";
-                let winner = await User.findById(item.winnerId);
-                if (winner) {
-                    if (winner.confidentiality == false) { name = await winner.userName; }
-                    console.log("name:   " + name);
-                    return { productName: item.name, winnerName: name };
-                }
-            }
-            return;
-        })
-        console.log("gg2:   " + gg2);
-    */
-    //אופציה ד
-    /*var myPromise = new Promise(function (resolve, reject) {
-        // resolve('promise resolved');
-        resolve(
-
-            auction.productList.map(async (item) => {
-                console.log("item:   " + item)
-                if (item) {
-                    let name = "Anonymous";
-                    let winner =await User.findById(item.winnerId);
-                    if (winner) {
-                        if (winner.confidentiality == false) { name = winner.userName; }
-                        console.log("name:   " + name)
-                        arr.push({ productName: item.name, winnerName: name });
-                    }
-                }
-            }))
-    });
-
-    myPromise.then(function (data) {
-        console.log("ss" + arr)
-    }, function (error) {
-        //fail
-    })*/
-    // return res.send(gg2);
-    // return res.send(gg);
-    return res.send(arr);
+    return res.send(auction);
 }
 
 //בצע הגרלות
@@ -361,7 +280,7 @@ const performLotteries = async (req, res) => {
 }
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
-    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation, deleteProduct, deletePackage, getWinnersList, performLotteries
+    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners, performLotteries
 }
 
 //המכירה שש לה הכי הרבה הכנסות
