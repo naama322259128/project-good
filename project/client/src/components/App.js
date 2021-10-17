@@ -10,6 +10,7 @@ import React from "react";
 import StateCounter from './StateCounter'
 import AuctionInformation from './new auction/AuctionInformation';
 import UserTable from './user/UserTable';
+import ViewOrder from './user/ViewOrder';
 import AuctionManagerTable from './user/auction manager/AuctionManagerTable';
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Switch> 
            {/* <AuctionManagerTable/> */}
      <UserTable/>
+     {/* <ViewOrder/> */}
         {/* <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>
