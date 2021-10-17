@@ -102,7 +102,7 @@ const getOrderDetails = async (req, res) => {
     let order = await Order.findById(_id).
         populate([
             { path: 'auctionId', select: 'organizationName name' },
-            // { path: 'productList._id', select: 'name' }
+            { path: 'productList._id', select: 'name' }
         ]);
     conosole.log(order);
     return res.send(order);
