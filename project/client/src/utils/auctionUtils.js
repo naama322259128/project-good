@@ -2,7 +2,6 @@ import * as actions from '../store/actions/newAuction';
 import axios from 'axios';
 export const getAuctionById = (_id) => {
   return axios.get(`http://localhost:5000/auctions/${_id}`)
-
 }
 export const createNewAuction = (auction) => {
   return (dispatch) => {
@@ -22,6 +21,6 @@ export const getAuctionsList = async () => {
 
 
 export const getWinnersList = async (_id) => {
-  return axios.get(`http://localhost:5000/auctions/getWinnersList/${_id}`);
-}
 
+  return axios.get(`http://localhost:5000/users/getWinnersList/${_id}`);
+}

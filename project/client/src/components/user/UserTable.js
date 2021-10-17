@@ -13,9 +13,7 @@ import './yourProfile.scss'
 import { getUserOrdersList } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
 import { getAuctionById } from '../../utils/auctionUtils'//מחזירה את שם המכירה
 import { Button } from '@material-ui/core';
-import OrderDetails from './OrderDetails';
-
-
+import OrderOptions from './OrderOptions';
 const UserTable = () => {
     const columns = [
         { id: 'name', label: 'Chinese auction Name', minWidth: 170 },
@@ -43,11 +41,11 @@ const UserTable = () => {
         }
     ];
 
-    const createData = (order,name,a_name, order_date, sum) => {
+    const createData = (order, name, a_name, order_date, sum) => {
 
-        const options =<div><OrderDetails item={order}/> <Button>Add order</Button></div> 
-        console.log("create data");
-        return { name, a_name,order_date, sum, options };
+       
+        const options = <OrderOptions order={order} />;
+        return { name, a_name, order_date, sum, options };
     }
 
     const [rows, setRows] = useState([]);
@@ -74,7 +72,7 @@ const UserTable = () => {
             succ.data.map((item) => {
                 console.log(item.auctionId);
                 //getAuctionById(item.auctionId).then(succ =>
-                arr.push(createData(item,/*succ.data.name*/55,77, item.orderDate, item.amountToPay))
+                arr.push(createData(item,/*succ.data.name*/55, 77, item.orderDate, item.amountToPay))
                 //)
 
                 console.log("auctionName");
@@ -127,7 +125,7 @@ const UserTable = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-               
+
             </Paper>
         </center>
     );
