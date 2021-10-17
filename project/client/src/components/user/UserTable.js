@@ -121,9 +121,7 @@ const UserTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-
         </Paper>
-
     );
 }
 const mapStateToProps = (state) => {
