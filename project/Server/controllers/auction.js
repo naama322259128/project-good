@@ -331,9 +331,9 @@ const getWinnersList = async (req, res) => {
 const performLotteries = async (req, res) => {
     let { _id } = req.params;
     let orders = await Order.find({ 'auctionId': _id });
+    if (!_id) res.send("")
     let auction = await Auction.findById(_id);
     let lott = [];      //[{ userId: "", productId: "" },{ userId: "", productId: "" },{ userId: "", productId: "" }...]
-    console.log(orders);
     orders.map(order => {//מעבר כל כל ההזמנות
         let orders_details = order.orderDetails;//הפרטים של ההזמנה 
         let user_id = order.userId//קוד נרשם
@@ -343,17 +343,18 @@ const performLotteries = async (req, res) => {
             for (var i = 0; i < qty; i++)lott.push({ userId: user_id, productId: prodId });//הכנסה למערך כמספר הכרטיסים שקנה
         })
     });
+    // console.log(orders);
 
     //ההגרלות
-    // let products = auctoin.productList;//המוצרים של המכירה הזו
-    // console.log(products);
-    // products.map(pro => {//מעבר על כל המוצרים
-    //     productId = pro._id;//קוד מוצר
-    //     let arr = lott.filter(l => { return l.productId === productId });//כל הכרטיסים למוצר הזה
-    //     let rnd = Math.floor(Math.random() * arr.length);//ההגרלה!!!
-    //     let winnerId = arr[rnd].userId;//הזוכה
-    //     pro.winnerId = winnerId;//רישום הזוכה
-    // })
+    let products = auctoin.productList;//המוצרים של המכירה הזו
+    console.log(products);
+    products.map(pro => {//מעבר על כל המוצרים
+        productId = pro._id;//קוד מוצר
+        let arr = lott.filter(l => { return l.productId === productId });//כל הכרטיסים למוצר הזה
+        let rnd = Math.floor(Math.random() * arr.length);//ההגרלה!!!
+        let winnerId = arr[rnd].userId;//הזוכה
+        pro.winnerId = winnerId;//רישום הזוכה
+    })
 
     await auction.save();
     res.send(auction);
