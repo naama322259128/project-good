@@ -43,7 +43,7 @@ export default function OrderOptions(props) {
     getWinnersList("615dcef171ffd48b48935b38"/*props.order.auctionId*/).then(succ => { setWinnersList(succ.data); })
     getOrderDetails("615dd49e71ffd48b48935b3c"/*props.order._id*/).then(succ => {
       let arr = [];
-      succ.data.orderDetails.map(item => { arr.push({product:}) })
+      // succ.data.orderDetails.map(item => { arr.push({product:}) })
       console.log(details);
       setGifts(succ.data.giftCodes);
     })
