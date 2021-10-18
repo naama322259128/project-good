@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const auctionSchema = new mongoose.Schema({
 
     name: String,
-    auctionManager: { type: mongoose.SchemaTypes.ObjectId, ref: 'auctionManager', required: true },//managerId
+    auctionManager: { type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true },//managerId
     registrationStartDate: { type: Date, default: new Date() },   //תאריך התחלה
     lotteriesDate: Date,   //תאריך ביצוע ההגרלות
     registrationEndDate: Date,//תאריך סיום הרשמה

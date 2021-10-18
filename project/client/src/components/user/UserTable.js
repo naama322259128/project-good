@@ -14,7 +14,7 @@ import { getUserOrdersList } from '../../utils/userUtils'//מחזירה את ה�
 import { getAuctionById } from '../../utils/auctionUtils'//מחזירה את שם המכירה
 import { Button } from '@material-ui/core';
 import OrderOptions from './OrderOptions';
-import Moment from 'moment';
+import moment from 'moment'
 
 const UserTable = () => {
     const columns = [
@@ -53,7 +53,8 @@ const UserTable = () => {
     const createData = (order) => {
         const options = <OrderOptions order={order} key={order._id} />;//הכפתורים
         const n = order.auctionId.organizationName + " : " + order.auctionId.name;
-        let d =  new Date(order.orderDate)
+        let d = moment(new Date(order.orderDate)).format('D/MM/YYYY');
+        console.log(d);
         let sum = order.amountToPay;
         return { n, d, sum, options };
     }
@@ -72,7 +73,7 @@ const UserTable = () => {
     useEffect(() => {
         getUserOrdersList("611c2f2e18f13934fc07bc27"/*JSON.parse(localStorage.user).currentUser._id*/).then(succ => {
             let arr = [];
-            succ.data.map((o) => { console.log(o.orderDate); arr.push(createData(o)) });
+            succ.data.map((o) => {arr.push(createData(o)) });
             setRows(arr);
         });
     }, [])

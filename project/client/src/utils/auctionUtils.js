@@ -23,3 +23,4 @@ export const getAuctionsList = async () => {
 export const getAuctionWithWinners = async (_id) => {
   return axios.get(`http://localhost:5000/users/getAuctionWithWinners/${_id}`);
 }
+
