@@ -269,16 +269,16 @@ const performLotteries = async (req, res) => {
     //ההגרלות
     let auction = await Auction.findById(_id);
     let products = auction.productList;//המוצרים של המכירה הזו
-    console.log("products");
-    console.log(products);
-    console.log("products------------------------------------");
     products.map(pro => {//מעבר על כל המוצרים
         productId = pro._id;//קוד מוצר
-        console.log("productId:");
-        console.log(productId);
 
-        //מחזיר רק את מה שעונה לתנאי
-        let arr = lott.filter(l => { return l.productId == productId });//כל הכרטיסים למוצר הזה
+        
+        // let arr = lott.filter(l => { l.productId === productId });//כל הכרטיסים למוצר הזה
+        let arr = [];
+        for (var i = 0; o < arr.length; i++)
+            if (lott[i].productId == productId)
+                arr.push(lott[i]);
+
         console.log("arr:");
         console.log(arr);
         console.log("--------------------------------------------------------------------------------");
