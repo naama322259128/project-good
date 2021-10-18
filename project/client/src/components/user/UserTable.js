@@ -14,6 +14,8 @@ import { getUserOrdersList } from '../../utils/userUtils'//מחזירה את ה�
 import { getAuctionById } from '../../utils/auctionUtils'//מחזירה את שם המכירה
 import { Button } from '@material-ui/core';
 import OrderOptions from './OrderOptions';
+import Moment from 'moment';
+
 const UserTable = () => {
     const columns = [
         {
@@ -21,9 +23,17 @@ const UserTable = () => {
             label: 'Name',
             minWidth: 170,
             align: 'left',
-            format: (value) => value.toFixed(2),
+
         },
-        { id: 'order_date', label: 'Order Date', minWidth: 100 },
+        {
+            id: 'order_date',
+            label: 'Order Date',
+            minWidth: 100,
+            align: 'left',
+            //    formatDate: (date) => Moment(date).format('DD-MM-YYYY')
+            // format: v => v.toLocaleDateString("en-US")
+
+        },
         {
             id: 'sum',//
             label: 'Sum',//מה יהיה רשום
@@ -41,11 +51,10 @@ const UserTable = () => {
     ];
 
     const createData = (order) => {
-        const options = <OrderOptions order={order} key={order._id} />;
+        const options = <OrderOptions order={order} key={order._id} />;//הכפתורים
         const n = order.auctionId.organizationName + " : " + order.auctionId.name;
-        let d = order.orderDate;
+        let d =  new Date(order.orderDate)
         let sum = order.amountToPay;
-        debugger;
         return { n, d, sum, options };
     }
 
@@ -63,7 +72,7 @@ const UserTable = () => {
     useEffect(() => {
         getUserOrdersList("611c2f2e18f13934fc07bc27"/*JSON.parse(localStorage.user).currentUser._id*/).then(succ => {
             let arr = [];
-            succ.data.map((o) => { arr.push(createData(o)) });
+            succ.data.map((o) => { console.log(o.orderDate); arr.push(createData(o)) });
             setRows(arr);
         });
     }, [])

@@ -25,7 +25,7 @@ export default function OrderOptions(props) {
   let [gifts, setGifts] = useState([]);
   useEffect(() => {
     getAuctionWithWinners(/*"615dcef171ffd48b48935b38"*/props.order.auctionId).then(succ => {
-      setProductsList(succ.data);//רשיתמ זוכים של מכירה זו
+      setProductsList(succ.data);//רשיתמ מוצרים עם הזוכים של מכירה זו
       setDetails(props.order.orderDetails);//פרטי הזמנה זו
       setGifts(props.order.giftCodes)//מתנות של הזמנה זו
     });

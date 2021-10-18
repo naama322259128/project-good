@@ -246,34 +246,50 @@ const getAuctionWithWinners = async (req, res) => {
     return res.send(auction);
 }
 
+
+
 //בצע הגרלות
 const performLotteries = async (req, res) => {
-    let { _id } = req.params;
-    let orders = await Order.find({ 'auctionId': _id });
-    if (!_id) res.send("")
-    let auction = await Auction.findById(_id);
-    let lott = [];      //[{ userId: "", productId: "" },{ userId: "", productId: "" },{ userId: "", productId: "" }...]
+    let { _id } = req.params;//מכירה
+    let orders = await Order.find({ 'auctionId': _id });//כל ההזמנות של המכירה הזו
+    if (!_id) res.send("id is not exist");
+    let lott = [];
     orders.map(order => {//מעבר כל כל ההזמנות
         let orders_details = order.orderDetails;//הפרטים של ההזמנה 
         let user_id = order.userId//קוד נרשם
+
         orders_details.map(details => {
             let qty = details.ticketsQuantity;//מספר כרטיסים
             let prodId = details.productId//קוד מוצר
-            for (var i = 0; i < qty; i++)lott.push({ userId: user_id, productId: prodId });//הכנסה למערך כמספר הכרטיסים שקנה
+            for (var i = 0; i < qty; i++)
+                lott.push({ userId: user_id, productId: prodId });//הכנסה למערך כמספר הכרטיסים שקנה
         })
-    });
-    // console.log(orders);
 
+    })
     //ההגרלות
-    let products = auctoin.productList;//המוצרים של המכירה הזו
+    let auction = await Auction.findById(_id);
+    let products = auction.productList;//המוצרים של המכירה הזו
+    console.log("products");
     console.log(products);
+    console.log("products------------------------------------");
     products.map(pro => {//מעבר על כל המוצרים
         productId = pro._id;//קוד מוצר
-        let arr = lott.filter(l => { return l.productId === productId });//כל הכרטיסים למוצר הזה
-        let rnd = Math.floor(Math.random() * arr.length);//ההגרלה!!!
-        let winnerId = arr[rnd].userId;//הזוכה
-        pro.winnerId = winnerId;//רישום הזוכה
+        console.log("productId:");
+        console.log(productId);
+
+        //מחזיר רק את מה שעונה לתנאי
+        let arr = lott.filter(l => { return l.productId == productId });//כל הכרטיסים למוצר הזה
+        console.log("arr:");
+        console.log(arr);
+        console.log("--------------------------------------------------------------------------------");
+
+        if (arr.length > 0) {
+            let rnd = Math.floor(Math.random() * arr.length);//ההגרלה!!!
+            let winnerId = arr[rnd].userId;//הזוכה
+            pro.winnerId = winnerId;//רישום הזוכה
+        }
     })
+
 
     await auction.save();
     res.send(auction);

@@ -97,14 +97,17 @@ const getAuctionSoldMostTickets = async (req, res) => {
 
 //פרטי הזמנה 
 const getOrderDetails = async (req, res) => {
+    console.log("getOrder");
+
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Invalid ID number");
-    let order = await Order.findById(_id).
+    let order = await Order.findById(_id)
+    .
         populate([
-            { path: 'auctionId', select: 'organizationName name' },
-            { path: 'productList._id', select: 'name' }
+             { path: 'orderDetails.productId', select: 'name' },
+            { path: 'auctionId', select: 'organizationName name' }
         ]);
-    conosole.log(order);
+    console.log(order);
     return res.send(order);
 }
 
