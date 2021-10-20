@@ -246,6 +246,23 @@ const getAuctionWithWinners = async (req, res) => {
     return res.send(auction);
 }
 
+//קבל רשימת זוכים מפורטת (עבור מנהל המכירה)
+const getAuctionWithWinnersForManager = async (req, res) => {
+    let { _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.findOne({ '_id': _id }).
+        populate([{
+            path: "productList.winnerId",
+            select: `userName
+            confidentiality
+            email
+            phone
+            address`
+        }]);
+    if (!auction) return res.status(404).send("There is no auction with such an ID number");
+    return res.send(auction);
+}
 
 
 //בצע הגרלות
@@ -272,7 +289,7 @@ const performLotteries = async (req, res) => {
     products.map(pro => {//מעבר על כל המוצרים
         productId = pro._id;//קוד מוצר
 
-        
+
         // let arr = lott.filter(l => { l.productId === productId });//כל הכרטיסים למוצר הזה
         let arr = [];
         for (var i = 0; o < arr.length; i++)
@@ -295,8 +312,11 @@ const performLotteries = async (req, res) => {
     res.send(auction);
 }
 module.exports = {
-    getAll, getById, addProduct, addAuction, deleteAuction, getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
-    , addPackages, addProducts, addOrganizationInformation, addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners, performLotteries
+    getAll, getById, addProduct, addAuction, deleteAuction,
+    getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
+    , addPackages, addProducts, addOrganizationInformation,
+    addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
+    getAuctionWithWinnersForManager, performLotteries
 }
 
 //המכירה שש לה הכי הרבה הכנסות
