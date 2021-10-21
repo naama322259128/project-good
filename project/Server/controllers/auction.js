@@ -268,6 +268,10 @@ const getAuctionWithWinnersForManager = async (req, res) => {
 //בצע הגרלות
 const performLotteries = async (req, res) => {
     let { _id } = req.params;//מכירה
+    let auction = await Auction.findById(_id);
+    if(auction.status=="DONE")
+       return res.send(null);
+    
     let orders = await Order.find({ 'auctionId': _id });//כל ההזמנות של המכירה הזו
     if (!_id) res.send("id is not exist");
     let lott = [];
@@ -284,17 +288,17 @@ const performLotteries = async (req, res) => {
 
     })
     //ההגרלות
-    let auction = await Auction.findById(_id);
+ 
     let products = auction.productList;//המוצרים של המכירה הזו
     products.map(pro => {//מעבר על כל המוצרים
         productId = pro._id;//קוד מוצר
 
-
-        // let arr = lott.filter(l => { l.productId === productId });//כל הכרטיסים למוצר הזה
-        let arr = [];
-        for (var i = 0; o < arr.length; i++)
-            if (lott[i].productId == productId)
-                arr.push(lott[i]);
+console.log("productId"+productId);
+        let arr = lott.filter(l => l.productId.toString() == productId.toString() );//כל הכרטיסים למוצר הזה
+        // let arr = [];
+        // for (var i = 0; i < arr.length; i++)
+        //     if (lott[i].productId == productId)
+        //         arr.push(lott[i]);
 
         console.log("arr:");
         console.log(arr);
@@ -307,7 +311,7 @@ const performLotteries = async (req, res) => {
         }
     })
 
-
+    auction.status="DONE";
     await auction.save();
     res.send(auction);
 }

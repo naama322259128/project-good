@@ -26,7 +26,7 @@ const UserTable = () => {
 
         },
         {
-            id: 'order_date',
+            id: 'orderDate',
             label: 'Order Date',
             minWidth: 100,
             align: 'left',
@@ -54,9 +54,8 @@ const UserTable = () => {
         const options = <OrderOptions order={order} key={order._id} />;//הכפתורים
         const n = order.auctionId.organizationName + " : " + order.auctionId.name;
         let d = moment(new Date(order.orderDate)).format('D/MM/YYYY');
-        console.log(d);
         let sum = order.amountToPay;
-        return { n, d, sum, options };
+        return {name: n,orderDate: d, sum:sum, options };
     }
 
     const [rows, setRows] = useState([]);
@@ -106,10 +105,11 @@ const UserTable = () => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                     {columns.map((column) => {
+                                
                                         const value = row[column.id];
                                         return (
                                             <TableCell key={column.id} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                               {value}
                                             </TableCell>
                                         );
                                     })}

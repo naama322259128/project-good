@@ -129,7 +129,7 @@ const sendWinnersList = async (req, res) => {
     message += `</table> 
 
     </body>`;
-{/* <img src={${p}}></img> */}
+    {/* <img src={${p}}></img> */ }
     try {
         mailOptions.html = message;
         mailOptions.to = auction.auctionManager.email;
@@ -145,6 +145,35 @@ const sendWinnersList = async (req, res) => {
     }
     catch (err) { console.log(err.message) }
 }
+const sendContactToSiteManager = async (req, res) => {
+
+    let { details } = req.params;
+
+    mailOptions.subject = details.subject;
+    mailOptions.text = details.message + "<br/>from " + details.name;
+    mailOptions.to = '‫chinese.auctions1@gmail.com‬';
+    mailOptions.from = details.email;
+    try {
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+
+        })
+        console.log("info")
+        console.log(info)
+        return res.send(info)
+    }
+    catch (err) { console.log(err.message) }
+    return false;
+}
+
+
+
+
+
 module.exports = {
-    sendEmailToWinners, sendWinnersList
+    sendEmailToWinners, sendWinnersList, sendContactToSiteManager
 }

@@ -11,13 +11,16 @@ import StateCounter from './StateCounter'
 import AuctionInformation from './new auction/AuctionInformation';
 import UserTable from './user/UserTable';
 import AuctionManagerTable from './user/auction manager/AuctionManagerTable';
+import ContactForm from './main/ContactForm';
 function App() {
   return (
 
      <Router>
       <Switch> 
            {/* <AuctionManagerTable/> */}
-     <UserTable/>
+           {/* <StateCounter/> */}
+     {/* <UserTable/> */}
+     <ContactForm/>
         {/* <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>

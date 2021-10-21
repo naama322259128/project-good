@@ -5,8 +5,9 @@ const orderSchema = new mongoose.Schema({
     },//קוד לקוח, מצביע לטבלת משתמשים
     orderDetails: [{
         productId: {
-            type:mongoose.SchemaTypes.ObjectId
+            type:mongoose.SchemaTypes.ObjectId       
         },//קוד מוצר, מצביע לטבלת מוצרים
+        productName:{ type: String, required: true },
         ticketsQuantity: { type: Number, required: true }//כמות מוצרים
     }],
     paymentCode: { type: String, required: true },//קוד תשלום

@@ -6,7 +6,7 @@ body {
 .glass_login{
   background-color:#1009094d;
   background-color: rgba(33, 33, 33, 0.66) !important;
-
+  z-index: 400 !important;
   //החלבי המקורי
   //background-color: rgba(226, 226, 226, 0.15);
 
@@ -14,7 +14,6 @@ body {
   /* The Modal (background) */
   // display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 28 !important; /* Sit on top */
   padding-top: 10vh; /* Location of the box */
   left: 0;
   top: 0;

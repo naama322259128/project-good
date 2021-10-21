@@ -23,18 +23,27 @@ export default function OrderOptions(props) {
   let [productsList, setProductsList] = useState([]);
   let [details, setDetails] = useState([]);
   let [gifts, setGifts] = useState([]);
+  let [status, setStatus] = useState("");
+
   useEffect(() => {
-    getAuctionWithWinners(/*"615dcef171ffd48b48935b38"*/props.order.auctionId).then(succ => {
-      setProductsList(succ.data);//רשיתמ מוצרים עם הזוכים של מכירה זו
-      setDetails(props.order.orderDetails);//פרטי הזמנה זו
-      setGifts(props.order.giftCodes)//מתנות של הזמנה זו
+
+    getAuctionWithWinners(/*"615dd14171ffd48b48935b3a"*/props.order.auctionId).then(succ => {
+      console.log(succ.data.productList)
+      setProductsList(succ.data.productList);//רשיתמ מוצרים עם הזוכים של מכירה זו
+      setStatus(succ.data.status);
     });
+
+    setDetails(props.order.orderDetails);//פרטי הזמנה זו
+    setGifts(props.order.giftCodes)//מתנות של הזמנה זו
   }, []);
 
   return (
     <div>
       <OrderDetails details={details} gifts={gifts} />
-      <IconButton aria-describedby={id} variant="contained" onClick={handleClick} /*disabled={getAuctionIsDone() == false}*/><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
+      <br/>
+      <br/>
+      <br/>
+      <IconButton aria-describedby={id} variant="contained" onClick={handleClick} disabled={status=="DONE"}><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
       <Popover
         id={id}
         open={open}
@@ -45,60 +54,65 @@ export default function OrderOptions(props) {
           horizontal: 'left',
         }}
       >
-        <Typography sx={{ p: 2 }}>{productsList.map((p, index) => { return <p key={index}>{p.name}:{p.winnerId.confidentiality ? "Anonymous" : p.winnerId.userName}</p> })}</Typography>
+        <Typography sx={{ p: 2 }}>{
+          productsList.map((p, index) => { return <p key={index}>{p.name}:{p.winnerId.confidentiality ? "Anonymous" : p.winnerId.userName}</p> }
+          )
+        }
+
+        </Typography>
       </Popover>
-      <IconButton><img title="Add order" className="table_options_icon" src={add} /></IconButton>
+
     </div>
   );
 }
 
 
-//מה שהפונ של רשימת זוכים מחזירה
+    //מה שהפונ של רשימת זוכים מחזירה
 /*{
-  "registrationStartDate": "2022-01-03T22:00:00.000Z",
-  "status": "NOT_DONE",
-  "lotteryApproval": true,
-  "organizationPhotos": [],
-  "publicationApproval": true,
-  "_id": "615dcef171ffd48b48935b38",
-  "name": "מצילים חיים",
-  "auctionManager": "222",
-  "lotteriesDate": "2025-10-04T21:00:00.000Z",
-  "registrationEndDate": "2025-09-04T21:00:00.000Z",
-  "purchasePackage": [],
-  "productList": [
+        "registrationStartDate": "2022-01-03T22:00:00.000Z",
+      "status": "NOT_DONE",
+      "lotteryApproval": true,
+      "organizationPhotos": [],
+      "publicationApproval": true,
+      "_id": "615dcef171ffd48b48935b38",
+      "name": "מצילים חיים",
+      "auctionManager": "222",
+      "lotteriesDate": "2025-10-04T21:00:00.000Z",
+      "registrationEndDate": "2025-09-04T21:00:00.000Z",
+      "purchasePackage": [],
+      "productList": [
       {
-          "includedInPackages": true,
-          "   _id": "616c71c3e0eed5f333585a86",
+        "includedInPackages": true,
+      "   _id": "616c71c3e0eed5f333585a86",
           "winnerId": {
-              "confidentiality": false,
-              "_id": "616b3feeaea25e30d4c2d118",
-              "userName": "Noam"
-          },
-          "name": "car"
-      },
+        "confidentiality": false,
+      "_id": "616b3feeaea25e30d4c2d118",
+      "userName": "Noam"
+  },
+  "name": "car"
+},
       {
-          "includedInPackages": true,
-          "_id": "616c72908c4a971c882b8c7a",
-          "name": "gold",
+        "includedInPackages": true,
+      "_id": "616c72908c4a971c882b8c7a",
+      "name": "gold",
           "winnerId": {
-              "confidentiality": false,
-              "_id": "616b3feeaea25e30d4c2d118",
-              "userName": "Noam"
-          }
-      },
+        "confidentiality": false,
+      "_id": "616b3feeaea25e30d4c2d118",
+      "userName": "Noam"
+  }
+},
       {
-          "includedInPackages": true,
-          "_id": "616c72c28c4a971c882b8c7b",
-          "name": "cow",
+        "includedInPackages": true,
+      "_id": "616c72c28c4a971c882b8c7b",
+      "name": "cow",
           "winnerId": {
-              "confidentiality": false,
-              "_id": "611c2f2e18f13934fc07bc27",
-              "userName": "Michal"
-          }
-      }
-  ],
-  "organizationName": "עזר מציון",
-  "organizationText": "ארגון חסד מציל חיים",
-  "terms": ""
+        "confidentiality": false,
+      "_id": "611c2f2e18f13934fc07bc27",
+      "userName": "Michal"
+  }
+}
+],
+"organizationName": "עזר מציון",
+"organizationText": "ארגון חסד מציל חיים",
+"terms": ""
 }*/

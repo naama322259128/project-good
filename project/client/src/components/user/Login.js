@@ -33,6 +33,9 @@ const Login = (props) => {
   const click = (e) => { e.stopPropagation(); }
 
   return (
+    <>
+    <p>{state.loginIsOpen}</p>
+    {  state.loginIsOpen&&(
     <center>
   
       <div className="glass_login" onClick={() => dispatch({ type: actionTypes.SET_LOGIN, payload: false /*props.setLogin(false)*/ })}>
@@ -54,7 +57,8 @@ const Login = (props) => {
         </div>
       </div>
     </center>
-  );
+  )}
+  </>)
 }
 
 const mapStateToProps = (state) => {

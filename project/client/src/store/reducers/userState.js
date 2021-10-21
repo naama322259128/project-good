@@ -11,12 +11,17 @@ export const initialState = {
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
+        
         case actionTypes.SET_CURRENT_USER:
-            return {
+            {
+                debugger;
+                    return {
                 ...state,
                 currentUser: action.payload,
                 loginIsOpen: false
             }
+            }
+        
         case actionTypes.SET_LOGIN:
             return {
                 ...state,

@@ -14,7 +14,7 @@ import * as actionTypes from '../../store/actionTypes';
 import { setCurrentUser } from '../../store/actions/signUp'
 
 
-const HomeHeader = (props) => {
+export default function HomeHeader (props) {
   const [state, dispatch, writeError] = useStorageReducer(
     localStorage,
     'user',
@@ -81,12 +81,3 @@ const HomeHeader = (props) => {
     <SmallHeader />
   </>)
 }
-
-
-const mapStateToProps = state => {
-  return {
-    // loginIsOpen: state.user.loginIsOpen,
-    // currentUser: state.user.currentUser
-  };
-}
-export default connect(mapStateToProps, { setCurrentUser, setLogin })(HomeHeader);

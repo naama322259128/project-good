@@ -12,7 +12,7 @@ import viewOrder from '../../img/icons/view-order.png'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import './yourProfile.scss';
-
+import{getProduct}from '../../utils/auctionUtils'
 
 export default function OrerDetails(props) {
     const [anchorEl1, setAnchorEl1] = React.useState(null);
@@ -26,7 +26,6 @@ export default function OrerDetails(props) {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) { return; }
         setState({ ...state, [anchor]: open });
     };
-
     const list = (anchor) => (
         <Box
             sx={{ width: anchor === 'left' ? 'auto' : 250 }}
@@ -35,17 +34,20 @@ export default function OrerDetails(props) {
             onKeyDown={toggleDrawer(anchor, false)}
         >
 
-            <TableContainer component={Paper} sx={{ width: '500' }} >
+            <TableContainer component={Paper} sx={{ width: '500' }}  >
                 <Table sx={{ minWidth: 500 }} aria-label="caption table">
-                    <TableCell component="th" scope="row" style={style1}>Tickets:</TableCell>
+                    <TableCell component="th" scope="row" style={style1} onClick={console.log(props.details)}> qty</TableCell>
+                    <TableCell component="th" scope="row" style={style1}>prod</TableCell>
                     <TableBody>
+
                         {props.details.map((row, index) => (
-                            <TableRow key={index}>
-                                <TableCell component="th" scope="row">{row.ticketsQuantity} * {row.productId.name}</TableCell>
+                            <TableRow key={index} >
+                                <TableCell component="th" scope="row" >{row.ticketsQuantity}</TableCell>
+                                <TableCell component="th" scope="row">{row.productName}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
-                    <TableCell  style={style1}component="th" scope="row">Gifts:</TableCell>
+                    <TableCell style={style1} component="th" scope="row">Gifts:</TableCell>
                     <TableBody>
                         {props.gifts.map((row, index) => (
                             <TableRow key={index}><TableCell component="th" scope="row">{row}</TableCell></TableRow>
@@ -56,7 +58,7 @@ export default function OrerDetails(props) {
         </Box >
     );
     const divStyle = { display: 'inline-block' };
-    const style1 = { backgroundColor:'rgb(253, 220, 220)',  fontWeight: 'bold'};
+    const style1 = { backgroundColor: 'rgb(253, 220, 220)', fontWeight: 'bold' };
 
     return (<div style={divStyle}>
         {['left'].map((anchor) => (

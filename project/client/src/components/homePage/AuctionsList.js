@@ -10,6 +10,7 @@ import { updateCurrentUser } from '../../store/actions/user'
 import { useStorageReducer } from 'react-storage-hooks';
 import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState'
 import * as actionTypes from '../../store/actionTypes';
+import Login from '../user/Login';
 
 const AuctionsList = (props) => {
     let [auctionsList, setAuctionsList] = useState([]);
@@ -25,6 +26,7 @@ const AuctionsList = (props) => {
     }, []);
 
     return (<>
+    {state.loginIsOpen ? <Login /> : null}
         {auctionsList && auctionsList.map((item) => {
             return (
                 <Link
