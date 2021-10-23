@@ -11,8 +11,14 @@ import {sendContact}from '../../utils/userUtils'
 
 const ContactForm = (props) => {
     const handleOnSubmit = (e) => {
+<<<<<<< HEAD
         let details = { name: e.target.from_name.value, email: e.target.from_email.value, message: e.target.message.value, subject: e.target.subject.value }
         debugger;
+=======
+        debugger;
+        let details = { name: e.target.from_name.value, email: e.target.from_email.value, massage: e.target.message.value, subject: e.target.subject.value }
+        console.log(details)
+>>>>>>> 3c37befd665528f418683850edef8593269a47bb
         sendContact(details);
     }
     return (
