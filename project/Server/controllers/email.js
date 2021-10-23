@@ -150,7 +150,6 @@ const sendContactToSiteManager = async (req, res) => {
     let details = req.body;
     console.log("--------------------------");
 
-<<<<<<< HEAD
     console.log(details.name);
     console.log(details.subject);
     console.log(details.email);
@@ -159,25 +158,8 @@ const sendContactToSiteManager = async (req, res) => {
     mailOptions.subject = details.subject;
     mailOptions.text = details.message + "from " + details.name;
     mailOptions.to ='chinese.auctions1@gmail.com‬';
-=======
-    let { details } = req.params;
-    console.log(req.params)
-    console.log("details*****************************");
-    console.log(details.subject);
-    console.log(details.message);
-    console.log(details.name);
-    console.log(details.email);
-    mailOptions.subject = details.subject;
-    mailOptions.text = details.message + " -----------from " + details.name;
-    mailOptions.to = '‫chinese.auctions1@gmail.com‬';
->>>>>>> 3c37befd665528f418683850edef8593269a47bb
     mailOptions.from = details.email;
 
-    console.log("mailOptions*****************************");
-    console.log(mailOptions.subject);
-    console.log(mailOptions.text);
-    console.log(mailOptions.to);
-    console.log(mailOptions.from);
     try {
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
@@ -189,11 +171,6 @@ const sendContactToSiteManager = async (req, res) => {
             }
 
         })
-<<<<<<< HEAD
-
-=======
-        return res.send(info)
->>>>>>> 3c37befd665528f418683850edef8593269a47bb
     }
     catch (err) { console.log(err.message) }
     return false;
