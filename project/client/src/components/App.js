@@ -23,7 +23,7 @@ function App() {
      <ContactForm/>
      {/* <NewAuction /> */}
         {/* <Route path={`/auction`} ><Auction /></Route>
-        <Route path={`/home`}><Home /></Route> */}
+        <Route path={`/home`}><Home /></Route> 
         <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
