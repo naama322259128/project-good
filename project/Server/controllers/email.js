@@ -148,11 +148,22 @@ const sendWinnersList = async (req, res) => {
 const sendContactToSiteManager = async (req, res) => {
 
     let { details } = req.params;
-
+    console.log(req.params)
+    console.log("details*****************************");
+    console.log(details.subject);
+    console.log(details.message);
+    console.log(details.name);
+    console.log(details.email);
     mailOptions.subject = details.subject;
-    mailOptions.text = details.message + "<br/>from " + details.name;
+    mailOptions.text = details.message + " -----------from " + details.name;
     mailOptions.to = '‫chinese.auctions1@gmail.com‬';
     mailOptions.from = details.email;
+
+    console.log("mailOptions*****************************");
+    console.log(mailOptions.subject);
+    console.log(mailOptions.text);
+    console.log(mailOptions.to);
+    console.log(mailOptions.from);
     try {
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
@@ -162,8 +173,6 @@ const sendContactToSiteManager = async (req, res) => {
             }
 
         })
-        console.log("info")
-        console.log(info)
         return res.send(info)
     }
     catch (err) { console.log(err.message) }
