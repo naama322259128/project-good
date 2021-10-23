@@ -16,7 +16,7 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
 
-    from: 'chinese.auctions1@gmail.com',
+    from:'chinese.auctions1@gmail.com',
     accessKeyId: 'AWSACCESSKEY',
     secretAccessKey: 'AWS/Secret/key',
 
@@ -146,25 +146,31 @@ const sendWinnersList = async (req, res) => {
     catch (err) { console.log(err.message) }
 }
 const sendContactToSiteManager = async (req, res) => {
+    debugger;
+    let details = req.body;
+    console.log("--------------------------");
 
-    let { details } = req.params;
+    console.log(details.name);
+    console.log(details.subject);
+    console.log(details.email);
+    console.log(details.message);
 
     mailOptions.subject = details.subject;
-    mailOptions.text = details.message + "<br/>from " + details.name;
-    mailOptions.to = '‫chinese.auctions1@gmail.com‬';
+    mailOptions.text = details.message + "from " + details.name;
+    mailOptions.to ='chinese.auctions1@gmail.com‬';
     mailOptions.from = details.email;
     try {
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log(error);
             } else {
-                console.log('Email sent: ' + info.response);
+               
+                console.log('Email sent: ' + info.envelope.to); 
+                return res.send(info)
             }
 
         })
-        console.log("info")
-        console.log(info)
-        return res.send(info)
+
     }
     catch (err) { console.log(err.message) }
     return false;
