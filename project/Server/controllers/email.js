@@ -68,7 +68,6 @@ const sendEmailToWinners = async (req, res) => {
     })
 
 }
-// 👻
 
 //שלח רשימת זוכים מפורטת למנהל המכירה
 const sendWinnersListToManager = async (req, res) => {
@@ -242,8 +241,10 @@ const sendWinnersListToUsers = async (req, res) => {
 
 //שולח למנהל האתר מייל של צור קשר
 const sendContactToSiteManager = async (req, res) => {
+    debugger;
+    let details = req.body;
+    console.log("--------------------------");
 
-<<<<<<< HEAD
     console.log(details.name);
     console.log(details.subject);
     console.log(details.email);
@@ -262,26 +263,10 @@ const sendContactToSiteManager = async (req, res) => {
 
                 console.log('Email sent: ' + info.envelope.to);
                 console.log('Email sent: ' + info.envelope.from);
-=======
-    let details = req.body;
-
-    mailOptions.subject = details.subject;
-    mailOptions.text = details.message + "\nfrom " + details.name;
-    mailOptions.to = '‫chinese.auctions1@gmail.com‬';
-    mailOptions.from = details.email;
-    try {
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) { console.log(error); }
-            else {
-                console.log('Email sent: ' + info.envelope.to);
->>>>>>> 81d9f8ce24a8ba2da50d525289a64b6397b8350e
                 return res.send(info)
             }
+
         })
-<<<<<<< HEAD
-=======
-        return res.send(info)
->>>>>>> 81d9f8ce24a8ba2da50d525289a64b6397b8350e
     }
     catch (err) { console.log(err.message) }
     return false;

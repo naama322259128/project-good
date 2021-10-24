@@ -16,7 +16,6 @@ import ContinueNewAuction from './new auction/ContinueNewAuction';
 function App() {
   return (
 
-<<<<<<< HEAD
     <Router>
       <Switch>
         {/* <AuctionManagerTable/> */}
@@ -26,17 +25,6 @@ function App() {
         {/* <NewAuction /> */}
         <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
-=======
-     <Router>
-      <Switch> 
-           {/* <AuctionManagerTable/> */}
-           {/* <StateCounter/> */}
-     {/* <UserTable/> */}
-     <ContactForm/>
-     {/* <NewAuction /> */}
-        {/* <Route path={`/auction`} ><Auction /></Route>
-        <Route path={`/home`}><Home /></Route> 
->>>>>>> 81d9f8ce24a8ba2da50d525289a64b6397b8350e
         <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/continueNewAuction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
