@@ -37,8 +37,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const getSteps = () => { return ['Purchase packages', 'Adding products', 'Organization details', 'Chinese Auction Details']; }
+const getSteps = () => {
+    debugger;
+    return ['Purchase packages', 'Adding products', 'Organization details', 'Chinese Auction Details'];
+}
 const getStepContent = (step) => {
+    debugger;
+
     switch (step) {
         case 0:
             return <AuctionPricing />;
@@ -77,6 +82,7 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
+        debugger;
         switch (activeStep) {
             case 0:
                 return savePackages(state._id, state.packagesList);//שמירת תמחור מכירה במסד נתונים;
@@ -115,6 +121,8 @@ const NewAuction = (props) => {
     const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); };
 
     const handleSkip = () => {
+        debugger;
+
         if (!isStepOptional(activeStep)) {
             throw new Error("You can't skip a step that isn't optional.");
         }

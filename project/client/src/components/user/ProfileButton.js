@@ -38,6 +38,8 @@ const ProfileButton = (props) => {
         dispatch({ type: actionTypes.SIGN_OUT }) //איפוס הנתונים בלוקלסטורג ובסטייט
     }
 
+
+
     return (<div>
         <AccountCircleIcon
             aria-label="more"
@@ -73,6 +75,9 @@ const ProfileButton = (props) => {
 
             <Link to={'/home'}>
                 <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>
+            </Link>
+             <Link to={'/continueNewAuction'}>
+                <MenuItem key={'Continue chinese auction'} onClick={handleClose}>Continue chinese auction</MenuItem>
             </Link>
 
 

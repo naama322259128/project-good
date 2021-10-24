@@ -109,7 +109,7 @@ export const resetNewAuctionState = () => {
 
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManager = (_id) => {
-    return axios.post(`http://localhost:5000/users/beManager`,_id)
+    return axios.post(`http://localhost:5000/users/beManager`, _id)
 }
 
 // אישור פירסום מכירה            
@@ -186,3 +186,11 @@ export const saveAuctionInformation = (_id, details) => {
 //         })}
 
 // }
+
+
+//מחזירה את המכירות שלא אושרו של המשתמש שנשלח
+export const getAllUnapprovedAuctionsByUser = (user_id) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/auctions/getAllUnapprovedAuctionsByUser/${user_id}`);
+    }
+}

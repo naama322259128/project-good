@@ -269,9 +269,9 @@ const getAuctionWithWinnersForManager = async (req, res) => {
 const performLotteries = async (req, res) => {
     let { _id } = req.params;//מכירה
     let auction = await Auction.findById(_id);
-    if(auction.status=="DONE")
-       return res.send(null);
-    
+    if (auction.status == "DONE")
+        return res.send(null);
+
     let orders = await Order.find({ 'auctionId': _id });//כל ההזמנות של המכירה הזו
     if (!_id) res.send("id is not exist");
     let lott = [];
@@ -288,13 +288,13 @@ const performLotteries = async (req, res) => {
 
     })
     //ההגרלות
- 
+
     let products = auction.productList;//המוצרים של המכירה הזו
     products.map(pro => {//מעבר על כל המוצרים
         productId = pro._id;//קוד מוצר
 
-console.log("productId"+productId);
-        let arr = lott.filter(l => l.productId.toString() == productId.toString() );//כל הכרטיסים למוצר הזה
+        console.log("productId" + productId);
+        let arr = lott.filter(l => l.productId.toString() == productId.toString());//כל הכרטיסים למוצר הזה
         // let arr = [];
         // for (var i = 0; i < arr.length; i++)
         //     if (lott[i].productId == productId)
@@ -311,16 +311,35 @@ console.log("productId"+productId);
         }
     })
 
-    auction.status="DONE";
+    auction.status = "DONE";
     await auction.save();
     res.send(auction);
 }
+
+//מחזיר את המכירות שלא אושרו לתצוגה לפי משתמש
+const getAllUnapprovedAuctionsByUser = async (req, res) => {
+    let { _id } = req.params;//user id
+    //לוודא שמחזיר רק את הרשומות שעונות על שני התנאים
+    try {
+        if (!mongoose.Types.ObjectId.isValid(_id))
+            return res.status(404).send("Invalid ID number");
+        let auctions = await Auction.find({ "auctionManager": _id }, { "publicationApproval": false });
+        if (!auctions)
+            return res.status(404).send("There is no auction with such an manager ID number");
+        console.log(auctions);
+    }
+    catch (err) { return res.status(400).send(err.message) }
+    return res.send(auctions);
+}
+
+
+
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction,
     getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
     , addPackages, addProducts, addOrganizationInformation,
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
-    getAuctionWithWinnersForManager, performLotteries
+    getAuctionWithWinnersForManager, performLotteries, getAllUnapprovedAuctionsByUser
 }
 
 //המכירה שש לה הכי הרבה הכנסות

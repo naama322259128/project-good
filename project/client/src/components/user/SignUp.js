@@ -15,11 +15,12 @@ import User from '../../models/user'
 import { useStorageReducer } from 'react-storage-hooks';
 import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
 import * as actionTypes from '../../store/actionTypes';
-
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'wrap'
     },
     margin: {
         margin: theme.spacing(1),
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = (props) => {
- 
+
     const classes = useStyles();
     const handleChange = (prop) => (event) => { setValues({ ...values, [prop]: event.target.value }); };
     const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }); };
@@ -74,7 +75,7 @@ const SignUp = (props) => {
         'user',
         reducer,
         userState
-      );
+    );
 
     //רישום משתמש חדש
     let password = "";
@@ -83,13 +84,16 @@ const SignUp = (props) => {
     let phone = "";
     let address = "";
     let birthYear = "";
+    let confidentiality = false;
+
+
 
     const createUser = () => {
         //מה עם סטטוס וחיסיון
-        let newUser = new User(password, userName, email, birthYear, address, phone, 3);
+        let newUser = new User(password, userName, email, birthYear, address, phone, confidentiality);
         props.addUser(newUser);
 
-                {/* 
+        {/* 
         לאחר הלחיצה המשתמש החדש נשמר בסטייט שמתאפס בטעינה מחדש ולא בסטייט שנשמר לפי הסטורג
 אולי נעשה אחרי שהפונקציה הזו סיימה, דיספאצ' לסטייט שנשמר 
 */}
@@ -162,7 +166,7 @@ const SignUp = (props) => {
                         onChange={(e) => { phone = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
-                                <i className="mobile alternate icon"/>
+                                <i className="mobile alternate icon" />
                             </InputAdornment>
                         }
                     />
@@ -176,7 +180,7 @@ const SignUp = (props) => {
                         onChange={(e) => { password = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
-                                <i className="lock icon"/>
+                                <i className="lock icon" />
                             </InputAdornment>
                         }
                         endAdornment={
@@ -191,6 +195,7 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                     />
+                    <FormControlLabel control={<Checkbox onChange={(e) => { confidentiality = e.target.checked }}/>} label="Confidentiality" />
                     <Button type="button" variant="contained" className={"login_btn"} onClick={createUser}>Login</Button>
                 </div>
 
