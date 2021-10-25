@@ -36,7 +36,7 @@ function App() {
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
         <Route path={`/`}><Home />    </Route>
-
+{/* 22 */}
       </Switch>
     </Router>
 
