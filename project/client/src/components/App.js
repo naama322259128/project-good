@@ -12,25 +12,27 @@ import AuctionInformation from './new auction/AuctionInformation';
 import UserTable from './user/UserTable';
 import AuctionManagerTable from './user/auction manager/AuctionManagerTable';
 import ContactForm from './main/ContactForm';
+import ContinueNewAuction from './new auction/ContinueNewAuction';
 function App() {
   return (
 
-     <Router>
-      <Switch> 
-           {/* <AuctionManagerTable/> */}
-           {/* <StateCounter/> */}
-     {/* <UserTable/> */}
-     <ContactForm/>
-     {/* <NewAuction /> */}
-        {/* <Route path={`/auction`} ><Auction /></Route>
-        <Route path={`/home`}><Home /></Route> 
+    <Router>
+      <Switch>
+        {/* <AuctionManagerTable/> */}
+        {/* <StateCounter/> */}
+        {/* <UserTable/> */}
+        {/* <ContactForm/> */}
+        {/* <NewAuction /> */}
+        <Route path={`/auction`} ><Auction /></Route>
+        <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>
+        <Route path={`/continueNewAuction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
-        <Route path={`/`}><Home />    </Route> */}
-     
-      </Switch> 
+        <Route path={`/`}><Home />    </Route>
+
+      </Switch>
     </Router>
 
   );

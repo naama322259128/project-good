@@ -8,6 +8,7 @@ route.get("/getAuctionsByManagerId/:manager_id", auctionController.getAuctionsBy
 route.get("/getAuctionIsDone/:_id", auctionController.getAuctionIsDone)
 route.get("/getAuctionWithWinners/:_id", auctionController.getAuctionWithWinners)
 route.get("/getAuctionWithWinnersForManager/:_id", auctionController.getAuctionWithWinnersForManager)
+route.get("/getAllUnapprovedAuctionsByUser/:_id",auctionController.getAllUnapprovedAuctionsByUser)
 
 route.get("/:id", auctionController.getById)
 route.put("/performLotteries/:_id", auctionController.performLotteries)
@@ -23,6 +24,6 @@ route.delete("/deletePackage/:auction_id&:package_id", auctionController.deleteP
 route.delete("/deleteProduct/:auction_id&:product_id", auctionController.deleteProduct)
 
 route.get("/sendEmailToWinners/:_id", myEmailMessagesController.sendEmailToWinners)
-route.get("/sendWinnersList/:_id", myEmailMessagesController.sendWinnersList)
-
+route.get("/sendWinnersListToManager/:_id", myEmailMessagesController.sendWinnersListToManager)
+route.get("/sendWinnersListToUsers/:_id", myEmailMessagesController.sendWinnersListToUsers)
 module.exports = route;

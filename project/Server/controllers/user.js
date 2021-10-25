@@ -88,6 +88,23 @@ const isUserExist = async (req, res) => {
         return res.status(400).send("Incorrect details entered");
     return res.send(user);
 }
+//האם משתמש קיים לפי שם וסיסמא 
+const isLoginGoogle = async (req, res) => {
+    let { name, email } = req.params;
+    let user = await User.findOne({ "email": email });
+    if (!user) {
+        user = { "userName": name, "email": email };
+        let newUser = new User(user);
+        try {            
+            await newUser.save();
+            return res.send(newUser);
+        }
+        catch (err) {
+            return res.status(400).send(err.message)
+        }
+    }
+    return res.send(user);
+}
 
 const beManager = async (req, res) => {
     let { _id } = req.params;
@@ -100,6 +117,6 @@ const beManager = async (req, res) => {
 
 
 module.exports = {
-    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager
+    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle
 
 }

@@ -1,5 +1,5 @@
 export default class User {
-    constructor(password, userName, email, phone, birthYear, address,Confidentiality) {
+    constructor(password, userName, email, phone, birthYear, address,confidentiality) {
         this.password = password;
         this.userName = userName;
         this.email = email;
@@ -7,7 +7,7 @@ export default class User {
         this.birthYear = birthYear
         this.address = address;
         // this.status = status;
-        this.Confidentiality = Confidentiality;
+        this.confidentiality = confidentiality;//חסוי
     }
 }
 

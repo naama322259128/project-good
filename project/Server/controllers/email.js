@@ -1,5 +1,6 @@
 var nodemailer = require('nodemailer');
 const Auction = require('../models/auction')
+const Order = require('../models/order')
 // const p = require('../../client/src/img/logo_orange&black&blue.png');
 
 var transporter = nodemailer.createTransport({
@@ -26,6 +27,8 @@ var mailOptions = {
     text: ''
 };
 
+//מייל לכל זוכה בנפרד
+//עובר על כל הזוכים לפי קוד מכירה
 const sendEmailToWinners = async (req, res) => {
 
     let { _id } = req.params;
@@ -65,9 +68,9 @@ const sendEmailToWinners = async (req, res) => {
     })
 
 }
-// 👻
 
-const sendWinnersList = async (req, res) => {
+//שלח רשימת זוכים מפורטת למנהל המכירה
+const sendWinnersListToManager = async (req, res) => {
 
     let { _id } = req.params;
     let auction = await Auction.findById(_id).
@@ -146,23 +149,124 @@ const sendWinnersList = async (req, res) => {
     }
     catch (err) { console.log(err.message) }
 }
-const sendContactToSiteManager = async (req, res) => {
 
-    let details = req.body;
+//מחזירה טבלת רשימת זוכים לא מפורטת
+const getWinnersTable = async (_id) => {
 
-    mailOptions.subject = details.subject;
-    mailOptions.text = details.message + "\nfrom " + details.name;
-    mailOptions.to = '‫chinese.auctions1@gmail.com‬';
-    mailOptions.from = details.email;
+    let auction = await Auction.findById(_id).
+        populate([
+            { path: "productList.winnerId", select: `userName confidentiality email phone address` },
+            { path: "auctionManager", select: `email` }
+        ]);
+    let arr = auction.productList;
+
+    let message = `
+    
+    <head>
+<style>
+*{
+    direction: ltr;
+   
+}table, td, th {
+    border: 1px solid black;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  td{
+      text-align:left
+  }
+  th{
+    background-color: #dcdeff;
+  }
+  img{
+      width:10vw
+  }
+</style>
+</head>
+<body>
+<h3>Hello dear user, These are the results of the Chinese auction ${auction.name} of ${auction.organizationName}</h3>
+  <table><thead>
+    <th></th>
+    <th>Product</th>
+    <th>Name</th>
+    <th>Adress</th>
+        </thead>`;
+
+    for (var i = 0; i < arr.length; i++) {
+        message += `<tr>
+        <td>${i + 1}</td>
+        <td>${arr[i].name}</td>`
+        if (arr[i].confidentiality == false)
+            message += `<td>${arr[i].winnerId.userName}</td>`
+        else message += `<td>Anonymies</td>`
+        message += `<td> ${arr[i].winnerId.address}</td></tr> `
+    }
+    message += `</table > 
+
+    </body > `;
+
+   return message;
+}
+
+//שולחת טבלת זוכים לכל משתתפי המכירה
+const sendWinnersListToUsers = async (req, res) => {
+
+    let { _id } = req.params;
+    mailOptions.html = getWinnersTable(_id);
+    let ordersList = await Order.find({ 'auctionId': _id }).
+        populate([{ path: "userId", select: `email` }]);
+
+    let arr = [];
+    ordersList.map(e => arr.push(e.userId.email));
+    var uniqueEmails = arr.filter((v, i, a) => a.indexOf(v) === i);
+
+    mailOptions.subject = `The Chinese auction ${auction.organizationName + " : " + auction.name} results`;
+    uniqueEmails.map(email => { mailOptions.bcc += `${email}, ` })
     try {
         transporter.sendMail(mailOptions, function (error, info) {
-            if (error) { console.log(error); }
-            else {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+
+        })
+    }
+    catch (err) { console.log(err.message) }
+
+}
+
+//שולח למנהל האתר מייל של צור קשר
+const sendContactToSiteManager = async (req, res) => {
+    debugger;
+    let details = req.body;
+    console.log("--------------------------");
+
+    console.log(details.name);
+    console.log(details.subject);
+    console.log(details.email);
+    console.log(details.message);
+
+    mailOptions.subject = details.subject;
+    mailOptions.text = details.message + "from " + details.name;
+    mailOptions.to = 'chinese.auctions1@gmail.com‬';
+    mailOptions.from = details.email;
+
+    try {
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+
                 console.log('Email sent: ' + info.envelope.to);
+                console.log('Email sent: ' + info.envelope.from);
                 return res.send(info)
             }
+
         })
-        return res.send(info)
     }
     catch (err) { console.log(err.message) }
     return false;
@@ -173,5 +277,5 @@ const sendContactToSiteManager = async (req, res) => {
 
 
 module.exports = {
-    sendEmailToWinners, sendWinnersList, sendContactToSiteManager
+    sendEmailToWinners, sendWinnersListToManager, sendContactToSiteManager,sendWinnersListToUsers,
 }
