@@ -137,7 +137,7 @@ const SignIn = (props) => {
 
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
         <br/>
-        <LoginGoogle />
+        <LoginGoogle/>
 
       </form>
     </center >

@@ -82,7 +82,7 @@ const SignUp = (props) => {
     let userName = "";
     let email = "";
     let phone = "";
-    let address = "";
+    let city = "";
     let birthYear = "";
     let confidentiality = false;
 
@@ -90,7 +90,7 @@ const SignUp = (props) => {
 
     const createUser = () => {
         //מה עם סטטוס וחיסיון
-        let newUser = new User(password, userName, email, birthYear, address, phone, confidentiality);
+        let newUser = new User(password, userName, email, birthYear, city, phone, confidentiality);
         props.addUser(newUser);
 
         {/* 
@@ -133,11 +133,11 @@ const SignUp = (props) => {
                     />
                     <FilledInput
                         type={'text'}
-                        placeholder="address"
+                        placeholder="city"
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
-                        onChange={(e) => { address = e.target.value }}
+                        onChange={(e) => { city = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="map marker alternate icon"></i>

@@ -52,7 +52,9 @@ const updateUser = async (req, res) => {
     user.fullName = userBody.fullName || user.fullName;
     user.phone = userBody.phone || user.phone;
     user.password = userBody.password || user.password;
-    user.address = userBody.address || user.address;
+    user.city = userBody.city || user.city;
+    user.birthYear = userBody.birthYear || user.birthYear;
+    console.log(user);
     await user.save();
     return res.send(user);
 }
@@ -92,6 +94,7 @@ const isUserExist = async (req, res) => {
 const isLoginGoogle = async (req, res) => {
     let { name, email } = req.params;
     let user = await User.findOne({ "email": email });
+    console.log(user);
     if (!user) {
         user = { "userName": name, "email": email };
         let newUser = new User(user);

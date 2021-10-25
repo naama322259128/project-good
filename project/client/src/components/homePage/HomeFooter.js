@@ -9,9 +9,8 @@ import ContactForm from '../main/ContactForm'
 const HomeFooter = (props) => {
     return (
         <footer className="home_footer">
-            {props.showForm && <ContactForm />}
             <div id="logo_in_home_footer" ></div>
-            <div id="contact_us" onClick={() => props.setShowContactForm(true)}><p>CONTACT US</p></div>
+            <Link to={'/about'}><div id="contact_us" onClick={() => window.scrollTo(0, 100000)}><p>CONTACT US</p></div></Link>
             <div id="menu_footer">
                 <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
                 <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>

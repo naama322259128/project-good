@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { setLogin } from '../../store/actions/home'
 import SmallFooter from "./SmallFooter";
 import SmallHeader from "./SmallHeader";
+import ContactForm from "./ContactForm";
 const About = (props) => {
 
   useEffect(() => {
@@ -102,6 +103,7 @@ const About = (props) => {
         </div>
       </div>
 
+{/* <ContactForm/> */}
     </center>
 
     <SmallFooter />
