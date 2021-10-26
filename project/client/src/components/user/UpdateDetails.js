@@ -77,7 +77,7 @@ const UpdateDetails = (props) => {
     let userName = u.userName;
     let email = u.email;
     let phone = u.phone;
-    let address = u.address;
+    let city = u.city;
     let birthYear = u.birthYear;
 
     const updateUser = () => {
@@ -85,7 +85,7 @@ const UpdateDetails = (props) => {
         user.password = password;
         user.email = email;
         user.phone = phone;
-        user.address = address;
+        user.city = city;
         user.name = userName;
         user.birthYear = birthYear;
         props.updateUser(user);
@@ -131,16 +131,16 @@ const UpdateDetails = (props) => {
                     <FilledInput
                         type={'text'}
                         required
-                        placeholder='Address'
+                        placeholder='City'
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
-                        onChange={(e) => { address = e.target.value }}
+                        onChange={(e) => { city = e.target.value }}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="map marker alternate icon"></i>
                             </InputAdornment>
                         }
-                        defaultValue={address} />
+                        defaultValue={city} />
 
                     <FilledInput
                         type={'text'}
@@ -216,3 +216,4 @@ const mapStateToProps = (state) => {
     };
 }
 export default connect(mapStateToProps, { updateUser})(UpdateDetails);
+

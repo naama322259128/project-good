@@ -13,6 +13,8 @@ import UserTable from './user/UserTable';
 import AuctionManagerTable from './user/auction manager/AuctionManagerTable';
 import ContactForm from './main/ContactForm';
 import ContinueNewAuction from './new auction/ContinueNewAuction';
+
+
 function App() {
   return (
 
@@ -23,6 +25,8 @@ function App() {
         {/* <UserTable/> */}
         {/* <ContactForm/> */}
         {/* <NewAuction /> */}
+        {/* <UpdateDetails/> */}
+
         <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>
