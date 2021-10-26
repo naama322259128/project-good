@@ -30,4 +30,4 @@ const mapStateToProps = (state) => {
     return {
     };
 }
-export default connect(mapStateToProps, { setOrganizationPhotos })(OrganizationInformation, setOrganizationName, setOrganizationText,);
+export default connect(mapStateToProps, { setOrganizationPhotos, setOrganizationName, setOrganizationText })(OrganizationInformation);

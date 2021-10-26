@@ -4,7 +4,7 @@ import './User.scss';
 import { uteThemeProps } from '@mui/material';
 import { setCurrentUser } from '../../store/actions/signUp';
 import { connect } from "react-redux";
-import { setLogin } from '../../store/actions/home'
+import { setLogin } from '../../store/actions/home';
 
 const LoginGoogle = (props) => {
 

@@ -14,14 +14,8 @@ const ContinueNewAuction = () => {
         });
 
     }, []);
+    //TODO
     let setArrInState = () => {
-
-//   const [state, dispatch, writeError] = useStorageReducer(
-//         localStorage,
-//         'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
-//         reducer,//רדיוסר
-//         newAuctionState //מה הסטייט שיהיה בלוקל סטור' וזה גם הסטייט הכללי
-//     );
     }
     return (
         <>

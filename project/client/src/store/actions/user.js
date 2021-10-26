@@ -50,6 +50,17 @@ export const addOrderToState = (order) => {
     }
 }
 
+export const addProductToCart = (cnt,product) => {
+    return {
+        type: actionTypes.ADD_PRODUCT_TO_CART,
+        payload: {
+            cnt: cnt,
+            product: product
+        }
+    }
+}
+
+
 export const signOut = () => {
     return {
         type: actionTypes.SIGN_OUT
@@ -85,5 +96,8 @@ export const getOrderByUserAndAuction = (user_id, auction_id) => {
     }
 }
 export const deleteProductFromCart = (_id) => {
-    return { type: actionTypes.DELETE_PRODUCT_FROM_CART, payload: _id }
+    return {
+        type: actionTypes.DELETE_PRODUCT_FROM_CART,
+        payload: _id
+    }
 }

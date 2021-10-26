@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { addProduct, showAddProduct, setProductsList/*, addProductToDb*/ } from "./../../../store/actions/newAuction";
+import { addProduct } from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
 
 const AddProduct = (props) => {
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => {
         showSetProduct: state.auction.showSetProduct,
     };
 }
-export default connect(mapStateToProps, { addProduct, showAddProduct, setProductsList })(AddProduct);
+export default connect(mapStateToProps, { addProduct })(AddProduct);

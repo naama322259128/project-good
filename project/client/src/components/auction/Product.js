@@ -1,5 +1,5 @@
 import './Auction.scss';
-import {  Header,  Modal } from 'semantic-ui-react';
+import { Header, Modal } from 'semantic-ui-react';
 import p from '../../img/car.jpg';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -9,9 +9,8 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { useStorageReducer } from 'react-storage-hooks';
-import { currentAuctionReducer as reducer, initialState as currentAuctionState } from '../../store/reducers/currentAuctionState'
-import * as actionTypes from '../../store/actionTypes'
+import {addProductToCart} from '../../store/actions/user';
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -24,12 +23,6 @@ const useStyles = makeStyles({
 
 const Product = (props) => {
 
-  const [state, dispatch, writeError] = useStorageReducer(
-    localStorage,
-    'currentAuction',
-    reducer,
-    currentAuctionState
-  );
 
   const [open, setOpen] = React.useState(false)
   const classes = useStyles();
@@ -59,10 +52,7 @@ const Product = (props) => {
             <AddShoppingCartIcon
               onClick={(e) => {
                 e.stopPropagation();
-                dispatch({
-                  type: actionTypes.ADD_PRODUCT_TO_CART,
-                  payload: { cnt: cnt, product: props.item }
-                });
+                props.addProductToCart(cnt, props.item);
                 setCnt(0);
               }} />
           </IconButton>
@@ -87,5 +77,8 @@ const Product = (props) => {
   )
 }
 
-
-export default Product;
+const mapStateToProps = state => {
+  return {
+  }
+}
+export default connect(mapStateToProps, { addProductToCart })(Product);
