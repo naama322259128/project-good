@@ -233,5 +233,9 @@ const mapStateToProps = (state) => {
     return {
     };
 }
+<<<<<<< HEAD
+export default connect(mapStateToProps, { updateUser})(UpdateDetails);
+=======
 export default connect(mapStateToProps, { })(UpdateDetails);
+>>>>>>> 58c819bfc053797af0066c7fa3d278ea6ddc79ce
 
