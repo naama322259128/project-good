@@ -1,17 +1,26 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 import { updateCurrentUser } from './user'
+import { setProductsList } from './newAuction';
 
 export const setCurrentAuction = (auctionId) => {
   return (dispatch) => {
     axios.get(`http://localhost:5000/auctions/${auctionId}`).then(succ => {
       console.log(succ.data);
       if (succ.status != 400)
-        dispatch(/*updateCurrentAuction(succ.data),*/ localStorage.setItem('currentAuction', JSON.stringify(succ.data)));
+        dispatch(updateCurrentAuction(succ.data));
     })
   }
 }
-
+export const setCntOfProductInCart = (_id, cnt) => {
+  return {
+    type: actionTypes.SET_CNT_PRODUCT_IN_CART,
+    payload: {
+      _id: _id,
+      cnt: cnt
+    }
+  }
+}
 export const updateCurrentAuction = (auction) => {
   return {
     type: actionTypes.SET_CURRENT_AUCTION,
@@ -20,7 +29,12 @@ export const updateCurrentAuction = (auction) => {
 }
 
 export const getProducts = (auction_id) => {
-  return axios.get(`http://localhost:5000/auctions/${auction_id}`);
+  return (dispatch) => {
+    return axios.get(`http://localhost:5000/auctions/${auction_id}`).then(succ => {
+      dispatch(setProductsList(succ.data))
+    })
+  }
+
 }
 
 export const updateCurrentAuctionState = () => {

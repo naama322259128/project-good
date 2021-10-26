@@ -1,18 +1,19 @@
 import Product from './Product';
 import './Auction.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getProducts } from '../../store/actions/currentAuction';
+import { connect } from "react-redux";
 
-const ProductList = (props) => {
+function ProductList (props)  {
 
     const [products, setProducts] = useState([]);
-    useEffect = (() => {
-        getProducts(JSON.parse(localStorage.getItem("currentAuction")).currnetAuction).then(
-            succ => { setProducts(succ.data) });
-    }, []);
 
+    useEffect(() => {
+        setProducts(props.getProducts(props.currnetAuction))
+    },[]);
     return (<div>
-        {products.map((item) => {
+        {products.length&&
+        products.map((item) => {
             return (<Product key={parseInt(item._id)} item={item} />)
         })}
     </div>
@@ -20,5 +21,12 @@ const ProductList = (props) => {
 
 }
 
+const mapStateToProps = state => {
+    return {
+        currentUser: state.user.currentUser,
+        loginIsOpen: state.user.loginIsOpen,
+        currnetAuction: state.auction._id
+    }
+}
+export default connect(mapStateToProps, { getProducts })(ProductList);
 
-export default ProductList;

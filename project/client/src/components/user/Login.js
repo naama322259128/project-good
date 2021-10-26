@@ -7,9 +7,6 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import { setLogin } from '../../store/actions/home';
 import { connect } from "react-redux";
-import { useStorageReducer } from 'react-storage-hooks';
-import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
-import * as actionTypes from '../../store/actionTypes';
 
 const useStyles = makeStyles({
   root: {
@@ -18,12 +15,7 @@ const useStyles = makeStyles({
 });
 
 const Login = (props) => {
-  const [state, dispatch, writeError] = useStorageReducer(
-    localStorage,
-    'user',
-    reducer,
-    userState
-  );
+ 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => { setValue(newValue); };
@@ -35,7 +27,7 @@ const Login = (props) => {
   return (
     <>
       <center>
-        <div className="glass_login" onClick={() => dispatch({ type: actionTypes.SET_LOGIN, payload: false })}>
+        <div className="glass_login" onClick={()=>props.setLogin(false)}>
           <div className="modal-content_login" onClick={click}>
             <Tabs
               value={value}

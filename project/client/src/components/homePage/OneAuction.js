@@ -1,8 +1,11 @@
-import React from 'react'
 import './home.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
+import { connect } from "react-redux";
+import { setLogin } from '../../store/actions/home'
+import { setCurrentUser } from '../../store/actions/signUp'
+import React, { useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     minWidth: 300,
     width: '100%',
-  
+
   },
   image: {
     top: 50,
@@ -40,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     left: 20,
     right: 20,
     top: 15,
-    bottom:15,
+    bottom: 15,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -59,9 +62,9 @@ const useStyles = makeStyles((theme) => ({
   imageBackdrop: {
     position: 'absolute',
     left: 20,
-    right:20,
-    top:10,
-    bottom:10,
+    right: 20,
+    top: 10,
+    bottom: 10,
     backgroundColor: theme.palette.common.black,
     opacity: 0.6,
     transition: theme.transitions.create('opacity'),
@@ -94,7 +97,7 @@ const OneAuction = (props) => {
       focusVisibleClassName={classes.focusVisible}
       style={{
         width: '27%',
-       
+
       }}
     >
       <span
@@ -121,4 +124,11 @@ const OneAuction = (props) => {
   </>
   )
 }
-export default OneAuction;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.user.currentUser,
+    loginIsOpen: state.user.loginIsOpen
+  }
+}
+export default connect(mapStateToProps, { setLogin })(OneAuction);
+

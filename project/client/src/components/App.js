@@ -13,6 +13,8 @@ import UserTable from './user/UserTable';
 import AuctionManagerTable from './user/auction manager/AuctionManagerTable';
 import ContactForm from './main/ContactForm';
 import ContinueNewAuction from './new auction/ContinueNewAuction';
+import UploadingProducts from './new auction/uploading products/UploadingProducts';
+import AddProduct from './new auction/uploading products/AddProduct';
 
 
 function App() {
@@ -26,19 +28,17 @@ function App() {
         {/* <ContactForm/> */}
         {/* <NewAuction /> */}
         {/* <UpdateDetails/> */}
-
-        <Route path={`/auction`} ><Auction /></Route>
+        <UploadingProducts />
+        {/* <AddProduct/> */}
+        {/* <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/continueNewAuction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
-        <Route path={`/`}><Home />    </Route>
-<<<<<<< HEAD
-=======
-{/* 22 */}
->>>>>>> 8aacb8fac9b2039fb736112c7e93f77c53960e36
+        <Route path={`/`}><Home />    </Route> */}
+
       </Switch>
     </Router>
 

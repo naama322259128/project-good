@@ -15,6 +15,8 @@ import { userReducer as reducer, initialState as userState } from '../../store/r
 import * as actionTypes from '../../store/actionTypes';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { setCurrentUser } from '../../store/actions/signUp';
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,25 +77,13 @@ const SignUp = (props) => {
     });
 
 
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'user',
-        reducer,
-        userState
-    );
-
     const [newUser, setNewUser] = useState({ password: "", userName: "", email: "", phone: "", birthYear: "", city: "", confidentiality: false })
 
     const createUser = () => {
         let addNewUser = new User(newUser);
         console.log(addNewUser)
-        //addUser מוסיף למסד נתונים
-        //dispatch מעדכן את הסטייט
         addUser(addNewUser).then(succ => {
-            dispatch({
-                type: actionTypes.SET_CURRENT_USER,
-                payload: succ.data
-            })
+            props.setCurrentUser(succ.data);
         });
     };
     const handleChange = e => {
@@ -223,4 +213,13 @@ const SignUp = (props) => {
 
 }
 
-export default SignUp;
+
+const mapStateToProps = state => {
+    return {
+       
+    }
+  }
+  export default connect(mapStateToProps, { setCurrentUser })(SignUp);
+  
+  
+  

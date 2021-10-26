@@ -1,5 +1,5 @@
 import p from '../../img/profile.png';
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { signIn } from '../../store/actions/signIn';
 import { connect } from 'react-redux';
 import "./User.scss"
@@ -15,7 +15,7 @@ import LoginGoogle from './LoginGoogle';
 import { useStorageReducer } from 'react-storage-hooks';
 import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
 import * as actionTypes from '../../store/actionTypes';
-
+import { setCurrentUser } from '../../store/actions/signUp';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -59,12 +59,6 @@ const SignIn = (props) => {
     showPassword: false,
   });
 
-  const [state, dispatch, writeError] = useStorageReducer(
-    localStorage,
-    'user',
-    reducer,
-    userState
-  );
 
   const handleChange = (prop) => (event) => { setValues({ ...values, [prop]: event.target.value }); };
 
@@ -123,21 +117,10 @@ const SignIn = (props) => {
           />
         </div>
         <Button type="button" variant="contained" className={"login_btn_sign_in"}
-          onClick={() => {
-            signIn(password, email).then(
-              succ => {
-                dispatch({
-                  type: actionTypes.SET_CURRENT_USER,
-                  payload: succ.data  
-                })
-              })
-
-          }}>Login</Button>
-
-
+          onClick={() => { props.signIn(password, email) }}>Login</Button>
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
-        <br/>
-        <LoginGoogle/>
+        <br />
+        <LoginGoogle />
 
       </form>
     </center >
@@ -147,4 +130,4 @@ const mapStateToProps = (state) => {
   return {
   };
 }
-export default connect(mapStateToProps, { /*signIn*/ })(SignIn);
+export default connect(mapStateToProps, { signIn, setCurrentUser })(SignIn);

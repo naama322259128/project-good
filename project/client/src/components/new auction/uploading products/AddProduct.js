@@ -1,33 +1,23 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { addProduct, showAddProduct, setProductsList/*, addProductToDb*/ } from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
-import { useStorageReducer } from 'react-storage-hooks';
-import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../../store/reducers/newAuctionState.js'
-import * as actionTypes from '../../../store/actionTypes'
+
 const AddProduct = (props) => {
 
-    
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
-        reducer,//רדיוסר
-        newAuctionState //מה הסטייט שיהיה בלוקל סטור' וזה גם הסטייט הכללי
-    );
-
-    
     const onChangeHandler = (event) => { setSelectedFile(event.target.files[0]); }
     const onClickHandler = () => {
-        const data = new FormData()
+        const data = new FormData();
+        debugger;
         data.append('file', selectedFile);
         newProduct.img = data;
     }
-  
-    
+
+
     const [selectedFile, setSelectedFile] = useState(null);
 
     let newProduct = { img: null, prodName: "", prodDescription: "", price: 0, includedInPackages: true };
 
-    return (state.showSetProduct ? (
+    return (props.showSetProduct ? (
         <div className="field">
             <form>
                 <input placeholder="product name" type="text" onChange={(e) => newProduct.prodName = e.target.value} required={true} />
@@ -45,7 +35,7 @@ const AddProduct = (props) => {
 
 
 
-                <input className="positive ui button" type="button" value="Add" onClick={() => { dispatch({type:actionTypes.ADD_PRODUCT ,payload: newProduct}) }} />
+                <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProduct(newProduct) }} />
             </form>
         </div>
     ) : null)

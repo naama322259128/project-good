@@ -11,7 +11,14 @@ export const updateCurrentUser = (user) => {
 
 //עדכון פרטי משתמש
 export const updateUserInDB = (user) => {
-    return axios.put(`http://localhost:5000/users/${user._id}`, user);
+    return (dispatch) => {
+        return axios.put(`http://localhost:5000/users/${user._id}`, user).then(succ => {
+            if (succ.status != 400) {
+                dispatch(updateCurrentUser(succ.data))
+            }
+        });;
+    }
+
 }
 
 //של משתמש ומחזירה את ההזמנות של אותו משתמש _id מקבלת  
@@ -76,4 +83,7 @@ export const getOrderByUserAndAuction = (user_id, auction_id) => {
             }
         })
     }
+}
+export const deleteProductFromCart = (_id) => {
+    return { type: actionTypes.DELETE_PRODUCT_FROM_CART, payload: _id }
 }

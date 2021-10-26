@@ -10,9 +10,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 import { updateUserInDB } from '../../store/actions/user'
-import { useStorageReducer } from 'react-storage-hooks';
-import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
-import * as actionTypes from '../../store/actionTypes';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -74,40 +71,25 @@ const UpdateDetails = (props) => {
         weightRange: '',
         showPassword: false,
     });
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'user',
-        reducer,
-        userState
-      );
-    
+
+
     //עדכון משתמש קיים
-    let u = JSON.parse(localStorage.getItem("user")).currentUser;
-    let password = u.password;
-    let userName = u.userName;
-    let email = u.email;
-    let phone = u.phone;
-    let city = u.city;
-    let birthYear = u.birthYear;
+    let password = props.currentUser.password;
+    let userName = props.currentUser.userName;
+    let email = props.currentUser.email;
+    let phone = props.currentUser.phone;
+    let city = props.currentUser.city;
+    let birthYear = props.currentUser.birthYear;
 
     const updateUser = () => {
-        let user = JSON.parse(localStorage.getItem("user")).currentUser;
+        let user = props.currentUser;
         user.password = password;
         user.email = email;
         user.phone = phone;
         user.city = city;
         user.name = userName;
         user.birthYear = birthYear;
-        updateUserInDB(user).then(succ => {
-            if (succ.status != 400) {
-                dispatch(
-                    {
-                        type: actionTypes.UPDATE_CURRENT_USER,
-                        payload: succ.data
-                    }
-                )
-            }
-        });
+        props.updateUserInDB(user);
     };
 
     return (
@@ -231,7 +213,8 @@ const UpdateDetails = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        currentUser: state.user.currentUser,
     };
 }
-export default connect(mapStateToProps, { })(UpdateDetails);
+export default connect(mapStateToProps, { updateUserInDB })(UpdateDetails);
 

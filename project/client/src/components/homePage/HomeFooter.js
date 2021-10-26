@@ -1,20 +1,14 @@
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import './home.scss';
-import { setLogin, setShowContactForm } from '../../store/actions/home';
+import { setLogin } from '../../store/actions/home';
 import { useEffect } from "react";
 import { updateCurrentUser } from '../../store/actions/user'
 import ContactForm from '../main/ContactForm'
-import { useStorageReducer } from 'react-storage-hooks';
-import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
-import * as actionTypes from '../../store/actionTypes';
+
 const HomeFooter = (props) => {
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'user',
-        reducer,
-        userState
-      );
+
+
     return (
         <footer className="home_footer">
             <div id="logo_in_home_footer" ></div>
@@ -22,7 +16,7 @@ const HomeFooter = (props) => {
             <div id="menu_footer">
                 <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
                 <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
-                <Link onClick={state.currentUser ? localStorage.removeItem("newAuction") : () => { window.scrollTo(0, 0);  dispatch({ type: actionTypes.SET_LOGIN, payload: true})}} to={state.currentUser ? "/new_auction" : '#'}>
+                <Link onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
                     <p className="menu_footer_link">BUILDING</p>
                 </Link>
                 <Link to={"/about"}><p className="menu_footer_link">ABOUT</p></Link>
@@ -40,7 +34,9 @@ const HomeFooter = (props) => {
     );
 }
 
-
-export default HomeFooter;
-
-
+const mapStateToProps = state => {
+    return {
+        currentUser: state.user.currentUser
+    }
+}
+export default connect(mapStateToProps, { setLogin })(HomeFooter);

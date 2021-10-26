@@ -3,19 +3,12 @@ import OneAuction from './OneAuction';
 import { Link } from 'react-router-dom';
 import './home.scss';
 import { getAuctionsList } from "../../utils/auctionUtils";
+import { setLogin } from '../../store/actions/home';
 import React, { useEffect, useState } from "react";
-import { useStorageReducer } from 'react-storage-hooks';
-import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState'
-import * as actionTypes from '../../store/actionTypes';
+
 
 const AuctionsList = (props) => {
-    let [auctionsList, setAuctionsList] = useState([]);
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'user',
-        reducer,
-        userState
-    );
+    let [auctionsList, setAuctionsList] = useState([]);  
     //הכנסת רשימה של כל המכירות הקיימות במסד נתונים
     useEffect(() => {
         getAuctionsList().then(succ => { setAuctionsList(succ.data) })
@@ -26,14 +19,8 @@ const AuctionsList = (props) => {
             return (
                 <Link
                     key={parseInt(item._id)}
-                    onClick={state.currentUser ? null : () => {
-                        window.scrollTo(0, 0);
-                        dispatch({
-                            type: actionTypes.SET_LOGIN,
-                            payload: true
-                        })
-                    }}
-                    to={state.currentUser ? `/auction` : '#'}>
+                    onClick={props.currentUser ? null : () => {props.setLogin(true); window.scrollTo(0, 0); }}
+                    to={props.currentUser ? `/auction` : '#'}>
                     <OneAuction key={parseInt(item._id)} item={item} />
                 </Link>
             )
@@ -42,6 +29,12 @@ const AuctionsList = (props) => {
     );
 }
 
-export default AuctionsList;
+
+const mapStateToProps = state => {
+    return {
+        currentUser: state.user.currentUser
+    }
+}
+export default connect(mapStateToProps, { setLogin })(AuctionsList);
 
 
