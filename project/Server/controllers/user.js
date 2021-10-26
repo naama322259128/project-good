@@ -54,10 +54,7 @@ const updateUser = async (req, res) => {
     user.password = userBody.password || user.password;
     user.city = userBody.city || user.city;
     user.birthYear = userBody.birthYear || user.birthYear;
-<<<<<<< HEAD
-=======
     console.log(user);
->>>>>>> 58c819bfc053797af0066c7fa3d278ea6ddc79ce
     await user.save();
     return res.send(user);
 }
