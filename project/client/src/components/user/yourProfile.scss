@@ -1,9 +1,11 @@
 #profileIcon{
     font-size: 3rem !important;
     color:#5055aa !important;
+    width: 3rem;
+    height: auto;
     position: absolute !important;
     right: 5vw !important;
-    top: 3vh !important;
+    top: 2vh !important;
     display: inline-block !important;
     cursor: pointer;
    }  
@@ -29,6 +31,9 @@
     width: 100%;  
     border: 2px solid black;
   }
+
+  
+
 /************************************************** userTable *****************************************************/
   .table_options_icon{
     fill: currentColor;

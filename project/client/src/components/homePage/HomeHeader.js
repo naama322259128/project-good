@@ -41,13 +41,15 @@ export default function HomeHeader(props) {
     <header id="home_header" >
       <Link to={"/home"} id="logo_home_header" />
 
-      {state.currentUser ? <ProfileButton/> : <Button type="button" className="btn" id="btnLogin"
+      {state.currentUser ? <ProfileButton/>
+      : <Button type="button" className="btn" id="btnLogin"
+
         onClick={() => {
           dispatch({ type: actionTypes.SET_LOGIN, payload: true  /*props.setLogin(true) */ })
-        }}>Login</Button>}
+        }}>Login</Button>
+        }
 
-      {/* {state.loginIsOpen && console.log("jjj") } */}
-      {state.loginIsOpen ? <Login /> : null}
+      {state.loginIsOpen ? <Login/> : null}
 
       <div id="home_text">
         <h3>Build your </h3>

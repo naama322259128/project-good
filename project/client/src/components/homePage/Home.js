@@ -13,19 +13,6 @@ const Home = (props) => {
     <br />
     <br />
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
     <AuctionsList />
     <br />
     <br />

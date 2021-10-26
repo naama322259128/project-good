@@ -35,6 +35,10 @@ function App() {
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
         <Route path={`/`}><Home />    </Route>
+<<<<<<< HEAD
+=======
+{/* 22 */}
+>>>>>>> 8aacb8fac9b2039fb736112c7e93f77c53960e36
       </Switch>
     </Router>
 
