@@ -88,12 +88,14 @@ const SignUp = (props) => {
 
 
     const createUser = () => {
+        alert("");
+        debugger
         let newUser = new User(password, userName, email, birthYear, city, phone, confidentiality);
         //addUser מוסיף למסד נתונים
         //dispatch מעדכן את הסטייט
         addUser(newUser).then(succ => {
             dispatch({
-                type: actionTypes.UPDATE_CURRENT_USER,
+                type: actionTypes.SET_CURRENT_USER,
                 payload: succ.data
             })
         });
