@@ -14,7 +14,7 @@ import * as actionTypes from '../../store/actionTypes';
 import { setCurrentUser } from '../../store/actions/signUp'
 
 
-export default function HomeHeader (props) {
+export default function HomeHeader(props) {
   const [state, dispatch, writeError] = useStorageReducer(
     localStorage,
     'user',
@@ -41,15 +41,24 @@ export default function HomeHeader (props) {
     <header id="home_header" >
       <Link to={"/home"} id="logo_home_header" />
 
+<<<<<<< HEAD
       {state.currentUser ? <ProfileButton/>
       : <Button type="button" className="btn" id="btnLogin"
 
+=======
+      {state.currentUser ? <ProfileButton/> : <Button type="button" className="btn" id="btnLogin"
+>>>>>>> db0d8a4f6b9abc6346c441ea5d1456046b168b8e
         onClick={() => {
           dispatch({ type: actionTypes.SET_LOGIN, payload: true  /*props.setLogin(true) */ })
         }}>Login</Button>
         }
 
+<<<<<<< HEAD
       {state.loginIsOpen ? <Login/> : null}
+=======
+      {/* {state.loginIsOpen && console.log("jjj") } */}
+      {state.loginIsOpen ? <Login /> : null}
+>>>>>>> db0d8a4f6b9abc6346c441ea5d1456046b168b8e
 
       <div id="home_text">
         <h3>Build your </h3>

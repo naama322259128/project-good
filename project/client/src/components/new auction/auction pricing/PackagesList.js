@@ -7,11 +7,6 @@ import { newAuctionReducer as reducer, initialState as newAuctionState } from '.
 import * as actionTypes from '../../../store/actionTypes'
 const PackagesList = (props) => {
 
-    //let deletePackage = (p) => {
-    // let x = JSON.parse(localStorage.getItem("packagesList")).remove(p);
-    // localStorage.setItem("packagesList", JSON.stringify(x))
-    //props.setPackagesList(x);
-    //}
     const [state, dispatch, writeError] = useStorageReducer(
         //צריך לבדוק שהכרנט יוסר תואם למידע בלוקל סטורג
         localStorage,

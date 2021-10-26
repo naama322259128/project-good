@@ -1,17 +1,14 @@
 import './Auction.scss';
-import { Button, Header, Icon, Modal } from 'semantic-ui-react';
+import {  Header,  Modal } from 'semantic-ui-react';
 import p from '../../img/car.jpg';
 import IconButton from '@material-ui/core/IconButton';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { connect } from "react-redux";
-import React, { useEffect } from 'react';
-import { updateCurrentAuction } from '../../store/actions/currentAuction'
+import React from 'react';
 import { useStorageReducer } from 'react-storage-hooks';
 import { currentAuctionReducer as reducer, initialState as currentAuctionState } from '../../store/reducers/currentAuctionState'
 import * as actionTypes from '../../store/actionTypes'
@@ -91,4 +88,4 @@ const Product = (props) => {
 }
 
 
-export default connect(null, { updateCurrentAuction })(Product);
+export default Product;

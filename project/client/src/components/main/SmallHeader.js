@@ -26,17 +26,11 @@ const SmallHeader = (props) => {
                 <ProfileButton /> :
                 <Button type="button" className="btn" id="login_btn_small_header"
                     onClick={() => {
-                        dispatch({ type: actionTypes.SET_LOGIN, payload: true  /*props.setLogin(true) */ })
+                        dispatch({ type: actionTypes.SET_LOGIN, payload: true })
                     }}>Login</Button>}
         </header>
 
     </>);
 }
-const mapStateToProps = (state) => {
-    return {
-        // currentUser: state.user.currentUser,
-        // loginIsOpen: state.user.loginIsOpen,
 
-    }
-}
-export default connect(mapStateToProps, { /*setLogin, updateCurrentUser */ })(SmallHeader);
+export default  SmallHeader;

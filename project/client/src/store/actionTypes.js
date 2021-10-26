@@ -15,6 +15,7 @@ export const SET_SHOW_CONTACT_FORM = "SET_SHOW_CONTACT_FORM"
 export const ADD_ORDER = "ADD_ORDER"//הוספת הזמנה לסטייט
 
 /******************************************   NEW AUCTION   ****************************************************/
+export const SET_NEW_AUCTION="SET_NEW_AUCTION"
 export const SHOW_ADD_PACKAGE = "SHOW_ADD_PACKAGE";//AddPackage להראות את הקומפוננטה 
 export const ADD_PACKAGE = "ADD_PACKAGE";//
 export const DELETE_PACKAGE = "DELETE_PACKAGE";//

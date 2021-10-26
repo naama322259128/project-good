@@ -1,4 +1,3 @@
-import AboutAuction from '../../components/auction/about/AboutAuction';
 import * as actionTypes from '../actionTypes';
 
 export const initialState = {

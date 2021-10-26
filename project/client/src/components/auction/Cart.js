@@ -1,11 +1,7 @@
-import { connect } from "react-redux";
 import ProductInCart from './ProductInCart'
-import { setCnt } from '../../store/actions/user'
 import { Link } from 'react-router-dom'
 import './Auction.scss';
-import { useState } from "react";
 import Button from '@material-ui/core/Button';
-import { addOrderToDB } from '../../store/actions/user';
 import Order from '../../models/order';
 import { useStorageReducer } from 'react-storage-hooks';
 import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
@@ -59,10 +55,4 @@ const Cart = (props) => {
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);
 }
-const mapStateToProps = (state) => {
-    return {
-        // arr: state.user.shoppingCart,
-    }
-}
-
-export default connect(mapStateToProps, { /*setCnt, addOrderToDB*/ })(Cart);
+export default Cart

@@ -1,5 +1,5 @@
 //עדכון פרטי מכירה וארגון
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import './auctionManager.scss'
 const EditAuctionDetails = (props) => {

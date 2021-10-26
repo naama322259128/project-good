@@ -1,6 +1,5 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
-import { setCurrentUser } from './signUp'
 
 
 export const updateCurrentUser = (user) => {

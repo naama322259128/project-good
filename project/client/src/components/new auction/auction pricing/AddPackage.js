@@ -22,16 +22,7 @@ const AddPackage = (props) => {
         if (newPackage.discount < 2) document.getElementById("discountInput").style.borderColor = "red";
         else document.getElementById("discountInput").style.borderColor = "";
     }
-    /*let addPackageToLS = () => {
-        let arr = localStorage.getItem('packagesList');
-        arr.push(newPackage)
-
-        localStorage.setItem("packagesList", JSON.stringify(arr))//האם צריך שורה זו
-        //props.setPackagesList(arr);
-
-        localStorage.setItem('showSetPackageBtn', true);
-        //props.showAddPackage(true);
-    }*/
+    
     return (
         <form >
             <div className="ui equal width form">

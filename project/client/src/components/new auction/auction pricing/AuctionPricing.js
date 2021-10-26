@@ -24,14 +24,9 @@ const AuctionPricing = (props) => {
             at a discounted price according to the percentage of the discount you will determine.</label>
         {state.showSetPackage == false && <button className="positive ui button" onClick={() => dispatch({ type: actionTypes.SHOW_ADD_PACKAGE })}>Add new Package</button>}
         {<PackagesList />}
-        {/* {props.isShow && <AddPackage />} */}
         {state.showSetPackage && <AddPackage />}
     </>);
 }
-const mapStateToProps = (state) => {
-    return {
-        // isShow: state.auction.showSetPackage
-    };
-}
-export default connect(mapStateToProps, { /*showAddPackage */ })(AuctionPricing);
+
+export default AuctionPricing;
 

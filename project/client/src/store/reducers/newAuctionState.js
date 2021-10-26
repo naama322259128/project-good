@@ -1,8 +1,12 @@
 import * as actionTypes from '../actionTypes';
 
 export const initialState = {
-    _id:"",
-    packagesList: [],//רשימת חבילות
+    _id: "",
+    status: "",
+    auctionManager: "",
+    lotteryApproval: false,
+    publicationApproval: false,//אישור פרסום באתר
+    packagesList: [],//רשימת חבילות purchasePackage
     productsList: [],//רשימ מוצרים
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
     showSetProduct: true,//האם להציג את קומפוננטת  AddProduct
@@ -10,6 +14,7 @@ export const initialState = {
     registrationEndDate: null,//תאריך סיום ההרשמה
     registrationStartDate: null,//תאריך תחילת ההרשמה
     organizationName: "",
+    auctionName: "",
     organizationTxt: "",
     organizationPhotos: [],
     terms: "",
@@ -17,6 +22,23 @@ export const initialState = {
 }
 export const newAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.SET_NEW_AUCTION:
+            return {
+                ...state,
+                status: action.payload.status,
+                lotteryApproval: action.payload.lotteryApproval,
+                publicationApproval: action.payload.publicationApproval,//אישור פרסום באתר
+                packagesList: action.payload.purchasePackage,//רשימת חבילות purchasePackage
+                productsList: action.payload.productList,//רשימ מוצרים
+                dateOfLottery: action.payload.lotteriesDate,//תאריך ביצוע ההגרלות
+                registrationEndDate: action.payload.registrationEndDate,//תאריך סיום ההרשמה
+                registrationStartDate: action.payload.registrationStartDate,//תאריך תחילת ההרשמה
+                organizationName: action.payload.organizationName,
+                auctionName: action.payload.name,
+                organizationTxt: action.payload.organizationText,
+                organizationPhotos: action.payload.organizationPhotos,
+                terms: ""
+            }
         case actionTypes.SHOW_ADD_PACKAGE: {
             //להציג את הטופס של הוספת חבילה חדשה
             return {
