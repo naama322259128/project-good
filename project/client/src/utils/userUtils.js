@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 export const addUser = (user) => {
+    console.log("user")
+    console.log(user)
     return axios.post("http://localhost:5000/users", user)
 }
 

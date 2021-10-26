@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { addUser } from '../../utils/userUtils';//הוספת משתמש למאגר
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -57,7 +57,13 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = (props) => {
 
     const classes = useStyles();
-    const handleChange = (prop) => (event) => { setValues({ ...values, [prop]: event.target.value }); };
+    const handleChangePassword = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+        setNewUser(prevState => ({
+            ...prevState,
+            ['password']: event.target.value
+        }))
+    };
     const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }); };
     const handleMouseDownPassword = (event) => { event.preventDefault(); };
     const [values, setValues] = React.useState({
@@ -76,43 +82,40 @@ const SignUp = (props) => {
         userState
     );
 
-    //רישום משתמש חדש
-    let password = "";
-    let userName = "";
-    let email = "";
-    let phone = "";
-    let city = "";
-    let birthYear = "";
-    let confidentiality = false;
-
-
+    const [newUser, setNewUser] = useState({ password: "", userName: "", email: "", phone: "", birthYear: "", city: "", confidentiality: false })
 
     const createUser = () => {
-        alert("");
-        debugger
-        let newUser = new User(password, userName, email, birthYear, city, phone, confidentiality);
+        let addNewUser = new User(newUser);
+        console.log(addNewUser)
         //addUser מוסיף למסד נתונים
         //dispatch מעדכן את הסטייט
-        addUser(newUser).then(succ => {
+        addUser(addNewUser).then(succ => {
             dispatch({
                 type: actionTypes.SET_CURRENT_USER,
                 payload: succ.data
             })
         });
     };
-
+    const handleChange = e => {
+        const { name, value } = e.target;
+        setNewUser(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
     return (
         <center>
             <form className={classes.root} noValidate autoComplete="off" >
                 <div className={"inputs_btns"}>
 
                     <FilledInput
+                        name="name"
                         type={'text'}
                         placeholder="Name"
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
-                        onChange={(e) => { userName = e.target.value }}
+                        onChange={handleChange}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="user icon"></i>
@@ -120,12 +123,13 @@ const SignUp = (props) => {
                         }
                     />
                     <FilledInput
+                        name="email"
                         type={'email'}
                         placeholder="Email address"
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
                         required
-                        onChange={(e) => { email = e.target.value }}
+                        onChange={handleChange}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="envelope icon"></i>
@@ -133,12 +137,13 @@ const SignUp = (props) => {
                         }
                     />
                     <FilledInput
+                        name="city"
                         type={'text'}
                         placeholder="city"
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
-                        onChange={(e) => { city = e.target.value }}
+                        onChange={handleChange}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="map marker alternate icon"></i>
@@ -146,12 +151,13 @@ const SignUp = (props) => {
                         }
                     />
                     <FilledInput
+                        name="birthYear"
                         type={'text'}
                         placeholder="Year Of Birth"
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
-                        onChange={(e) => { birthYear = e.target.value }}
+                        onChange={handleChange}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="calendar alternate outline icon"></i>
@@ -160,11 +166,12 @@ const SignUp = (props) => {
                     />
                     <FilledInput
                         type={'text'}
+                        name="phone"
                         placeholder="Phone Number"
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
-                        onChange={(e) => { phone = e.target.value }}
+                        onChange={handleChange}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="mobile alternate icon" />
@@ -172,13 +179,13 @@ const SignUp = (props) => {
                         }
                     />
                     <FilledInput
+                        name="password"
                         type={values.showPassword ? 'text' : 'password'}
-                        onChange={handleChange('password')}
                         placeholder="Password"
                         required
                         className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                         variant="filled"
-                        onChange={(e) => { password = e.target.value }}
+                        onChange={handleChangePassword('password')}
                         startAdornment={
                             <InputAdornment position="start">
                                 <i className="lock icon" />
@@ -196,7 +203,15 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                     />
-                    <FormControlLabel control={<Checkbox onChange={(e) => { confidentiality = e.target.checked }} />} label="Confidentiality" />
+                    <FormControlLabel
+                        control=
+                        {<Checkbox onChange={(e) => setNewUser(prevState => ({
+                            ...prevState,
+                            ['confidentiality']: e.target.checked
+                        }))} />}
+                        label="Confidentiality" />
+
+
                     <Button type="button" variant="contained" className={"login_btn"} onClick={createUser}>Login</Button>
                 </div>
 
