@@ -1,7 +1,5 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
-import { updateCurrentUser } from './user'
-
 
 export const showAddPackage = () => {
     return {
@@ -105,6 +103,13 @@ export const resetNewAuctionState = () => {
     return {
         type: actionTypes.RESET_NEW_AUCTION_STATE
     }
+}
+
+export const setNewAuction=(newAuction)=>{
+  return{
+      type:actionTypes.SET_NEW_AUCTION,
+      payload:newAuction
+  }  
 }
 
 //להפוך סטטוס של משתמש רגיל למנהל

@@ -29,7 +29,7 @@ const auctionSchema = new mongoose.Schema({
     organizationText: String,
     organizationPhotos: [String],
     terms:String,//קובץ
-    publicationApproval: { type: Boolean, default: false }//אישור פירסום רק בתנאי שאישר הצגת המכירה
+    publicationApproval: { type: Boolean, default: false }//אישור פרסום באתר
 
 });
 const Auction = mongoose.model("Auction", auctionSchema);

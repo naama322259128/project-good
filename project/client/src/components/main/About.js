@@ -60,7 +60,7 @@ const About = (props) => {
         <p><b>Why? </b>The money with which they purchased the tickets will allow you to continue your operations and reach new destinations.</p>
         <p><b>How? </b>Choose a name for your Chinese auction, set prizes, prices and dates, tell about your organization / purpose. Confirm the auction and the auction in the air!</p>
         <b>Want to get started?</b>
-        <Link to={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? localStorage.removeItem("newAuction") : () => dispatch({ type: actionTypes.SET_LOGIN, payload: true})}>Click here!</Link>
+        <Link to={state.currentUser ? "/new_auction" : '#'} onClick={state.currentUser ? localStorage.removeItem("newAuction") : () => dispatch({ type: actionTypes.SET_LOGIN, payload: true})}>Click here!</Link>
       </div>
 
       <h2>Building a Chinese auction:</h2>
@@ -122,10 +122,5 @@ const About = (props) => {
   </>);
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loginIsOpen: state.user.loginIsOpen,
-    currentUser: state.user.currentUser
-  };
-}
-export default connect(mapStateToProps, { setLogin })(About);
+
+export default About;

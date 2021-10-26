@@ -1,11 +1,7 @@
-import { connect } from "react-redux";
 import ProductInCart from './ProductInCart'
-import { setCnt } from '../../store/actions/user'
 import { Link } from 'react-router-dom'
 import './Auction.scss';
-import { useState } from "react";
 import Button from '@material-ui/core/Button';
-import { addOrderToDB } from '../../store/actions/user';
 import Order from '../../models/order';
 import { useStorageReducer } from 'react-storage-hooks';
 import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'

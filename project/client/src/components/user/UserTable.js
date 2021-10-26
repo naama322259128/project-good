@@ -7,12 +7,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import './yourProfile.scss'
 import { getUserOrdersList } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
-import { getAuctionById } from '../../utils/auctionUtils'//מחזירה את שם המכירה
-import { Button } from '@material-ui/core';
 import OrderOptions from './OrderOptions';
 import moment from 'moment'
 

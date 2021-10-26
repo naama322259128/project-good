@@ -20,13 +20,7 @@ export const updateCurrentAuction = (auction) => {
 }
 
 export const getProducts = (auction_id) => {
-  return (dispatch) => {
-    axios.get(`http://localhost:5000/auctions/${auction_id}`).then(succ => {
-      console.log(succ.data);
-      if (succ.status != 400)
-        dispatch(console.log(succ.data));//לעדכן את רשימת המוצרים בסטייט
-    })
-  }
+  return axios.get(`http://localhost:5000/auctions/${auction_id}`);
 }
 
 export const updateCurrentAuctionState = () => {

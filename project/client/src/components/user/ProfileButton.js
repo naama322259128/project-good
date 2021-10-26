@@ -6,8 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-// import { signOut } from "../../store/actions/user";
-// import{setYourProfile} from '../../store/actions/signIn';
+
 import { useStorageReducer } from 'react-storage-hooks';
 import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
 import * as actionTypes from '../../store/actionTypes';
@@ -19,8 +18,8 @@ const ProfileButton = (props) => {
         'user',
         reducer,
         userState
-      );
-    
+    );
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -73,13 +72,13 @@ const ProfileButton = (props) => {
                 <MenuItem key={'Update your details'} onClick={handleClose}>Update your details</MenuItem>
             </Link>
 
-            <Link to={'/home'}>
-                <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>
-            </Link>
-             <Link to={'/continueNewAuction'}>
+            <Link to={'/continueNewAuction'}>
                 <MenuItem key={'Continue chinese auction'} onClick={handleClose}>Continue chinese auction</MenuItem>
             </Link>
 
+            <Link to={'/home'}>
+                <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>
+            </Link>
 
         </Menu>
 

@@ -1,6 +1,6 @@
 import './yourProfile.scss'
 import { connect } from 'react-redux';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';

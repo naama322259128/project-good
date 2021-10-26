@@ -1,12 +1,10 @@
-import { connect } from 'react-redux';
-import React, { useEffect } from 'react';
-import { addUser } from '../../utils/userUtils';//הוספת משתמש למאגר, והגדרתו בסטורג ובסטייט
+import React from 'react';
+import { addUser } from '../../utils/userUtils';//הוספת משתמש למאגר
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-// import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
@@ -17,6 +15,7 @@ import { userReducer as reducer, initialState as userState } from '../../store/r
 import * as actionTypes from '../../store/actionTypes';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -89,15 +88,15 @@ const SignUp = (props) => {
 
 
     const createUser = () => {
-        //מה עם סטטוס וחיסיון
         let newUser = new User(password, userName, email, birthYear, city, phone, confidentiality);
-        props.addUser(newUser);
-
-        {/* 
-        לאחר הלחיצה המשתמש החדש נשמר בסטייט שמתאפס בטעינה מחדש ולא בסטייט שנשמר לפי הסטורג
-אולי נעשה אחרי שהפונקציה הזו סיימה, דיספאצ' לסטייט שנשמר 
-*/}
-
+        //addUser מוסיף למסד נתונים
+        //dispatch מעדכן את הסטייט
+        addUser(newUser).then(succ => {
+            dispatch({
+                type: actionTypes.UPDATE_CURRENT_USER,
+                payload: succ.data
+            })
+        });
     };
 
     return (
@@ -195,7 +194,7 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                     />
-                    <FormControlLabel control={<Checkbox onChange={(e) => { confidentiality = e.target.checked }}/>} label="Confidentiality" />
+                    <FormControlLabel control={<Checkbox onChange={(e) => { confidentiality = e.target.checked }} />} label="Confidentiality" />
                     <Button type="button" variant="contained" className={"login_btn"} onClick={createUser}>Login</Button>
                 </div>
 
@@ -207,9 +206,4 @@ const SignUp = (props) => {
 
 }
 
-const mapStateToProps = (state) => {
-    return {
-        currentUser: state.user.currentUser
-    };
-}
-export default connect(mapStateToProps, { addUser })(SignUp);
+export default SignUp;

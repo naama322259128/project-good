@@ -1,5 +1,5 @@
 import p from '../../img/profile.png';
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { signIn } from '../../store/actions/signIn';
 import { connect } from 'react-redux';
 import "./User.scss"

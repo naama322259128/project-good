@@ -1,6 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
-import { updateCurrentUser } from './user'
+
 //מביא את כל המכירות של המנהל הזה
 export const getAuctionsArray = (user) => {
     //let manager_id='611c2f2e18f13934fc07bc27';
