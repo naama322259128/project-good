@@ -22,22 +22,15 @@ function App() {
 
     <Router>
       <Switch>
-        {/* <AuctionManagerTable/> */}
-        {/* <StateCounter/> */}
-        {/* <UserTable/> */}
-        {/* <ContactForm/> */}
-        {/* <NewAuction /> */}
-        {/* <UpdateDetails/> */}
-        <UploadingProducts />
-        {/* <AddProduct/> */}
-        {/* <Route path={`/auction`} ><Auction /></Route>
+  
+        <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/continueNewAuction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
-        <Route path={`/`}><Home />    </Route> */}
+        <Route path={`/`}><Home />    </Route>
 
       </Switch>
     </Router>
