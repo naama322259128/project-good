@@ -96,4 +96,4 @@ const ProductInCart = (props) => {
 }
 
 
-export default connect(null, {  })(ProductInCart);
+export default ProductInCart;

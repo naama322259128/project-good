@@ -91,4 +91,4 @@ const Product = (props) => {
 }
 
 
-export default connect(null, { updateCurrentAuction })(Product);
+export default Product;

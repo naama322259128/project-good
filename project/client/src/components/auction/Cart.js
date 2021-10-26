@@ -59,10 +59,4 @@ const Cart = (props) => {
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);
 }
-const mapStateToProps = (state) => {
-    return {
-        // arr: state.user.shoppingCart,
-    }
-}
-
-export default connect(mapStateToProps, { /*setCnt, addOrderToDB*/ })(Cart);
+export default Cart

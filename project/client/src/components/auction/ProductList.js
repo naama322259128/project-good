@@ -15,17 +15,13 @@ const ProductList = (props) => {
             return (<Product key={parseInt(item._id)} item={item} />)
         })} */}
 
-        {props.getProducts(JSON.parse(localStorage.getItem("currentAuction")).currnetAuction).map((item) => {
+        {getProducts(JSON.parse(localStorage.getItem("currentAuction")).currnetAuction).map((item) => {
             return (<Product key={parseInt(item._id)} item={item} />)
         })}
 
     </div>
     );
 }
-const mapStateToProps = (state) => {
-    return {
-        //arr: state.currentAuction.productsList,
-    }
-}
 
-export default connect(mapStateToProps, { /*updateCurrentAuction,*/ getProducts })(ProductList);
+
+export default ProductList;
