@@ -241,7 +241,6 @@ const sendWinnersListToUsers = async (req, res) => {
 
 //שולח למנהל האתר מייל של צור קשר
 const sendContactToSiteManager = async (req, res) => {
-    debugger;
     let details = req.body;
     console.log("--------------------------");
 

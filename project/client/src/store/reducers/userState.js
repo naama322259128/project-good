@@ -14,7 +14,6 @@ export const userReducer = (state = initialState, action) => {
         
         case actionTypes.SET_CURRENT_USER:
             {
-                debugger;
                     return {
                 ...state,
                 currentUser: action.payload,

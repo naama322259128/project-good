@@ -258,7 +258,7 @@ const getAuctionWithWinnersForManager = async (req, res) => {
             confidentiality
             email
             phone
-            address`
+            city`
         }]);
     if (!auction) return res.status(404).send("There is no auction with such an ID number");
     return res.send(auction);

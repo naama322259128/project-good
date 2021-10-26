@@ -26,7 +26,6 @@ const AuctionsList = (props) => {
     }, []);
 
     return (<>
-    {state.loginIsOpen ? <Login /> : null}
         {auctionsList && auctionsList.map((item) => {
             return (
                 <Link

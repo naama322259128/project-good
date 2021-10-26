@@ -19,9 +19,11 @@ const userSchema = new mongoose.Schema({
         //     message: props => `${props.value} is not a valid phone number!`
         // }
     },
-    // birthYear: { type: Number, required: true },
     birthYear: { type: Number },
+<<<<<<< HEAD
     // address: { type: String, required: true },
+=======
+>>>>>>> 58c819bfc053797af0066c7fa3d278ea6ddc79ce
     city: { type: String },
     status: { type: String, enum: ['USER', 'AUCTION_MANAGER', 'SITE_MANAGER'], required: true, default: 'USER' },
     confidentiality: { type: Boolean, default: false }//חסוי או לא חסוי

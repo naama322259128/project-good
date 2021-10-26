@@ -54,6 +54,10 @@ const updateUser = async (req, res) => {
     user.password = userBody.password || user.password;
     user.city = userBody.city || user.city;
     user.birthYear = userBody.birthYear || user.birthYear;
+<<<<<<< HEAD
+=======
+    console.log(user);
+>>>>>>> 58c819bfc053797af0066c7fa3d278ea6ddc79ce
     await user.save();
     return res.send(user);
 }
@@ -93,6 +97,7 @@ const isUserExist = async (req, res) => {
 const isLoginGoogle = async (req, res) => {
     let { name, email } = req.params;
     let user = await User.findOne({ "email": email });
+    console.log(user);
     if (!user) {
         user = { "userName": name, "email": email };
         let newUser = new User(user);

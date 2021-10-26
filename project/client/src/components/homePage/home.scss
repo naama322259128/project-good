@@ -1,11 +1,10 @@
 
 #logo_home_header{
-  background-image: url('../../img/logo_white.png');
-  // background-image: url('../../img/logo_orange&7376c0&white.png');
+  background-image: url('../../img/logo.webp');
   background-size:100%;
   background-repeat: no-repeat;
-  height: 9vh;
-  width: 18vw;
+  height: 8vh;
+  width: 13vw;
   display: inline-block;
   cursor: pointer;
   margin-top: 3vh;
@@ -42,7 +41,6 @@
 #home_text>p{
   line-height:0.8 !important;
   color: white;
-  // color: black;
   font-size: 3vh; 
    font-family: 'Centaur';
    text-align: right !important;
@@ -52,7 +50,6 @@
 #home_text>h5{
   line-height:0.8 !important;
   color: white;
-  // color: black;
   font-size: 9vh; 
    font-family: 'Centaur';
    text-align: right !important;
@@ -61,7 +58,6 @@
 #home_text>h3{
   line-height:0.8 !important;
   color: white;
-  // color: black;
   font-size: 14vh; 
    font-family: 'Centaur';
    text-align: right !important;
@@ -110,10 +106,9 @@
     top: 52%
   }
   .home_footer{
-     background-image: url('../../img/footer_dbdcf7_small.png');
+     background-image: url('../../img/footer.webp');
     // background-color: #3e2626;
     background-size: 100%;
-    background-position: bottom;
     height:40vh;
     background-repeat: no-repeat;
     width: 100vw;
@@ -121,7 +116,7 @@
   }
   
  #logo_in_home_footer{
-    background-image: url('../../img/logo_orange&black&blue.png');
+    background-image: url('../../img/blacklogo.webp');
     background-size: 100%;
     background-repeat: no-repeat;
     position: absolute;
@@ -140,7 +135,7 @@
     cursor: pointer;
     top: 75%;
     left: 12%;
-    border: black 3px solid;
+    border: black 1px solid;
 }
 #contact_us>p{
     margin: auto;
@@ -152,14 +147,14 @@
   height: 42%;
   position: absolute;
   top: 48%;
-  border-left: 2px solid white; 
+  border-left: 2px solid black; 
   padding-bottom: 1%;
   padding-left: 2%;
 }
 #text_footer{
   right: 16%; 
   font-size: 1.7vh ;
-  color: white ;
+  color: black ;
 }
 #menu_footer{
   display: grid;
@@ -169,7 +164,7 @@
 }
 
 .menu_footer_link{
-  color: white ;
+  color: black ;
   font-size: 1.7vh ;  
   cursor: pointer;
 }

@@ -34,31 +34,27 @@ const Login = (props) => {
 
   return (
     <>
-    <p>{state.loginIsOpen}</p>
-    {  state.loginIsOpen&&(
-    <center>
-  
-      <div className="glass_login" onClick={() => dispatch({ type: actionTypes.SET_LOGIN, payload: false /*props.setLogin(false)*/ })}>
-        <div className="modal-content_login" onClick={click}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="SIGN IN" id="btn_signin" onClick={signInShow} />
-            <Tab label="SIGN UP" id="btn_signup" onClick={signUpShow} />
+      <center>
+        <div className="glass_login" onClick={() => dispatch({ type: actionTypes.SET_LOGIN, payload: false })}>
+          <div className="modal-content_login" onClick={click}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              centered
+            >
+              <Tab label="SIGN IN" id="btn_signin" onClick={signInShow} />
+              <Tab label="SIGN UP" id="btn_signup" onClick={signUpShow} />
 
-          </Tabs>
-          <div id="login_top" >{show}</div>
-          <div id="login_bottom" />
+            </Tabs>
+            <div id="login_top" >{show}</div>
+            <div id="login_bottom" />
 
+          </div>
         </div>
-      </div>
-    </center>
-  )}
-  </>)
+      </center>
+    </>)
 }
 
 const mapStateToProps = (state) => {

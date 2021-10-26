@@ -1,13 +1,14 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import './main.scss'
-import p from '../../img/logo_orange&black&blue.png'
+import p from '../../img/logo.webp'
 import video from '../../img/vvv.mp4'
-import img from '../../img/iii.webp'
+import img from '../../img/logo.webp'
 import { Link } from 'react-router-dom';
 import { setLogin } from '../../store/actions/home'
 import SmallFooter from "./SmallFooter";
 import SmallHeader from "./SmallHeader";
+import ContactForm from "./ContactForm";
 const About = (props) => {
 
   useEffect(() => {
@@ -18,7 +19,6 @@ const About = (props) => {
   }, []);
   const changeHeader = () => {
     let s = document.getElementById("small-header");
-    debugger;
     if (s != null) {
       let height = 5
       if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
@@ -102,6 +102,7 @@ const About = (props) => {
         </div>
       </div>
 
+{/* <ContactForm/> */}
     </center>
 
     <SmallFooter />

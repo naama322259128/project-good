@@ -26,6 +26,10 @@ function App() {
         {/* <ContactForm/> */}
         {/* <NewAuction /> */}
         {/* <UpdateDetails/> */}
+<<<<<<< HEAD
+=======
+{/* <ContactForm/> */}
+>>>>>>> 58c819bfc053797af0066c7fa3d278ea6ddc79ce
 
         <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
@@ -35,7 +39,7 @@ function App() {
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
         <Route path={`/`}><Home />    </Route>
-
+{/* 22 */}
       </Switch>
     </Router>
 

@@ -9,7 +9,11 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
-import { updateUser } from '../../store/actions/user'//מעדכן בסטייט ובסטורג
+import { updateUserInDB } from '../../store/actions/user'
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -70,7 +74,13 @@ const UpdateDetails = (props) => {
         weightRange: '',
         showPassword: false,
     });
-
+    const [state, dispatch, writeError] = useStorageReducer(
+        localStorage,
+        'user',
+        reducer,
+        userState
+      );
+    
     //עדכון משתמש קיים
     let u = JSON.parse(localStorage.getItem("user")).currentUser;
     let password = u.password;
@@ -88,14 +98,22 @@ const UpdateDetails = (props) => {
         user.city = city;
         user.name = userName;
         user.birthYear = birthYear;
-        props.updateUser(user);
+        updateUserInDB(user).then(succ => {
+            if (succ.status != 400) {
+                dispatch(
+                    {
+                        type: actionTypes.UPDATE_CURRENT_USER,
+                        payload: succ.data
+                    }
+                )
+            }
+        });
     };
 
     return (
         <>
             <center>
                 <br />
-
                 <h1 id="h1_profile">Update your details</h1>
                 <form className={classes.root} autoComplete="off" id="update_user_details_form" >
 
@@ -215,5 +233,9 @@ const mapStateToProps = (state) => {
     return {
     };
 }
+<<<<<<< HEAD
 export default connect(mapStateToProps, { updateUser})(UpdateDetails);
+=======
+export default connect(mapStateToProps, { })(UpdateDetails);
+>>>>>>> 58c819bfc053797af0066c7fa3d278ea6ddc79ce
 
