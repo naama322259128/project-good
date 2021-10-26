@@ -19,7 +19,6 @@ const About = (props) => {
   }, []);
   const changeHeader = () => {
     let s = document.getElementById("small-header");
-    debugger;
     if (s != null) {
       let height = 5
       if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {

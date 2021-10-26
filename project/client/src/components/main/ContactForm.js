@@ -12,7 +12,6 @@
 // const ContactForm = (props) => {
 //     const handleOnSubmit = (e) => {
 //         let details = { name: e.target.from_name.value, email: e.target.from_email.value, message: e.target.message.value, subject: e.target.subject.value }
-//         debugger;
 //         sendContact(details);
 //     }
 //     return (

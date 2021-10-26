@@ -21,7 +21,5 @@ export const signIn = (password, email) => {
 }
 
 export const loginGoogle=(name,email)=>{
-    debugger;
     return axios.get(`http://localhost:5000/users/loginGoogle/${name}&${email}`);
-
 }

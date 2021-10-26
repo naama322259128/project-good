@@ -29,7 +29,6 @@ const SmallHeader = (props) => {
                         dispatch({ type: actionTypes.SET_LOGIN, payload: true  /*props.setLogin(true) */ })
                     }}>Login</Button>}
         </header>
-        {/* {state.loginIsOpen ? (<Login />) : null} */}
 
     </>);
 }

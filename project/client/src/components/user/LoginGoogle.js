@@ -18,7 +18,6 @@ const LoginGoogle = () => {
     const name = response.profileObj.name;
     const email = response.profileObj.email;
     loginGoogle(name, email).then(succ=>{
-      debugger;
       dispatch({
         type: actionTypes.SET_CURRENT_USER,
         payload: succ.data  
