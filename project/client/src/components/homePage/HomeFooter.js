@@ -10,7 +10,7 @@ const HomeFooter = (props) => {
     return (
         <footer className="home_footer">
             <div id="logo_in_home_footer" ></div>
-            <Link to={'/about'}><div id="contact_us" onClick={() => window.scrollTo(0, 10000)}><p>CONTACT US</p></div></Link>
+            <Link to={'/about'}><div id="contact_us" onClick={() => window.scrollTo(0, 12000)}><p>CONTACT US</p></div></Link>
             <div id="menu_footer">
                 <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
                 <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
