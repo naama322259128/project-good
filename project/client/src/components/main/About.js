@@ -3,14 +3,22 @@ import React, { useEffect, useState } from 'react';
 import './main.scss'
 import p from '../../img/logo.webp'
 import video from '../../img/vvv.mp4'
-import img from '../../img/logo.webp'
+import img from '../../img/logo_blue_orange.webp'
 import { Link } from 'react-router-dom';
 import { setLogin } from '../../store/actions/home'
 import SmallFooter from "./SmallFooter";
 import SmallHeader from "./SmallHeader";
 import ContactForm from "./ContactForm";
+import { useStorageReducer } from 'react-storage-hooks';
+import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
+import * as actionTypes from '../../store/actionTypes';
 const About = (props) => {
-
+  const [state, dispatch, writeError] = useStorageReducer(
+    localStorage,
+    'user',
+    reducer,
+    userState
+  );
   useEffect(() => {
     window.addEventListener("scroll", changeHeader)
     return () => {
@@ -52,7 +60,7 @@ const About = (props) => {
         <p><b>Why? </b>The money with which they purchased the tickets will allow you to continue your operations and reach new destinations.</p>
         <p><b>How? </b>Choose a name for your Chinese auction, set prizes, prices and dates, tell about your organization / purpose. Confirm the auction and the auction in the air!</p>
         <b>Want to get started?</b>
-        <Link to={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? localStorage.removeItem("newAuction") : () => props.setLogin(true)}>Click here!</Link>
+        <Link to={props.currentUser ? "/new_auction" : '#'} onClick={props.currentUser ? localStorage.removeItem("newAuction") : () => dispatch({ type: actionTypes.SET_LOGIN, payload: true})}>Click here!</Link>
       </div>
 
       <h2>Building a Chinese auction:</h2>
@@ -102,9 +110,14 @@ const About = (props) => {
         </div>
       </div>
 
-{/* <ContactForm/> */}
+<ContactForm/>
     </center>
-
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
     <SmallFooter />
   </>);
 }
