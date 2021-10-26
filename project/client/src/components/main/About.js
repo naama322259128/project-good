@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import './main.scss'
-import p from '../../img/logo_orange&black&blue.png'
+import p from '../../img/logo.webp'
 import video from '../../img/vvv.mp4'
-import img from '../../img/iii.webp'
+import img from '../../img/logo.webp'
 import { Link } from 'react-router-dom';
 import { setLogin } from '../../store/actions/home'
 import SmallFooter from "./SmallFooter";

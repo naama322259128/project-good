@@ -8,34 +8,34 @@ import React, { useEffect } from "react";
 const Home = (props) => {
   return (<>
     <HomeHeader />
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/> 
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <AuctionsList />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <HomeFooter />
   </>
   );
@@ -44,4 +44,4 @@ const mapStateToProps = state => {
   return {
   };
 }
-export default connect(mapStateToProps, { })(Home);
+export default connect(mapStateToProps, {})(Home);

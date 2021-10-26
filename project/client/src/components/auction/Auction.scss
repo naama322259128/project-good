@@ -1,12 +1,8 @@
 
 .glass_product{
-    // background-color: rgba(226, 226, 226, 0.15) !important; 
-    
-  background-color: rgba(33, 33, 33, 0.66) !important;
-
-    backdrop-filter: blur(5px) !important;
+  background-color: rgba(226, 226, 226, 0.15);
+  backdrop-filter: blur(5px);
   }
-  /* The Modal (background) */
   .modal_product {
     // display: none; /* Hidden by default */
     position: fixed !important; /* Stay in place */
@@ -57,7 +53,7 @@
 
   }
  .auction_footer{
-    background-image: url('../../img/footer.png');
+    background-image: url('../../img/smallfooter.webp');
     width: 100vw;
     height: 18vh;
     background-size: 100% ;
