@@ -49,15 +49,11 @@ const updateUser = async (req, res) => {
     if (!user)
         return res.status(404).send("There is no user with such an ID number");
     user.email = userBody.email || user.email;
-    user.fullName = userBody.fullName || user.fullName;
+    user.userName = userBody.userName || user.userName;
     user.phone = userBody.phone || user.phone;
     user.password = userBody.password || user.password;
     user.city = userBody.city || user.city;
     user.birthYear = userBody.birthYear || user.birthYear;
-<<<<<<< HEAD
-=======
-    console.log(user);
->>>>>>> 58c819bfc053797af0066c7fa3d278ea6ddc79ce
     await user.save();
     return res.send(user);
 }
