@@ -1,17 +1,17 @@
 // import React, { useState } from 'react';
-// import { connect } from "react-redux";
-// import { Form, Input, TextArea, Button } from 'semantic-ui-react';
-// import './main.scss';
-// import Swal from 'sweetalert2';
-// import emailjs from 'emailjs-com';
-// import { setShowContactForm } from '../../store/actions/home';
-// import { sendContact } from '../../utils/userUtils'
+import { connect } from "react-redux";
+import { Form, Input, TextArea, Button } from 'semantic-ui-react';
+import './main.scss';
+import Swal from 'sweetalert2';
+import emailjs from 'emailjs-com';
+import { setShowContactForm } from '../../store/actions/home';
+import { sendContact } from '../../utils/userUtils'
 
 
 
 // const ContactForm = (props) => {
 //     const handleOnSubmit = (e) => {
-//         let details = { name: e.target.from_name.value, email: e.target.from_email.value, message: e.target.message.value, subject: e.target.subject.value }
+//         let details = { name: e.target.name.value, email: e.target.email.value, message: e.target.message.value, subject: e.target.subject.value }
 //         sendContact(details);
 //     }
 //     return (
@@ -21,7 +21,7 @@
 //                 id='form-input-control-last-name'
 //                 control={Input}
 //                 label='Name'
-//                 name='from_name'
+//                 name='name'
 //                 placeholder='Name…'
 //                 required
 //                 icon='user circle'
@@ -32,7 +32,7 @@
 //                 id='form-input-control-email'
 //                 control={Input}
 //                 label='Email'
-//                 name='from_email'
+//                 name='email'
 //                 placeholder='Email…'
 //                 required
 //                 icon='mail'
@@ -79,21 +79,15 @@ import React from "react";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBBtn, MDBInput } from "mdbreact";
 
 const ContactForm = () => {
+
+    const send = (e) => {
+        let details = { name: e.target.name.value, email: e.target.email.value, phone: e.target.phone, message: e.target.message.value, subject: e.target.subject.value }
+        sendContact(details);
+    }
     return (
         <section className="contact-section my-5">
-
             <MDBCard>
                 <MDBRow>
-
-
-
-
-
-
-
-
-
-
                     <MDBCol lg="8">
                         <MDBCardBody className="form">
                             <h3 className="mt-4">
@@ -108,6 +102,7 @@ const ContactForm = () => {
                                             type="text"
                                             id="form-contact-name"
                                             label="Your name"
+                                            name="name"
                                         />
                                     </div>
                                 </MDBCol>
@@ -117,6 +112,7 @@ const ContactForm = () => {
                                             type="text"
                                             id="form-contact-email"
                                             label="Your email"
+                                            name="email"
                                         />
                                     </div>
                                 </MDBCol>
@@ -129,6 +125,7 @@ const ContactForm = () => {
                                             type="text"
                                             id="form-contact-phone"
                                             label="Your phone"
+                                            name="phone"
                                         />
                                     </div>
                                 </MDBCol>
@@ -137,15 +134,12 @@ const ContactForm = () => {
                                         <MDBInput
                                             type="text"
                                             id="form-contact-company"
-                                            label="Your company"
+                                            label="Message subject"
+                                            name="subject"
                                         />
                                     </div>
                                 </MDBCol>
                             </MDBRow>
-
-
-
-
 
                             <MDBRow>
                                 <MDBCol md="12">
@@ -154,6 +148,7 @@ const ContactForm = () => {
                                             type="textarea"
                                             id="form-contact-message"
                                             label="Your message"
+                                            name="message"
                                         />
                                         {/* <MDBBtn rounded color="blue">
                                             <MDBIcon icon="paper-plane" />
@@ -164,17 +159,6 @@ const ContactForm = () => {
 
                         </MDBCardBody>
                     </MDBCol>
-
-
-
-
-
-
-
-
-
-
-
                     <MDBCol lg="4">
                         <MDBCardBody className="contact text-center h-100 white-text">
                             <h3 className="my-4 pb-2">Contact information</h3>
@@ -182,18 +166,19 @@ const ContactForm = () => {
                                 <li>
                                     <p>
                                         <MDBIcon icon="map-marker-alt" className="pr-2" />
-                                        New York, 94126 USA
+                                        Israel, Bnei brak
                                     </p>
                                 </li>
                                 <li>
                                     <p>
-                                        <MDBIcon icon="phone" className="pr-2" />+ 01 234 567 89
+                                        <MDBIcon icon="phone" className="pr-2" />
+                                        +972 315 7271 / +972 316 4376
                                     </p>
                                 </li>
                                 <li>
                                     <p>
                                         <MDBIcon icon="envelope" className="pr-2" />
-                                        contact@example.com
+                                        chinese.auctions1@gmail.com
                                     </p>
                                 </li>
                             </ul>
@@ -201,9 +186,8 @@ const ContactForm = () => {
 
                         </MDBCardBody>
                     </MDBCol>
-
-
                 </MDBRow>
+                <Button type='submit' onClick={send} color='green'>Send</Button>
             </MDBCard>
         </section>
     );
