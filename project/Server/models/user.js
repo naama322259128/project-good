@@ -20,10 +20,7 @@ const userSchema = new mongoose.Schema({
         // }
     },
     birthYear: { type: Number },
-<<<<<<< HEAD
     // address: { type: String, required: true },
-=======
->>>>>>> db0d8a4f6b9abc6346c441ea5d1456046b168b8e
     city: { type: String },
     status: { type: String, enum: ['USER', 'AUCTION_MANAGER', 'SITE_MANAGER'], required: true, default: 'USER' },
     confidentiality: { type: Boolean, default: false }//חסוי או לא חסוי
