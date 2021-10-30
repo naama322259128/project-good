@@ -15,23 +15,13 @@ import { beManager } from "../../utils/newAuctionUtils";
 import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
 import { Link } from 'react-router-dom'
 import Auction from '../../models/auction';
-import { useStorageReducer } from 'react-storage-hooks';
-import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../store/reducers/newAuctionState.js'
-import * as actionTypes from '../../store/actionTypes'
-
 const FinalStep = (props) => {
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
-        reducer,//רדיוסר
-        newAuctionState //מה הסטייט שיהיה בלוקל סטור' וזה גם הסטייט הכללי
-    );
+
     const pubicationApproval = () => {//אישור פירסום
         //TODO: אם קיים שדה _idלשאול
-        //pubicationApproval עדכון במסד נתונים
-        //dispatch עדכון הסטייט
+        //TODO:  לדף הפונקציוthen להעביר את
         pubicationApproval(JSON.parse(localStorage.getItem("newAuction"))._id, true).then(succ => {
-            dispatch({ type: actionTypes.SET_NEW_AUCTION, payload: (succ.data) });
+            props.setNewAuction(succ.data);
             //לפנות את הלוכל-סטורג' מנתוני מכירה חדשה
             localStorage.removeItem("newAuction");
             // window.history.pushState({}, null, "/home");

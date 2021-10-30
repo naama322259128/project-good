@@ -8,7 +8,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
 import Button from '@material-ui/core/Button';
-import {deleteProductFromCart} from '../../store/actions/user';
+import { deleteProductFromCart } from '../../store/actions/user';
+import { setCntOfProductInCart } from '../../store/actions/currentAuction';
 import React, { useEffect, useState } from 'react';
 
 const useStyles = makeStyles({
@@ -55,7 +56,7 @@ const ProductInCart = (props) => {
             title="Contemplative Reptile"
           />
 
-          <i className="trash icon" onClick={(e) => { e.stopPropagation();props.deleteProductFromCart(_id)}}></i>
+          <i className="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(_id) }}></i>
           <IconButton color="primary"
             onClick={(e) => {
               let c = getCnt(_id);
@@ -93,5 +94,4 @@ const mapStateToProps = state => {
     currnetAuction: state.auction._id
   }
 }
-export default connect(mapStateToProps, {deleteProductFromCart})(ProductInCart);
-
+export default connect(mapStateToProps, { deleteProductFromCart, })(ProductInCart);
