@@ -5,3 +5,9 @@ export const setCurrentUser = (user) => {
         payload: user
     }
 }
+export const signInOfState = (user) => {
+    return {
+        type: actionTypes.SIGN_IN_OF_STATE,
+        payload: user
+    }
+}

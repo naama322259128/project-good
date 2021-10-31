@@ -11,20 +11,25 @@ export const initialState = {
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        
-        case actionTypes.SET_CURRENT_USER:
-            {
-                    return {
-                ...state,
-                currentUser: action.payload,
-            }
-            }
-        
         case actionTypes.SET_LOGIN:
             return {
                 ...state,
                 loginIsOpen: action.payload
             }
+        case actionTypes.SET_CURRENT_USER:
+            {
+                return {
+                    ...state,
+                    currentUser: action.payload,
+                }
+            }
+        case actionTypes.SIGN_IN_OF_STATE: {
+            return {
+                ...state,
+                currentUser: action.payload,
+                loginIsOpen: false
+            }
+        }
         case actionTypes.ADD_PRODUCT_TO_CART:
             {
                 let _id = action.payload.product._id;
@@ -76,7 +81,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 shoppingCart: action.payload,
             }
-            }
+        }
     }
     return state;
 }

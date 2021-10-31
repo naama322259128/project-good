@@ -1,3 +1,6 @@
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+
 import './yourProfile.scss'
 import { connect } from 'react-redux';
 import React from 'react';
@@ -94,6 +97,8 @@ const UpdateDetails = (props) => {
 
     return (
         <>
+
+
             <center>
                 <br />
                 <h1 id="h1_profile">Update your details</h1>
@@ -204,6 +209,7 @@ const UpdateDetails = (props) => {
                     {/* וגם להודיע לו שזה עודכן */}
                     <Button type="button" variant="contained" id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
                 </form>
+                <Alert onClose={() => { }}>This is a success alert — check it out!</Alert>
 
             </center >
         </>
@@ -217,4 +223,7 @@ const mapStateToProps = (state) => {
     };
 }
 export default connect(mapStateToProps, { updateUserInDB })(UpdateDetails);
+
+
+
 
