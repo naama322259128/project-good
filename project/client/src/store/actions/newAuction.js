@@ -125,7 +125,9 @@ export const beManagerInDB = (_id) => {
 export const pubicationApprovalInDB = (a_id, status, managerId) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`).then(
-            succ => { dispatch(getManagerAuctionsFromDB(managerId)) }
+            succ => {
+                dispatch(getManagerAuctionsFromDB(managerId))
+            }
         )
     }
 }
@@ -188,7 +190,6 @@ export const deleteProductFromDB = (_id, product_id) => {
             }
         })
     }
-
 }
 
 

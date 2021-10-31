@@ -91,7 +91,7 @@ const mapStateToProps = state => {
   return {
     currentUser: state.user.currentUser,
     loginIsOpen: state.user.loginIsOpen,
-    currnetAuction: state.auction._id
+    currnetAuction: state.auction
   }
 }
 export default connect(mapStateToProps, { deleteProductFromCart, })(ProductInCart);

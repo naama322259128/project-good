@@ -10,22 +10,18 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
-import { pubicationApprovalInDB } from "../../utils/newAuctionUtils"
-import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
+import { pubicationApprovalInDB } from "../../store/actions/newAuction"
 import { Link } from 'react-router-dom'
 import Auction from '../../models/auction';
 const FinalStep = (props) => {
 
     const pubicationApprovalInDB = () => {//אישור פירסום
         //TODO: אם קיים שדה _idלשאול
-        //TODO:  לדף הפונקציוthen להעביר את
-        pubicationApprovalInDB(props.newAuction._id, true, props.user._id).then(succ => {
-            props.setNewAuction(succ.data);
-            //לפנות את הלוכל-סטורג' מנתוני מכירה חדשה
-            localStorage.removeItem("newAuction");
-            // window.history.pushState({}, null, "/home");
-            window.location.replace(`http://localhost:3000/home`);//לחזור לדף הבית
-        })
+        pubicationApprovalInDB(props.newAuction._id, true, props.user._id);
+        //לפנות את הלוכל-סטורג' מנתוני מכירה חדשה
+        localStorage.removeItem("newAuction");
+        // window.history.pushState({}, null, "/home");
+        window.location.replace(`http://localhost:3000/home`);//לחזור לדף הבית
     }
 
     const theme = useTheme();
@@ -49,13 +45,19 @@ const FinalStep = (props) => {
                 <Button variant="contained" size="medium" onClick={props.setLastModal(false)} color="primary">
                     Not yet
                 </Button>
-                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { pubicationApprovalInDB(); props.setLastModal(true) }} color="primary">
+                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { props.pubicationApprovalInDB(); props.setLastModal(true) }} color="primary">
                     Ok
                 </Button></Link>
             </DialogActions>
         </Dialog>
     </div>)
 }
-//TODO לעשות כאן
 
-export default FinalStep;
+const mapStateToProps = (state) => {
+    return {
+        newAuction: state.auction.newAuction,
+        user: state.user.currentUser
+    };
+}
+export default connect(mapStateToProps, { pubicationApprovalInDB, setLastModal, })(FinalStep);
+

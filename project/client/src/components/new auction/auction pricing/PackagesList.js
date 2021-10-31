@@ -23,7 +23,7 @@ const PackagesList = (props) => {
 }
 const myMapStateToProps = (state) => {
     return {
-        packagesList: state.auction.packagesList
+        packagesList: state.auction.newAuction.packagesList
     }
 }
 export default connect(myMapStateToProps, { deletePackageFromDB })(PackagesList);

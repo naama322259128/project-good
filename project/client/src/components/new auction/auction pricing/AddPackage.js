@@ -39,7 +39,7 @@ const AddPackage = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        arr: state.auction.packagesList
+        arr: state.auction.newAuction.productList
     };
 }
 export default connect(mapStateToProps, { addPackageToDB })(AddPackage);
