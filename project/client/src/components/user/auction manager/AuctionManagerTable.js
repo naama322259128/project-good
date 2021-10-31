@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import DeleteModal from './DeleteModal'
 import ApprovalModal from './ApprovalModal'
 import DisApprovalModal from './DisApprovalModal'
-import { getAuctionsArray, setDeleteAuctionModal, setApprovalAuctionModal, setDisApprovalAuctionModal, approvalAuction, setSelectedAuctionToOptions, getAuctionIsDone, isAuctionApproved } from '../../../store/actions/auctionManager'
+import { getManagerAuctionsFromDB, setDeleteAuctionModal, setApprovalAuctionModal, setDisApprovalAuctionModal, approvalAuctionInDB, setSelectedAuctionToOptions, getAuctionIsDoneFromDB, isAuctionApproved } from '../../../store/actions/auctionManager'
 import IconButton from '@material-ui/core/IconButton';
 import edit from '../../../img/icons/edit-file.png'
 import st from '../../../img/icons/stadistics.png'
@@ -78,7 +78,7 @@ const AuctionManagerTable = (props) => {
 
     function createData(name1, name2, start_date, end_date, done, _id) {
         let isApproved = props.isAuctionApproved(_id);
-        let isDone = props.getAuctionIsDone(_id);
+        let isDone = props.getAuctionIsDoneFromDB(_id);
         let options = <div className="optionsBtn">
             <Switch
                 checked={isApproved}
@@ -105,7 +105,7 @@ const AuctionManagerTable = (props) => {
     ];
 
     // TODO: sort by date
-    /*const rows = props.getAuctionsArray(localStorage.getItem("currentUser")).map((item) => {
+    /*const rows = props.getManagerAuctionsFromDB(localStorage.getItem("currentUser")).map((item) => {
         return createData(item.name, item.registrationStartDate, item.lotteriesDate, item.status);
     });*/
 
@@ -166,7 +166,7 @@ const mapStateToProps = (state) => {
         show_disapproval: state.auctionManager.disapprovalAuctionModal
     };
 }
-export default connect(mapStateToProps, { setDeleteAuctionModal, setSelectedAuctionToOptions, setDisApprovalAuctionModal, getAuctionIsDone, setApprovalAuctionModal, approvalAuction, getAuctionsArray, isAuctionApproved })(AuctionManagerTable);
+export default connect(mapStateToProps, { setDeleteAuctionModal, setSelectedAuctionToOptions, setDisApprovalAuctionModal, getAuctionIsDoneFromDB, setApprovalAuctionModal, approvalAuctionInDB, getManagerAuctionsFromDB, isAuctionApproved })(AuctionManagerTable);
 
 
 

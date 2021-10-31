@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { Link, Route, useRouteMatch, Switch } from 'react-router-dom'
-import { updateCurrentAuctionState } from '../../store/actions/currentAuction'
 import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
 import './Auction.scss';
@@ -17,7 +16,7 @@ const Auction = (props) => {
              log-out להוסיף כפתור התנתקות
             <Link to={"/home"}>  <div className="logo" ></div></Link>
         </header> */}
-        
+
         <br />
         <br />
         <br />
@@ -40,4 +39,4 @@ const Auction = (props) => {
 }
 const mapStateToProps = state => {
 }
-export default connect(mapStateToProps, {  updateCurrentAuctionState })(Auction);
+export default connect(mapStateToProps, {})(Auction);

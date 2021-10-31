@@ -1,12 +1,8 @@
 import axios from 'axios';
 
 
-//להפוך סטטוס של משתמש רגיל למנהל
-export const beManager = (_id) => {
-    return axios.post(`http://localhost:5000/users/beManager/:${_id}`)
-}
-// אישור פירסום מכירה 
 
+// אישור פירסום מכירה 
 export const pubicationApproval = (a_id, status) => {
     return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)
 }

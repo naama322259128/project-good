@@ -57,7 +57,7 @@ export const newAuctionReducer = (state = initialState, action) => {
         }
         case actionTypes.DELETE_PACKAGE:
             let arr2 = state.packagesList.
-                filter(p => p.qty !== action.payload.qty);
+                filter(p => p._id !== action.payload._id);
             return {
                 ...state,
                 packagesList: arr2,
@@ -128,7 +128,7 @@ export const newAuctionReducer = (state = initialState, action) => {
         }
         case actionTypes.DELETE_PRODUCT:
             let arr4 = state.productsList.
-                filter(p => p !== action.payload);
+                filter(p => p._id !== action.payload);
             return {
                 ...state,
                 productsList: arr4,

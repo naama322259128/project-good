@@ -4,10 +4,9 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import Timer from "./Timer";
 import './Auction.scss';
-import { updateCurrentAuction } from '../../store/actions/currentAuction'
 
 const CurrentAuction = (props) => {
-    
+
     return (<>
         <br />
         <br />
@@ -26,5 +25,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { updateCurrentAuction })(CurrentAuction);
+export default connect(mapStateToProps, {})(CurrentAuction);
 

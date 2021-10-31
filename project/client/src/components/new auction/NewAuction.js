@@ -14,7 +14,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
-import { beManager } from "../../utils/newAuctionUtils";
+import { beManagerInDB } from "../../utils/newAuctionUtils";
 import { savePackages, saveAuctionInformation, saveProducts, saveOrganizationInformation } from '../../utils/newAuctionUtils'
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +55,7 @@ const NewAuction = (props) => {
         //TODO: האם זה אמור להיות כאן או באחד הכפתורים קודם, אולי לא מכיר את הדיספאצ
         //ומה עם שגיאה 400?
         //TODO: לשנות את הסטטוס שלו למנהל  
-        // beManager
+        // beManagerInDB
     }, [])
 
     const classes = useStyles();

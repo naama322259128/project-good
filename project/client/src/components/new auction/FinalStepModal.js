@@ -11,7 +11,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { pubicationApproval } from "../../utils/newAuctionUtils"
-import { beManager } from "../../utils/newAuctionUtils";
 import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
 import { Link } from 'react-router-dom'
 import Auction from '../../models/auction';

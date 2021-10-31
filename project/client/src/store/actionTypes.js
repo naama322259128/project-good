@@ -15,7 +15,7 @@ export const SET_SHOW_CONTACT_FORM = "SET_SHOW_CONTACT_FORM"
 export const ADD_ORDER = "ADD_ORDER"//הוספת הזמנה לסטייט
 
 /******************************************   NEW AUCTION   ****************************************************/
-export const SET_NEW_AUCTION="SET_NEW_AUCTION"
+export const SET_NEW_AUCTION = "SET_NEW_AUCTION"
 export const SHOW_ADD_PACKAGE = "SHOW_ADD_PACKAGE";//AddPackage להראות את הקומפוננטה 
 export const ADD_PACKAGE = "ADD_PACKAGE";//
 export const DELETE_PACKAGE = "DELETE_PACKAGE";//
@@ -44,7 +44,7 @@ export const SET_DISAPPROVAL_AUCTION_MODAL = "SET_DISAPPROVAL_AUCTION_MODAL"//ה
 export const SET_APPROVAL_AUCTION_MODAL = "SET_APPROVAL_AUCTION_MODAL";//האם להציג מודל אישור אישור מכירה
 export const SET_SELECTED_AUCTION_TO_OPTIONS = "SET_SELECTED_AUCTION_TO_OPTIONS"//איזו מכירה תימחק/תתעדכן/תאושר
 export const UPDATE_AUCTION_MANAGER_STATE = "UPDATE_AUCTION_MANAGER_STATE"
-
+export const SET_MANAGER_AUCTIONS = "SET_MANAGER_AUCTIONS"//הגדרה בסטייט של מכירות של המנהל
 
 /******************************************   SITE MANAGER   ****************************************************/
 export const UPDATE_SITE_MANAGER_STATE = "UPDATE_SITE_MANAGER_STATE"

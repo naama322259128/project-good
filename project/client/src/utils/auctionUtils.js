@@ -15,12 +15,12 @@ export const createNewAuction = (auction) => {
 }
 
 //מחזירה את רשימת המכירות הקיימות במסד נתונים 
-export const getAuctionsList = async () => {
+export const getAuctionsListFromDB= async () => {
   return axios.get(`http://localhost:5000/auctions`)
 }
 
 
-export const getAuctionWithWinners = async (_id) => {
+export const getAuctionWithWinnersFromDB = async (_id) => {
   return axios.get(`http://localhost:5000/auctions/getAuctionWithWinners/${_id}`);
 }
 

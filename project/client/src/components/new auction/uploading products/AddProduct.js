@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { addProduct } from "./../../../store/actions/newAuction";
+import { addProductToDB } from "./../../../store/actions/newAuction";
 import { connect } from "react-redux";
 
 const AddProduct = (props) => {
@@ -35,7 +35,7 @@ const AddProduct = (props) => {
 
 
 
-                <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProduct(newProduct) }} />
+                <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProductToDB(newProduct) }} />
             </form>
         </div>
     ) : null)
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => {
         showSetProduct: state.auction.showSetProduct,
     };
 }
-export default connect(mapStateToProps, { addProduct })(AddProduct);
+export default connect(mapStateToProps, { addProductToDB })(AddProduct);
