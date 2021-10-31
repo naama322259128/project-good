@@ -122,15 +122,13 @@ export const beManagerInDB = (_id) => {
 }
 
 // אישור פירסום מכירה            
-export const pubicationApproval = (a_id, status, managerId) => {
+export const pubicationApprovalInDB = (a_id, status, managerId) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`).then(
             succ => { dispatch(getManagerAuctionsFromDB(managerId)) }
         )
     }
 }
-
-//--------------שמירת נתוני מכירה לפי שלבים
 
 //תמחור מכירה
 export const addPackageToDB = (_id, packages) => {
@@ -154,16 +152,6 @@ export const addProductToDB = (a_id, product) => {
     }
 }
 
-//מידע על הארגון
-export const saveOrganizationInformation = (_id, details) => {
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/setOrganizationInformation/${_id}&${details}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data));
-        })
-    }
-}
 
 //מידע על המכירה
 export const saveAuctionInformation = (_id, details) => {
@@ -176,11 +164,10 @@ export const saveAuctionInformation = (_id, details) => {
     }
 
 }
-//למחוק ישירות מהמסד נתונים
-//מקבלת קוד מכירה וקוד חבילה ומוחקת מהמסד נתונים
-export const deletePackageFromDB = (_id, package_id) => {
+
+export const deletePackageFromDB = (a_id, package_id) => {
     return (dispatch) => {
-        axios.delete(`http://localhost:5000/auction/deletePackage/${_id}&${package_id}`).then(succ => {
+        axios.delete(`http://localhost:5000/auction/deletePackage/${a_id}&${package_id}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400) {
                 dispatch(console.log(succ.data), deletePackage(package_id));

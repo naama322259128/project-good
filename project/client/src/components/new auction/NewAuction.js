@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 import { beManagerInDB } from "../../utils/newAuctionUtils";
-import { savePackages, saveAuctionInformation, saveProducts, saveOrganizationInformation } from '../../utils/newAuctionUtils'
+import {  saveAuctionInformation,  saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,16 +70,16 @@ const NewAuction = (props) => {
     const handleNext = () => {
         switch (activeStep) {
             case 0:
-                return savePackages(props._id, props.packagesList);//שמירת תמחור מכירה במסד נתונים;
+                return //savePackages(props._id, props.packagesList);//שמירת תמחור מכירה במסד נתונים;
             case 1:
-                return saveProducts(props._id, props.productsList);//שמירת העלאת מוצרים במסד נתונים;
+                return //saveProducts(props._id, props.productsList);//שמירת העלאת מוצרים במסד נתונים;
             case 2: {
                 let organizationDetails = {
                     organizationName: props.organizationName,
                     organizationTxt: props.organizationTxt,
                     organizationPhotos: props.organizationPhotos
                 };
-                return saveOrganizationInformation(props._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
+                return saveOrganizationInformationInDB(props._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
             }
             case 3: {
                 let auctionDetails = {

@@ -10,16 +10,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
-import { pubicationApproval } from "../../utils/newAuctionUtils"
+import { pubicationApprovalInDB } from "../../utils/newAuctionUtils"
 import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
 import { Link } from 'react-router-dom'
 import Auction from '../../models/auction';
 const FinalStep = (props) => {
 
-    const pubicationApproval = () => {//אישור פירסום
+    const pubicationApprovalInDB = () => {//אישור פירסום
         //TODO: אם קיים שדה _idלשאול
         //TODO:  לדף הפונקציוthen להעביר את
-        pubicationApproval(props.newAuction._id, true, props.user._id).then(succ => {
+        pubicationApprovalInDB(props.newAuction._id, true, props.user._id).then(succ => {
             props.setNewAuction(succ.data);
             //לפנות את הלוכל-סטורג' מנתוני מכירה חדשה
             localStorage.removeItem("newAuction");
@@ -49,7 +49,7 @@ const FinalStep = (props) => {
                 <Button variant="contained" size="medium" onClick={props.setLastModal(false)} color="primary">
                     Not yet
                 </Button>
-                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { pubicationApproval(); props.setLastModal(true) }} color="primary">
+                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { pubicationApprovalInDB(); props.setLastModal(true) }} color="primary">
                     Ok
                 </Button></Link>
             </DialogActions>
