@@ -15,7 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 import { beManagerInDB } from "../../utils/newAuctionUtils";
-import {  saveAuctionInformation,  saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
+import {  saveAuctionInformation } from '../../store/actions/newAuction'
+import {    saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
 
 const useStyles = makeStyles((theme) => ({
     root: {

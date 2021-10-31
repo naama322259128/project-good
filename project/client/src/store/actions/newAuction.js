@@ -1,6 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
-import { updateCurrentUser } from './user';
+import { setCurrentUser } from './user';
 import { getManagerAuctionsFromDB } from './auctionManager';
 export const showAddPackage = () => {
     return {
@@ -115,7 +115,7 @@ export const setNewAuction = (newAuction) => {
 export const beManagerInDB = (_id) => {
     return (dispatch) => {
         axios.post(`http://localhost:5000/users/beManager`, _id).then(succ => {
-            if (succ.status != 400) updateCurrentUser(succ.data);
+            if (succ.status != 400) setCurrentUser(succ.data);
             //TODO לבדוק שבאמת מחזיר א תהמשתמש
         });
     }
@@ -194,7 +194,7 @@ export const deleteProductFromDB = (_id, product_id) => {
 
 
 //מחזירה את המכירות שלא אושרו של המשתמש שנשלח
-export const getAllUnapprovedAuctionsByUser = (user_id) => {
+export const getAllUnapprovedAuctionsByUserFromDB = (user_id) => {
     return (dispatch) => {
         axios.get(`http://localhost:5000/auctions/getAllUnapprovedAuctionsByUser/${user_id}`);
     }

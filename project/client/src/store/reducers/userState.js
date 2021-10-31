@@ -17,7 +17,6 @@ export const userReducer = (state = initialState, action) => {
                     return {
                 ...state,
                 currentUser: action.payload,
-                loginIsOpen: false
             }
             }
         
@@ -70,13 +69,6 @@ export const userReducer = (state = initialState, action) => {
                     yourProfileIsOpen: false,
                     shoppingCart: null
                 }
-            }
-        case actionTypes.UPDATE_CURRENT_USER: {
-            //עידכון משתמש נוכחי
-            return {
-                ...state,
-                currentUser: action.payload,
-            }
             }
         case actionTypes.UPDATE_USER_STATE: {
             //עידכון משתמש נוכחי

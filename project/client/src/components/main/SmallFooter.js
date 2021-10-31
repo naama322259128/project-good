@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import './main.scss';
 import { setLogin } from '../../store/actions/home';
-import { updateCurrentUser } from '../../store/actions/user'
+import { setCurrentUser } from '../../store/actions/user'
 import c from '../../img/icons/copy_right.png'
 
 const SmallFooter = (props) => {
@@ -22,6 +22,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { setLogin, updateCurrentUser })(SmallFooter);
+export default connect(mapStateToProps, { setLogin, setCurrentUser })(SmallFooter);
 
 

@@ -9,7 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import './yourProfile.scss'
-import { getUserOrdersList } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
+import { getUserOrdersListFromDB } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
 import OrderOptions from './OrderOptions';
 import moment from 'moment'
 
@@ -67,7 +67,7 @@ const UserTable = () => {
     });
 
     useEffect(() => {
-        getUserOrdersList("611c2f2e18f13934fc07bc27"/*JSON.parse(localStorage.user).currentUser._id*/).then(succ => {
+        getUserOrdersListFromDB("611c2f2e18f13934fc07bc27"/*JSON.parse(localStorage.user).currentUser._id*/).then(succ => {
             let arr = [];
             succ.data.map((o) => {arr.push(createData(o)) });
             setRows(arr);

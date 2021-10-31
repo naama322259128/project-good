@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { getOrderDetails } from '../../utils/orderUtils'
+import { getOrderDetailsFromDB } from '../../utils/orderUtils'
 import { getAuctionWithWinnersFromDB } from '../../utils/auctionUtils'
 import { getAuctionIsDoneFromDB } from '../../store/actions/auctionManager';
 import IconButton from '@material-ui/core/IconButton';

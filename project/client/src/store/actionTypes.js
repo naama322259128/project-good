@@ -7,12 +7,12 @@ export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART"//מחיקת �
 export const SET_CURRENT_AUCTION = "SET_CURRENT_AUCTION";//לאתחל את מערך המוצרים, ועוד נתונים של המכירה הנוכחית
 export const SET_CNT_PRODUCT_IN_CART = "SET_CNT_PRODUCT_IN_CART";//עדכון כמות מוצר מתוך הסל
 export const SIGN_OUT = "SIGN_OUT"//יציאת משתמש
-export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER"//עדכון פרטי משתמש
 export const UPDATE_SHOPPING_CART = "UPDATE_SHOPPING_CART"
 // export const SET_YOUR_PROFILE="SET_YOUR_PROFILE"//האם להציג את הyour profile
 export const UPDATE_USER_STATE = "UPDATE_USER_STATE"
 export const SET_SHOW_CONTACT_FORM = "SET_SHOW_CONTACT_FORM"
 export const ADD_ORDER = "ADD_ORDER"//הוספת הזמנה לסטייט
+export const SET_USER_ORDERS = "SET_USER_ORDERS"
 
 /******************************************   NEW AUCTION   ****************************************************/
 export const SET_NEW_AUCTION = "SET_NEW_AUCTION"

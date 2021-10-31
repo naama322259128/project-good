@@ -1,6 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
-import { updateCurrentUser } from './user'
+import { setCurrentUser } from './user'
 import { setProductsList } from './newAuction';
 
 export const getAuctionFromDB = (auctionId) => {

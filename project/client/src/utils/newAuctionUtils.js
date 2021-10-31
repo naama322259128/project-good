@@ -13,7 +13,7 @@ export const saveOrganizationInformationInDB = (_id, details) => {
 }
 
 //מידע על המכירה
-export const saveAuctionInformation = (details) => {
+export const saveAuctionInformationInDB = (details) => {
     return (dispatch) => {
         axios.post(`http://localhost:5000/auctions/setAuctionInformation/`, details).then(succ => {
             console.log(succ.data);

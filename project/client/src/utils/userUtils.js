@@ -7,7 +7,7 @@ export const addUser = (user) => {
 }
 
 
-export const getUserOrdersList = async (_id) => {
+export const getUserOrdersListFromDB = async (_id) => {
     return axios.get(`http://localhost:5000/orders/userOrdersList/${_id}`)
 }
 export const sendContact = async (details) => {

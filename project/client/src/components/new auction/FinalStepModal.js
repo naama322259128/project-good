@@ -12,7 +12,6 @@ import { useTheme } from '@material-ui/core/styles';
 import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
 import { pubicationApprovalInDB } from "../../store/actions/newAuction"
 import { Link } from 'react-router-dom'
-import Auction from '../../models/auction';
 const FinalStep = (props) => {
 
     const pubicationApprovalInDB = () => {//אישור פירסום

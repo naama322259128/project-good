@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './Auction.scss';
 import Button from '@material-ui/core/Button';
 import Order from '../../models/order';
-import { addOrderToState } from '../../store/actions/user';
+import { addOrderToDB } from '../../store/actions/user';
 import { connect } from "react-redux";
 
 const Cart = (props) => {
@@ -52,4 +52,4 @@ const mapStateToProps = state => {
         auction_id: state.currentAuction._id//לבדוק אם הכוונה ב _id של מחירה
     }
 }
-export default connect(mapStateToProps, { addOrderToState })(Cart);
+export default connect(mapStateToProps, { addOrderToDB })(Cart);
