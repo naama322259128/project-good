@@ -19,7 +19,7 @@ const FinalStep = (props) => {
     const pubicationApproval = () => {//אישור פירסום
         //TODO: אם קיים שדה _idלשאול
         //TODO:  לדף הפונקציוthen להעביר את
-        pubicationApproval(JSON.parse(localStorage.getItem("newAuction"))._id, true).then(succ => {
+        pubicationApproval(props.newAuction._id, true, props.user._id).then(succ => {
             props.setNewAuction(succ.data);
             //לפנות את הלוכל-סטורג' מנתוני מכירה חדשה
             localStorage.removeItem("newAuction");
@@ -56,6 +56,6 @@ const FinalStep = (props) => {
         </Dialog>
     </div>)
 }
-
+//TODO לעשות כאן
 
 export default FinalStep;

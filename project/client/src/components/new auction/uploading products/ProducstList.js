@@ -12,7 +12,7 @@ const ProductsList = (props) => {
                     <h2>includedInPackages:{item.includedInPackages}</h2>
                     <h2>price: {item.price}</h2>
                     <input key={index} className="tiny ui button" type="button" value="Delete"
-                     onClick={() => { props.deleteProductFromDB(item)} }/>
+                     onClick={() => { props.deleteProductFromDB(item._id)} }/>
                 </div>
                 )
             })}

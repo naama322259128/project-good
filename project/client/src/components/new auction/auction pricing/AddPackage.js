@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { addPackage } from '../../../store/actions/newAuction'
+import { addPackageToDB } from '../../../store/actions/newAuction'
 import * as actionTypes from '../../../store/actionTypes'
 
 const AddPackage = (props) => {
@@ -33,7 +33,7 @@ const AddPackage = (props) => {
             </div>
             <button className="positive ui button"
                 // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
-                onClick={() => props.addPackage(newPackage)}>Add</button>
+                onClick={() => props.addPackageToDB(newPackage)}>Add</button>
         </form >
     );
 }
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
         arr: state.auction.packagesList
     };
 }
-export default connect(mapStateToProps, { addPackage })(AddPackage);
+export default connect(mapStateToProps, { addPackageToDB })(AddPackage);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable

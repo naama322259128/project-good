@@ -1,6 +1,7 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 import { updateCurrentUser } from './user';
+import { getManagerAuctionsFromDB } from './auctionManager';
 export const showAddPackage = () => {
     return {
         type: actionTypes.SHOW_ADD_PACKAGE
@@ -121,8 +122,12 @@ export const beManagerInDB = (_id) => {
 }
 
 // אישור פירסום מכירה            
-export const pubicationApproval = (a_id, status) => {
-    return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)
+export const pubicationApproval = (a_id, status, managerId) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`).then(
+            succ => { dispatch(getManagerAuctionsFromDB(managerId)) }
+        )
+    }
 }
 
 //--------------שמירת נתוני מכירה לפי שלבים
