@@ -10,33 +10,17 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { setLastModal } from "../../store/actions/newAuction"; //האם להציג את מודל אישור סופי
-import { pubicationApproval } from "../../utils/newAuctionUtils"
-import { beManager } from "../../utils/newAuctionUtils";
-import { createNewAuction } from "../../utils/auctionUtils"; //שמירת כל הנתונים במסד
+import { pubicationApprovalInDB } from "../../store/actions/newAuction"
 import { Link } from 'react-router-dom'
-import Auction from '../../models/auction';
-import { useStorageReducer } from 'react-storage-hooks';
-import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../store/reducers/newAuctionState.js'
-import * as actionTypes from '../../store/actionTypes'
-
 const FinalStep = (props) => {
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
-        reducer,//רדיוסר
-        newAuctionState //מה הסטייט שיהיה בלוקל סטור' וזה גם הסטייט הכללי
-    );
-    const pubicationApproval = () => {//אישור פירסום
+
+    const pubicationApprovalInDB = () => {//אישור פירסום
         //TODO: אם קיים שדה _idלשאול
-        //pubicationApproval עדכון במסד נתונים
-        //dispatch עדכון הסטייט
-        pubicationApproval(JSON.parse(localStorage.getItem("newAuction"))._id, true).then(succ => {
-            dispatch({ type: actionTypes.SET_NEW_AUCTION, payload: (succ.data) });
-            //לפנות את הלוכל-סטורג' מנתוני מכירה חדשה
-            localStorage.removeItem("newAuction");
-            // window.history.pushState({}, null, "/home");
-            window.location.replace(`http://localhost:3000/home`);//לחזור לדף הבית
-        })
+        pubicationApprovalInDB(props.newAuction._id, true, props.user._id);
+        //לפנות את הלוכל-סטורג' מנתוני מכירה חדשה
+        localStorage.removeItem("newAuction");
+        // window.history.pushState({}, null, "/home");
+        window.location.replace(`http://localhost:3000/home`);//לחזור לדף הבית
     }
 
     const theme = useTheme();
@@ -60,7 +44,7 @@ const FinalStep = (props) => {
                 <Button variant="contained" size="medium" onClick={props.setLastModal(false)} color="primary">
                     Not yet
                 </Button>
-                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { pubicationApproval(); props.setLastModal(true) }} color="primary">
+                <Link to={'/home'}><Button variant="contained" size="medium" onClick={() => { props.pubicationApprovalInDB(); props.setLastModal(true) }} color="primary">
                     Ok
                 </Button></Link>
             </DialogActions>
@@ -68,5 +52,11 @@ const FinalStep = (props) => {
     </div>)
 }
 
+const mapStateToProps = (state) => {
+    return {
+        newAuction: state.auction.newAuction,
+        user: state.user.currentUser
+    };
+}
+export default connect(mapStateToProps, { pubicationApprovalInDB, setLastModal, })(FinalStep);
 
-export default FinalStep;

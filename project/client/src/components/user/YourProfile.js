@@ -1,5 +1,5 @@
 import './yourProfile.scss'
-import React from 'react';
+import React, { useEffect } from 'react';
 import SiteManagerTable from './site manager/SiteManagerTable';
 import AuctionManagerTable from './auction manager/AuctionManagerTable';
 import UserTable from './UserTable';
@@ -7,24 +7,36 @@ import { Route, Switch } from 'react-router-dom'
 import EditAuction from './auction manager/EditAuction'
 import AuctionResults from './auction manager/AuctionResults'
 import AuctionStatistics from './auction manager/AuctionStatistics'
+import { connect } from 'react-redux';
+import { getUserOrdersListFromDB } from '../../store/actions/user'//מחזירה את ההזמנות של המשתמש
 
 
 const YourProfile = (props) => {
+    useEffect(() => { getUserOrdersListFromDB(props.userId); }, [])
     //TODO: לבדוק שהיוסר או הכרנט-יוסר לא אנדיפיינד
-    let currentUser = JSON.parse(localStorage.getItem('user')).currentUser;
+    
     return (
         <Switch>
-            <Route path={'/your_profile/edit_auction'}>{currentUser.status === 'AUCTION_MANAGER' ? <EditAuction /> : null}</Route>
-            <Route path={'/your_profile/statistics'}>{currentUser.status === 'AUCTION_MANAGER' ? < AuctionStatistics /> : null}</Route>
-            <Route path={'/your_profile/results'}>{currentUser.status === 'AUCTION_MANAGER' ? <AuctionResults /> : null}</Route>
+            <Route path={'/your_profile/edit_auction'}>{props.user.status === 'AUCTION_MANAGER' ? <EditAuction /> : null}</Route>
+            <Route path={'/your_profile/statistics'}>{props.user.status === 'AUCTION_MANAGER' ? < AuctionStatistics /> : null}</Route>
+            <Route path={'/your_profile/results'}>{props.user.status === 'AUCTION_MANAGER' ? <AuctionResults /> : null}</Route>
             <Route path={'/your_profile'}>
-                {currentUser.status === 'SITE_MANAGER' ? (<SiteManagerTable />) :
-                    currentUser.status === 'AUCTION_MANAGER' ?
-                        (<AuctionManagerTable />) : (<UserTable />)}
+                {/* {props.user.status === 'SITE_MANAGER' ? (<SiteManagerTable />) :
+                    props.user.status === 'AUCTION_MANAGER' ?
+                        (<AuctionManagerTable />) : null} */}
+                <UserTable />
             </Route>
         </Switch>
     );
 }
 
+// michalkatan18@gmail.com
 
-export default YourProfile;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user.currentUser,
+        userId: state.user.currentUser._id
+
+    };
+}
+export default connect(mapStateToProps, {})(YourProfile);

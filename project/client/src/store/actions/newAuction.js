@@ -1,6 +1,7 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
-
+import { setCurrentUser } from './user';
+import { getManagerAuctionsFromDB } from './auctionManager';
 export const showAddPackage = () => {
     return {
         type: actionTypes.SHOW_ADD_PACKAGE
@@ -12,10 +13,10 @@ export const addPackage = (p) => {
         payload: p
     }
 }
-export const deletePackage = (p) => {
+export const deletePackage = (p_id) => {
     return {
         type: actionTypes.DELETE_PACKAGE,
-        payload: p
+        payload: p_id
     }
 }
 export const setOrganizationName = (na) => {
@@ -60,20 +61,18 @@ export const setTerms = (date) => {
         payload: date
     }
 }
-export const setProductsList = (arr) => {
-    return {
-        type: actionTypes.SET_PRODUCTS_LIST,
-        payload: arr
-    }
-}
-export const setPackagesList = (arr) => {
-    return {
-        type: actionTypes.SET_PACKAGES_LIST,
-        payload: arr
-    }
-}
-
-
+// export const setProductsList = (arr) => {
+//     return {
+//         type: actionTypes.SET_PRODUCTS_LIST,
+//         payload: arr
+//     }
+// }
+// export const setPackagesList = (arr) => {
+//     return {
+//         type: actionTypes.SET_PACKAGES_LIST,
+//         payload: arr
+//     }
+// }
 export const addProduct = (p) => {
     return {
         type: actionTypes.ADD_PRODUCT,
@@ -86,10 +85,10 @@ export const showAddProduct = (b) => {
         payload: b
     }
 }
-export const deleteProduct = (p) => {
+export const deleteProduct = (p_id) => {
     return {
         type: actionTypes.DELETE_PRODUCT,
-        payload: p
+        payload: p_id
     }
 }
 
@@ -105,57 +104,56 @@ export const resetNewAuctionState = () => {
     }
 }
 
-export const setNewAuction=(newAuction)=>{
-  return{
-      type:actionTypes.SET_NEW_AUCTION,
-      payload:newAuction
-  }  
+export const setNewAuction = (newAuction) => {
+    return {
+        type: actionTypes.SET_NEW_AUCTION,
+        payload: newAuction
+    }
 }
 
 //להפוך סטטוס של משתמש רגיל למנהל
-export const beManager = (_id) => {
-    return axios.post(`http://localhost:5000/users/beManager`, _id)
+export const beManagerInDB = (_id) => {
+    return (dispatch) => {
+        axios.post(`http://localhost:5000/users/beManager`, _id).then(succ => {
+            if (succ.status != 400) setCurrentUser(succ.data);
+            //TODO לבדוק שבאמת מחזיר א תהמשתמש
+        });
+    }
 }
 
 // אישור פירסום מכירה            
-export const pubicationApproval = (a_id, status) => {
-    return axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`)
+export const pubicationApprovalInDB = (a_id, status, managerId) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`).then(
+            succ => {
+                dispatch(getManagerAuctionsFromDB(managerId))
+            }
+        )
+    }
 }
 
-//--------------שמירת נתוני מכירה לפי שלבים
-
 //תמחור מכירה
-export const savePackages = (_id, packages) => {
+export const addPackageToDB = (_id, packages) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/setPackages/${_id}&${packages}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
-                dispatch(console.log(succ.data));
+                dispatch(console.log(succ.data), addPackage(succ.data));
         })
     }
 }
 
 //העלאת מוצרים
-export const saveProducts = (_id, products) => {
+export const addProductToDB = (a_id, product) => {
     return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/setProducts/${_id}&${products}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/setProducts/${a_id}&${product}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
-                dispatch(console.log(succ.data));
+                dispatch(console.log(succ.data), addProduct(succ.data));
         })
     }
 }
 
-//מידע על הארגון
-export const saveOrganizationInformation = (_id, details) => {
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/setOrganizationInformation/${_id}&${details}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data));
-        })
-    }
-}
 
 //מידע על המכירה
 export const saveAuctionInformation = (_id, details) => {
@@ -168,33 +166,35 @@ export const saveAuctionInformation = (_id, details) => {
     }
 
 }
-//למחוק ישירות מהמסד נתונים
-//מקבלת קוד מכירה וקוד חבילה ומוחקת מהמסד נתונים
-// export const deletePackage = (_id,package_id) => {
-//     return (dispatch) => {
-//         axios.delete(`http://localhost:5000/auction/deletePackage/${_id}&${package_id}`).then(succ => {
-//             console.log(succ.data);
-//             if (succ.status != 400) {
-//                 dispatch(console.log(succ.data));
-//             }
-//         })}
+
+export const deletePackageFromDB = (a_id, package_id) => {
+    return (dispatch) => {
+        axios.delete(`http://localhost:5000/auction/deletePackage/${a_id}&${package_id}`).then(succ => {
+            console.log(succ.data);
+            if (succ.status != 400) {
+                dispatch(console.log(succ.data), deletePackage(package_id));
+            }
+        })
+    }
+
+}
+// export const setNewAuction = (a) => {
 
 // }
-
-// export const deleteProduct = (_id,product_id) => {
-//     return (dispatch) => {
-//         axios.delete(`http://localhost:5000/auction/deleteProduct/${_id}&${product_id}`).then(succ => {
-//             console.log(succ.data);
-//             if (succ.status != 400) {
-//                 dispatch(console.log(succ.data));
-//             }
-//         })}
-
-// }
+export const deleteProductFromDB = (_id, product_id) => {
+    return (dispatch) => {
+        axios.delete(`http://localhost:5000/auction/deleteProduct/${_id}&${product_id}`).then(succ => {
+            console.log(succ.data);
+            if (succ.status != 400) {
+                dispatch(console.log(succ.data), deleteProduct(product_id));
+            }
+        })
+    }
+}
 
 
 //מחזירה את המכירות שלא אושרו של המשתמש שנשלח
-export const getAllUnapprovedAuctionsByUser = (user_id) => {
+export const getAllUnapprovedAuctionsByUserFromDB = (user_id) => {
     return (dispatch) => {
         axios.get(`http://localhost:5000/auctions/getAllUnapprovedAuctionsByUser/${user_id}`);
     }

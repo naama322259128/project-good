@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './home.scss';
 import { setLogin } from '../../store/actions/home';
 import { useEffect } from "react";
-import { updateCurrentUser } from '../../store/actions/user'
+import { setCurrentUser } from '../../store/actions/user'
 import ContactForm from '../main/ContactForm'
 
 const HomeFooter = (props) => {

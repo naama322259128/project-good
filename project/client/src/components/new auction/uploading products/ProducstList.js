@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import{deleteProduct} from "../../../store/actions/newAuction";
+import{deleteProductFromDB} from "../../../store/actions/newAuction";
 const ProductsList = (props) => {
 
 
@@ -12,7 +12,7 @@ const ProductsList = (props) => {
                     <h2>includedInPackages:{item.includedInPackages}</h2>
                     <h2>price: {item.price}</h2>
                     <input key={index} className="tiny ui button" type="button" value="Delete"
-                     onClick={() => { props.deleteProduct(item)} }/>
+                     onClick={() => { props.deleteProductFromDB(item._id)} }/>
                 </div>
                 )
             })}
@@ -25,4 +25,4 @@ const myMapStateToProps = (state) => {
         productsList: state.auction.productsList
     }
 }
-export default connect(myMapStateToProps, {deleteProduct })(ProductsList);
+export default connect(myMapStateToProps, {deleteProductFromDB })(ProductsList);

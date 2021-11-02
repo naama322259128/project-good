@@ -1,23 +1,10 @@
 import * as actionTypes from '../actionTypes';
 
 export const initialState = {
-    _id: "",
-    status: "",
-    auctionManager: "",
-    lotteryApproval: false,
-    publicationApproval: false,//אישור פרסום באתר
-    packagesList: [],//רשימת חבילות purchasePackage
-    productsList: [],//רשימ מוצרים
+    newAuction: "",
+
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
     showSetProduct: true,//האם להציג את קומפוננטת  AddProduct
-    dateOfLottery: null,//תאריך ביצוע ההגרלות
-    registrationEndDate: null,//תאריך סיום ההרשמה
-    registrationStartDate: null,//תאריך תחילת ההרשמה
-    organizationName: "",
-    auctionName: "",
-    organizationTxt: "",
-    organizationPhotos: [],
-    terms: "",
     finalStepModalIsOpen: true//האם להציג את המודל של האישור הסופי
 }
 export const newAuctionReducer = (state = initialState, action) => {
@@ -25,19 +12,7 @@ export const newAuctionReducer = (state = initialState, action) => {
         case actionTypes.SET_NEW_AUCTION:
             return {
                 ...state,
-                status: action.payload.status,
-                lotteryApproval: action.payload.lotteryApproval,
-                publicationApproval: action.payload.publicationApproval,//אישור פרסום באתר
-                packagesList: action.payload.purchasePackage,//רשימת חבילות purchasePackage
-                productsList: action.payload.productList,//רשימ מוצרים
-                dateOfLottery: action.payload.lotteriesDate,//תאריך ביצוע ההגרלות
-                registrationEndDate: action.payload.registrationEndDate,//תאריך סיום ההרשמה
-                registrationStartDate: action.payload.registrationStartDate,//תאריך תחילת ההרשמה
-                organizationName: action.payload.organizationName,
-                auctionName: action.payload.name,
-                organizationTxt: action.payload.organizationText,
-                organizationPhotos: action.payload.organizationPhotos,
-                terms: ""
+                newAuction: action.payload
             }
         case actionTypes.SHOW_ADD_PACKAGE: {
             //להציג את הטופס של הוספת חבילה חדשה
@@ -48,56 +23,46 @@ export const newAuctionReducer = (state = initialState, action) => {
         }
         case actionTypes.ADD_PACKAGE: {
             //כבר נבדק שלא הוכנה חבילה עם מספר כרטיסים כזה
-            let arr = [...state.packagesList, action.payload];
+            let arr = [...state.newAuction.purchasePackage, action.payload];
+            let tmp = state.newAuction;
+            tmp.purchasePackage = arr;
             return {
                 ...state,
-                packagesList: arr,
+                newAuction: tmp,
                 showSetPackage: false
             }
         }
         case actionTypes.DELETE_PACKAGE:
-            let arr2 = state.packagesList.
-                filter(p => p.qty !== action.payload.qty);
+            let arr2 = state.newAuction.purchasePackage.
+                filter(p => p._id !== action.payload._id);
+            let tmp = state.newAuction;
+            tmp.purchasePackage = arr2;
             return {
                 ...state,
-                packagesList: arr2,
+                newAuction: tmp,
             };
-        case actionTypes.SET_ORGANIZATION_NAME:
-            return {
-                ...state,
-                organizationName: action.payload
-            }
-        case actionTypes.SET_ORGANIZATION_TEXT:
-            return {
-                ...state,
-                organizationTxt: action.payload
-            }
-        case actionTypes.ADD_PIC_ORGANIZATION:
-            let arrrr = [...state.organizationPhotos, action.payload];
-            return {
-                ...state,
-                organizationPhotos: arrrr
-            }
-        case actionTypes.SET_TERMS:
-            return {
-                ...state,
-                terms: action.payload
-            }
-        case actionTypes.SET_START_DATE:
-            return {
-                ...state,
-                registrationStartDate: action.payload
-            }
-        case actionTypes.SET_END_DATE:
-            return {
-                ...state,
-                registrationEndDate: action.payload
-            }
-        case actionTypes.SET_LOTERY_DATE:
-            return {
-                ...state,
-                dateOfLottery: action.payload
-            }
+        // case actionTypes.SET_ORGANIZATION_NAME:
+        //     return {
+        //         ...state,
+
+        //     }
+        // case actionTypes.SET_ORGANIZATION_TEXT:
+        //     return {
+        //         ...state,
+
+        //     }
+        // case actionTypes.ADD_PIC_ORGANIZATION:
+        //     let arrrr = [...state., action.payload];
+        //     return {
+        //         ...state,
+
+        //     }
+        // case actionTypes.SET_TERMS:
+        //     return {
+        //         ...state,
+
+        //     }
+
         case actionTypes.SHOW_ADD_PRODUCT: {
             return {
                 ...state,
@@ -105,34 +70,43 @@ export const newAuctionReducer = (state = initialState, action) => {
             }
         }
         case actionTypes.ADD_PRODUCT: {
-            let arr = [...state.productsList, action.payload];
+            let arr = [...state.newAuction.productList, action.payload];
+            let tmp = state.newAuction;
+            tmp.productList = arr;
             return {
                 ...state,
-                productsList: arr,
+                newAuction: tmp,
                 showSetProduct: false
             }
         }
         //מעדכן את רשימת מוצרים
         case actionTypes.SET_PRODUCTS_LIST: {
+            let tmp = state.newAuction;
+            tmp.productList = action.payload
             return {
                 ...state,
-                productsList: action.payload,
+                newAuction: tmp
             }
         }
         //מעדכן את רשימת החבילות
         case actionTypes.SET_PACKAGES_LIST: {
+            let tmp = state.newAuction;
+            tmp.purchasePackage = action.payload;
             return {
                 ...state,
-                packagesList: action.payload,
+                newAuction: tmp
             }
         }
-        case actionTypes.DELETE_PRODUCT:
-            let arr4 = state.productsList.
-                filter(p => p !== action.payload);
+        case actionTypes.DELETE_PRODUCT: {
+            let arr4 = state.newAuction.productList.
+                filter(p => p._id !== action.payload);
+            let tmp = state.newAuction;
+            tmp.productList = arr4;
             return {
                 ...state,
-                productsList: arr4,
+                newAuction: tmp
             };
+        }
         case actionTypes.SET_FINAL_STEP:
             return {
                 ...state,
@@ -141,34 +115,18 @@ export const newAuctionReducer = (state = initialState, action) => {
         case actionTypes.UPDATE_NEW_AUCTION_STATE:
             return {
                 ...state,
-                packagesList: action.payload.packagesList,
-                productsList: action.payload.productsList,
                 showSetPackage: action.payload.showSetPackage,
                 showSetProduct: action.payload.showSetProduct,
-                dateOfLottery: action.payload.dateOfLotery,
-                registrationEndDate: action.payload.dateOfEnd,
-                registrationStartDate: action.payload.dateOfStart,
-                organizationName: action.payload.organizationName,
-                organizationTxt: action.payload.organizationText,
-                organizationPhotos: action.payload.organizationPhotos,
-                terms: action.payload.terms,
             }
         case actionTypes.RESET_NEW_AUCTION_STATE:
             //איפוס הסטייט לאחר בניית מכירה
             return {
-                //pricesList: [],
-                packagesList: [],
-                productsList: [],
+                //TODO מה לעשות פה
+                newAuction: null,
                 //showSetPrice: false,
                 showSetPackage: false,
                 showSetProduct: true,
-                dateOfLottery: null,
-                registrationEndDate: null,
-                organizationName: "",
-                organizationTxt: "",
-                organizationPhotos: [],
-                finalStepModalIsOpen: true,
-                terms: ""
+                finalStepModalIsOpen: true
             }
     }
     return state;

@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
-import { setLogin } from '../../store/actions/home'
-import { setCurrentUser } from '../../store/actions/signUp'
 import React, { useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -130,5 +128,5 @@ const mapStateToProps = state => {
     loginIsOpen: state.user.loginIsOpen
   }
 }
-export default connect(mapStateToProps, { setLogin })(OneAuction);
+export default connect(mapStateToProps, {})(OneAuction);
 

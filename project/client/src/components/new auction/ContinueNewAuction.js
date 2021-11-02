@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllUnapprovedAuctionsByUser } from '../../store/actions/newAuction';
+import { getAllUnapprovedAuctionsByUserFromDB } from '../../store/actions/newAuction';
 import { ThemeContext } from '@emotion/react';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const ContinueNewAuction = () => {
 
     useEffect(() => {
         let userId = JSON.parse(localStorage.getItem("currentUser")).currentUser._id;
-        getAllUnapprovedAuctionsByUser(userId).then(succ => {
+        getAllUnapprovedAuctionsByUserFromDB(userId).then(succ => {
             console.log(succ.data);
             setArr(succ.data);
         });
@@ -27,4 +27,5 @@ const ContinueNewAuction = () => {
     );
 }
 
+//TODO לעשות כאן
 export default ContinueNewAuction;

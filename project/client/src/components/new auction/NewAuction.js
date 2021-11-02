@@ -14,15 +14,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
-// import { updateNewAuctioinState } from '../../store/actions/newAuction'
-// import { setNewAuctionItemsInLS } from '../../utils/newAuctionUtils'
-import { beManager } from "../../utils/newAuctionUtils";
-
-import { useStorageReducer } from 'react-storage-hooks';
-import { newAuctionReducer as reducer, initialState as newAuctionState } from '../../store/reducers/newAuctionState.js'
-import * as actionTypes from '../../store/actionTypes'
-
-import { savePackages, saveAuctionInformation, saveProducts, saveOrganizationInformation } from '../../utils/newAuctionUtils'
+import { beManagerInDB } from "../../utils/newAuctionUtils";
+import {  saveAuctionInformation } from '../../store/actions/newAuction'
+import {    saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,17 +50,13 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
-    const [state, dispatch, writeError] = useStorageReducer(
-        localStorage,
-        'newAuction',//שם המשתנה בלוקל סטורג והוא יכיל את כל הסטייט
-        reducer,//רדיוסר
-        newAuctionState //מה הסטייט שיהיה בלוקל סטור' וזה גם הסטייט הכללי
-    );
+
+
     useEffect(() => {
         //TODO: האם זה אמור להיות כאן או באחד הכפתורים קודם, אולי לא מכיר את הדיספאצ
         //ומה עם שגיאה 400?
-        //לשנות את הסטטוס שלו למנהל  
-        // beManager(state.currentUser._id).then(succ => dispatch({ type: actionTypes.SET_CURRENT_USER, payload: succ.data }))
+        //TODO: לשנות את הסטטוס שלו למנהל  
+        // beManagerInDB
     }, [])
 
     const classes = useStyles();
@@ -81,24 +71,24 @@ const NewAuction = (props) => {
     const handleNext = () => {
         switch (activeStep) {
             case 0:
-                return savePackages(state._id, state.packagesList);//שמירת תמחור מכירה במסד נתונים;
+                return //savePackages(props._id, props.packagesList);//שמירת תמחור מכירה במסד נתונים;
             case 1:
-                return saveProducts(state._id, state.productsList);//שמירת העלאת מוצרים במסד נתונים;
+                return //saveProducts(props._id, props.productsList);//שמירת העלאת מוצרים במסד נתונים;
             case 2: {
                 let organizationDetails = {
-                    organizationName: state.organizationName,
-                    organizationTxt: state.organizationTxt,
-                    organizationPhotos: state.organizationPhotos
+                    organizationName: props.organizationName,
+                    organizationTxt: props.organizationTxt,
+                    organizationPhotos: props.organizationPhotos
                 };
-                return saveOrganizationInformation(state._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
+                return saveOrganizationInformationInDB(props._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
             }
             case 3: {
                 let auctionDetails = {
-                    dateOfLottery: state.dateOfLottery,
-                    registrationEndDate: state.registrationEndDate,
-                    registrationStartDate: state.registrationStartDate
+                    dateOfLottery: props.dateOfLottery,
+                    registrationEndDate: props.registrationEndDate,
+                    registrationStartDate: props.registrationStartDate
                 };
-                return saveAuctionInformation(state._id, auctionDetails);//שמירת מידע על המכירה במסד נתונים;
+                return saveAuctionInformation(props._id, auctionDetails);//שמירת מידע על המכירה במסד נתונים;
 
             }
         }
@@ -156,30 +146,30 @@ const NewAuction = (props) => {
             <div>
                 {activeStep === steps.length ? (
                     <div>
-                        <Typography className={classes.instructions}>{state.finalStepModalIsOpen ? <FinalStep /> : null}</Typography>
+                        <Typography className={classes.instructions}>{props.finalStepModalIsOpen ? <FinalStep /> : null}</Typography>
                         <Button onClick={handleBack} className={classes.button}>Back</Button>
                         <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>
                 ) : (
+                    <div>
+                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                         <div>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                            <div>
-                                {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
-                                {isStepOptional(activeStep) && (
-                                    <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
-                                )}
+                            {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
+                            {isStepOptional(activeStep) && (
+                                <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
+                            )}
 
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={handleNext}
-                                    className={classes.button}
-                                >
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
-                                </Button>
-                            </div>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleNext}
+                                className={classes.button}
+                            >
+                                {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
+                            </Button>
                         </div>
-                    )}
+                    </div>
+                )}
             </div>
         </div>
 
@@ -192,9 +182,9 @@ const NewAuction = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        // isOpen: state.auction.finalStepModalIsOpen,
+        isOpen: state.auction.finalStepModalIsOpen,
 
     };
 }
-export default connect(mapStateToProps, { /*updateNewAuctioinState, setNewAuctionItemsInLS*/ })(NewAuction);
+export default connect(mapStateToProps, { })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

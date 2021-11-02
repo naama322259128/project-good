@@ -12,9 +12,7 @@ import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import LoginGoogle from './LoginGoogle';
-import { useStorageReducer } from 'react-storage-hooks';
-import { userReducer as reducer, initialState as userState } from '../../store/reducers/userState.js'
-import * as actionTypes from '../../store/actionTypes';
+
 import { setCurrentUser } from '../../store/actions/signUp';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,6 +90,7 @@ const SignIn = (props) => {
           <FilledInput
             type={values.showPassword ? 'text' : 'password'}
             onChange={handleChange('password')}
+            onKeyPress={e => { if (e.key === 'Enter') document.getElementById('btnSubmit').click() }}
             placeholder="Password"
             required
             className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
@@ -116,7 +115,7 @@ const SignIn = (props) => {
             }
           />
         </div>
-        <Button type="button" variant="contained" className={"login_btn_sign_in"}
+        <Button type="button" variant="contained" className={"login_btn_sign_in"} id="btnSubmit"
           onClick={() => { props.signIn(password, email) }}>Login</Button>
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
         <br />

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './Auction.scss';
 import Button from '@material-ui/core/Button';
 import Order from '../../models/order';
-import {addOrderToState} from '../../store/actions/user';
+import { addOrderToDB } from '../../store/actions/user';
 import { connect } from "react-redux";
 
 const Cart = (props) => {
@@ -35,22 +35,21 @@ const Cart = (props) => {
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
 
-            {props.shoppingCart.map((item, index) => {
+            {props.shoppingCart && props.shoppingCart.map((item, index) => {
                 return (<ProductInCart key={parseInt(index)} item={item} /*setCount={props.setCnt}*/ />)
             })}
             <Button onClick={orderCompletion}>OK</Button>{/* כפתור אישור פה יועבר כל בסל מהלוקל סטורג למסד נתונים*/}
 
-            {amountToPay()}
+            {props.shoppingCart && amountToPay()}
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);
 }
 
 const mapStateToProps = state => {
     return {
-        shoppingCart:state.user.shoppingCart,
-        currentUser:state.user.currentUser,
-        auction_id:state.currentAuction._id//לבדוק אם הכוונה ב _id של מחירה
+        shoppingCart: state.user.shoppingCart,
+        currentUser: state.user.currentUser,
+        auction_id: state.currentAuction._id//לבדוק אם הכוונה ב _id של מחירה
     }
-  }
-export default connect(mapStateToProps, {addOrderToState})(Cart);
-  
+}
+export default connect(mapStateToProps, { addOrderToDB })(Cart);

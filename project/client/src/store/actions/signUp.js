@@ -5,19 +5,9 @@ export const setCurrentUser = (user) => {
         payload: user
     }
 }
-
-// export const deleteUser = (user) => {
-
-//     return (dispatch) => {
-//         axios.delete(`http://localhost:5000/users/${user._id}`).then(succ => {
-//             console.log(user);
-//             console.log(succ.data);
-//             if (succ.status != 400) {
-//                 dispatch(deleteCurrentUser(succ.data));
-
-//             }
-
-//         })
-//     }
-
-// }
+export const signInOfState = (user) => {
+    return {
+        type: actionTypes.SIGN_IN_OF_STATE,
+        payload: user
+    }
+}

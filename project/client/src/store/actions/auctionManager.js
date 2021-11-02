@@ -2,13 +2,13 @@ import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 
 //מביא את כל המכירות של המנהל הזה
-export const getAuctionsArray = (user) => {
+export const getManagerAuctionsFromDB = (user) => {
     //let manager_id='611c2f2e18f13934fc07bc27';
     let manager_id = user._id;
     return (dispatch) => {
         axios.get(`http://localhost:5000/auctions/getAuctionsByManagerId/${manager_id}`).then(succ => {
             console.log(succ.data);
-            //if (succ.status != 400) dispatch();
+            if (succ.status != 400) dispatch(setManagerAuctions(succ.data));
         })
     }
 }
@@ -65,24 +65,19 @@ export const updateAuction = (_id, auction) => {
         payload: false
     }
 }
-export const approvalAuction = (a_id, status) => {
-    // TODO       put/get ??
-    if (status) alert("approved!!");
-    else alert("disapproved")
+export const setManagerAuctions = (list) => {
     return {
-        //זה סתם רק בגלל השגיאה
-        //לעשות עדכון במסד נתונים
-        //ואז למחוק את הרטרן הזה
-        type: actionTypes.SET_APPROVAL_AUCTION_MODAL,
-        payload: false
+        type: actionTypes.SET_MANAGER_AUCTIONS,
+        payload: list
     }
-
-    /* return (dispatch) => {
-         axios.put(`http://localhost:5000/auctions/approvalAuction/${a_id}&${status}`).then(succ => {
-             console.log(succ.data);
-             //if (succ.status != 400) dispatch();
-         })
-     }*/
+}
+export const approvalAuctionInDB = (a_id, status) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:5000/auctions/approvalAuction/${a_id}&${status}`).then(succ => {
+            console.log(succ.data);
+            if (succ.status != 400) dispatch(getManagerAuctionsFromDB());
+        })
+    }
 }
 //האם ההגרלות מאושרות
 export const isAuctionApproved = (_id) => {
@@ -94,7 +89,7 @@ export const isAuctionApproved = (_id) => {
     }
 }
 //האם ההגרלות התבצעו
-export const getAuctionIsDone = (_id) => {
+export const getAuctionIsDoneFromDB = (_id) => {
     return (dispatch) => {
         axios.get(`http://localhost:5000/auctions/getAuctionIsDone/${_id}`).then(succ => {
             console.log(succ.data);
@@ -102,14 +97,3 @@ export const getAuctionIsDone = (_id) => {
         })
     }
 }
-
-/*
-export const updateAuctionManagerState = () => {
-    //TODO: אפשר?
-    updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
-    return {
-        type: actionTypes.UPDATE_AUCTION_MANAGER_STATE,
-        payload: JSON.parse(localStorage.getItem("selected_auction_to_options"))
-    };
-}
-*/

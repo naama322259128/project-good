@@ -1,14 +1,14 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
-import { updateCurrentUser } from './user'
+import { setCurrentUser } from './user'
 import { setProductsList } from './newAuction';
 
-export const setCurrentAuction = (auctionId) => {
+export const getAuctionFromDB = (auctionId) => {
   return (dispatch) => {
     axios.get(`http://localhost:5000/auctions/${auctionId}`).then(succ => {
       console.log(succ.data);
       if (succ.status != 400)
-        dispatch(updateCurrentAuction(succ.data));
+        dispatch(setCurrentAuction(succ.data));
     })
   }
 }
@@ -21,27 +21,10 @@ export const setCntOfProductInCart = (_id, cnt) => {
     }
   }
 }
-export const updateCurrentAuction = (auction) => {
+export const setCurrentAuction = (auction) => {
   return {
     type: actionTypes.SET_CURRENT_AUCTION,
     payload: auction
-  }
-}
-
-export const getProducts = (auction_id) => {
-  return (dispatch) => {
-    return axios.get(`http://localhost:5000/auctions/${auction_id}`).then(succ => {
-      dispatch(setProductsList(succ.data))
-    })
-  }
-
-}
-
-export const updateCurrentAuctionState = () => {
-  updateCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
-  return {
-    type: actionTypes.UPDATE_CURRENT_AUCTION_STATE,
-    payload: JSON.parse(localStorage.getItem("currentAuction"))
   }
 }
 

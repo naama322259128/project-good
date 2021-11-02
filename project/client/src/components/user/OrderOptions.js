@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { getOrderDetails } from '../../utils/orderUtils'
-import { getAuctionWithWinners } from '../../utils/auctionUtils'
-import { getAuctionIsDone } from '../../store/actions/auctionManager';
+import { getOrderDetailsFromDB } from '../../utils/orderUtils'
+import { getAuctionWithWinnersFromDB } from '../../utils/auctionUtils'
+import { getAuctionIsDoneFromDB } from '../../store/actions/auctionManager';
 import IconButton from '@material-ui/core/IconButton';
 import results from '../../img/icons/results.png'
 import viewOrder from '../../img/icons/view-order.png'
@@ -27,7 +27,7 @@ export default function OrderOptions(props) {
 
   useEffect(() => {
 
-    getAuctionWithWinners(/*"615dd14171ffd48b48935b3a"*/props.order.auctionId).then(succ => {
+    getAuctionWithWinnersFromDB(/*"615dd14171ffd48b48935b3a"*/props.order.auctionId).then(succ => {
       console.log(succ.data.productList)
       setProductsList(succ.data.productList);//רשיתמ מוצרים עם הזוכים של מכירה זו
       setStatus(succ.data.status);

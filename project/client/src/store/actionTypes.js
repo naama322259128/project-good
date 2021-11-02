@@ -7,15 +7,15 @@ export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART"//מחיקת �
 export const SET_CURRENT_AUCTION = "SET_CURRENT_AUCTION";//לאתחל את מערך המוצרים, ועוד נתונים של המכירה הנוכחית
 export const SET_CNT_PRODUCT_IN_CART = "SET_CNT_PRODUCT_IN_CART";//עדכון כמות מוצר מתוך הסל
 export const SIGN_OUT = "SIGN_OUT"//יציאת משתמש
-export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER"//עדכון פרטי משתמש
 export const UPDATE_SHOPPING_CART = "UPDATE_SHOPPING_CART"
 // export const SET_YOUR_PROFILE="SET_YOUR_PROFILE"//האם להציג את הyour profile
 export const UPDATE_USER_STATE = "UPDATE_USER_STATE"
 export const SET_SHOW_CONTACT_FORM = "SET_SHOW_CONTACT_FORM"
 export const ADD_ORDER = "ADD_ORDER"//הוספת הזמנה לסטייט
-
+export const SET_USER_ORDERS = "SET_USER_ORDERS"
+export const SIGN_IN_OF_STATE="SIGN_IN_OF_STATE"
 /******************************************   NEW AUCTION   ****************************************************/
-export const SET_NEW_AUCTION="SET_NEW_AUCTION"
+export const SET_NEW_AUCTION = "SET_NEW_AUCTION"
 export const SHOW_ADD_PACKAGE = "SHOW_ADD_PACKAGE";//AddPackage להראות את הקומפוננטה 
 export const ADD_PACKAGE = "ADD_PACKAGE";//
 export const DELETE_PACKAGE = "DELETE_PACKAGE";//
@@ -44,7 +44,7 @@ export const SET_DISAPPROVAL_AUCTION_MODAL = "SET_DISAPPROVAL_AUCTION_MODAL"//ה
 export const SET_APPROVAL_AUCTION_MODAL = "SET_APPROVAL_AUCTION_MODAL";//האם להציג מודל אישור אישור מכירה
 export const SET_SELECTED_AUCTION_TO_OPTIONS = "SET_SELECTED_AUCTION_TO_OPTIONS"//איזו מכירה תימחק/תתעדכן/תאושר
 export const UPDATE_AUCTION_MANAGER_STATE = "UPDATE_AUCTION_MANAGER_STATE"
-
+export const SET_MANAGER_AUCTIONS = "SET_MANAGER_AUCTIONS"//הגדרה בסטייט של מכירות של המנהל
 
 /******************************************   SITE MANAGER   ****************************************************/
 export const UPDATE_SITE_MANAGER_STATE = "UPDATE_SITE_MANAGER_STATE"
