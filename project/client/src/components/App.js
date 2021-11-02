@@ -17,12 +17,13 @@ import UploadingProducts from './new auction/uploading products/UploadingProduct
 import AddProduct from './new auction/uploading products/AddProduct';
 
 
+
 function App() {
   return (
 
     <Router>
       <Switch>
-  
+
         <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>
