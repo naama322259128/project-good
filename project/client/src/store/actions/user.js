@@ -21,7 +21,6 @@ export const updateUserInDB = (user) => {
 
 }
 
-
 export const setUserOrders = (orders) => {
     return {
         type: actionTypes.SET_USER_ORDERS,
@@ -99,10 +98,3 @@ export const deleteProductFromCart = (_id) => {
 }
 
 
-export const getUserOrdersListFromDB = async (_id) => {
-    return (dispatch) => {
-     /*return*/   axios.get(`http://localhost:5000/orders/userOrdersList/${_id}`).then(succ => {
-            dispatch(setUserOrders(succ.data), console.log(succ.data));
-        })
-    }
-}

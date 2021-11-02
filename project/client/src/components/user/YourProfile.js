@@ -8,11 +8,10 @@ import EditAuction from './auction manager/EditAuction'
 import AuctionResults from './auction manager/AuctionResults'
 import AuctionStatistics from './auction manager/AuctionStatistics'
 import { connect } from 'react-redux';
-import { getUserOrdersListFromDB } from '../../store/actions/user'//מחזירה את ההזמנות של המשתמש
 
 
 const YourProfile = (props) => {
-    useEffect(() => { getUserOrdersListFromDB(props.userId); }, [])
+
     //TODO: לבדוק שהיוסר או הכרנט-יוסר לא אנדיפיינד
     
     return (

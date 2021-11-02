@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import './yourProfile.scss'
 import OrderOptions from './OrderOptions';
 import moment from 'moment'
+import { getUserOrdersListFromDB } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
 
 const UserTable = (props) => {
     const columns = [
@@ -65,56 +66,62 @@ const UserTable = (props) => {
         },
     });
 
-    useEffect(() => {
-        debugger;
-        let arr = [];
-        props.orders.map((o) => { arr.push(createData(o)) });
-        setRows(arr);
 
+    useEffect(() => {
+        getUserOrdersListFromDB(props.user._id).then(succ => {
+            let arr = [];
+            succ.data.map((o) => { arr.push(createData(o)) });
+            console.log(succ.data);
+            setRows(arr);
+        });
     }, [])
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+
     const style1 = { marginLeft: '36vw', marginTop: '4vh' }
     return (
-        <Paper className={classes.root} style={style1}>
-            <TableContainer className={classes.container} >
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                            return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                    {columns.map((column) => {
+        <center>
+            <h1>UserTable</h1>
+            <Paper className={classes.root} style={style1}>
+                <TableContainer className={classes.container} >
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                                return (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        {columns.map((column) => {
 
-                                        const value = row[column.id];
-                                        return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {value}
-                                            </TableCell>
-                                        );
-                                    })}
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Paper>
+                                            const value = row[column.id];
+                                            return (
+                                                <TableCell key={column.id} align={column.align}>
+                                                    {value}
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
+        </center>
     );
 }
 
