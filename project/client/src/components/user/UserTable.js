@@ -9,11 +9,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import './yourProfile.scss'
-import { getUserOrdersListFromDB } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
 import OrderOptions from './OrderOptions';
 import moment from 'moment'
 
-const UserTable = () => {
+const UserTable = (props) => {
     const columns = [
         {
             id: 'name',
@@ -52,7 +51,7 @@ const UserTable = () => {
         const n = order.auctionId.organizationName + " : " + order.auctionId.name;
         let d = moment(new Date(order.orderDate)).format('D/MM/YYYY');
         let sum = order.amountToPay;
-        return {name: n,orderDate: d, sum:sum, options };
+        return { name: n, orderDate: d, sum: sum, options };
     }
 
     const [rows, setRows] = useState([]);
@@ -67,17 +66,16 @@ const UserTable = () => {
     });
 
     useEffect(() => {
-        getUserOrdersListFromDB("611c2f2e18f13934fc07bc27"/*JSON.parse(localStorage.user).currentUser._id*/).then(succ => {
-            let arr = [];
-            succ.data.map((o) => {arr.push(createData(o)) });
-            setRows(arr);
-        });
+        debugger;
+        let arr = [];
+        props.orders.map((o) => { arr.push(createData(o)) });
+        setRows(arr);
+
     }, [])
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
 
     const style1 = { marginLeft: '36vw', marginTop: '4vh' }
     return (
@@ -102,11 +100,11 @@ const UserTable = () => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                     {columns.map((column) => {
-                                
+
                                         const value = row[column.id];
                                         return (
                                             <TableCell key={column.id} align={column.align}>
-                                               {value}
+                                                {value}
                                             </TableCell>
                                         );
                                     })}
@@ -119,9 +117,11 @@ const UserTable = () => {
         </Paper>
     );
 }
+
 const mapStateToProps = (state) => {
     return {
-
+        user: state.user.currentUser,
+        orders: state.user.ordersList
     };
 }
 export default connect(mapStateToProps, {})(UserTable);

@@ -2,6 +2,7 @@ import * as actionTypes from '../actionTypes';
 export const initialState = {
     currentUser: null,
     loginIsOpen: false,
+    ordersList:[],
     shoppingCart: [    //סל מוצרים
         { cnt: 1, product: { _id: "111", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
         { cnt: 4, product: { _id: "222", name: "in cart", image: "465", description: "osjqw jrngu3i", price: 15 } },
@@ -80,6 +81,12 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 shoppingCart: action.payload,
+            }
+        }
+        case  actionTypes.SET_USER_ORDERS:{
+            return{
+                ...state,
+                ordersList:action.payload
             }
         }
     }

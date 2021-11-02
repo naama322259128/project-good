@@ -13,7 +13,6 @@ function App() {
   return (
 
     <Router>
-      {/* <UpdateDetails/> */}
       <Switch>
 
         <Route path={`/auction`} ><Auction /></Route>

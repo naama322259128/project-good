@@ -21,16 +21,6 @@ export const updateUserInDB = (user) => {
 
 }
 
-//של משתמש ומחזירה את ההזמנות של אותו משתמש _id מקבלת  
-export const getUserOrdersFromDB = (user) => {
-    let id = user._id;
-    return (dispatch) => {
-        axios.get(`http://localhost:5000/orders/orderList/${id}`).then(succ => {
-            if (succ.status != 400)
-                dispatch(setUserOrders(succ.data))
-        })
-    }
-}
 
 export const setUserOrders = (orders) => {
     return {
@@ -66,7 +56,6 @@ export const addProductToCart = (cnt, product) => {
         }
     }
 }
-
 
 export const signOut = () => {
     return {
@@ -106,5 +95,14 @@ export const deleteProductFromCart = (_id) => {
     return {
         type: actionTypes.DELETE_PRODUCT_FROM_CART,
         payload: _id
+    }
+}
+
+
+export const getUserOrdersListFromDB = async (_id) => {
+    return (dispatch) => {
+     /*return*/   axios.get(`http://localhost:5000/orders/userOrdersList/${_id}`).then(succ => {
+            dispatch(setUserOrders(succ.data), console.log(succ.data));
+        })
     }
 }
