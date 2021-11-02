@@ -177,15 +177,17 @@ const NewAuction = (props) => {
 
 
 
-        <footer id="new_auction_footer"></footer>
+        <footer id="new_auction_footer"/>
 
     </>
     )
 }
 const mapStateToProps = (state) => {
     return {
-        isOpen: state.auction.finalStepModalIsOpen,
-        currentUser: state.user.currentUser
+        finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
+        currentUser: state.user.currentUser,
+        // dateOfLottery:
+        // registrationEndDate
     };
 }
 export default connect(mapStateToProps, { createNewAuction })(NewAuction);
