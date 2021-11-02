@@ -51,18 +51,21 @@ const HomeHeader = (props) => {
 
         <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
 
-        <Button
-          href={props.currentUser ? "/new_auction" : '#'}
-          onClick={props.currentUser ?
-            localStorage.removeItem("newAuction")  //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
-            : () => {
-              props.setLogin(true);
-              window.scrollTo(0, 0);
+        <Link
+          to={props.currentUser ? "/new_auction" : '#'}>
+          <Button
+            // href={props.currentUser ? "/new_auction" : '#'}
+            onClick={props.currentUser ?
+              localStorage.removeItem("newAuction")  //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
+              : () => {
+                props.setLogin(true);
+                window.scrollTo(0, 0);
+              }
             }
-          }
-          type="button" className="btn" id="btnNewAuction">
-          BUILD CHINESE AUCTION
-        </Button>
+            type="button" className="btn" id="btnNewAuction">
+            BUILD CHINESE AUCTION
+          </Button>
+          </Link>
       </div>
 
 
@@ -75,7 +78,7 @@ const HomeHeader = (props) => {
 const mapStateToProps = state => {
   return {
     currentUser: state.user.currentUser,
-    loginIsOpen:state.user.loginIsOpen
+    loginIsOpen: state.user.loginIsOpen
   }
 }
-export default connect(mapStateToProps, {setLogin})(HomeHeader);
+export default connect(mapStateToProps, { setLogin })(HomeHeader);

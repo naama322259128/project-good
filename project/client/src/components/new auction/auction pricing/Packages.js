@@ -1,7 +1,7 @@
 //כרטיסים בחבילה
 //הקומפוננטה נמצאת בתוך תמחור מכירה
 import React, { useState } from 'react'
-import AddPackage from './AddPackage';
+import AddPackageFrom from './AddPackageFrom';
 import PackagesList from './PackagesList';
 import { connect } from "react-redux";
 import { showAddPackage } from '../../../store/actions/newAuction';
@@ -17,7 +17,7 @@ return (<>
          at a discounted price according to the percentage of the discount you will determine</label>
         <button className="positive ui button" onClick={props.showAddPackage}>Add new Package</button>
         {<PackagesList/>}
-        {<AddPackage />}
+        {<AddPackageFrom />}
     </>);
 }
 

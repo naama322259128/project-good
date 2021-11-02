@@ -9,17 +9,6 @@ export const setCurrentUser = (user) => {
     }
 }
 
-//עדכון פרטי משתמש
-export const updateUserInDB = (user) => {
-    return (dispatch) => {
-        return axios.put(`http://localhost:5000/users/${user._id}`, user).then(succ => {
-            if (succ.status != 400) {
-                dispatch(setCurrentUser(succ.data))
-            }
-        });;
-    }
-
-}
 
 export const setUserOrders = (orders) => {
     return {
@@ -57,6 +46,11 @@ export const addProductToCart = (cnt, product) => {
 }
 
 export const signOut = () => {
+    //TODO מה עושה אם אני אומרת לו למחוק אייטם שלא קיים
+    localStorage.setItem("login", false);
+    localStorage.removeItem("pass");
+    localStorage.removeItem("email");
+    localStorage.removeItem("name");
     return {
         type: actionTypes.SIGN_OUT
     }
@@ -69,6 +63,14 @@ export const updateShoppingCart = (arr) => {
     }
 }
 
+export const deleteProductFromCart = (_id) => {
+    return {
+        type: actionTypes.DELETE_PRODUCT_FROM_CART,
+        payload: _id
+    }
+}
+
+
 export const addOrderToDB = (order) => {
     return (dispatch) => {
         axios.post(`http://localhost:5000/orders`, order).then(succ => {
@@ -79,22 +81,14 @@ export const addOrderToDB = (order) => {
     }
 }
 
-//מחזירה הזמנה עפ"י קוד משתמש ומכירה
-export const getOrderByUserAndAuctionFromDB = (user_id, auction_id) => {
+//עדכון פרטי משתמש
+export const updateUserInDB = (user) => {
     return (dispatch) => {
-        axios.get(`http://localhost:5000/orders/${user_id}&${auction_id}`).then(succ => {
+        return axios.put(`http://localhost:5000/users/${user._id}`, user).then(succ => {
             if (succ.status != 400) {
-                const arr = (succ.data).orderDetails;
-                dispatch();
+                dispatch(setCurrentUser(succ.data))
             }
-        })
+        });;
     }
-}
-export const deleteProductFromCart = (_id) => {
-    return {
-        type: actionTypes.DELETE_PRODUCT_FROM_CART,
-        payload: _id
-    }
-}
 
-
+}

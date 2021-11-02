@@ -1,9 +1,9 @@
 import * as actionTypes from '../actionTypes';
-
+import Auction from '../../models/auction'
 export const initialState = {
-    newAuction: "",
+    newAuction: new Auction(),
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
-    showSetProduct: true,//האם להציג את קומפוננטת  AddProduct
+    showSetProduct: true,//האם להציג את קומפוננטת  AddProductForm
     finalStepModalIsOpen: true//האם להציג את המודל של האישור הסופי
 }
 export const newAuctionReducer = (state = initialState, action) => {
@@ -120,7 +120,7 @@ export const newAuctionReducer = (state = initialState, action) => {
             //איפוס הסטייט לאחר בניית מכירה
             return {
                 //TODO מה לעשות פה
-                newAuction: null,
+                newAuction: new Auction(),
                 //showSetPrice: false,
                 showSetPackage: false,
                 showSetProduct: true,

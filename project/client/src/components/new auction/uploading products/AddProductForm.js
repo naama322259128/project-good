@@ -1,13 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { addProductToDB } from "./../../../store/actions/newAuction";
+import { addProductToDB } from "../../../store/actions/newAuction";
 import { connect } from "react-redux";
 
-const AddProduct = (props) => {
+const AddProductForm = (props) => {
 
     const onChangeHandler = (event) => { setSelectedFile(event.target.files[0]); }
     const onClickHandler = () => {
         const data = new FormData();
-        debugger;
         data.append('file', selectedFile);
         newProduct.img = data;
     }
@@ -33,9 +32,7 @@ const AddProduct = (props) => {
                 <input type="file" name="file" onChange={(e) => { onChangeHandler(e) }} />
                 <button type="button" class="btn btn-success btn-block" onClick={(e) => onClickHandler(e)}>Upload</button>
 
-
-
-                <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProductToDB(newProduct) }} />
+                <input className="positive ui button" type="button" value="Add" onClick={() => { props.addProductToDB(props.auctionId, newProduct) }} />
             </form>
         </div>
     ) : null)
@@ -43,6 +40,7 @@ const AddProduct = (props) => {
 const mapStateToProps = (state) => {
     return {
         showSetProduct: state.auction.showSetProduct,
+        auctionId: state.auction.newAuction._id
     };
 }
-export default connect(mapStateToProps, { addProductToDB })(AddProduct);
+export default connect(mapStateToProps, { addProductToDB })(AddProductForm);

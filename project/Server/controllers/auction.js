@@ -20,9 +20,11 @@ const getById = async (req, res) => {
 }
 
 const addAuction = async (req, res) => {
-    let auction = req.body;
-    let newAuction = new Auction(auction);
+    let au = req.body;
+    let newAuction = new Auction(au);
     try {
+        console.log(newAuction)
+        
         await newAuction.save();
         return res.send(newAuction);
     }
@@ -30,20 +32,7 @@ const addAuction = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
-const createAuction = async (req, res) => {
-    let auctionManager = req.body;
 
-    let newAuction = new Auction();
-
-    try {
-        newAuction.auctionManager=auctionManager;
-        await newAuction.save();
-        return res.send(newAuction);
-    }
-    catch (err) {
-        return res.status(400).send(err.message)
-    }
-}
 const addProduct = async (req, res) => {
     let product = req.body;
     const url1 = req.protocol + '://' + req.get('host');
@@ -166,7 +155,7 @@ const addPackages = async (req, res) => {
     let { packages } = req.params;
     let newAuction = new Auction();
     try {
-        
+
         if (!mongoose.Types.ObjectId.isValid(_id))
             return res.status(404).send("Invalid ID number");
         if (_id && mongoose.Types.ObjectId.isValid(_id)) {
@@ -353,7 +342,7 @@ module.exports = {
     getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
     , addPackages, addProducts, addOrganizationInformation,
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
-    getAuctionWithWinnersForManager, performLotteries, getAllUnapprovedAuctionsByUser,createAuction
+    getAuctionWithWinnersForManager, performLotteries, getAllUnapprovedAuctionsByUser
 }
 
 //המכירה שש לה הכי הרבה הכנסות

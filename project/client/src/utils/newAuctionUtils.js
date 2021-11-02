@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { setNewAuction } from '../store/actions/newAuction';
 
+export const createNewAuctionInDB = (auction) => {
+    return axios.post(`http://localhost:5000/auctions/createNewAuction`, auction)
+}
+
 //מידע על הארגון
 export const saveOrganizationInformationInDB = (_id, details) => {
     return (dispatch) => {

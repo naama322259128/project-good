@@ -14,10 +14,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
-import { beManagerInDB } from "../../utils/newAuctionUtils";
-import { saveAuctionInformation } from '../../store/actions/newAuction'
-import { saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
-import { createNewAuction } from '../../store/actions/newAuction';
+import { beManagerInDB } from "../../store/actions/newAuction";
+import { createNewAuctionInDB, saveAuctionInformation, saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
+import { signIn, loginGoogle } from '../../store/actions/signIn';
+import { setNewAuction } from '../../store/actions/newAuction'
+import Auction from '../../models/auction'
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -50,15 +51,30 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
-
-
     useEffect(() => {
-        //TODO: האם זה אמור להיות כאן או באחד הכפתורים קודם, אולי לא מכיר את הדיספאצ
-        //ומה עם שגיאה 400?
-        //TODO: לשנות את הסטטוס שלו למנהל  
-        // beManagerInDB
-        debugger;
-        props.createNewAuction(props.currentUser);
+        if (props.currentUser == null && localStorage.getItem("login") == "true")
+            props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
+        else if (props.currentUser == null && localStorage.getItem("login") == "google")
+            props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+
+        let au = new Auction({
+            name: "uknown", auctionManager: props.currentUser._id, registrationStartDate: null,
+            lotteriesDate: null, registrationEndDate: null,
+            status: "NOT_DONE", purchasePackage: [],
+            productList: [], organizationName: "uknown",
+            organizationText: "uknown", organizationPhotos: [],
+            terms: "uknown", publicationApproval: false,
+            lotteryApproval: false
+        })
+
+        createNewAuctionInDB(au).then(succ => {
+            if (succ.status != 400) {
+                props.setNewAuction(succ.data);
+                console.log(succ.data);
+            }
+        });
+        props.beManagerInDB(props.userId);
+
     }, [])
 
     const classes = useStyles();
@@ -71,37 +87,35 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
-        switch (activeStep) {
-            case 0:
-                return //savePackages(props._id, props.packagesList);//שמירת תמחור מכירה במסד נתונים;
-            case 1:
-                return //saveProducts(props._id, props.productsList);//שמירת העלאת מוצרים במסד נתונים;
-            case 2: {
-                let organizationDetails = {
-                    organizationName: props.organizationName,
-                    organizationTxt: props.organizationTxt,
-                    organizationPhotos: props.organizationPhotos
-                };
-                return saveOrganizationInformationInDB(props._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
-            }
-            case 3: {
-                let auctionDetails = {
-                    dateOfLottery: props.dateOfLottery,
-                    registrationEndDate: props.registrationEndDate,
-                    registrationStartDate: props.registrationStartDate
-                };
-                return saveAuctionInformation(props._id, auctionDetails);//שמירת מידע על המכירה במסד נתונים;
+        // switch (activeStep) {
+        //     case 0:
+        //         return //savePackages(props._id, props.packagesList);//שמירת תמחור מכירה במסד נתונים;
+        //     case 1:
+        //         return //saveProducts(props._id, props.productsList);//שמירת העלאת מוצרים במסד נתונים;
+        //     case 2: {
+        //         let organizationDetails = {
+        //             organizationName: props.organizationName,
+        //             organizationTxt: props.organizationTxt,
+        //             organizationPhotos: props.organizationPhotos
+        //         };
+        //         return saveOrganizationInformationInDB(props._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
+        //     }
+        //     case 3: {
+        //         let auctionDetails = {
+        //             dateOfLottery: props.dateOfLottery,
+        //             registrationEndDate: props.registrationEndDate,
+        //             registrationStartDate: props.registrationStartDate
+        //         };
+        //         return saveAuctionInformation(props._id, auctionDetails);//שמירת מידע על המכירה במסד נתונים;
 
-            }
-        }
+        //     }
+        // }
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());
             newSkipped.delete(activeStep);
         }
-        //מתי לעשות את השמירה של המכירה 
-        //או חלקים ממנה (מוצרים/חבילות וכו' בנפרד),
-        // בכל לחיצה כאן, או כשעוזב את הקומפוננטה הזו? או אחר
+
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
     };
@@ -153,32 +167,28 @@ const NewAuction = (props) => {
                         <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>
                 ) : (
+                    <div>
+                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                         <div>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                            <div>
-                                {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
-                                {isStepOptional(activeStep) && (
-                                    <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
-                                )}
+                            {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
+                            {isStepOptional(activeStep) && (
+                                <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
+                            )}
 
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={handleNext}
-                                    className={classes.button}
-                                >
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
-                                </Button>
-                            </div>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleNext}
+                                className={classes.button}
+                            >
+                                {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
+                            </Button>
                         </div>
-                    )}
+                    </div>
+                )}
             </div>
         </div>
-
-
-
-        <footer id="new_auction_footer"/>
-
+        <footer id="new_auction_footer" />
     </>
     )
 }
@@ -186,9 +196,10 @@ const mapStateToProps = (state) => {
     return {
         finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
         currentUser: state.user.currentUser,
+        userId: state.user.currentUser._id,
         // dateOfLottery:
         // registrationEndDate
     };
 }
-export default connect(mapStateToProps, { createNewAuction })(NewAuction);
+export default connect(mapStateToProps, { beManagerInDB, signIn, loginGoogle, setNewAuction })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { addPackageToDB } from '../../../store/actions/newAuction'
 import * as actionTypes from '../../../store/actionTypes'
 
-const AddPackage = (props) => {
+const AddPackageFrom = (props) => {
 
     let newPackage = { qty: 0, discount: 0 };
     let checkQty = () => {
@@ -31,20 +31,22 @@ const AddPackage = (props) => {
                     </div>
                 </div>
             </div>
-            
-                      <button className="positive ui button"
+
+            <button className="positive ui button"
                 // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
-                onClick={() => props.addPackageToDB(newPackage)}>Add</button>
+                onClick={() => props.addPackageToDB(props.auctionId, newPackage)}>Add</button>
 
         </form >
     );
 }
 const mapStateToProps = (state) => {
     return {
-        arr: state.auction.newAuction.productList
+        arr: state.auction.newAuction.productList,
+        auctionId: state.auction.newAuction._id
+
     };
 }
-export default connect(mapStateToProps, { addPackageToDB })(AddPackage);
+export default connect(mapStateToProps, { addPackageToDB })(AddPackageFrom);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable
