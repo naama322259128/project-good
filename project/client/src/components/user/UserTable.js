@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import './yourProfile.scss'
 import OrderOptions from './OrderOptions';
 import moment from 'moment'
+import { getUserOrdersListFromDB } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
 
 const UserTable = (props) => {
     const columns = [
@@ -64,18 +65,21 @@ const UserTable = (props) => {
             maxHeight: 440,
         },
     });
+    
 
     useEffect(() => {
-        debugger;
-        let arr = [];
-        props.orders.map((o) => { arr.push(createData(o)) });
-        setRows(arr);
-
+        getUserOrdersListFromDB(props.user._id).then(succ => {
+            let arr = [];
+            succ.data.map((o) => { arr.push(createData(o)) });
+            console.log(succ.data);
+            setRows(arr);
+        });
     }, [])
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
 
     const style1 = { marginLeft: '36vw', marginTop: '4vh' }
     return (
@@ -96,7 +100,7 @@ const UserTable = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        {rows&&rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                     {columns.map((column) => {

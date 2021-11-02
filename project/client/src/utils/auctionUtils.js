@@ -14,7 +14,6 @@ export const getAuctionByIdFromDB = (_id) => {
 //   }
 // }
 
-//מחזירה את רשימת המכירות הקיימות במסד נתונים 
 export const getAuctionsListFromDB= async () => {
   return axios.get(`http://localhost:5000/auctions`)
 }

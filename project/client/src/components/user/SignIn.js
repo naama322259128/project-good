@@ -75,6 +75,7 @@ const SignIn = (props) => {
         <img className='profile_img' src={p} />
         <div className={"inputs_btns"}>
           <FilledInput
+            onKeyPress={e => { if (e.key === 'Enter') document.getElementById('btnSubmit').click() }}
             type={'text'}
             placeholder="Email"
             required

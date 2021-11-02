@@ -48,11 +48,10 @@ const getUserOrdersList = async (req, res) => {
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send("Invalid ID number");
-    let orders = await Order.find({ "userId": _id }).populate('auctionId');//לבדוק אם ככה שואלים
-    // orders.map(item => {
-    //     item.name = Auction.findOne('_id': _id)
-    // })
-    //TODO להמשיך
+    let orders = await Order.find({ "userId": _id }).
+        populate([
+            { path: 'auctionId', select: 'name organizationName' }
+        ]);
     return res.send(orders);
 }
 
@@ -102,7 +101,7 @@ const getOrderDetails = async (req, res) => {
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Invalid ID number");
     let order = await Order.findById(_id)
-    .
+        .
         populate([
             { path: 'auctionId', select: 'organizationName name' }
         ]);
