@@ -31,9 +31,11 @@ const AddPackage = (props) => {
                     </div>
                 </div>
             </div>
-            <button className="positive ui button"
+            
+                      <button className="positive ui button"
                 // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
                 onClick={() => props.addPackageToDB(newPackage)}>Add</button>
+
         </form >
     );
 }

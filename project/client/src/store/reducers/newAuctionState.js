@@ -2,7 +2,6 @@ import * as actionTypes from '../actionTypes';
 
 export const initialState = {
     newAuction: "",
-
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
     showSetProduct: true,//האם להציג את קומפוננטת  AddProduct
     finalStepModalIsOpen: true//האם להציג את המודל של האישור הסופי
@@ -23,9 +22,8 @@ export const newAuctionReducer = (state = initialState, action) => {
         }
         case actionTypes.ADD_PACKAGE: {
             //כבר נבדק שלא הוכנה חבילה עם מספר כרטיסים כזה
-            let arr = [...state.newAuction.purchasePackage, action.payload];
             let tmp = state.newAuction;
-            tmp.purchasePackage = arr;
+            tmp.purchasePackage = action.payload;
             return {
                 ...state,
                 newAuction: tmp,

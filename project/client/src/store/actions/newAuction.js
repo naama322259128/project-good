@@ -134,6 +134,7 @@ export const pubicationApprovalInDB = (a_id, status, managerId) => {
 
 //תמחור מכירה
 export const addPackageToDB = (_id, packages) => {
+    debugger;
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/setPackages/${_id}&${packages}`).then(succ => {
             console.log(succ.data);
@@ -197,5 +198,17 @@ export const deleteProductFromDB = (_id, product_id) => {
 export const getAllUnapprovedAuctionsByUserFromDB = (user_id) => {
     return (dispatch) => {
         axios.get(`http://localhost:5000/auctions/getAllUnapprovedAuctionsByUser/${user_id}`);
+    }
+}
+
+export const createNewAuction = (user_id) => {
+    return (dispatch) => {
+        axios.post(`http://localhost:5000/auctions/createNewAuction`,user_id).then(succ => {
+            if (succ.status != 400) {
+                debugger;
+                dispatch(setNewAuction(succ.data), console.log(succ.data))
+            }
+
+        });
     }
 }

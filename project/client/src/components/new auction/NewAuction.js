@@ -15,9 +15,9 @@ import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 import { beManagerInDB } from "../../utils/newAuctionUtils";
-import {  saveAuctionInformation } from '../../store/actions/newAuction'
-import {    saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
-
+import { saveAuctionInformation } from '../../store/actions/newAuction'
+import { saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
+import { createNewAuction } from '../../store/actions/newAuction';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -57,6 +57,8 @@ const NewAuction = (props) => {
         //ומה עם שגיאה 400?
         //TODO: לשנות את הסטטוס שלו למנהל  
         // beManagerInDB
+        debugger;
+        props.createNewAuction(props.currentUser);
     }, [])
 
     const classes = useStyles();
@@ -151,25 +153,25 @@ const NewAuction = (props) => {
                         <Button onClick={handleReset} className={classes.button}>Reset</Button>
                     </div>
                 ) : (
-                    <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                         <div>
-                            {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
-                            {isStepOptional(activeStep) && (
-                                <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
-                            )}
+                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                            <div>
+                                {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
+                                {isStepOptional(activeStep) && (
+                                    <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
+                                )}
 
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleNext}
-                                className={classes.button}
-                            >
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
-                            </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleNext}
+                                    className={classes.button}
+                                >
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
+                                </Button>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
             </div>
         </div>
 
@@ -183,8 +185,8 @@ const NewAuction = (props) => {
 const mapStateToProps = (state) => {
     return {
         isOpen: state.auction.finalStepModalIsOpen,
-
+        currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, { })(NewAuction);
+export default connect(mapStateToProps, { createNewAuction })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו
