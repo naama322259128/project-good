@@ -6,11 +6,19 @@ import NewAuction from '../components/new auction/NewAuction';
 import About from './main/About'
 import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
-import React from "react";
+import React, { useEffect } from "react";
 import ContinueNewAuction from './new auction/ContinueNewAuction';
+import { connect } from "react-redux";
+import { signIn, loginGoogle } from '../store/actions/signIn';
 
+function App(props) {
 
-function App() {
+  useEffect(() => {
+    if (props.currentUser == null && localStorage.getItem("login") == "true")
+      props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
+    else if (props.currentUser == null && localStorage.getItem("login") == "google")
+      props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+  }, [])
   return (
 
     <Router>
@@ -22,11 +30,15 @@ function App() {
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
-        <Route path={`/`}><Home />    </Route>
+        <Route path={`/`}><Home /></Route>
       </Switch>
     </Router>
 
   );
 }
-
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.user.currentUser
+  };
+}
+export default connect(mapStateToProps, { signIn, loginGoogle  })(App);

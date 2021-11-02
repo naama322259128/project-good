@@ -105,6 +105,8 @@ export const resetNewAuctionState = () => {
 }
 
 export const setNewAuction = (newAuction) => {
+    debugger;
+    console.log(newAuction)
     return {
         type: actionTypes.SET_NEW_AUCTION,
         payload: newAuction
@@ -133,10 +135,10 @@ export const pubicationApprovalInDB = (a_id, status, managerId) => {
 }
 
 //תמחור מכירה
-export const addPackageToDB = (_id, packages) => {
+export const addPackageToDB = (_id, pa) => {
     debugger;
     return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/setPackages/${_id}&${packages}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/setPackages/${_id}&${pa}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data), addPackage(succ.data));
@@ -179,9 +181,7 @@ export const deletePackageFromDB = (a_id, package_id) => {
     }
 
 }
-// export const setNewAuction = (a) => {
 
-// }
 export const deleteProductFromDB = (_id, product_id) => {
     return (dispatch) => {
         axios.delete(`http://localhost:5000/auction/deleteProduct/${_id}&${product_id}`).then(succ => {
@@ -201,14 +201,3 @@ export const getAllUnapprovedAuctionsByUserFromDB = (user_id) => {
     }
 }
 
-export const createNewAuction = (user_id) => {
-    return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/createNewAuction`,user_id).then(succ => {
-            if (succ.status != 400) {
-                debugger;
-                dispatch(setNewAuction(succ.data), console.log(succ.data))
-            }
-
-        });
-    }
-}
