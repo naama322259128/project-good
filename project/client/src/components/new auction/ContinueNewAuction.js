@@ -21,7 +21,7 @@ const ContinueNewAuction = () => {
         <>
             <h1>Continue New Auction</h1>
             {arr.map(a => {
-                <Link to={'newAuction'} onClick={() => setArrInState(a._id)}>{a.name}</Link>
+                <Link to={'newAuction'} key={a._id} onClick={() => setArrInState(a._id)}>{a.name}</Link>
             })}
         </>
     );

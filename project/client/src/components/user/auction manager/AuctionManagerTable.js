@@ -105,10 +105,7 @@ const AuctionManagerTable = (props) => {
     ];
 
     // TODO: sort by date
-    /*const rows = props.getManagerAuctionsFromDB(localStorage.getItem("currentUser")).map((item) => {
-        return createData(item.name, item.registrationStartDate, item.lotteriesDate, item.status);
-    });*/
-
+  
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);

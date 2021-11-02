@@ -12,7 +12,7 @@ import viewOrder from '../../img/icons/view-order.png'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import './yourProfile.scss';
-import{getProduct}from '../../utils/auctionUtils'
+
 
 export default function OrerDetails(props) {
     const [anchorEl1, setAnchorEl1] = React.useState(null);
@@ -36,7 +36,7 @@ export default function OrerDetails(props) {
 
             <TableContainer component={Paper} sx={{ width: '500' }}  >
                 <Table sx={{ minWidth: 500 }} aria-label="caption table">
-                    <TableCell component="th" scope="row" style={style1} onClick={console.log(props.details)}> qty</TableCell>
+                    <TableCell component="th" scope="row" style={style1}> qty</TableCell>
                     <TableCell component="th" scope="row" style={style1}>prod</TableCell>
                     <TableBody>
 

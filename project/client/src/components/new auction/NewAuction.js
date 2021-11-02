@@ -15,8 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
 import FinalStep from './FinalStepModal';
 import { beManagerInDB } from "../../utils/newAuctionUtils";
-import {  saveAuctionInformation } from '../../store/actions/newAuction'
-import {    saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
+import { saveAuctionInformation } from '../../store/actions/newAuction'
+import { saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -138,7 +138,7 @@ const NewAuction = (props) => {
                     }
                     return (
                         <Step key={label} {...stepProps}>
-                            <StepLabel {...labelProps}>{label}</StepLabel>
+                            <StepLabel key={label}  {...labelProps}>{label}</StepLabel>
                         </Step>
                     );
                 })}
@@ -186,5 +186,5 @@ const mapStateToProps = (state) => {
 
     };
 }
-export default connect(mapStateToProps, { })(NewAuction);
+export default connect(mapStateToProps, {})(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

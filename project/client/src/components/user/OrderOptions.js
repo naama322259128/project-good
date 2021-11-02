@@ -27,8 +27,7 @@ export default function OrderOptions(props) {
 
   useEffect(() => {
 
-    getAuctionWithWinnersFromDB(/*"615dd14171ffd48b48935b3a"*/props.order.auctionId).then(succ => {
-      console.log(succ.data.productList)
+    getAuctionWithWinnersFromDB(props.order.auctionId._id).then(succ => {
       setProductsList(succ.data.productList);//רשיתמ מוצרים עם הזוכים של מכירה זו
       setStatus(succ.data.status);
     });
@@ -40,10 +39,7 @@ export default function OrderOptions(props) {
   return (
     <div>
       <OrderDetails details={details} gifts={gifts} />
-      <br/>
-      <br/>
-      <br/>
-      <IconButton aria-describedby={id} variant="contained" onClick={handleClick} disabled={status=="DONE"}><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
+      <IconButton aria-describedby={id} variant="contained" onClick={handleClick} disabled={status == "DONE"}><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
       <Popover
         id={id}
         open={open}

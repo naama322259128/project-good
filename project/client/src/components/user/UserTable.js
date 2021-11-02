@@ -65,7 +65,7 @@ const UserTable = (props) => {
             maxHeight: 440,
         },
     });
-    
+
 
     useEffect(() => {
         getUserOrdersListFromDB(props.user._id).then(succ => {
@@ -83,42 +83,45 @@ const UserTable = (props) => {
 
     const style1 = { marginLeft: '36vw', marginTop: '4vh' }
     return (
-        <Paper className={classes.root} style={style1}>
-            <TableContainer className={classes.container} >
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows&&rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                            return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                    {columns.map((column) => {
+        <center>
+            <h1>UserTable</h1>
+            <Paper className={classes.root} style={style1}>
+                <TableContainer className={classes.container} >
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                                return (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        {columns.map((column) => {
 
-                                        const value = row[column.id];
-                                        return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {value}
-                                            </TableCell>
-                                        );
-                                    })}
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Paper>
+                                            const value = row[column.id];
+                                            return (
+                                                <TableCell key={column.id} align={column.align}>
+                                                    {value}
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
+        </center>
     );
 }
 
