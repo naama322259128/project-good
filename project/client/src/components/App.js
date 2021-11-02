@@ -9,6 +9,7 @@ import UpdateDetails from './user/UpdateDetails';
 import React from "react";
 import ContinueNewAuction from './new auction/ContinueNewAuction';
 
+
 function App() {
   return (
 
