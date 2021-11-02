@@ -17,10 +17,7 @@ import FinalStep from './FinalStepModal';
 import { beManagerInDB } from "../../utils/newAuctionUtils";
 import { saveAuctionInformation } from '../../store/actions/newAuction'
 import { saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
-<<<<<<< HEAD
-=======
 import { createNewAuction } from '../../store/actions/newAuction';
->>>>>>> 9124491a448d0ee33d21bc4d6584a2d2fea3a7a2
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -191,9 +188,5 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser
     };
 }
-<<<<<<< HEAD
-export default connect(mapStateToProps, {})(NewAuction);
-=======
 export default connect(mapStateToProps, { createNewAuction })(NewAuction);
->>>>>>> 9124491a448d0ee33d21bc4d6584a2d2fea3a7a2
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו
