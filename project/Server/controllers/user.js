@@ -24,7 +24,7 @@ const isEmailExist = async (em) => {
 }
 //הוספת משתמש
 const addUser = async (req, res) => {
-    console.log(user)
+
     let user = req.body;
     if (await isEmailExist(user.email) == true) return res.send("This email is exist");
     else {
@@ -97,7 +97,7 @@ const isLoginGoogle = async (req, res) => {
     if (!user) {
         user = { "userName": name, "email": email };
         let newUser = new User(user);
-        try {            
+        try {
             await newUser.save();
             return res.send(newUser);
         }
@@ -109,8 +109,9 @@ const isLoginGoogle = async (req, res) => {
 }
 
 const beManager = async (req, res) => {
-    let { _id } = req.params;
-    let doc = await User.findOneAndUpdate({ _id: _id }, { status: 'AUCTION_MANAGER' });
+    let userId = req.params._id;
+    console.log(userId)
+    let doc = await User.findOneAndUpdate({ _id: userId }, { status: 'AUCTION_MANAGER' });
     if (!doc)
         return res.status(400).send("Incorrect details entered");
     return res.send(doc);

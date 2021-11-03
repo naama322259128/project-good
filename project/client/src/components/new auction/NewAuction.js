@@ -18,6 +18,7 @@ import { beManagerInDB } from "../../store/actions/newAuction";
 import { createNewAuctionInDB, saveAuctionInformation, saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
 import { signIn, loginGoogle } from '../../store/actions/signIn';
 import { setNewAuction } from '../../store/actions/newAuction'
+import { setCurrentUser } from '../../store/actions/user';
 import Auction from '../../models/auction'
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,23 +58,29 @@ const NewAuction = (props) => {
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
             props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
 
-        let au = new Auction({
-            name: "uknown", auctionManager: props.currentUser._id, registrationStartDate: null,
-            lotteriesDate: null, registrationEndDate: null,
-            status: "NOT_DONE", purchasePackage: [],
-            productList: [], organizationName: "uknown",
-            organizationText: "uknown", organizationPhotos: [],
-            terms: "uknown", publicationApproval: false,
-            lotteryApproval: false
-        })
+        // let au = new Auction({
+        //     name: "uknown", auctionManager: props.currentUser._id, registrationStartDate: null,
+        //     lotteriesDate: null, registrationEndDate: null,
+        //     status: "NOT_DONE", purchasePackage: [],
+        //     productList: [], organizationName: "uknown",
+        //     organizationText: "uknown", organizationPhotos: [],
+        //     terms: "uknown", publicationApproval: false,
+        //     lotteryApproval: false
+        // })
 
-        createNewAuctionInDB(au).then(succ => {
+        createNewAuctionInDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) {
                 props.setNewAuction(succ.data);
                 console.log(succ.data);
             }
         });
-        props.beManagerInDB(props.userId);
+
+        beManagerInDB(props.userId).then(succ => {
+            if (succ.status != 400) {
+                props.setCurrentUser(succ.data);
+                console.log(succ.data);
+            }
+        });
 
     }, [])
 
@@ -201,5 +208,5 @@ const mapStateToProps = (state) => {
         // registrationEndDate
     };
 }
-export default connect(mapStateToProps, { beManagerInDB, signIn, loginGoogle, setNewAuction })(NewAuction);
+export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

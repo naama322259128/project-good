@@ -71,11 +71,14 @@ const SignIn = (props) => {
 
   return (
     <center>
-      <form className={classes.root} noValidate autoComplete="off">
+      <form className={classes.root} noValidate autoComplete="off" onLoad={() => { document.getElementById('emailInput').focus() }}>
+
         <img className='profile_img' src={p} />
+
         <div className={"inputs_btns"}>
           <FilledInput
-            onKeyPress={e => { if (e.key === 'Enter') document.getElementById('btnSubmit').click() }}
+            id="emailInput"
+            onKeyPress={e => { if (e.key === 'Enter') document.getElementById('passInput').focus() }}
             type={'text'}
             placeholder="Email"
             required
@@ -89,6 +92,7 @@ const SignIn = (props) => {
             }
           />
           <FilledInput
+            id="passInput"
             type={values.showPassword ? 'text' : 'password'}
             onChange={handleChange('password')}
             onKeyPress={e => { if (e.key === 'Enter') document.getElementById('btnSubmit').click() }}
@@ -116,10 +120,13 @@ const SignIn = (props) => {
             }
           />
         </div>
+
         <Button type="button" variant="contained" className={"login_btn_sign_in"} id="btnSubmit"
           onClick={() => { props.signIn(password, email) }}>Login</Button>
+
         {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
         <br />
+
         <LoginGoogle />
 
       </form>

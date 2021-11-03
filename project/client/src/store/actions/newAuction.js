@@ -115,12 +115,7 @@ export const setNewAuction = (newAuction) => {
 
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManagerInDB = (_id) => {
-    return (dispatch) => {
-        axios.post(`http://localhost:5000/users/beManager`, _id).then(succ => {
-            if (succ.status != 400) setCurrentUser(succ.data);
-            //TODO לבדוק שבאמת מחזיר א תהמשתמש
-        });
-    }
+    return axios.put(`http://localhost:5000/users/beManager`, _id)
 }
 
 // אישור פירסום מכירה            

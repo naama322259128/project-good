@@ -20,11 +20,12 @@ const getById = async (req, res) => {
 }
 
 const addAuction = async (req, res) => {
-    let au = req.body;
-    let newAuction = new Auction(au);
+    // let _id = req.body;
+    // console.log(req.body)
+    
+    let { manager_id } = req.params;
     try {
-        console.log(newAuction)
-        
+        let newAuction = new Auction({ auctionManager: manager_id });
         await newAuction.save();
         return res.send(newAuction);
     }
@@ -217,6 +218,7 @@ const addOrganizationInformation = async (req, res) => {
     }
 }
 const addAuctionInformation = async (req, res) => {
+    // req.body
     let { _id } = req.params;
     let { details } = req.params;
     let newAuction = new Auction();
