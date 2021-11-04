@@ -94,7 +94,6 @@ const isUserExist = async (req, res) => {
 const isLoginGoogle = async (req, res) => {
     let { name, email } = req.params;
     let user = await User.findOne({ "email": email });
-    console.log(user);
     if (!user) {
         user = { "userName": name, "email": email };
         let newUser = new User(user);
