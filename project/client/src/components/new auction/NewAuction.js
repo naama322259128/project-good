@@ -58,16 +58,6 @@ const NewAuction = (props) => {
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
             props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
 
-        // let au = new Auction({
-        //     name: "uknown", auctionManager: props.currentUser._id, registrationStartDate: null,
-        //     lotteriesDate: null, registrationEndDate: null,
-        //     status: "NOT_DONE", purchasePackage: [],
-        //     productList: [], organizationName: "uknown",
-        //     organizationText: "uknown", organizationPhotos: [],
-        //     terms: "uknown", publicationApproval: false,
-        //     lotteryApproval: false
-        // })
-
         createNewAuctionInDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) {
                 props.setNewAuction(succ.data);
@@ -203,9 +193,7 @@ const mapStateToProps = (state) => {
     return {
         finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
         currentUser: state.user.currentUser,
-        userId: state.user.currentUser._id,
-        // dateOfLottery:
-        // registrationEndDate
+        userId: state.user.currentUser._id
     };
 }
 export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction })(NewAuction);

@@ -105,7 +105,6 @@ export const resetNewAuctionState = () => {
 }
 
 export const setNewAuction = (newAuction) => {
-    debugger;
     console.log(newAuction)
     return {
         type: actionTypes.SET_NEW_AUCTION,
@@ -115,7 +114,7 @@ export const setNewAuction = (newAuction) => {
 
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManagerInDB = (_id) => {
-    return axios.put(`http://localhost:5000/users/beManager`, _id)
+    return axios.put(`http://localhost:5000/users/beManager${_id}`)
 }
 
 // אישור פירסום מכירה            

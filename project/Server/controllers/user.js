@@ -89,6 +89,7 @@ const isUserExist = async (req, res) => {
         return res.status(400).send("Incorrect details entered");
     return res.send(user);
 }
+
 //האם משתמש קיים לפי שם וסיסמא 
 const isLoginGoogle = async (req, res) => {
     let { name, email } = req.params;
@@ -110,16 +111,20 @@ const isLoginGoogle = async (req, res) => {
 
 const beManager = async (req, res) => {
     let userId = req.params._id;
-    console.log(userId)
-    let doc = await User.findOneAndUpdate({ _id: userId }, { status: 'AUCTION_MANAGER' });
+    let filter = { _id: userId };
+    let update = { status: 'AUCTION_MANAGER' };
+
+    // `doc` is the document _after_ `update` was applied because of
+    // `new: true`
+    let doc = await User.findOneAndUpdate(filter, update, {
+        new: true
+    });
+
     if (!doc)
         return res.status(400).send("Incorrect details entered");
     return res.send(doc);
 }
 
-
-
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle
-
 }
