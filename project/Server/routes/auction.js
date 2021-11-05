@@ -22,6 +22,8 @@ route.put("/setOrganizationInformation/:_id&:details", auctionController.addOrga
 route.put("/setAuctionInformation/:_id&:details", auctionController.addAuctionInformation)
 route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
 route.put("/publicationApproval/:a_id&:status", auctionController.publicationApproval)
+// route.put("/addPurchasePackage/:a_id", auctionController.addPurchasePackage)
+route.put("/addPurchasePackage/:a_id&:qty&:discount", auctionController.addPurchasePackage)
 
 route.delete("/:id", auctionController.deleteAuction)
 route.delete("/deletePackage/:auction_id&:package_id", auctionController.deletePackage)
@@ -29,8 +31,6 @@ route.delete("/deleteProduct/:auction_id&:product_id", auctionController.deleteP
 route.delete("/deletePurchasePackage/:id", auctionController.deletePurchasePackage)
 
 route.post("/createNewAuction/:manager_id", auctionController.addAuction)
-route.post("/addPurchasePackage/:a_id", auctionController.addPurchasePackage)
-// route.post("/addPurchasePackage/:a_id&:package", auctionController.addPurchasePackage)
 
 
 module.exports = route;

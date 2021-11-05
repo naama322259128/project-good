@@ -10,7 +10,6 @@ route.get("/loginGoogle/:name&:email", userController.isLoginGoogle)
 route.post("/sendContactToSiteManager/", myEmailMessagesController.sendContactToSiteManager)
 route.post("/", userController.addUser)
 
-// route.put("/beManager", userController.beManager)
 route.put("/beManager/:_id", userController.beManager)
 route.put("/:id", userController.updateUser)
 

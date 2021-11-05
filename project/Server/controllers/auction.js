@@ -98,7 +98,7 @@ const approvalAuction = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
     let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
-}
+}/////////////////////TODO לא מוכן
 //האם לאשר פרסום מכירה 
 const publicationApproval = async (req, res) => {
     let { a_id } = req.params;
@@ -106,7 +106,9 @@ const publicationApproval = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
     let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
-}
+
+    //////////////////////////////////////////////////////////////////////////////////////////TODO
+}/////////////////////TODO לא מוכן
 
 
 /********************************************הוספת נתונים למכירה שנוצרה**************************************** */
@@ -160,23 +162,31 @@ const addPurchasePackage = async (req, res) => {
 
     // let user = req.body;
     // if (await isEmailExist(user.email) == true) return res.send("This email is exist");
-    // else {
+    // else {x
     //     let newUser = new User(user);
     //     try {
     //         await newUser.save();
-    console.log(req.body);
+
     let { a_id } = req.params;
-    console.log(a_id);
-    let package = req.body;
-    console.log(package.nn);
-    // let newPurchasePackage = new PurchasePackage(package);
+    // let { package } = req.body;
+    let d = req.params.discount;
+    let q = req.params.qty;
+
     try {
-        //     await newPurchasePackage.save();
-        //     console.log(newPurchasePackage)
-        //     return res.send(newPurchasePackage);
+        const filter = { _id: a_id };
+        const update = { $push: { purchasePackage: { qty: q, discount: d } } };
+
+        // `doc` is the document _after_ `update` was applied because of
+        // `returnOriginal: false`
+        let doc = await Auction.findOneAndUpdate(filter, update, {
+            new: true
+        });
+        await doc.save();
+        console.log(doc)
+        return res.send(doc);
     }
     catch (err) {
-        // return res.status(400).send(err.message)
+        return res.status(400).send(err.message)
     }
 }
 const addProduct = async (req, res) => {

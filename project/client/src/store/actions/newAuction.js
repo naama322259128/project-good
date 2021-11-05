@@ -114,7 +114,7 @@ export const setNewAuction = (newAuction) => {
 
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManagerInDB = (_id) => {
-    return axios.put(`http://localhost:5000/users/beManager${_id}`)
+    return axios.put(`http://localhost:5000/users/beManager/${_id}`)
 }
 
 // אישור פירסום מכירה            
@@ -129,8 +129,9 @@ export const pubicationApprovalInDB = (a_id, status, managerId) => {
 }
 
 export const addPackageToDB = (a_id, pa) => {
+    debugger;
     return (dispatch) => {
-        axios.put(`http://localhost:5000/auction/addPurchasePackage/${a_id}&${pa}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data), addPackage(succ.data));
@@ -141,7 +142,7 @@ export const addPackageToDB = (a_id, pa) => {
 //העלאת מוצרים
 export const addProductToDB = (a_id, product) => {
     return (dispatch) => {
-        axios.put(`http://localhost:5000/auction/addProduct/${a_id}&${product}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/addProduct/${a_id}&${product}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data), addProduct(succ.data));

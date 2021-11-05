@@ -196,5 +196,5 @@ const mapStateToProps = (state) => {
         userId: state.user.currentUser._id
     };
 }
-export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction })(NewAuction);
+export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

@@ -114,9 +114,9 @@ const beManager = async (req, res) => {
     let update = { status: 'AUCTION_MANAGER' };
 
     // `doc` is the document _after_ `update` was applied because of
-    // `new: true`
+    // `returnOriginal: false`
     let doc = await User.findOneAndUpdate(filter, update, {
-        new: true
+        returnOriginal: false
     });
 
     if (!doc)
