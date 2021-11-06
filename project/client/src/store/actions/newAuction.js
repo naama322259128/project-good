@@ -122,6 +122,7 @@ export const pubicationApprovalInDB = (a_id, status, managerId) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`).then(
             succ => {
+                //TODO: if...
                 dispatch(getManagerAuctionsFromDB(managerId))
             }
         )
@@ -131,13 +132,17 @@ export const pubicationApprovalInDB = (a_id, status, managerId) => {
 
 export const addPackageToDB = (a_id, pa) => {
     debugger;
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}&${pa.packageName}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data), addPackage(succ.data));
-        })
-    }
+    // return (dispatch) => {
+        return axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}&${pa.packageName}`)
+        
+        
+        // .then(succ => {
+        //     debugger;
+        //     console.log(succ.data);
+        //     if (succ.status != 400)
+        //         dispatch(addPackage(succ.data));
+        // })
+    // }
 }
 
 //העלאת מוצרים

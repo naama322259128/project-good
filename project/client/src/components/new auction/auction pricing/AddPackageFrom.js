@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { addPackageToDB } from '../../../store/actions/newAuction'
-import * as actionTypes from '../../../store/actionTypes'
+import { addPackageToDB, addPackage } from '../../../store/actions/newAuction'
+import { signIn, loginGoogle } from '../../../store/actions/signIn';
 
 const AddPackageFrom = (props) => {
 
@@ -17,7 +17,13 @@ const AddPackageFrom = (props) => {
         if (newPackage.discount < 2) document.getElementById("discountInput").style.borderColor = "red";
         else document.getElementById("discountInput").style.borderColor = "";
     }
-
+    useEffect(() => {
+        debugger;
+        if (props.currentUser == null && localStorage.getItem("login") == "true")
+            props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
+        else if (props.currentUser == null && localStorage.getItem("login") == "google")
+            props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+    }, [])
     return (
         <form >
             <div className="ui equal width form">
@@ -39,7 +45,13 @@ const AddPackageFrom = (props) => {
 
             <button className="positive ui button"
                 // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
-                onClick={() => props.addPackageToDB(props.auctionId, newPackage)}>Add</button>
+                onClick={() =>
+                    addPackageToDB(props.newAuction._id, newPackage).then(succ => {
+                        debugger;
+                        console.log(succ.data);
+                        if (succ.status != 400) props.addPackage(succ.data);
+                    })}
+            >Add</button>
 
         </form >
     );
@@ -47,11 +59,10 @@ const AddPackageFrom = (props) => {
 const mapStateToProps = (state) => {
     return {
         arr: state.auction.newAuction.productList,
-        auctionId: state.auction.newAuction._id
-
+        newAuction: state.auction.newAuction
     };
 }
-export default connect(mapStateToProps, { addPackageToDB })(AddPackageFrom);
+export default connect(mapStateToProps, { /*addPackageToDB*/ addPackage,signIn,loginGoogle })(AddPackageFrom);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable

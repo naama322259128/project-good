@@ -65,7 +65,7 @@ const NewAuction = (props) => {
             }
         });
 
-        beManagerInDB(props.userId).then(succ => {
+        beManagerInDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) {
                 props.setCurrentUser(succ.data);
                 console.log(succ.data);
@@ -193,7 +193,6 @@ const mapStateToProps = (state) => {
     return {
         finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
         currentUser: state.user.currentUser,
-        userId: state.user.currentUser._id
     };
 }
 export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);

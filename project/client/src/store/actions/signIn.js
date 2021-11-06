@@ -9,7 +9,7 @@ export const signIn = (password, email) => {
                 // dispatch(setCurrentUser(succ.data), setLogin(false)) //TODO למה לא?
                 dispatch(
                     signInOfState(succ.data),
-                    localStorage.setItem("login", true),
+                    localStorage.setItem("login", "true"),
                     localStorage.setItem("pass", password),
                     localStorage.setItem("email", email)
                 )

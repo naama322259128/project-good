@@ -47,7 +47,7 @@ export const addProductToCart = (cnt, product) => {
 
 export const signOut = () => {
     //TODO מה עושה אם אני אומרת לו למחוק אייטם שלא קיים
-    localStorage.setItem("login", false);
+    localStorage.setItem("login", "false");
     localStorage.removeItem("pass");
     localStorage.removeItem("email");
     localStorage.removeItem("name");

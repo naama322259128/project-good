@@ -160,13 +160,6 @@ const addAuctionInformation = async (req, res) => {
 }
 const addPurchasePackage = async (req, res) => {
 
-    // let user = req.body;
-    // if (await isEmailExist(user.email) == true) return res.send("This email is exist");
-    // else {x
-    //     let newUser = new User(user);
-    //     try {
-    //         await newUser.save();
-
     let { a_id } = req.params;
     // let { package } = req.body;
     let { discount } = req.params;
@@ -179,8 +172,6 @@ const addPurchasePackage = async (req, res) => {
         const filter = { _id: a_id };
         const update = { $push: { purchasePackage: { ticketsQuantity: qty, discountPercenrages: discount, name: packageName } } };
 
-        // `doc` is the document _after_ `update` was applied because of
-        // `returnOriginal: false`
         let doc = await Auction.findOneAndUpdate(filter, update, {
             new: true
         });
