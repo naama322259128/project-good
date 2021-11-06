@@ -105,7 +105,6 @@ export const resetNewAuctionState = () => {
 }
 
 export const setNewAuction = (newAuction) => {
-    debugger;
     console.log(newAuction)
     return {
         type: actionTypes.SET_NEW_AUCTION,
@@ -115,12 +114,7 @@ export const setNewAuction = (newAuction) => {
 
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManagerInDB = (_id) => {
-    return (dispatch) => {
-        axios.post(`http://localhost:5000/users/beManager`, _id).then(succ => {
-            if (succ.status != 400) setCurrentUser(succ.data);
-            //TODO לבדוק שבאמת מחזיר א תהמשתמש
-        });
-    }
+    return axios.put(`http://localhost:5000/users/beManager/${_id}`)
 }
 
 // אישור פירסום מכירה            
@@ -128,35 +122,39 @@ export const pubicationApprovalInDB = (a_id, status, managerId) => {
     return (dispatch) => {
         axios.put(`http://localhost:5000/auctions/publicationApproval/${a_id}&${status}`).then(
             succ => {
+                //TODO: if...
                 dispatch(getManagerAuctionsFromDB(managerId))
             }
         )
     }
 }
 
-//תמחור מכירה
-export const addPackageToDB = (_id, pa) => {
+
+export const addPackageToDB = (a_id, pa) => {
     debugger;
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/setPackages/${_id}&${pa}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data), addPackage(succ.data));
-        })
-    }
+    // return (dispatch) => {
+        return axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}&${pa.packageName}`)
+        
+        
+        // .then(succ => {
+        //     debugger;
+        //     console.log(succ.data);
+        //     if (succ.status != 400)
+        //         dispatch(addPackage(succ.data));
+        // })
+    // }
 }
 
 //העלאת מוצרים
 export const addProductToDB = (a_id, product) => {
     return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/setProducts/${a_id}&${product}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/addProduct/${a_id}&${product}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data), addProduct(succ.data));
         })
     }
 }
-
 
 //מידע על המכירה
 export const saveAuctionInformation = (_id, details) => {

@@ -12,9 +12,7 @@ const OrganizationInformation = (props) => {
             props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
             props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
-        /*  localStorage.setItem("organizationName",JSON.stringify( organizationName));
-          localStorage.setItem("organizationText", JSON.stringify(organizationText));
-          localStorage.setItem("organizationPhotos", JSON.stringify(organizationPhotos));*/
+            
     });
 
     return (<form>

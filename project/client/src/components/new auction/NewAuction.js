@@ -18,6 +18,7 @@ import { beManagerInDB } from "../../store/actions/newAuction";
 import { createNewAuctionInDB, saveAuctionInformation, saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
 import { signIn, loginGoogle } from '../../store/actions/signIn';
 import { setNewAuction } from '../../store/actions/newAuction'
+import { setCurrentUser } from '../../store/actions/user';
 import Auction from '../../models/auction'
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,6 +58,7 @@ const NewAuction = (props) => {
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
             props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
 
+<<<<<<< HEAD
         let au = new Auction({
             name: "uknown", auctionManager: props.currentUser._id, registrationStartDate: null,
             lotteriesDate: null, registrationEndDate: null,
@@ -69,12 +71,21 @@ const NewAuction = (props) => {
         debugger;
 
         createNewAuctionInDB(au).then(succ => {
+=======
+        createNewAuctionInDB(props.currentUser._id).then(succ => {
+>>>>>>> c6cca5229b43c6ff9414010ac3c136ecfdb3865a
             if (succ.status != 400) {
                 props.setNewAuction(succ.data);
                 console.log(succ.data);
             }
         });
-        props.beManagerInDB(props.userId);
+
+        beManagerInDB(props.currentUser._id).then(succ => {
+            if (succ.status != 400) {
+                props.setCurrentUser(succ.data);
+                console.log(succ.data);
+            }
+        });
 
     }, [])
 
@@ -197,10 +208,7 @@ const mapStateToProps = (state) => {
     return {
         finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
         currentUser: state.user.currentUser,
-        userId: state.user.currentUser._id,
-        // dateOfLottery:
-        // registrationEndDate
     };
 }
-export default connect(mapStateToProps, { beManagerInDB, signIn, loginGoogle, setNewAuction })(NewAuction);
+export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);
 // לעשות עיצוב לחלק שאנו נמצאות בו עכשיו

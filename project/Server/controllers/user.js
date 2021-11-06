@@ -24,7 +24,7 @@ const isEmailExist = async (em) => {
 }
 //הוספת משתמש
 const addUser = async (req, res) => {
-    console.log(user)
+
     let user = req.body;
     if (await isEmailExist(user.email) == true) return res.send("This email is exist");
     else {
@@ -89,15 +89,15 @@ const isUserExist = async (req, res) => {
         return res.status(400).send("Incorrect details entered");
     return res.send(user);
 }
+
 //האם משתמש קיים לפי שם וסיסמא 
 const isLoginGoogle = async (req, res) => {
     let { name, email } = req.params;
     let user = await User.findOne({ "email": email });
-    console.log(user);
     if (!user) {
         user = { "userName": name, "email": email };
         let newUser = new User(user);
-        try {            
+        try {
             await newUser.save();
             return res.send(newUser);
         }
@@ -109,16 +109,21 @@ const isLoginGoogle = async (req, res) => {
 }
 
 const beManager = async (req, res) => {
-    let { _id } = req.params;
-    let doc = await User.findOneAndUpdate({ _id: _id }, { status: 'AUCTION_MANAGER' });
+    let userId = req.params._id;
+    let filter = { _id: userId };
+    let update = { status: 'AUCTION_MANAGER' };
+
+    // `doc` is the document _after_ `update` was applied because of
+    // `returnOriginal: false`
+    let doc = await User.findOneAndUpdate(filter, update, {
+        returnOriginal: false
+    });
+
     if (!doc)
         return res.status(400).send("Incorrect details entered");
     return res.send(doc);
 }
 
-
-
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle
-
 }

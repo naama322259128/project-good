@@ -28,9 +28,9 @@ var upload = multer({
     }
 });
 
-route.get("/:auctionId",productController.getAllProduct)
-route.get("/",productController.getAll)
-route.get("/:id",productController.getById)
-route.post("/",upload.single("image"),auctionController.addProduct)
+// route.get("/:auctionId",productController.getAllProduct)
+// route.get("/",productController.getAll)
+// route.get("/:id",productController.getById)
+// route.post("/",upload.single("image"),auctionController.addProduct)
 
 module.exports=route;
