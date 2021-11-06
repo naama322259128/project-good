@@ -23,6 +23,7 @@ const addAuction = async (req, res) => {
     let au = req.body;
     let newAuction = new Auction(au);
     try {
+        console.log("---------------------------------------")
         console.log(newAuction)
         
         await newAuction.save();

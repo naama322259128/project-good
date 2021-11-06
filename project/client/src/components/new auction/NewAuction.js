@@ -66,6 +66,7 @@ const NewAuction = (props) => {
             terms: "uknown", publicationApproval: false,
             lotteryApproval: false
         })
+        debugger;
 
         createNewAuctionInDB(au).then(succ => {
             if (succ.status != 400) {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { setNewAuction } from '../store/actions/newAuction';
 
 export const createNewAuctionInDB = (auction) => {
+    debugger;
     return axios.post(`http://localhost:5000/auctions/createNewAuction`, auction)
 }
 
