@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
-import{deleteProductFromDB} from "../../../store/actions/newAuction";
+import { deleteProductFromDB } from "../../../store/actions/newAuction";
 const ProductsList = (props) => {
 
 
     return (<><h1>ProductsList</h1>
         <div className="ui divided selection list">
-            {props.productsList.map((item, index) => {
+            {props.productsList && props.productsList.map((item, index) => {
                 return (<div key={index}>
-                    <h2>{item.prodDescription}</h2>
-                    <h2>{item.prodName}</h2>
+                    <h2>{item.description}</h2>
+                    <h2>{item.name}</h2>
                     <h2>includedInPackages:{item.includedInPackages}</h2>
                     <h2>price: {item.price}</h2>
                     <input key={index} className="tiny ui button" type="button" value="Delete"
-                     onClick={() => { props.deleteProductFromDB(item._id)} }/>
+                        onClick={() => { props.deleteProductFromDB(item._id) }} />
                 </div>
                 )
             })}
@@ -22,7 +22,7 @@ const ProductsList = (props) => {
 
 const myMapStateToProps = (state) => {
     return {
-        productsList: state.auction.productsList
+        productsList: state.auction.newAuction.productList
     }
 }
-export default connect(myMapStateToProps, {deleteProductFromDB })(ProductsList);
+export default connect(myMapStateToProps, { deleteProductFromDB })(ProductsList);

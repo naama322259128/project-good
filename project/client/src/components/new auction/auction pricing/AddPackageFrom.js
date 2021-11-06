@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { addPackageToDB, addPackage } from '../../../store/actions/newAuction'
+import { addPackage } from '../../../store/actions/newAuction'
+import { addPackageToDB } from '../../../utils/newAuctionUtils'
 import { signIn, loginGoogle } from '../../../store/actions/signIn';
 
 const AddPackageFrom = (props) => {
@@ -18,7 +19,6 @@ const AddPackageFrom = (props) => {
         else document.getElementById("discountInput").style.borderColor = "";
     }
     useEffect(() => {
-        debugger;
         if (props.currentUser == null && localStorage.getItem("login") == "true")
             props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
@@ -46,16 +46,10 @@ const AddPackageFrom = (props) => {
             <button className="positive ui button"
                 // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
                 onClick={() => {
-                    try {
-                        addPackageToDB(props.newAuction._id, newPackage).then(succ => {
-                            debugger;
-                            console.log(succ.data);
-                            if (succ.status != 400) props.addPackage(succ.data);
-                        })
-                    }
-                    catch (err) {
-                        console.log(err.message)
-                    }
+                    addPackageToDB(props.newAuction._id, newPackage).then(succ => {
+                        alert(JSON.parse(succ.data));
+                        if (succ.status != 400) props.addPackage(succ.data);
+                    })
                 }}
             >Add</button>
 

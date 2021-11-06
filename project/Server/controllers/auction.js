@@ -113,23 +113,25 @@ const publicationApproval = async (req, res) => {
 
 /********************************************הוספת נתונים למכירה שנוצרה**************************************** */
 const addOrganizationInformation = async (req, res) => {
-    let { _id } = req.params;
-    let { details } = req.params;
-    let newAuction = new Auction();
+    console.log(req.params)
+    let { a_id } = req.params;
+    let { organizationName } = req.params;
+    let { organizationText } = req.params;
+    let { organizationPhotos } = req.params;
+    // let { details } = req.body;
+    console.log(organizationText)
     try {
-        if (!mongoose.Types.ObjectId.isValid(_id))
-            return res.status(404).send("Invalid ID number");
-        if (_id && mongoose.Types.ObjectId.isValid(_id)) {
-            newAuction = await Auction.findOne({ '_id': _id });
-            if (!newAuction)
-                return res.status(404).send("There is no auction with such an manager ID number");
-            console.log(newAuction);
+        const filter = { _id: a_id };
+        const update = {
+            organizationName: organizationName,
+            organizationPhotos: organizationPhotos,
+            organizationText: organizationText
         }
-        newAuction.organizationName = details.organizationName;
-        newAuction.organizationText = details.organizationText;
-        //לשמור כמו התמונות
-        newAuction.organizationPhotos = details.organizationPhotos;
-        await newAuction.save();
+        let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
+        //TODO: לשמור את התמונות
+        console.log(doc)
+        await doc.save();
+        return res.send(dco);
     }
     catch (err) {
         return res.status(400).send(err.message)
@@ -177,19 +179,36 @@ const addPurchasePackage = async (req, res) => {
         });
         await doc.save();
         console.log(doc)
-        return res.send(doc);
+        return res.send({ ticketsQuantity: qty, discountPercenrages: discount, name: packageName });
     }
     catch (err) { return res.status(400).send(err.message) }
 }
 const addProduct = async (req, res) => {
-    let product = req.body;
-    const url1 = req.protocol + '://' + req.get('host');
-    let newProduct = new Product(product);
-    newProduct.image = url1 + '/public/' + req.file.filename;
+    // let product = req.body;
+    let { a_id } = req.params;
+    let { name } = req.params;
+    let { price } = req.params;
+    let { includedInPackages } = req.params;
+    let { description } = req.params;
+
+    let product = {
+        name: name,
+        description: description,
+        price: price,
+        includedInPackages: includedInPackages
+    }
+
+    // const url1 = req.protocol + '://' + req.get('host');
+    // let newProduct = new Product(product);
+    // newProduct.image = url1 + '/public/' + req.file.filename;
     try {
-        await newProduct.save();
-        console.log(newProduct)
-        return res.send(newProduct);
+        const filter = { _id: a_id };
+        const update = { $push: { productList: product } };
+
+        let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
+
+        await doc.save();
+        return res.send(product);
     }
     catch (err) {
         return res.status(400).send(err.message)
@@ -243,52 +262,8 @@ const deletePurchasePackage = async (req, res) => {
 //     return res.send(productList);
 // }
 
-//---------------------------שמירת תהליך הקמת מכירה
 
-// const addPackages = async (req, res) => {
-//     let { _id } = req.params;
-//     let { packages } = req.params;
-//     let newAuction = new Auction();
-//     try {
 
-//         if (!mongoose.Types.ObjectId.isValid(_id))
-//             return res.status(404).send("Invalid ID number");
-//         if (_id && mongoose.Types.ObjectId.isValid(_id)) {
-//             newAuction = await Auction.findOne({ '_id': _id });
-//             if (!newAuction)
-//                 return res.status(404).send("There is no auction with such an manager ID number");
-//             console.log(newAuction);
-//         }
-//         newAuction.purchasePackage = packages;
-//         await newAuction.save();
-//     }
-//     catch (err) {
-//         return res.status(400).send(err.message)
-//     }
-// }
-
-// const addProducts = async (req, res) => {
-//     let { _id } = req.params;
-//     let { products } = req.params;
-//     let newAuction = new Auction();
-//     try {
-//         if (!mongoose.Types.ObjectId.isValid(_id))
-//             return res.status(404).send("Invalid ID number");
-//         if (_id && mongoose.Types.ObjectId.isValid(_id)) {
-//             newAuction = await Auction.findOne({ '_id': _id });
-//             if (!newAuction)
-//                 return res.status(404).send("There is no auction with such an manager ID number");
-//             console.log(newAuction);
-//         }
-//         //לבדוק איך נכון להוסיף רשימת מוצרים
-//         products.forEach((p) => { addProduct({ p, _id }); });
-//         // newAuction.productList = products;
-//         await newAuction.save();
-//     }
-//     catch (err) {
-//         return res.status(400).send(err.message)
-//     }
-// }
 
 
 
@@ -398,8 +373,8 @@ const getAllUnapprovedAuctionsByUser = async (req, res) => {
 
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction,
-    getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval
-    /*, addPackages, addProducts*/, addOrganizationInformation,
+    getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval,
+    addOrganizationInformation,
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
     getAuctionWithWinnersForManager, performLotteries, getAllUnapprovedAuctionsByUser,
     addPurchasePackage, deletePurchasePackage

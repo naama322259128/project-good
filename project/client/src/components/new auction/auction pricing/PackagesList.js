@@ -10,8 +10,9 @@ const PackagesList = (props) => {
         <div className="ui divided selection list">
             {props.packagesList && props.packagesList.map((item, index) => {
                 return (<div key={index}>
-                    <h2>qty: {item.qty}</h2>
-                    <h2>discount: {item.discount}</h2>
+                    <h2>name: {item.name}</h2>
+                    <h2>qty: {item.ticketsQuantity}</h2>
+                    <h2>discount: {item.discountPercenrages}</h2>
                     <input key={item._id} className="tiny ui button" type="button" value="Delete"
                         onClick={() => { props.deletePackageFromDB(item._id) }} />
                 </div>
@@ -23,7 +24,7 @@ const PackagesList = (props) => {
 }
 const myMapStateToProps = (state) => {
     return {
-        packagesList: state.auction.newAuction.packagesList
+        packagesList: state.auction.newAuction.purchasePackage
     }
 }
 export default connect(myMapStateToProps, { deletePackageFromDB })(PackagesList);

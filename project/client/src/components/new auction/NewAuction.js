@@ -53,6 +53,7 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
+        alert("NewAuction UseEffect")
         if (props.currentUser == null && localStorage.getItem("login") == "true")
             props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
@@ -85,29 +86,6 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
-        // switch (activeStep) {
-        //     case 0:
-        //         return //savePackages(props._id, props.packagesList);//שמירת תמחור מכירה במסד נתונים;
-        //     case 1:
-        //         return //saveProducts(props._id, props.productsList);//שמירת העלאת מוצרים במסד נתונים;
-        //     case 2: {
-        //         let organizationDetails = {
-        //             organizationName: props.organizationName,
-        //             organizationTxt: props.organizationTxt,
-        //             organizationPhotos: props.organizationPhotos
-        //         };
-        //         return saveOrganizationInformationInDB(props._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
-        //     }
-        //     case 3: {
-        //         let auctionDetails = {
-        //             dateOfLottery: props.dateOfLottery,
-        //             registrationEndDate: props.registrationEndDate,
-        //             registrationStartDate: props.registrationStartDate
-        //         };
-        //         return saveAuctionInformation(props._id, auctionDetails);//שמירת מידע על המכירה במסד נתונים;
-
-        //     }
-        // }
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());
@@ -179,7 +157,7 @@ const NewAuction = (props) => {
                                 onClick={handleNext}
                                 className={classes.button}
                             >
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
+                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             </Button>
                         </div>
                     </div>

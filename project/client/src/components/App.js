@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 import ContinueNewAuction from './new auction/ContinueNewAuction';
 import { connect } from "react-redux";
 import { signIn, loginGoogle } from '../store/actions/signIn';
+import UploadingProducts from './new auction/uploading products/UploadingProducts';
 
 function App(props) {
 

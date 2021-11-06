@@ -1,35 +1,45 @@
 import React, { useEffect } from 'react';
-import { setOrganizationPhotos, setOrganizationName, setOrganizationText } from "../../store/actions/newAuction";
+import { setNewAuction } from '../../store/actions/newAuction';
+import { saveOrganizationInformationInDB } from '../../utils/newAuctionUtils';
 import { connect } from "react-redux";
 
 const OrganizationInformation = (props) => {
-    let organizationName = "";
-    let organizationText = "";
-    let organizationPhotos = [];
+    let details = {
+        organizationName: "",
+        organizationText: "",
+        organizationPhotos: ""
+    };
 
     useEffect(() => { // componentWillUnmount
-        if (props.currentUser == null && localStorage.getItem("login") == "true")
-            props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
-        else if (props.currentUser == null && localStorage.getItem("login") == "google")
-            props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
-            
+        // if (props.currentUser == null && localStorage.getItem("login") == "true")
+        //     props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
+        // else if (props.currentUser == null && localStorage.getItem("login") == "google")
+        //     props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+
     });
 
     return (<form>
         {/* <TextField id="standard-basic" label="Dccc" /> */}
 
         <label> The organization name</label>
-        <input type="text" onChange={(e) => organizationName(e.target.value)} required={true} />
-        <area onChange={(e) => organizationText(e.target.value)}>
-        </area>
+        <input type="text" onChange={(e) => details.organizationName = e.target.value} required={true} />
+        <textarea onChange={(e) => details.organizationText = e.target.value}>
+        </textarea>
         <label>Upload photos of the organization</label>
         {/* לשמור תמונות שהוא מעלה */}
-        <input type="button" value="upload photos" onChange={(e) => { organizationPhotos.push(e.target.value) }} />
+        <input type="button" value="upload photos" onChange={(e) => { details.organizationPhotos.push(e.target.value) }} />
+        <input type="button" value="save organization information"
+            onClick={() => saveOrganizationInformationInDB(props.auctionId, details).then(succ => {
+                console.log(succ.data);
+                if (succ.status != 400) props.setNewAuction(succ.data)
+            })
+            } />
     </form>)
 }
 //submit!!!!
 const mapStateToProps = (state) => {
     return {
+        auctionId: state.auction.newAuction._id
     };
 }
-export default connect(mapStateToProps, { setOrganizationPhotos, setOrganizationName, setOrganizationText })(OrganizationInformation);
+export default connect(mapStateToProps, { setNewAuction })(OrganizationInformation);
