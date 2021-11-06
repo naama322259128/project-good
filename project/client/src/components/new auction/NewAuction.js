@@ -63,7 +63,8 @@ const NewAuction = (props) => {
                 props.setNewAuction(succ.data);
                 console.log(succ.data);
             }
-        });
+        });//TODO: להעביר את זה לאונקליק של כפתור מכירה חדשה
+
 
         beManagerInDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) {

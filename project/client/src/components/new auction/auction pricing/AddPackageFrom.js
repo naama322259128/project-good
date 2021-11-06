@@ -45,12 +45,18 @@ const AddPackageFrom = (props) => {
 
             <button className="positive ui button"
                 // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
-                onClick={() =>
-                    addPackageToDB(props.newAuction._id, newPackage).then(succ => {
-                        debugger;
-                        console.log(succ.data);
-                        if (succ.status != 400) props.addPackage(succ.data);
-                    })}
+                onClick={() => {
+                    try {
+                        addPackageToDB(props.newAuction._id, newPackage).then(succ => {
+                            debugger;
+                            console.log(succ.data);
+                            if (succ.status != 400) props.addPackage(succ.data);
+                        })
+                    }
+                    catch (err) {
+                        console.log(err.message)
+                    }
+                }}
             >Add</button>
 
         </form >
@@ -62,7 +68,7 @@ const mapStateToProps = (state) => {
         newAuction: state.auction.newAuction
     };
 }
-export default connect(mapStateToProps, { /*addPackageToDB*/ addPackage,signIn,loginGoogle })(AddPackageFrom);
+export default connect(mapStateToProps, { /*addPackageToDB*/ addPackage, signIn, loginGoogle })(AddPackageFrom);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable
