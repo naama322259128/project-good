@@ -169,12 +169,15 @@ const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;
     // let { package } = req.body;
-    let d = req.params.discount;
-    let q = req.params.qty;
+    let { discount } = req.params;
+    let { qty } = req.params;
+    let { packageName } = req.params;
+    console.log("discount %d", discount)
+    console.log("qty %d", qty)
 
     try {
         const filter = { _id: a_id };
-        const update = { $push: { purchasePackage: { qty: q, discount: d } } };
+        const update = { $push: { purchasePackage: { ticketsQuantity: qty, discountPercenrages: discount, name: packageName } } };
 
         // `doc` is the document _after_ `update` was applied because of
         // `returnOriginal: false`
@@ -185,9 +188,7 @@ const addPurchasePackage = async (req, res) => {
         console.log(doc)
         return res.send(doc);
     }
-    catch (err) {
-        return res.status(400).send(err.message)
-    }
+    catch (err) { return res.status(400).send(err.message) }
 }
 const addProduct = async (req, res) => {
     let product = req.body;
@@ -402,17 +403,6 @@ const getAllUnapprovedAuctionsByUser = async (req, res) => {
     catch (err) { return res.status(400).send(err.message) }
     return res.send(auctions);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = {

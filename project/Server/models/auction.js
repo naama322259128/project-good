@@ -10,7 +10,8 @@ const auctionSchema = new mongoose.Schema({
     registrationEndDate: Date,//תאריך סיום הרשמה
     status: { type: String, enum: ['DONE', 'NOT_DONE'], default: 'NOT_DONE' },
     purchasePackage: [{
-        _id: mongoose.SchemaTypes.ObjectId,
+        //אם מוסיפים שדה זה, הוא לא ממציא לבד אי-די, אלא נותן לנו לשלוח ערך לשדה זה
+        // _id: { type: mongoose.SchemaTypes.ObjectId, required: true },
         name: String,
         ticketsQuantity: Number,//כמות כרטיסים
         discountPercenrages: Number,//אחוזי הנחה

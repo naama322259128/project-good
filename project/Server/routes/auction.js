@@ -23,7 +23,7 @@ route.put("/setAuctionInformation/:_id&:details", auctionController.addAuctionIn
 route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
 route.put("/publicationApproval/:a_id&:status", auctionController.publicationApproval)
 // route.put("/addPurchasePackage/:a_id", auctionController.addPurchasePackage)
-route.put("/addPurchasePackage/:a_id&:qty&:discount", auctionController.addPurchasePackage)
+route.put("/addPurchasePackage/:a_id&:qty&:discount&:packageName", auctionController.addPurchasePackage)
 
 route.delete("/:id", auctionController.deleteAuction)
 route.delete("/deletePackage/:auction_id&:package_id", auctionController.deletePackage)

@@ -128,10 +128,11 @@ export const pubicationApprovalInDB = (a_id, status, managerId) => {
     }
 }
 
+
 export const addPackageToDB = (a_id, pa) => {
     debugger;
     return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}`).then(succ => {
+        axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}&${pa.packageName}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400)
                 dispatch(console.log(succ.data), addPackage(succ.data));
@@ -149,7 +150,6 @@ export const addProductToDB = (a_id, product) => {
         })
     }
 }
-
 
 //מידע על המכירה
 export const saveAuctionInformation = (_id, details) => {

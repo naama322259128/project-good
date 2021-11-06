@@ -5,7 +5,8 @@ import * as actionTypes from '../../../store/actionTypes'
 
 const AddPackageFrom = (props) => {
 
-    let newPackage = { qty: 0, discount: 0 };
+    //TODO מה עם מתנות
+    let newPackage = { qty: 0, discount: 0, packageName: "package" };
     let checkQty = () => {
         let tmp = [];
         if (props.arr) tmp = props.arr.filter(p => p.qty === newPackage.qty);//פילטר מחזיר רק את אלה שעונים לתנאי
@@ -28,6 +29,10 @@ const AddPackageFrom = (props) => {
                     <div className="field">
                         <label>Discount percentages</label>
                         <input id="discountInput" type="number" min="2" required={(newPackage.qty > 0)} onChange={(e) => { newPackage.discount = e.target.value; checkDiscount() }} />
+                    </div>
+                    <div className="field">
+                        <label>Package name</label>
+                        <input id="packageNameInput" type="text" onChange={(e) => { newPackage.packageName = e.target.value; }} />
                     </div>
                 </div>
             </div>
