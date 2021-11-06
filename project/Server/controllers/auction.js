@@ -25,13 +25,7 @@ const addAuction = async (req, res) => {
 
     let { manager_id } = req.params;
     try {
-<<<<<<< HEAD
-        console.log("---------------------------------------")
-        console.log(newAuction)
-        
-=======
         let newAuction = new Auction({ auctionManager: manager_id });
->>>>>>> c6cca5229b43c6ff9414010ac3c136ecfdb3865a
         await newAuction.save();
         return res.send(newAuction);
     }
