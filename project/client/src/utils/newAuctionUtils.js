@@ -1,14 +1,9 @@
 import axios from 'axios';
 import { setNewAuction } from '../store/actions/newAuction';
 
-<<<<<<< HEAD
 export const createNewAuctionInDB = (auction) => {
     debugger;
     return axios.post(`http://localhost:5000/auctions/createNewAuction`, auction)
-=======
-export const createNewAuctionInDB = (manager_id) => {
-    return axios.post(`http://localhost:5000/auctions/createNewAuction/${manager_id}`)
->>>>>>> c6cca5229b43c6ff9414010ac3c136ecfdb3865a
 }
 
 //מידע על הארגון

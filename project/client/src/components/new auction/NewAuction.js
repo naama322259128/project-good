@@ -58,7 +58,6 @@ const NewAuction = (props) => {
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
             props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
 
-<<<<<<< HEAD
         let au = new Auction({
             name: "uknown", auctionManager: props.currentUser._id, registrationStartDate: null,
             lotteriesDate: null, registrationEndDate: null,
@@ -71,9 +70,6 @@ const NewAuction = (props) => {
         debugger;
 
         createNewAuctionInDB(au).then(succ => {
-=======
-        createNewAuctionInDB(props.currentUser._id).then(succ => {
->>>>>>> c6cca5229b43c6ff9414010ac3c136ecfdb3865a
             if (succ.status != 400) {
                 props.setNewAuction(succ.data);
                 console.log(succ.data);
