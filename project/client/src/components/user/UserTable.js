@@ -54,8 +54,14 @@ const UserTable = (props) => {
         let sum = order.amountToPay;
         return { name: n, orderDate: d, sum: sum, options };
     }
-
-    const [rows, setRows] = useState([]);
+    useEffect(() => {
+        getUserOrdersListFromDB(props.user._id).then(succ => {
+            let arr = [];
+            succ.data.map((o) => { arr.push(createData(o)) });
+            console.log(succ.data);
+            setRows(arr);
+        });
+    }, [])
 
     const useStyles = makeStyles({
         root: {
@@ -66,15 +72,7 @@ const UserTable = (props) => {
         },
     });
 
-
-    useEffect(() => {
-        getUserOrdersListFromDB(props.user._id).then(succ => {
-            let arr = [];
-            succ.data.map((o) => { arr.push(createData(o)) });
-            console.log(succ.data);
-            setRows(arr);
-        });
-    }, [])
+    const [rows, setRows] = useState([]);
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);

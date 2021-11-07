@@ -113,13 +113,11 @@ const publicationApproval = async (req, res) => {
 
 /********************************************הוספת נתונים למכירה שנוצרה**************************************** */
 const addOrganizationInformation = async (req, res) => {
-    console.log(req.params)
     let { a_id } = req.params;
     let { organizationName } = req.params;
     let { organizationText } = req.params;
     let { organizationPhotos } = req.params;
     // let { details } = req.body;
-    console.log(organizationText)
     try {
         const filter = { _id: a_id };
         const update = {
@@ -129,32 +127,36 @@ const addOrganizationInformation = async (req, res) => {
         }
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
         //TODO: לשמור את התמונות
-        console.log(doc)
         await doc.save();
-        return res.send(dco);
+        return res.send(doc);
     }
     catch (err) {
         return res.status(400).send(err.message)
     }
 }
 const addAuctionInformation = async (req, res) => {
-    // req.body
-    let { _id } = req.params;
-    let { details } = req.params;
-    let newAuction = new Auction();
+    console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    let { a_id } = req.params;
+    let { registrationStartDate } = req.params;
+    let { registrationEndDate } = req.params;
+    let { lotteriesDate } = req.params;
+    let { terms } = req.params;
+    let { name } = req.params;
+    // let { details } = req.body;
     try {
-        if (!mongoose.Types.ObjectId.isValid(_id))
-            return res.status(404).send("Invalid ID number");
-        if (_id && mongoose.Types.ObjectId.isValid(_id)) {
-            newAuction = await Auction.findOne({ '_id': _id });
-            if (!newAuction)
-                return res.status(404).send("There is no auction with such an manager ID number");
-            console.log(newAuction);
+        const filter = { _id: a_id };
+        const update = {
+            registrationStartDate: registrationStartDate,
+            registrationEndDate: registrationEndDate,
+            lotteriesDate: lotteriesDate,
+            terms: terms,
+            name: name
         }
-        newAuction.registrationStartDate = details.registrationStartDate;
-        newAuction.registrationEndDate = details.registrationEndDate;
-        newAuction.lotteriesDate = details.lotteriesDate;
-        await newAuction.save();
+        let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
+
+        console.log(doc)
+        await doc.save();
+        return res.send(doc);
     }
     catch (err) {
         return res.status(400).send(err.message)
@@ -174,9 +176,7 @@ const addPurchasePackage = async (req, res) => {
         const filter = { _id: a_id };
         const update = { $push: { purchasePackage: { ticketsQuantity: qty, discountPercenrages: discount, name: packageName } } };
 
-        let doc = await Auction.findOneAndUpdate(filter, update, {
-            new: true
-        });
+        let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
         await doc.save();
         console.log(doc)
         return res.send({ ticketsQuantity: qty, discountPercenrages: discount, name: packageName });
@@ -208,7 +208,8 @@ const addProduct = async (req, res) => {
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
 
         await doc.save();
-        return res.send(product);
+        let len = doc.productList.length
+        return res.send(doc.productList[len - 1]);
     }
     catch (err) {
         return res.status(400).send(err.message)
@@ -218,17 +219,16 @@ const addProduct = async (req, res) => {
 
 /********************************************מחיקת נתונים ממכירה שנוצרה**************************************** */
 const deleteProduct = async (req, res) => {
-
-    //לבדוק
     let { auction_id } = req.params;
     let { product_id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(auction_id) && !mongoose.Types.ObjectId.isValid(product_id))
-        return res.status(404).send("Invalid ID number");
-    let user = await Auction.findByIdAndRemove(id);
-    if (!user)
-        return res.status(404).send("There is no user with such an ID number");
-    console.log(user);
-    return res.send(user);
+    console.log("dd")
+    const filter = { _id: auction_id };
+    const update = { $pull: { 'productList': { '_id': product_id } } }
+    let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
+
+    await doc.save();
+    console.log(doc)
+    return res.send(doc);
 }
 const deletePackage = async (req, res) => {
 

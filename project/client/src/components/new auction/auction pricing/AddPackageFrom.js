@@ -47,7 +47,6 @@ const AddPackageFrom = (props) => {
                 // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
                 onClick={() => {
                     addPackageToDB(props.newAuction._id, newPackage).then(succ => {
-                        alert(JSON.parse(succ.data));
                         if (succ.status != 400) props.addPackage(succ.data);
                     })
                 }}

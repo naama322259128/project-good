@@ -33,7 +33,6 @@ const AddProductForm = (props) => {
                 <button type="button" class="btn btn-success btn-block" onClick={(e) => onClickHandler(e)}>Upload</button>
 
                 <input className="positive ui button" type="button" value="Add" onClick={() => {
-                    debugger;
                     addProductToDB(props.auctionId, newProduct).then(succ => { console.log(succ.data); if (succ.status != 400) props.addProduct(succ.data); })
                 }} />
             </form>

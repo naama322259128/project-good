@@ -7,7 +7,7 @@ const OrganizationInformation = (props) => {
     let details = {
         organizationName: "",
         organizationText: "",
-        organizationPhotos: ""
+        organizationPhotos: "photooooo"
     };
 
     useEffect(() => { // componentWillUnmount
@@ -23,11 +23,16 @@ const OrganizationInformation = (props) => {
 
         <label> The organization name</label>
         <input type="text" onChange={(e) => details.organizationName = e.target.value} required={true} />
-        <textarea onChange={(e) => details.organizationText = e.target.value}>
-        </textarea>
+
+        <textarea onChange={(e) => details.organizationText = e.target.value}></textarea>
+
         <label>Upload photos of the organization</label>
         {/* לשמור תמונות שהוא מעלה */}
         <input type="button" value="upload photos" onChange={(e) => { details.organizationPhotos.push(e.target.value) }} />
+        <br />
+        <br />
+        <br />
+        <br />
         <input type="button" value="save organization information"
             onClick={() => saveOrganizationInformationInDB(props.auctionId, details).then(succ => {
                 console.log(succ.data);

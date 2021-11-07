@@ -53,7 +53,6 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
-        alert("NewAuction UseEffect")
         if (props.currentUser == null && localStorage.getItem("login") == "true")
             props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
         else if (props.currentUser == null && localStorage.getItem("login") == "google")

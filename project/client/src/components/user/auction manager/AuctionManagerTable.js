@@ -22,9 +22,6 @@ import st from '../../../img/icons/stadistics.png'
 import results from '../../../img/icons/results.png'
 import de from '../../../img/icons/dustbin.png'
 
-
-// כרגע כל המכירות עדיין לא התבצעו ולכן אי אפשר לראות תוצאות
-
 const useStyles = makeStyles({
     root: { width: '80%', },
     container: { maxHeight: 440, }
