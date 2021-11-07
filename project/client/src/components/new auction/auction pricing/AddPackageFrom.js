@@ -51,10 +51,7 @@ const AddPackageFrom = (props) => {
             <input className="positive ui button" type="button" value="Add"
                 onClick={() => {
                     addPackageToDB(props.newAuction._id, newPackage).then(
-                        succ => {
-                            console.log(succ.data);
-                            if (succ.status != 400) props.addPackage(succ.data);
-                        })
+                        succ => { if (succ.status != 400) props.addPackage(succ.data); })
                 }} />
         </form >
     );

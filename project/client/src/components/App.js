@@ -11,9 +11,7 @@ import React, { useEffect } from "react";
 import ContinueNewAuction from './new auction/ContinueNewAuction';
 import { connect } from "react-redux";
 import { signIn, loginGoogle } from '../store/actions/signIn';
-
 function App(props) {
-
   useEffect(() => {
     if (props.currentUser == null && localStorage.getItem("login") == "true")
       props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
@@ -21,18 +19,16 @@ function App(props) {
       props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
   }, [])
   return (
-
     <Router>
       <Switch>
-        <Gifts/>
-        {/* <Route path={`/auction`} ><Auction /></Route>
+        <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/continueNewAuction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
-        <Route path={`/`}><Home /></Route> */}
+        <Route path={`/`}><Home /></Route>
       </Switch>
     </Router>
 
@@ -43,4 +39,4 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { signIn, loginGoogle  })(App);
+export default connect(mapStateToProps, { signIn, loginGoogle })(App);
