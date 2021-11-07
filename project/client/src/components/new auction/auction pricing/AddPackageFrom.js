@@ -40,10 +40,6 @@ const AddPackageFrom = (props) => {
                         <label>Package name</label>
                         <input id="packageNameInput" type="text" onChange={(e) => { newPackage.packageName = e.target.value; }} />
                     </div>
-                    <div className="field">
-                        <label>Package name</label>
-                        <input id="packageNameInput" type="text" onChange={(e) => { newPackage.packageName = e.target.value; }} />
-                    </div>
                 </div>
             </div>
 
