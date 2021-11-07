@@ -11,7 +11,10 @@ import {
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { saveAuctionInformationInDB } from '../../utils/newAuctionUtils';
-import { setNewAuction } from '../../store/actions/newAuction';
+import { useForm } from "react-hook-form";
+import { TextField } from "@mui/material";
+import Alert from '@mui/material/Alert';
+import {setNewAuction} from'../../store/actions/newAuction';
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -23,6 +26,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AuctionInformation = (props) => {
+    let submit = (data, e) => {
+        debugger;
+        e.preventDefault();
+        // details.registrationStartDate = selectedDate2;
+        // details.registrationEndDate = selectedDate3;
+        // details.lotteriesDate = selectedDate1;
+        // details.name = name;
+        debugger;
+        details.registrationStartDate = new Date();
+        details.registrationEndDate = new Date(31, 1, 2021);
+        details.lotteriesDate =new Date(1, 12, 2021);
+        details.name = data.name;
+
+        console.log(details);
+
+        console.log(props.auctionId);
+        debugger;
+        saveAuctionInformationInDB(details).then(succ=>{
+            console.log(succ.data);
+            
+            if(succ.status!=400)
+            props.setNewAuction(succ.data);
+        })
+    }
+
 
     const classes = useStyles();
     const [selectedDate1, setSelectedDate1] = React.useState(null);//lotery
@@ -33,20 +61,33 @@ const AuctionInformation = (props) => {
     const handleDateChange1 = (date) => { setSelectedDate1(date) };//lotery
     const handleDateChange2 = (date) => { setSelectedDate2(date) };//start
     const handleDateChange3 = (date) => { setSelectedDate3(date) };//end
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+
     let details = {
         registrationStartDate: null,
         registrationEndDate: null,
         lotteriesDate: null,
         terms: "",//קובץ תקנון
-        name: "unknown"
+        name: "unknown",
+        auctionId: props.auctionId
     }
-    return (<form className={classes.root} noValidate autoComplete="off">
+
+
+    return (<form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
         <h1>Auction information</h1>
 
-        <input type="text" placeholder="newAuction.name" onChange={(e) => { setName(e.target.value) }} />
+        <TextField className="txt" variant="standard"  {...register('name', { required: true })} id="input-with-icon-grid" label="Name Auction" />
+        {errors.name && <Alert severity="error">This is an error enter Name (required)</Alert>}
+       
 
-        <br />
-        <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
+
+
+        {/* <input type="text" placeholder="newAuction.name" onChange={(e) => { setName(e.target.value) }} /> */}
+
+
+        {/* <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
             <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
@@ -59,12 +100,12 @@ const AuctionInformation = (props) => {
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
+                {...register('lotteriesDate', { required: true })} id="input-with-icon-grid" label="Date of the lottery"
             />
 
-        </MuiPickersUtilsProvider>
-        <br />
+        </MuiPickersUtilsProvider> */}
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+       <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
@@ -79,7 +120,6 @@ const AuctionInformation = (props) => {
                 }}
             />
         </MuiPickersUtilsProvider>
-        <br />
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
@@ -96,7 +136,9 @@ const AuctionInformation = (props) => {
                 }}
             />
         </MuiPickersUtilsProvider>
-        <br />
+
+
+
 
         <Button
             variant="contained"
@@ -107,26 +149,9 @@ const AuctionInformation = (props) => {
         >
             Upload Terms
         </Button>
-        <br />
-        <br />
-        <br />
-        <br />
+        
 
-        <button
-            onClick={() => {
-                details.registrationStartDate = selectedDate2;
-                details.registrationEndDate = selectedDate3;
-                details.lotteriesDate = selectedDate1;
-                details.name = name;
-                
-                console.log(details);
-                debugger;
-                saveAuctionInformationInDB(props.auctionId, details).then(succ => {
-                    console.log(succ.data);
-                    if (succ.status != 400) props.setNewAuction(succ.data)
-                })
-            }}
-        > Save</button>
+        <button type="submit"> Save</button>
 
     </form >);
     //submit!!!!
@@ -139,3 +164,6 @@ const mapStateToProps = (state) => {
     };
 }
 export default connect(mapStateToProps, { setNewAuction })(AuctionInformation);
+
+
+

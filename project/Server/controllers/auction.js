@@ -134,23 +134,28 @@ const addOrganizationInformation = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
+
 const addAuctionInformation = async (req, res) => {
-    console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-    let { a_id } = req.params;
-    let { registrationStartDate } = req.params;
-    let { registrationEndDate } = req.params;
-    let { lotteriesDate } = req.params;
-    let { terms } = req.params;
-    let { name } = req.params;
-    // let { details } = req.body;
+
+   let details = req.body;
+
+console.log("-------------------");
+console.log(details.name);
+console.log(details.auctionId);
+console.log(details.registrationStartDate);
+console.log(details.lotteriesDate);
+console.log(details.registrationEndDate);
+
+ 
+    
     try {
-        const filter = { _id: a_id };
+        const filter = { _id:details.auctionId};
         const update = {
-            registrationStartDate: registrationStartDate,
-            registrationEndDate: registrationEndDate,
-            lotteriesDate: lotteriesDate,
-            terms: terms,
-            name: name
+            registrationStartDate:details. registrationStartDate,
+            registrationEndDate:details. registrationEndDate,
+            lotteriesDate: details.lotteriesDate,
+            terms: details.terms,
+            name: details.name
         }
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
 
@@ -162,6 +167,12 @@ const addAuctionInformation = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
+
+
+
+
+
+
 const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;

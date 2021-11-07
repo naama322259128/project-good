@@ -26,7 +26,10 @@ export const saveOrganizationInformationInDB = (_id, d) => {
     return axios.put(`http://localhost:5000/auctions/setOrganizationInformation/${_id}&${d.organizationName}&${d.organizationText}&${d.organizationPhotos}`)
 }
 
+
 //מידע על המכירה
-export const saveAuctionInformationInDB = (a_id, d) => {
-    return axios.put(`http://localhost:5000/auctions/setAuctionInformation/${a_id}&${d.name}&${d.registrationStartDate}&${d.registrationEndDate}&${d.lotteriesDate}&${d.terms}`)
+export const saveAuctionInformationInDB = (details) => {
+        debugger;
+     return axios.post(`http://localhost:5000/auctions/setAuctionInformation`, details);
+
 }
