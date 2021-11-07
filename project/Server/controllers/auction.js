@@ -169,9 +169,11 @@ const addPurchasePackage = async (req, res) => {
     let { discount } = req.params;
     let { qty } = req.params;
     let { packageName } = req.params;
+    let { gifts } = req.params;//TODO: זמני, עד שנצליח לשלוח מערך
+
     try {
         const filter = { _id: a_id };
-        const update = { $push: { purchasePackage: { ticketsQuantity: qty, discountPercenrages: discount, name: packageName } } };
+        const update = { $push: { purchasePackage: { ticketsQuantity: qty, discountPercenrages: discount, name: packageName, gifts: gifts } } };
 
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
         await doc.save();
@@ -192,7 +194,7 @@ const addProduct = async (req, res) => {
         name: name,
         description: description,
         price: price,
-        includedInPackages: includedInPackages
+        includedInPackages: includedInPackages,
     }
 
     // const url1 = req.protocol + '://' + req.get('host');

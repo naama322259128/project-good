@@ -20,7 +20,7 @@ route.put("/setOrganizationInformation/:a_id&:organizationName&:organizationText
 route.put("/setAuctionInformation/:a_id&:name&:registrationStartDate&:registrationEndDate&:lotteriesDate&:terms", auctionController.addAuctionInformation)
 route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
 route.put("/publicationApproval/:a_id&:status", auctionController.publicationApproval)
-route.put("/addPurchasePackage/:a_id&:qty&:discount&:packageName", auctionController.addPurchasePackage)
+route.put("/addPurchasePackage/:a_id&:qty&:discount&:packageName&:gifts", auctionController.addPurchasePackage)//TODO
 route.put("/addProduct/:a_id&:name&:description&:price&:includedInPackages", auctionController.addProduct)
 
 route.delete("/:id", auctionController.deleteAuction)

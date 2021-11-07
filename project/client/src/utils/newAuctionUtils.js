@@ -4,7 +4,10 @@ export const createNewAuctionInDB = (manager_id) => {
     return axios.post(`http://localhost:5000/auctions/createNewAuction/${manager_id}`)
 }
 export const addPackageToDB = (a_id, pa) => {
-    return axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}&${pa.packageName}`)
+    //TODO: לשלוח מתנות
+    let str = "";
+    for (var i = 0; i < pa.gifts.length; i++) str += `${pa.gifts[i]}. `;
+    return axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}&${pa.packageName}&${str}`)
 }
 
 export const deletePackageFromDB = (a_id, package_id) => {

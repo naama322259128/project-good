@@ -67,7 +67,11 @@ const PackagesList = (props) => {
             }}
             title="Delete" > <img className="my_icon" src={de} />
         </IconButton >
-        return { name: pu.name, ticketsQuantity: pu.ticketsQuantity, discountPercenrages: pu.discountPercenrages, gifts: pu.gifts.toString(), del };
+
+        // var str = "";
+        // for (var i = 0; i < pu.gifts.length; i++) str += `${pu.gifts[i]}. `;
+        //TODO צריך לעשות את זה כאן, עד לתיקון הבעיה זה יהיה לפני השמירה בסרבר
+        return { name: pu.name, ticketsQuantity: pu.ticketsQuantity, discountPercenrages: pu.discountPercenrages, gifts:pu.gifts /*str*/, del };
     }
 
     const classes = useStyles();
