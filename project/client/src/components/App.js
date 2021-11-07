@@ -11,9 +11,7 @@ import React, { useEffect } from "react";
 import ContinueNewAuction from './new auction/ContinueNewAuction';
 import { connect } from "react-redux";
 import { signIn, loginGoogle } from '../store/actions/signIn';
-
 function App(props) {
-
   useEffect(() => {
     if (props.currentUser == null && localStorage.getItem("login") == "true")
       props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
@@ -21,7 +19,6 @@ function App(props) {
       props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
   }, [])
   return (
-
     <Router>
       <Switch>
         <Gifts/>
@@ -43,4 +40,4 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { signIn, loginGoogle  })(App);
+export default connect(mapStateToProps, { signIn, loginGoogle })(App);
