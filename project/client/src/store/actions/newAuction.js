@@ -105,7 +105,6 @@ export const resetNewAuctionState = () => {
 }
 
 export const setNewAuction = (newAuction) => {
-    console.log(newAuction)
     return {
         type: actionTypes.SET_NEW_AUCTION,
         payload: newAuction
@@ -128,34 +127,6 @@ export const pubicationApprovalInDB = (a_id, status, managerId) => {
         )
     }
 }
-
-
-export const addPackageToDB = (a_id, pa) => {
-    debugger;
-    // return (dispatch) => {
-        return axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}&${pa.packageName}`)
-        
-        
-        // .then(succ => {
-        //     debugger;
-        //     console.log(succ.data);
-        //     if (succ.status != 400)
-        //         dispatch(addPackage(succ.data));
-        // })
-    // }
-}
-
-//העלאת מוצרים
-export const addProductToDB = (a_id, product) => {
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/addProduct/${a_id}&${product}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data), addProduct(succ.data));
-        })
-    }
-}
-
 //מידע על המכירה
 export const saveAuctionInformation = (_id, details) => {
     return (dispatch) => {
@@ -167,30 +138,6 @@ export const saveAuctionInformation = (_id, details) => {
     }
 
 }
-
-export const deletePackageFromDB = (a_id, package_id) => {
-    return (dispatch) => {
-        axios.delete(`http://localhost:5000/auction/deletePackage/${a_id}&${package_id}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400) {
-                dispatch(console.log(succ.data), deletePackage(package_id));
-            }
-        })
-    }
-
-}
-
-export const deleteProductFromDB = (_id, product_id) => {
-    return (dispatch) => {
-        axios.delete(`http://localhost:5000/auction/deleteProduct/${_id}&${product_id}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400) {
-                dispatch(console.log(succ.data), deleteProduct(product_id));
-            }
-        })
-    }
-}
-
 
 //מחזירה את המכירות שלא אושרו של המשתמש שנשלח
 export const getAllUnapprovedAuctionsByUserFromDB = (user_id) => {

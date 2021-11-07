@@ -58,23 +58,13 @@ const NewAuction = (props) => {
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
             props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
 
-        let au = new Auction({
-            name: "uknown", auctionManager: props.currentUser._id, registrationStartDate: null,
-            lotteriesDate: null, registrationEndDate: null,
-            status: "NOT_DONE", purchasePackage: [],
-            productList: [], organizationName: "uknown",
-            organizationText: "uknown", organizationPhotos: [],
-            terms: "uknown", publicationApproval: false,
-            lotteryApproval: false
-        })
-        debugger;
-
-        createNewAuctionInDB(au).then(succ => {
+        createNewAuctionInDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) {
                 props.setNewAuction(succ.data);
                 console.log(succ.data);
             }
-        });
+        });//TODO: להעביר את זה לאונקליק של כפתור מכירה חדשה
+
 
         beManagerInDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) {
@@ -95,29 +85,6 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
-        // switch (activeStep) {
-        //     case 0:
-        //         return //savePackages(props._id, props.packagesList);//שמירת תמחור מכירה במסד נתונים;
-        //     case 1:
-        //         return //saveProducts(props._id, props.productsList);//שמירת העלאת מוצרים במסד נתונים;
-        //     case 2: {
-        //         let organizationDetails = {
-        //             organizationName: props.organizationName,
-        //             organizationTxt: props.organizationTxt,
-        //             organizationPhotos: props.organizationPhotos
-        //         };
-        //         return saveOrganizationInformationInDB(props._id, organizationDetails);//שמירת מידע על הארגון במסד נתונים; 
-        //     }
-        //     case 3: {
-        //         let auctionDetails = {
-        //             dateOfLottery: props.dateOfLottery,
-        //             registrationEndDate: props.registrationEndDate,
-        //             registrationStartDate: props.registrationStartDate
-        //         };
-        //         return saveAuctionInformation(props._id, auctionDetails);//שמירת מידע על המכירה במסד נתונים;
-
-        //     }
-        // }
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());
@@ -189,7 +156,7 @@ const NewAuction = (props) => {
                                 onClick={handleNext}
                                 className={classes.button}
                             >
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Save'}
+                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             </Button>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import Home from './homePage/Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Auction from '../components/auction/Auction';
 import NewAuction from '../components/new auction/NewAuction';
+import Gifts from '../components/new auction/auction pricing/Gifts';
 import About from './main/About'
 import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
@@ -23,14 +24,15 @@ function App(props) {
 
     <Router>
       <Switch>
-        <Route path={`/auction`} ><Auction /></Route>
+        <Gifts/>
+        {/* <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
         <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/continueNewAuction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
-        <Route path={`/`}><Home /></Route>
+        <Route path={`/`}><Home /></Route> */}
       </Switch>
     </Router>
 

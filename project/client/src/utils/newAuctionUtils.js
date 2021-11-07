@@ -1,29 +1,32 @@
 import axios from 'axios';
-import { setNewAuction } from '../store/actions/newAuction';
 
-export const createNewAuctionInDB = (auction) => {
-    debugger;
-    return axios.post(`http://localhost:5000/auctions/createNewAuction`, auction)
+export const createNewAuctionInDB = (manager_id) => {
+    return axios.post(`http://localhost:5000/auctions/createNewAuction/${manager_id}`)
+}
+export const addPackageToDB = (a_id, pa) => {
+    return axios.put(`http://localhost:5000/auctions/addPurchasePackage/${a_id}&${pa.qty}&${pa.discount}&${pa.packageName}`)
+}
+
+export const deletePackageFromDB = (a_id, package_id) => {
+    return axios.delete(`http://localhost:5000/auctions/deletePackage/${a_id}&${package_id}`);
+}
+
+//העלאת מוצרים
+export const addProductToDB = (a_id, p) => {
+    return axios.put(`http://localhost:5000/auctions/addProduct/${a_id}&${p.name}&${p.description}&${p.price}&${p.includedInPackages}`/*, p*/);
+}
+
+
+export const deleteProductFromDB = (a_id, product_id) => {
+    return axios.delete(`http://localhost:5000/auctions/deleteProduct/${a_id}&${product_id}`)
 }
 
 //מידע על הארגון
-export const saveOrganizationInformationInDB = (_id, details) => {
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/setOrganizationInformation/${_id}&${details}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data), setNewAuction(succ.data));
-        })
-    }
+export const saveOrganizationInformationInDB = (_id, d) => {
+    return axios.put(`http://localhost:5000/auctions/setOrganizationInformation/${_id}&${d.organizationName}&${d.organizationText}&${d.organizationPhotos}`)
 }
 
 //מידע על המכירה
-export const saveAuctionInformationInDB = (details) => {
-    return (dispatch) => {
-        axios.post(`http://localhost:5000/auctions/setAuctionInformation/`, details).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data), setNewAuction(succ.data));
-        })
-    }
+export const saveAuctionInformationInDB = (a_id, d) => {
+    return axios.put(`http://localhost:5000/auctions/setAuctionInformation/${a_id}&${d.name}&${d.registrationStartDate}&${d.registrationEndDate}&${d.lotteriesDate}&${d.terms}`)
 }
