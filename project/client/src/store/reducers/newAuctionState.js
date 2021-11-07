@@ -22,8 +22,9 @@ export const newAuctionReducer = (state = initialState, action) => {
         }
         case actionTypes.ADD_PACKAGE: {
             //כבר נבדק שלא הוכנה חבילה עם מספר כרטיסים כזה
+            let arr = [...state.newAuction.purchasePackage, action.payload];
             let tmp = state.newAuction;
-            tmp.purchasePackage = action.payload;
+            tmp.purchasePackage = arr;
             return {
                 ...state,
                 newAuction: tmp,
@@ -32,7 +33,7 @@ export const newAuctionReducer = (state = initialState, action) => {
         }
         case actionTypes.DELETE_PACKAGE:
             let arr2 = state.newAuction.purchasePackage.
-                filter(p => p._id !== action.payload._id);
+                filter(p => p._id !== action.payload);
             let tmp = state.newAuction;
             tmp.purchasePackage = arr2;
             return {

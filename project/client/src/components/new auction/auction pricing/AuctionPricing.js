@@ -18,10 +18,8 @@ const AuctionPricing = (props) => {
         {props.showSetPackage == false &&
             <button className="positive ui button" onClick={props.showAddPackage}>Add new Package</button>}
 
-        {<PackagesList />}
-
         {props.showSetPackage && <AddPackageFrom />}
-
+        {<PackagesList />}
     </>);
 }
 

@@ -40,18 +40,22 @@ const AddPackageFrom = (props) => {
                         <label>Package name</label>
                         <input id="packageNameInput" type="text" onChange={(e) => { newPackage.packageName = e.target.value; }} />
                     </div>
+                    <div className="field">
+                        <label>Package name</label>
+                        <input id="packageNameInput" type="text" onChange={(e) => { newPackage.packageName = e.target.value; }} />
+                    </div>
                 </div>
             </div>
 
-            <button className="positive ui button"
-                // disabled={parseInt(newPackage.qty) < 1 || parseInt(newPackage.discount) < 2}
-                onClick={() => {
-                    addPackageToDB(props.newAuction._id, newPackage).then(succ => {
-                        if (succ.status != 400) props.addPackage(succ.data);
-                    })
-                }}
-            >Add</button>
 
+            <input className="positive ui button" type="button" value="Add"
+                onClick={() => {
+                    addPackageToDB(props.newAuction._id, newPackage).then(
+                        succ => {
+                            console.log(succ.data);
+                            if (succ.status != 400) props.addPackage(succ.data);
+                        })
+                }} />
         </form >
     );
 }

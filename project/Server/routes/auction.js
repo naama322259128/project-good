@@ -26,7 +26,6 @@ route.put("/addProduct/:a_id&:name&:description&:price&:includedInPackages", auc
 route.delete("/:id", auctionController.deleteAuction)
 route.delete("/deletePackage/:auction_id&:package_id", auctionController.deletePackage)
 route.delete("/deleteProduct/:auction_id&:product_id", auctionController.deleteProduct)
-route.delete("/deletePurchasePackage/:id", auctionController.deletePurchasePackage)
 
 route.post("/createNewAuction/:manager_id", auctionController.addAuction)
 

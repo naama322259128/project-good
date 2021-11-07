@@ -73,7 +73,7 @@ const ProductsList = (props) => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const style1 = { width: "60vw",marginLeft:"7vw", marginTop: '8vh' }
+    const style1 = { width: "80vw", marginLeft: "3vw", marginTop: '8vh' }
 
     return (
         <center>

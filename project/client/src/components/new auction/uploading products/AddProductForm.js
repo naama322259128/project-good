@@ -15,8 +15,13 @@ const AddProductForm = (props) => {
     const [selectedFile, setSelectedFile] = useState(null);
 
     let newProduct = { img: null, name: "", description: "", price: 0, includedInPackages: true };
-
-    return (props.showSetProduct ? (
+    useEffect(() => {
+        if (props.currentUser == null && localStorage.getItem("login") == "true")
+            props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
+        else if (props.currentUser == null && localStorage.getItem("login") == "google")
+            props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+    }, [])
+    return (
         <div className="field">
             <form>
                 <input placeholder="product name" type="text" onChange={(e) => newProduct.name = e.target.value} required={true} />
@@ -36,13 +41,13 @@ const AddProductForm = (props) => {
                     addProductToDB(props.auctionId, newProduct).then(succ => { console.log(succ.data); if (succ.status != 400) props.addProduct(succ.data); })
                 }} />
             </form>
-        </div>
-    ) : null)
+        </div>)
 }
 const mapStateToProps = (state) => {
     return {
-        showSetProduct: state.auction.showSetProduct,
-        auctionId: state.auction.newAuction._id
+        auctionId: state.auction.newAuction._id,
+        arr: state.auction.newAuction.productList,
+        newAuction: state.auction.newAuction,
     };
 }
 export default connect(mapStateToProps, { addProduct })(AddProductForm);

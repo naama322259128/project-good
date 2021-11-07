@@ -169,17 +169,14 @@ const addPurchasePackage = async (req, res) => {
     let { discount } = req.params;
     let { qty } = req.params;
     let { packageName } = req.params;
-    console.log("discount %d", discount)
-    console.log("qty %d", qty)
-
     try {
         const filter = { _id: a_id };
         const update = { $push: { purchasePackage: { ticketsQuantity: qty, discountPercenrages: discount, name: packageName } } };
 
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
         await doc.save();
-        console.log(doc)
-        return res.send({ ticketsQuantity: qty, discountPercenrages: discount, name: packageName });
+        let len = doc.purchasePackage.length
+        return res.send(doc.purchasePackage[len - 1]);
     }
     catch (err) { return res.status(400).send(err.message) }
 }
@@ -221,39 +218,25 @@ const addProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
     let { auction_id } = req.params;
     let { product_id } = req.params;
-    console.log("dd")
+
     const filter = { _id: auction_id };
     const update = { $pull: { 'productList': { '_id': product_id } } }
     let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
 
     await doc.save();
-    console.log(doc)
     return res.send(doc);
 }
 const deletePackage = async (req, res) => {
-
-    //לבדוק
     let { auction_id } = req.params;
     let { package_id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(auction_id) && !mongoose.Types.ObjectId.isValid(package_id))
-        return res.status(404).send("Invalid ID number");
-    let user = await Auction.findByIdAndRemove(id);
-    if (!user)
-        return res.status(404).send("There is no user with such an ID number");
-    console.log(user);
-    return res.send(user);
-}
-const deletePurchasePackage = async (req, res) => {
-    let { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id))
-        return res.status(404).send("Invalid ID number");
-    let purchasePackage = await PurchasePackage.findByIdAndRemove(id);
-    if (!purchasePackage)
-        return res.status(404).send("There is no purchase package with such an ID number");
-    console.log(purchasePackage);
-    return res.send(purchasePackage);
-}
+    console.log("package_id")
 
+    const filter = { _id: auction_id };
+    const update = { $pull: { 'purchasePackage': { '_id': package_id } } }
+    let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
+    await doc.save();
+    return res.send(doc);
+}
 
 
 /********************************************מיונים סטטיסטיקות ותרשימים**************************************** */
@@ -377,7 +360,7 @@ module.exports = {
     addOrganizationInformation,
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
     getAuctionWithWinnersForManager, performLotteries, getAllUnapprovedAuctionsByUser,
-    addPurchasePackage, deletePurchasePackage
+    addPurchasePackage
 }
 
 //המכירה שש לה הכי הרבה הכנסות
