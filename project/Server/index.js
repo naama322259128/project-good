@@ -6,7 +6,6 @@ const user = require("./routes/user");
 // const purchasePackage=require("./routes/purchasePackage");
 const auction = require("./routes/auction");
 const order = require("./routes/order");
-// const archivalAuction=require("./routes/archivalAuction");
 
 
 mongoose.connect("mongodb://localhost:27017/projectDB").then(() => {
@@ -22,7 +21,6 @@ app.use("/users", user);
 // app.use("/products",product);
 // app.use("/purchasePackages",purchasePackage);
 app.use("/auctions", auction);
-//app.use("/archivalAuctions",archivalAuction);
 app.use("/orders", order);
 
 app.listen(5000, () => {
