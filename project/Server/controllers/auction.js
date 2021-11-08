@@ -137,22 +137,22 @@ const addOrganizationInformation = async (req, res) => {
 
 const addAuctionInformation = async (req, res) => {
 
-   let details = req.body;
+    let details = req.body;
 
-console.log("-------------------");
-console.log(details.name);
-console.log(details.auctionId);
-console.log(details.registrationStartDate);
-console.log(details.lotteriesDate);
-console.log(details.registrationEndDate);
+    console.log("-------------------");
+    console.log(details.name);
+    console.log(details.auctionId);
+    console.log(details.registrationStartDate);
+    console.log(details.lotteriesDate);
+    console.log(details.registrationEndDate);
 
- 
-    
+
+
     try {
-        const filter = { _id:details.auctionId};
+        const filter = { _id: details.auctionId };
         const update = {
-            registrationStartDate:details. registrationStartDate,
-            registrationEndDate:details. registrationEndDate,
+            registrationStartDate: details.registrationStartDate,
+            registrationEndDate: details.registrationEndDate,
             lotteriesDate: details.lotteriesDate,
             terms: details.terms,
             name: details.name
@@ -167,11 +167,6 @@ console.log(details.registrationEndDate);
         return res.status(400).send(err.message)
     }
 }
-
-
-
-
-
 
 const addPurchasePackage = async (req, res) => {
 
@@ -352,17 +347,19 @@ const performLotteries = async (req, res) => {
 }
 //מחזיר את המכירות שלא אושרו לתצוגה לפי משתמש
 const getAllUnapprovedAuctionsByUser = async (req, res) => {
-    let { _id } = req.params;//user id
-    //לוודא שמחזיר רק את הרשומות שעונות על שני התנאים
+    let { _id } = req.params;//user id 
+    let auctions = [];
+    console.log(_id);
     try {
         if (!mongoose.Types.ObjectId.isValid(_id))
             return res.status(404).send("Invalid ID number");
-        let auctions = await Auction.find({ "auctionManager": _id }, { "publicationApproval": false });
+        auctions = await Auction.find({ "auctionManager": _id, "publicationApproval": false });
         if (!auctions)
             return res.status(404).send("There is no auction with such an manager ID number");
         console.log(auctions);
     }
     catch (err) { return res.status(400).send(err.message) }
+
     return res.send(auctions);
 }
 
@@ -381,3 +378,5 @@ module.exports = {
 
 
 // https://www.tutorialspoint.com/mongodb-aggregation-to-sum-individual-properties-on-an-object-in-an-array-across-documents
+
+
