@@ -77,7 +77,6 @@ const deleteUser = async (req, res) => {
     let user = await User.findByIdAndRemove(id);
     if (!user)
         return res.status(404).send("There is no user with such an ID number");
-    console.log(user);
     return res.send(user);
 }
 

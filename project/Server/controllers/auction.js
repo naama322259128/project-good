@@ -40,7 +40,6 @@ const deleteAuction = async (req, res) => {
     let auction = await Auction.findByIdAndRemove(id);
     if (!auction)
         return res.status(404).send("There is no auction with such an ID number");
-    console.log(auction);
     return res.send(auction);
 }
 const getAuctionsByManagerId = async (req, res) => {
@@ -114,18 +113,11 @@ const publicationApproval = async (req, res) => {
 /********************************************הוספת נתונים למכירה שנוצרה**************************************** */
 const addOrganizationInformation = async (req, res) => {
     let { a_id } = req.params;
-    let { organizationName } = req.params;
-    let { organizationText } = req.params;
-    let { organizationPhotos } = req.params;
-    // let { details } = req.body;
+    let  details = req.body;
     try {
         const filter = { _id: a_id };
-        const update = {
-            organizationName: organizationName,
-            organizationPhotos: organizationPhotos,
-            organizationText: organizationText
-        }
-        let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
+
+        let doc = await Auction.findOneAndUpdate(filter, details, { new: true });
         //TODO: לשמור את התמונות
         await doc.save();
         return res.send(doc);
@@ -138,6 +130,7 @@ const addOrganizationInformation = async (req, res) => {
 const addAuctionInformation = async (req, res) => {
 
     let details = req.body;
+<<<<<<< HEAD
 
     console.log("-------------------");
     console.log(details.name);
@@ -148,6 +141,9 @@ const addAuctionInformation = async (req, res) => {
 
 
 
+=======
+
+>>>>>>> 2fdd62b73eb06892c42665790c9ce91d2fdff685
     try {
         const filter = { _id: details.auctionId };
         const update = {
@@ -171,15 +167,10 @@ const addAuctionInformation = async (req, res) => {
 const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;
-    // let { package } = req.body;
-    let { discount } = req.params;
-    let { qty } = req.params;
-    let { packageName } = req.params;
-    let { gifts } = req.params;//TODO: זמני, עד שנצליח לשלוח מערך
-
+    let  package = req.body;
     try {
         const filter = { _id: a_id };
-        const update = { $push: { purchasePackage: { ticketsQuantity: qty, discountPercenrages: discount, name: packageName, gifts: gifts } } };
+        const update = { $push: { purchasePackage: { ticketsQuantity: package.qty, discountPercenrages: package.discount, name: package.packageName, gifts: package.gifts } } };
 
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
         await doc.save();
@@ -189,19 +180,8 @@ const addPurchasePackage = async (req, res) => {
     catch (err) { return res.status(400).send(err.message) }
 }
 const addProduct = async (req, res) => {
-    // let product = req.body;
+    let product = req.body;
     let { a_id } = req.params;
-    let { name } = req.params;
-    let { price } = req.params;
-    let { includedInPackages } = req.params;
-    let { description } = req.params;
-
-    let product = {
-        name: name,
-        description: description,
-        price: price,
-        includedInPackages: includedInPackages,
-    }
 
     // const url1 = req.protocol + '://' + req.get('host');
     // let newProduct = new Product(product);
@@ -237,7 +217,6 @@ const deleteProduct = async (req, res) => {
 const deletePackage = async (req, res) => {
     let { auction_id } = req.params;
     let { package_id } = req.params;
-    console.log("package_id")
 
     const filter = { _id: auction_id };
     const update = { $pull: { 'purchasePackage': { '_id': package_id } } }
@@ -323,16 +302,11 @@ const performLotteries = async (req, res) => {
     products.map(pro => {//מעבר על כל המוצרים
         productId = pro._id;//קוד מוצר
 
-        console.log("productId" + productId);
         let arr = lott.filter(l => l.productId.toString() == productId.toString());//כל הכרטיסים למוצר הזה
         // let arr = [];
         // for (var i = 0; i < arr.length; i++)
         //     if (lott[i].productId == productId)
         //         arr.push(lott[i]);
-
-        console.log("arr:");
-        console.log(arr);
-        console.log("--------------------------------------------------------------------------------");
 
         if (arr.length > 0) {
             let rnd = Math.floor(Math.random() * arr.length);//ההגרלה!!!

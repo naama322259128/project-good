@@ -16,19 +16,18 @@ route.get("/sendWinnersListToManager/:_id", myEmailMessagesController.sendWinner
 route.get("/sendWinnersListToUsers/:_id", myEmailMessagesController.sendWinnersListToUsers)
 
 route.put("/performLotteries/:_id", auctionController.performLotteries)
-route.put("/setOrganizationInformation/:a_id&:organizationName&:organizationText&:organizationPhotos", auctionController.addOrganizationInformation)
+route.post("/setOrganizationInformation/:a_id", auctionController.addOrganizationInformation)
 route.post("/setAuctionInformation/",auctionController.addAuctionInformation)
 
 route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
 route.put("/publicationApproval/:a_id&:status", auctionController.publicationApproval)
-route.put("/addPurchasePackage/:a_id&:qty&:discount&:packageName&:gifts", auctionController.addPurchasePackage)//TODO
-route.put("/addProduct/:a_id&:name&:description&:price&:includedInPackages", auctionController.addProduct)
+route.post("/addPurchasePackage/:a_id", auctionController.addPurchasePackage)
+route.post("/addProduct/:a_id", auctionController.addProduct)
+route.post("/createNewAuction/:manager_id", auctionController.addAuction)
 
 route.delete("/:id", auctionController.deleteAuction)
 route.delete("/deletePackage/:auction_id&:package_id", auctionController.deletePackage)
 route.delete("/deleteProduct/:auction_id&:product_id", auctionController.deleteProduct)
-
-route.post("/createNewAuction/:manager_id", auctionController.addAuction)
 
 
 module.exports = route;
