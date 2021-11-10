@@ -21,10 +21,11 @@ const OrganizationInformation = (props) => {
     return (<form>
         {/* <TextField id="standard-basic" label="Dccc" /> */}
 
-        <label> The organization name</label>
-        <input type="text" onChange={(e) => details.organizationName = e.target.value} required={true} />
 
-        <textarea onChange={(e) => details.organizationText = e.target.value}></textarea>
+        <label> The organization name</label>
+        <input type="text" onChange={(e) => details.organizationName = e.target.value} defaultValue={props.auction.organizationName} required={true} />
+
+        <textarea defaultValue={props.auction.organizationText} onChange={(e) => details.organizationText = e.target.value}></textarea>
 
         <label>Upload photos of the organization</label>
         {/* לשמור תמונות שהוא מעלה */}
@@ -44,7 +45,8 @@ const OrganizationInformation = (props) => {
 //submit!!!!
 const mapStateToProps = (state) => {
     return {
-        auctionId: state.auction.newAuction._id
+        auctionId: state.auction.newAuction._id,
+        auction: state.auction.newAuction
     };
 }
 export default connect(mapStateToProps, { setNewAuction })(OrganizationInformation);

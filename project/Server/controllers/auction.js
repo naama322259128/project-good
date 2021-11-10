@@ -113,7 +113,7 @@ const publicationApproval = async (req, res) => {
 /********************************************הוספת נתונים למכירה שנוצרה**************************************** */
 const addOrganizationInformation = async (req, res) => {
     let { a_id } = req.params;
-    let  details = req.body;
+    let details = req.body;
     try {
         const filter = { _id: a_id };
 
@@ -130,20 +130,6 @@ const addOrganizationInformation = async (req, res) => {
 const addAuctionInformation = async (req, res) => {
 
     let details = req.body;
-<<<<<<< HEAD
-
-    console.log("-------------------");
-    console.log(details.name);
-    console.log(details.auctionId);
-    console.log(details.registrationStartDate);
-    console.log(details.lotteriesDate);
-    console.log(details.registrationEndDate);
-
-
-
-=======
-
->>>>>>> 2fdd62b73eb06892c42665790c9ce91d2fdff685
     try {
         const filter = { _id: details.auctionId };
         const update = {
@@ -167,7 +153,7 @@ const addAuctionInformation = async (req, res) => {
 const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;
-    let  package = req.body;
+    let package = req.body;
     try {
         const filter = { _id: a_id };
         const update = { $push: { purchasePackage: { ticketsQuantity: package.qty, discountPercenrages: package.discount, name: package.packageName, gifts: package.gifts } } };
@@ -320,20 +306,17 @@ const performLotteries = async (req, res) => {
     res.send(auction);
 }
 //מחזיר את המכירות שלא אושרו לתצוגה לפי משתמש
-const getAllUnapprovedAuctionsByUser = async (req, res) => {
+const getUnapprovedAuctionsByUser = async (req, res) => {
     let { _id } = req.params;//user id 
     let auctions = [];
-    console.log(_id);
     try {
         if (!mongoose.Types.ObjectId.isValid(_id))
             return res.status(404).send("Invalid ID number");
-        auctions = await Auction.find({ "auctionManager": _id, "publicationApproval": false });
+        auctions = await Auction.find({ "auctionManager": _id, "publicationApproval": 'false' });
         if (!auctions)
             return res.status(404).send("There is no auction with such an manager ID number");
-        console.log(auctions);
     }
     catch (err) { return res.status(400).send(err.message) }
-
     return res.send(auctions);
 }
 
@@ -343,7 +326,7 @@ module.exports = {
     getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval,
     addOrganizationInformation,
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
-    getAuctionWithWinnersForManager, performLotteries, getAllUnapprovedAuctionsByUser,
+    getAuctionWithWinnersForManager, performLotteries, getUnapprovedAuctionsByUser,
     addPurchasePackage
 }
 

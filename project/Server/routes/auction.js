@@ -9,7 +9,7 @@ route.get("/getAuctionsByManagerId/:manager_id", auctionController.getAuctionsBy
 route.get("/getAuctionIsDone/:_id", auctionController.getAuctionIsDone)
 route.get("/getAuctionWithWinners/:_id", auctionController.getAuctionWithWinners)
 route.get("/getAuctionWithWinnersForManager/:_id", auctionController.getAuctionWithWinnersForManager)
-route.get("/getAllUnapprovedAuctionsByUser/:_id", auctionController.getAllUnapprovedAuctionsByUser)
+route.get("/unapprovedAuctionsByUser/:_id", auctionController.getUnapprovedAuctionsByUser)
 route.get("/:id", auctionController.getById)
 route.get("/sendEmailToWinners/:_id", myEmailMessagesController.sendEmailToWinners)
 route.get("/sendWinnersListToManager/:_id", myEmailMessagesController.sendWinnersListToManager)
@@ -17,10 +17,11 @@ route.get("/sendWinnersListToUsers/:_id", myEmailMessagesController.sendWinnersL
 
 route.put("/performLotteries/:_id", auctionController.performLotteries)
 route.post("/setOrganizationInformation/:a_id", auctionController.addOrganizationInformation)
-route.post("/setAuctionInformation/",auctionController.addAuctionInformation)
+route.post("/setAuctionInformation/", auctionController.addAuctionInformation)
 
-route.put("/approvalAuction/:a_id&:status", auctionController.approvalAuction)
-route.put("/publicationApproval/:a_id&:status", auctionController.publicationApproval)
+route.post("/approvalAuction/:a_id&:status", auctionController.approvalAuction)//TODO
+route.post("/approvalLotteries/:a_id&:status", auctionController.approvalAuction)//TODO
+
 route.post("/addPurchasePackage/:a_id", auctionController.addPurchasePackage)
 route.post("/addProduct/:a_id", auctionController.addProduct)
 route.post("/createNewAuction/:manager_id", auctionController.addAuction)

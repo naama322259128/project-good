@@ -65,7 +65,7 @@ const ProfileButton = (props) => {
                 <MenuItem key={'Update your details'} onClick={handleClose}>Update your details</MenuItem>
             </Link>
 
-            <Link to={'/continueNewAuction'}>
+            <Link to={'/continue_new_auction'}>
                 <MenuItem key={'Continue chinese auction'} onClick={handleClose}>Continue chinese auction</MenuItem>
             </Link>
 
