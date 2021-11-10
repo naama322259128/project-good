@@ -8,7 +8,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { setApprovalAuctionModal, approvalAuctionInDB } from '../../../store/actions/auctionManager'
+import { saveApprovalAuctionInDB } from '../../../utils/newAuctionUtils'
+import { setApprovalAuctionModal } from '../../../store/actions/auctionManager'
 import './auctionManager.scss'
 const ApprovalModal = (props) => {
     const theme = useTheme();
@@ -34,7 +35,7 @@ const ApprovalModal = (props) => {
                     <Button variant="contained" size="medium" onClick={() => props.setApprovalAuctionModal(false)} color="primary">
                         Cancle
                     </Button>
-                    <Button variant="contained" size="medium" onClick={() => { props.approvalAuctionInDB(props.auction_id, true); props.setApprovalAuctionModal(false) }} color="primary">
+                    <Button variant="contained" size="medium" onClick={() => { props.saveApprovalAuctionInDB(props.auction_id, true); props.setApprovalAuctionModal(false) }} color="primary">
                         Ok
                     </Button>
                 </DialogActions>
@@ -47,7 +48,7 @@ const mapStateToProps = (state) => {
         auction_id: state.auctionManager.selected_auction_to_options
     };
 }
-export default connect(mapStateToProps, { setApprovalAuctionModal, approvalAuctionInDB })(ApprovalModal);
+export default connect(mapStateToProps, { setApprovalAuctionModal, saveApprovalAuctionInDB })(ApprovalModal);
 
 
 

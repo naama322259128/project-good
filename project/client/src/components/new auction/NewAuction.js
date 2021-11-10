@@ -23,6 +23,7 @@ import Auction from '../../models/auction'
 import { saveApprovalAuctionInDB, saveApprovalLotteriesInDB } from '../../utils/newAuctionUtils';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -91,14 +92,14 @@ const NewAuction = (props) => {
     const handleNext = () => {
         if (activeStep == steps.length - 1) {
 
-            saveApprovalLotteriesInDB(props.auctionId, details).then(succ => {
-                if (succ.status != 400)
-                    props.setNewAuction(succ.data);
-            })
-            saveApprovalAuctionInDB(props.auctionId, details).then(succ => {
-                if (succ.status != 400)
-                    props.setNewAuction(succ.data);
-            })
+            // saveApprovalLotteriesInDB(props.auctionId, details).then(succ => {
+            //     if (succ.status != 400)
+            //         props.setNewAuction(succ.data);
+            // })
+            // saveApprovalAuctionInDB(props.auctionId, details).then(succ => {
+            //     if (succ.status != 400)
+            //         props.setNewAuction(succ.data);
+            // })
 
             let newSkipped = skipped;
             if (isStepSkipped(activeStep)) {
@@ -109,8 +110,10 @@ const NewAuction = (props) => {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
             setSkipped(newSkipped);
         };
+    }
 
-        const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); };
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
         const handleSkip = () => {
             if (!isStepOptional(activeStep)) {
@@ -198,10 +201,11 @@ const NewAuction = (props) => {
         </>
         )
     }
-    const mapStateToProps = (state) => {
-        return {
-            finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
-            currentUser: state.user.currentUser,
-        };
-    }
-    export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);
+}
+const mapStateToProps = (state) => {
+    return {
+        finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
+        currentUser: state.user.currentUser,
+    };
+}
+export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);

@@ -13,7 +13,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 import { updateUserInDB } from '../../store/actions/user'
-
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -204,13 +205,13 @@ const UpdateDetails = (props) => {
 
                     <br />
                     {/* //TODO להוסיף האם רוצה להיות חסוי או לא */}
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         control=
                         {<Checkbox onChange={(e) => setNewUser(prevState => ({
                             ...prevState,
                             ['confidentiality']: e.target.checked
                         }))} />}
-                        label="Confidentiality" />
+                        label="Confidentiality" /> */}
 
                     {/* האם לעשות שיעבור לדף הבית */}
                     {/* וגם להודיע לו שזה עודכן */}

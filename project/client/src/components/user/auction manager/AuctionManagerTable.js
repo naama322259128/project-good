@@ -14,8 +14,9 @@ import TableRow from '@material-ui/core/TableRow';
 import { Link } from 'react-router-dom';
 import DeleteModal from './DeleteModal'
 import ApprovalModal from './ApprovalModal'
+import {saveApprovalAuctionInDB}from '../../../utils/newAuctionUtils'
 import DisApprovalModal from './DisApprovalModal'
-import { getManagerAuctionsFromDB, setDeleteAuctionModal, setApprovalAuctionModal, setDisApprovalAuctionModal, approvalAuctionInDB, setSelectedAuctionToOptions, getAuctionIsDoneFromDB, isAuctionApproved } from '../../../store/actions/auctionManager'
+import { getManagerAuctionsFromDB, setDeleteAuctionModal, setApprovalAuctionModal, setDisApprovalAuctionModal, setSelectedAuctionToOptions, getAuctionIsDoneFromDB, isAuctionApproved } from '../../../store/actions/auctionManager'
 import IconButton from '@material-ui/core/IconButton';
 import edit from '../../../img/icons/edit-file.png'
 import st from '../../../img/icons/stadistics.png'
@@ -160,7 +161,7 @@ const mapStateToProps = (state) => {
         show_disapproval: state.auctionManager.disapprovalAuctionModal
     };
 }
-export default connect(mapStateToProps, { setDeleteAuctionModal, setSelectedAuctionToOptions, setDisApprovalAuctionModal, getAuctionIsDoneFromDB, setApprovalAuctionModal, approvalAuctionInDB, getManagerAuctionsFromDB, isAuctionApproved })(AuctionManagerTable);
+export default connect(mapStateToProps, { setDeleteAuctionModal,saveApprovalAuctionInDB, setSelectedAuctionToOptions, setDisApprovalAuctionModal, getAuctionIsDoneFromDB, setApprovalAuctionModal, getManagerAuctionsFromDB, isAuctionApproved })(AuctionManagerTable);
 
 
 
