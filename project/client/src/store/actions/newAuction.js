@@ -139,15 +139,6 @@ export const saveAuctionInformation = (_id, details) => {
 
 }
 
-//מחזירה את המכירות שלא אושרו של המשתמש שנשלח
-export const getAllUnapprovedAuctionsByUserFromDB = (user_id) => {
-    return (dispatch) => { 
-        axios.get(`http://localhost:5000/auctions/getAllUnapprovedAuctionsByUser/${user_id}`).then(succ => {
-            debugger;
-            if (succ.status != 400)
-                dispatch(console.log(succ.data));
-        })
-    }
-}
+
 
 

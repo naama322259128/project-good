@@ -9,7 +9,7 @@ route.get("/getAuctionsByManagerId/:manager_id", auctionController.getAuctionsBy
 route.get("/getAuctionIsDone/:_id", auctionController.getAuctionIsDone)
 route.get("/getAuctionWithWinners/:_id", auctionController.getAuctionWithWinners)
 route.get("/getAuctionWithWinnersForManager/:_id", auctionController.getAuctionWithWinnersForManager)
-route.get("/getAllUnapprovedAuctionsByUser/:_id", auctionController.getAllUnapprovedAuctionsByUser)
+route.get("/unapprovedAuctionsByUser/:_id", auctionController.getUnapprovedAuctionsByUser)
 route.get("/:id", auctionController.getById)
 route.get("/sendEmailToWinners/:_id", myEmailMessagesController.sendEmailToWinners)
 route.get("/sendWinnersListToManager/:_id", myEmailMessagesController.sendWinnersListToManager)
