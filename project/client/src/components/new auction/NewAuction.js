@@ -113,7 +113,7 @@ const NewAuction = (props) => {
     }
 
     const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);}
 
         const handleSkip = () => {
             if (!isStepOptional(activeStep)) {
@@ -201,7 +201,7 @@ const NewAuction = (props) => {
         </>
         )
     }
-}
+
 const mapStateToProps = (state) => {
     return {
         finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
