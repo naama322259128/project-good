@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import './NewAuction.scss'
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,7 +14,9 @@ import { saveAuctionInformationInDB } from '../../utils/newAuctionUtils';
 import { useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import Alert from '@mui/material/Alert';
-import {setNewAuction} from'../../store/actions/newAuction';
+import { setNewAuction } from '../../store/actions/newAuction';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -35,18 +37,21 @@ const AuctionInformation = (props) => {
 
         details.registrationStartDate = new Date();
         details.registrationEndDate = new Date(31, 1, 2021);
-        details.lotteriesDate =new Date(1, 12, 2021);
+        details.lotteriesDate = new Date(1, 12, 2021);
         details.name = data.name;
+        details.lotteryApproval = lotteryApproval;
+        details.publicationApproval = publicationApproval;
 
-
-        saveAuctionInformationInDB(details).then(succ=>{          
-            if(succ.status!=400)
-            props.setNewAuction(succ.data);
+        saveAuctionInformationInDB(details).then(succ => {
+            if (succ.status != 400)
+                props.setNewAuction(succ.data);
         })
     }
 
 
     const classes = useStyles();
+    const [publicationApproval, setPublicationApproval] = useState(false);
+    const [lotteryApproval, setLotteryApproval] = useState(false);
     const [selectedDate1, setSelectedDate1] = React.useState(null);//lotery
     const [selectedDate2, setSelectedDate2] = React.useState(null);//start
     const [selectedDate3, setSelectedDate3] = React.useState(null);//end
@@ -74,9 +79,6 @@ const AuctionInformation = (props) => {
 
         <TextField className="txt" variant="standard" defaultValue={props.auction.name} {...register('name', { required: true })} id="input-with-icon-grid" label="Name Auction" />
         {errors.name && <Alert severity="error">This is an error enter Name (required)</Alert>}
-       
-
-
 
         {/* <input type="text" placeholder="newAuction.name" onChange={(e) => { setName(e.target.value) }} /> */}
 
@@ -100,7 +102,7 @@ const AuctionInformation = (props) => {
 
         </MuiPickersUtilsProvider>
 
-       <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
@@ -109,7 +111,7 @@ const AuctionInformation = (props) => {
                 id="date-picker-inline"
                 label="Registration start date"
                 value={selectedDate2}
-                onChange={handleDateChange2} 
+                onChange={handleDateChange2}
                 defaultValue={props.auction.registrationStartDate}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
@@ -131,7 +133,7 @@ const AuctionInformation = (props) => {
                     'aria-label': 'change date',
                 }}
                 defaultValue={props.auction.registrationEndDate}
-                
+
             />
         </MuiPickersUtilsProvider>
 
@@ -145,6 +147,15 @@ const AuctionInformation = (props) => {
             Upload Terms
         </Button>
 
+        <FormControlLabel
+            control=
+            {<Checkbox onChange={(e) => setPublicationApproval(e.target.checked)} />}
+            label="Publication approval" />
+        <br />
+        <FormControlLabel
+            control=
+            {<Checkbox onChange={(e) => setLotteryApproval(e.target.checked)} />}
+            label="Lottery approval" />
         <button type="submit"> Save</button>
 
     </form >);
@@ -159,6 +170,4 @@ const mapStateToProps = (state) => {
     }
 }
 export default connect(mapStateToProps, { setNewAuction })(AuctionInformation);
-
-
 

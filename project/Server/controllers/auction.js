@@ -91,23 +91,6 @@ const getAuctionIsApproved = async (req, res) => {
         return res.status(404).send("There is no auction with such an manager ID number");
     return res.send(auction.lotteryApproval);
 }
-const approvalAuction = async (req, res) => {
-    let { a_id } = req.params;
-    let { status } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(a_id))
-        return res.status(404).send("Invalid ID number");
-    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
-}/////////////////////TODO לא מוכן
-//האם לאשר פרסום מכירה 
-const publicationApproval = async (req, res) => {
-    let { a_id } = req.params;
-    let { status } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(a_id))
-        return res.status(404).send("Invalid ID number");
-    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
-
-    //////////////////////////////////////////////////////////////////////////////////////////TODO
-}/////////////////////TODO לא מוכן
 
 
 /********************************************הוספת נתונים למכירה שנוצרה**************************************** */
@@ -126,7 +109,6 @@ const addOrganizationInformation = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
-
 const addAuctionInformation = async (req, res) => {
 
     let details = req.body;
@@ -137,7 +119,9 @@ const addAuctionInformation = async (req, res) => {
             registrationEndDate: details.registrationEndDate,
             lotteriesDate: details.lotteriesDate,
             terms: details.terms,
-            name: details.name
+            name: details.name,
+            publicationApproval: details.publicationApproval,
+            lotteryApproval: details.lotteryApproval
         }
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
 
@@ -149,7 +133,6 @@ const addAuctionInformation = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
-
 const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;
@@ -185,6 +168,26 @@ const addProduct = async (req, res) => {
     catch (err) {
         return res.status(400).send(err.message)
     }
+}
+const setApprovalAuction = async (req, res) => {
+    let { a_id } = req.params;
+    let { status } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(a_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
+    if (!auction)
+        return res.status(404).send("There is no auction with such an ID number");
+    return res.send(auction);
+}
+const setApprovalLotteries = async (req, res) => {
+    let { a_id } = req.params;
+    let { status } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(a_id))
+        return res.status(404).send("Invalid ID number");
+    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
+    if (!auction)
+        return res.status(404).send("There is no auction with such an ID number");
+    return res.send(auction);
 }
 
 
@@ -323,8 +326,8 @@ const getUnapprovedAuctionsByUser = async (req, res) => {
 
 module.exports = {
     getAll, getById, addProduct, addAuction, deleteAuction,
-    getAuctionsByManagerId, getAuctionIsApproved, approvalAuction, getAuctionIsDone, publicationApproval,
-    addOrganizationInformation,
+    getAuctionsByManagerId, getAuctionIsApproved, setApprovalAuction, getAuctionIsDone,
+    addOrganizationInformation, setApprovalLotteries,
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
     getAuctionWithWinnersForManager, performLotteries, getUnapprovedAuctionsByUser,
     addPurchasePackage

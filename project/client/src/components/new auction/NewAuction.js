@@ -1,5 +1,4 @@
-//TODO: בכל פעם שמתחיל מכירה חדשה למחוק את מה שיש סלוקלסטורג של מכירה חדשה
-//localStorage.removeItem("newAuction");
+
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import AuctionInformation from './AuctionInformation';
@@ -13,16 +12,17 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import './NewAuction.scss';
-import FinalStep from './FinalStepModal';
 import { beManagerInDB } from "../../store/actions/newAuction";
-import { createNewAuctionInDB, saveAuctionInformation, saveOrganizationInformationInDB } from '../../utils/newAuctionUtils'
+import { createNewAuctionInDB } from '../../utils/newAuctionUtils'
 import { signIn, loginGoogle } from '../../store/actions/signIn';
 import { setNewAuction } from '../../store/actions/newAuction'
 import { setCurrentUser } from '../../store/actions/user';
-import Auction from '../../models/auction'
-import { saveApprovalAuctionInDB, saveApprovalLotteriesInDB } from '../../utils/newAuctionUtils';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import { useHistory } from "react-router-dom";
+
+//TODO: בכל פעם שמתחיל מכירה חדשה למחוק את מה שיש סלוקלסטורג של מכירה חדשה
+//localStorage.removeItem("newAuction");
+//מהלינק ולא מהקומפוננטה הזו
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,8 +55,7 @@ const getStepContent = (step) => {
     }
 }
 const NewAuction = (props) => {
-    const [publicationApproval, setPublicationApproval] = useState(false);
-    const [lotteryApproval, setLotteryApproval] = useState(false);
+
     useEffect(() => {
         if (props.currentUser == null && localStorage.getItem("login") == "true")
             props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
@@ -84,128 +83,75 @@ const NewAuction = (props) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const steps = getSteps();
-
-    const isStepOptional = (step) => { return true };//האם השלב הזה אופציונלי
+    const history = useHistory();
 
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
-        if (activeStep == steps.length - 1) {
+        let newSkipped = skipped;
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setSkipped(newSkipped);
+    };
 
-            // saveApprovalLotteriesInDB(props.auctionId, details).then(succ => {
-            //     if (succ.status != 400)
-            //         props.setNewAuction(succ.data);
-            // })
-            // saveApprovalAuctionInDB(props.auctionId, details).then(succ => {
-            //     if (succ.status != 400)
-            //         props.setNewAuction(succ.data);
-            // })
+    const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); }
 
-            let newSkipped = skipped;
-            if (isStepSkipped(activeStep)) {
-                newSkipped = new Set(newSkipped.values());
-                newSkipped.delete(activeStep);
-            }
-
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
-            setSkipped(newSkipped);
-        };
-    }
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);}
-
-        const handleSkip = () => {
-            if (!isStepOptional(activeStep)) {
-                throw new Error("You can't skip a step that isn't optional.");
-            }
-
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
-            setSkipped((prevSkipped) => {
-                const newSkipped = new Set(prevSkipped.values());
-                newSkipped.add(activeStep);
-                return newSkipped;
-            });
-        };
-
-        const handleReset = () => { setActiveStep(0); };
-
-        return (<>
+    return (<>
 
 
-            <br />
-            <br />
-            <center><h1>Build Your own chinese auction</h1></center>
-            <br />
-            <div className={classes.root}>
-                <Stepper activeStep={activeStep}>
-                    {steps.map((label, index) => {
-                        const stepProps = {};
-                        const labelProps = {};
-                        if (isStepSkipped(index)) {
-                            stepProps.completed = false;
-                        }
-                        return (
-                            <Step key={label} {...stepProps}>
-                                <StepLabel key={label}  {...labelProps}>{label}</StepLabel>
-                            </Step>
-                        );
-                    })}
-                </Stepper>
+        <br />
+        <br />
+        <center><h1>Build Your own chinese auction</h1></center>
+        <br />
+        <div className={classes.root}>
+            <Stepper activeStep={activeStep}>
+                {steps.map((label, index) => {
+                    const stepProps = {};
+                    const labelProps = {};
+                    if (isStepSkipped(index)) {
+                        stepProps.completed = false;
+                    }
+                    return (
+                        <Step key={label} {...stepProps}>
+                            <StepLabel key={label}  {...labelProps}>{label}</StepLabel>
+                        </Step>
+                    );
+                })}
+            </Stepper>
+            <div>
                 <div>
-                    {activeStep === steps.length ? (
-                        <div style={{ 'marginLeft': '5vw' }}>
-                            <FormControlLabel
-                                control=
-                                {<Checkbox onChange={(e) => setPublicationApproval(e.target.checked)} />}
-                                label="Publication approval" />
-                            <br />
-                            <FormControlLabel
-                                control=
-                                {<Checkbox onChange={(e) => setLotteryApproval(e.target.checked)} />}
-                                label="Lottery approval" />
-                            <br />
-                            <br />
+                    <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                    <div>
+                        {activeStep > 0 ?
                             <Button
                                 variant="contained"
                                 color="primary"
                                 onClick={handleBack} className={classes.button}>
                                 Back
-                            </Button>                    </div>
-                    ) : (
-                        <div>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                            <div>
-                                {activeStep > 0 ?
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={handleBack} className={classes.button}>
-                                        Back
-                                    </Button> : null}
+                            </Button> : null}
 
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={handleNext}
-                                    className={classes.button}
-                                >
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                </Button>
-                            </div>
-                        </div>
-                    )}
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={activeStep === steps.length - 1 ? history.push("/home") : handleNext}
+                            className={classes.button}
+                        >
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                        </Button>
+                    </div>
                 </div>
             </div>
-            <footer id="new_auction_footer" />
-        </>
-        )
-    }
+        </div>
+        <footer id="new_auction_footer" />
+    </>
+    )
+}
 
 const mapStateToProps = (state) => {
     return {
         finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
         currentUser: state.user.currentUser,
+        auctionId: state.auction.newAuction._id,
+
     };
 }
 export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);

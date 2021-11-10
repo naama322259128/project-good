@@ -84,6 +84,7 @@ const UpdateDetails = (props) => {
     let phone = props.currentUser.phone;
     let city = props.currentUser.city;
     let birthYear = props.currentUser.birthYear;
+    let confidentiality = props.currentUser.confidentiality;
 
     const updateUser = () => {
         let user = props.currentUser;
@@ -91,8 +92,9 @@ const UpdateDetails = (props) => {
         user.email = email;
         user.phone = phone;
         user.city = city;
-        user.name = userName;
+        user.userName = userName;
         user.birthYear = birthYear;
+        user.confidentiality = confidentiality//TODO למה לא טוב
         props.updateUserInDB(user);
     };
 
@@ -204,19 +206,19 @@ const UpdateDetails = (props) => {
 
 
                     <br />
-                    {/* //TODO להוסיף האם רוצה להיות חסוי או לא */}
-                    {/* <FormControlLabel
+                    <br />
+                    <FormControlLabel
                         control=
-                        {<Checkbox onChange={(e) => setNewUser(prevState => ({
-                            ...prevState,
-                            ['confidentiality']: e.target.checked
-                        }))} />}
-                        label="Confidentiality" /> */}
-
-                    {/* האם לעשות שיעבור לדף הבית */}
-                    {/* וגם להודיע לו שזה עודכן */}
+                        {<Checkbox onChange={(e) => { confidentiality = e.target.checked }} />}
+                        label="Confidentiality" />
+                    <br />
+                    <br />
                     <Button type="button" variant="contained" id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
                 </form>
+
+
+                {/* וגם להודיע לו שזה עודכן */}
+                {/* TODO */}
                 <Alert onClose={() => { }}>This is a success alert — check it out!</Alert>
 
             </center >
