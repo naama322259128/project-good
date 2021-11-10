@@ -5,8 +5,6 @@ export const addUser = (user) => {
 }
 
 
-
-
 export const sendContact = async (details) => {
     return axios.post(`http://localhost:5000/users/sendContactToSiteManager`, details).then(succ => {
         console.log(succ.data)
