@@ -11,6 +11,12 @@ const AddProductForm = (props) => {
 
     let submit = (data, e) => {
         e.preventDefault();
+         newProduct.name =data.name;
+         newProduct.description =data.description;
+         newProduct.price =data.price;
+         newProduct.includedInPackages =data.includedInPackages;
+         newProduct.img =data.img;
+
 
         addProductToDB(props.auctionId, newProduct).then(succ => {
             console.log(succ.data);
@@ -59,7 +65,9 @@ const AddProductForm = (props) => {
                     id="input-with-icon-grid"
                 />
                  <input type="file" name="file" onChange={(e) => { onChangeHandler(e) }} />
-                <submit>Add</submit>
+        
+            <button className="positive ui button" type="submit"> Add</button>
+
             </form>
         </div>
 

@@ -110,7 +110,8 @@ const AddPackageForm = (props) => {
             })}</div>
     
     
-            <submit className="positive ui button">Add</submit>
+    
+            <button className="positive ui button" type="submit"> Add</button>
     
     
     
