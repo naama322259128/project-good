@@ -9,7 +9,8 @@ const ContinueNewAuction = (props) => {
     const [auctionsList, setAuctionsList] = useState([]);//המכירות שלו שעדיין לא אושרו לתצוגה
 
     useEffect(() => {
-        getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => { setAuctionsList(succ.data) })
+        getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => { setAuctionsList(succ.data)
+      })
     }, []);
 
     return (

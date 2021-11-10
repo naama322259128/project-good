@@ -317,7 +317,7 @@ const getUnapprovedAuctionsByUser = async (req, res) => {
             return res.status(404).send("There is no auction with such an manager ID number");
     }
     catch (err) { return res.status(400).send(err.message) }
-
+console.log(auctions)
     return res.send(auctions);
 }
 

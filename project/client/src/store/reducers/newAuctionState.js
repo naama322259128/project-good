@@ -1,7 +1,7 @@
 import * as actionTypes from '../actionTypes';
 import Auction from '../../models/auction'
 export const initialState = {
-    newAuction: new Auction(),
+    newAuction: null,
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
     showSetProduct: true,//האם להציג את קומפוננטת  AddProductForm
     finalStepModalIsOpen: true//האם להציג את המודל של האישור הסופי
