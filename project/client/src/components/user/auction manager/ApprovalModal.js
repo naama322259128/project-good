@@ -48,7 +48,7 @@ const mapStateToProps = (state) => {
         auction_id: state.auctionManager.selected_auction_to_options
     };
 }
-export default connect(mapStateToProps, { setApprovalAuctionModal, saveApprovalAuctionInDB })(ApprovalModal);
+export default connect(mapStateToProps, { setApprovalAuctionModal,saveApprovalAuctionInDB  })(ApprovalModal);
 
 
 

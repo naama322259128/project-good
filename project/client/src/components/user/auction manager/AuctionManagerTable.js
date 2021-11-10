@@ -71,7 +71,6 @@ const AuctionManagerTable = (props) => {
         props.setSelectedAuctionToOptions(_id);
         if (props.isAuctionApproved(_id)) props.setDisApprovalAuctionModal(true);//אם מאושר יציג את ביטול הגרלות
         else props.setApprovalAuctionModal(true);//אם לא מאושר יציג את אישור הגרלות
-
     }
 
     function createData(name1, name2, start_date, end_date, done, _id) {
