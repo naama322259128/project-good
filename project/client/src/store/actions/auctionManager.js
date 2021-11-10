@@ -71,14 +71,10 @@ export const setManagerAuctions = (list) => {
         payload: list
     }
 }
-export const approvalAuctionInDB = (a_id, status) => {
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/auctions/approvalAuction/${a_id}&${status}`).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400) dispatch(getManagerAuctionsFromDB());
-        })
-    }
-}
+
+
+
+
 //האם ההגרלות מאושרות
 export const isAuctionApproved = (_id) => {
     return (dispatch) => {

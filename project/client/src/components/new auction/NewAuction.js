@@ -1,6 +1,6 @@
 //TODO: בכל פעם שמתחיל מכירה חדשה למחוק את מה שיש סלוקלסטורג של מכירה חדשה
 //localStorage.removeItem("newAuction");
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import AuctionInformation from './AuctionInformation';
 import OrganizationInformation from './OrganizationInformation';
@@ -20,6 +20,9 @@ import { signIn, loginGoogle } from '../../store/actions/signIn';
 import { setNewAuction } from '../../store/actions/newAuction'
 import { setCurrentUser } from '../../store/actions/user';
 import Auction from '../../models/auction'
+import { saveApprovalAuctionInDB, saveApprovalLotteriesInDB } from '../../utils/newAuctionUtils';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -51,7 +54,8 @@ const getStepContent = (step) => {
     }
 }
 const NewAuction = (props) => {
-
+    const [publicationApproval, setPublicationApproval] = useState(false);
+    const [lotteryApproval, setLotteryApproval] = useState(false);
     useEffect(() => {
         if (props.currentUser == null && localStorage.getItem("login") == "true")
             props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
@@ -85,93 +89,119 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
-        let newSkipped = skipped;
-        if (isStepSkipped(activeStep)) {
-            newSkipped = new Set(newSkipped.values());
-            newSkipped.delete(activeStep);
-        }
+        if (activeStep == steps.length - 1) {
 
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setSkipped(newSkipped);
-    };
+            saveApprovalLotteriesInDB(props.auctionId, details).then(succ => {
+                if (succ.status != 400)
+                    props.setNewAuction(succ.data);
+            })
+            saveApprovalAuctionInDB(props.auctionId, details).then(succ => {
+                if (succ.status != 400)
+                    props.setNewAuction(succ.data);
+            })
 
-    const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); };
+            let newSkipped = skipped;
+            if (isStepSkipped(activeStep)) {
+                newSkipped = new Set(newSkipped.values());
+                newSkipped.delete(activeStep);
+            }
 
-    const handleSkip = () => {
-        if (!isStepOptional(activeStep)) {
-            throw new Error("You can't skip a step that isn't optional.");
-        }
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            setSkipped(newSkipped);
+        };
 
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setSkipped((prevSkipped) => {
-            const newSkipped = new Set(prevSkipped.values());
-            newSkipped.add(activeStep);
-            return newSkipped;
-        });
-    };
+        const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); };
 
-    const handleReset = () => { setActiveStep(0); };
+        const handleSkip = () => {
+            if (!isStepOptional(activeStep)) {
+                throw new Error("You can't skip a step that isn't optional.");
+            }
 
-    return (<>
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            setSkipped((prevSkipped) => {
+                const newSkipped = new Set(prevSkipped.values());
+                newSkipped.add(activeStep);
+                return newSkipped;
+            });
+        };
+
+        const handleReset = () => { setActiveStep(0); };
+
+        return (<>
 
 
-        <br />
-        <br />
-        <center><h1>Build Your own chinese auction</h1></center>
-        <br />
-        <div className={classes.root}>
-            <Stepper activeStep={activeStep}>
-                {steps.map((label, index) => {
-                    const stepProps = {};
-                    const labelProps = {};
-                    if (isStepSkipped(index)) {
-                        stepProps.completed = false;
-                    }
-                    return (
-                        <Step key={label} {...stepProps}>
-                            <StepLabel key={label}  {...labelProps}>{label}</StepLabel>
-                        </Step>
-                    );
-                })}
-            </Stepper>
-            <div>
-                {activeStep === steps.length ? (
-                    <div>
-                        <Typography className={classes.instructions}>{props.finalStepModalIsOpen ? <FinalStep /> : null}</Typography>
-                        <Button onClick={handleBack} className={classes.button}>Back</Button>
-                        <Button onClick={handleReset} className={classes.button}>Reset</Button>
-                    </div>
-                ) : (
-                    <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                        <div>
-                            {activeStep > 0 ? <Button onClick={handleBack} className={classes.button}>Back</Button> : null}
-                            {isStepOptional(activeStep) && (
-                                <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>Skip</Button>
-                            )}
-
+            <br />
+            <br />
+            <center><h1>Build Your own chinese auction</h1></center>
+            <br />
+            <div className={classes.root}>
+                <Stepper activeStep={activeStep}>
+                    {steps.map((label, index) => {
+                        const stepProps = {};
+                        const labelProps = {};
+                        if (isStepSkipped(index)) {
+                            stepProps.completed = false;
+                        }
+                        return (
+                            <Step key={label} {...stepProps}>
+                                <StepLabel key={label}  {...labelProps}>{label}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
+                <div>
+                    {activeStep === steps.length ? (
+                        <div style={{ 'marginLeft': '5vw' }}>
+                            <FormControlLabel
+                                control=
+                                {<Checkbox onChange={(e) => setPublicationApproval(e.target.checked)} />}
+                                label="Publication approval" />
+                            <br />
+                            <FormControlLabel
+                                control=
+                                {<Checkbox onChange={(e) => setLotteryApproval(e.target.checked)} />}
+                                label="Lottery approval" />
+                            <br />
+                            <br />
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={handleNext}
-                                className={classes.button}
-                            >
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
+                                onClick={handleBack} className={classes.button}>
+                                Back
+                            </Button>                    </div>
+                    ) : (
+                        <div>
+                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                            <div>
+                                {activeStep > 0 ?
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleBack} className={classes.button}>
+                                        Back
+                                    </Button> : null}
+
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleNext}
+                                    className={classes.button}
+                                >
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                </Button>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
-        </div>
-        <footer id="new_auction_footer" />
-    </>
-    )
-}
-const mapStateToProps = (state) => {
-    return {
-        finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
-        currentUser: state.user.currentUser,
-    };
-}
-export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);
-// לעשות עיצוב לחלק שאנו נמצאות בו עכשיו
+            <footer id="new_auction_footer" />
+        </>
+        )
+    }
+    const mapStateToProps = (state) => {
+        return {
+            finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
+            currentUser: state.user.currentUser,
+        };
+    }
+    export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);

@@ -312,12 +312,11 @@ const getUnapprovedAuctionsByUser = async (req, res) => {
     try {
         if (!mongoose.Types.ObjectId.isValid(_id))
             return res.status(404).send("Invalid ID number");
-        auctions = await Auction.find({ "auctionManager": _id, "publicationApproval": false });
+        auctions = await Auction.find({ "auctionManager": _id, "publicationApproval": 'false' });
         if (!auctions)
             return res.status(404).send("There is no auction with such an manager ID number");
     }
     catch (err) { return res.status(400).send(err.message) }
-console.log(auctions)
     return res.send(auctions);
 }
 

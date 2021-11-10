@@ -1,4 +1,4 @@
-import AddPackageFrom from './AddPackageFrom';
+import AddPackageForm from './AddPackageForm';
 import PackagesList from './PackagesList';
 import { connect } from "react-redux";
 import { showAddPackage } from "../../../store/actions/newAuction";
@@ -18,7 +18,7 @@ const AuctionPricing = (props) => {
         {props.showSetPackage == false &&
             <button className="positive ui button" onClick={props.showAddPackage}>Add new Package</button>}
 
-        {props.showSetPackage && <AddPackageFrom />}
+        {props.showSetPackage && <AddPackageForm />}
         {<PackagesList />}
     </>);
 }

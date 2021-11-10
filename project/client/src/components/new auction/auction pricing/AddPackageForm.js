@@ -5,7 +5,7 @@ import { addPackageToDB } from '../../../utils/newAuctionUtils'
 import { signIn, loginGoogle } from '../../../store/actions/signIn';
 import de from '../../../img/icons/dustbin.png'
 
-const AddPackageFrom = (props) => {
+const AddPackageForm = (props) => {
 
     let checkQty = () => {
     //     let tmp = [];
@@ -96,7 +96,7 @@ const mapStateToProps = (state) => {
         auctionId: state.auction.newAuction._id
     };
 }
-export default connect(mapStateToProps, { addPackage, signIn, loginGoogle })(AddPackageFrom);
+export default connect(mapStateToProps, { addPackage, signIn, loginGoogle })(AddPackageForm);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable

@@ -203,7 +203,14 @@ const UpdateDetails = (props) => {
 
 
                     <br />
-
+                    {/* //TODO להוסיף האם רוצה להיות חסוי או לא */}
+                    <FormControlLabel
+                        control=
+                        {<Checkbox onChange={(e) => setNewUser(prevState => ({
+                            ...prevState,
+                            ['confidentiality']: e.target.checked
+                        }))} />}
+                        label="Confidentiality" />
 
                     {/* האם לעשות שיעבור לדף הבית */}
                     {/* וגם להודיע לו שזה עודכן */}

@@ -1,7 +1,7 @@
 import * as actionTypes from '../actionTypes';
 import Auction from '../../models/auction'
 export const initialState = {
-    newAuction: null,
+    newAuction: new Auction(),
     showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
     showSetProduct: true,//האם להציג את קומפוננטת  AddProductForm
     finalStepModalIsOpen: true//האם להציג את המודל של האישור הסופי
@@ -40,28 +40,6 @@ export const newAuctionReducer = (state = initialState, action) => {
                 ...state,
                 newAuction: tmp,
             };
-        // case actionTypes.SET_ORGANIZATION_NAME:
-        //     return {
-        //         ...state,
-
-        //     }
-        // case actionTypes.SET_ORGANIZATION_TEXT:
-        //     return {
-        //         ...state,
-
-        //     }
-        // case actionTypes.ADD_PIC_ORGANIZATION:
-        //     let arrrr = [...state., action.payload];
-        //     return {
-        //         ...state,
-
-        //     }
-        // case actionTypes.SET_TERMS:
-        //     return {
-        //         ...state,
-
-        //     }
-
         case actionTypes.SHOW_ADD_PRODUCT: {
             return {
                 ...state,

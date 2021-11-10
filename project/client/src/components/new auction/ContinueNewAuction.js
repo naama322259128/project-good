@@ -9,15 +9,15 @@ const ContinueNewAuction = (props) => {
     const [auctionsList, setAuctionsList] = useState([]);//המכירות שלו שעדיין לא אושרו לתצוגה
 
     useEffect(() => {
-        getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => { setAuctionsList(succ.data)
-      })
+        getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => { setAuctionsList(succ.data) });
+        //TODO למה המערכים של המוצרים והחבילות מגיעים ריקים מתוכן
     }, []);
 
     return (
         <>
             <h1>Continue New Auction</h1>
             {auctionsList && auctionsList.map((a, index) => {
-               return <><Link to={'/new_auction'} key={a._id} onClick={() => props.setNewAuction(auctionsList[index])}>{index+1+')  '}{a.name}</Link><br/></>
+                return <><Link to={'/new_auction'} key={a._id} onClick={() => props.setNewAuction(auctionsList[index])}>{index + 1 + ')  '}{a.name}</Link><br /></>
             })}
         </>
     );

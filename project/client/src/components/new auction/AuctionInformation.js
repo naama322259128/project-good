@@ -27,25 +27,19 @@ const useStyles = makeStyles((theme) => ({
 
 const AuctionInformation = (props) => {
     let submit = (data, e) => {
-        debugger;
         e.preventDefault();
         // details.registrationStartDate = selectedDate2;
         // details.registrationEndDate = selectedDate3;
         // details.lotteriesDate = selectedDate1;
         // details.name = name;
-        debugger;
+
         details.registrationStartDate = new Date();
         details.registrationEndDate = new Date(31, 1, 2021);
         details.lotteriesDate =new Date(1, 12, 2021);
         details.name = data.name;
 
-        console.log(details);
 
-        console.log(props.auctionId);
-        debugger;
-        saveAuctionInformationInDB(details).then(succ=>{
-            console.log(succ.data);
-            
+        saveAuctionInformationInDB(details).then(succ=>{          
             if(succ.status!=400)
             props.setNewAuction(succ.data);
         })
@@ -78,7 +72,7 @@ const AuctionInformation = (props) => {
     return (<form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
         <h1>Auction information</h1>
 
-        <TextField className="txt" variant="standard"  {...register('name', { required: true })} id="input-with-icon-grid" label="Name Auction" />
+        <TextField className="txt" variant="standard" defaultValue={props.auction.name} {...register('name', { required: true })} id="input-with-icon-grid" label="Name Auction" />
         {errors.name && <Alert severity="error">This is an error enter Name (required)</Alert>}
        
 
@@ -87,7 +81,7 @@ const AuctionInformation = (props) => {
         {/* <input type="text" placeholder="newAuction.name" onChange={(e) => { setName(e.target.value) }} /> */}
 
 
-        {/* <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
+        <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
             <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
@@ -97,13 +91,14 @@ const AuctionInformation = (props) => {
                 label="Date of the lottery"
                 value={selectedDate1}
                 onChange={handleDateChange1}
+                defaultValue={props.auction.lotteriesDate}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
                 {...register('lotteriesDate', { required: true })} id="input-with-icon-grid" label="Date of the lottery"
             />
 
-        </MuiPickersUtilsProvider> */}
+        </MuiPickersUtilsProvider>
 
        <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
@@ -114,7 +109,8 @@ const AuctionInformation = (props) => {
                 id="date-picker-inline"
                 label="Registration start date"
                 value={selectedDate2}
-                onChange={handleDateChange2}
+                onChange={handleDateChange2} 
+                defaultValue={props.auction.registrationStartDate}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
@@ -134,11 +130,10 @@ const AuctionInformation = (props) => {
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
+                defaultValue={props.auction.registrationEndDate}
+                
             />
         </MuiPickersUtilsProvider>
-
-
-
 
         <Button
             variant="contained"
@@ -149,7 +144,6 @@ const AuctionInformation = (props) => {
         >
             Upload Terms
         </Button>
-        
 
         <button type="submit"> Save</button>
 
@@ -160,8 +154,9 @@ const AuctionInformation = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        auctionId: state.auction.newAuction._id
-    };
+        auctionId: state.auction.newAuction._id,
+        auction: state.auction.newAuction
+    }
 }
 export default connect(mapStateToProps, { setNewAuction })(AuctionInformation);
 
