@@ -55,7 +55,7 @@ const AddProductForm = (props) => {
                 <label>included in packages:</label>
                 <Checkbox  defaultChecked {...register('includedInPackages', { required: true })} id="input-with-icon-grid" />
                 <TextField
-                    placeholder="product description"
+                    label="product description"
                     multiline
                     rows={2}
                     rowsMax={4}

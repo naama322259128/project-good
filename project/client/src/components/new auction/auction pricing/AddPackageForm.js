@@ -26,20 +26,27 @@ const AddPackageForm = (props) => {
     }, [])
     const checkGifts = () => { if (gifts.indexOf("") == -1) return false; return true; }
 
-    const [qty, setQty] = useState([]);
-    const [discount, setDiscount] = useState([]);
-    // const [packageName, setPackageName] = useState([]);
-    let name;
     const [gifts, setGifts] = useState([]);
-
+    
+    let newPackage = {
+        name: "",
+        ticketsQuantity: 0,
+        discountPercenrages: 0,
+        // gifts:[]
+    }
 
     let submit = (data, e) => {
         e.preventDefault();
-        name = data.name;
-        let newPackage = { qty, discount, name, gifts };
+
+        newPackage.name = data.name;
+        newPackage.ticketsQuantity = data.ticketsQuantity;
+        newPackage.discountPercenrages = data.discountPercenrages;
+        //  newPackage.gifts=data.gifts;
+
         let goodGifts = [];
         for (var i = 0; i < gifts.length; i++)if (gifts[i] !== "") goodGifts.push(gifts[i]);
         newPackage.gifts = goodGifts;
+        debugger;
         addPackageToDB(props.newAuction._id, newPackage).then(
             succ => { if (succ.status != 400) props.addPackage(succ.data); })
     }
@@ -48,42 +55,14 @@ const AddPackageForm = (props) => {
     return (
 
         <form noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
-    
-            <TextField
-                type="number"
-                // InputProps={{
-                //     inputProps: { 
-                //         max: 100, min: 10 
-                //     }
-                // }}
-                label="Quantity of tickets"
-                defaultValue={props.newAuction.purchasePackage.ticketsQuantity}
-                onChange={(e) => { setQty(e.target.value); checkQty() }}
-                {...register('qty', { required: true })}
-                id="input-with-icon-grid"
-            // id="qtyInput"
-            />
-            <TextField
-                type="number"
-                InputProps={{
-                    inputProps: {
-                        min: 2
-                    }
-                }}
-                label="Discount percentages"
-                defaultValue={props.newAuction.purchasePackage.discountPercenrages}
-                onChange={(e) => { setDiscount(e.target.value); checkDiscount() }}
-                {...register('discount', { required: true })}
-                id="input-with-icon-grid"
-            //  id="discountInput"
-            />
-    
+            <TextField className="txt" type="number" variant="standard" defaultValue={props.newAuction.purchasePackage.ticketsQuantity} {...register('ticketsQuantity', { required: true })} id="input-with-icon-grid" label="Quantity of tickets" />
+            <TextField className="txt" type="number" variant="standard" InputProps={{inputProps: {min: 2}}} defaultValue={props.newAuction.purchasePackage.discountPercenrages} {...register('discountPercenrages', { required: true })} id="input-with-icon-grid" label="Discount percentages" />
             <TextField className="txt" variant="standard" defaultValue={props.newAuction.purchasePackage.name} {...register('name', { required: true })} id="input-with-icon-grid" label="Package name" />
-    
-    
-    
-    
-    
+
+
+
+
+
             {/* //TODO לא לאפשר אם הוסיף מתנה ולא מילא את שמה */}
             <input type="button" /*disabled={checkGifts}*/ onClick={() => { let ggg = gifts; setGifts([...ggg, ""]); }} value="Add gift" />
             <br />
@@ -108,14 +87,14 @@ const AddPackageForm = (props) => {
                     </button >
                 </div>)
             })}</div>
-    
-    
-    
+
+
+
             <button className="positive ui button" type="submit"> Add</button>
-    
-    
-    
-    
+
+
+
+
         </form >
     );
 }
