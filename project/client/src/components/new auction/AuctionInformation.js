@@ -156,7 +156,7 @@ const AuctionInformation = (props) => {
             control=
             {<Checkbox onChange={(e) => setLotteryApproval(e.target.checked)} />}
             label="Lottery approval" />
-        <button type="submit" className="positive ui button"> Save</button>
+        <button type="submit" className="positive ui button">Save</button>
 
     </form >);
     //submit!!!!

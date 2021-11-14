@@ -29,8 +29,6 @@ const Auction = (props) => {
         <Switch>
             <Route path={`/auction/cart`}><Cart /></Route>
             <Route path={`/auction`}><CurrentAuction /></Route>
-            <Route path={`/`}><CurrentAuction /></Route>
-            {/* למחוק את הראוט האחרון הוא רק זמני */}
         </Switch>
         {/* <footer className="auction_footer"></footer> */}
         <SmallFooter />

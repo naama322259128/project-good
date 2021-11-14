@@ -14,9 +14,10 @@ const CurrentAuction = (props) => {
         <br />
         <br />
         <Link to={`/auction/cart`}><h1>Cart</h1></Link>
-        {/* כפתור שמעביר לצפיה בסל */}
-        <Timer />
-        {/* כאן נוסיף גם שעון, אודות, וכו */}
+
+
+        {/* <Timer /> */}
+
         <ProductList />
     </>);
 }

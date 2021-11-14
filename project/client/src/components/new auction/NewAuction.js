@@ -18,6 +18,7 @@ import { signIn, loginGoogle } from '../../store/actions/signIn';
 import { setNewAuction } from '../../store/actions/newAuction'
 import { setCurrentUser } from '../../store/actions/user';
 import { useHistory } from "react-router-dom";
+// import { LoginFromStorage, GetDataFromStorage } from '../../store/actions/home';
 
 //TODO: בכל פעם שמתחיל מכירה חדשה למחוק את מה שיש סלוקלסטורג של מכירה חדשה
 //localStorage.removeItem("newAuction");
@@ -57,20 +58,21 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
-        if (props.currentUser == null && localStorage.getItem("login") == "true")
-            props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
-        else if (props.currentUser == null && localStorage.getItem("login") == "google")
-            props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+        // if (props.currentUser == null && localStorage.getItem("login") == "true")
+        //     props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
+        // else if (props.currentUser == null && localStorage.getItem("login") == "google")
+        //     props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
 
-        
+        /*if (props.currentUser == null) props.LoginFromStorage();
+        if (props.newAuction == null)props.GetDataFromStorage();*/
 
 
-        beManagerInDB(props.currentUser._id).then(succ => {
-            if (succ.status != 400) {
-                props.setCurrentUser(succ.data);
-                console.log(succ.data);
-            }
-        });
+        // beManagerInDB(props.currentUser._id).then(succ => {
+        //     if (succ.status != 400) {
+        //         props.setCurrentUser(succ.data);
+        //         console.log(succ.data);
+        //     }
+        // });
 
     }, [])
 
@@ -150,4 +152,5 @@ const mapStateToProps = (state) => {
 
     };
 }
-export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser })(NewAuction);
+export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser
+ })(NewAuction);

@@ -17,6 +17,7 @@ route.get("/sendWinnersListToUsers/:_id", myEmailMessagesController.sendWinnersL
 
 route.put("/performLotteries/:_id", auctionController.performLotteries)
 
+
 route.post("/setOrganizationInformation/:a_id", auctionController.addOrganizationInformation)
 route.post("/setAuctionInformation/", auctionController.addAuctionInformation)
 route.post("/approvalAuction/:a_id&:status", auctionController.setApprovalAuction)

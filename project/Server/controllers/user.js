@@ -126,6 +126,48 @@ const beManager = async (req, res) => {
     return res.send(doc);
 }
 
+const addProductToCart = async (req, res) => {
+    let { auctionId } = req.params;
+    let { productId } = req.params;
+    let { userId } = req.params;
+
+
+    /*shoppingCart: [{
+        porductId: mongoose.SchemaTypes.ObjectId,
+        qty: Number,
+        auctionId: mongoose.SchemaTypes.ObjectId
+    }]*/
+
+    // try {
+    //     const filter = { _id: userId };
+    //     const update = { $: { shoppingCart.qty: 1}, }
+
+    //     //shoppingCart.porductId: productId, shoppingCart.auctionId: auctionId 
+
+    //     let doc = await User.findOneAndUpdate(filter, update, { new: true });
+    //     await doc.save();
+
+    //     return res.send(doc.shoppingCart);
+    // }
+    // catch (err) { return res.status(400).send(err.message) }
+}
+
+const removeProductFromCart = async (req, res) => {
+    // let { auctionId } = req.params;
+    // let { productId } = req.params;
+    // let { userId } = req.params;
+
+    const filter = { _id: userId };
+    // const update = { $c: {shoppingCart.qty: 1}, }
+
+    //shoppingCart.porductId: productId, shoppingCart.auctionId: auctionId 
+
+    // let doc = await User.findOneAndUpdate(filter, update, { new: true });
+    // await doc.save();
+    // return res.send(doc.shoppingCart);
+}
+
 module.exports = {
-    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle
+    getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle,
+    removeProductFromCart, addProductToCart
 }

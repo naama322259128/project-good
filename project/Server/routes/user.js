@@ -12,6 +12,8 @@ route.post("/", userController.addUser)
 
 route.put("/beManager/:_id", userController.beManager)
 route.put("/:id", userController.updateUser)
+route.put(`/addProductToCart/:auctionId/:userId/:productId`, userController.addProductToCart);
+route.put(`/deleteProductFromCart/:auctionId/:userId/:productId`, userController.deleteProductFromCart);
 
 route.delete("/:id", userController.deleteUser)
 

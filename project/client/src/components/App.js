@@ -9,15 +9,16 @@ import UpdateDetails from './user/UpdateDetails';
 import React, { useEffect } from "react";
 import ContinueNewAuction from './new auction/ContinueNewAuction';
 import { connect } from "react-redux";
-import { signIn, loginGoogle } from '../store/actions/signIn';
+// import { LoginFromStorage, GetDataFromStorage } from '../store/actions/home';
+
 function App(props) {
   useEffect(() => {
-    if (props.currentUser == null && localStorage.getItem("login") == "true")
-      props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
-    else if (props.currentUser == null && localStorage.getItem("login") == "google")
-      props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+    /*if (props.currentUser == null) props.LoginFromStorage();
+    if (props.newAuction == null) props.GetDataFromStorage();*/
   }, [])
   return (
+
+    // TODO: למחוק מהלוקל-סטורג' מיד שעוזבים את הקומפוננטה
     <Router>
       <Switch>
         <Route path={`/auction`} ><Auction /></Route>
@@ -38,4 +39,4 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, { signIn, loginGoogle })(App);
+export default connect(mapStateToProps, {})(App);

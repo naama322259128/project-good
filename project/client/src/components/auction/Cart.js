@@ -35,7 +35,7 @@ const Cart = (props) => {
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
 
-            {props.shoppingCart && props.shoppingCart.map((item, index) => {
+            {props.currentUser && props.currentUser.shoppingCart && props.currentUser.shoppingCart.map((item, index) => {
                 return (<ProductInCart key={parseInt(index)} item={item} /*setCount={props.setCnt}*/ />)
             })}
             <Button onClick={orderCompletion}>OK</Button>{/* כפתור אישור פה יועבר כל בסל מהלוקל סטורג למסד נתונים*/}
@@ -47,7 +47,6 @@ const Cart = (props) => {
 
 const mapStateToProps = state => {
     return {
-        shoppingCart: state.user.shoppingCart,
         currentUser: state.user.currentUser,
         auction_id: state.currentAuction._id//לבדוק אם הכוונה ב _id של מחירה
     }

@@ -42,7 +42,7 @@ const AddPackageForm = (props) => {
         newPackage.ticketsQuantity =parseInt(data.ticketsQuantity);
         newPackage.discountPercenrages = parseInt(data.discountPercenrages);
         //  newPackage.gifts=data.gifts;
-debugger;
+
         let goodGifts = [];
         for (var i = 0; i < gifts.length; i++)if (gifts[i] !== "") goodGifts.push(gifts[i]);
         newPackage.gifts = goodGifts;

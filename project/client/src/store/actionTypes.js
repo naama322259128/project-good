@@ -13,7 +13,10 @@ export const UPDATE_USER_STATE = "UPDATE_USER_STATE"
 export const SET_SHOW_CONTACT_FORM = "SET_SHOW_CONTACT_FORM"
 export const ADD_ORDER = "ADD_ORDER"//הוספת הזמנה לסטייט
 export const SET_USER_ORDERS = "SET_USER_ORDERS"
-export const SIGN_IN_OF_STATE="SIGN_IN_OF_STATE"
+export const SIGN_IN_OF_STATE = "SIGN_IN_OF_STATE"
+export const SET_SHOPPING_CART = "SET_SHOPPING_CART"
+
+
 /******************************************   NEW AUCTION   ****************************************************/
 export const SET_NEW_AUCTION = "SET_NEW_AUCTION"
 export const SHOW_ADD_PACKAGE = "SHOW_ADD_PACKAGE";//AddPackage להראות את הקומפוננטה 

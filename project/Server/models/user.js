@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     // password: { type: String, required: true},
-    password: { type: String},
+    password: { type: String },
     userName: { type: String, required: true },
     email: {
         type: String,
@@ -22,7 +22,12 @@ const userSchema = new mongoose.Schema({
     birthYear: { type: Number },
     city: { type: String },
     status: { type: String, enum: ['USER', 'AUCTION_MANAGER', 'SITE_MANAGER'], required: true, default: 'USER' },
-    confidentiality: { type: Boolean, default: false }//חסוי או לא חסוי
+    confidentiality: { type: Boolean, default: false },//חסוי או לא חסוי
+    shoppingCart: [{
+        porductId: mongoose.SchemaTypes.ObjectId,
+        qty: Number,
+        auctionId: mongoose.SchemaTypes.ObjectId
+    }]
 });
 const User = mongoose.model("User", userSchema);
 module.exports = User;

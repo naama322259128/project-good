@@ -92,3 +92,23 @@ export const updateUserInDB = (user) => {
     }
 
 }
+
+export const addProductToshoppingCart = (auctionId, userId, productId) => {
+    //מוסיף אחד לכמות שקיימת בסל מאותו מוצר
+    return (dispatch) => {
+        axios.put(`http://localhost:5000/users/addProductToCart/${auctionId}&${userId}&${productId}`).then(succ => {
+            if (succ.status != 400)
+                dispatch(updateShoppingCart(succ.data));
+        })
+    }
+}
+
+export const deleteProductToshoppingCart = (auctionId, userId, productId) => {
+    //מוריד אחד מהכמות שקיימת בסל מאותו מוצר
+    return (dispatch) => {
+        axios.put(`http://localhost:5000/users/deleteProductFromCart/${auctionId}&${userId}&${productId}`).then(succ => {
+            if (succ.status != 400)
+                dispatch(updateShoppingCart(succ.data));
+        })
+    }
+}
