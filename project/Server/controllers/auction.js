@@ -137,13 +137,14 @@ const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;
     let package = req.body;
+    console.log(package)
     try {
         const filter = { _id: a_id };
-        const update = { $push: { purchasePackage: { ticketsQuantity: package.qty, discountPercenrages: package.discount, name: package.packageName, gifts: package.gifts } } };
+        const update = { $push: { purchasePackage: { ticketsQuantity: package.ticketsQuantity, discountPercenrages: package.discountPercenrages, name: package.name, gifts: package.gifts } } };
 
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
         await doc.save();
-        let len = doc.purchasePackage.length
+        let len = doc.purchasePackage.length;
         return res.send(doc.purchasePackage[len - 1]);
     }
     catch (err) { return res.status(400).send(err.message) }

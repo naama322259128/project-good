@@ -5,10 +5,10 @@ import { setLogin } from '../../store/actions/home';
 import { useEffect } from "react";
 import { setCurrentUser } from '../../store/actions/user'
 import ContactForm from '../main/ContactForm'
-
+import NewAuction from "../new auction/NewAuction";
+import { setNewAuction } from "../../store/actions/newAuction"
+import { createNewAuctionInDB } from "../../utils/newAuctionUtils";
 const HomeFooter = (props) => {
-
-
     return (
         <footer className="home_footer">
             <div id="logo_in_home_footer" ></div>
@@ -16,7 +16,12 @@ const HomeFooter = (props) => {
             <div id="menu_footer">
                 <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
                 <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
-                <Link onClick={props.currentUser ? null : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
+                <Link onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
+                    if (succ.status != 400) {
+                        props.setNewAuction(succ.data);
+                        console.log(succ.data);
+                    }
+                }) : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
                     <p className="menu_footer_link">BUILDING</p>
                 </Link>
                 <Link to={"/about"}><p className="menu_footer_link">ABOUT</p></Link>
@@ -30,7 +35,7 @@ const HomeFooter = (props) => {
                     Thanks to its uniqueness.
                 </p>
             </div>
-        </footer>
+        </footer >
     );
 }
 
@@ -39,4 +44,4 @@ const mapStateToProps = state => {
         currentUser: state.user.currentUser
     }
 }
-export default connect(mapStateToProps, { setLogin })(HomeFooter);
+export default connect(mapStateToProps, { setLogin,setNewAuction })(HomeFooter);

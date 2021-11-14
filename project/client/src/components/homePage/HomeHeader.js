@@ -7,7 +7,8 @@ import Button from '@material-ui/core/Button';
 import ProfileButton from '../user/ProfileButton';
 import { setLogin } from '../../store/actions/home'
 import { setCurrentUser } from '../../store/actions/signUp'
-
+import { createNewAuctionInDB } from '../../utils/newAuctionUtils';
+import { setNewAuction } from '../../store/actions/newAuction';
 import SmallHeader from '../main/SmallHeader';
 import User from '../../models/user'
 
@@ -56,7 +57,15 @@ const HomeHeader = (props) => {
           <Button
             // href={props.currentUser ? "/new_auction" : '#'}
             onClick={props.currentUser ?
-              localStorage.removeItem("newAuction")  //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
+              () => {
+                createNewAuctionInDB(props.currentUser._id).then(succ => {
+                  if (succ.status != 400) {
+                    props.setNewAuction(succ.data);
+                    console.log(succ.data);
+                  }
+                })
+                localStorage.removeItem("newAuction")
+              }  //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
               : () => {
                 props.setLogin(true);
                 window.scrollTo(0, 0);
@@ -65,7 +74,7 @@ const HomeHeader = (props) => {
             type="button" className="btn" id="btnNewAuction">
             BUILD CHINESE AUCTION
           </Button>
-          </Link>
+        </Link>
       </div>
 
 
@@ -81,4 +90,4 @@ const mapStateToProps = state => {
     loginIsOpen: state.user.loginIsOpen
   }
 }
-export default connect(mapStateToProps, { setLogin })(HomeHeader);
+export default connect(mapStateToProps, { setLogin,setNewAuction })(HomeHeader);

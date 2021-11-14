@@ -10,7 +10,8 @@ import SmallFooter from "./SmallFooter";
 import SmallHeader from "./SmallHeader";
 import ContactForm from "./ContactForm";
 import{resetNewAuctionState} from "../../store/actions/newAuction";
-
+import { createNewAuctionInDB } from "../../utils/newAuctionUtils";
+import { setNewAuction } from "../../store/actions/newAuction";
 const About = (props) => {
 
   useEffect(() => {
@@ -55,7 +56,12 @@ const About = (props) => {
         <p><b>How? </b>Choose a name for your Chinese auction, set prizes, prices and dates, tell about your organization / purpose. Confirm the auction and the auction in the air!</p>
         <b>Want to get started?</b>
         <Link to={props.currentUser ? "/new_auction" : '#'}
-         onClick={props.currentUser ? props.resetNewAuctionState()
+         onClick={props.currentUser ?  () => createNewAuctionInDB(props.currentUser._id).then(succ => {
+          if (succ.status != 400) {
+              props.setNewAuction(succ.data);
+              console.log(succ.data);
+          }
+      })
           :props.setLogin(true)}>Click here!</Link>
       </div>
 
@@ -126,4 +132,4 @@ const mapStateToProps = state => {
       auction_id:state.currentAuction._id
   }
 }
-export default connect(mapStateToProps, {setLogin,resetNewAuctionState})(About);
+export default connect(mapStateToProps, {setLogin,setNewAuction})(About);

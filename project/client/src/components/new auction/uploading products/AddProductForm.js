@@ -50,18 +50,17 @@ const AddProductForm = (props) => {
     return (
         <div className="field">
             <form noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
-                <TextField className="txt" variant="standard" defaultValue={props.newAuction.productList.name} {...register('name', { required: true })} id="input-with-icon-grid" label="Product Name" />
-                <TextField className="txt" variant="standard" defaultValue={props.newAuction.productList.price} {...register('price', { required: true })} id="input-with-icon-grid" label="Product Price" />
+                <TextField className="txt" variant="standard"  {...register('name', { required: true })} id="input-with-icon-grid" label="Product Name" />
+                <TextField className="txt" variant="standard"{...register('price', { required: true })} id="input-with-icon-grid" label="Product Price" />
                 <label>included in packages:</label>
-                <Checkbox  defaultChecked {...register('includedInPackages', { required: true })} id="input-with-icon-grid" />
+                <Checkbox  defaultChecked {...register('includedInPackages')} id="input-with-icon-grid" />
                 <TextField
                     label="product description"
                     multiline
                     rows={2}
                     rowsMax={4}
                     variant="standard"
-                    defaultValue={props.newAuction.productList.description}
-                    {...register('description', { required: true })}
+                    {...register('description')}
                     id="input-with-icon-grid"
                 />
                  <input type="file" name="file" onChange={(e) => { onChangeHandler(e) }} />

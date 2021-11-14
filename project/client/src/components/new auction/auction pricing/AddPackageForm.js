@@ -39,10 +39,10 @@ const AddPackageForm = (props) => {
         e.preventDefault();
 
         newPackage.name = data.name;
-        newPackage.ticketsQuantity = data.ticketsQuantity;
-        newPackage.discountPercenrages = data.discountPercenrages;
+        newPackage.ticketsQuantity =parseInt(data.ticketsQuantity);
+        newPackage.discountPercenrages = parseInt(data.discountPercenrages);
         //  newPackage.gifts=data.gifts;
-
+debugger;
         let goodGifts = [];
         for (var i = 0; i < gifts.length; i++)if (gifts[i] !== "") goodGifts.push(gifts[i]);
         newPackage.gifts = goodGifts;
@@ -55,9 +55,9 @@ const AddPackageForm = (props) => {
     return (
 
         <form noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
-            <TextField className="txt" type="number" variant="standard" defaultValue={props.newAuction.purchasePackage.ticketsQuantity} {...register('ticketsQuantity', { required: true })} id="input-with-icon-grid" label="Quantity of tickets" />
-            <TextField className="txt" type="number" variant="standard" InputProps={{inputProps: {min: 2}}} defaultValue={props.newAuction.purchasePackage.discountPercenrages} {...register('discountPercenrages', { required: true })} id="input-with-icon-grid" label="Discount percentages" />
-            <TextField className="txt" variant="standard" defaultValue={props.newAuction.purchasePackage.name} {...register('name', { required: true })} id="input-with-icon-grid" label="Package name" />
+            <TextField className="txt" type="number" variant="standard"  {...register('ticketsQuantity', { required: true })} id="input-with-icon-grid" label="Quantity of tickets" />
+            <TextField className="txt" type="number" variant="standard" InputProps={{inputProps: {min: 2}}}  {...register('discountPercenrages', { required: true })} id="input-with-icon-grid" label="Discount percentages" />
+            <TextField className="txt" variant="standard"  {...register('name', { required: true })} id="input-with-icon-grid" label="Package name" />
 
 
 

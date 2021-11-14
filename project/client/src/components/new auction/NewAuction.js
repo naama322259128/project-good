@@ -62,12 +62,7 @@ const NewAuction = (props) => {
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
             props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
 
-        createNewAuctionInDB(props.currentUser._id).then(succ => {
-            if (succ.status != 400) {
-                props.setNewAuction(succ.data);
-                console.log(succ.data);
-            }
-        });//TODO: להעביר את זה לאונקליק של כפתור מכירה חדשה
+        
 
 
         beManagerInDB(props.currentUser._id).then(succ => {
