@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import {addProductToCart} from '../../store/actions/user';
+import { addProductToshoppingCartInDB, updateShoppingCart } from '../../store/actions/user';
 import { connect } from "react-redux";
 
 const useStyles = makeStyles({
@@ -28,9 +28,9 @@ const Product = (props) => {
   const classes = useStyles();
   let [cnt, setCnt] = useState(0);
   let image_src = p;//עד שנעשה את הקטע של התמונות
-  let description = props.item.description;
-  let name = props.item.name;
-  let price = props.item.prices;
+  let description = props.product.description;
+  let name = props.product.name;
+  let price = props.product.prices;
 
   return (
     <Modal
@@ -51,9 +51,10 @@ const Product = (props) => {
           <IconButton color="primary" aria-label="add to shopping cart">
             <AddShoppingCartIcon
               onClick={(e) => {
-                e.stopPropagation();
-                props.addProductToCart(cnt, props.item);
-                setCnt(0);
+                e.stopPropagation();  //auctionId, userId, productId
+                addProductToshoppingCartInDB(props.currentAuction._id, props.currentUser._id, props.product._id).then(succ => {
+                  if (succ.status != 400) { props.updateShoppingCart(succ.data); setCnt(0); }
+                })
               }} />
           </IconButton>
 
@@ -79,6 +80,8 @@ const Product = (props) => {
 
 const mapStateToProps = state => {
   return {
+    currentUser: state.user.currentUser,
+    currentAuction: state.currentAuction.currentAuction
   }
 }
-export default connect(mapStateToProps, { addProductToCart })(Product);
+export default connect(mapStateToProps, { updateShoppingCart })(Product);

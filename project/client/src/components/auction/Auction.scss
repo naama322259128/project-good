@@ -59,3 +59,12 @@
     background-size: 100% ;
     background-repeat: no-repeat;
  }
+
+ .products-container {
+  display: grid;
+  grid-template-columns: repeat(5, 5fr);
+}
+
+.products-container .MuiPaper-root.MuiCard-root.makeStyles-root-20.MuiPaper-elevation1.MuiPaper-rounded{
+margin: 2vh  !important;
+}

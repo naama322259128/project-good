@@ -1,9 +1,10 @@
+import Auction from '../../models/auction';
 import * as actionTypes from '../actionTypes';
 export const initialState = {
     registrationEndDate: new Date(2021, 10, 9, 17, 0, 0),//תאריך אחרון להרשמה
     productsList: [],//רשימת מוצרים של מכירה זו
     _id: "",
-    currentAuction: ""
+    currentAuction: new Auction()
 }
 export const currentAuctionReducer = (state = initialState, action) => {
     switch (action.type) {

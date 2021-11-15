@@ -35,15 +35,15 @@ export const addOrder = (order) => {
     }
 }
 
-export const addProductToCart = (cnt, product) => {
-    return {
-        type: actionTypes.ADD_PRODUCT_TO_CART,
-        payload: {
-            cnt: cnt,
-            product: product
-        }
-    }
-}
+// export const addProductToCart = (cnt, product) => {
+//     return {
+//         type: actionTypes.ADD_PRODUCT_TO_CART,
+//         payload: {
+//             cnt: cnt,
+//             product: product
+//         }
+//     }
+// }
 
 export const signOut = () => {
     //TODO מה עושה אם אני אומרת לו למחוק אייטם שלא קיים
@@ -63,12 +63,12 @@ export const updateShoppingCart = (arr) => {
     }
 }
 
-export const deleteProductFromCart = (_id) => {
-    return {
-        type: actionTypes.DELETE_PRODUCT_FROM_CART,
-        payload: _id
-    }
-}
+// export const deleteProductFromCart = (_id) => {
+//     return {
+//         type: actionTypes.DELETE_PRODUCT_FROM_CART,
+//         payload: _id
+//     }
+// }
 
 
 export const addOrderToDB = (order) => {
@@ -93,7 +93,7 @@ export const updateUserInDB = (user) => {
 
 }
 
-export const addProductToshoppingCart = (auctionId, userId, productId) => {
+export const addProductToshoppingCartInDB = (auctionId, userId, productId) => {
     //מוסיף אחד לכמות שקיימת בסל מאותו מוצר
     return (dispatch) => {
         axios.put(`http://localhost:5000/users/addProductToCart/${auctionId}&${userId}&${productId}`).then(succ => {
@@ -103,7 +103,7 @@ export const addProductToshoppingCart = (auctionId, userId, productId) => {
     }
 }
 
-export const deleteProductToshoppingCart = (auctionId, userId, productId) => {
+export const deleteProductToshoppingCartInDB = (auctionId, userId, productId) => {
     //מוריד אחד מהכמות שקיימת בסל מאותו מוצר
     return (dispatch) => {
         axios.put(`http://localhost:5000/users/deleteProductFromCart/${auctionId}&${userId}&${productId}`).then(succ => {
