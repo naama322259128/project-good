@@ -92,10 +92,7 @@ const NewAuction = (props) => {
 
     const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); }
 
-    return (<>
-
-
-        <br />
+    return (<><div id="newAuctionAllSteps" >
         <br />
         <center><h1>Build Your own chinese auction</h1></center>
         <br />
@@ -129,7 +126,7 @@ const NewAuction = (props) => {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={activeStep === steps.length? history.push("/home") : handleNext}
+                            onClick={activeStep === steps.length ? history.push("/home") : handleNext}
 
                             className={classes.button}
                         >
@@ -139,6 +136,8 @@ const NewAuction = (props) => {
                 </div>
             </div>
         </div>
+    </div>
+
         <footer id="new_auction_footer" />
     </>
     )
@@ -152,5 +151,6 @@ const mapStateToProps = (state) => {
 
     };
 }
-export default connect(mapStateToProps, { signIn, loginGoogle, setNewAuction, setCurrentUser
- })(NewAuction);
+export default connect(mapStateToProps, {
+    signIn, loginGoogle, setNewAuction, setCurrentUser
+})(NewAuction);

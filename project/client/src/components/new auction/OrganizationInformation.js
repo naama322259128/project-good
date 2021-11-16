@@ -4,6 +4,7 @@ import { saveOrganizationInformationInDB } from '../../utils/newAuctionUtils';
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
+import './NewAuction.scss'
 const OrganizationInformation = (props) => {
     let details = {
         organizationName: "",
@@ -32,24 +33,22 @@ const OrganizationInformation = (props) => {
     });
 
     return (<form noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
-
-        <TextField className="txt" variant="standard" defaultValue={props.auction.organizationName} {...register('organizationName', { required: true })} id="input-with-icon-grid" label="Organization Name" />
-        <TextField
-            className="txt"
-            multiline
-            rows={2}
-            rowsMax={4}
-            variant="standard"
-            defaultValue={props.auction.organizationText}
-            {...register('organizationText', { required: true })}
-            id="input-with-icon-grid"
-            label="Organization Text" />
-
+        <div className={"inputs-in-form-container"}>
+            <TextField className="txt" variant="standard" defaultValue={props.auction.organizationName} {...register('organizationName', { required: true })} id="input-with-icon-grid" label="Organization Name" />
+            <TextField
+                className="txt"
+                multiline
+                variant="standard"
+                defaultValue={props.auction.organizationText}
+                {...register('organizationText', { required: true })}
+                id="input-with-icon-grid"
+                label="Organization Text" />
+        </div>
 
         <label>Upload photos of the organization</label>
         <button className="positive ui button" {...register('organizationPhotos', { required: true })}>Upload Photos</button>
         <button className="positive ui button" type="submit">Save</button>
-    </form>)
+    </form >)
 }
 
 const mapStateToProps = (state) => {

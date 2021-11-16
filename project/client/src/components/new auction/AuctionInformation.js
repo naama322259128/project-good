@@ -20,9 +20,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
-            margin: theme.spacing(1),
-            width: '40%',
-            // outerHeight:'70%'
+            margin: theme.spacing(1)
         },
     },
 }));
@@ -76,88 +74,86 @@ const AuctionInformation = (props) => {
 
     return (<form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
         <h1>Auction information</h1>
+        <div className={"inputs-in-form-container"} >
 
-        <TextField className="txt" variant="standard" defaultValue={props.auction.name} {...register('name', { required: true })} id="input-with-icon-grid" label="Name Auction" />
-        {errors.name && <Alert severity="error">This is an error enter Name (required)</Alert>}
+            <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
+                <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="dd/MM/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Date of the lottery"
+                    value={selectedDate1}
+                    onChange={handleDateChange1}
+                    defaultValue={props.auction.lotteriesDate}
+                    KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                    }}
+                    {...register('lotteriesDate', { required: true })} id="input-with-icon-grid" label="Date of the lottery"
+                />
 
-        {/* <input type="text" placeholder="newAuction.name" onChange={(e) => { setName(e.target.value) }} /> */}
+            </MuiPickersUtilsProvider>
 
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="dd/MM/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Registration start date"
+                    value={selectedDate2}
+                    onChange={handleDateChange2}
+                    defaultValue={props.auction.registrationStartDate}
+                    KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                    }}
+                />
+            </MuiPickersUtilsProvider>
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
-            <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="dd/MM/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Date of the lottery"
-                value={selectedDate1}
-                onChange={handleDateChange1}
-                defaultValue={props.auction.lotteriesDate}
-                KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                }}
-                {...register('lotteriesDate', { required: true })} id="input-with-icon-grid" label="Date of the lottery"
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="dd/MM/yyyy"
+                    margin="normal"
+                    id="date-picker-inline"
+                    label="Registration end date"
+                    value={selectedDate3}
+                    onChange={handleDateChange3}
+                    KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                    }}
+                    defaultValue={props.auction.registrationEndDate}
 
-        </MuiPickersUtilsProvider>
+                />
+            </MuiPickersUtilsProvider>
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="dd/MM/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Registration start date"
-                value={selectedDate2}
-                onChange={handleDateChange2}
-                defaultValue={props.auction.registrationStartDate}
-                KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                }}
-            />
-        </MuiPickersUtilsProvider>
+            <TextField className="txt" variant="standard" defaultValue={props.auction.name} {...register('name', { required: true })} id="input-with-icon-grid" label="Name Auction" />
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="dd/MM/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Registration end date"
-                value={selectedDate3}
-                onChange={handleDateChange3}
-                KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                }}
-                defaultValue={props.auction.registrationEndDate}
+            <Button
+                variant="contained"
+                color="default"
+                className={classes.button}
+                startIcon={<CloudUploadIcon />}
+            // onChange={(e) => terms=e.target.value}
+            >
+                Upload Terms
+            </Button>
 
-            />
-        </MuiPickersUtilsProvider>
+            <FormControlLabel
+                control=
+                {<Checkbox onChange={(e) => setPublicationApproval(e.target.checked)} />}
+                label="Publication approval" />
 
-        <Button
-            variant="contained"
-            color="default"
-            className={classes.button}
-            startIcon={<CloudUploadIcon />}
-        // onChange={(e) => terms=e.target.value}
-        >
-            Upload Terms
-        </Button>
+            <FormControlLabel
+                control=
+                {<Checkbox onChange={(e) => setLotteryApproval(e.target.checked)} />}
+                label="Lottery approval" />
+        </div>
 
-        <FormControlLabel
-            control=
-            {<Checkbox onChange={(e) => setPublicationApproval(e.target.checked)} />}
-            label="Publication approval" />
-        <br />
-        <FormControlLabel
-            control=
-            {<Checkbox onChange={(e) => setLotteryApproval(e.target.checked)} />}
-            label="Lottery approval" />
         <button type="submit" className="positive ui button">Save</button>
-
     </form >);
     //submit!!!!
     //לבדוק שהתאריכים תקינים

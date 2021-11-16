@@ -28,6 +28,7 @@ function App(props) {
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
+        <Route path={`/shoppingCart`}><Home /></Route>
         <Route path={`/`}><Home /></Route>
       </Switch>
     </Router>

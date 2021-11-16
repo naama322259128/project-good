@@ -5,8 +5,11 @@ import ProductsList from "./ProducstList";
 const UploadingProducts = (props) => {
 
     return (<>
-        <input type="button" className="ui button" onClick={() => { props.showAddProduct(true) }} value="add product" />
         {props.showSetProduct && <AddProductForm />}
+        <br />
+        <br />
+        <input type="button" className="ui button" onClick={() => { props.showAddProduct(true) }} value="add product" />
+
         <ProductsList />
     </>);
 }

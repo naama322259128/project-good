@@ -157,13 +157,25 @@ const addProduct = async (req, res) => {
     // let newProduct = new Product(product);
     // newProduct.image = url1 + '/public/' + req.file.filename;
     try {
+
         const filter = { _id: a_id };
-        const update = { $push: { productList: product } };
+        const update = {
+            $push: {
+                productList: {
+                    name: product.name,
+                    // image: product.image,
+                    description: product.description,
+                    price: product.price,
+                    includedInPackages: product.includedInPackages
+                }
+            }
+        };
+        console.log(3);
 
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
 
-        await doc.save();
-        let len = doc.productList.length
+        // await doc.save();
+        let len = doc.productList.length;
         return res.send(doc.productList[len - 1]);
     }
     catch (err) {

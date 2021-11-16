@@ -90,3 +90,22 @@ body {
 //   margin-left: auto !important;
 //   box-shadow: 0px 0px 3px 0.2px black;
 // }
+
+// 
+.inputs-in-form-container{
+  display: grid;
+  grid-template-columns: repeat(3, 5fr);
+  grid-gap: 1rem; 
+  margin-bottom: 2vh;
+  margin-top: 1vh;
+
+}
+.inputs-in-form-container .MuiFormControl-root.MuiTextField-root.txt.css-1u3bzj6-MuiFormControl-root-MuiTextField-root{ 
+}
+
+#newAuctionAllSteps{
+  width:100%;
+  padding-right: 7vw;
+  padding-left: 7vw;
+  padding-top: 3vh;
+}
