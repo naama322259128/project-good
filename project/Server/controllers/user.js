@@ -126,48 +126,73 @@ const beManager = async (req, res) => {
     return res.send(doc);
 }
 
-const addProductToCart = async (req, res) => {
-    let { auctionId } = req.params;
-    let { productId } = req.params;
+// const addProductToCart = async (req, res) => {
+//     let { auctionId } = req.params;
+//     let { productId } = req.params;
+//     let { userId } = req.params;
+//     let { cnt } = req.params;
+
+//     /*shoppingCart: [{
+//         porductId: mongoose.SchemaTypes.ObjectId,
+//         qty: Number,
+//         auctionId: mongoose.SchemaTypes.ObjectId
+//     }]*/
+
+//     try {
+//         const filter = { _id: userId };
+//         const update = { $: { shoppingCart.qty: 1}, }
+
+//         //shoppingCart.porductId: productId, shoppingCart.auctionId: auctionId 
+
+//         let doc = await User.findOneAndUpdate(filter, update, { new: true });
+//         await doc.save();
+
+//         return res.send(doc.shoppingCart);
+//     }
+//     catch (err) { return res.status(400).send(err.message) }
+
+//TODO****************************להחזיר מערך מוצרים רק ממכירה אחת
+// }
+
+// const removeProductFromCart = async (req, res) => {
+//     // let { auctionId } = req.params;
+//     // let { productId } = req.params;
+//     // let { userId } = req.params;
+
+//     const filter = { _id: userId };
+//     // const update = { $c: {shoppingCart.qty: 1}, }
+
+//     //shoppingCart.porductId: productId, shoppingCart.auctionId: auctionId 
+
+//     // let doc = await User.findOneAndUpdate(filter, update, { new: true });
+//     // await doc.save();
+//TODO****************************להחזיר מערך מוצרים רק ממכירה אחת
+
+//     // return res.send(doc.shoppingCart);
+// }
+const getProductsInCartByAuctionId = async (req, res) => {
     let { userId } = req.params;
+    let { auctionId } = req.params;
 
 
-    /*shoppingCart: [{
-        porductId: mongoose.SchemaTypes.ObjectId,
-        qty: Number,
-        auctionId: mongoose.SchemaTypes.ObjectId
-    }]*/
+    if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(auctionId))
+        return res.status(404).send("Invalid ID number");
+    let user = await User.findById(userId);    //.populate לקבל גם מחיר של המוצר
+    /* 
+    //דוגמה
+    let auction = await Auction.findById(_id).
+            populate([
+                { path: "productList.winnerId", select: `userName confidentiality email phone address` },
+                { path: "auctionManager", select: `email` }
+            ]);*/
+    if (!user) return res.status(404).send("There is no user with such an ID number");
 
-    // try {
-    //     const filter = { _id: userId };
-    //     const update = { $: { shoppingCart.qty: 1}, }
+    let arr = user.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
 
-    //     //shoppingCart.porductId: productId, shoppingCart.auctionId: auctionId 
-
-    //     let doc = await User.findOneAndUpdate(filter, update, { new: true });
-    //     await doc.save();
-
-    //     return res.send(doc.shoppingCart);
-    // }
-    // catch (err) { return res.status(400).send(err.message) }
-}
-
-const removeProductFromCart = async (req, res) => {
-    // let { auctionId } = req.params;
-    // let { productId } = req.params;
-    // let { userId } = req.params;
-
-    const filter = { _id: userId };
-    // const update = { $c: {shoppingCart.qty: 1}, }
-
-    //shoppingCart.porductId: productId, shoppingCart.auctionId: auctionId 
-
-    // let doc = await User.findOneAndUpdate(filter, update, { new: true });
-    // await doc.save();
-    // return res.send(doc.shoppingCart);
+    return res.send(arr);
 }
 
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle,
-    removeProductFromCart, addProductToCart
+   /* removeProductFromCart, addProductToCart,*/ getProductsInCartByAuctionId
 }

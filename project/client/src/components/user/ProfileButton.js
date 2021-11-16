@@ -7,7 +7,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import { connect } from "react-redux";
-import {signOut} from '../../store/actions/user';
+import { signOut } from '../../store/actions/user';
 
 const ITEM_HEIGHT = 48;
 const ProfileButton = (props) => {
@@ -68,7 +68,9 @@ const ProfileButton = (props) => {
             <Link to={'/continue_new_auction'}>
                 <MenuItem key={'Continue chinese auction'} onClick={handleClose}>Continue chinese auction</MenuItem>
             </Link>
-
+            <Link to={'/shoppingCart'}>
+                <MenuItem key={'Shopping cart'} onClick={handleClose}>Shopping cart</MenuItem>
+            </Link>
             <Link to={'/home'}>
                 <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>
             </Link>
@@ -83,4 +85,4 @@ const mapStateToProps = state => {
     return {
     };
 }
-export default connect(mapStateToProps, {signOut })(ProfileButton);
+export default connect(mapStateToProps, { signOut })(ProfileButton);

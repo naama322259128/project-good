@@ -7,14 +7,19 @@ route.get("/", userController.getAll)
 route.get("/:id", userController.getById)
 route.get("/signIn/:password&:email", userController.isUserExist)
 route.get("/loginGoogle/:name&:email", userController.isLoginGoogle)
+route.get("/getProductsInCartByAuctionId/:userId&:auctionId", userController.getProductsInCartByAuctionId)
+
 route.post("/sendContactToSiteManager/", myEmailMessagesController.sendContactToSiteManager)
 route.post("/", userController.addUser)
 
 route.put("/beManager/:_id", userController.beManager)
 route.put("/:id", userController.updateUser)
-// route.put(`/addProductToCart/:auctionId/:userId/:productId`, userController.addProductToCart);
-// route.put(`/deleteProductFromCart/:auctionId/:userId/:productId`, userController.deleteProductFromCart);
+// route.put(`/addProductToCart/:auctionId&:userId&:productId&:cnt`, userController.addProductToCart);
+// route.put(`/deleteProductFromCart/:auctionId&:userId&:productId`, userController.deleteProductFromCart);
 
 route.delete("/:id", userController.deleteUser)
 
 module.exports = route;
+
+
+//ME.find({$where: 'this.pictures.length > 0'}).sort('-created').limit(10).execFind()

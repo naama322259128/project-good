@@ -9,7 +9,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { addProductToshoppingCartInDB, updateShoppingCart } from '../../store/actions/user';
+import { addProductToShoppingCartInDB, updateShoppingCart } from '../../store/actions/user';
 import { connect } from "react-redux";
 
 const useStyles = makeStyles({
@@ -37,32 +37,26 @@ const Product = (props) => {
       closeIcon
       open={open}
       trigger={
-        <Card className={classes.root} >
-          {name}
-          <Typography gutterBottom variant="h5" component="h2">
-            {price}
-          </Typography>
-          <CardMedia
-            className={classes.media}
-            image={image_src}
-            title="Contemplative Reptile"
-          />
+        <Card className={classes.root, "product-in-list"} >
+
+          <center>{name}</center>
+          <Typography gutterBottom variant="h5" component="h2">{price}</Typography>
+          <CardMedia className={classes.media} image={image_src} title={name} />
+          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>
+          <h2 style={{ display: "inline-block", fontSize: '2vh' }}>{cnt}</h2>
+          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); e.stopPropagation(); }}>+</IconButton>
+
           {/* הוסף לסל */}
-          <IconButton color="primary" aria-label="add to shopping cart">
+          <IconButton color="primary" aria-label="add to shopping cart" id="add-to-cart-btn">
             <AddShoppingCartIcon
               onClick={(e) => {
-                e.stopPropagation();  //auctionId, userId, productId
-                addProductToshoppingCartInDB(props.currentAuction._id, props.currentUser._id, props.product._id).then(succ => {
+                e.stopPropagation();
+                addProductToShoppingCartInDB(props.currentAuction._id, props.currentUser._id, props.product._id, cnt).then(succ => {
                   if (succ.status != 400) { props.updateShoppingCart(succ.data); setCnt(0); }
                 })
               }} />
           </IconButton>
 
-          <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>
-
-          <h2>{cnt}</h2>
-
-          <IconButton color="primary" onClick={(e) => { let c = cnt; setCnt(c + 1); e.stopPropagation(); }}>+ </IconButton>
 
         </Card>}
       onClose={() => setOpen(false)}
@@ -70,10 +64,8 @@ const Product = (props) => {
     >
 
       <Header ><h1>{name}</h1></Header>
-      <Modal.Content>
-        {description}<br />
-        <img src={image_src}></img>
-      </Modal.Content>
+      <Modal.Content><img src={image_src}/><div style={{marginLeft:'2vw',marginTop:'2vh', overflowWrap: 'break-word'}}>{description}</div></Modal.Content>
+
     </Modal>
   )
 }

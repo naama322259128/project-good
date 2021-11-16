@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom'
 import './Auction.scss';
 import Button from '@material-ui/core/Button';
 import Order from '../../models/order';
-import { addOrderToDB } from '../../store/actions/user';
+import { addOrderToDB, updateShoppingCart } from '../../store/actions/user';
 import { connect } from "react-redux";
-
+import React, { useEffect, useState } from 'react';
 const Cart = (props) => {
 
     const amountToPay = () => {
         let sum = 0;
-        props.shoppingCart.map((item) => { sum = item.cnt * item.product.price });
+        props.user.shoppingCartOfCurrentAuction.map((item) => { sum += item.qty * item.productId/* איך נגיע למחיר*/ });//TODO
         return sum;
     }
+
 
     const orderCompletion = () => {
         const newOrder = new Order(
@@ -24,31 +25,31 @@ const Cart = (props) => {
             [],//להוסיף בחירת מתנות
             new Date()
         );
-
+        //TODO מתי לאפס את השופינג בארט בסטייט ובמסד נתונים
         props.addOrderToState(newOrder);
     }
 
     return (
         <div>
-            <br />
-            <br />
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
 
-            {props.currentUser && props.currentUser.shoppingCart && props.currentUser.shoppingCart.map((item, index) => {
+            {/* מערך רק של המוצרים מהמכירה הזו */}
+            {props.user && props.user.shoppingCartOfCurrentAuction && props.user.shoppingCartOfCurrentAuction.map((item, index) => {
                 return (<ProductInCart key={parseInt(index)} item={item} /*setCount={props.setCnt}*/ />)
             })}
+
             <Button onClick={orderCompletion}>OK</Button>{/* כפתור אישור פה יועבר כל בסל מהלוקל סטורג למסד נתונים*/}
 
-            {props.shoppingCart && amountToPay()}
+            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay()}
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);
 }
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.user.currentUser,
-        auction_id: state.currentAuction._id//לבדוק אם הכוונה ב _id של מחירה
+        user: state.user,
+        currentAuction: state.currentAuction.currentAuction
     }
 }
 export default connect(mapStateToProps, { addOrderToDB })(Cart);

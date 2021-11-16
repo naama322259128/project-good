@@ -12,8 +12,7 @@ export const currentAuctionReducer = (state = initialState, action) => {
             {
                 return {
                     ...state,
-                    //קיבלנו לכאן קוד מכירה
-                    currentAuction: action.payload
+                    currentAuction: action.payload                    //קיבלנו לכאן קוד מכירה
                 }
 
             }

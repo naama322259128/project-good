@@ -57,6 +57,7 @@ export const signOut = () => {
 }
 
 export const updateShoppingCart = (arr) => {
+    console.log(arr)
     return {
         type: actionTypes.UPDATE_SHOPPING_CART,
         payload: arr
@@ -93,17 +94,17 @@ export const updateUserInDB = (user) => {
 
 }
 
-export const addProductToshoppingCartInDB = (auctionId, userId, productId) => {
+export const addProductToShoppingCartInDB = (auctionId, userId, productId, cnt) => {
     //מוסיף אחד לכמות שקיימת בסל מאותו מוצר
     return (dispatch) => {
-        axios.put(`http://localhost:5000/users/addProductToCart/${auctionId}&${userId}&${productId}`).then(succ => {
+        axios.put(`http://localhost:5000/users/addProductToCart/${auctionId}&${userId}&${productId}&${cnt}`).then(succ => {
             if (succ.status != 400)
                 dispatch(updateShoppingCart(succ.data));
         })
     }
 }
 
-export const deleteProductToshoppingCartInDB = (auctionId, userId, productId) => {
+export const deleteProductFromShoppingCartInDB = (auctionId, userId, productId) => {
     //מוריד אחד מהכמות שקיימת בסל מאותו מוצר
     return (dispatch) => {
         axios.put(`http://localhost:5000/users/deleteProductFromCart/${auctionId}&${userId}&${productId}`).then(succ => {

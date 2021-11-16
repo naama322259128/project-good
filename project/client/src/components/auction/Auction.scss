@@ -63,8 +63,25 @@
  .products-container {
   display: grid;
   grid-template-columns: repeat(5, 5fr);
+  grid-gap: 1rem;
+  padding: 7vw;
 }
 
-.products-container .MuiPaper-root.MuiCard-root.makeStyles-root-20.MuiPaper-elevation1.MuiPaper-rounded{
-margin: 2vh  !important;
+.product-in-list{
+  padding-top: 1vh;
+  padding-left: 0.3vw;
+  padding-right: 0.3vw;
+}
+.product-in-list button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorPrimary{
+width:1.8vw;
+height:3.6vh;
+}
+
+#add-to-cart-btn{
+margin-left: 1vw;}
+
+.content>*{
+display: inline-block;
+inline-size:40%;
+vertical-align: top;
 }

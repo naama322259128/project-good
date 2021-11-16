@@ -61,7 +61,6 @@ const HomeHeader = (props) => {
                 createNewAuctionInDB(props.currentUser._id).then(succ => {
                   if (succ.status != 400) {
                     props.setNewAuction(succ.data);
-                    console.log(succ.data);
                   }
                 })
                 localStorage.removeItem("newAuction")

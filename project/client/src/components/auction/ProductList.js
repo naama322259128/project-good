@@ -16,7 +16,6 @@ const ProductList = (props) => {
 const mapStateToProps = state => {
     return {
         currentUser: state.user.currentUser,
-        loginIsOpen: state.user.loginIsOpen,
         currentAuction: state.currentAuction.currentAuction
     }
 }

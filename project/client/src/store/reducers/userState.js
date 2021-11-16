@@ -3,6 +3,7 @@ export const initialState = {
     currentUser: null,
     loginIsOpen: false,
     ordersList: [],//?
+    shoppingCartOfCurrentAuction: []
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -26,11 +27,9 @@ export const userReducer = (state = initialState, action) => {
             }
         }
         case actionTypes.UPDATE_SHOPPING_CART: {
-            let tmp = state.currentUser;
-            tmp.shoppingCart = action.payload;
             return {
                 ...state,
-                currentUser: tmp
+                shoppingCartOfCurrentAuction: action.payload
             }
         }
         // case actionTypes.ADD_PRODUCT_TO_CART:
@@ -75,14 +74,14 @@ export const userReducer = (state = initialState, action) => {
                     currentUser: null,
                     loginIsOpen: false,
                     yourProfileIsOpen: false,
-                    shoppingCart: null
+                    shoppingCart: []
                 }
             }
         case actionTypes.UPDATE_USER_STATE: {
             //עידכון משתמש נוכחי
             return {
                 ...state,
-                shoppingCart: action.payload,
+                //TODO ??
             }
         }
         case actionTypes.SET_USER_ORDERS: {
