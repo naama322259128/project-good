@@ -11,11 +11,13 @@ const SmallHeader = (props) => {
 
     return (<>
         <header id="small-header">
-            <Link to={"/home"} id="logo_home_small_header" />
+            <Link to={"/home"} id="logo_home_small_header" />//TODO למה פותח לוגין
+
             {props.currentUser ?
                 <ProfileButton /> :
-                <Button type="button" className="btn" id="login_btn_small_header"
-                    onClick={() => { props.setLogin(true) }}>Login</Button>}
+                (<Button type="button" className="btn" id="login_btn_small_header"
+                    onClick={() => { props.setLogin(true) }}>Login</Button>)}//למה לא פותח לוגין
+
         </header>
 
     </>);

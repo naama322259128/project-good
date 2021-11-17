@@ -19,7 +19,7 @@ route.put("/performLotteries/:_id", auctionController.performLotteries)
 
 
 route.post("/setOrganizationInformation/:a_id", auctionController.addOrganizationInformation)
-route.post("/setAuctionInformation/", auctionController.addAuctionInformation)
+route.post("/setAuctionInformation/:a_id", auctionController.addAuctionInformation)
 route.post("/approvalAuction/:a_id&:status", auctionController.setApprovalAuction)
 route.post("/approvalLotteries/:a_id&:status", auctionController.setApprovalLotteries)
 route.post("/addPurchasePackage/:a_id", auctionController.addPurchasePackage)

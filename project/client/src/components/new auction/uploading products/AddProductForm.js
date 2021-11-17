@@ -65,7 +65,7 @@ const AddProductForm = (props) => {
             <br />
 
             <button type="submit">Add</button>
-            {/* <Button variant="contained" component="span" type="submit">Add</Button> */}
+
         </form>
     )
 }

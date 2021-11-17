@@ -135,3 +135,37 @@ div.one-step h3{
 
   }
   /**************************************************************************/
+
+
+  .inputs-in-contact-form-container{
+    display: grid;
+    grid-template-columns: repeat(2, 5fr);
+    grid-gap: 1rem;
+margin-bottom: 5vh;
+}
+
+#contact-form .MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-multiline.css-5xn5lu-MuiInputBase-root-MuiInput-root
+{ width: 62vw !important;
+
+}
+
+
+
+#contact-form
+{
+    border-radius: 5px;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+    padding-right: 4vw;
+    padding-left: 4vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+
+    -moz-box-shadow:    3px 3px 5px 6px #ccc;
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    box-shadow:         3px 3px 5px 6px #ccc;
+
+    // box-shadow: 0 -20px 15px -10px #8c92f7 inset,
+    // 0 20px 15px -10px #8c92f7 inset,
+    // 0 0 10px rgba(0, 0, 0, 0.1);
+}

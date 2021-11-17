@@ -15,43 +15,34 @@ import FilledInput from '@material-ui/core/FilledInput';
 import { updateUserInDB } from '../../store/actions/user'
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    margin: {
-        margin: theme.spacing(1),
-    },
-    withoutLabel: {
-        marginTop: theme.spacing(3),
-    },
-    textField: {
-        width: '25ch',
-    },
-    input_pas_ma: {
-        color: '#8e8e95',
-        height: '4vh !important',
-        background: 'none !important',
-        color: '#8e8e95 !important',
-        width: '70% !important',
-        padding: '0vw !important',
-        borderBottomColor: '8e8e95 !important',
-        background: 'none !important',
-        alignSelf: 'flex-end',
-        marginRight: 'auto',
-        marginLeft: 'auto'
+const useStyles = makeStyles((theme) => (
+    {
+        margin: {
+            margin: theme.spacing(1),
+        },
+        withoutLabel: {
+            marginTop: theme.spacing(3),
+        },
+        input_pas_ma: {
+            color: '#8e8e95',
+            height: '4vh !important',
+            background: 'none !important',
+            color: '#8e8e95 !important',
+            padding: '0vw !important',
+            borderBottomColor: '8e8e95 !important',
+            background: 'none !important',
+            alignSelf: 'flex-end'
+        },
+        eye: {
+            color: '#8e8e95',
 
-    },
-    eye: {
-        color: '#8e8e95',
-
-    },
-    placeholder_in_form: {
-        marginLeft: '3% !important',
-        marginBottom: ' -2% !important'
+        },
+        placeholder_in_form: {
+            marginLeft: '3% !important',
+            marginBottom: ' -2% !important'
+        }
     }
-}));
+));
 
 const UpdateDetails = (props) => {
 
@@ -104,122 +95,121 @@ const UpdateDetails = (props) => {
 
             <center>
                 <br />
-                <h1 id="h1_profile">Update your details</h1>
-                <form className={classes.root} autoComplete="off" id="update_user_details_form" >
+                <form autoComplete="off" id="update_user_details_form" >
 
-                    <FilledInput
-                        type={'text'}
-                        placeholder="Name"
-                        required
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        onChange={(e) => { userName = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="user icon"></i>
-                            </InputAdornment>
-                        }
-                        defaultValue={userName}
-                    />
+                    <h1 id="h1_profile">Update your details</h1>
+                    <div id="grid-inputs-in-update-form">
+                        <FilledInput
+                            type={'text'}
+                            placeholder="Name"
+                            required
+                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                            variant="filled"
+                            onChange={(e) => { userName = e.target.value }}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <i className="user icon"></i>
+                                </InputAdornment>
+                            }
+                            defaultValue={userName}
+                        />
 
-                    <FilledInput
-                        type={'email'}
-                        placeholder="Email address"
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        required
-                        onChange={(e) => { email = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="envelope icon"></i>
-                            </InputAdornment>
-                        }
-                        defaultValue={email} />
+                        <FilledInput
+                            type={'email'}
+                            placeholder="Email address"
+                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                            variant="filled"
+                            required
+                            onChange={(e) => { email = e.target.value }}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <i className="envelope icon"></i>
+                                </InputAdornment>
+                            }
+                            defaultValue={email} />
 
-                    <FilledInput
-                        type={'text'}
-                        required
-                        placeholder='City'
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        onChange={(e) => { city = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="map marker alternate icon"></i>
-                            </InputAdornment>
-                        }
-                        defaultValue={city} />
+                        <FilledInput
+                            type={'text'}
+                            required
+                            placeholder='City'
+                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                            variant="filled"
+                            onChange={(e) => { city = e.target.value }}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <i className="map marker alternate icon"></i>
+                                </InputAdornment>
+                            }
+                            defaultValue={city} />
 
-                    <FilledInput
-                        type={'text'}
-                        placeholder="Year Of Birth"
-                        required
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        onChange={(e) => { birthYear = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="calendar alternate outline icon"></i>
-                            </InputAdornment>
-                        }
-                        defaultValue={birthYear} />
+                        <FilledInput
+                            type={'text'}
+                            placeholder="Year Of Birth"
+                            required
+                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                            variant="filled"
+                            onChange={(e) => { birthYear = e.target.value }}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <i className="calendar alternate outline icon"></i>
+                                </InputAdornment>
+                            }
+                            defaultValue={birthYear} />
 
-                    <FilledInput
-                        type={'text'}
-                        placeholder="Phone Number"
-                        required
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        onChange={(e) => { phone = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="mobile alternate icon"></i>
-                            </InputAdornment>
-                        }
-                        defaultValue={phone} />
+                        <FilledInput
+                            type={'text'}
+                            placeholder="Phone Number"
+                            required
+                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                            variant="filled"
+                            onChange={(e) => { phone = e.target.value }}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <i className="mobile alternate icon"></i>
+                                </InputAdornment>
+                            }
+                            defaultValue={phone} />
 
-                    <FilledInput
-                        type={values.showPassword ? 'text' : 'password'}
-                        onChange={handleChange('password')}
-                        placeholder="Password"
-                        required
-                        className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                        variant="filled"
-                        onChange={(e) => { password = e.target.value }}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <i className="lock icon"></i>
-                            </InputAdornment>
-                        }
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    className={classes.eye}
-                                >
-                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                        defaultValue={password} />
+                        <FilledInput
+                            type={values.showPassword ? 'text' : 'password'}
+                            onChange={handleChange('password')}
+                            placeholder="Password"
+                            required
+                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                            variant="filled"
+                            onChange={(e) => { password = e.target.value }}
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <i className="lock icon"></i>
+                                </InputAdornment>
+                            }
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        className={classes.eye}
+                                    >
+                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            defaultValue={password} />
 
-
-                    <br />
-                    <br />
-                    <FormControlLabel
-                        control=
-                        {<Checkbox onChange={(e) => { confidentiality = e.target.checked }} />}
-                        label="Confidentiality" />
+                        <FormControlLabel style={{marginLeft:'0vw'}}
+                            control=
+                            {<Checkbox onChange={(e) => { confidentiality = e.target.checked }} />}
+                            label="Confidentiality" />
+                    </div>
                     <br />
                     <br />
                     <Button type="button" variant="contained" id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
+
+
+                    {/* וגם להודיע לו שזה עודכן */}
+                    {/* TODO */}
+                    <Alert onClose={() => { }}>This is a success alert — check it out!</Alert>
                 </form>
-
-
-                {/* וגם להודיע לו שזה עודכן */}
-                {/* TODO */}
-                <Alert onClose={() => { }}>This is a success alert — check it out!</Alert>
 
             </center >
         </>

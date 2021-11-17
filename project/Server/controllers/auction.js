@@ -110,10 +110,10 @@ const addOrganizationInformation = async (req, res) => {
     }
 }
 const addAuctionInformation = async (req, res) => {
-
+    let { a_id } = req.params;
     let details = req.body;
     try {
-        const filter = { _id: details.auctionId };
+        const filter = { _id: a_id};
         const update = {
             registrationStartDate: details.registrationStartDate,
             registrationEndDate: details.registrationEndDate,

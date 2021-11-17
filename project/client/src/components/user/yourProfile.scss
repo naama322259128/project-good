@@ -24,12 +24,26 @@
   }
   
   #update_user_details_form{
-    background-color: white;
-    margin-bottom: 1vh;
-    background-size: 100% 100% ;
-    height: 80%;
-    width: 100%;  
-    border: 2px solid black;
+width: 70vw;
+    border-radius: 5px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-right: 2vw;
+    padding-left: 2vw;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+
+    -moz-box-shadow:    3px 3px 5px 6px #ccc;
+    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    box-shadow:         3px 3px 5px 6px #ccc;
+
+
+   
+  }
+  #grid-inputs-in-update-form{
+     display: grid;
+    grid-template-columns: repeat(2, 5fr);
+    grid-gap: 0.5rem; 
   }
 
   
@@ -47,9 +61,4 @@
 }
 .table_options_icon:not(:root) {
     overflow: hidden;
-}
-.MuiPaper-root {
-  // margin-top: 3.6vh;
-  // width: 12vw !important;
-
 }

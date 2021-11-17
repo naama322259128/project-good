@@ -55,15 +55,14 @@ const HomeHeader = (props) => {
         <Link
           to={props.currentUser ? "/new_auction" : '#'}>
           <Button
-            // href={props.currentUser ? "/new_auction" : '#'}
             onClick={props.currentUser ?
               () => {
                 createNewAuctionInDB(props.currentUser._id).then(succ => {
                   if (succ.status != 400) {
+                    localStorage.setItem("newAuction",succ.data._id)
                     props.setNewAuction(succ.data);
                   }
                 })
-                localStorage.removeItem("newAuction")
               }  //לפנות את הלוכל-סטורג' מנתיוני מכירה חדשה
               : () => {
                 props.setLogin(true);
@@ -89,4 +88,4 @@ const mapStateToProps = state => {
     loginIsOpen: state.user.loginIsOpen
   }
 }
-export default connect(mapStateToProps, { setLogin,setNewAuction })(HomeHeader);
+export default connect(mapStateToProps, { setLogin, setNewAuction })(HomeHeader);

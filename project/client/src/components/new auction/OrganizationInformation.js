@@ -13,6 +13,7 @@ const OrganizationInformation = (props) => {
     }
     let submit = (data, e) => {
         e.preventDefault();
+        debugger;
         details.organizationName = data.organizationName;
         details.organizationText = data.organizationText;
         details.organizationPhotos = data.organizationPhotos;
@@ -40,13 +41,13 @@ const OrganizationInformation = (props) => {
                 multiline
                 variant="standard"
                 defaultValue={props.auction.organizationText}
-                {...register('organizationText', { required: true })}
+                {...register('organizationText', { required: false })}
                 id="input-with-icon-grid"
                 label="Organization Text" />
         </div>
 
         <label>Upload photos of the organization</label>
-        <button className="positive ui button" {...register('organizationPhotos', { required: true })}>Upload Photos</button>
+        <button className="positive ui button" {...register('organizationPhotos', { required: false })}>Upload Photos</button>
         <button className="positive ui button" type="submit">Save</button>
     </form >)
 }
