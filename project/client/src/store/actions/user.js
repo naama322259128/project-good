@@ -28,12 +28,6 @@ export const getOrderByIdFromDB = (order) => {
     }
 }
 
-export const addOrder = (order) => {
-    return {
-        type: actionTypes.ADD_ORDER,
-        payload: order
-    }
-}
 
 // export const addProductToCart = (cnt, product) => {
 //     return {
@@ -57,7 +51,6 @@ export const signOut = () => {
 }
 
 export const updateShoppingCart = (arr) => {
-    console.log(arr)
     return {
         type: actionTypes.UPDATE_SHOPPING_CART,
         payload: arr
@@ -72,15 +65,7 @@ export const updateShoppingCart = (arr) => {
 // }
 
 
-export const addOrderToDB = (order) => {
-    return (dispatch) => {
-        axios.post(`http://localhost:5000/orders`, order).then(succ => {
-            console.log(succ.data);
-            if (succ.status != 400)
-                dispatch(console.log(succ.data), addOrder(succ.data));
-        })
-    }
-}
+
 
 //עדכון פרטי משתמש
 export const updateUserInDB = (user) => {
@@ -94,22 +79,4 @@ export const updateUserInDB = (user) => {
 
 }
 
-export const addProductToShoppingCartInDB = (auctionId, userId, productId, cnt) => {
-    //מוסיף אחד לכמות שקיימת בסל מאותו מוצר
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/users/addProductToCart/${auctionId}&${userId}&${productId}&${cnt}`).then(succ => {
-            if (succ.status != 400)
-                dispatch(updateShoppingCart(succ.data));
-        })
-    }
-}
 
-export const deleteProductFromShoppingCartInDB = (auctionId, userId, productId) => {
-    //מוריד אחד מהכמות שקיימת בסל מאותו מוצר
-    return (dispatch) => {
-        axios.put(`http://localhost:5000/users/deleteProductFromCart/${auctionId}&${userId}&${productId}`).then(succ => {
-            if (succ.status != 400)
-                dispatch(updateShoppingCart(succ.data));
-        })
-    }
-}

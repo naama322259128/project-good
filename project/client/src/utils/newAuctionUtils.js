@@ -41,3 +41,7 @@ export const saveApprovalAuctionInDB = (a_id, status) => {
 export const saveApprovalLotteriesInDB = (a_id, status) => {
     return axios.put(`http://localhost:5000/auctions/approvalLotteries/${a_id}&${status}`);
 }
+
+export const addOrderToDB = (order) => {
+    return axios.post(`http://localhost:5000/orders`, order);
+}

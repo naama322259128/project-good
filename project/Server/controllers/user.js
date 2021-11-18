@@ -170,7 +170,12 @@ const beManager = async (req, res) => {
 
 //     // return res.send(doc.shoppingCart);
 // }
-const getProductsInCartByAuctionId = async (req, res) => {
+
+const emptyTheBasketBuAuction = async (req, res) => {
+return null;
+}
+
+const getProductsInCartByAuction = async (req, res) => {
     let { userId } = req.params;
     let { auctionId } = req.params;
 
@@ -178,13 +183,8 @@ const getProductsInCartByAuctionId = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(auctionId))
         return res.status(404).send("Invalid ID number");
     let user = await User.findById(userId);    //.populate לקבל גם מחיר של המוצר
-    /* 
-    //דוגמה
-    let auction = await Auction.findById(_id).
-            populate([
-                { path: "productList.winnerId", select: `userName confidentiality email phone address` },
-                { path: "auctionManager", select: `email` }
-            ]);*/
+
+    
     if (!user) return res.status(404).send("There is no user with such an ID number");
 
     let arr = user.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
@@ -194,5 +194,5 @@ const getProductsInCartByAuctionId = async (req, res) => {
 
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle,
-   /* removeProductFromCart, addProductToCart,*/ getProductsInCartByAuctionId
+   /* removeProductFromCart, addProductToCart,*/ getProductsInCartByAuction,emptyTheBasketBuAuction
 }

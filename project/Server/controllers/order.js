@@ -2,6 +2,7 @@ const Order = require("../models/order");
 const Auction = require("../models/auction");
 
 const mongoose = require("mongoose");
+const User = require("../models/user");
 
 const getAll = async (req, res) => {
     let orders = await Order.find();
@@ -20,12 +21,23 @@ const getById = async (req, res) => {
 }
 
 const addOrder = async (req, res) => {
+
+    //הפונקציה הזו מוסיפה לטבלת ההזמנות ומוחקת למשתמש את המוצרים של המכירה הזו מהסל
+    /*
+    porductId: mongoose.SchemaTypes.ObjectId,
+            qty: Number,
+            auctionId: mongoose.SchemaTypes.ObjectId,
+            productName: String*/
     let order = req.body;
     let newOrder = new Order(order);
     try {
         await newOrder.save();
         console.log(newOrder)
-        return res.send(newOrder);
+        let user = await User.findById(newOrder.userId);
+        let arr = user.shoppingCart.filter(item => item.auctionId.toString() != order.auctionId);
+        user.shoppingCart = arr;
+        await user.save();
+        return res.send(user);
     }
     catch (err) {
         return res.status(400).send(err.message)

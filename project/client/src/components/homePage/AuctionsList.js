@@ -15,7 +15,7 @@ const AuctionsList = (props) => {
         getAuctionsListFromDB().then(succ => { setAuctionsList(succ.data) })
     }, []);
 
-    return (<>
+    return (<div id="auctions-container">
         {auctionsList && auctionsList.map((item) => {
             return (
                 <Link
@@ -26,7 +26,7 @@ const AuctionsList = (props) => {
                 </Link>
             )
         })}
-    </>
+    </div>
     );
 }
 

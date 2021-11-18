@@ -7,13 +7,14 @@ route.get("/", userController.getAll)
 route.get("/:id", userController.getById)
 route.get("/signIn/:password&:email", userController.isUserExist)
 route.get("/loginGoogle/:name&:email", userController.isLoginGoogle)
-route.get("/getProductsInCartByAuctionId/:userId&:auctionId", userController.getProductsInCartByAuctionId)
+route.get("/getProductsInCartByAuction/:userId&:auctionId", userController.getProductsInCartByAuction)
 
 route.post("/sendContactToSiteManager/", myEmailMessagesController.sendContactToSiteManager)
 route.post("/", userController.addUser)
 
 route.put("/beManager/:_id", userController.beManager)
 route.put("/:id", userController.updateUser)
+route.put("/emptyTheBasketBuAuction/:auctionId&:userId", userController.emptyTheBasketBuAuction)
 // route.put(`/addProductToCart/:auctionId&:userId&:productId&:cnt`, userController.addProductToCart);
 // route.put(`/deleteProductFromCart/:auctionId&:userId&:productId`, userController.deleteProductFromCart);
 

@@ -14,8 +14,6 @@ const useStyles = makeStyles((theme) => ({
 
   },
   image: {
-    top: 50,
-    left: '10vw',
     position: 'relative',
     height: 250,
     [theme.breakpoints.down('xs')]: {
@@ -94,7 +92,7 @@ const OneAuction = (props) => {
       className={classes.image}
       focusVisibleClassName={classes.focusVisible}
       style={{
-        width: '27%',
+        width: '100%',
 
       }}
     >

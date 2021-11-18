@@ -113,7 +113,7 @@ const addAuctionInformation = async (req, res) => {
     let { a_id } = req.params;
     let details = req.body;
     try {
-        const filter = { _id: a_id};
+        const filter = { _id: a_id };
         const update = {
             registrationStartDate: details.registrationStartDate,
             registrationEndDate: details.registrationEndDate,
@@ -170,8 +170,6 @@ const addProduct = async (req, res) => {
                 }
             }
         };
-        console.log(3);
-
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
 
         // await doc.save();

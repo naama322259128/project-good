@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
     shoppingCart: [{
         porductId: mongoose.SchemaTypes.ObjectId,
         qty: Number,
-        auctionId: mongoose.SchemaTypes.ObjectId
+        auctionId: mongoose.SchemaTypes.ObjectId,
+        productName: String
     }]
 });
 const User = mongoose.model("User", userSchema);

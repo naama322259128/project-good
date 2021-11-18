@@ -168,3 +168,11 @@
   font-size: 1.7vh ;  
   cursor: pointer;
 }
+
+#auctions-container{
+  display: grid;
+  grid-template-columns: repeat(3, 5fr);
+  grid-gap: 1rem;
+  width: 100vw;
+  padding: 3vw;
+}

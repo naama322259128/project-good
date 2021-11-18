@@ -9,7 +9,9 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { addProductToShoppingCartInDB, updateShoppingCart } from '../../store/actions/user';
+import { updateShoppingCart } from '../../store/actions/user';
+import { addProductToShoppingCartInDB } from '../../utils/userUtils';
+
 import { connect } from "react-redux";
 
 const useStyles = makeStyles({
@@ -48,11 +50,16 @@ const Product = (props) => {
 
           {/* הוסף לסל */}
           <IconButton color="primary" aria-label="add to shopping cart" id="add-to-cart-btn">
+            {/* TODO: לא לאפשר כאשר הכמות קטנה מאחד */}
             <AddShoppingCartIcon
               onClick={(e) => {
                 e.stopPropagation();
                 addProductToShoppingCartInDB(props.currentAuction._id, props.currentUser._id, props.product._id, cnt).then(succ => {
-                  if (succ.status != 400) { props.updateShoppingCart(succ.data); setCnt(0); }
+                  debugger;
+                  if (succ.status != 400) {
+                    props.updateShoppingCart(succ.data);
+                    setCnt(0);
+                  }
                 })
               }} />
           </IconButton>
@@ -64,7 +71,7 @@ const Product = (props) => {
     >
 
       <Header ><h1>{name}</h1></Header>
-      <Modal.Content><img src={image_src}/><div style={{marginLeft:'2vw',marginTop:'2vh', overflowWrap: 'break-word'}}>{description}</div></Modal.Content>
+      <Modal.Content><img src={image_src} /><div style={{ marginLeft: '2vw', marginTop: '2vh', overflowWrap: 'break-word' }}>{description}</div></Modal.Content>
 
     </Modal>
   )

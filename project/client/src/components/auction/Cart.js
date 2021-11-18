@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import './Auction.scss';
 import Button from '@material-ui/core/Button';
 import Order from '../../models/order';
-import { addOrderToDB, updateShoppingCart } from '../../store/actions/user';
+import { updateShoppingCart } from '../../store/actions/user';
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
+import { emptyTheBasketByAuction, addOrderToDB } from '../../utils/userUtils';
 const Cart = (props) => {
 
     const amountToPay = () => {
@@ -18,15 +19,21 @@ const Cart = (props) => {
     const orderCompletion = () => {
         const newOrder = new Order(
             props.currentUser,
-            props.shoppingCart,
+            props.user.shoppingCartOfCurrentAuction,
             "",//אחרי זה להכניס קוד תשלום
             amountToPay(),
-            props.auction_id,
+            props.currentAuction._id,
             [],//להוסיף בחירת מתנות
             new Date()
         );
-        //TODO מתי לאפס את השופינג בארט בסטייט ובמסד נתונים
-        props.addOrderToState(newOrder);
+
+        //הפונקציה הזו מוסיפה לטבלת ההזמנות ומוחקת למשתמש את המוצרים של המכירה הזו מהסל
+        addOrderToDB(newOrder).then(succ => {
+            if (succ.status != 400) {
+                props.updateShoppingCart([]);
+            }
+        })
+
     }
 
     return (
@@ -52,4 +59,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction
     }
 }
-export default connect(mapStateToProps, { addOrderToDB })(Cart);
+export default connect(mapStateToProps, { updateShoppingCart })(Cart);
