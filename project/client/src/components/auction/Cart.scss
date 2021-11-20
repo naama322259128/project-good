@@ -1,0 +1,22 @@
+#cart-products-container {
+    display: grid;
+    grid-template-columns: repeat(5, 5fr);
+    grid-gap: 1rem;
+    padding: 7vw;
+  }
+  
+  .cart-product-in-list{
+    padding-top: 1vh;
+    padding-left: 0.3vw;
+      padding-right: 0.3vw;
+  }
+  .cart-product-in-list button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorPrimary{
+  width:1.8vw;
+  height:3.6vh;
+  }
+  
+ /* .content>*{
+  display: inline-block;
+  inline-size:40%;
+  vertical-align: top;
+  }*/

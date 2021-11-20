@@ -95,3 +95,86 @@
 //   }
 // }
 // export default connect(mapStateToProps, { deleteProductFromCart, })(ProductInCart);
+
+import './Cart.scss';
+import { Header, Modal } from 'semantic-ui-react';
+import p from '../../img/car.jpg';
+import IconButton from '@material-ui/core/IconButton';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import { updateShoppingCart } from '../../store/actions/user';
+import { addProductToShoppingCartInDB } from '../../utils/userUtils';
+
+import { connect } from "react-redux";
+
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 300,
+    },
+    media: {
+        height: 160,
+    },
+});
+
+const ProductInCart = (props) => {
+
+
+    const [open, setOpen] = React.useState(false)
+    const classes = useStyles();
+
+    let image_src = p;//עד שנעשה את הקטע של התמונות
+    let description = props.productInCart.description;
+    let name = props.productInCart.name;
+    let price = props.productInCart.prices;
+    let cnt = props.productInCart.qty;//TODO
+    return (
+        <Modal
+            closeIcon
+            open={open}
+            trigger={
+                <Card className={classes.root, "cart-product-in-list"} >
+
+                    <center>{name}</center>
+                    <Typography gutterBottom variant="h5" component="h2">{price}</Typography>
+                    <CardMedia className={classes.media} image={image_src} title={name} />
+                    <IconButton color="primary" onClick={(e) => { e.stopPropagation(); }}  >-</IconButton>
+                    <h2 style={{ display: "inline-block", fontSize: '2vh' }}>cnt</h2>
+                    <IconButton color="primary" onClick={(e) => { e.stopPropagation(); }}>+</IconButton>
+
+                    {/* מחיקה מהסל */}
+                    <IconButton color="primary" aria-label="delete from shopping cart">
+                        <AddShoppingCartIcon
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                //delete
+                                alert("וגם לשנות את האייקון! deleted!!")
+                            }} />
+                    </IconButton>
+
+
+                </Card>}
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+        >
+
+            <Header ><h1>{name}</h1></Header>
+            <Modal.Content><img src={image_src} />
+                <div style={{ marginLeft: '2vw', marginTop: '2vh', overflowWrap: 'break-word' }}>{description}</div>
+            </Modal.Content>
+
+        </Modal>
+    )
+}
+
+const mapStateToProps = state => {
+    return {
+        currentUser: state.user.currentUser,
+        currentAuction: state.currentAuction.currentAuction
+    }
+}
+export default connect(mapStateToProps, { updateShoppingCart })(ProductInCart);
