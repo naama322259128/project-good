@@ -5,10 +5,7 @@ const orderSchema = new mongoose.Schema({
     },//קוד לקוח, מצביע לטבלת משתמשים
     orderDetails: [{
         auctionId: mongoose.SchemaTypes.ObjectId,
-        productId: {
-            type: mongoose.SchemaTypes.ObjectId
-        },//קוד מוצר, מצביע לטבלת מוצרים
-        productName: { type: String, required: true },
+        productId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Product' },//קוד מוצר, מצביע לטבלת מוצרים
         ticketsQuantity: { type: Number, required: true }//כמות מוצרים
     }],
     paymentCode: { type: String, required: true },//קוד תשלום

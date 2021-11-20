@@ -42,7 +42,7 @@ const sendEmailToWinners = async (req, res) => {
     mailOptions.subject = `Congratulations! You won the Chinese auction ${auction.organizationName + " : " + auction.name}`;
     arr.map(p => {
         mailOptions.text = `Hi ${p.winnerId.userName}.
-          We are happy to inform you that you have won ${productName}
+          We are happy to inform you that you have won ${p.name}
           Please contact us soon to receive the product.
           By email ${auctionManager.email}
           Thank you for your contribution.`

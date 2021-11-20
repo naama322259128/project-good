@@ -101,7 +101,7 @@ import { Header, Modal } from 'semantic-ui-react';
 import p from '../../img/car.jpg';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -122,16 +122,19 @@ const useStyles = makeStyles({
 });
 
 const ProductInCart = (props) => {
-
+console.log(props.productInCart)
 
     const [open, setOpen] = React.useState(false)
     const classes = useStyles();
-
-    let image_src = p;//עד שנעשה את הקטע של התמונות
+ 
+    let image_src =/*props.productInCart.image*/ p;//עד שנעשה את הקטע של התמונות
     let description = props.productInCart.description;
     let name = props.productInCart.name;
     let price = props.productInCart.prices;
-    let cnt = props.productInCart.qty;//TODO
+    let qty = props.qty;
+    useEffect(()=>{
+        console.log(props)
+    },[])
     return (
         <Modal
             closeIcon
@@ -143,7 +146,7 @@ const ProductInCart = (props) => {
                     <Typography gutterBottom variant="h5" component="h2">{price}</Typography>
                     <CardMedia className={classes.media} image={image_src} title={name} />
                     <IconButton color="primary" onClick={(e) => { e.stopPropagation(); }}  >-</IconButton>
-                    <h2 style={{ display: "inline-block", fontSize: '2vh' }}>cnt</h2>
+                    <h2 style={{ display: "inline-block", fontSize: '2vh' }}>{qty}</h2>
                     <IconButton color="primary" onClick={(e) => { e.stopPropagation(); }}>+</IconButton>
 
                     {/* מחיקה מהסל */}

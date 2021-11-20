@@ -1,8 +1,6 @@
 
 const mongoose = require("mongoose");
-
 const auctionSchema = new mongoose.Schema({
-
     name: String,
     auctionManager: { type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true },//managerId
     registrationStartDate: { type: Date },   //תאריך התחלה
@@ -17,15 +15,7 @@ const auctionSchema = new mongoose.Schema({
         discountPercenrages: Number,//אחוזי הנחה
         gifts: [String]
     }],
-    productList: [{
-        // _id: mongoose.SchemaTypes.ObjectId,
-        name: String,
-        image: String,
-        description: String,
-        price: Number,
-        includedInPackages: { type: Boolean, default: true },
-        winnerId: { type: mongoose.SchemaTypes.ObjectId, ref: 'User' }
-    }],
+    productList: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Product' }],
     lotteryApproval: { type: Boolean, default: false },
     organizationName: String,
     organizationText: String,

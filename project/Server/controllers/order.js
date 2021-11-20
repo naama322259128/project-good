@@ -23,11 +23,7 @@ const getById = async (req, res) => {
 const addOrder = async (req, res) => {
 
     //הפונקציה הזו מוסיפה לטבלת ההזמנות ומוחקת למשתמש את המוצרים של המכירה הזו מהסל
-    /*
-    porductId: mongoose.SchemaTypes.ObjectId,
-            qty: Number,
-            auctionId: mongoose.SchemaTypes.ObjectId,
-            productName: String*/
+
     let order = req.body;
     let newOrder = new Order(order);
     try {
@@ -62,7 +58,8 @@ const getUserOrdersList = async (req, res) => {
         return res.status(404).send("Invalid ID number");
     let orders = await Order.find({ "userId": _id }).
         populate([
-            { path: 'auctionId', select: 'name organizationName' }
+            { path: 'auctionId', select: 'name organizationName' },
+            { path: 'productId', select: 'name' }
         ]);
     return res.send(orders);
 }

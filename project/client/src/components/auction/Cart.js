@@ -7,70 +7,45 @@ import { updateShoppingCart } from '../../store/actions/user';
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import { emptyTheBasketByAuction, addOrderToDB } from '../../utils/userUtils';
+import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
+
 const Cart = (props) => {
 
     const amountToPay = () => {
         let sum = 0;
-        props.user.shoppingCartOfCurrentAuction.map((item) => { sum += item.qty * item.productId/* איך נגיע למחיר*/ });//TODO
+        props.user.shoppingCartOfCurrentAuction.map((item) => { sum += item.qty * item.productId.price });
         return sum;
     }
 
-    const tmp = [{
-        "includedInPackages": false,
-        "_id": "6177ceceee8b6f95a2752451",
-        "name": "kitchen",
-        "winnerId": "617696a4e42d1737a80d9c60",
-        "description": "very good kitchen. the best present for every women!!",
-        "price": 1
-    },
-    {
-        "includedInPackages": false,
-        "_id": "6177cfdbee8b6f95a2752452",
-        "name": "5000 NIS for IKEA",
-        "winnerId": "6176976ce42d1737a80d9c62",
-        "description": "",
-        "price": 1
-    },
-    {
-        "includedInPackages": false,
-        "_id": "6177d2d6ee8b6f95a2752453",
-        "name": "Table + chairs",
-        "winnerId": "617697dae42d1737a80d9c63",
-        "description": "",
-        "price": 1
-    },
-    {
-        "includedInPackages": false,
-        "_id": "6177d2e2ee8b6f95a2752454",
-        "name": "Courtyard pool",
-        "winnerId": "6176903ae42d1737a80d9c5f",
-        "description": "",
-        "price": 1
-    },
-    {
-        "includedInPackages": false,
-        "_id": "6177d2e8ee8b6f95a2752455",
-        "name": "Electric Bicycle",
-        "winnerId": "61769917e42d1737a80d9c66",
-        "description": "",
-        "price": 1
-    },
-    {
-        "includedInPackages": false,
-        "_id": "6177d2eeee8b6f95a2752456",
-        "name": "video camera",
-        "winnerId": "61769707e42d1737a80d9c61",
-        "description": "",
-        "price": 1
-    },
-    {
-        "includedInPackages": false,
-        "_id": "6177d2f3ee8b6f95a2752457",
-        "name": "Desktop computer",
-        "winnerId": "617698a4e42d1737a80d9c65",
-        "description": "",
-        "price": 1
-    }];
+    const tmp = [
+        {
+            productId: {
+                "includedInPackages": false,
+                "_id": "6177ceceee8b6f95a2752451",
+                "name": "kitchen",
+                "description": "very good kitchen. the best present for every women!!",
+                "price": 1
+            },
+            qty: 3
+        },
+        {
+            productId: {
+                "includedInPackages": false,
+                "_id": "6177cfdbee8b6f95a2752452",
+                "name": "5000 NIS for IKEA",
+                "description": "",
+                "price": 1
+            }, qty: 3
+        },
+        {
+            productId: {
+                "includedInPackages": false,
+                "_id": "6177d2e2ee8b6f95a2752454",
+                "name": "Courtyard pool",
+                "description": "",
+                "price": 1
+            }, qty: 1
+        }];
 
     const orderCompletion = () => {
         const newOrder = new Order(
@@ -92,6 +67,20 @@ const Cart = (props) => {
 
     }
 
+    useEffect(() => {
+        getProductsInCartByAuctionIdFromDB(props.user.currentUser._id, props.currentAuction._id).then(succ => {
+            if (succ.status != 400) { props.updateShoppingCart(succ.data); }
+        })
+    }, [])
+
+
+    /*
+    המבנה בסרבר    
+     shoppingCart: [{
+        productId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Product' },
+        qty: Number,
+        auctionId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Auction' }
+    }]*/
     return (
         <div>
             <h1>Cart Component</h1>
@@ -100,11 +89,12 @@ const Cart = (props) => {
             <div id="cart-products-container">
                 {/* מערך רק של המוצרים מהמכירה הזו */}
                 {/*props.user && props.user.shoppingCartOfCurrentAuction && props.user.shoppingCartOfCurrentAuction*/tmp.map((item, index) => {
-                    return (<ProductInCart key={parseInt(index)} productInCart={item} /*setCount={props.setCnt}*/ />)
+                    return (<ProductInCart key={parseInt(index)} qty={item.qty} productInCart={item.productId} /*setCount={props.setCnt}*/ />)
                 })}
             </div>
             <Button onClick={orderCompletion}>OK</Button>{/* כפתור אישור פה יועבר כל בסל מהלוקל סטורג למסד נתונים*/}
 
+            {/* TODO: איך התצוגה תתרענן פה */}
             {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay()}
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);

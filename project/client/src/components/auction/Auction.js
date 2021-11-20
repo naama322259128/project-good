@@ -6,17 +6,10 @@ import Cart from '../auction/Cart';
 import './Auction.scss';
 import SmallHeader from '../main/SmallHeader';
 import SmallFooter from '../main/SmallFooter';
-import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
-import { updateShoppingCart } from '../../store/actions/user';
 const Auction = (props) => {
 
 
-    useEffect(() => {
-        getProductsInCartByAuctionIdFromDB(props.currentUser._id, props.currentAuction._id).then(succ => {
-            if (succ.status != 400) { props.updateShoppingCart(succ.data); }
-        })
-    }, [])
-
+   
 
     return (<>
         <SmallHeader />
@@ -37,4 +30,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction
     }
 }
-export default connect(mapStateToProps, { updateShoppingCart })(Auction);
+export default connect(mapStateToProps, {  })(Auction);

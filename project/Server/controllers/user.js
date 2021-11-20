@@ -172,7 +172,7 @@ const beManager = async (req, res) => {
 // }
 
 const emptyTheBasketBuAuction = async (req, res) => {
-return null;
+    return null;
 }
 
 const getProductsInCartByAuction = async (req, res) => {
@@ -182,11 +182,12 @@ const getProductsInCartByAuction = async (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(auctionId))
         return res.status(404).send("Invalid ID number");
-    let user = await User.findById(userId);    //.populate לקבל גם מחיר של המוצר
 
-    
-    if (!user) return res.status(404).send("There is no user with such an ID number");
 
+    let user = await User.findById(userId).populate([
+        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+
+    // if (!user)
     let arr = user.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
 
     return res.send(arr);
@@ -194,5 +195,5 @@ const getProductsInCartByAuction = async (req, res) => {
 
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle,
-   /* removeProductFromCart, addProductToCart,*/ getProductsInCartByAuction,emptyTheBasketBuAuction
+   /* removeProductFromCart, addProductToCart,*/ getProductsInCartByAuction, emptyTheBasketBuAuction
 }
