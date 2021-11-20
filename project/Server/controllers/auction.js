@@ -157,17 +157,12 @@ const addProduct = async (req, res) => {
     // let newProduct = new Product(product);
     // newProduct.image = url1 + '/public/' + req.file.filename;
     try {
-
+        let newProduct = new Product(product);
+        console.log(newProduct)
         const filter = { _id: a_id };
         const update = {
             $push: {
-                productList: {
-                    name: product.name,
-                    // image: product.image,
-                    description: product.description,
-                    price: product.price,
-                    includedInPackages: product.includedInPackages
-                }
+                productList: { newProduct }
             }
         };
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
@@ -180,6 +175,7 @@ const addProduct = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
+
 const setApprovalAuction = async (req, res) => {
     let { a_id } = req.params;
     let { status } = req.params;
