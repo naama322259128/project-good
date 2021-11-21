@@ -122,19 +122,16 @@ const useStyles = makeStyles({
 });
 
 const ProductInCart = (props) => {
-console.log(props.productInCart)
-
     const [open, setOpen] = React.useState(false)
     const classes = useStyles();
- 
+
     let image_src =/*props.productInCart.image*/ p;//עד שנעשה את הקטע של התמונות
     let description = props.productInCart.description;
     let name = props.productInCart.name;
     let price = props.productInCart.prices;
     let qty = props.qty;
-    useEffect(()=>{
-        console.log(props)
-    },[])
+
+
     return (
         <Modal
             closeIcon

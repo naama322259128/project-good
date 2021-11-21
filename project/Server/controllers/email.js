@@ -69,6 +69,7 @@ const sendEmailToWinners = async (req, res) => {
 
 }
 
+//TODO לא עובד!
 //שלח רשימת זוכים מפורטת למנהל המכירה
 const sendWinnersListToManager = async (req, res) => {
 

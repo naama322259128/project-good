@@ -4,7 +4,6 @@ export const createNewAuctionInDB = (manager_id) => {
     return axios.post(`http://localhost:5000/auctions/createNewAuction/${manager_id}`)
 }
 export const addPackageToDB = (a_id, pa) => {
-    console.log(pa);
     return axios.post(`http://localhost:5000/auctions/addPurchasePackage/${a_id}`, pa)
 }
 

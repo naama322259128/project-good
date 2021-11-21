@@ -67,16 +67,4 @@ export const updateShoppingCart = (arr) => {
 
 
 
-//עדכון פרטי משתמש
-export const updateUserInDB = (user) => {
-    return (dispatch) => {
-        return axios.put(`http://localhost:5000/users/${user._id}`, user).then(succ => {
-            if (succ.status != 400) {
-                dispatch(setCurrentUser(succ.data))
-            }
-        });;
-    }
-
-}
-
 

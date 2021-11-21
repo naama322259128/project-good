@@ -1,7 +1,12 @@
 import axios from 'axios';
 
-export const addUser = (user) => {
+export const addUserToDB = (user) => {
     return axios.post("http://localhost:5000/users", user)
+}
+
+//עדכון פרטי משתמש
+export const updateUserInDB = (user) => {
+    return axios.put(`http://localhost:5000/users/${user._id}`, user);
 }
 
 

@@ -1,6 +1,4 @@
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
-
+// import Stack from '@mui/material/Stack';
 import './yourProfile.scss'
 import { connect } from 'react-redux';
 import React from 'react';
@@ -12,9 +10,14 @@ import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
-import { updateUserInDB } from '../../store/actions/user'
+import { updateUserInDB } from '../../utils/userUtils'
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+// import CloseIcon from '@mui/icons-material/Close';ד
+import { setCurrentUser } from '../../store/actions/user';
 const useStyles = makeStyles((theme) => (
     {
         margin: {
@@ -77,17 +80,39 @@ const UpdateDetails = (props) => {
     let birthYear = props.currentUser.birthYear;
     let confidentiality = props.currentUser.confidentiality;
 
+    //מה נציג אם לא חוזר כלום מהשרת, לדוגמא הוא לא עובד עכשיו
     const updateUser = () => {
+        setOpen(false);
+        setOpen2(false);
+        setOpenEror(false);
         let user = props.currentUser;
-        user.password = password;
-        user.email = email;
-        user.phone = phone;
-        user.city = city;
-        user.userName = userName;
-        user.birthYear = birthYear;
-        user.confidentiality = confidentiality//TODO למה לא טוב
-        props.updateUserInDB(user);
+        if (user.password == password && user.email == email && user.phone == phone &&
+            user.city == city &&
+            user.userName == userName &&
+            user.birthYear == birthYear &&
+            user.confidentiality == confidentiality)
+            setOpen2(true);
+        else {
+            user.password = password;
+            user.email = email;
+            user.phone = phone;
+            user.city = city;
+            user.userName = userName;
+            user.birthYear = birthYear;
+            user.confidentiality = confidentiality//TODO למה לא טוב
+
+            updateUserInDB(user).then(succ => {
+                if (succ.status != 400) {
+                    setOpen(true);
+                    props.setCurrentUser(succ.data);
+                }
+                else setOpenEror(true);
+            });
+        }
     };
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+    const [openEror, setOpenEror] = React.useState(false);
 
     return (
         <>
@@ -196,7 +221,7 @@ const UpdateDetails = (props) => {
                             }
                             defaultValue={password} />
 
-                        <FormControlLabel style={{marginLeft:'0vw'}}
+                        <FormControlLabel style={{ marginLeft: '0vw' }}
                             control=
                             {<Checkbox onChange={(e) => { confidentiality = e.target.checked }} />}
                             label="Confidentiality" />
@@ -206,11 +231,66 @@ const UpdateDetails = (props) => {
                     <Button type="button" variant="contained" id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
 
 
-                    {/* וגם להודיע לו שזה עודכן */}
-                    {/* TODO */}
-                    <Alert onClose={() => { }}>This is a success alert — check it out!</Alert>
                 </form>
-
+                <Box sx={{ width: '71%' }}>
+                    <Collapse in={openEror}>
+                        <Alert
+                            severity="error"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setOpenEror(false);
+                                    }}
+                                >
+                                    x
+                                </IconButton>
+                            }
+                            sx={{ mb: 2 }}
+                        >
+                            Error! Please check that the details are standard and try again.
+                        </Alert>
+                    </Collapse>
+                    <Collapse in={open2}>
+                        <Alert
+                            severity="info"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setOpen2(false);
+                                    }}
+                                >
+                                    x
+                                </IconButton>
+                            }
+                            sx={{ mb: 2 }}
+                        >
+                            No change in details found. </Alert>
+                    </Collapse>
+                    <Collapse in={open}>
+                        <Alert
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setOpen(false);
+                                    }}
+                                >
+                                    x
+                                </IconButton>
+                            }
+                            sx={{ mb: 2 }}
+                        >
+                            Your details have been successfully updated.       </Alert>
+                    </Collapse>
+                </Box>
             </center >
         </>
     );
@@ -222,7 +302,7 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser,
     };
 }
-export default connect(mapStateToProps, { updateUserInDB })(UpdateDetails);
+export default connect(mapStateToProps, { setCurrentUser })(UpdateDetails);
 
 
 

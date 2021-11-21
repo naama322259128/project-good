@@ -3,7 +3,7 @@ const User = require("../models/user");
 const Order = require("../models/order");
 const mongoose = require("mongoose");
 const { addUser } = require("./user");
-
+const Product = require("../models/product")
 
 /********************************************כללי**************************************** */
 const getAll = async (req, res) => {
@@ -125,7 +125,6 @@ const addAuctionInformation = async (req, res) => {
         }
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
 
-        console.log(doc)
         await doc.save();
         return res.send(doc);
     }
@@ -137,7 +136,7 @@ const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;
     let package = req.body;
-    console.log(package)
+
     try {
         const filter = { _id: a_id };
         const update = { $push: { purchasePackage: { ticketsQuantity: package.ticketsQuantity, discountPercenrages: package.discountPercenrages, name: package.name, gifts: package.gifts } } };
@@ -158,16 +157,12 @@ const addProduct = async (req, res) => {
     // newProduct.image = url1 + '/public/' + req.file.filename;
     try {
         let newProduct = new Product(product);
-        console.log(newProduct)
         const filter = { _id: a_id };
-        const update = {
-            $push: {
-                productList: { newProduct }
-            }
-        };
-        let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
+        const update = { $push: { productList: newProduct } };
 
-        // await doc.save();
+        console.log(newProduct);
+
+        let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
         let len = doc.productList.length;
         return res.send(doc.productList[len - 1]);
     }
@@ -274,8 +269,8 @@ const getAuctionWithWinnersForManager = async (req, res) => {
 const performLotteries = async (req, res) => {
     let { _id } = req.params;//מכירה
     let auction = await Auction.findById(_id);
-    if (auction.status == "DONE")
-        return res.send(null);
+    // if (auction.status == "DONE")
+    //     return res.send(null);
 
     let orders = await Order.find({ 'auctionId': _id });//כל ההזמנות של המכירה הזו
     if (!_id) res.send("id is not exist");
@@ -292,9 +287,11 @@ const performLotteries = async (req, res) => {
         })
 
     })
+
     //ההגרלות
 
     let products = auction.productList;//המוצרים של המכירה הזו
+
     products.map(pro => {//מעבר על כל המוצרים
         productId = pro._id;//קוד מוצר
 
@@ -309,6 +306,9 @@ const performLotteries = async (req, res) => {
             let winnerId = arr[rnd].userId;//הזוכה
             pro.winnerId = winnerId;//רישום הזוכה
         }
+        //מוצר שאין לו זוכים, יוכנס אליו קוד מנהל
+        //כי אחרי זה בפונקציות אחרות זה עושה שגיאות שעושים פופולייט לפי קוד זוכה
+        else pro.winnerId = auction.auctionManager;
     })
 
     auction.status = "DONE";

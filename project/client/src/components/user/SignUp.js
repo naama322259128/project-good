@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addUser } from '../../utils/userUtils';//הוספת משתמש למאגר
+import { addUserToDB } from '../../utils/userUtils';//הוספת משתמש למאגר
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -80,7 +80,7 @@ const SignUp = (props) => {
     const createUser = () => {
         let addNewUser = new User(newUser);
         console.log(addNewUser)
-        addUser(addNewUser).then(succ => {
+        addUserToDB(addNewUser).then(succ => {
             props.setCurrentUser(succ.data);
         });
     };

@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import { emptyTheBasketByAuction, addOrderToDB } from '../../utils/userUtils';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
-
 const Cart = (props) => {
 
     const amountToPay = () => {
@@ -31,10 +30,18 @@ const Cart = (props) => {
         {
             productId: {
                 "includedInPackages": false,
-                "_id": "6177cfdbee8b6f95a2752452",
+                "_id": "6177cfdbee8b6f95a2752452",//שווים
                 "name": "5000 NIS for IKEA",
                 "description": "",
-                "price": 1
+                "price": 50
+            }, qty: 3
+        }, {
+            productId: {
+                "includedInPackages": false,
+                "_id": "6177cfdbee8b6f95a2752452",//שווים
+                "name": "10000 NIS for IKEA",
+                "description": "",
+                "price": 50
             }, qty: 3
         },
         {
@@ -43,7 +50,7 @@ const Cart = (props) => {
                 "_id": "6177d2e2ee8b6f95a2752454",
                 "name": "Courtyard pool",
                 "description": "",
-                "price": 1
+                "price": 10
             }, qty: 1
         }];
 
@@ -67,6 +74,18 @@ const Cart = (props) => {
 
     }
 
+    const orderPackages = () => {
+        //יאך ניתן לו לבחור????
+        let sort_packages = [];
+        if (props.currentAuction.purchasePackage.length && props.currentAuction.purchasePackage.length > 0)
+            sort_packages = props.currentAuction.purchasePackage.
+                sort((a, b) => parseFloat(b.ticketsQuantity) - parseFloat(a.ticketsQuantity))
+        let sort_tickets = tmp/* props.user.shoppingCartOfCurrentAuction*/.
+            sort((a, b) => parseFloat(b.productId.price) - parseFloat(a.productId.price));
+
+
+    }
+
     useEffect(() => {
         getProductsInCartByAuctionIdFromDB(props.user.currentUser._id, props.currentAuction._id).then(succ => {
             if (succ.status != 400) { props.updateShoppingCart(succ.data); }
@@ -83,6 +102,7 @@ const Cart = (props) => {
     }]*/
     return (
         <div>
+            <button onClick={orderPackages}>Sort by price</button>
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
 
@@ -92,7 +112,8 @@ const Cart = (props) => {
                     return (<ProductInCart key={parseInt(index)} qty={item.qty} productInCart={item.productId} /*setCount={props.setCnt}*/ />)
                 })}
             </div>
-            <Button onClick={orderCompletion}>OK</Button>{/* כפתור אישור פה יועבר כל בסל מהלוקל סטורג למסד נתונים*/}
+            <Link to={'/auction/cart/purchaseSettings'}> <Button onClick={orderCompletion}>set purchase packages</Button></Link>
+            <Button onClick={orderCompletion}>PAY</Button>
 
             {/* TODO: איך התצוגה תתרענן פה */}
             {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay()}

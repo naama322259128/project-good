@@ -43,7 +43,7 @@ const addUser = async (req, res) => {
 const updateUser = async (req, res) => {
     let userBody = req.body;
     let { id } = req.params;
-    console.log(userBody);
+
     if (!mongoose.Types.ObjectId.isValid(id))
         return res.status(404).send("Invalid ID number");
     let user = await User.findById(id);
@@ -56,7 +56,7 @@ const updateUser = async (req, res) => {
     user.city = userBody.city || user.city;
     user.birthYear = userBody.birthYear || user.birthYear;
     user.confidentiality = userBody.confidentiality || user.confidentiality;//TODO
-    console.log(user);
+
     await user.save();
     return res.send(user);
 }

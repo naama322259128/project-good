@@ -1,5 +1,6 @@
 
 const mongoose = require("mongoose");
+const productSchema = require("../models/product").schema
 const auctionSchema = new mongoose.Schema({
     name: String,
     auctionManager: { type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true },//managerId
@@ -15,7 +16,8 @@ const auctionSchema = new mongoose.Schema({
         discountPercenrages: Number,//אחוזי הנחה
         gifts: [String]
     }],
-    productList: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Product' }],
+    productList: [productSchema],
+    // productList: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Product' }],
     lotteryApproval: { type: Boolean, default: false },
     organizationName: String,
     organizationText: String,
