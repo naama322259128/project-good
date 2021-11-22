@@ -10,6 +10,11 @@ const getAll = async (req, res) => {
     let auctions = await Auction.find();
     return res.send(auctions);
 }
+
+const getpublicationApprovalAuctionsList = async (req, res) => {
+    let auctions = await Auction.find({ "publicationApproval": true });
+    return res.send(auctions);
+}
 const getById = async (req, res) => {
     let { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id))
@@ -332,7 +337,7 @@ const getUnapprovedAuctionsByUser = async (req, res) => {
 
 
 module.exports = {
-    getAll, getById, addProduct, addAuction, deleteAuction,
+    getAll, getpublicationApprovalAuctionsList, getById, addProduct, addAuction, deleteAuction,
     getAuctionsByManagerId, getAuctionIsApproved, setApprovalAuction, getAuctionIsDone,
     addOrganizationInformation, setApprovalLotteries,
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,

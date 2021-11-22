@@ -26,7 +26,7 @@ const ProfileButton = (props) => {
 
     const out = () => {
         handleClose();
-        //TODO: חשוב מאוד, האם לשמור לו נתונים לפני שמוחקים לו הכל
+        //TODO: חשוב מאוד, לשמור לו נתונים לפני שמוחקים לו הכל
         props.signOut();
     }
 
@@ -52,14 +52,14 @@ const ProfileButton = (props) => {
             PaperProps={{
                 style: {
                     maxHeight: ITEM_HEIGHT * 4.5,
-                    width: '20ch',
+                    width: '25ch',
+                    marginTop:'4vh'
                 },
             }}
         >
             <Link to={'/your_profile'}>
                 <MenuItem key={'Your profile'} onClick={handleClose}>Your profile</MenuItem>
             </Link>
-
 
             <Link to={'/update_your_details'}>
                 <MenuItem key={'Update your details'} onClick={handleClose}>Update your details</MenuItem>

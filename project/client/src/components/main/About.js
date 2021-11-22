@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './main.scss';
 import p from '../../img/logo.webp';
 import video from '../../img/vvv.mp4';
@@ -9,16 +9,20 @@ import { setLogin } from '../../store/actions/home';
 import SmallFooter from "./SmallFooter";
 import SmallHeader from "./SmallHeader";
 import ContactForm from "./ContactForm";
-import{resetNewAuctionState} from "../../store/actions/newAuction";
+import { resetNewAuctionState } from "../../store/actions/newAuction";
 import { createNewAuctionInDB } from "../../utils/newAuctionUtils";
 import { setNewAuction } from "../../store/actions/newAuction";
+import { setWantContact } from "../../store/actions/user"
 const About = (props) => {
 
+
   useEffect(() => {
+
+    if (props.wantContact) window.scrollTo(0, 2500);
+    else window.scrollTo(0, 0);
     window.addEventListener("scroll", changeHeader)
-    return () => {
-      window.removeEventListener('scroll', changeHeader);
-    };
+
+    return () => { window.removeEventListener('scroll', changeHeader); };
   }, []);
   const changeHeader = () => {
     let s = document.getElementById("small-header");
@@ -56,13 +60,13 @@ const About = (props) => {
         <p><b>How? </b>Choose a name for your Chinese auction, set prizes, prices and dates, tell about your organization / purpose. Confirm the auction and the auction in the air!</p>
         <b>Want to get started?</b>
         <Link to={props.currentUser ? "/new_auction" : '#'}
-         onClick={props.currentUser ?  () => createNewAuctionInDB(props.currentUser._id).then(succ => {
-          if (succ.status != 400) {
+          onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
+            if (succ.status != 400) {
               props.setNewAuction(succ.data);
               console.log(succ.data);
-          }
-      })
-          :props.setLogin(true)}>Click here!</Link>
+            }
+          })
+            : props.setLogin(true)}>Click here!</Link>
       </div>
 
       <h2>Building a Chinese auction:</h2>
@@ -112,14 +116,14 @@ const About = (props) => {
         </div>
       </div>
 
-<ContactForm/>
+      <ContactForm />
     </center>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <SmallFooter />
   </>);
 }
@@ -127,9 +131,10 @@ const About = (props) => {
 
 const mapStateToProps = state => {
   return {
-      shoppingCart:state.user.shoppingCart,
-      currentUser:state.user.currentUser,
-      auction_id:state.currentAuction._id
+    shoppingCart: state.user.shoppingCart,
+    currentUser: state.user.currentUser,
+    auction_id: state.currentAuction._id,
+    wantContact: state.user.wantContact
   }
 }
-export default connect(mapStateToProps, {setLogin,setNewAuction})(About);
+export default connect(mapStateToProps, { setLogin, setNewAuction, setWantContact })(About);

@@ -5,8 +5,8 @@ export const getAuctionByIdFromDB = (_id) => {
 }
 
 
-export const getAuctionsListFromDB = async () => {
-  return axios.get(`http://localhost:5000/auctions`)
+export const getpublicationApprovalAuctionsListFromDB = async () => {
+  return axios.get(`http://localhost:5000/auctions/getpublicationApprovalAuctionsList/`)
 }
 
 

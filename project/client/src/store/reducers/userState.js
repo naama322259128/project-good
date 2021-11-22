@@ -3,7 +3,8 @@ export const initialState = {
     currentUser: null,
     loginIsOpen: false,
     ordersList: [],//?
-    shoppingCartOfCurrentAuction: []
+    shoppingCartOfCurrentAuction: [],
+    wantContact: false
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -11,6 +12,12 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loginIsOpen: action.payload
+            } 
+        case actionTypes.SET_WANT_CONTACT:
+           debugger;
+            return {
+                ...state,
+                wantContact: action.payload
             }
         case actionTypes.SET_CURRENT_USER:
             {
@@ -74,7 +81,8 @@ export const userReducer = (state = initialState, action) => {
                     currentUser: null,
                     loginIsOpen: false,
                     yourProfileIsOpen: false,
-                    shoppingCart: []
+                    shoppingCart: [],
+                    wantContact:false
                 }
             }
         case actionTypes.UPDATE_USER_STATE: {

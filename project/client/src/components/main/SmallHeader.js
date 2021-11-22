@@ -11,7 +11,7 @@ const SmallHeader = (props) => {
 
     return (<>
         <header id="small-header">
-            <Link to={"/home"} id="logo_home_small_header" />//TODO למה פותח לוגין
+            <Link to={"/home"} id="logo_home_small_header" />
 
             {props.currentUser ?
                 <ProfileButton /> :

@@ -8,6 +8,13 @@ export const setCurrentUser = (user) => {
         payload: user
     }
 }
+export const setWantContact=(b)=>{
+    debugger;
+     return {
+        type: actionTypes.SET_WANT_CONTACT,
+        payload: b
+    }
+}
 
 
 export const setUserOrders = (orders) => {

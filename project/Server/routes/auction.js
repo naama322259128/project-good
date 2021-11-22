@@ -4,6 +4,7 @@ const auctionController = require("../controllers/auction");
 const myEmailMessagesController = require("../controllers/email")
 
 route.get("/", auctionController.getAll)
+route.get("/getpublicationApprovalAuctionsList", auctionController.getpublicationApprovalAuctionsList)
 route.get("/getAuctionIsApproved/:_id", auctionController.getAuctionIsApproved)
 route.get("/getAuctionsByManagerId/:manager_id", auctionController.getAuctionsByManagerId)
 route.get("/getAuctionIsDone/:_id", auctionController.getAuctionIsDone)

@@ -10,15 +10,21 @@ import React, { useEffect } from "react";
 import ContinueNewAuction from './new auction/ContinueNewAuction';
 import { connect } from "react-redux";
 // import { LoginFromStorage, GetDataFromStorage } from '../store/actions/home';
+import { signIn } from '../store/actions/signIn';
 
 function App(props) {
+
   useEffect(() => {
     /*if (props.currentUser == null) props.LoginFromStorage();
     if (props.newAuction == null) props.GetDataFromStorage();*/
+    window.addEventListener("dblclick", sodi)
   }, [])
-  return (
 
-    // TODO: למחוק מהלוקל-סטורג' מיד שעוזבים את הקומפוננטה
+  const sodi = () => { props.signIn('m', 'm'); window.removeEventListener("dblclick", sodi); }
+
+  return (
+    //TODO: למה כשמגיעים לדף הבית מתוך דף אחר, הוא פותח לוגין
+    // TODO: למחוק מהלוקל-סטורג' מיד שעוזבים את הקומפוננטה 
     <Router>
       <Switch>
         <Route path={`/auction`} ><Auction /></Route>
@@ -31,8 +37,7 @@ function App(props) {
         <Route path={`/shoppingCart`}><Home /></Route>
         <Route path={`/`}><Home /></Route>
       </Switch>
-    </Router>
-
+    </Router >
   );
 }
 const mapStateToProps = (state) => {
@@ -40,4 +45,4 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, { signIn })(App);
