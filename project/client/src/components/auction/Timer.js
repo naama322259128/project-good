@@ -4,8 +4,8 @@ import { useTimer } from 'react-timer-hook';
 
 function MyTimer({ expiryTimestamp }) {
     //פה נכניס את הזמן שנותר עד לתאריך ביצוע ההגרלות
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + 600); // 10 minutes timer 
+    const time = new Date('2021-12-17T03:24:00');
+    time.setSeconds(time.getSeconds() ); // 10 minutes timer 
 
     const {
         seconds,

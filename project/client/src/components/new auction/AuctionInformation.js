@@ -17,6 +17,8 @@ import Alert from '@mui/material/Alert';
 import { setNewAuction } from '../../store/actions/newAuction';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -42,7 +44,22 @@ const AuctionInformation = (props) => {
             if (succ.status != 400) props.setNewAuction(succ.data);
         })
     }
+    let submit2 = (e) => {
+        e.preventDefault();
 
+        let details = {
+            registrationStartDate: selectedDate2,
+            lotteriesDate: selectedDate1,
+            registrationEndDate: selectedDate3,
+            // lotteryApproval: data.lotteryApproval,
+            // publicationApproval: data.publicationApproval,
+            // name: data.name || "unknown"
+        }
+
+        saveAuctionInformationInDB(props.auctionId, details).then(succ => {
+            if (succ.status != 400) props.setNewAuction(succ.data);
+        })
+    }
 
     const classes = useStyles();
 
@@ -52,12 +69,11 @@ const AuctionInformation = (props) => {
     const [selectedDate2, setSelectedDate2] = React.useState(new Date());//start
     const [selectedDate3, setSelectedDate3] = React.useState(new Date());//end
 
-
-    return (<form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
+    return (<form className={classes.root} noValidate autoComplete="off" onSubmit={submit2} /*onSubmit={handleSubmit(submit)}*/>
         <h1>Auction information</h1>
         <div className={"inputs-in-form-container"} >
 
-            {/* <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
+            <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
                 <KeyboardDatePicker
                     disableToolbar
                     variant="inline"
@@ -66,11 +82,13 @@ const AuctionInformation = (props) => {
                     id="date-picker-inline"
                     label="Date of the lottery"
                     value={selectedDate1}
-                    defaultValue={props.auction.lotteriesDate}
+                    // defaultValue={props.auction.lotteriesDate}
+                    onChange={(date) => { setSelectedDate1(date) }}
+
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
                     }}
-                    {...register('lotteriesDate', { required: true })} id="input-with-icon-grid" label="Date of the lottery"
+                // {...register('lotteriesDate', { required: true })} id="input-with-icon-grid" label="Date of the lottery"
                 />
 
             </MuiPickersUtilsProvider>
@@ -84,13 +102,15 @@ const AuctionInformation = (props) => {
                     id="date-picker-inline"
                     label="Registration start date"
                     value={selectedDate2}
-                    defaultValue={props.auction.registrationStartDate}
+                    // defaultValue={props.auction.registrationStartDate}
+                    onChange={(date) => { setSelectedDate2(date) }}
+
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
                     }}
-                    {...register('registrationStartDate', { required: true })}
+                // {...register('registrationStartDate', { required: true })}
                 />
-            </MuiPickersUtilsProvider> */}
+            </MuiPickersUtilsProvider>
 
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
@@ -100,18 +120,17 @@ const AuctionInformation = (props) => {
                     margin="normal"
                     id="date-picker-inline"
                     label="Registration end date"
-                    // value={selectedDate3}
-                    onChange={(date)=>{debugger;}}
+                    value={selectedDate3}
+                    onChange={(date) => { setSelectedDate3(date) }}
 
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
                     }}
-                    // defaultValue={props.auction.registrationEndDate}
-                    {...register('registrationEndDate', { required: true })}
+
+                // defaultValue={props.auction.registrationEndDate}
+                // {...register('registrationEndDate', { required: true })}
                 />
             </MuiPickersUtilsProvider>
-
-            {/* <TextField className="txt" variant="standard" defaultValue={props.auction.name} {...register('name', { required: true })} id="input-with-icon-grid" label="Name Auction" /> */}
 
             <Button
                 variant="contained"

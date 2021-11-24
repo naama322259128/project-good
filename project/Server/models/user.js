@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
     shoppingCart: [{
         productId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Product' },
         qty: Number,
-        auctionId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Auction' }
+        auctionId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Auction' },
+        packageId: Number
     }]
 });
 const User = mongoose.model("User", userSchema);

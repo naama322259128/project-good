@@ -17,6 +17,7 @@ import { makeStyles } from '@material-ui/core';
 import upload_src from '../../../img/icons/uploadImg.png'
 import IconButton from '@material-ui/core/IconButton';
 import '../NewAuction.scss'
+import axios from 'axios';
 
 const AddProductForm = (props) => {
 
@@ -28,10 +29,24 @@ const AddProductForm = (props) => {
         newProduct.description = data.description;
         newProduct.price = parseInt(data.price);
         newProduct.includedInPackages = data.includedInPackages;
-        newProduct.image = data.image;
+        debugger;
+        newProduct.image = imagePath;
 
         addProductToDB(props.auctionId, newProduct).then(succ => { if (succ.status != 400) props.addProduct(succ.data); })
 
+    }
+    const [imagePath, setImagePath] = useState("");
+    const onChangeHandler = event => {
+
+        console.log(event.target.files[0])
+        const data = new FormData()
+        data.append('file', event.target.files[0]);
+        axios.post("http://localhost:5000/upload", data, { // receive two parameter endpoint url ,form data 
+        })
+            .then(res => { // then print response status
+                console.log(res);
+                setImagePath("http://localhost:5000/images/" + res.data.filename);
+            })
     }
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -41,9 +56,8 @@ const AddProductForm = (props) => {
         /* if (props.currentUser == null) LoginFromStorage();
          if (props.newAuction == null) GetDataFromStorage();*/
     }, [])
-    const Input = styled('input')({
-        display: 'none',
-    });
+    // const Input = styled('input')({
+    // });
 
     return (
         // noValidate
@@ -53,11 +67,19 @@ const AddProductForm = (props) => {
                 <TextField className="txt" variant="standard" multiline {...register('description', { required: false })} id="input-with-icon-grid" label="Description" />
                 <TextField className="txt" type="number" variant="standard"{...register('price', { required: true })} id="input-with-icon-grid" label="Price" />
             </div>
-
+            <img src={imagePath}></img>
+            <input
+                style={{ display: "none" }}
+                id="contained-button-file"
+                type="file" onChange={onChangeHandler}
+            />
             <label htmlFor="contained-button-file">
-                <Input accept="image/*" id="contained-button-file" multiple type="file" {...register('image', { required: false })} />
-                <IconButton /*color={"primary"}*/><img className="my_icon" src={upload_src} /></IconButton>
+                <Button variant="contained" color="primary" component="span">
+                    Upload
+                </Button>
             </label>
+
+
 
             <FormControlLabel
                 control={<Checkbox defaultChecked {...register('includedInPackages')} id="input-with-icon-grid" />}

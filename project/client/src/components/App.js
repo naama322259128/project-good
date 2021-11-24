@@ -11,6 +11,7 @@ import ContinueNewAuction from './new auction/ContinueNewAuction';
 import { connect } from "react-redux";
 // import { LoginFromStorage, GetDataFromStorage } from '../store/actions/home';
 import { signIn } from '../store/actions/signIn';
+import MiniDrawer from '../components/main/Drawer'
 
 function App(props) {
 
@@ -20,7 +21,7 @@ function App(props) {
     window.addEventListener("dblclick", sodi)
   }, [])
 
-  const sodi = () => { props.signIn('m', 'm'); window.removeEventListener("dblclick", sodi); }
+  const sodi = () => { props.signIn('m', 'm@gmail.com'); window.removeEventListener("dblclick", sodi); }
 
   return (
     //TODO: למה כשמגיעים לדף הבית מתוך דף אחר, הוא פותח לוגין
@@ -29,13 +30,14 @@ function App(props) {
       <Switch>
         <Route path={`/auction`} ><Auction /></Route>
         <Route path={`/home`}><Home /></Route>
+        <Route exact path={`/`}><Home /></Route>
+        {/* <Route path={`/`}><MiniDrawer /></Route> */}
         <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/continue_new_auction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
         <Route path={`/shoppingCart`}><Home /></Route>
-        <Route path={`/`}><Home /></Route>
       </Switch>
     </Router >
   );

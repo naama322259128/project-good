@@ -57,26 +57,6 @@ const getAuctionsByManagerId = async (req, res) => {
     //if(auction==undefined)return res.send([]);
     return res.send(auction);
 }
-// const addProduct = async (req, res) => {
-//     let product = req.body;
-//     const url1 = req.protocol + '://' + req.get('host');
-//     product.image = url1 + '/public/' + req.file.filename;
-//     try {
-//         var auction = await Auction.findOne({ _id: req.query.id });
-//         console.log(auction);
-//         if (!auction.productList)
-//             auction.productList = [];
-//         auction.productList.push(product);
-//         await auction.save();
-//         return res.send(auction);
-//     }
-//     catch (err) {
-//         console.log(err.message)
-//         return res.status(400).send(err.message)
-//     }
-// }
-
-
 
 //לקבל במערך את כל המכירות השייכות למנהל שנשלח
 
@@ -156,10 +136,6 @@ const addPurchasePackage = async (req, res) => {
 const addProduct = async (req, res) => {
     let product = req.body;
     let { a_id } = req.params;
-
-    // const url1 = req.protocol + '://' + req.get('host');
-    // let newProduct = new Product(product);
-    // newProduct.image = url1 + '/public/' + req.file.filename;
     try {
         let newProduct = new Product(product);
         const filter = { _id: a_id };

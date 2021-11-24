@@ -16,7 +16,7 @@ const CurrentAuction = (props) => {
         <Link to={`/auction/cart`}><h1>Cart</h1></Link>
 
 
-        {/* <Timer /> */}
+        <Timer />
 
         <ProductList />
     </>);
