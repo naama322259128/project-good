@@ -24,6 +24,7 @@ const HomeFooter = (props) => {
                 }) : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
                     <p className="menu_footer_link">BUILDING</p>
                 </Link>
+                <Link to={"/statistics"} ><p className="menu_footer_link">STATISTICS</p></Link>
                 <Link to={"/about"} ><p className="menu_footer_link">ABOUT</p></Link>
             </div>
             <div id="text_footer">

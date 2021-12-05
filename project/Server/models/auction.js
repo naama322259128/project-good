@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const productSchema = require("../models/product").schema
 const auctionSchema = new mongoose.Schema({
-    name: String,
+    name: { type: String, default: "" },
     auctionManager: { type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true },//managerId
     registrationStartDate: { type: Date },   //תאריך התחלה
     lotteriesDate: Date,   //תאריך ביצוע ההגרלות
@@ -17,14 +17,13 @@ const auctionSchema = new mongoose.Schema({
         gifts: [String]
     }],
     productList: [productSchema],
-    // productList: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Product' }],
     lotteryApproval: { type: Boolean, default: false },
     organizationName: String,
     organizationText: String,
     organizationPhotos: [String],
     terms: String,//קובץ
-    publicationApproval: { type: Boolean, default: false }//אישור פרסום באתר
-
+    publicationApproval: { type: Boolean, default: false },//אישור פרסום באתר
+    logo: { type: String, default: "" }
 });
 const Auction = mongoose.model("Auction", auctionSchema);
 module.exports = Auction;

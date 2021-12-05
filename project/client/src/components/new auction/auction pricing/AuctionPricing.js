@@ -19,7 +19,7 @@ const AuctionPricing = (props) => {
             <button className="positive ui button" onClick={props.showAddPackage}>Add new Package</button>}
 
         {props.showSetPackage && <AddPackageForm />}
-        {<PackagesList />}
+        {props.packagesList&&props.packagesList.length>0 &&<PackagesList />}
     </>);
 }
 
@@ -27,7 +27,9 @@ const AuctionPricing = (props) => {
 
 const mapStateToProps = state => {
     return {
-        showSetPackage: state.auction.showSetPackage
+        showSetPackage: state.auction.showSetPackage,
+        packagesList: state.auction.newAuction.purchasePackage,
+
     }
 }
 export default connect(mapStateToProps, { showAddPackage })(AuctionPricing);

@@ -29,7 +29,7 @@ export const setOrganizationText = (txt) => {
         payload: txt
     }
 }
-export const setOrganizationPhotos = (pic) => {
+export const setorganizationPhotos = (pic) => {
     return {
         type: actionTypes.ADD_PIC_ORGANIZATION,
         payload: pic

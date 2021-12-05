@@ -4,7 +4,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
-
+import defaultLogo from '../../img/defaultLogo.jpg'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -84,7 +84,8 @@ const useStyles = makeStyles((theme) => ({
 
 const OneAuction = (props) => {
   const classes = useStyles();
-
+  useEffect(() => { console.log(props.item.logo); }, [])
+  useEffect(() => { console.log(props.item); }, [])
   return (<>
     <ButtonBase
       focusRipple
@@ -99,8 +100,8 @@ const OneAuction = (props) => {
       <span
         className={classes.imageSrc}
         style={{
-          backgroundImage: `url(${props.item.image})`,
-          backgroundSize: '100% 100%'
+          backgroundImage: `url('${props.item.logo||defaultLogo}')`,
+          backgroundSize: '100%'
         }}
       />
       <span className={classes.imageBackdrop} />

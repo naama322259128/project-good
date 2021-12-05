@@ -4,7 +4,6 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_LOGIN = "SET_LOGIN";//האם להציג את הלוגין
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART"//הכנסת מוצר לסל
 export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART"//מחיקת מוצר מסל 
-export const SET_CURRENT_AUCTION = "SET_CURRENT_AUCTION";//לאתחל את מערך המוצרים, ועוד נתונים של המכירה הנוכחית
 export const SET_CNT_PRODUCT_IN_CART = "SET_CNT_PRODUCT_IN_CART";//עדכון כמות מוצר מתוך הסל
 export const SIGN_OUT = "SIGN_OUT"//יציאת משתמש
 export const UPDATE_SHOPPING_CART = "UPDATE_SHOPPING_CART"
@@ -58,4 +57,4 @@ export const UPDATE_SITE_MANAGER_STATE = "UPDATE_SITE_MANAGER_STATE"
 
 
 /******************************************   CURRENT AUCTION   ****************************************************/
-export const UPDATE_CURRENT_AUCTION_STATE = "UPDATE_CURRENT_AUCTION_STATE"
+export const SET_CURRENT_AUCTION = "SET_CURRENT_AUCTION";//לאתחל את מערך המוצרים, ועוד נתונים של המכירה הנוכחית

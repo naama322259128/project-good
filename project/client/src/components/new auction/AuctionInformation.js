@@ -72,6 +72,7 @@ const AuctionInformation = (props) => {
     return (<form className={classes.root} noValidate autoComplete="off" onSubmit={submit2} /*onSubmit={handleSubmit(submit)}*/>
         <h1>Auction information</h1>
         <div className={"inputs-in-form-container"} >
+            <TextField className="txt" type="number" variant="standard"{...register('name', { required: true })} id="input-with-icon-grid" label="Auction name" />
 
             <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
                 <KeyboardDatePicker

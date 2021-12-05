@@ -1,9 +1,6 @@
 import Auction from '../../models/auction';
 import * as actionTypes from '../actionTypes';
 export const initialState = {
-    registrationEndDate: new Date(2021, 10, 9, 17, 0, 0),//תאריך אחרון להרשמה
-    productsList: [],//רשימת מוצרים של מכירה זו
-    _id: "",
     currentAuction: new Auction()
 }
 export const currentAuctionReducer = (state = initialState, action) => {
@@ -11,16 +8,7 @@ export const currentAuctionReducer = (state = initialState, action) => {
         case actionTypes.SET_CURRENT_AUCTION:
             {
                 return {
-                    ...state,
                     currentAuction: action.payload                    //קיבלנו לכאן קוד מכירה
-                }
-
-            }
-        case actionTypes.UPDATE_CURRENT_AUCTION_STATE:
-            {
-                return {
-                    ...state,
-                    currentAuction: action.payload
                 }
 
             }

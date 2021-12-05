@@ -205,8 +205,61 @@ const deletePackage = async (req, res) => {
 // }
 
 
+//הכנסות של מכירה
+const getTotalRevenueOneAuction = async (req, res) => {
+    let { _id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(_id))
+        return res.status(404).send("Invalid ID number");
+    let sum = 0;
+    let orders = await Order.find({ "auctionId": _id });
+    for (var i = 0; i < orders.length; i++) sum += orders[i].amountToPay;
 
+    return res.send(sum.toString());
+}
 
+//הכנסות של כלל המכירות
+const getTotalRevenueAllAuctions = async (req, res) => {
+
+    let a = await Order.aggregate([
+        // { $match: { time: {$gte: a, $lte: tomorrow} } },//TODO האם לעשות תנאי שיסכום רק את אלו שהקוד תשלום לא נאל
+        { $group: { _id: null, total: { $sum: "$amountToPay" } } }
+    ])
+    if (!a) return res.status(404).send("There is no orders");
+
+    return res.send(a)
+}
+
+//מחזיר מערך של
+//אם כמה מכירות באותו סכום של הכנסות, כולן תחזורנה
+const getHighestRevenueAuctions = async (req, res) => {
+
+    let auctions = await Order.aggregate(
+        [
+            //----------------לא למחוק
+            //זה מתאים להכנסות של מכירה אחת
+            // {    $match: { auctionId: mongoose.Types.ObjectId("6199851fae43b64838d52887") } },
+            { $group: { _id: '$auctionId', totalAmount: { $sum: "$amountToPay" } } },
+            { $sort: { totalAmount: -1 } }
+
+            //TODO להביא את שם המכירה
+        ]
+    )
+
+    console.log(auctions)
+    if (!auctions) return res.status(404).send("There is no orders");
+
+    //אולי יש כמה שהגיעו לסכום הכי גבוה
+    let max_auctions = [];
+    for (var i = 0; i < auctions.length; i++) {
+        if (auctions[i].totalAmount == auctions[0].totalAmount) {
+            let n = await Auction.findById(auctions[i]._id);
+            max_auctions.push({ auctionId: auctions[i]._id, auctionName: n.name, total: auctions[i].totalAmount });
+        }
+        else break;
+    }
+
+    return res.json(max_auctions);
+}
 
 
 /********************************************הגרלות וזוכים**************************************** */
@@ -318,13 +371,7 @@ module.exports = {
     addOrganizationInformation, setApprovalLotteries,
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
     getAuctionWithWinnersForManager, performLotteries, getUnapprovedAuctionsByUser,
-    addPurchasePackage
+    addPurchasePackage,
+    getTotalRevenueOneAuction, getTotalRevenueAllAuctions, getHighestRevenueAuctions
 }
-
-//המכירה שש לה הכי הרבה הכנסות
-//המכירה שיש בה הכי קצת....
-
-
-// https://www.tutorialspoint.com/mongodb-aggregation-to-sum-individual-properties-on-an-object-in-an-array-across-documents
-
 

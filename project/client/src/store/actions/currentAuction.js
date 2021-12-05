@@ -8,8 +8,9 @@ export const getAuctionFromDB = (auctionId) => {
     axios.get(`http://localhost:5000/auctions/${auctionId}`).then(succ => {
       console.log(succ.data);
       if (succ.status != 400)
-        dispatch(setCurrentAuction(succ.data));
+        dispatch( setCurrentAuction(succ.data));
     })
+
   }
 }
 export const setCntOfProductInCart = (_id, cnt) => {
@@ -27,4 +28,3 @@ export const setCurrentAuction = (auction) => {
     payload: auction
   }
 }
-

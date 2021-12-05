@@ -5,9 +5,13 @@ import { sendContact } from '../../utils/userUtils'
 import { useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import React from "react";
-
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@material-ui/core/IconButton';
 
 const ContactForm = () => {
+    const [open, setOpen] = React.useState(false);
 
     let submit = (data, e) => {
         debugger;
@@ -15,15 +19,18 @@ const ContactForm = () => {
         debugger;
         let details = { name: data.name, email: data.email, phone: data.phone, message: data.message, subject: data.subject }
         sendContact(details).then(succ => {
-           debugger;
-            if (succ.status != 400) alert("yoohhhhhhhhhhhhhhhhhhhhhhhh")//TODO: למחוק את מה שכתוב בטופס
+            setOpen(false);
+            if (succ.status != 400) {
+                setOpen(true)
+                // reset();//משבש את עיצוב האינפוטים
+                //TODO: למחוק את מה שכתוב בטופס
+            }
         })
     }
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     return (
-
         <form noValidate autoComplete="off" onSubmit={handleSubmit(submit)} id={"contact-form"} style={{ width: '70vw' }}>
             <h3>
                 {/* icon  */}
@@ -60,7 +67,29 @@ const ContactForm = () => {
 
 
             <button type="submit" className="positive ui button">Send</button>
-        </form >);
+            <Box sx={{ width: '100%', marginTop: '5vh' }}>
+                <Collapse in={open}>
+                    <Alert
+                        action={
+                            <IconButton
+                                aria-label="close"
+                                color="inherit"
+                                size="small"
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                            >
+                                x
+                            </IconButton>
+                        }
+                        sx={{ mb: 2 }}
+                    >
+                        Your message has been successfully sent.     </Alert>
+                </Collapse>
+            </Box>
+        </form >
+
+    );
 }
 
 export default ContactForm;

@@ -5,7 +5,7 @@ import './about.scss'
 import SmallFooter from "../../main/SmallFooter";
 import SmallHeader from "../../main/SmallHeader";
 import AuctionTerms from "./AuctionTerms";
-import OrganizationPhotos from "./OrganizationPhotos";
+import organizationPhotos from "./organizationPhotos";
 
 
 const AboutAuction = (props) => {
@@ -70,7 +70,7 @@ const AboutAuction = (props) => {
       <br />
       <br />
 
-      <OrganizationPhotos />    {/* תמונות ארגון */}
+      <organizationPhotos />    {/* תמונות ארגון */}
       <br />
       <br /> 
         <br />

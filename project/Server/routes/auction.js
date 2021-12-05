@@ -3,7 +3,6 @@ const route = express.Router();
 const auctionController = require("../controllers/auction");
 const myEmailMessagesController = require("../controllers/email")
 
-route.get("/", auctionController.getAll)
 route.get("/getpublicationApprovalAuctionsList", auctionController.getpublicationApprovalAuctionsList)
 route.get("/getAuctionIsApproved/:_id", auctionController.getAuctionIsApproved)
 route.get("/getAuctionsByManagerId/:manager_id", auctionController.getAuctionsByManagerId)
@@ -11,10 +10,14 @@ route.get("/getAuctionIsDone/:_id", auctionController.getAuctionIsDone)
 route.get("/getAuctionWithWinners/:_id", auctionController.getAuctionWithWinners)
 route.get("/getAuctionWithWinnersForManager/:_id", auctionController.getAuctionWithWinnersForManager)
 route.get("/unapprovedAuctionsByUser/:_id", auctionController.getUnapprovedAuctionsByUser)
-route.get("/:id", auctionController.getById)
 route.get("/sendEmailToWinners/:_id", myEmailMessagesController.sendEmailToWinners)
 route.get("/sendWinnersListToManager/:_id", myEmailMessagesController.sendWinnersListToManager)
 route.get("/sendWinnersListToUsers/:_id", myEmailMessagesController.sendWinnersListToUsers)
+route.get("/getTotalRevenueOneAuction/:_id", auctionController.getTotalRevenueOneAuction)
+route.get("/getTotalRevenueAllAuctions", auctionController.getTotalRevenueAllAuctions)
+route.get("/getHighestRevenueAuctions", auctionController.getHighestRevenueAuctions)
+route.get("/:id", auctionController.getById)
+route.get("/", auctionController.getAll)
 
 route.put("/performLotteries/:_id", auctionController.performLotteries)
 

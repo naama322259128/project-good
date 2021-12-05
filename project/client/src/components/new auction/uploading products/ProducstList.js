@@ -26,32 +26,38 @@ const ProductsList = (props) => {
 
 
     const columns = [
-        { id: 'name', label: 'Name', minWidth: 80 },
+        { id: 'name', label: 'Name', minWidth: 130 },
         {
             id: 'description',
             label: 'Description',
-            minWidth: 170,
-            align: 'right',
+            minWidth: 550,
+            align: 'left',
             format: (value) => value.toFixed(2)
         },
         {
             id: 'includedInPackages',
             label: 'Included in packages',
             minWidth: 170,
-            align: 'right',
+            align: 'left',
             format: (value) => value.toFixed(2),
         },
         {
             id: 'price',
             label: 'Price',
-            minWidth: 170,
+            minWidth: 70,
+            align: 'right',
+            format: (value) => value.toFixed(2)
+        }, {
+            id: 'img',
+            label: 'Image',
+            minWidth: 70,
             align: 'right',
             format: (value) => value.toFixed(2)
         }, {
             id: 'del',
             label: 'Delete',
-            minWidth: 170,
-            align: 'right',
+            minWidth: 50,
+            align: 'left',
             format: (value) => value.toFixed(2)
         }
     ];
@@ -66,7 +72,8 @@ const ProductsList = (props) => {
             }}
             title="Delete" > <img className="my_icon" src={de} />
         </IconButton >
-        return { name: pro.name, description: pro.description, includedInPackages: pro.includedInPackages.toString(), price: pro.price, del };
+        const img = pro.image ? <img src={pro.image} style={{width:'auto',height:'auto',maxWidth:'7vw',maxHeight:'6vh'}}/> : "";
+        return { name: pro.name, description: pro.description, includedInPackages: pro.includedInPackages.toString(), price: pro.price, img, del };
     }
 
     const classes = useStyles();

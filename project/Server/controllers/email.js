@@ -261,7 +261,7 @@ const sendContactToSiteManager = async (req, res) => {
             } else {
 
                 console.log('Email sent: ' + info.envelope.to);
-                console.log('Email sent: ' + info.envelope.from);
+                console.log('Email from: ' + info.envelope.from);
                 return res.send(info)
             }
 

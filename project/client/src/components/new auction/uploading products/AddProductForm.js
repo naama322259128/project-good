@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import Checkbox from '@mui/material/Checkbox';
 import { TextField } from "@mui/material";
 import FormControlLabel from '@mui/material/FormControlLabel';
-// import { LoginFromStorage, GetDataFromStorage } from '../../../store/actions/home';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -14,11 +13,10 @@ import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@material-ui/core';
-import upload_src from '../../../img/icons/uploadImg.png'
 import IconButton from '@material-ui/core/IconButton';
 import '../NewAuction.scss'
 import axios from 'axios';
-
+import uploadImg from '../../../img/upload.png'
 const AddProductForm = (props) => {
 
     let submit = (data, e) => {
@@ -29,7 +27,6 @@ const AddProductForm = (props) => {
         newProduct.description = data.description;
         newProduct.price = parseInt(data.price);
         newProduct.includedInPackages = data.includedInPackages;
-        debugger;
         newProduct.image = imagePath;
 
         addProductToDB(props.auctionId, newProduct).then(succ => { if (succ.status != 400) props.addProduct(succ.data); })
@@ -37,16 +34,13 @@ const AddProductForm = (props) => {
     }
     const [imagePath, setImagePath] = useState("");
     const onChangeHandler = event => {
-
-        console.log(event.target.files[0])
         const data = new FormData()
         data.append('file', event.target.files[0]);
         axios.post("http://localhost:5000/upload", data, { // receive two parameter endpoint url ,form data 
+        }).then(res => { // then print response status
+            console.log(res);
+            setImagePath("http://localhost:5000/images/" + res.data.filename);
         })
-            .then(res => { // then print response status
-                console.log(res);
-                setImagePath("http://localhost:5000/images/" + res.data.filename);
-            })
     }
 
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -56,23 +50,18 @@ const AddProductForm = (props) => {
         /* if (props.currentUser == null) LoginFromStorage();
          if (props.newAuction == null) GetDataFromStorage();*/
     }, [])
-    // const Input = styled('input')({
-    // });
+
 
     return (
-        // noValidate
-        <form autoComplete="off" onSubmit={handleSubmit(submit)}>
+        <form autoComplete="off" noValidate onSubmit={handleSubmit(submit)}>
             <div className={"inputs-in-form-container"}>
                 <TextField className="txt" variant="standard"  {...register('name', { required: true })} id="input-with-icon-grid" label="Name" />
                 <TextField className="txt" variant="standard" multiline {...register('description', { required: false })} id="input-with-icon-grid" label="Description" />
                 <TextField className="txt" type="number" variant="standard"{...register('price', { required: true })} id="input-with-icon-grid" label="Price" />
             </div>
-            <img src={imagePath}></img>
-            <input
-                style={{ display: "none" }}
-                id="contained-button-file"
-                type="file" onChange={onChangeHandler}
-            />
+
+            <img src={imagePath || uploadImg} style={{ width: 'auto', height: 'auto', maxHeight: '25vh', maxWidth: '15vw' }} />
+            <input style={{ display: "none" }} id="contained-button-file"  accept="image/*" type="file" onChange={onChangeHandler} />
             <label htmlFor="contained-button-file">
                 <Button variant="contained" color="primary" component="span">
                     Upload

@@ -12,8 +12,8 @@ const AuctionsList = (props) => {
     let [auctionsList, setAuctionsList] = useState([]);
     //הכנסת רשימה של כל המכירות הקיימות במסד נתונים
     useEffect(() => {
-        getpublicationApprovalAuctionsListFromDB().then(succ => { setAuctionsList(succ.data) })
-    }, []);
+        getpublicationApprovalAuctionsListFromDB().then(succ => {console.log(succ.data); setAuctionsList(succ.data) })
+    },[] );
 
     return (<div id="auctions-container">
         {auctionsList && auctionsList.map((item) => {

@@ -1,6 +1,5 @@
 import './Auction.scss';
 import { Header, Modal } from 'semantic-ui-react';
-import p from '../../img/car.jpg';
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { useState } from 'react';
@@ -11,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { updateShoppingCart } from '../../store/actions/user';
 import { addProductToShoppingCartInDB } from '../../utils/userUtils';
+import defaultImg from '../../img/picture.png'
 
 import { connect } from "react-redux";
 
@@ -19,8 +19,9 @@ const useStyles = makeStyles({
     maxWidth: 300,
   },
   media: {
-    height: 160,
+    height: 160
   },
+
 });
 
 const Product = (props) => {
@@ -29,7 +30,7 @@ const Product = (props) => {
   const [open, setOpen] = React.useState(false)
   const classes = useStyles();
   let [cnt, setCnt] = useState(0);
-  let image_src = p;//עד שנעשה את הקטע של התמונות
+  let image_src = props.product.image || defaultImg;//TODO לשים תמונה סתם
   let description = props.product.description;
   let name = props.product.name;
   let price = props.product.prices;
@@ -71,7 +72,7 @@ const Product = (props) => {
     >
 
       <Header ><h1>{name}</h1></Header>
-      <Modal.Content><img src={image_src} /><div style={{ marginLeft: '2vw', marginTop: '2vh', overflowWrap: 'break-word' }}>{description}</div></Modal.Content>
+      <Modal.Content><img src={image_src} style={{ width: '30%', height: 'auto' }} /><div style={{ marginLeft: '2vw', marginTop: '2vh', overflowWrap: 'break-word' }}>{description}</div></Modal.Content>
 
     </Modal>
   )

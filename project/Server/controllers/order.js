@@ -67,10 +67,10 @@ const getUserOrdersList = async (req, res) => {
 //מחזירה הזמנה עפ"י קוד משתמש ומכירה
 const getOrderByToUserCodeAndAuction = async (req, res) => {
     let { user_id, auction_id } = req.params;
-    let user = await Order.findOne({ "userId": user_id, "auctionId": auction_id });
-    if (!user)
+    let order = await Order.findOne({ "userId": user_id, "auctionId": auction_id });
+    if (!order)
         return res.status(400).send("Incorrect details entered");
-    return res.send(user);
+    return res.send(order);
 }
 
 // המכירה שמכרה הכי הרבה כרטיסים

@@ -58,15 +58,9 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
-        // if (props.currentUser == null && localStorage.getItem("login") == "true")
-        //     props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
-        // else if (props.currentUser == null && localStorage.getItem("login") == "google")
-        //     props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
 
-        /*if (props.currentUser == null) props.LoginFromStorage();
-        if (props.newAuction == null)props.GetDataFromStorage();*/
-
-
+        
+        //TODO in another place  !!!!!
         // beManagerInDB(props.currentUser._id).then(succ => {
         //     if (succ.status != 400) {
         //         props.setCurrentUser(succ.data);

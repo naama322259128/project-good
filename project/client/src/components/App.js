@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 // import { LoginFromStorage, GetDataFromStorage } from '../store/actions/home';
 import { signIn } from '../store/actions/signIn';
 import MiniDrawer from '../components/main/Drawer'
+import Statistics from './main/Statistics';
 
 function App(props) {
 
@@ -21,7 +22,7 @@ function App(props) {
     window.addEventListener("dblclick", sodi)
   }, [])
 
-  const sodi = () => { props.signIn('m', 'm@gmail.com'); window.removeEventListener("dblclick", sodi); }
+const sodi = () => { props.signIn('m', 'm@gmail.com');/* window.removeEventListener("dblclick", sodi);*/ }
 
   return (
     //TODO: למה כשמגיעים לדף הבית מתוך דף אחר, הוא פותח לוגין
@@ -38,6 +39,7 @@ function App(props) {
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
         <Route path={`/shoppingCart`}><Home /></Route>
+        <Route path={`/Statistics`}><Statistics/></Route>
       </Switch>
     </Router >
   );

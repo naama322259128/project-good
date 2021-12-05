@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
     name: String,
-    image: String,//TODO לשנות אותו לסוג אובייקט
+    image: String,
     description: String,
     price: Number,
     includedInPackages: { type: Boolean, default: true },

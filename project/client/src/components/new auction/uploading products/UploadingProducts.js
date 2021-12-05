@@ -10,13 +10,14 @@ const UploadingProducts = (props) => {
         <br />
         <input type="button" className="ui button" onClick={() => { props.showAddProduct(true) }} value="add product" />
 
-        <ProductsList />
+       {props.productsList&&props.productsList.length>0 &&<ProductsList />}
     </>);
 }
 
 const mapStateToProps = (state) => {
     return {
         showSetProduct: state.auction.showSetProduct,
+        productsList: state.auction.newAuction.productList
 
     };
 }

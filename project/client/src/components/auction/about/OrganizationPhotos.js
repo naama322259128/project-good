@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 
-export default function OrganizationPhotos() {
+export default function organizationPhotos() {
   return (
     <>
     <h3>organization photos:</h3> 
