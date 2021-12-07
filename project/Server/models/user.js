@@ -24,10 +24,9 @@ const userSchema = new mongoose.Schema({
     status: { type: String, enum: ['USER', 'AUCTION_MANAGER', 'SITE_MANAGER'], required: true, default: 'USER' },
     confidentiality: { type: Boolean, default: false },//חסוי או לא חסוי
     shoppingCart: [{
-        productId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Product' },
+       productId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Product' },
         qty: Number,
         auctionId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Auction' },
-        packageId: Number
     }]
 });
 const User = mongoose.model("User", userSchema);

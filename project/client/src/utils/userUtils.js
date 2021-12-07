@@ -19,7 +19,7 @@ export const getUserOrdersListFromDB = async (_id) => {
 }
 
 export const getProductsInCartByAuctionIdFromDB = async (userId, auctionId) => {
-    return axios.get(`http://localhost:5000/users/getProductsInCartByAuctionId/${userId}&${auctionId}`)
+    return axios.get(`http://localhost:5000/users/getProductsInCartByAuction/${userId}&${auctionId}`)
 }
 
 export const addProductToShoppingCartInDB = (auctionId, userId, productId, cnt) => {
@@ -27,9 +27,9 @@ export const addProductToShoppingCartInDB = (auctionId, userId, productId, cnt) 
     //מוסיף אחד לכמות שקיימת בסל מאותו מוצר
     return axios.post(`http://localhost:5000/users/addProductToCart/${auctionId}&${userId}&${productId}&${cnt}`);
 }
-export const deleteProductFromShoppingCartInDB = (auctionId, userId, productId) => {
+export const deleteProductFromShoppingCartInDB = (auctionId, userId, productId, cnt) => {
     //מוריד אחד מהכמות שקיימת בסל מאותו מוצר
-    return axios.post(`http://localhost:5000/users/deleteProductFromCart/${auctionId}&${userId}&${productId}`)
+    return axios.post(`http://localhost:5000/users/removeProductFromCart/${auctionId}&${userId}&${productId}&${cnt}`)
 }
 
 export const emptyTheBasketByAuction = (auctionId, userId) => {

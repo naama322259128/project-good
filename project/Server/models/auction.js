@@ -16,6 +16,7 @@ const auctionSchema = new mongoose.Schema({
         discountPercenrages: Number,//אחוזי הנחה
         gifts: [String]
     }],
+    // productList: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Auction' }],
     productList: [productSchema],
     lotteryApproval: { type: Boolean, default: false },
     organizationName: String,

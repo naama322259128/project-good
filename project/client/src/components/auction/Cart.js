@@ -12,47 +12,13 @@ const Cart = (props) => {
 
     const amountToPay = () => {
         let sum = 0;
+        debugger;
+        if (props.user.shoppingCartOfCurrentAuction.length == 0) return 0;
         props.user.shoppingCartOfCurrentAuction.map((item) => { sum += item.qty * item.productId.price });
         return sum;
     }
 
-    const tmp = [
-        {
-            productId: {
-                "includedInPackages": false,
-                "_id": "6177ceceee8b6f95a2752451",
-                "name": "kitchen",
-                "description": "very good kitchen. the best present for every women!!",
-                "price": 1
-            },
-            qty: 3
-        },
-        {
-            productId: {
-                "includedInPackages": false,
-                "_id": "6177cfdbee8b6f95a2752452",//שווים
-                "name": "5000 NIS for IKEA",
-                "description": "",
-                "price": 50
-            }, qty: 3
-        }, {
-            productId: {
-                "includedInPackages": false,
-                "_id": "6177cfdbee8b6f95a2752452",//שווים
-                "name": "10000 NIS for IKEA",
-                "description": "",
-                "price": 50
-            }, qty: 3
-        },
-        {
-            productId: {
-                "includedInPackages": false,
-                "_id": "6177d2e2ee8b6f95a2752454",
-                "name": "Courtyard pool",
-                "description": "",
-                "price": 10
-            }, qty: 1
-        }];
+
 
     const orderCompletion = () => {
         const newOrder = new Order(
@@ -80,7 +46,7 @@ const Cart = (props) => {
         if (props.currentAuction.purchasePackage.length && props.currentAuction.purchasePackage.length > 0)
             sort_packages = props.currentAuction.purchasePackage.
                 sort((a, b) => parseFloat(b.ticketsQuantity) - parseFloat(a.ticketsQuantity))
-        let sort_tickets = tmp/* props.user.shoppingCartOfCurrentAuction*/.
+        let sort_tickets = props.user.shoppingCartOfCurrentAuction.
             sort((a, b) => parseFloat(b.productId.price) - parseFloat(a.productId.price));
 
 
@@ -108,15 +74,15 @@ const Cart = (props) => {
 
             <div id="cart-products-container">
                 {/* מערך רק של המוצרים מהמכירה הזו */}
-                {/*props.user && props.user.shoppingCartOfCurrentAuction && props.user.shoppingCartOfCurrentAuction*/tmp.map((item, index) => {
-                    return (<ProductInCart key={parseInt(index)} qty={item.qty} productInCart={item.productId} /*setCount={props.setCnt}*/ />)
+                {props.user && props.user.shoppingCartOfCurrentAuction && props.user.shoppingCartOfCurrentAuction.map((item, index) => {
+                    return (<ProductInCart key={parseInt(index)} qty={item.qty} productInCart={item.productId} />)
                 })}
             </div>
             <Link to={'/auction/cart/purchaseSettings'}> <Button onClick={orderCompletion}>set purchase packages</Button></Link>
             <Button onClick={orderCompletion}>PAY</Button>
 
             {/* TODO: איך התצוגה תתרענן פה */}
-            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay()}
+            {props.user && props.user.shoppingCartOfCurrentAuction && <h1>{amountToPay()}</h1>}
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);
 }

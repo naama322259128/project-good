@@ -126,53 +126,47 @@ const beManager = async (req, res) => {
     return res.send(doc);
 }
 
-// const addProductToCart = async (req, res) => {
-//     let { auctionId } = req.params;
-//     let { productId } = req.params;
-//     let { userId } = req.params;
-//     let { cnt } = req.params;
+const addProductToCart = async (req, res) => {
+    let { auctionId } = req.params;
+    let { productId } = req.params;
+    let { userId } = req.params;
+    let { cnt } = req.params;//כמה להוסיף
+    let user = await User.findById(userId);
+    console.log('-----------------------');
+    let tmp = user.shoppingCart
+    let obj = tmp.find(x => x.productId.toString() === productId.toString());
+    console.log(obj);
+    let index = tmp.indexOf(obj);
+    console.log("index");
+    console.log(index);
+    if (index == -1)
+        tmp.push({ productId: productId, qty: cnt, auctionId: auctionId })
+    else
+        tmp.fill(obj.qty += parseInt(cnt), index, index++);
+    user.shoppingCart = tmp;
+    await user.save();
+    return res.send(user.shoppingCart);
+}
 
-//     /*shoppingCart: [{
-//         porductId: mongoose.SchemaTypes.ObjectId,
-//         qty: Number,
-//         auctionId: mongoose.SchemaTypes.ObjectId
-//     }]*/
-
-//     try {
-//         const filter = { _id: userId };
-//         const update = { $: { shoppingCart.qty: 1}, }
-
-//         //shoppingCart.porductId: productId, shoppingCart.auctionId: auctionId 
-
-//         let doc = await User.findOneAndUpdate(filter, update, { new: true });
-//         await doc.save();
-
-//         return res.send(doc.shoppingCart);
-//     }
-//     catch (err) { return res.status(400).send(err.message) }
-
-//TODO****************************להחזיר מערך מוצרים רק ממכירה אחת
-// }
-
-// const removeProductFromCart = async (req, res) => {
-//     // let { auctionId } = req.params;
-//     // let { productId } = req.params;
-//     // let { userId } = req.params;
-
-//     const filter = { _id: userId };
-//     // const update = { $c: {shoppingCart.qty: 1}, }
-
-//     //shoppingCart.porductId: productId, shoppingCart.auctionId: auctionId 
-
-//     // let doc = await User.findOneAndUpdate(filter, update, { new: true });
-//     // await doc.save();
-//TODO****************************להחזיר מערך מוצרים רק ממכירה אחת
-
-//     // return res.send(doc.shoppingCart);
-// }
+const removeProductFromCart = async (req, res) => {
+    let { auctionId } = req.params;
+    let { productId } = req.params;
+    let { userId } = req.params;
+    let { cnt } = req.params;
+}
 
 const emptyTheBasketBuAuction = async (req, res) => {
-    return null;
+    let { auctionId } = req.params;
+    let { userId } = req.params;
+
+    let user = await User.findById(userId);
+    let cart = user.shoppingCart;
+    if (cart) {
+        let arr = lott.filter(l => l.auctionId.toString() != auctionId.toString());//כל הכרטיסים למוצר הזה
+        user.shoppingCart = arr;
+        await user.save();
+    }
+    return res.send(user.shoppingCart);
 }
 
 const getProductsInCartByAuction = async (req, res) => {
@@ -189,11 +183,11 @@ const getProductsInCartByAuction = async (req, res) => {
 
     // if (!user)
     let arr = user.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
-
+    console.log(arr);
     return res.send(arr);
 }
 
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle,
-   /* removeProductFromCart, addProductToCart,*/ getProductsInCartByAuction, emptyTheBasketBuAuction
+    removeProductFromCart, addProductToCart, getProductsInCartByAuction, emptyTheBasketBuAuction
 }

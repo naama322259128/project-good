@@ -1,101 +1,3 @@
-// import './Auction.scss';
-// import { Header, Modal } from 'semantic-ui-react';
-// import p from '../../img/car.jpg';
-// import IconButton from '@material-ui/core/IconButton';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Card from '@material-ui/core/Card';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import Typography from '@material-ui/core/Typography';
-// import { connect } from "react-redux";
-// import Button from '@material-ui/core/Button';
-// import { deleteProductFromCart } from '../../store/actions/user';
-// import { setCntOfProductInCart } from '../../store/actions/currentAuction';
-// import React, { useEffect, useState } from 'react';
-
-// const useStyles = makeStyles({
-//   root: {
-//     maxWidth: 300,
-//   },
-//   media: {
-//     height: 160,
-//   },
-// });
-
-// const getCnt = (_id) => {
-//   let arr = JSON.parse(localStorage.getItem("shoppingCart"));
-//   if (!arr) return 0;
-//   let index = arr.findIndex(item => item.product_id == _id);
-//   if (index != -1)
-//     return arr[index].cnt;
-//   return 0;
-// }
-
-// const ProductInCart = (props) => {
-//   const [open, setOpen] = React.useState(false)
-//   const classes = useStyles();
-
-//   let image_src = p;//עד שנעשה את הקטע של התמונות
-//   let description = props.item.product.description;
-//   let name = props.item.product.name;
-//   let price = props.item.product.prices;
-//   let _id = props.item.product._id;
-
-//   return (
-//     <Modal
-//       closeIcon
-//       open={open}
-//       trigger={
-//         <Card className={classes.root} >
-//           {name}
-//           <Typography gutterBottom variant="h5" component="h2">
-//             {price}
-//           </Typography>
-//           <CardMedia
-//             className={classes.media}
-//             image={image_src}
-//             title="Contemplative Reptile"
-//           />
-
-//           <i className="trash icon" onClick={(e) => { e.stopPropagation(); props.deleteProductFromCart(_id) }}></i>
-//           <IconButton color="primary"
-//             onClick={(e) => {
-//               let c = getCnt(_id);
-//               if (c > 0) props.setCntOfProductInCart(_id, c - 1);
-//               e.stopPropagation();
-//             }}  >
-//             -</IconButton>
-//           <h2>{getCnt()}</h2>
-//           <IconButton color="primary"
-//             onClick={(e) => {
-//               let c = getCnt(_id);
-//               props.setCntOfProductInCart(_id, c + 1);
-
-//               e.stopPropagation();
-//             }}
-//           >+</IconButton>
-//         </Card >}
-//       onClose={() => setOpen(false)}
-//       onOpen={() => setOpen(true)}
-//     >
-
-//       <Header ><h1>{name}</h1></Header>
-//       <Modal.Content>
-//         {description}<br />
-//         <img src={image_src}></img>
-//       </Modal.Content>
-//     </Modal >
-//   )
-// }
-
-// const mapStateToProps = state => {
-//   return {
-//     currentUser: state.user.currentUser,
-//     loginIsOpen: state.user.loginIsOpen,
-//     currnetAuction: state.auction
-//   }
-// }
-// export default connect(mapStateToProps, { deleteProductFromCart, })(ProductInCart);
-
 import './Cart.scss';
 import { Header, Modal } from 'semantic-ui-react';
 import IconButton from '@material-ui/core/IconButton';
@@ -107,8 +9,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import { updateShoppingCart } from '../../store/actions/user';
-import { addProductToShoppingCartInDB } from '../../utils/userUtils';
-
+import { addProductToShoppingCartInDB, deleteProductFromShoppingCartInDB } from '../../utils/userUtils';
+import deleteIcon from '../../img/icons/dustbin.png'
 import { connect } from "react-redux";
 import defaultImg from '../../img/picture.png'
 
@@ -117,7 +19,7 @@ const useStyles = makeStyles({
         maxWidth: 300,
     },
     media: {
-        height:160
+        height: 160
     },
 });
 
@@ -128,9 +30,9 @@ const ProductInCart = (props) => {
     let image_src = props.productInCart.image || defaultImg;
     let description = props.productInCart.description;
     let name = props.productInCart.name;
-    let price = props.productInCart.prices;
+    let price = props.productInCart.price;
     let qty = props.qty;
-
+    let _id = props.productInCart._id;
 
     return (
         <Modal
@@ -142,18 +44,33 @@ const ProductInCart = (props) => {
                     <center>{name}</center>
                     <Typography gutterBottom variant="h5" component="h2">{price}</Typography>
                     <CardMedia className={classes.media} image={image_src} title={name} />
-                    <IconButton color="primary" onClick={(e) => { e.stopPropagation(); }}  >-</IconButton>
+
+                    {/* מחיקת אחד */}
+                    <IconButton color="primary" onClick={(e) => {
+                        e.stopPropagation();
+                        deleteProductFromShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, 1).then(succ => {
+                            if (succ.status != 400) props.updateShoppingCart(succ.data);
+                        })
+                    }} >-</IconButton>
+
                     <h2 style={{ display: "inline-block", fontSize: '2vh' }}>{qty}</h2>
-                    <IconButton color="primary" onClick={(e) => { e.stopPropagation(); }}>+</IconButton>
+
+                    {/* הוספת אחד */}
+                    <IconButton color="primary" onClick={(e) => {
+                        e.stopPropagation();
+                        addProductToShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, 1).then(succ => {
+                            if (succ.status != 400) props.updateShoppingCart(succ.data);
+                        })
+                    }}>+</IconButton>
 
                     {/* מחיקה מהסל */}
-                    <IconButton color="primary" aria-label="delete from shopping cart">
-                        <AddShoppingCartIcon
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                //delete
-                                alert("וגם לשנות את האייקון! deleted!!")
-                            }} />
+                    <IconButton color="primary" aria-label="delete from shopping cart" onClick={(e) => {
+                        e.stopPropagation();
+                        deleteProductFromShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, qty).then(succ => {
+                            if (succ.status != 400) props.updateShoppingCart(succ.data);
+                        })
+                    }}>
+                        <img src={deleteIcon} className="my_icon" />
                     </IconButton>
 
 
@@ -164,7 +81,7 @@ const ProductInCart = (props) => {
 
             <Header ><h1>{name}</h1></Header>
             <Modal.Content>
-                <img src={1}  style={{width:'30%',height:'auto'}}/>
+                <img src={image_src} style={{ width: '30%', height: 'auto' }} />
                 <div style={{ marginLeft: '2vw', marginTop: '2vh', overflowWrap: 'break-word' }}>{description}</div>
             </Modal.Content>
 

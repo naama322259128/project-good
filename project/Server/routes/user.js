@@ -15,8 +15,8 @@ route.post("/", userController.addUser)
 route.put("/beManager/:_id", userController.beManager)
 route.put("/:id", userController.updateUser)
 route.put("/emptyTheBasketBuAuction/:auctionId&:userId", userController.emptyTheBasketBuAuction)
-// route.put(`/addProductToCart/:auctionId&:userId&:productId&:cnt`, userController.addProductToCart);
-// route.put(`/deleteProductFromCart/:auctionId&:userId&:productId`, userController.deleteProductFromCart);
+ route.post(`/addProductToCart/:auctionId&:userId&:productId&:cnt`, userController.addProductToCart);
+// route.post(`/removeProductFromCart/:auctionId&:userId&:productId&:cnt`, userController.deleteProductFromCart);
 
 route.delete("/:id", userController.deleteUser)
 

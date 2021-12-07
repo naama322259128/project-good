@@ -33,7 +33,7 @@ const Product = (props) => {
   let image_src = props.product.image || defaultImg;//TODO לשים תמונה סתם
   let description = props.product.description;
   let name = props.product.name;
-  let price = props.product.prices;
+  let price = props.product.price;
 
   return (
     <Modal
@@ -55,6 +55,7 @@ const Product = (props) => {
             <AddShoppingCartIcon
               onClick={(e) => {
                 e.stopPropagation();
+                
                 addProductToShoppingCartInDB(props.currentAuction._id, props.currentUser._id, props.product._id, cnt).then(succ => {
                   debugger;
                   if (succ.status != 400) {

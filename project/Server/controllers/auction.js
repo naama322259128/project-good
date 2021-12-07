@@ -137,7 +137,7 @@ const addProduct = async (req, res) => {
     let product = req.body;
     let { a_id } = req.params;
     try {
-        let newProduct = new Product(product);
+        let newProduct = await Product.insertMany(product);
         const filter = { _id: a_id };
         const update = { $push: { productList: newProduct } };
 
@@ -182,9 +182,11 @@ const deleteProduct = async (req, res) => {
     const filter = { _id: auction_id };
     const update = { $pull: { 'productList': { '_id': product_id } } }
     let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
-
     await doc.save();
+    await Product.findOneAndDelete({ _id: product_id })
+
     return res.send(doc);
+
 }
 const deletePackage = async (req, res) => {
     let { auction_id } = req.params;
