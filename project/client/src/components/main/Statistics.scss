@@ -1,0 +1,23 @@
+#results-container {
+  // display: grid;
+  // grid-template-columns: repeat(3, 5fr);
+  // grid-gap: 1rem;
+
+  // margin-left: auto;
+  // margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  justify-content: space-around;
+}
+#results-container
+  .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiCard-root.css-1ri6ub7-MuiPaper-root-MuiCard-root {
+  flex: 0 0 33.333333%;
+  margin-top: 3vh;
+  transition: 0.6s ;
+}
+
+#results-container
+  .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiCard-root.css-1ri6ub7-MuiPaper-root-MuiCard-root:hover {
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}

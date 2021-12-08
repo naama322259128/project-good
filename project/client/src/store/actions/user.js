@@ -1,7 +1,6 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 
-
 export const setCurrentUser = (user) => {
     return {
         type: actionTypes.SET_CURRENT_USER,

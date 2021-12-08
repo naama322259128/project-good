@@ -4,7 +4,8 @@ export const initialState = {
     loginIsOpen: false,
     ordersList: [],//?
     shoppingCartOfCurrentAuction: [],
-    wantContact: false
+    wantContact: false,
+    shoppingCartAll: []
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -12,9 +13,9 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loginIsOpen: action.payload
-            } 
+            }
         case actionTypes.SET_WANT_CONTACT:
-           debugger;
+            debugger;
             return {
                 ...state,
                 wantContact: action.payload
@@ -39,40 +40,6 @@ export const userReducer = (state = initialState, action) => {
                 shoppingCartOfCurrentAuction: action.payload
             }
         }
-        // case actionTypes.ADD_PRODUCT_TO_CART:
-        //     {
-        //         let _id = action.payload.product._id;
-        //         let cnt = action.payload.cnt;
-        //         let index = state.currentUser.shoppingCart.findIndex(item => item.product._id == _id);
-        //         let arr = [...state.currentUser.shoppingCart];
-        //         if (index == -1) arr.push(action.payload);
-        //         else arr[index].cnt += cnt;
-        //         return {
-        //             ...state,
-        //             shoppingCart: arr
-        //         }
-        //     }
-        // case actionTypes.DELETE_PRODUCT_FROM_CART:
-        //     {
-        //         let arr2 = state.shoppingCart.
-        //             filter(p => p.product._id !== action.payload)
-        //         return {
-        //             ...state,
-        //             shoppingCart: arr2
-        //         }
-        //     }
-        // case actionTypes.SET_CNT_PRODUCT_IN_CART:
-        //     {
-        //         let _id = action.payload._id;
-        //         let cnt = action.payload.cnt;
-        //         let index = state.shoppingCart.findIndex(item => item.product._id == _id);
-        //         let arr = [...state.shoppingCart];
-        //         if (index != -1) arr[index].cnt = cnt;
-        //         return {
-        //             ...state,
-        //             shoppingCart: arr
-        //         }
-        //     }
         case actionTypes.SIGN_OUT:
             {
                 //יציאת משתמש
@@ -82,7 +49,7 @@ export const userReducer = (state = initialState, action) => {
                     loginIsOpen: false,
                     yourProfileIsOpen: false,
                     shoppingCart: [],
-                    wantContact:false
+                    wantContact: false
                 }
             }
         case actionTypes.UPDATE_USER_STATE: {

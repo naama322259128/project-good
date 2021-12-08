@@ -8,15 +8,16 @@ route.get("/:id", userController.getById)
 route.get("/signIn/:password&:email", userController.isUserExist)
 route.get("/loginGoogle/:name&:email", userController.isLoginGoogle)
 route.get("/getProductsInCartByAuction/:userId&:auctionId", userController.getProductsInCartByAuction)
+route.get("/getCart/:userId", userController.getCart)
 
 route.post("/sendContactToSiteManager/", myEmailMessagesController.sendContactToSiteManager)
 route.post("/", userController.addUser)
+route.post(`/addProductToCart/:auctionId&:userId&:productId&:cnt`, userController.addProductToCart);
+route.post(`/removeProductFromCart/:auctionId&:userId&:productId&:cnt`, userController.removeProductFromCart);
 
 route.put("/beManager/:_id", userController.beManager)
 route.put("/:id", userController.updateUser)
-route.put("/emptyTheBasketBuAuction/:auctionId&:userId", userController.emptyTheBasketBuAuction)
- route.post(`/addProductToCart/:auctionId&:userId&:productId&:cnt`, userController.addProductToCart);
-route.post(`/removeProductFromCart/:auctionId&:userId&:productId&:cnt`, userController.removeProductFromCart);
+route.put("/emptyTheCartByAuction/:auctionId&:userId", userController.emptyTheCartByAuction)
 
 route.delete("/:id", userController.deleteUser)
 

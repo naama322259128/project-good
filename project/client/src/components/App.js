@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { signIn } from '../store/actions/signIn';
 import MiniDrawer from '../components/main/Drawer'
 import Statistics from './main/Statistics';
+import CartAll from './user/CartAll';
 
 function App(props) {
 
@@ -38,7 +39,7 @@ const sodi = () => { props.signIn('m', 'm@gmail.com');/* window.removeEventListe
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
-        <Route path={`/shoppingCart`}><Home /></Route>
+        <Route path={`/shoppingCart`}><CartAll /></Route>
         <Route path={`/Statistics`}><Statistics/></Route>
       </Switch>
     </Router >

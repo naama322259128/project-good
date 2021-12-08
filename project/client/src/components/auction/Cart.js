@@ -6,7 +6,7 @@ import Order from '../../models/order';
 import { updateShoppingCart } from '../../store/actions/user';
 import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
-import { emptyTheBasketByAuction, addOrderToDB } from '../../utils/userUtils';
+import { emptyTheCartByAuction, addOrderToDB } from '../../utils/userUtils';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
 const Cart = (props) => {
 
@@ -82,7 +82,7 @@ const Cart = (props) => {
             <Button onClick={orderCompletion}>PAY</Button>
 
             {/* TODO: איך התצוגה תתרענן פה */}
-            {props.user && props.user.shoppingCartOfCurrentAuction && <h1>{amountToPay()}</h1>}
+            {props.user && props.user.shoppingCartOfCurrentAuction && <h1>{amountToPay()+ "₪"}</h1>}
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);
 }

@@ -66,7 +66,7 @@ const ProfileButton = (props) => {
             </Link>
 
             <Link to={'/continue_new_auction'}>
-                <MenuItem key={'Continue chinese auction'} onClick={handleClose}>Continue chinese auction</MenuItem>
+                <MenuItem key={'Continue building'} onClick={handleClose}>Continue building</MenuItem>
             </Link>
             <Link to={'/shoppingCart'}>
                 <MenuItem key={'Shopping cart'} onClick={handleClose}>Shopping cart</MenuItem>

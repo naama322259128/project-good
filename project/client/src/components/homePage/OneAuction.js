@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         opacity: 0,
       },
       '& $imageTitle': {
-        border: '1px solid currentColor',
+        border: '3px solid currentColor',
       },
     },
   },
@@ -61,14 +61,16 @@ const useStyles = makeStyles((theme) => ({
     right: 20,
     top: 10,
     bottom: 10,
-    backgroundColor: theme.palette.common.black,
-    opacity: 0.6,
+    // backgroundColor: theme.palette.common.black,
+    // opacity:0.6,
     transition: theme.transitions.create('opacity'),
   },
   //הכיתוב
   imageTitle: {
     position: 'relative',
     padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
+    fontSize:'2.8vh',
+    textShadow: '-0.6px 0 black, 0 0.6px black, 0.6px 0 black, 0 -0.6px black'
   },
   //הפס שנמצא מתחת הכיתוב בכל תמונה
   imageMarked: {
@@ -84,8 +86,6 @@ const useStyles = makeStyles((theme) => ({
 
 const OneAuction = (props) => {
   const classes = useStyles();
-  useEffect(() => { console.log(props.item.logo); }, [])
-  useEffect(() => { console.log(props.item); }, [])
   return (<>
     <ButtonBase
       focusRipple

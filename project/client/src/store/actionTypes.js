@@ -13,7 +13,6 @@ export const SET_SHOW_CONTACT_FORM = "SET_SHOW_CONTACT_FORM"
 export const ADD_ORDER = "ADD_ORDER"//הוספת הזמנה לסטייט
 export const SET_USER_ORDERS = "SET_USER_ORDERS"
 export const SIGN_IN_OF_STATE = "SIGN_IN_OF_STATE"
-export const SET_SHOPPING_CART = "SET_SHOPPING_CART"
 export const SET_WANT_CONTACT = "SET_WANT_CONTACT"//כדישנדע האם לגלול את דף האודות לתחתיתו
 
 /******************************************   NEW AUCTION   ****************************************************/

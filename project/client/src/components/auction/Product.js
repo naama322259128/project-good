@@ -43,7 +43,7 @@ const Product = (props) => {
         <Card className={classes.root, "product-in-list"} >
 
           <center>{name}</center>
-          <Typography gutterBottom variant="h5" component="h2">{price}</Typography>
+          <Typography gutterBottom variant="h5" component="h2">{price+ "₪"}</Typography>
           <CardMedia className={classes.media} image={image_src} title={name} />
           <IconButton color="primary" onClick={(e) => { let c = cnt; if (cnt > 0) setCnt(c - 1); e.stopPropagation(); }}  >-</IconButton>
           <h2 style={{ display: "inline-block", fontSize: '2vh' }}>{cnt}</h2>

@@ -247,7 +247,6 @@ const getHighestRevenueAuctions = async (req, res) => {
         ]
     )
 
-    console.log(auctions)
     if (!auctions) return res.status(404).send("There is no orders");
 
     //אולי יש כמה שהגיעו לסכום הכי גבוה
@@ -255,13 +254,56 @@ const getHighestRevenueAuctions = async (req, res) => {
     for (var i = 0; i < auctions.length; i++) {
         if (auctions[i].totalAmount == auctions[0].totalAmount) {
             let n = await Auction.findById(auctions[i]._id);
-            max_auctions.push({ auctionId: auctions[i]._id, auctionName: n.name, total: auctions[i].totalAmount });
+            if (n)//TODO
+                max_auctions.push({
+                    auctionId: auctions[i]._id,
+                    auctionName: n.name,
+                    total: auctions[i].totalAmount,
+                    logo: n.logo,
+                });
         }
         else break;
     }
 
     return res.json(max_auctions);
 }
+//מוצר הכי נמכר בכל מכירה
+const getBestSellingProductByAuction = async (req, res) => {
+    let { _id } = req.params;
+    try {
+        if (!mongoose.Types.ObjectId.isValid(_id))
+            return res.status(404).send("Invalid ID number");
+        let auctions = await Auction.findOne({ "_id": _id });//מכירה הנוכחית
+        if (!auctions)
+            return res.status(404).send("There is no auction with such an manager ID number");
+        let orders = await Order.find({ 'auctionId': _id });//כל ההזמנות של המכירה הנוכחית
+        let tmp = [];
+        let products = auctions.productList;
+        let max = 0;
+        let max_p;
+        orders.map(p => {
+            let details = { productId: p.orderDetails.productId, ticketsQuantity: p.orderDetails.ticketsQuantity }
+            tmp.push(details);//הכנסה למערך את המוצר והכמות שנמכר
+        })
+
+        products.map(p => {
+            let c = tmp.filter(l => l.details.productId.toString() == p._id.toString());
+            let cnt = 0;
+            c.map(i => {
+                cnt += i.details.ticketsQuantity;//כמות מוצר אחד
+            })
+            if (cnt > max) {
+                max = cnt;
+                max_p = p.name;//שם מוצר בו נרשמו הכי הרבה אנשים
+            }
+        })
+        return res.send(max_p, max);
+
+    }
+    catch (err) { return res.status(400).send(err.message) }
+}
+
+
 
 
 /********************************************הגרלות וזוכים**************************************** */
@@ -374,6 +416,9 @@ module.exports = {
     addAuctionInformation, deleteProduct, deletePackage, getAuctionWithWinners,
     getAuctionWithWinnersForManager, performLotteries, getUnapprovedAuctionsByUser,
     addPurchasePackage,
-    getTotalRevenueOneAuction, getTotalRevenueAllAuctions, getHighestRevenueAuctions
+    getTotalRevenueOneAuction, getTotalRevenueAllAuctions, getHighestRevenueAuctions,
+
+
+    getBestSellingProductByAuction
 }
 

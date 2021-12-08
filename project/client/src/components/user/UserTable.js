@@ -56,10 +56,12 @@ const UserTable = (props) => {
     }
     useEffect(() => {
         getUserOrdersListFromDB(props.user._id).then(succ => {
-            let arr = [];
-            succ.data.map((o) => { arr.push(createData(o)) });
-            console.log(succ.data);
-            setRows(arr);
+            if (succ.status != 400) {
+                let arr = [];
+                succ.data.map((o) => { arr.push(createData(o)) });
+                console.log(succ.data);
+                setRows(arr);
+            }
         });
     }, [])
 
@@ -100,7 +102,7 @@ const UserTable = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            {rows && rows.length && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                         {columns.map((column) => {

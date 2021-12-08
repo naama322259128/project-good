@@ -1,28 +1,32 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState, useRef } from 'react';
 import { getHighestRevenueAuctionsFromDB, getTotalRevenueAllAuctionsFromDB } from '../../utils/mainUtils'
+import StatisticsCard from "./StatisticsCard";
+import './Statistics.scss'
+import s from '../../img/statictis.jpg'
+
 const Statistics = (props) => {
   const [highestRevenueAuctions, setHighestRevenueAuctions] = useState(null);
-  const [totalRevenueAllAuctions, setTotalRevenueAllAuctions] = useState(0);
+  const [totalRevenueAllAuctions, setTotalRevenueAllAuctions] = useState([0]);
   useEffect(() => {
-    getHighestRevenueAuctionsFromDB().then(succ => { if (succ.status != 400) setHighestRevenueAuctions(succ.data); console.log(succ.data); })
-    getTotalRevenueAllAuctionsFromDB().then(succ => { if (succ.status != 400) setTotalRevenueAllAuctions(succ.data); console.log(succ.data); })
+    getHighestRevenueAuctionsFromDB().then(succ => { if (succ.status != 400) setHighestRevenueAuctions(succ.data) })
+    getTotalRevenueAllAuctionsFromDB().then(succ => { if (succ.status != 400) setTotalRevenueAllAuctions(succ.data) })
   }, [])
   return (<>
 
     <br />
-    <br />
-    <h1>General Statistics</h1>
-    <p>סטטיסטיקות לגבי כל המכירות</p>
-    <br />
-    <br />
-    <h1>ההכנסות מכל המכירות עד כה:{totalRevenueAllAuctions && totalRevenueAllAuctions[0].total}</h1>
-    <br />
-    <br />
-    <h1>highestRevenueAuctions</h1>
-    {highestRevenueAuctions && highestRevenueAuctions.map(item => {
-      return <h2>{item.auctionName}:{item.total}</h2>
-    })}
+    <div id="results-container">
+    <StatisticsCard logo={s} title={"Total revenue all chienes auctions: " + totalRevenueAllAuctions[0].total + "₪"} content={"All proceeds from the purchase of the site's users in all Chinese auctions since the site was established."} />
+       {highestRevenueAuctions && highestRevenueAuctions.map(item => {
+        return <StatisticsCard
+          btn={true}
+          key={item.auctionId}
+          _id={item.auctionId}
+          logo={item.logo}
+          title={item.auctionName + ": " + item.total + "₪"}
+          content={"The Chinese auction that managed to get the most money. The chiense auction with the most revenue. From the purchases of the site's users"} />
+      })}
+    </div>
   </>);
 }
 

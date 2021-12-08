@@ -175,18 +175,24 @@ const removeProductFromCart = async (req, res) => {
     return res.send(arr);
 }
 
-const emptyTheBasketBuAuction = async (req, res) => {
+const emptyTheCartByAuction = async (req, res) => {
     let { auctionId } = req.params;
     let { userId } = req.params;
 
     let user = await User.findById(userId);
     let cart = user.shoppingCart;
     if (cart) {
-        let arr = lott.filter(l => l.auctionId.toString() != auctionId.toString());//כל הכרטיסים למוצר הזה
+        let arr = cart.filter(l => l.auctionId.toString() != auctionId.toString());//כל הכרטיסים למוצר הזה
         user.shoppingCart = arr;
         await user.save();
     }
-    return res.send(user.shoppingCart);
+    let user2 = await User.findById(userId).populate([
+        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+
+    // if (!user2)
+    let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
+
+    return res.send(arr);
 }
 
 const getProductsInCartByAuction = async (req, res) => {
@@ -206,8 +212,32 @@ const getProductsInCartByAuction = async (req, res) => {
     console.log(arr);
     return res.send(arr);
 }
+const getCart = async (req, res) => {
+    let { userId } = req.params;
 
+    if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(userId))
+        return res.status(404).send("Invalid ID number");
+
+
+    let user = await User.findById(userId).populate([
+        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }, "shoppingCart.auctionId"]);
+
+    let tmp = user.shoppingCart;
+
+    //רשימה יחודית של מכירות מהסל
+    let uniq = tmp.map(item => item.auctionId._id).filter((value, index, self) => self.indexOf(value) === index);
+    let toReturn = [];
+
+    uniq.map(item => {
+        let byAuction = tmp.filter(l => l.auctionId._id.toString() == item.toString());//כל המוצרים בסל ששיכים למכירה הזו
+        let sum = 0;
+        byAuction.map(item => { sum += (parseInt(item.productId.price) * parseInt(item.qty)) });
+        toReturn.push({ sum, auction: byAuction[0].auctionId });//נכניס למערך את פרטי מכירה, ואת הסכום של הכרטיסים
+    })
+
+    return res.send(toReturn);
+}
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle,
-    removeProductFromCart, addProductToCart, getProductsInCartByAuction, emptyTheBasketBuAuction
+    removeProductFromCart, addProductToCart, getProductsInCartByAuction, emptyTheCartByAuction, getCart
 }

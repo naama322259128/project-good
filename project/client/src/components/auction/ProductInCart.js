@@ -42,7 +42,7 @@ const ProductInCart = (props) => {
                 <Card className={classes.root, "cart-product-in-list"} >
 
                     <center>{name}</center>
-                    <Typography gutterBottom variant="h5" component="h2">{price}</Typography>
+                    <Typography gutterBottom variant="h5" component="h2">{price+ "₪"}</Typography>
                     <CardMedia className={classes.media} image={image_src} title={name} />
 
                     {/* מחיקת אחד */}

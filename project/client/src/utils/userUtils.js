@@ -21,6 +21,9 @@ export const getUserOrdersListFromDB = async (_id) => {
 export const getProductsInCartByAuctionIdFromDB = async (userId, auctionId) => {
     return axios.get(`http://localhost:5000/users/getProductsInCartByAuction/${userId}&${auctionId}`)
 }
+export const getCartFromDB = async (userId) => {
+    return axios.get(`http://localhost:5000/users/getCart/${userId}`)
+}
 
 export const addProductToShoppingCartInDB = (auctionId, userId, productId, cnt) => {
     debugger;
@@ -32,9 +35,9 @@ export const deleteProductFromShoppingCartInDB = (auctionId, userId, productId, 
     return axios.post(`http://localhost:5000/users/removeProductFromCart/${auctionId}&${userId}&${productId}&${cnt}`)
 }
 
-export const emptyTheBasketByAuction = (auctionId, userId) => {
+export const emptyTheCartByAuction = (auctionId, userId) => {
     //מוחק את כל המוצרים של מכירה מתוך סל הקניות של המשתמש
-    return axios.put(`http://localhost:5000/users/emptyTheBasketBuAuction/${auctionId}&${userId}`)
+    return axios.put(`http://localhost:5000/users/emptyTheCartByAuction/${auctionId}&${userId}`)
 }
 
 export const addOrderToDB = (order) => {
