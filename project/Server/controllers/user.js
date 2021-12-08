@@ -132,27 +132,47 @@ const addProductToCart = async (req, res) => {
     let { userId } = req.params;
     let { cnt } = req.params;//כמה להוסיף
     let user = await User.findById(userId);
-    console.log('-----------------------');
     let tmp = user.shoppingCart
+
     let obj = tmp.find(x => x.productId.toString() === productId.toString());
-    console.log(obj);
     let index = tmp.indexOf(obj);
-    console.log("index");
-    console.log(index);
-    if (index == -1)
-        tmp.push({ productId: productId, qty: cnt, auctionId: auctionId })
-    else
-        tmp.fill(obj.qty += parseInt(cnt), index, index++);
+    if (index == -1) tmp.push({ productId: productId, qty: cnt, auctionId: auctionId })
+    else tmp.fill(obj.qty += parseInt(cnt), index, index++);
     user.shoppingCart = tmp;
     await user.save();
-    return res.send(user.shoppingCart);
+
+    let user2 = await User.findById(userId).populate([
+        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+
+    // if (!user2)
+    let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
+
+    return res.send(arr);
 }
 
 const removeProductFromCart = async (req, res) => {
     let { auctionId } = req.params;
     let { productId } = req.params;
     let { userId } = req.params;
-    let { cnt } = req.params;
+    let { cnt } = req.params;//כמה להוריד
+    let user = await User.findById(userId);
+    let tmp = user.shoppingCart
+
+    let obj = tmp.find(x => x.productId.toString() === productId.toString());
+    let index = tmp.indexOf(obj);
+    if (index > -1) {
+        if (obj.qty - parseInt(cnt) < 1) tmp.splice(index, 1);//אם הכמות שנותרה היא פחות אחד, למחוק אותו מהסל
+        else tmp.fill(obj.qty -= parseInt(cnt), index, index++);//אחרת, להפחית מהכמות שבסל
+        user.shoppingCart = tmp;
+        await user.save();
+    }
+    let user2 = await User.findById(userId).populate([
+        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+
+    // if (!user2)
+    let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
+
+    return res.send(arr);
 }
 
 const emptyTheBasketBuAuction = async (req, res) => {
