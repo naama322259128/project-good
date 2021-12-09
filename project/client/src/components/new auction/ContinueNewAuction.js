@@ -40,15 +40,14 @@ const ContinueNewAuction = (props) => {
 
     return (
         <>
-            <h1>ContinueNewAuction</h1>
             <TableContainer component={Paper} id={"unapproved-auctions-list"}>
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
                             <TableCell /> {/* האייקון של פתח/סגור */}
                             <TableCell>Chiense auction name</TableCell>
-                            <TableCell align="right">Purchase packages</TableCell>
                             <TableCell align="right">Products</TableCell>
+                            <TableCell align="right">Purchase packages</TableCell>
                             <TableCell align="right">Lotteries date</TableCell>
                             <TableCell /> {/* האייקון של המשך מכירה זו */}
                         </TableRow>

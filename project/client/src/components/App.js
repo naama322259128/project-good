@@ -23,25 +23,29 @@ function App(props) {
     window.addEventListener("dblclick", sodi)
   }, [])
 
-const sodi = () => { props.signIn('m', 'm@gmail.com');/* window.removeEventListener("dblclick", sodi);*/ }
+  const sodi = () => { props.signIn('m', 'm@gmail.com');/* window.removeEventListener("dblclick", sodi);*/ }
 
   return (
     //TODO: למה כשמגיעים לדף הבית מתוך דף אחר, הוא פותח לוגין
     // TODO: למחוק מהלוקל-סטורג' מיד שעוזבים את הקומפוננטה 
     <Router>
       <Switch>
-        <Route path={`/auction`} ><Auction /></Route>
-        <Route path={`/home`}><Home /></Route>
+        <Route exact path={`/home`}><Home /></Route>
         <Route exact path={`/`}><Home /></Route>
-        {/* <Route path={`/`}><MiniDrawer /></Route> */}
-        <Route path={`/new_auction`}><NewAuction /></Route>
+        <Route path={`/`}><MiniDrawer /></Route>
+
+        {/* //יירקתי בגלל הדרוואר */}
+        {/* <Route path={`/auction`} ><Auction /></Route> 
+         <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/continue_new_auction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
         <Route path={`/your_profile`}><YourProfile /></Route>
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
         <Route path={`/shoppingCart`}><CartAll /></Route>
-        <Route path={`/Statistics`}><Statistics/></Route>
+        <Route path={`/statistics`}><Statistics/></Route> */}
+        
       </Switch>
+      
     </Router >
   );
 }

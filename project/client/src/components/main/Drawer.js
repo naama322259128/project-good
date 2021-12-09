@@ -9,6 +9,13 @@ import UpdateDetails from '../user/UpdateDetails';
 import React, { useEffect } from "react";
 import ContinueNewAuction from '../new auction/ContinueNewAuction';
 import { connect } from "react-redux";
+import Statistics from './Statistics';
+import CartAll from '../user/CartAll';
+import { setLogin } from '../../store/actions/home';
+import { setNewAuction } from '../../store/actions/newAuction';
+import { createNewAuctionInDB } from '../../utils/newAuctionUtils';
+import { Link } from 'react-router-dom';
+import Login from '../user/Login';
 
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -28,6 +35,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+
+import './Drawer.scss'
 
 const drawerWidth = 240;
 
@@ -95,8 +104,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
   }),
 );
-
- function MiniDrawer() {
+const MyLinkInList = ({ text, icon }) => {
+  return (
+    <ListItem button>
+      <ListItemIcon className="links-icons">
+        <InboxIcon />
+      </ListItemIcon>
+      <ListItemText primary={text} />
+    </ListItem>)
+}
+export const MiniDrawer = (props) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -112,7 +129,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar id="drawer-top">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -125,9 +142,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
+          <Typography variant="h6" noWrap component="div" >Chinese auctions</Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -137,44 +152,41 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <List id="links-list">
+          <Link to={"/home"}><MyLinkInList text="HOME" /></Link>
+          <Link to={"/home"}><MyLinkInList text="AUCTIONS" /></Link>
+          <Link onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
+            if (succ.status != 400) {
+              props.setNewAuction(succ.data);
+              console.log(succ.data);
+            }
+          }) : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
+            <MyLinkInList text="BUILDING" />
+          </Link>
+          <Link to={"/statistics"} ><MyLinkInList text="STATISTICS" /></Link>
+          <Link to={"/about"} ><MyLinkInList text="ABOUT" /></Link>
+
+
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-      
+        {props.loginIsOpen ? <Login /> : null}
+
         <Router>
-      <Switch>
-        <Route path={`/auction`} ><Auction /></Route>
-        <Route path={`/new_auction`}><NewAuction /></Route>
-        <Route path={`/continue_new_auction`}><ContinueNewAuction /></Route>
-        <Route path={`/about`}><About /></Route>
-        <Route path={`/your_profile`}><YourProfile /></Route>
-        <Route path={`/update_your_details`}><UpdateDetails /></Route>
-        <Route path={`/shoppingCart`}><Home /></Route>
-      </Switch>
-    </Router >
+          <Switch>
+            <Route path={`/auction`} ><Auction /></Route>
+            <Route path={`/new_auction`}><NewAuction /></Route>
+            <Route path={`/continue_new_auction`}><ContinueNewAuction /></Route>
+            <Route path={`/about`}><About /></Route>
+            <Route path={`/your_profile`}><YourProfile /></Route>
+            <Route path={`/update_your_details`}><UpdateDetails /></Route>
+            <Route path={`/shoppingCart`}><CartAll /></Route>
+            <Route path={`/statistics`}><Statistics /></Route>
+          </Switch>
+        </Router >
       </Box>
-    </Box>
+    </Box >
   );
 }
 
@@ -191,7 +203,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    loginIsOpen: state.user.loginIsOpen
+
   };
 }
-export default connect(mapStateToProps, {  })(MiniDrawer);
+export default connect(mapStateToProps, { setLogin, setNewAuction })(MiniDrawer);

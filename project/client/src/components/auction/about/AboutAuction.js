@@ -77,7 +77,6 @@ const AboutAuction = (props) => {
       <br />
       
     </main>
-    <SmallFooter />
 
   </>);
 }

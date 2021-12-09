@@ -132,7 +132,7 @@ const NewAuction = (props) => {
         </div>
     </div>
 
-        <footer id="new_auction_footer" />
+        {/* <footer id="new_auction_footer" /> */}
     </>
     )
 }

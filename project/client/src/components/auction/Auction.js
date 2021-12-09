@@ -13,7 +13,6 @@ const Auction = (props) => {
 
 
     return (<>
-        <SmallHeader />
         <br />
 
         <Switch>
@@ -22,7 +21,6 @@ const Auction = (props) => {
             <Route path={`/auction`}><CurrentAuction /></Route>
         </Switch>
 
-        <SmallFooter />
     </>
     );
 }

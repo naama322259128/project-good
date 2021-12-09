@@ -124,7 +124,6 @@ const About = (props) => {
     <br />
     <br />
     <br />
-    <SmallFooter />
   </>);
 }
 
