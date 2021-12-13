@@ -50,6 +50,7 @@ const HomeHeader = (props) => {
           you will create your Chinese auction.
         </p>
 
+        {/* לשנות את הכפתור ללינק */}
         <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
 
         <Link
@@ -59,7 +60,7 @@ const HomeHeader = (props) => {
               () => {
                 createNewAuctionInDB(props.currentUser._id).then(succ => {
                   if (succ.status != 400) {
-                    localStorage.setItem("newAuction",succ.data._id)
+                    localStorage.setItem("newAuction", succ.data._id)
                     props.setNewAuction(succ.data);
                   }
                 })

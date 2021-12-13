@@ -68,6 +68,7 @@ const AddPackageForm = (props) => {
             <div>{gifts && gifts.map((gi, index) => {
                 return (<div style={{ display: "inline-block", marginRight: "1.5vw", marginTop: "1.2vh" }}>
                     <input type="text"
+                        value={gi} 
                         style={{ width: '6vw', height: '2vh', fontSize: '1.8vh' }}
                         onChange={(e) => {
                             let g = gifts; g[index] = e.target.value; setGifts([...g]);
@@ -77,10 +78,11 @@ const AddPackageForm = (props) => {
                         onClick={() => {
                             //TODO למה לא מוחק את הנכון
                             let g = gifts;
-                            let ind = g.indexOf(gi);
-                            if (ind > -1) { g.splice(ind, 1); }
-                            console.log(gifts);
-                            setGifts([...g]);
+                            console.log(g);
+                            g.splice(index, 1);
+                            console.log(index);
+                            console.log(g);
+                            setGifts(g);
                         }}
                         title="Delete" > <img className="my_icon small_delete_icon" src={de} />
                     </button >

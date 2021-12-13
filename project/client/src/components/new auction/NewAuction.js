@@ -120,7 +120,7 @@ const NewAuction = (props) => {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={activeStep === steps.length ? history.push("/home") : handleNext}
+                            onClick={activeStep === steps.length ? window.location="http://localhost:3000/home" : handleNext}
 
                             className={classes.button}
                         >

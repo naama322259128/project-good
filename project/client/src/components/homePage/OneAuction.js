@@ -61,8 +61,8 @@ const useStyles = makeStyles((theme) => ({
     right: 20,
     top: 10,
     bottom: 10,
-    // backgroundColor: theme.palette.common.black,
-    // opacity:0.6,
+    backgroundColor: theme.palette.common.black,
+    opacity:0.4,
     transition: theme.transitions.create('opacity'),
   },
   //הכיתוב

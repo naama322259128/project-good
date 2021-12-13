@@ -28,16 +28,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AuctionInformation = (props) => {
-    let submit = (data, e) => {
-        e.preventDefault();
+    let submit = () => {
+        //e.preventDefault();
 
         let details = {
-            registrationStartDate: data.registrationStartDate,
-            lotteriesDate: data.lotteriesDate,
-            registrationEndDate: data.registrationEndDate,
-            lotteryApproval: data.lotteryApproval,
-            publicationApproval: data.publicationApproval,
-            name: data.name || "unknown"
+            // registrationStartDate: data.registrationStartDate,
+            lotteriesDate:selectedDate1,
+            // registrationEndDate: data.registrationEndDate,
+            // lotteryApproval: data.lotteryApproval,
+            // publicationApproval: data.publicationApproval,
+            // name: data.name || "unknown"
         }
 
         saveAuctionInformationInDB(props.auctionId, details).then(succ => {
@@ -69,7 +69,8 @@ const AuctionInformation = (props) => {
     const [selectedDate2, setSelectedDate2] = React.useState(new Date());//start
     const [selectedDate3, setSelectedDate3] = React.useState(new Date());//end
 
-    return (<form className={classes.root} noValidate autoComplete="off" onSubmit={submit2} /*onSubmit={handleSubmit(submit)}*/>
+    return (
+    <><form className={classes.root} noValidate autoComplete="off"  /*onSubmit={handleSubmit(submit)}*/>
         <h1>Auction information</h1>
         <div className={"inputs-in-form-container"} >
             <TextField className="txt" type="number" variant="standard"{...register('name', { required: true })} id="input-with-icon-grid" label="Auction name" />
@@ -89,7 +90,7 @@ const AuctionInformation = (props) => {
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
                     }}
-                // {...register('lotteriesDate', { required: true })} id="input-with-icon-grid" label="Date of the lottery"
+            //    {...register('lotteriesDate', { required: true })} id="input-with-icon-grid" label="Date of the lottery"
                 />
 
             </MuiPickersUtilsProvider>
@@ -139,6 +140,7 @@ const AuctionInformation = (props) => {
                 className={classes.button}
                 startIcon={<CloudUploadIcon />}
                 {...register('terms', { required: false })}
+                
             >
                 Upload Terms
             </Button>
@@ -148,8 +150,12 @@ const AuctionInformation = (props) => {
             <FormControlLabel control={<Checkbox  {...register('lotteryApproval', { required: false })} />} label="Lottery approval" />
         </div>
 
-        <button type="submit" className="positive ui button">Save</button>
-    </form >);
+    </form >
+     <button onClick={submit}  className="positive ui button">Save</button>
+     </>
+    );
+   
+
     //submit!!!!
     //לבדוק שהתאריכים תקינים
     //סיום ההרשמה ולפני ביצוע ההגרלות
