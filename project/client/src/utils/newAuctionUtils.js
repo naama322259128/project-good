@@ -25,13 +25,26 @@ export const deleteProductFromDB = (a_id, product_id) => {
 export const saveOrganizationInformationInDB = (_id, d) => {
     return axios.post(`http://localhost:5000/auctions/setOrganizationInformation/${_id}`, d)
 }
-
+/*      publicationApproval
+        lotteryApproval
+*/
 
 //מידע על המכירה
+export const savePublicationApprovalInDB = (_id, b) => {
+    return axios.post(`http://localhost:5000/auctions/setPublicationApproval/${_id}&${b}`);
+}
+export const saveLotteryApprovalInDB = (_id, b) => {
+    return axios.post(`http://localhost:5000/auctions/setLotteryApproval/${_id}&${b}`);
+}
 export const saveAuctionInformationInDB = (_id, details) => {
     return axios.post(`http://localhost:5000/auctions/setAuctionInformation/${_id}`, details);
-
 }
+
+
+
+/*registrationStartDate: { type: Date },   //תאריך התחלה
+    lotteriesDate: Date,   //תאריך ביצוע ההגרלות
+    registrationEndDate: */
 
 export const saveApprovalAuctionInDB = (a_id, status) => {
     return axios.put(`http://localhost:5000/auctions/approvalAuction/${a_id}&${status}`);

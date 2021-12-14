@@ -36,11 +36,9 @@ const About = (props) => {
     }
   }
   return (<>
-    <SmallHeader />
+    {/* <SmallHeader /> */}
     <center>
       <img src={p} id="logo-about" />
-      {/* <h1>About Us</h1> */}
-
       <div id="txt-about">
         <br />
         <h3>  Building Chinese auctions, And a database of all auctions built.
@@ -66,7 +64,7 @@ const About = (props) => {
               console.log(succ.data);
             }
           })
-            : props.setLogin(true)}>Click here!</Link>
+            : () => props.setLogin(true)}>Click here!</Link>
       </div>
 
       <h2>Building a Chinese auction:</h2>

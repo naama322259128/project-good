@@ -13,3 +13,7 @@ export const getpublicationApprovalAuctionsListFromDB = async () => {
 export const getAuctionWithWinnersFromDB = async (_id) => {
   return axios.get(`http://localhost:5000/auctions/getAuctionWithWinners/${_id}`);
 }
+
+export const deleteAuctionFromDB = async (_id) => {
+  return axios.delete(`http://localhost:5000/auctions/${_id}`);
+}

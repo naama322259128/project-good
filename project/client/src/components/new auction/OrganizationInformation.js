@@ -19,7 +19,6 @@ const OrganizationInformation = (props) => {
     }
     let submit = (data, e) => {
         e.preventDefault();
-        debugger;
         details.organizationName = data.organizationName;
         details.organizationText = data.organizationText;
         details.logo = imagePath;
@@ -31,7 +30,7 @@ const OrganizationInformation = (props) => {
         })
     }
     const { register, handleSubmit, formState: { errors } } = useForm();
-    useEffect(() => { });
+
     const [imagePath, setImagePath] = useState(props.auction.logo);
     const onChangeHandler = event => {
         const data = new FormData()
@@ -44,12 +43,12 @@ const OrganizationInformation = (props) => {
     }
     return (<form noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
         <div className={"inputs-in-form-container"}>
-            <TextField className="txt" variant="standard" defaultValue={props.auction.organizationName} {...register('organizationName', { required: true })} id="input-with-icon-grid" label="Organization Name" />
+            <TextField className="txt" variant="standard" defaultValue={props.auction.organizationName  } {...register('organizationName', {  required: false})} id="input-with-icon-grid" label="Organization Name" />
             <TextField
                 className="txt"
                 multiline
                 variant="standard"
-                defaultValue={props.auction.organizationText}
+                defaultValue={props.auction.organizationText  }
                 {...register('organizationText', { required: false })}
                 id="input-with-icon-grid"
                 label="Organization Text" />
@@ -81,26 +80,3 @@ const mapStateToProps = (state) => {
     };
 }
 export default connect(mapStateToProps, { setNewAuction })(OrganizationInformation);
-// {/* <form>
-//         {/* <TextField id="standard-basic" label="Dccc" /> */}
-
-
-//         <label> The organization name</label>
-//         <input type="text" onChange={(e) => details.organizationName = e.target.value} defaultValue={props.auction.organizationName} required={true} />
-
-//         <textarea defaultValue={props.auction.organizationText} onChange={(e) => details.organizationText = e.target.value}></textarea>
-
-//         <label>Upload photos of the organization</label>
-//         {/* לשמור תמונות שהוא מעלה */}
-//         <input type="button" value="upload photos" onChange={(e) => { details.organizationPhotos.push(e.target.value) }} />
-//         <br />
-//         <br />
-//         <br />
-//         <br />
-//         <input type="button" value="save organization information"
-//             onClick={() => saveOrganizationInformationInDB(props.auctionId, details).then(succ => {
-//                 console.log(succ.data);
-//                 if (succ.status != 400) props.setNewAuction(succ.data)
-//             })
-//             } />
-//     </form> */}

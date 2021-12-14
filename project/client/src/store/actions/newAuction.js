@@ -1,5 +1,11 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
+export const setMyAuctionsToSet = (arr) => {
+    return {
+        type: actionTypes.SET_MY_AUCTIONS_TO_SET,
+        payload: arr
+    }
+}
 export const showAddPackage = () => {
     return {
         type: actionTypes.SHOW_ADD_PACKAGE

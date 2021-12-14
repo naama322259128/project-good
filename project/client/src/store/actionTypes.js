@@ -16,6 +16,7 @@ export const SIGN_IN_OF_STATE = "SIGN_IN_OF_STATE"
 export const SET_WANT_CONTACT = "SET_WANT_CONTACT"//כדישנדע האם לגלול את דף האודות לתחתיתו
 
 /******************************************   NEW AUCTION   ****************************************************/
+export const SET_MY_AUCTIONS_TO_SET = "SET_MY_AUCTIONS_TO_SET"
 export const SET_NEW_AUCTION = "SET_NEW_AUCTION"
 export const SHOW_ADD_PACKAGE = "SHOW_ADD_PACKAGE";//AddPackage להראות את הקומפוננטה 
 export const ADD_PACKAGE = "ADD_PACKAGE";//

@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { connect } from "react-redux";
-import { setNewAuction } from '../../store/actions/newAuction'
+import { setMyAuctionsToSet } from '../../store/actions/newAuction'
 import { getUnapprovedAuctionsByUserFromDB } from '../../utils/auctionManagerUtils';
 import Row from './ContinueNewAuctionRow'
 
@@ -30,11 +30,10 @@ const createData = (auction) => {
 
 const ContinueNewAuction = (props) => {
 
-    const [auctionsList, setAuctionsList] = useState([]);//המכירות שלו שעדיין לא אושרו לתצוגה
-
     useEffect(() => {
+        //TODO
         getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => {
-            if (succ.status != 400) { setAuctionsList(succ.data); }
+            if (succ.status != 400) { props.setMyAuctionsToSet(succ.data); }
         });
     }, []);
 
@@ -44,16 +43,17 @@ const ContinueNewAuction = (props) => {
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
-                            <TableCell /> {/* האייקון של פתח/סגור */}
-                            <TableCell>Chiense auction name</TableCell>
-                            <TableCell align="right">Products</TableCell>
-                            <TableCell align="right">Purchase packages</TableCell>
-                            <TableCell align="right">Lotteries date</TableCell>
-                            <TableCell /> {/* האייקון של המשך מכירה זו */}
+                            <TableCell align="left" /> {/* האייקון של פתח/סגור */}
+                            <TableCell align="left"><b>Chiense auction name</b></TableCell>
+                            <TableCell align="left"><b>Products</b></TableCell>
+                            <TableCell align="left"><b>Purchase packages</b></TableCell>
+                            <TableCell align="left"><b>Lotteries date</b></TableCell>
+                            <TableCell align="left"><b>Delete</b></TableCell> {/* האייקון של מחק מכירה זו */}
+                            <TableCell align="left"><b>Continue</b></TableCell> {/* האייקון של המשך מכירה זו */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {auctionsList.map((a) => {
+                        {props.myAuctionsToSet.map((a) => {
                             let row = createData(a);
                             return <Row key={row.name} row={row} auction={a} />
                         })}
@@ -65,7 +65,8 @@ const ContinueNewAuction = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user.currentUser
+        currentUser: state.user.currentUser,
+        myAuctionsToSet: state.user.myAuctionsToSet
     };
 }
-export default connect(mapStateToProps, {})(ContinueNewAuction);
+export default connect(mapStateToProps, { setMyAuctionsToSet })(ContinueNewAuction);

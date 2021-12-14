@@ -38,7 +38,8 @@ const HomeHeader = (props) => {
         : <Button type="button" className="btn" id="btnLogin"
           onClick={() => props.setLogin(true)}>Login</Button>}
 
-      {props.loginIsOpen ? <Login /> : null}
+      {/* //יירקתי בגלל הדרוואר */}
+      {/* {props.loginIsOpen ? <Login /> : null} */}
 
       <div id="home_text">
         <h3>Build your </h3>
@@ -50,8 +51,7 @@ const HomeHeader = (props) => {
           you will create your Chinese auction.
         </p>
 
-        {/* לשנות את הכפתור ללינק */}
-        <Button type="button" className="btn" id="btnMoreInfo" href="/about">MORE INFO</Button>
+        <Link to={"/about"}><Button type="button" className="btn" id="btnMoreInfo" >MORE INFO</Button></Link>
 
         <Link
           to={props.currentUser ? "/new_auction" : '#'}>
@@ -80,7 +80,7 @@ const HomeHeader = (props) => {
       <div id="right_pic" />
       <div id="left_pic" />
     </header>
-    {/* <SmallHeader /> */}
+    <SmallHeader />
   </>)
 }
 const mapStateToProps = state => {

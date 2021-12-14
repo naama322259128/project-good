@@ -29,7 +29,7 @@ const AboutAuction = (props) => {
   }
 
   return (<>
-    <SmallHeader />
+    {/* <SmallHeader /> */}
     <main>
 
       <h1>About Us</h1>

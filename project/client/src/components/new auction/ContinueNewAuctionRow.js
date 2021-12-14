@@ -11,9 +11,12 @@ import Typography from '@mui/material/Typography';
 import KeyboardArrowDownIcon from '../../img/icons/arrow-down.png';
 import KeyboardArrowUpIcon from '../../img/icons/arrow-up.png';
 import Continue from '../../img/icons/continue.png';
+import deleteSrc from '../../img/icons/dustbin.png';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { setNewAuction } from '../../store/actions/newAuction'
+import { setNewAuction, setMyAuctionsToSet } from '../../store/actions/newAuction'
+import { deleteAuctionFromDB } from '../../utils/auctionUtils'
+import { getUnapprovedAuctionsByUserFromDB } from '../../utils/auctionManagerUtils';
 
 const ContinueNewAuctionRow = (props) => {
     const { row } = props;
@@ -33,32 +36,46 @@ const ContinueNewAuctionRow = (props) => {
                             : <img className="view-details-icon" src={KeyboardArrowDownIcon} />}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell align="right">{row.productsQty}</TableCell>
-                <TableCell align="right">{row.purchasePackagesQty}</TableCell>
-                <TableCell align="right">{row.lotteriesDate}</TableCell>
-                <TableCell>
+                <TableCell align="left" component="th" scope="row">{row.name}</TableCell>
+                <TableCell align="left" component="th" scope="row">{row.productsQty}</TableCell>
+                <TableCell align="left" component="th" scope="row">{row.purchasePackagesQty}</TableCell>
+                <TableCell align="left" component="th" scope="row">{row.lotteriesDate}</TableCell>
+
+                <TableCell align="left" component="th" scope="row">
+                    <IconButton aria-label="expand row" size="small" onClick={() => deleteAuctionFromDB(props.auction._id).then(succ => {
+                        if (succ.status != 400) {
+
+                            getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => {
+                                if (succ.status != 400) { props.setMyAuctionsToSet(succ.data); }
+                            });
+                        }
+                    })}>
+                        <img className="view-details-icon" src={deleteSrc} />
+                    </IconButton>
+                </TableCell>
+
+                <TableCell align="left" component="th" scope="row">
                     <Link to={'/new_auction'}>
                         <IconButton aria-label="expand row" size="small" onClick={() => props.setNewAuction(props.auction)}>
                             <img className="view-details-icon" src={Continue} />
                         </IconButton>
                     </Link>
                 </TableCell>
+
             </TableRow>
+
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <br />
-                            <Typography variant="h6" gutterBottom component="div">
-                                Products
-                            </Typography>
+                            <Typography variant="h6" gutterBottom component="div">Products</Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
-                                    <TableRow>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell>Price</TableCell>
-                                    </TableRow>
+                                    {row.products.length > 0 ? (<TableRow>
+                                        <TableCell><b>Name</b></TableCell>
+                                        <TableCell><b>Price</b></TableCell>
+                                    </TableRow>) : <p>No Products</p>}
                                 </TableHead>
                                 <TableBody>
                                     {row.products.map((pro, index) => (
@@ -69,18 +86,19 @@ const ContinueNewAuctionRow = (props) => {
                                     ))}
                                 </TableBody>
                             </Table>
+
                             <br />
-                            <Typography variant="h6" gutterBottom component="div">
-                                Purchase packages
-                            </Typography>
+                            <br />
+
+                            <Typography variant="h6" gutterBottom component="div">Purchase packages</Typography>
                             <Table size="small" aria-label="purchases">
-                                <TableHead>
+                                {row.purchasePackages.length > 0 ? (<TableHead>
                                     <TableRow>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell>Tickets quantity</TableCell>
-                                        <TableCell>Discount percenrages</TableCell>
+                                        <TableCell><b>Name</b></TableCell>
+                                        <TableCell><b>Tickets quantity</b></TableCell>
+                                        <TableCell><b>Discount percenrages</b></TableCell>
                                     </TableRow>
-                                </TableHead>
+                                </TableHead>) : <p>No purchase Packages</p>}
                                 <TableBody>
                                     {row.purchasePackages.map((pu, index) => (
                                         <TableRow key={index}>
@@ -91,17 +109,20 @@ const ContinueNewAuctionRow = (props) => {
                                     ))}
                                 </TableBody>
                             </Table>
-                            <br />
+
                         </Box>
                     </Collapse>
                 </TableCell>
             </TableRow>
-        </React.Fragment>
+
+        </React.Fragment >
     );
 }
 
 const mapStateToProps = (state) => {
     return {
+        currentUser: state.user.currentUser,
+
     };
 }
-export default connect(mapStateToProps, { setNewAuction })(ContinueNewAuctionRow);
+export default connect(mapStateToProps, { setNewAuction, deleteAuctionFromDB, setMyAuctionsToSet })(ContinueNewAuctionRow);

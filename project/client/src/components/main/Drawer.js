@@ -153,8 +153,11 @@ export const MiniDrawer = (props) => {
         </DrawerHeader>
         <Divider />
         <List id="links-list">
+
           <Link to={"/home"}><MyLinkInList text="HOME" /></Link>
+
           <Link to={"/home"}><MyLinkInList text="AUCTIONS" /></Link>
+
           <Link onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) {
               props.setNewAuction(succ.data);
@@ -163,15 +166,15 @@ export const MiniDrawer = (props) => {
           }) : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
             <MyLinkInList text="BUILDING" />
           </Link>
-          <Link to={"/statistics"} ><MyLinkInList text="STATISTICS" /></Link>
-          <Link to={"/about"} ><MyLinkInList text="ABOUT" /></Link>
 
+          <Link to={"/statistics"} ><MyLinkInList text="STATISTICS" /></Link>
+
+          <Link to={"/about"} ><MyLinkInList text="ABOUT" /></Link>
 
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {props.loginIsOpen ? <Login /> : null}
 
         <Router>
           <Switch>
@@ -191,21 +194,9 @@ export const MiniDrawer = (props) => {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 const mapStateToProps = (state) => {
   return {
     currentUser: state.user.currentUser,
-    loginIsOpen: state.user.loginIsOpen
-
   };
 }
 export default connect(mapStateToProps, { setLogin, setNewAuction })(MiniDrawer);

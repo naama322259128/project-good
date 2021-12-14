@@ -97,6 +97,7 @@ const addOrganizationInformation = async (req, res) => {
 const addAuctionInformation = async (req, res) => {
     let { a_id } = req.params;
     let details = req.body;
+    console.log(details)
     try {
         const filter = { _id: a_id };
         const update = {
@@ -394,15 +395,36 @@ const performLotteries = async (req, res) => {
     res.send(auction);
 }
 //מחזיר את המכירות שלא אושרו לתצוגה לפי משתמש
+//ומוחק את המכירות שאין בהם אף תוכן
 const getUnapprovedAuctionsByUser = async (req, res) => {
     let { _id } = req.params;//user id 
     let auctions = [];
     try {
         if (!mongoose.Types.ObjectId.isValid(_id))
             return res.status(404).send("Invalid ID number");
+
+        //מחיקת מכירות שלו שאין בהם נתונים
+        let x = await Auction.deleteMany({
+            "name": "",
+            "auctionManager": _id,
+            "registrationStartDate": null,   //תאריך התחלה
+            "lotteriesDate": null,   //תאריך ביצוע ההגרלות
+            "registrationEndDate": null,//תאריך סיום הרשמה
+            "purchasePackage": { $exists: true, $size: 0 },
+            "productList": { $exists: true, $size: 0 },
+            "lotteryApproval": false,
+            "organizationName": "",//
+            "organizationText": "",//
+            "organizationPhotos": { $exists: true, $size: 0 },
+            "terms": "",
+            "publicationApproval": false,
+            "logo": ""
+        });
+        console.log(x);
         auctions = await Auction.find({ "auctionManager": _id, "publicationApproval": 'false' });
         if (!auctions)
             return res.status(404).send("There is no auction with such an manager ID number");
+
     }
     catch (err) { return res.status(400).send(err.message) }
     return res.send(auctions);

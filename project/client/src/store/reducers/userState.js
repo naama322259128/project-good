@@ -5,7 +5,9 @@ export const initialState = {
     ordersList: [],//?
     shoppingCartOfCurrentAuction: [],
     wantContact: false,
-    shoppingCartAll: []
+    shoppingCartAll: [],
+    myAuctionsToSet:[]//המכירות שלו שעדיין לא אושרו לתצוגה
+
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -38,6 +40,12 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 shoppingCartOfCurrentAuction: action.payload
+            }
+        }    
+        case actionTypes.SET_MY_AUCTIONS_TO_SET: {
+            return {
+                ...state,
+                myAuctionsToSet: action.payload
             }
         }
         case actionTypes.SIGN_OUT:

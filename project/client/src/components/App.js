@@ -14,7 +14,7 @@ import { signIn } from '../store/actions/signIn';
 import MiniDrawer from '../components/main/Drawer'
 import Statistics from './main/Statistics';
 import CartAll from './user/CartAll';
-
+import Login from './user/Login';
 function App(props) {
 
   useEffect(() => {
@@ -28,14 +28,17 @@ function App(props) {
   return (
     //TODO: למה כשמגיעים לדף הבית מתוך דף אחר, הוא פותח לוגין
     // TODO: למחוק מהלוקל-סטורג' מיד שעוזבים את הקומפוננטה 
-    <Router>
-      <Switch>
-        <Route exact path={`/home`}><Home /></Route>
-        <Route exact path={`/`}><Home /></Route>
-        <Route path={`/`}><MiniDrawer /></Route>
+    <>
+      {props.loginIsOpen ? <Login /> : null}
+      <Router>
 
-        {/* //יירקתי בגלל הדרוואר */}
-        {/* <Route path={`/auction`} ><Auction /></Route> 
+        <Switch>
+          <Route exact path={`/home`}><Home /></Route>
+          <Route exact path={`/`}><Home /></Route>
+          <Route path={`/`}><MiniDrawer /></Route>
+
+          {/* //יירקתי בגלל הדרוואר */}
+          {/* <Route path={`/auction`} ><Auction /></Route> 
          <Route path={`/new_auction`}><NewAuction /></Route>
         <Route path={`/continue_new_auction`}><ContinueNewAuction /></Route>
         <Route path={`/about`}><About /></Route>
@@ -43,15 +46,17 @@ function App(props) {
         <Route path={`/update_your_details`}><UpdateDetails /></Route>
         <Route path={`/shoppingCart`}><CartAll /></Route>
         <Route path={`/statistics`}><Statistics/></Route> */}
-        
-      </Switch>
-      
-    </Router >
+
+        </Switch>
+
+      </Router ></>
   );
 }
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    loginIsOpen: state.user.loginIsOpen
+
   };
 }
 export default connect(mapStateToProps, { signIn })(App);

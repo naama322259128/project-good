@@ -37,8 +37,8 @@ const addUser = async (req, res) => {
             return res.status(400).send(err.message)
         }
     }
-
 }
+
 //עדכון משתמש
 const updateUser = async (req, res) => {
     let userBody = req.body;
