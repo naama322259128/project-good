@@ -7,9 +7,15 @@ import { getAuctionFromDB } from '../../store/actions/currentAuction'
 import de from '../../img/icons/dustbin.png'
 import IconButton from '@material-ui/core/IconButton';
 import OneAuction from '../homePage/OneAuction';
+import { setNewAuction } from '../../store/actions/newAuction';
+import { setCurrentAuction } from '../../store/actions/currentAuction';
+import { signIn } from '../../store/actions/signIn';
+import { dataUpdate } from '../../store/actions/user';
 const CartAll = (props) => {
 
     useEffect(() => {
+        //props.dataUpdate();
+
         getCartFromDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) setArray(succ.data);
         })
@@ -17,7 +23,7 @@ const CartAll = (props) => {
 
     const [array, setArray] = React.useState(null);
 
-    return (<div id="auctions-container">
+    return (<div id="a-container">
         {array && array.map((item) => {
             return (
                 <div> <Link
@@ -51,4 +57,4 @@ const mapStateToProps = state => {
         currentUser: state.user.currentUser
     }
 }
-export default connect(mapStateToProps, { getAuctionFromDB })(CartAll);
+export default connect(mapStateToProps, {  signIn, setCurrentAuction, setNewAuction, dataUpdate })(CartAll);

@@ -1,8 +1,9 @@
 #cart-products-container {
-    display: grid;
-    grid-template-columns: repeat(5, 5fr);
-    grid-gap: 1rem;
-    padding: 7vw;
+  display: grid;
+  grid-template-columns: repeat(5, 5fr);
+  grid-gap: 1rem;
+  padding-right: 12vw;
+  padding-left: 12vw;
   }
   
   .cart-product-in-list{

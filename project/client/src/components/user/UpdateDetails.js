@@ -1,7 +1,7 @@
 // import Stack from '@mui/material/Stack';
 import './yourProfile.scss'
 import { connect } from 'react-redux';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -17,7 +17,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 // import CloseIcon from '@mui/icons-material/Close';ד
-import { setCurrentUser } from '../../store/actions/user';
+import { dataUpdate, setCurrentUser } from '../../store/actions/user';
 const useStyles = makeStyles((theme) => (
     {
         margin: {
@@ -70,6 +70,7 @@ const UpdateDetails = (props) => {
         showPassword: false,
     });
 
+    //useEffect(() => { //props.dataUpdate(); })
 
     //עדכון משתמש קיים
     let password = props.currentUser.password;
@@ -302,7 +303,7 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser,
     };
 }
-export default connect(mapStateToProps, { setCurrentUser })(UpdateDetails);
+export default connect(mapStateToProps, { setCurrentUser,dataUpdate })(UpdateDetails);
 
 
 

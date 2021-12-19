@@ -18,12 +18,7 @@ import { signIn, loginGoogle } from '../../store/actions/signIn';
 import { setNewAuction } from '../../store/actions/newAuction'
 import { setCurrentUser } from '../../store/actions/user';
 import { useHistory } from "react-router-dom";
-// import { LoginFromStorage, GetDataFromStorage } from '../../store/actions/home';
-
-//TODO: בכל פעם שמתחיל מכירה חדשה למחוק את מה שיש סלוקלסטורג של מכירה חדשה
-//localStorage.removeItem("newAuction");
-//מהלינק ולא מהקומפוננטה הזו
-
+import { dataUpdate } from '../../store/actions/user'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,18 +52,7 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
-    useEffect(() => {
-
-        
-        //TODO in another place  !!!!!
-        // beManagerInDB(props.currentUser._id).then(succ => {
-        //     if (succ.status != 400) {
-        //         props.setCurrentUser(succ.data);
-        //         console.log(succ.data);
-        //     }
-        // });
-
-    }, [])
+    //useEffect(() => { //props.dataUpdate(); })
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -79,12 +63,17 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
+        if (activeStep == 2) alert("save Organization details")
+
         let newSkipped = skipped;
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
     };
 
-    const handleBack = () => { setActiveStep((prevActiveStep) => prevActiveStep - 1); }
+    const handleBack = () => {
+        if (activeStep == 2) alert("save Organization details")
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
 
     return (<><div id="newAuctionAllSteps" >
         <br />
@@ -120,8 +109,7 @@ const NewAuction = (props) => {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={activeStep === steps.length ? window.location="http://localhost:3000/home" : handleNext}
-
+                            onClick={activeStep === steps.length ? window.location = "http://localhost:3000/home" : handleNext}
                             className={classes.button}
                         >
                             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
@@ -146,5 +134,5 @@ const mapStateToProps = (state) => {
     };
 }
 export default connect(mapStateToProps, {
-    signIn, loginGoogle, setNewAuction, setCurrentUser
+    signIn, loginGoogle, setNewAuction, setCurrentUser,dataUpdate
 })(NewAuction);

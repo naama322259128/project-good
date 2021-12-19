@@ -9,17 +9,22 @@ import UpdateDetails from './user/UpdateDetails';
 import React, { useEffect } from "react";
 import ContinueNewAuction from './new auction/ContinueNewAuction';
 import { connect } from "react-redux";
-// import { LoginFromStorage, GetDataFromStorage } from '../store/actions/home';
+import { LoginFromStorage, GetDataFromStorage } from '../store/actions/home';
+import { getUserByIDFromDB } from '../utils/userUtils';
+import { getAuctionByIdFromDB } from '../utils/auctionUtils';
 import { signIn } from '../store/actions/signIn';
 import MiniDrawer from '../components/main/Drawer'
 import Statistics from './main/Statistics';
 import CartAll from './user/CartAll';
 import Login from './user/Login';
+import { setNewAuction } from '../store/actions/newAuction'
+import { setCurrentAuction } from '../store/actions/currentAuction'
+import {dataUpdate}from '../store/actions/user'
 function App(props) {
 
   useEffect(() => {
-    /*if (props.currentUser == null) props.LoginFromStorage();
-    if (props.newAuction == null) props.GetDataFromStorage();*/
+    //props.dataUpdate();
+
     window.addEventListener("dblclick", sodi)
   }, [])
 
@@ -51,6 +56,7 @@ function App(props) {
 
       </Router ></>
   );
+  
 }
 const mapStateToProps = (state) => {
   return {
@@ -59,4 +65,4 @@ const mapStateToProps = (state) => {
 
   };
 }
-export default connect(mapStateToProps, { signIn })(App);
+export default connect(mapStateToProps, { signIn, setCurrentAuction, setNewAuction,dataUpdate })(App);

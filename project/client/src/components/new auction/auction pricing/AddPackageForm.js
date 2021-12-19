@@ -25,38 +25,37 @@ const AddPackageForm = (props) => {
         else if (props.currentUser == null && localStorage.getItem("login") == "google")
             props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
     }, [])
-    const checkGifts = () => { if (gifts.indexOf("") == -1) return false; return true; }
+    // const checkGifts = () => { if (gifts.indexOf("") == -1) return false; return true; }
 
     const [gifts, setGifts] = useState([]);
 
-    let newPackage = {
-        name: "",
-        ticketsQuantity: 0,
-        discountPercenrages: 0,
-        // gifts:[]
-    }
+    // let newPackage = {
+    // name: "",
+    // ticketsQuantity: 0,
+    // discountPercenrages: 0,
+    // gifts:[]
+    // }
 
     let submit = (data, e) => {
         e.preventDefault();
-
+        let newPackage = {};
         newPackage.name = data.name;
         newPackage.ticketsQuantity = parseInt(data.ticketsQuantity);
         newPackage.discountPercenrages = parseInt(data.discountPercenrages);
-        //  newPackage.gifts=data.gifts;
 
         let goodGifts = [];
         for (var i = 0; i < gifts.length; i++)if (gifts[i] !== "") goodGifts.push(gifts[i]);
         newPackage.gifts = goodGifts;
-        debugger;
+
         addPackageToDB(props.newAuction._id, newPackage).then(
             succ => { if (succ.status != 400) props.addPackage(succ.data); })
     }
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     return (
-// noValidate
-        <form  autoComplete="off" onSubmit={handleSubmit(submit)}>
-            <div  className={"inputs-in-form-container"}>
+        // noValidate
+        <form autoComplete="off" onSubmit={handleSubmit(submit)}>
+            <div className={"inputs-in-form-container"}>
                 <TextField className="txt" type="number" variant="standard"  {...register('ticketsQuantity', { required: true })} id="input-with-icon-grid" label="Quantity of tickets" />
                 <TextField className="txt" type="number" variant="standard" InputProps={{ inputProps: { min: 2 } }}  {...register('discountPercenrages', { required: true })} id="input-with-icon-grid" label="Discount percentages" />
                 <TextField className="txt" variant="standard"  {...register('name', { required: true })} id="input-with-icon-grid" label="Package name" />
@@ -68,20 +67,16 @@ const AddPackageForm = (props) => {
             <div>{gifts && gifts.map((gi, index) => {
                 return (<div style={{ display: "inline-block", marginRight: "1.5vw", marginTop: "1.2vh" }}>
                     <input type="text"
-                        value={gi} 
+                        value={gi}
                         style={{ width: '6vw', height: '2vh', fontSize: '1.8vh' }}
                         onChange={(e) => {
-                            let g = gifts; g[index] = e.target.value; setGifts([...g]);
+                            let g = gifts; g[index] = e.target.value; setGifts([...g]); console.log(gifts);
                         }}
                         placeholder={"enter gift"} />
                     <button style={{ background: "none", border: "none", cursor: "pointer" }}
                         onClick={() => {
-                            //TODO למה לא מוחק את הנכון
                             let g = gifts;
-                            console.log(g);
                             g.splice(index, 1);
-                            console.log(index);
-                            console.log(g);
                             setGifts(g);
                         }}
                         title="Delete" > <img className="my_icon small_delete_icon" src={de} />

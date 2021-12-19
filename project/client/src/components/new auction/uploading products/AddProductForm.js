@@ -46,12 +46,6 @@ const AddProductForm = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
 
-    useEffect(() => {
-        /* if (props.currentUser == null) LoginFromStorage();
-         if (props.newAuction == null) GetDataFromStorage();*/
-    }, [])
-
-
     return (
         <form autoComplete="off" noValidate onSubmit={handleSubmit(submit)}>
             <div className={"inputs-in-form-container"}>

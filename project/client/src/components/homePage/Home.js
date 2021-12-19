@@ -4,25 +4,15 @@ import AuctionsList from './AuctionsList';
 import HomeFooter from './HomeFooter';
 import HomeHeader from './HomeHeader';
 import React, { useEffect } from "react";
+import { dataUpdate } from "../../store/actions/user";
 
 const Home = (props) => {
+  //useEffect(()=>{props.dataUpdate();})
   return (<>
     <HomeHeader />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
     <AuctionsList />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
     <HomeFooter />
   </>
   );
@@ -31,4 +21,4 @@ const mapStateToProps = state => {
   return {
   };
 }
-export default connect(mapStateToProps, {})(Home);
+export default connect(mapStateToProps, {dataUpdate})(Home);

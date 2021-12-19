@@ -2,10 +2,12 @@ import AddPackageForm from './AddPackageForm';
 import PackagesList from './PackagesList';
 import { connect } from "react-redux";
 import { showAddPackage } from "../../../store/actions/newAuction";
+import { useEffect } from 'react';
+import { dataUpdate } from '../../../store/actions/user';
 
 const AuctionPricing = (props) => {
     //חבילות
-
+    //useEffect(() => { //props.dataUpdate(); })
     return (<>
 
         <h1>Packages</h1>
@@ -19,7 +21,7 @@ const AuctionPricing = (props) => {
             <button className="positive ui button" onClick={props.showAddPackage}>Add new Package</button>}
 
         {props.showSetPackage && <AddPackageForm />}
-        {props.packagesList&&props.packagesList.length>0 &&<PackagesList />}
+        {props.packagesList && props.packagesList.length > 0 && <PackagesList />}
     </>);
 }
 
@@ -32,4 +34,4 @@ const mapStateToProps = state => {
 
     }
 }
-export default connect(mapStateToProps, { showAddPackage })(AuctionPricing);
+export default connect(mapStateToProps, { showAddPackage ,dataUpdate})(AuctionPricing);

@@ -22,6 +22,7 @@ export const getProductsInCartByAuctionIdFromDB = async (userId, auctionId) => {
     return axios.get(`http://localhost:5000/users/getProductsInCartByAuction/${userId}&${auctionId}`)
 }
 export const getCartFromDB = async (userId) => {
+    debugger;
     return axios.get(`http://localhost:5000/users/getCart/${userId}`)
 }
 

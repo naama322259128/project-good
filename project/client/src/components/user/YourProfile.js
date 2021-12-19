@@ -8,12 +8,13 @@ import EditAuction from './auction manager/EditAuction'
 import AuctionResults from './auction manager/AuctionResults'
 import AuctionStatistics from './auction manager/AuctionStatistics'
 import { connect } from 'react-redux';
+import { dataUpdate } from '../../store/actions/user';
 
 
 const YourProfile = (props) => {
 
     //TODO: לבדוק שהיוסר או הכרנט-יוסר לא אנדיפיינד
-    
+    useEffect(() => { dataUpdate(); })
     return (
         <Switch>
             <Route path={'/your_profile/edit_auction'}>{props.user.status === 'AUCTION_MANAGER' ? <EditAuction /> : null}</Route>

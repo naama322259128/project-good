@@ -1,22 +1,21 @@
 import { connect } from "react-redux";
 import ProductList from './ProductList';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import Timer from "./Timer";
 import './Auction.scss';
+import { dataUpdate } from "../../store/actions/user";
 
 const CurrentAuction = (props) => {
-
+    useEffect(() => {
+        //props.dataUpdate();
+    })
     return (<>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+
         <Link to={`/auction/cart`}><h1>Cart</h1></Link>
 
 
-        <Timer />
+        {/* <Timer /> */}
 
         <ProductList />
     </>);
@@ -26,5 +25,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {})(CurrentAuction);
+export default connect(mapStateToProps, {dataUpdate})(CurrentAuction);
 

@@ -2,34 +2,16 @@ import file from '../../../img/terms.pdf'
 import { connect } from "react-redux";
 import React, { useEffect } from 'react';
 import './about.scss'
-import SmallFooter from "../../main/SmallFooter";
-import SmallHeader from "../../main/SmallHeader";
 import AuctionTerms from "./AuctionTerms";
 import organizationPhotos from "./organizationPhotos";
-
+import { dataUpdate } from '../../../store/actions/user';
 
 const AboutAuction = (props) => {
   useEffect(() => {
-    window.addEventListener("scroll", changeHeader)
-    return () => {
-      window.removeEventListener('scroll', changeHeader);
-    };
+    //props.dataUpdate();
   }, []);
-  const changeHeader = () => {
-    let s = document.getElementById("small-header");
-    if (s != null) {
-      let height = 5
-      if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
-        if (s != null) s.style.top = "0";
-      } else {
-        if (s != null) s.style.top = "-500px";
-      }
-    }
-
-  }
 
   return (<>
-    {/* <SmallHeader /> */}
     <main>
 
       <h1>About Us</h1>
@@ -72,10 +54,10 @@ const AboutAuction = (props) => {
 
       <organizationPhotos />    {/* תמונות ארגון */}
       <br />
-      <br /> 
-        <br />
       <br />
-      
+      <br />
+      <br />
+
     </main>
 
   </>);
@@ -87,4 +69,4 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, {})(AboutAuction);
+export default connect(mapStateToProps, {dataUpdate})(AboutAuction);

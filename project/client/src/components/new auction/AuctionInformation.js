@@ -17,6 +17,7 @@ import Alert from '@mui/material/Alert';
 import { setNewAuction } from '../../store/actions/newAuction';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { dataUpdate } from '../../store/actions/user';
 //TODO שהתאריכים יהיו הגיוניים
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AuctionInformation = (props) => {
+
+    useEffect(() => {
+        //props.dataUpdate();
+    })
+
     let saveDetails = () => {
 
 
@@ -143,5 +149,5 @@ const mapStateToProps = (state) => {
         auction: state.auction.newAuction
     }
 }
-export default connect(mapStateToProps, { setNewAuction })(AuctionInformation);
+export default connect(mapStateToProps, { setNewAuction ,dataUpdate})(AuctionInformation);
 

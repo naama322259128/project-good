@@ -97,6 +97,7 @@ export const resetNewAuctionState = () => {
 }
 
 export const setNewAuction = (newAuction) => {
+    localStorage.setItem("newAuction", newAuction._id)
     return {
         type: actionTypes.SET_NEW_AUCTION,
         payload: newAuction

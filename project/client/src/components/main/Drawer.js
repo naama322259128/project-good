@@ -1,6 +1,6 @@
 import 'semantic-ui-css/semantic.min.css'
 import Home from '../homePage/Home';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
 import Auction from '../auction/Auction';
 import NewAuction from '../new auction/NewAuction';
 import About from './About'
@@ -16,7 +16,7 @@ import { setNewAuction } from '../../store/actions/newAuction';
 import { createNewAuctionInDB } from '../../utils/newAuctionUtils';
 import { Link } from 'react-router-dom';
 import Login from '../user/Login';
-
+import Timer from '../auction/Timer'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -35,9 +35,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
+import ProfileButton from '../user/ProfileButton';
+import Button from '@material-ui/core/Button';
 import './Drawer.scss'
-
+import YourOrders from '../user/YourOrders'
+import { dataUpdate } from '../../store/actions/user';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -105,6 +107,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 const MyLinkInList = ({ text, icon }) => {
+
   return (
     <ListItem button>
       <ListItemIcon className="links-icons">
@@ -114,6 +117,8 @@ const MyLinkInList = ({ text, icon }) => {
     </ListItem>)
 }
 export const MiniDrawer = (props) => {
+  //useEffect(() => { props.dataUpdate(); })
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -124,6 +129,7 @@ export const MiniDrawer = (props) => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const location = useLocation();
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -142,7 +148,9 @@ export const MiniDrawer = (props) => {
           >
             <MenuIcon />
           </IconButton>
+          {props.currentUser ? <ProfileButton /> : <Button type="button" id="btnLoginInDrower" onClick={() => props.setLogin(true)}>Login</Button>}
           <Typography variant="h6" noWrap component="div" >Chinese auctions</Typography>
+          {location.pathname == '/auction' && <Timer />}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -159,10 +167,7 @@ export const MiniDrawer = (props) => {
           <Link to={"/home"}><MyLinkInList text="AUCTIONS" /></Link>
 
           <Link onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
-            if (succ.status != 400) {
-              props.setNewAuction(succ.data);
-              console.log(succ.data);
-            }
+            if (succ.status != 400) props.setNewAuction(succ.data);
           }) : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
             <MyLinkInList text="BUILDING" />
           </Link>
@@ -185,6 +190,7 @@ export const MiniDrawer = (props) => {
             <Route path={`/your_profile`}><YourProfile /></Route>
             <Route path={`/update_your_details`}><UpdateDetails /></Route>
             <Route path={`/shoppingCart`}><CartAll /></Route>
+            <Route path={`/orders`}><YourOrders /></Route>
             <Route path={`/statistics`}><Statistics /></Route>
           </Switch>
         </Router >
@@ -199,4 +205,4 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser,
   };
 }
-export default connect(mapStateToProps, { setLogin, setNewAuction })(MiniDrawer);
+export default connect(mapStateToProps, { setLogin, setNewAuction,dataUpdate })(MiniDrawer);

@@ -170,8 +170,11 @@
 
 #auctions-container{
   display: grid;
-  grid-template-columns: repeat(3, 5fr);
-  grid-gap: 1rem;
+  grid-template-columns: repeat(3, 25fr) !important;
+  grid-gap: 2vh;
   width: 100vw;
-  padding: 3vw;
+  padding-right: 11vw;
+  padding-left: 11vw;
+  margin-top: 7vh;
+  margin-bottom: 7vh;
 }

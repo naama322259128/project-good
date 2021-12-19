@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { setMyAuctionsToSet } from '../../store/actions/newAuction'
 import { getUnapprovedAuctionsByUserFromDB } from '../../utils/auctionManagerUtils';
 import Row from './ContinueNewAuctionRow'
+import { dataUpdate } from '../../store/actions/user';
 
 const createData = (auction) => {
     let name = auction.name;
@@ -31,7 +32,7 @@ const createData = (auction) => {
 const ContinueNewAuction = (props) => {
 
     useEffect(() => {
-        //TODO
+        //props.dataUpdate();
         getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) { props.setMyAuctionsToSet(succ.data); }
         });
@@ -39,7 +40,7 @@ const ContinueNewAuction = (props) => {
 
     return (
         <>
-            <TableContainer component={Paper} id={"unapproved-auctions-list"}>
+            {props.myAuctionsToSet && props.myAuctionsToSet.length > 0 ? <TableContainer component={Paper} id={"unapproved-auctions-list"}>
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
@@ -59,7 +60,8 @@ const ContinueNewAuction = (props) => {
                         })}
                     </TableBody>
                 </Table>
-            </TableContainer></>
+            </TableContainer> : <h1>You have no Chinese auctions that you are in the middle of building.</h1>}
+        </>
     );
 }
 
@@ -69,4 +71,4 @@ const mapStateToProps = (state) => {
         myAuctionsToSet: state.user.myAuctionsToSet
     };
 }
-export default connect(mapStateToProps, { setMyAuctionsToSet })(ContinueNewAuction);
+export default connect(mapStateToProps, { setMyAuctionsToSet,dataUpdate })(ContinueNewAuction);

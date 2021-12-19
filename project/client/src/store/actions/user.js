@@ -1,5 +1,8 @@
 import * as actionTypes from '../actionTypes';
 import axios from 'axios';
+import { signIn } from './signIn';
+import { setCurrentAuction } from './currentAuction';
+import { setNewAuction } from './newAuction';
 
 export const setCurrentUser = (user) => {
     return {
@@ -7,9 +10,9 @@ export const setCurrentUser = (user) => {
         payload: user
     }
 }
-export const setWantContact=(b)=>{
+export const setWantContact = (b) => {
     debugger;
-     return {
+    return {
         type: actionTypes.SET_WANT_CONTACT,
         payload: b
     }
@@ -33,24 +36,29 @@ export const getOrderByIdFromDB = (order) => {
         })
     }
 }
+export const dataUpdate = () => {
+    let id = localStorage.getItem("user");
+    let a_id = localStorage.getItem("currentAuction");
+    let n_a_id = localStorage.getItem("newAuction");
 
+    //TODO:
+    // if (props.currentUser == null && id) {
 
-// export const addProductToCart = (cnt, product) => {
-//     return {
-//         type: actionTypes.ADD_PRODUCT_TO_CART,
-//         payload: {
-//             cnt: cnt,
-//             product: product
-//         }
-//     }
-// }
+    if (id) axios.get(`http://localhost:5000/users/${id}`).
+        then(succ => { if (succ.status != 400) signIn(succ.data.password, succ.data.email) });
+
+    if (a_id) axios.get(`http://localhost:5000/auctions/${a_id}`).
+        then(succ => { if (succ.status != 400) setCurrentAuction(succ.data) });
+
+    if (n_a_id) axios.get(`http://localhost:5000/auctions/${n_a_id}`).
+        then(succ => { if (succ.status != 400) setNewAuction(succ.data) });
+
+    return { a: 1 }
+    // }
+}
 
 export const signOut = () => {
-    //TODO מה עושה אם אני אומרת לו למחוק אייטם שלא קיים
-    localStorage.setItem("login", "false");
-    localStorage.removeItem("pass");
-    localStorage.removeItem("email");
-    localStorage.removeItem("name");
+    localStorage.removeItem("user")
     return {
         type: actionTypes.SIGN_OUT
     }
@@ -62,15 +70,3 @@ export const updateShoppingCart = (arr) => {
         payload: arr
     }
 }
-
-// export const deleteProductFromCart = (_id) => {
-//     return {
-//         type: actionTypes.DELETE_PRODUCT_FROM_CART,
-//         payload: _id
-//     }
-// }
-
-
-
-
-

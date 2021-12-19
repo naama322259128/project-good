@@ -12,6 +12,7 @@ import './yourProfile.scss'
 import OrderOptions from './OrderOptions';
 import moment from 'moment'
 import { getUserOrdersListFromDB } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
+import { dataUpdate } from '../../store/actions/user';
 
 const UserTable = (props) => {
     const columns = [
@@ -55,6 +56,7 @@ const UserTable = (props) => {
         return { name: n, orderDate: d, sum: sum, options };
     }
     useEffect(() => {
+        //props.dataUpdate();
         getUserOrdersListFromDB(props.user._id).then(succ => {
             if (succ.status != 400) {
                 let arr = [];
@@ -131,4 +133,4 @@ const mapStateToProps = (state) => {
         orders: state.user.ordersList
     };
 }
-export default connect(mapStateToProps, {})(UserTable);
+export default connect(mapStateToProps, {dataUpdate})(UserTable);

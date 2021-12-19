@@ -219,20 +219,30 @@ const getCart = async (req, res) => {
         return res.status(404).send("Invalid ID number");
 
 
+
     let user = await User.findById(userId).populate([
-        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }, "shoppingCart.auctionId"]);
+        { path: "shoppingCart.productId", select: `name image description price includedInPackages` },
+        "shoppingCart.auctionId"
+    ]);
+    if (!user) return res.send(null);
+
+
+    //מחיקת כל המוצרים שבסל, אם התאריך האחורן להרשמה של המכירה לה הם שייכים, כבר עבר
+    let arr = user.shoppingCart.filter(item => new Date(item.auctionId.registrationEndDate).valueOf() > new Date().valueOf())
+    user.shoppingCart = arr;
+    await user.save();
 
     let tmp = user.shoppingCart;
 
-    //רשימה יחודית של מכירות מהסל
+    //רשימה יחודית של קודי מכירות מהסל
     let uniq = tmp.map(item => item.auctionId._id).filter((value, index, self) => self.indexOf(value) === index);
     let toReturn = [];
 
     uniq.map(item => {
-        let byAuction = tmp.filter(l => l.auctionId._id.toString() == item.toString());//כל המוצרים בסל ששיכים למכירה הזו
+        let productsByAuction = tmp.filter(l => l.auctionId._id.toString() == item.toString());//כל המוצרים בסל ששיכים למכירה הזו
         let sum = 0;
-        byAuction.map(item => { sum += (parseInt(item.productId.price) * parseInt(item.qty)) });
-        toReturn.push({ sum, auction: byAuction[0].auctionId });//נכניס למערך את פרטי מכירה, ואת הסכום של הכרטיסים
+        productsByAuction.map(item => { if (item.productId != null) sum += (parseInt(item.productId.price) * parseInt(item.qty)) });
+        toReturn.push({ sum, auction: productsByAuction[0].auctionId });//נכניס למערך את פרטי מכירה, ואת המחיר
     })
 
     return res.send(toReturn);

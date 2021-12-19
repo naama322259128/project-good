@@ -13,6 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import de from '../../../img/icons/dustbin.png'
 import '../NewAuction.scss'
+import { dataUpdate } from "../../../store/actions/user";
 const useStyles = makeStyles({
     root: { width: '80%', },
     container: { maxHeight: 440, }
@@ -23,7 +24,7 @@ const ProductsList = (props) => {
         props.productsList && props.productsList.map((p) => { arr.push(createData(p)) });
         setRows(arr);
     }, [props.productsList])
-
+  //  useEffect(() => { //props.dataUpdate(); })
 
     const columns = [
         { id: 'name', label: 'Name', minWidth: 130 },
@@ -72,7 +73,7 @@ const ProductsList = (props) => {
             }}
             title="Delete" > <img className="my_icon" src={de} />
         </IconButton >
-        const img = pro.image ? <img src={pro.image} style={{width:'auto',height:'auto',maxWidth:'7vw',maxHeight:'6vh'}}/> : "";
+        const img = pro.image ? <img src={pro.image} style={{ width: 'auto', height: 'auto', maxWidth: '7vw', maxHeight: '6vh' }} /> : "";
         return { name: pro.name, description: pro.description, includedInPackages: pro.includedInPackages.toString(), price: pro.price, img, del };
     }
 
@@ -125,4 +126,4 @@ const myMapStateToProps = (state) => {
         productsList: state.auction.newAuction.productList
     }
 }
-export default connect(myMapStateToProps, { deleteProduct })(ProductsList);
+export default connect(myMapStateToProps, { deleteProduct,dataUpdate })(ProductsList);

@@ -74,6 +74,7 @@ const SignUp = (props) => {
         showPassword: false,
     });
 
+    // 
 
     const [newUser, setNewUser] = useState({ password: "", userName: "", email: "", phone: "", birthYear: "", city: "", confidentiality: false })
 
@@ -81,7 +82,10 @@ const SignUp = (props) => {
         let addNewUser = new User(newUser);
         console.log(addNewUser)
         addUserToDB(addNewUser).then(succ => {
-            props.setCurrentUser(succ.data);
+            if (succ.status != 400) {
+                localStorage.setItem("user", succ.data._id)
+                props.setCurrentUser(succ.data);
+            }
         });
     };
     const handleChange = e => {
@@ -214,10 +218,9 @@ const SignUp = (props) => {
 
 const mapStateToProps = state => {
     return {
-       
+
     }
-  }
-  export default connect(mapStateToProps, { setCurrentUser })(SignUp);
-  
-  
-  
+}
+export default connect(mapStateToProps, { setCurrentUser })(SignUp);
+
+

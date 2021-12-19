@@ -1,5 +1,5 @@
 /**************************************header************************************/
-#small-header{
+#small-header {
     background-color: #ffffff;
     box-shadow: 0px 0px 2px 0px #666666;
     position: fixed;
@@ -12,50 +12,47 @@
 }
 
 #login_btn_small_header {
-    cursor: pointer;  
+    cursor: pointer;
     right: 3.6vw !important;
-    z-index:26;
+    z-index: 26;
     top: 1.8vh;
 }
-#logo_home_small_header{
-  background-image: url('../../img/logo_blue_orange.webp');
-  background-size: 100%;
-  background-repeat: no-repeat;
-  display: inline-block;
-  cursor: pointer;
-  height:5vh !important;
-  width: 10vw !important;
-  margin-left: 3.6vw !important;
-z-index:26;
-margin-top: 1.4vh;
+#logo_home_small_header {
+    background-image: url("../../img/logo_blue_orange.webp");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    cursor: pointer;
+    height: 5vh !important;
+    width: 10vw !important;
+    margin-left: 3.6vw !important;
+    z-index: 26;
+    margin-top: 1.4vh;
 }
 /*************************************main*************************************/
-#logo-about{
-width: 28vw;
-height: auto;
-margin-top: 10vh;
+#logo-about {
+    width: 28vw;
+    height: auto;
+    margin-top: 10vh;
 }
-#txt-about{
+#txt-about {
     width: 67vw;
     margin-top: 2vh;
     text-align: left !important;
 }
-#build-video{
+#build-video {
     margin-top: 3vh;
-    margin-bottom: 2vh;  
-
+    margin-bottom: 2vh;
 }
-#build-video[poster]{
-
+#build-video[poster] {
 }
-#all-steps{
+#all-steps {
     //כל השלבים בפנים
     width: 70%;
-    margin-top:8vh;
+    margin-top: 8vh;
     text-align: left !important;
-
 }
-.one-step{
+.one-step {
     //שלב אחד ביצירת מכירה
     width: 100%;
     height: 42vh;
@@ -64,42 +61,40 @@ margin-top: 10vh;
     grid-column-gap: 0.2vw;
     grid-row-gap: 1vw;
     margin-bottom: 2vh;
-
 }
-div.one-step div{   
-    
+div.one-step div {
     display: flex;
     // justify-content: center;//האמצע מימין ושמאל
     // align-items: center;//האמצע מלמעלה ולמטה
     padding: 20px;
     line-height: 1;
     font-weight: 200;
-    transition: all .3s ease;
-}    
-div.one-step h3{   
-    margin-bottom:3vh;
+    transition: all 0.3s ease;
+}
+div.one-step h3 {
+    margin-bottom: 3vh;
 }
 /*************************************footer*************************************/
-#small-footer{
-    background-image: url('../../img/smallfooter.webp');
-   background-size: 100%;
-   height:22vh;
-   background-repeat: no-repeat;
-   width: 100vw;
-   position: relative;
- }
-#logo_in_footer{
-   background-image: url('../../img/logo_blue_orange.webp');
-   background-size: 100%;
-   background-repeat: no-repeat;
-   position: absolute;
-   height: 10vh;
-   width: 20vw;
-   display: inline-block;
-   top: 27%;
-   right: 10%;
-} 
-#copy-right-icon{
+#small-footer {
+    background-image: url("../../img/smallfooter.webp");
+    background-size: 100%;
+    height: 22vh;
+    background-repeat: no-repeat;
+    width: 100vw;
+    position: relative;
+}
+#logo_in_footer {
+    background-image: url("../../img/logo_blue_orange.webp");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 10vh;
+    width: 20vw;
+    display: inline-block;
+    top: 27%;
+    right: 10%;
+}
+#copy-right-icon {
     fill: currentColor;
     width: 1em;
     height: 1em;
@@ -112,7 +107,7 @@ div.one-step h3{
     margin-right: 0.08vw;
 }
 
-#made{
+#made {
     position: absolute;
     bottom: 3.2vh;
     left: 70%;
@@ -127,32 +122,27 @@ div.one-step h3{
     // margin-left: 10vw;
     // margin-bottom: 20vh;
 }
-  #contactForm {
+#contactForm {
     border: 1px solid lightgray;
     border-radius: 10px;
     padding: 20px;
     // margin:0vh !important;
+}
+/**************************************************************************/
 
-  }
-  /**************************************************************************/
-
-
-  .inputs-in-contact-form-container{
+.inputs-in-contact-form-container {
     display: grid;
     grid-template-columns: repeat(2, 5fr);
     grid-gap: 1rem;
-margin-bottom: 5vh;
+    margin-bottom: 5vh;
 }
-
-#contact-form .MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-multiline.css-5xn5lu-MuiInputBase-root-MuiInput-root
-{ width: 62vw !important;
-
-}
-
-
 
 #contact-form
-{
+    .MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-multiline.css-5xn5lu-MuiInputBase-root-MuiInput-root {
+    width: 62vw !important;
+}
+
+#contact-form {
     border-radius: 5px;
     padding-top: 4vh;
     padding-bottom: 4vh;
@@ -161,11 +151,23 @@ margin-bottom: 5vh;
     margin-top: 10vh;
     margin-bottom: 10vh;
 
-    -moz-box-shadow:    3px 3px 5px 6px #ccc;
+    -moz-box-shadow: 3px 3px 5px 6px #ccc;
     -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-    box-shadow:         3px 3px 5px 6px #ccc;
+    box-shadow: 3px 3px 5px 6px #ccc;
 
     // box-shadow: 0 -20px 15px -10px #8c92f7 inset,
     // 0 20px 15px -10px #8c92f7 inset,
     // 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#btnLoginInDrower {
+        color: #ffffff !important;
+    width: 8vw !important;
+    border-radius: 5vw !important;
+    position: absolute !important;
+    cursor: pointer !important;
+    background-color: #7376c0 !important ; //אפרפר
+    right: 3vw !important;
+    top: 2.2vh !important;
+    display: inline-block !important;
 }

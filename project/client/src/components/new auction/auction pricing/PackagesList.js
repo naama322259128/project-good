@@ -13,6 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import de from '../../../img/icons/dustbin.png'
 import '../NewAuction.scss'
+import { dataUpdate } from "../../../store/actions/user";
 const useStyles = makeStyles({
     root: { width: '80%', },
     container: { maxHeight: 440, }
@@ -23,7 +24,7 @@ const PackagesList = (props) => {
         props.packagesList && props.packagesList.map((p) => { arr.push(createData(p)) });
         setRows(arr);
     }, [props.packagesList])
-
+   // useEffect(() => { //props.dataUpdate(); })
 
     const columns = [
         //  name,ticketsQuantity,discountPercenrages,gifts: []
@@ -71,7 +72,7 @@ const PackagesList = (props) => {
         // var str = "";
         // for (var i = 0; i < pu.gifts.length; i++) str += `${pu.gifts[i]}. `;
         //TODO צריך לעשות את זה כאן, עד לתיקון הבעיה זה יהיה לפני השמירה בסרבר
-        return { name: pu.name, ticketsQuantity: pu.ticketsQuantity, discountPercenrages: pu.discountPercenrages, gifts:pu.gifts /*str*/, del };
+        return { name: pu.name, ticketsQuantity: pu.ticketsQuantity, discountPercenrages: pu.discountPercenrages, gifts: pu.gifts /*str*/, del };
     }
 
     const classes = useStyles();
@@ -123,4 +124,4 @@ const myMapStateToProps = (state) => {
         packagesList: state.auction.newAuction.purchasePackage,
     }
 }
-export default connect(myMapStateToProps, { deletePackage })(PackagesList);
+export default connect(myMapStateToProps, { deletePackage ,dataUpdate})(PackagesList);

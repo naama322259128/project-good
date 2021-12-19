@@ -14,9 +14,7 @@ const ContactForm = () => {
     const [open, setOpen] = React.useState(false);
 
     let submit = (data, e) => {
-        debugger;
         e.preventDefault();
-        debugger;
         let details = { name: data.name, email: data.email, phone: data.phone, message: data.message, subject: data.subject }
         sendContact(details).then(succ => {
             setOpen(false);

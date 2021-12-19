@@ -53,7 +53,7 @@ const ProfileButton = (props) => {
                 style: {
                     maxHeight: ITEM_HEIGHT * 4.5,
                     width: '25ch',
-                    marginTop:'4vh'
+                    marginTop: '4vh'
                 },
             }}
         >
@@ -70,6 +70,9 @@ const ProfileButton = (props) => {
             </Link>
             <Link to={'/shoppingCart'}>
                 <MenuItem key={'Shopping cart'} onClick={handleClose}>Shopping cart</MenuItem>
+            </Link>
+            <Link to={'/orders'}>
+                <MenuItem key={'Your Orders'} onClick={handleClose}>Your Orders</MenuItem>
             </Link>
             <Link to={'/home'}>
                 <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>

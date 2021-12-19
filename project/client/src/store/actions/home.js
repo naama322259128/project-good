@@ -83,4 +83,26 @@ export const LoginFromStorage = () => {
 
 
 
-*/
+// */
+
+// export const LoginFromStorage = () => {
+//     let user = localStorage.getItem("login")
+//     if (!user) return null;
+//     return (dispatch) => {
+//         axios.get(`http://localhost:5000/users/signIn/${localStorage.getItem("pass")}&${localStorage.getItem("email")}`).then(succ => {
+//             // dispatch(setCurrentUser(succ.data), setLogin(false)) //TODO למה לא?
+//             dispatch(
+//                 signInOfState(succ.data),
+//             )
+//         });
+
+//         else if (localStorage.getItem("login") == "google")
+//     axios.get(`http://localhost:5000/users/loginGoogle/${localStorage.getItem("name")}&${localStorage.getItem("email")}`).then(succ => {
+//         dispatch(
+//             //setCurrentUser(succ.data), setLogin(false), localStorage.setItem("isLogin", true))
+//             signInOfState(succ.data),
+//         )
+//     });
+// else null;
+//     }
+// }

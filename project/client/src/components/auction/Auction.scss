@@ -64,7 +64,8 @@
   display: grid;
   grid-template-columns: repeat(5, 5fr);
   grid-gap: 1rem;
-  padding: 7vw;
+  padding-right: 12vw;
+  padding-left: 12vw;
 }
 
 .product-in-list{

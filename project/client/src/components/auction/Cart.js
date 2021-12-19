@@ -8,11 +8,11 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import { emptyTheCartByAuction, addOrderToDB } from '../../utils/userUtils';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
+import { dataUpdate } from '../../store/actions/user';
 const Cart = (props) => {
 
     const amountToPay = () => {
         let sum = 0;
-        debugger;
         if (props.user.shoppingCartOfCurrentAuction.length == 0) return 0;
         props.user.shoppingCartOfCurrentAuction.map((item) => { sum += item.qty * item.productId.price });
         return sum;
@@ -53,22 +53,15 @@ const Cart = (props) => {
     }
 
     useEffect(() => {
+        //props.dataUpdate();
         getProductsInCartByAuctionIdFromDB(props.user.currentUser._id, props.currentAuction._id).then(succ => {
             if (succ.status != 400) { props.updateShoppingCart(succ.data); }
         })
     }, [])
 
-
-    /*
-    המבנה בסרבר    
-     shoppingCart: [{
-        productId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Product' },
-        qty: Number,
-        auctionId: { type: mongoose.SchemaTypes.ObjectId, ref: 'Auction' }
-    }]*/
     return (
         <div>
-            <button onClick={orderPackages}>Sort by price</button>
+
             <h1>Cart Component</h1>
             <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
 
@@ -78,11 +71,11 @@ const Cart = (props) => {
                     return (<ProductInCart key={parseInt(index)} qty={item.qty} productInCart={item.productId} />)
                 })}
             </div>
-            <Link to={'/auction/cart/purchaseSettings'}> <Button onClick={orderCompletion}>set purchase packages</Button></Link>
-            <Button onClick={orderCompletion}>PAY</Button>
+
+            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay() != 0 && <Button onClick={orderCompletion}>PAY</Button>}
 
             {/* TODO: איך התצוגה תתרענן פה */}
-            {props.user && props.user.shoppingCartOfCurrentAuction && <h1>{amountToPay()+ "₪"}</h1>}
+            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay() != 0 && <h1>{amountToPay() + "₪"}</h1>}
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);
 }
@@ -93,4 +86,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction
     }
 }
-export default connect(mapStateToProps, { updateShoppingCart })(Cart);
+export default connect(mapStateToProps, { updateShoppingCart,dataUpdate })(Cart);

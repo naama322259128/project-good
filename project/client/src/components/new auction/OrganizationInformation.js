@@ -10,7 +10,12 @@ import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import uploadImg from '../../img/upload.png'
+import { dataUpdate } from '../../store/actions/user';
 const OrganizationInformation = (props) => {
+
+    //useEffect(() => { //props.dataUpdate() })
+
+
     let details = {
         organizationName: "",
         organizationText: "",
@@ -43,12 +48,12 @@ const OrganizationInformation = (props) => {
     }
     return (<form noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
         <div className={"inputs-in-form-container"}>
-            <TextField className="txt" variant="standard" defaultValue={props.auction.organizationName  } {...register('organizationName', {  required: false})} id="input-with-icon-grid" label="Organization Name" />
+            <TextField className="txt" variant="standard" defaultValue={props.auction.organizationName} {...register('organizationName', { required: false })} id="input-with-icon-grid" label="Organization Name" />
             <TextField
                 className="txt"
                 multiline
                 variant="standard"
-                defaultValue={props.auction.organizationText  }
+                defaultValue={props.auction.organizationText}
                 {...register('organizationText', { required: false })}
                 id="input-with-icon-grid"
                 label="Organization Text" />
@@ -79,4 +84,4 @@ const mapStateToProps = (state) => {
         auction: state.auction.newAuction
     };
 }
-export default connect(mapStateToProps, { setNewAuction })(OrganizationInformation);
+export default connect(mapStateToProps, { setNewAuction,dataUpdate })(OrganizationInformation);

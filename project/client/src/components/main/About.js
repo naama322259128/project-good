@@ -13,30 +13,17 @@ import { resetNewAuctionState } from "../../store/actions/newAuction";
 import { createNewAuctionInDB } from "../../utils/newAuctionUtils";
 import { setNewAuction } from "../../store/actions/newAuction";
 import { setWantContact } from "../../store/actions/user"
+import { dataUpdate } from "../../store/actions/user";
 const About = (props) => {
 
 
   useEffect(() => {
-
-    if (props.wantContact) window.scrollTo(0, 2500);
-    else window.scrollTo(0, 0);
-    window.addEventListener("scroll", changeHeader)
-
-    return () => { window.removeEventListener('scroll', changeHeader); };
+    //props.dataUpdate();
   }, []);
-  const changeHeader = () => {
-    let s = document.getElementById("small-header");
-    if (s != null) {
-      let height = 5
-      if (document.body.scrollTop > height || document.documentElement.scrollTop > height) {
-        if (s != null) s.style.top = "0";
-      } else {
-        if (s != null) s.style.top = "-500px";
-      }
-    }
-  }
+
+
   return (<>
-    {/* <SmallHeader /> */}
+
     <center>
       <img src={p} id="logo-about" />
       <div id="txt-about">
@@ -59,10 +46,7 @@ const About = (props) => {
         <b>Want to get started?</b>
         <Link to={props.currentUser ? "/new_auction" : '#'}
           onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
-            if (succ.status != 400) {
-              props.setNewAuction(succ.data);
-              console.log(succ.data);
-            }
+            if (succ.status != 400) props.setNewAuction(succ.data);
           })
             : () => props.setLogin(true)}>Click here!</Link>
       </div>
@@ -134,4 +118,4 @@ const mapStateToProps = state => {
     wantContact: state.user.wantContact
   }
 }
-export default connect(mapStateToProps, { setLogin, setNewAuction, setWantContact })(About);
+export default connect(mapStateToProps, { setLogin, setNewAuction, setWantContact,dataUpdate })(About);

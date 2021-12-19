@@ -3,6 +3,8 @@ const route = express.Router();
 const auctionController = require("../controllers/auction");
 const myEmailMessagesController = require("../controllers/email")
 
+route.get("/getBestSellingProduct", auctionController.getBestSellingProduct)
+route.get("/getBestSellingProductByAuction/:_id", auctionController.getBestSellingProductByAuction)
 route.get("/getpublicationApprovalAuctionsList", auctionController.getpublicationApprovalAuctionsList)
 route.get("/getAuctionIsApproved/:_id", auctionController.getAuctionIsApproved)
 route.get("/getAuctionsByManagerId/:manager_id", auctionController.getAuctionsByManagerId)
@@ -20,7 +22,6 @@ route.get("/:id", auctionController.getById)
 route.get("/", auctionController.getAll)
 
 route.put("/performLotteries/:_id", auctionController.performLotteries)
-
 
 route.post("/setOrganizationInformation/:a_id", auctionController.addOrganizationInformation)
 route.post("/setAuctionInformation/:a_id", auctionController.addAuctionInformation)
