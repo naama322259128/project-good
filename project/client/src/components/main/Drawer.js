@@ -39,7 +39,7 @@ import ProfileButton from '../user/ProfileButton';
 import Button from '@material-ui/core/Button';
 import './Drawer.scss'
 import YourOrders from '../user/YourOrders'
-import { dataUpdate } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -117,7 +117,16 @@ const MyLinkInList = ({ text, icon }) => {
     </ListItem>)
 }
 export const MiniDrawer = (props) => {
-  //useEffect(() => { props.dataUpdate(); })
+  useEffect(() => {
+    let id = localStorage.getItem("user");
+    if (id) {
+      let a_id = localStorage.getItem("currentAuction");
+      let n_a_id = localStorage.getItem("newAuction");
+      if (a_id) props.setCurrentAuctionByStorage(a_id);
+      if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+      props.setUserByStorage(id);
+    }
+  },[])
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -150,7 +159,7 @@ export const MiniDrawer = (props) => {
           </IconButton>
           {props.currentUser ? <ProfileButton /> : <Button type="button" id="btnLoginInDrower" onClick={() => props.setLogin(true)}>Login</Button>}
           <Typography variant="h6" noWrap component="div" >Chinese auctions</Typography>
-          {location.pathname == '/auction' && <Timer />}
+          {location.pathname.startsWith('/auction') && <Timer />}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -205,4 +214,4 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser,
   };
 }
-export default connect(mapStateToProps, { setLogin, setNewAuction,dataUpdate })(MiniDrawer);
+export default connect(mapStateToProps, { setLogin, setNewAuction, setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage })(MiniDrawer);

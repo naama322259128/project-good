@@ -16,8 +16,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
-// import CloseIcon from '@mui/icons-material/Close';ד
-import { dataUpdate, setCurrentUser } from '../../store/actions/user';
+// import CloseIcon from '@mui/icons-material/Close';
+import { setUserByStorage, setNewAuctionByStorage, setCurrentAuctionByStorage } from '../../store/actions/user';
 const useStyles = makeStyles((theme) => (
     {
         margin: {
@@ -70,7 +70,16 @@ const UpdateDetails = (props) => {
         showPassword: false,
     });
 
-    //useEffect(() => { //props.dataUpdate(); })
+    useEffect(() => {
+        let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        };
+    },[])
 
     //עדכון משתמש קיים
     let password = props.currentUser.password;
@@ -303,7 +312,7 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser,
     };
 }
-export default connect(mapStateToProps, { setCurrentUser,dataUpdate })(UpdateDetails);
+export default connect(mapStateToProps, { setUserByStorage, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(UpdateDetails);
 
 
 

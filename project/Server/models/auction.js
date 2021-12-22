@@ -12,14 +12,14 @@ const auctionSchema = new mongoose.Schema({
     lotteriesDate: { type: Date, default: null },   //תאריך ביצוע ההגרלות
     registrationEndDate: { type: Date, default: null },//תאריך סיום הרשמה
     status: { type: String, enum: ['DONE', 'NOT_DONE'], default: 'NOT_DONE' },
-    purchasePackage: [{
+    /*purchasePackage: [{
         //אם מוסיפים שדה זה, הוא לא ממציא לבד אי-די, אלא נותן לנו לשלוח ערך לשדה זה
         // _id: { type: mongoose.SchemaTypes.ObjectId, required: true },
         name: String,
         ticketsQuantity: Number,//כמות כרטיסים
         discountPercenrages: Number,//אחוזי הנחה
         gifts: [String]
-    }],
+    }],*/
     // productList: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Auction' }],
     productList: [productSchema],
     lotteryApproval: { type: Boolean, default: false },

@@ -4,11 +4,18 @@ import React, { useEffect } from 'react';
 import './about.scss'
 import AuctionTerms from "./AuctionTerms";
 import organizationPhotos from "./organizationPhotos";
-import { dataUpdate } from '../../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../../store/actions/user';
 
 const AboutAuction = (props) => {
   useEffect(() => {
-    //props.dataUpdate();
+    let id = localStorage.getItem("user");
+    if (id) {
+      let a_id = localStorage.getItem("currentAuction");
+      let n_a_id = localStorage.getItem("newAuction");
+      if (a_id) props.setCurrentAuctionByStorage(a_id);
+      if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+      props.setUserByStorage(id);
+    }
   }, []);
 
   return (<>
@@ -42,15 +49,16 @@ const AboutAuction = (props) => {
       <br />
 
 
-      <div>      {/* {arr.map....} */}    {/* חבילות רכישה */}
-        <h3>   purchasePackage:</h3>
+      {/* <div> */}
+      {/* {arr.map....} */}    {/* חבילות רכישה */}
+      {/* <h3>   purchasePackage:</h3>
         <li>חבילה רגילה 5 כרטיסים 10% הנחה</li>
         <li>חבילה מיוחדת 20 כרטיסים 30% הנחה. מתנה לבחירה שרשרת/כרטיספר</li>
         <li>חבילה יוקרתית 50 כרטיסים 40% הנחה. מתנה מצלמה</li>
         <li>חבילה מפוארת 100 כרטיסים 60% הנחה. מתנה לבחירה הפלגה משפחתית/טיסה משפחתית בשמי הארץ</li>
       </div>
       <br />
-      <br />
+      <br /> */}
 
       <organizationPhotos />    {/* תמונות ארגון */}
       <br />
@@ -69,4 +77,4 @@ const mapStateToProps = (state) => {
     currentUser: state.user.currentUser
   };
 }
-export default connect(mapStateToProps, {dataUpdate})(AboutAuction);
+export default connect(mapStateToProps, { , setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(AboutAuction);

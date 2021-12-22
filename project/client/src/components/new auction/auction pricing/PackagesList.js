@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { deletePackageFromDB } from '../../../utils/newAuctionUtils'
-import { deletePackage } from '../../../store/actions/newAuction'
+// import { deletePackageFromDB } from '../../../utils/newAuctionUtils'
+// import { deletePackage } from '../../../store/actions/newAuction'
 import IconButton from '@material-ui/core/IconButton';
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,109 +13,116 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import de from '../../../img/icons/dustbin.png'
 import '../NewAuction.scss'
-import { dataUpdate } from "../../../store/actions/user";
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from "../../../store/actions/user";
 const useStyles = makeStyles({
     root: { width: '80%', },
     container: { maxHeight: 440, }
 });
 const PackagesList = (props) => {
-    useEffect(() => {
-        let arr = [];
-        props.packagesList && props.packagesList.map((p) => { arr.push(createData(p)) });
-        setRows(arr);
-    }, [props.packagesList])
-   // useEffect(() => { //props.dataUpdate(); })
+    //     useEffect(() => {
+    //         let arr = [];
+    //         props.packagesList && props.packagesList.map((p) => { arr.push(createData(p)) });
+    //         setRows(arr);
+    //     }, [props.packagesList])
+    //    useEffect(() => {         let id = localStorage.getItem("user");
+    //         if (id) {
+    //             let a_id = localStorage.getItem("currentAuction");
+    //             let n_a_id = localStorage.getItem("newAuction");
+    //         if (a_id) props.setCurrentAuctionByStorage(a_id);
+    //         if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+    //         props.setUserByStorage(id);
+    //     }; },[])
 
-    const columns = [
-        //  name,ticketsQuantity,discountPercenrages,gifts: []
-        { id: 'name', label: 'Name', minWidth: 80 },
-        {
-            id: 'ticketsQuantity',
-            label: 'Tickets Quantity',
-            minWidth: 170,
-            align: 'right',
-            format: (value) => value.toFixed(2)
-        },
-        {
-            id: 'discountPercenrages',
-            label: 'Discount Percenrages',
-            minWidth: 170,
-            align: 'right',
-            format: (value) => value.toFixed(2),
-        },
-        {
-            id: 'gifts',
-            label: 'Gifts',
-            minWidth: 170,
-            align: 'right',
-            format: (value) => value.toFixed(2)
-        }, {
-            id: 'del',
-            label: 'Delete',
-            minWidth: 170,
-            align: 'right',
-            format: (value) => value.toFixed(2)
-        }
-    ];
-    const [rows, setRows] = useState([]);
+    // const columns = [
+    //     //  name,ticketsQuantity,discountPercenrages,gifts: []
+    //     { id: 'name', label: 'Name', minWidth: 80 },
+    //     {
+    //         id: 'ticketsQuantity',
+    //         label: 'Tickets Quantity',
+    //         minWidth: 170,
+    //         align: 'right',
+    //         format: (value) => value.toFixed(2)
+    //     },
+    //     {
+    //         id: 'discountPercenrages',
+    //         label: 'Discount Percenrages',
+    //         minWidth: 170,
+    //         align: 'right',
+    //         format: (value) => value.toFixed(2),
+    //     },
+    //     {
+    //         id: 'gifts',
+    //         label: 'Gifts',
+    //         minWidth: 170,
+    //         align: 'right',
+    //         format: (value) => value.toFixed(2)
+    //     }, {
+    //         id: 'del',
+    //         label: 'Delete',
+    //         minWidth: 170,
+    //         align: 'right',
+    //         format: (value) => value.toFixed(2)
+    //     }
+    // ];
+    // const [rows, setRows] = useState([]);
 
-    const createData = (pu) => {
-        const del = <IconButton
-            onClick={() => {
-                deletePackageFromDB(props.auctionId, pu._id).then(succ => {
-                    if (succ.status != 400) props.deletePackage(pu._id)
-                })
-            }}
-            title="Delete" > <img className="my_icon" src={de} />
-        </IconButton >
+    // const createData = (pu) => {
+    //     const del = <IconButton
+    //         onClick={() => {
+    //             deletePackageFromDB(props.auctionId, pu._id).then(succ => {
+    //                 if (succ.status != 400) props.deletePackage(pu._id)
+    //             })
+    //         }}
+    //         title="Delete" > <img className="my_icon" src={de} />
+    //     </IconButton >
 
-        // var str = "";
-        // for (var i = 0; i < pu.gifts.length; i++) str += `${pu.gifts[i]}. `;
-        //TODO צריך לעשות את זה כאן, עד לתיקון הבעיה זה יהיה לפני השמירה בסרבר
-        return { name: pu.name, ticketsQuantity: pu.ticketsQuantity, discountPercenrages: pu.discountPercenrages, gifts: pu.gifts /*str*/, del };
-    }
+    // var str = "";
+    // for (var i = 0; i < pu.gifts.length; i++) str += `${pu.gifts[i]}. `;
+    //TODO צריך לעשות את זה כאן, עד לתיקון הבעיה זה יהיה לפני השמירה בסרבר
+    // return { name: pu.name, ticketsQuantity: pu.ticketsQuantity, discountPercenrages: pu.discountPercenrages, gifts: pu.gifts /*str*/, del };
+}
 
-    const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+const classes = useStyles();
+const [page, setPage] = React.useState(0);
+const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const style1 = { width: "80vw", marginLeft: "3vw", marginTop: '8vh' }
+const style1 = { width: "80vw", marginLeft: "3vw", marginTop: '8vh' }
 
-    return (
-        <center>
-            <Paper className={classes.root} style={style1}>
-                <TableContainer className={classes.container} >
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (<TableCell key={column.id} align={column.align}>{value}</TableCell>);
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
-        </center>
-    );
+return (
+    <center>
+        {/*     <Paper className={classes.root} style={style1}>
+        //         <TableContainer className={classes.container} >
+        //             <Table stickyHeader aria-label="sticky table">
+        //                 <TableHead>
+        //                     <TableRow>
+        //                         {columns.map((column) => (
+        //                             <TableCell
+        //                                 key={column.id}
+        //                                 align={column.align}
+        //                                 style={{ minWidth: column.minWidth }}
+        //                             >
+        //                                 {column.label}
+        //                             </TableCell>
+        //                         ))}
+        //                     </TableRow>
+        //                 </TableHead>
+        //                 <TableBody>
+        //                     {rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+        //                         return (
+        //                             <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+        //                                 {columns.map((column) => {
+        //                                     const value = row[column.id];
+        //                                     return (<TableCell key={column.id} align={column.align}>{value}</TableCell>);
+        //                                 })}
+        //                             </TableRow>
+        //                         );
+        //                     })}
+        //                 </TableBody>
+        //             </Table>
+        //         </TableContainer>
+    </Paper>*/}
+    </center>
+);
 }
 
 const myMapStateToProps = (state) => {
@@ -124,4 +131,4 @@ const myMapStateToProps = (state) => {
         packagesList: state.auction.newAuction.purchasePackage,
     }
 }
-export default connect(myMapStateToProps, { deletePackage ,dataUpdate})(PackagesList);
+export default connect(myMapStateToProps, { /*deletePackage, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage */ })(PackagesList);

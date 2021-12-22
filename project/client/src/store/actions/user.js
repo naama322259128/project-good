@@ -36,29 +36,35 @@ export const getOrderByIdFromDB = (order) => {
         })
     }
 }
-export const dataUpdate = () => {
-    let id = localStorage.getItem("user");
-    let a_id = localStorage.getItem("currentAuction");
-    let n_a_id = localStorage.getItem("newAuction");
 
-    //TODO:
-    // if (props.currentUser == null && id) {
 
-    if (id) axios.get(`http://localhost:5000/users/${id}`).
-        then(succ => { if (succ.status != 400) signIn(succ.data.password, succ.data.email) });
 
-    if (a_id) axios.get(`http://localhost:5000/auctions/${a_id}`).
-        then(succ => { if (succ.status != 400) setCurrentAuction(succ.data) });
-
-    if (n_a_id) axios.get(`http://localhost:5000/auctions/${n_a_id}`).
-        then(succ => { if (succ.status != 400) setNewAuction(succ.data) });
-
-    return { a: 1 }
-    // }
+export const setNewAuctionByStorage = (id) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/auctions/${id}`).
+            then(succ => { if (succ.status != 400) dispatch(setNewAuction(succ.data)) });
+    }
 }
 
+export const setCurrentAuctionByStorage = (id) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/auctions/${id}`).
+            then(succ => { if (succ.status != 400) dispatch(setCurrentAuction(succ.data)) });
+    }
+}
+export const setUserByStorage = (id) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:5000/users/${id}`).
+            then(succ => { if (succ.status != 400) dispatch(signIn(succ.data.password, succ.data.email)) });
+    }
+}
+
+
+    
 export const signOut = () => {
     localStorage.removeItem("user")
+    localStorage.removeItem("newAuction")
+    localStorage.removeItem("currentAuction")
     return {
         type: actionTypes.SIGN_OUT
     }
@@ -69,4 +75,4 @@ export const updateShoppingCart = (arr) => {
         type: actionTypes.UPDATE_SHOPPING_CART,
         payload: arr
     }
-}
+}    

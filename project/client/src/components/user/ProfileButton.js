@@ -64,10 +64,11 @@ const ProfileButton = (props) => {
             <Link to={'/update_your_details'}>
                 <MenuItem key={'Update your details'} onClick={handleClose}>Update your details</MenuItem>
             </Link>
-
-            <Link to={'/continue_new_auction'}>
-                <MenuItem key={'Continue building'} onClick={handleClose}>Continue building</MenuItem>
-            </Link>
+            {props.currentUser && props.currentUser.status != "USER" &&
+                <Link to={'/continue_new_auction'}>
+                    <MenuItem key={'Continue building'} onClick={handleClose}>Continue building</MenuItem>
+                </Link>
+            }
             <Link to={'/shoppingCart'}>
                 <MenuItem key={'Shopping cart'} onClick={handleClose}>Shopping cart</MenuItem>
             </Link>

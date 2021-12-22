@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import { emptyTheCartByAuction, addOrderToDB } from '../../utils/userUtils';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
-import { dataUpdate } from '../../store/actions/user';
+import { setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage } from '../../store/actions/user';
 const Cart = (props) => {
 
     const amountToPay = () => {
@@ -40,21 +40,16 @@ const Cart = (props) => {
 
     }
 
-    const orderPackages = () => {
-        //יאך ניתן לו לבחור????
-        let sort_packages = [];
-        if (props.currentAuction.purchasePackage.length && props.currentAuction.purchasePackage.length > 0)
-            sort_packages = props.currentAuction.purchasePackage.
-                sort((a, b) => parseFloat(b.ticketsQuantity) - parseFloat(a.ticketsQuantity))
-        let sort_tickets = props.user.shoppingCartOfCurrentAuction.
-            sort((a, b) => parseFloat(b.productId.price) - parseFloat(a.productId.price));
-
-
-    }
 
     useEffect(() => {
-        //props.dataUpdate();
-        getProductsInCartByAuctionIdFromDB(props.user.currentUser._id, props.currentAuction._id).then(succ => {
+        let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        }        getProductsInCartByAuctionIdFromDB(props.user.currentUser._id, props.currentAuction._id).then(succ => {
             if (succ.status != 400) { props.updateShoppingCart(succ.data); }
         })
     }, [])
@@ -86,4 +81,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction
     }
 }
-export default connect(mapStateToProps, { updateShoppingCart,dataUpdate })(Cart);
+export default connect(mapStateToProps, { updateShoppingCart })(Cart);

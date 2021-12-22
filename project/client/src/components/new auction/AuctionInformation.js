@@ -17,7 +17,7 @@ import Alert from '@mui/material/Alert';
 import { setNewAuction } from '../../store/actions/newAuction';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { dataUpdate } from '../../store/actions/user';
+import { setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage } from '../../store/actions/user';
 //TODO שהתאריכים יהיו הגיוניים
 
 const useStyles = makeStyles((theme) => ({
@@ -31,8 +31,15 @@ const useStyles = makeStyles((theme) => ({
 const AuctionInformation = (props) => {
 
     useEffect(() => {
-        //props.dataUpdate();
-    })
+                let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        };
+    },[])
 
     let saveDetails = () => {
 
@@ -149,5 +156,5 @@ const mapStateToProps = (state) => {
         auction: state.auction.newAuction
     }
 }
-export default connect(mapStateToProps, { setNewAuction ,dataUpdate})(AuctionInformation);
+export default connect(mapStateToProps, { setNewAuction , setNewAuctionByStorage,setCurrentAuctionByStorage,setUserByStorage})(AuctionInformation);
 

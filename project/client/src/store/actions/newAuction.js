@@ -6,23 +6,23 @@ export const setMyAuctionsToSet = (arr) => {
         payload: arr
     }
 }
-export const showAddPackage = () => {
-    return {
-        type: actionTypes.SHOW_ADD_PACKAGE
-    }
-}
-export const addPackage = (p) => {
-    return {
-        type: actionTypes.ADD_PACKAGE,
-        payload: p
-    }
-}
-export const deletePackage = (p_id) => {
-    return {
-        type: actionTypes.DELETE_PACKAGE,
-        payload: p_id
-    }
-}
+// export const showAddPackage = () => {
+//     return {
+//         type: actionTypes.SHOW_ADD_PACKAGE
+//     }
+// }
+// export const addPackage = (p) => {
+//     return {
+//         type: actionTypes.ADD_PACKAGE,
+//         payload: p
+//     }
+// }
+// export const deletePackage = (p_id) => {
+//     return {
+//         type: actionTypes.DELETE_PACKAGE,
+//         payload: p_id
+//     }
+// }
 export const setOrganizationName = (na) => {
     return {
         type: actionTypes.SET_ORGANIZATION_NAME,

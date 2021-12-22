@@ -19,12 +19,18 @@ import CartAll from './user/CartAll';
 import Login from './user/Login';
 import { setNewAuction } from '../store/actions/newAuction'
 import { setCurrentAuction } from '../store/actions/currentAuction'
-import {dataUpdate}from '../store/actions/user'
+import {setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage}from '../store/actions/user'
 function App(props) {
 
   useEffect(() => {
-    //props.dataUpdate();
-
+    let id = localStorage.getItem("user");
+    if (id) {
+        let a_id = localStorage.getItem("currentAuction");
+        let n_a_id = localStorage.getItem("newAuction");
+        if (a_id) props.setCurrentAuctionByStorage(a_id);
+        if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+        props.setUserByStorage(id);
+    }
     window.addEventListener("dblclick", sodi)
   }, [])
 
@@ -65,4 +71,4 @@ const mapStateToProps = (state) => {
 
   };
 }
-export default connect(mapStateToProps, { signIn, setCurrentAuction, setNewAuction,dataUpdate })(App);
+export default connect(mapStateToProps, { signIn, setCurrentAuctionByStorage, setNewAuctionByStorage,setUserByStorage })(App);

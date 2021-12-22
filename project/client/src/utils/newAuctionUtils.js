@@ -3,13 +3,13 @@ import axios from 'axios';
 export const createNewAuctionInDB = (manager_id) => {
     return axios.post(`http://localhost:5000/auctions/createNewAuction/${manager_id}`)
 }
-export const addPackageToDB = (a_id, pa) => {
-    return axios.post(`http://localhost:5000/auctions/addPurchasePackage/${a_id}`, pa)
-}
+// export const addPackageToDB = (a_id, pa) => {
+//     return axios.post(`http://localhost:5000/auctions/addPurchasePackage/${a_id}`, pa)
+// }
 
-export const deletePackageFromDB = (a_id, package_id) => {
-    return axios.delete(`http://localhost:5000/auctions/deletePackage/${a_id}&${package_id}`);
-}
+// export const deletePackageFromDB = (a_id, package_id) => {
+//     return axios.delete(`http://localhost:5000/auctions/deletePackage/${a_id}&${package_id}`);
+// }
 
 //העלאת מוצרים
 export const addProductToDB = (a_id, p) => {

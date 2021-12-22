@@ -10,21 +10,21 @@ import { connect } from "react-redux";
 import { setMyAuctionsToSet } from '../../store/actions/newAuction'
 import { getUnapprovedAuctionsByUserFromDB } from '../../utils/auctionManagerUtils';
 import Row from './ContinueNewAuctionRow'
-import { dataUpdate } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 
 const createData = (auction) => {
     let name = auction.name;
     let productsQty = auction.productList;
-    let purchasePackagesQty = auction.purchasePackage;
+    // let purchasePackagesQty = auction.purchasePackage;
     let lotteriesDate = auction.lotteriesDate;
     if (productsQty) productsQty = productsQty.length;
     else productsQty = 0;
-    if (purchasePackagesQty) purchasePackagesQty = purchasePackagesQty.length;
-    else purchasePackagesQty = 0;
+    // if (purchasePackagesQty) purchasePackagesQty = purchasePackagesQty.length;
+    // else purchasePackagesQty = 0;
     return {
-        name, productsQty, purchasePackagesQty, lotteriesDate,
-        products: auction.productList,
-        purchasePackages: auction.purchasePackage
+        name, productsQty,/* purchasePackagesQty, */lotteriesDate,
+        products: auction.productList
+        //, purchasePackages: auction.purchasePackage
     };
 }
 
@@ -32,7 +32,14 @@ const createData = (auction) => {
 const ContinueNewAuction = (props) => {
 
     useEffect(() => {
-        //props.dataUpdate();
+        let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        };
         getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) { props.setMyAuctionsToSet(succ.data); }
         });
@@ -47,7 +54,7 @@ const ContinueNewAuction = (props) => {
                             <TableCell align="left" /> {/* האייקון של פתח/סגור */}
                             <TableCell align="left"><b>Chiense auction name</b></TableCell>
                             <TableCell align="left"><b>Products</b></TableCell>
-                            <TableCell align="left"><b>Purchase packages</b></TableCell>
+                            {/* <TableCell align="left"><b>Purchase packages</b></TableCell> */}
                             <TableCell align="left"><b>Lotteries date</b></TableCell>
                             <TableCell align="left"><b>Delete</b></TableCell> {/* האייקון של מחק מכירה זו */}
                             <TableCell align="left"><b>Continue</b></TableCell> {/* האייקון של המשך מכירה זו */}
@@ -71,4 +78,4 @@ const mapStateToProps = (state) => {
         myAuctionsToSet: state.user.myAuctionsToSet
     };
 }
-export default connect(mapStateToProps, { setMyAuctionsToSet,dataUpdate })(ContinueNewAuction);
+export default connect(mapStateToProps, { setMyAuctionsToSet, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(ContinueNewAuction);

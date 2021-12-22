@@ -27,7 +27,7 @@ const getUnapprovedAuctionsByUser = async (req, res) => {
             "registrationStartDate": null,   //תאריך התחלה
             "lotteriesDate": null,   //תאריך ביצוע ההגרלות
             "registrationEndDate": null,//תאריך סיום הרשמה
-            "purchasePackage": { $exists: true, $size: 0 },
+            // "purchasePackage": { $exists: true, $size: 0 },
             "productList": { $exists: true, $size: 0 },
             "lotteryApproval": false,
             "organizationName": "",//

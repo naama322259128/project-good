@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import AuctionInformation from './AuctionInformation';
 import OrganizationInformation from './OrganizationInformation';
-import AuctionPricing from './auction pricing/AuctionPricing';
+// import AuctionPricing from './auction pricing/AuctionPricing';
 import UploadingProducts from './uploading products/UploadingProducts';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -18,7 +18,7 @@ import { signIn, loginGoogle } from '../../store/actions/signIn';
 import { setNewAuction } from '../../store/actions/newAuction'
 import { setCurrentUser } from '../../store/actions/user';
 import { useHistory } from "react-router-dom";
-import { dataUpdate } from '../../store/actions/user'
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,17 +34,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getSteps = () => {
-    return ['Purchase packages', 'Adding products', 'Organization details', 'Chinese Auction Details'];
+    return [/*'Purchase packages',*/ 'Products', 'Organization details', 'Chinese Auction Details'];
 }
 const getStepContent = (step) => {
     switch (step) {
+        // case 0:
+        //     return <AuctionPricing />;
         case 0:
-            return <AuctionPricing />;
-        case 1:
             return <UploadingProducts />;
-        case 2:
+        case 1:
             return <OrganizationInformation />;
-        case 3:
+        case 2:
             return <AuctionInformation />;
         default:
             return 'Unknown step';
@@ -52,7 +52,16 @@ const getStepContent = (step) => {
 }
 const NewAuction = (props) => {
 
-    //useEffect(() => { //props.dataUpdate(); })
+    useEffect(() => {
+        let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        };
+    },[])
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -134,5 +143,5 @@ const mapStateToProps = (state) => {
     };
 }
 export default connect(mapStateToProps, {
-    signIn, loginGoogle, setNewAuction, setCurrentUser,dataUpdate
+    signIn, loginGoogle, setNewAuction, setCurrentUser, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage
 })(NewAuction);

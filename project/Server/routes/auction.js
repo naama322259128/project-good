@@ -27,13 +27,13 @@ route.post("/setOrganizationInformation/:a_id", auctionController.addOrganizatio
 route.post("/setAuctionInformation/:a_id", auctionController.addAuctionInformation)
 route.post("/approvalAuction/:a_id&:status", auctionController.setApprovalAuction)
 route.post("/approvalLotteries/:a_id&:status", auctionController.setApprovalLotteries)
-route.post("/addPurchasePackage/:a_id", auctionController.addPurchasePackage)
+// route.post("/addPurchasePackage/:a_id", auctionController.addPurchasePackage)
 route.post("/addProduct/:a_id", auctionController.addProduct)
 route.post("/createNewAuction/:manager_id", auctionController.addAuction)
 
 route.delete("/:id", auctionController.deleteAuction)
-route.delete("/deletePackage/:auction_id&:package_id", auctionController.deletePackage)
-route.delete("/deleteProduct/:auction_id&:product_id", auctionController.deleteProduct)
+// route.delete("/deletePackage/:auction_id&:package_id", auctionController.deletePackage)
+// route.delete("/deleteProduct/:auction_id&:product_id", auctionController.deleteProduct)
 
 
 module.exports = route;

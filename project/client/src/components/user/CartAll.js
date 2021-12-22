@@ -10,11 +10,18 @@ import OneAuction from '../homePage/OneAuction';
 import { setNewAuction } from '../../store/actions/newAuction';
 import { setCurrentAuction } from '../../store/actions/currentAuction';
 import { signIn } from '../../store/actions/signIn';
-import { dataUpdate } from '../../store/actions/user';
+import { setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage } from '../../store/actions/user';
 const CartAll = (props) => {
 
     useEffect(() => {
-        //props.dataUpdate();
+                let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        };
 
         getCartFromDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) setArray(succ.data);
@@ -57,4 +64,4 @@ const mapStateToProps = state => {
         currentUser: state.user.currentUser
     }
 }
-export default connect(mapStateToProps, {  signIn, setCurrentAuction, setNewAuction, dataUpdate })(CartAll);
+export default connect(mapStateToProps, {  signIn, setCurrentAuction, setNewAuction,  setNewAuctionByStorage,setCurrentAuctionByStorage,setUserByStorage })(CartAll);

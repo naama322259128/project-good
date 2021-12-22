@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { addPackage } from '../../../store/actions/newAuction'
-import { addPackageToDB } from '../../../utils/newAuctionUtils'
+// import { addPackage } from '../../../store/actions/newAuction'
+// import { addPackageToDB } from '../../../utils/newAuctionUtils'
 import { signIn, loginGoogle } from '../../../store/actions/signIn';
 import de from '../../../img/icons/dustbin.png'
 import { useForm } from "react-hook-form";
@@ -20,10 +20,10 @@ const AddPackageForm = (props) => {
         // else document.getElementById("discountInput").style.borderColor = "";
     }
     useEffect(() => {
-        if (props.currentUser == null && localStorage.getItem("login") == "true")
-            props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
-        else if (props.currentUser == null && localStorage.getItem("login") == "google")
-            props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+        // if (props.currentUser == null && localStorage.getItem("login") == "true")
+        //     props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
+        // else if (props.currentUser == null && localStorage.getItem("login") == "google")
+        //     props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
     }, [])
     // const checkGifts = () => { if (gifts.indexOf("") == -1) return false; return true; }
 
@@ -47,8 +47,8 @@ const AddPackageForm = (props) => {
         for (var i = 0; i < gifts.length; i++)if (gifts[i] !== "") goodGifts.push(gifts[i]);
         newPackage.gifts = goodGifts;
 
-        addPackageToDB(props.newAuction._id, newPackage).then(
-            succ => { if (succ.status != 400) props.addPackage(succ.data); })
+        // addPackageToDB(props.newAuction._id, newPackage).then(
+        //     succ => { if (succ.status != 400) props.addPackage(succ.data); })
     }
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -102,7 +102,7 @@ const mapStateToProps = (state) => {
         auctionId: state.auction.newAuction._id
     };
 }
-export default connect(mapStateToProps, { addPackage, signIn, loginGoogle })(AddPackageForm);
+export default connect(mapStateToProps, { /*addPackage, signIn, loginGoogle*/ })(AddPackageForm);
 
 //לא לאפשר הוספת חבילה עם כמות שכבר קיימת
 //disable

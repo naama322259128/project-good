@@ -5,13 +5,20 @@ import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
 import './Auction.scss';
 import PurchaseSettings from './PurchaseSettings';
-import { dataUpdate } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 const Auction = (props) => {
 
 
     useEffect(() => {
-        //props.dataUpdate();
-    })
+        let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        }
+    }, [])
 
     return (<>
         <Switch>
@@ -28,4 +35,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction
     }
 }
-export default connect(mapStateToProps, {dataUpdate})(Auction);
+export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(Auction);

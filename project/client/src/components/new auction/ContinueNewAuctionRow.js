@@ -38,7 +38,7 @@ const ContinueNewAuctionRow = (props) => {
                 </TableCell>
                 <TableCell align="left" component="th" scope="row">{row.name}</TableCell>
                 <TableCell align="left" component="th" scope="row">{row.productsQty}</TableCell>
-                <TableCell align="left" component="th" scope="row">{row.purchasePackagesQty}</TableCell>
+                {/* <TableCell align="left" component="th" scope="row">{row.purchasePackagesQty}</TableCell> */}
                 <TableCell align="left" component="th" scope="row">{row.lotteriesDate}</TableCell>
 
                 <TableCell align="left" component="th" scope="row">
@@ -87,7 +87,7 @@ const ContinueNewAuctionRow = (props) => {
                                 </TableBody>
                             </Table>
 
-                            <br />
+                            {/*   <br />
                             <br />
 
                             <Typography variant="h6" gutterBottom component="div">Purchase packages</Typography>
@@ -109,7 +109,7 @@ const ContinueNewAuctionRow = (props) => {
                                     ))}
                                 </TableBody>
                             </Table>
-
+                                    */}
                         </Box>
                     </Collapse>
                 </TableCell>

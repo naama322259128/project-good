@@ -62,14 +62,14 @@ const useStyles = makeStyles((theme) => ({
     top: 10,
     bottom: 10,
     backgroundColor: theme.palette.common.black,
-    opacity:0.4,
+    opacity: 0.3,
     transition: theme.transitions.create('opacity'),
   },
   //הכיתוב
   imageTitle: {
     position: 'relative',
     padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
-    fontSize:'2.8vh',
+    fontSize: '2.8vh',
     textShadow: '-0.6px 0 black, 0 0.6px black, 0.6px 0 black, 0 -0.6px black'
   },
   //הפס שנמצא מתחת הכיתוב בכל תמונה
@@ -100,7 +100,8 @@ const OneAuction = (props) => {
       <span
         className={classes.imageSrc}
         style={{
-          backgroundImage: `url('${props.item.logo||defaultLogo}')`,
+          backgroundRepeat: 'no-repeat',
+          backgroundImage: `url('${props.item.logo || defaultLogo}')`,
           backgroundSize: '100%'
         }}
       />

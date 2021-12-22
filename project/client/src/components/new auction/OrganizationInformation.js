@@ -10,10 +10,19 @@ import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import uploadImg from '../../img/upload.png'
-import { dataUpdate } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 const OrganizationInformation = (props) => {
 
-    //useEffect(() => { //props.dataUpdate() })
+    useEffect(() => {
+        let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        }
+    },[])
 
 
     let details = {
@@ -84,4 +93,4 @@ const mapStateToProps = (state) => {
         auction: state.auction.newAuction
     };
 }
-export default connect(mapStateToProps, { setNewAuction,dataUpdate })(OrganizationInformation);
+export default connect(mapStateToProps, { setNewAuction, })(OrganizationInformation);

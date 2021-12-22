@@ -2,10 +2,19 @@ import { minutesToMilliseconds } from 'date-fns';
 import { useTimer } from 'react-timer-hook';
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
-import { dataUpdate } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 
 function MyTimer(props) {
-    //useEffect(() => { props.dataUpdate(); })
+    useEffect(() => {
+        let id = localStorage.getItem("user");
+        if (id) {
+            let a_id = localStorage.getItem("currentAuction");
+            let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        }
+    },[])
     //פה נכניס את הזמן שנותר עד לתאריך ביצוע ההגרלות
     const time = props.currentAuction && new Date(props.currentAuction.registrationEndDate) || new Date('2021-12-20T03:24:00');
     // time.setSeconds(time.getSeconds()); // 10 minutes timer 
@@ -34,4 +43,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction,
     }
 }
-export default connect(mapStateToProps, {dataUpdate})(MyTimer);
+export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(MyTimer);

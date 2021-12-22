@@ -18,9 +18,9 @@ export const SET_WANT_CONTACT = "SET_WANT_CONTACT"//כדישנדע האם לגל
 /******************************************   NEW AUCTION   ****************************************************/
 export const SET_MY_AUCTIONS_TO_SET = "SET_MY_AUCTIONS_TO_SET"
 export const SET_NEW_AUCTION = "SET_NEW_AUCTION"
-export const SHOW_ADD_PACKAGE = "SHOW_ADD_PACKAGE";//AddPackage להראות את הקומפוננטה 
-export const ADD_PACKAGE = "ADD_PACKAGE";//
-export const DELETE_PACKAGE = "DELETE_PACKAGE";//
+// export const SHOW_ADD_PACKAGE = "SHOW_ADD_PACKAGE";//AddPackage להראות את הקומפוננטה 
+// export const ADD_PACKAGE = "ADD_PACKAGE";//
+// export const DELETE_PACKAGE = "DELETE_PACKAGE";//
 export const DELETE_GROUP = "DELETE_GROUP";//
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const SHOW_ADD_PRODUCT = "SHOW_ADD_PRODUCT";
@@ -35,7 +35,7 @@ export const SET_TERMS = "SET_TERMS"
 export const SET_FINAL_STEP = "SET_FINAL_STEP"//האם להציג את המודל של אישור סיום בניית המכירה
 export const RESET_NEW_AUCTION_STATE = "RESET_NEW_AUCTION_STATE"//איפוס הסטייט של מכירה חדשה לאחר בניית מכירה
 export const SET_PRODUCTS_LIST = "SET_PRODUCTS_LIST"// מעדכנת את רשימת המוצרים בסטייט 
-export const SET_PACKAGES_LIST = "SET_PACKAGES_LIST"// מעדכנת את רשימת החבילות בסטייט 
+// export const SET_PACKAGES_LIST = "SET_PACKAGES_LIST"// מעדכנת את רשימת החבילות בסטייט 
 export const UPDATE_NEW_AUCTION_STATE = "UPDATE_NEW_AUCTION_STATE"
 
 

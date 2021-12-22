@@ -4,10 +4,20 @@ import AuctionsList from './AuctionsList';
 import HomeFooter from './HomeFooter';
 import HomeHeader from './HomeHeader';
 import React, { useEffect } from "react";
-import { dataUpdate } from "../../store/actions/user";
+import { setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage } from "../../store/actions/user";
 
 const Home = (props) => {
-  //useEffect(()=>{props.dataUpdate();})
+  useEffect(()=>{
+    
+    let id = localStorage.getItem("user");
+    if (id) {
+        let a_id = localStorage.getItem("currentAuction");
+        let n_a_id = localStorage.getItem("newAuction");
+        if (a_id) props.setCurrentAuctionByStorage(a_id);
+        if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+        props.setUserByStorage(id);
+    }
+  },[])
   return (<>
     <HomeHeader />
 
@@ -21,4 +31,4 @@ const mapStateToProps = state => {
   return {
   };
 }
-export default connect(mapStateToProps, {dataUpdate})(Home);
+export default connect(mapStateToProps, {setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage })(Home);

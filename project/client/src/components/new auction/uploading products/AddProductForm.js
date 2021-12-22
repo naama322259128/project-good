@@ -21,12 +21,12 @@ const AddProductForm = (props) => {
 
     let submit = (data, e) => {
         e.preventDefault();
-        let newProduct = { image: "", name: "", description: "", price: 0, includedInPackages: true };
+        let newProduct = { image: "", name: "", description: "", price: 0/*, includedInPackages: true */};
 
         newProduct.name = data.name;
         newProduct.description = data.description;
         newProduct.price = parseInt(data.price);
-        newProduct.includedInPackages = data.includedInPackages;
+        // newProduct.includedInPackages = data.includedInPackages;
         newProduct.image = imagePath;
 
         addProductToDB(props.auctionId, newProduct).then(succ => { if (succ.status != 400) props.addProduct(succ.data); })
@@ -64,10 +64,10 @@ const AddProductForm = (props) => {
 
 
 
-            <FormControlLabel
+            {/* <FormControlLabel
                 control={<Checkbox defaultChecked {...register('includedInPackages')} id="input-with-icon-grid" />}
                 label="Included in packages" />
-            <br />
+            <br /> */}
 
             <button type="submit">Add</button>
 

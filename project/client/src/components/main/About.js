@@ -13,12 +13,19 @@ import { resetNewAuctionState } from "../../store/actions/newAuction";
 import { createNewAuctionInDB } from "../../utils/newAuctionUtils";
 import { setNewAuction } from "../../store/actions/newAuction";
 import { setWantContact } from "../../store/actions/user"
-import { dataUpdate } from "../../store/actions/user";
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from "../../store/actions/user";
 const About = (props) => {
 
 
   useEffect(() => {
-    //props.dataUpdate();
+    let id = localStorage.getItem("user");
+    if (id) {
+      let a_id = localStorage.getItem("currentAuction");
+      let n_a_id = localStorage.getItem("newAuction");
+      if (a_id) props.setCurrentAuctionByStorage(a_id);
+      if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+      props.setUserByStorage(id);
+    }
   }, []);
 
 
@@ -36,7 +43,7 @@ const About = (props) => {
         <h2>Participation in Chinese Auctions:</h2>
         <p><b>What? </b>Chinese Auction: A raffle that allows you to buy tickets for the prizes you are interested in from the catalog.</p>
         <p><b>Why? </b>The money with which you purchase tickets for auction (s) you would like to continue their operations and reach new destinations.</p>
-        <p><b>How? </b>Choose here on the site the sale (s) you would like to participate in, buy tickets for the prizes you would like to win (depending on the packages, if any), fill in the credit card details and you are in!</p>
+        <p><b>How? </b>Choose here on the site the sale (s) you would like to participate in, buy tickets for the prizes you would like to win {/*(depending on the packages, if any)*/}, fill in the credit card details and you are in!</p>
         <b>Want to get started? </b><Link to={"/home"}>Click here!</Link>
         <br />        <br />
         <h2>Build your own Chinese auction:</h2>
@@ -56,7 +63,7 @@ const About = (props) => {
       <video id="build-video" width="70%" controls controlsList="nodownload" src={video} poster={img} />
 
       <div id="all-steps">
-        <div className="one-step">
+        {/*<div className="one-step">
           <div>
             <p>
               <h3>Purchase packages</h3>
@@ -64,7 +71,7 @@ const About = (props) => {
             </p>
           </div>
           <div style={{ backgroundColor: "powderblue" }}>image</div>
-        </div>
+        </div> */}
 
         <div className="one-step">
           <div>
@@ -118,4 +125,4 @@ const mapStateToProps = state => {
     wantContact: state.user.wantContact
   }
 }
-export default connect(mapStateToProps, { setLogin, setNewAuction, setWantContact,dataUpdate })(About);
+export default connect(mapStateToProps, { setLogin, setNewAuction, setWantContact, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(About);
