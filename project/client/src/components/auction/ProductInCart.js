@@ -13,6 +13,7 @@ import { addProductToShoppingCartInDB, deleteProductFromShoppingCartInDB } from 
 import deleteIcon from '../../img/icons/dustbin.png'
 import { connect } from "react-redux";
 import defaultImg from '../../img/picture.png'
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 
 const useStyles = makeStyles({
     root: {
@@ -26,7 +27,19 @@ const useStyles = makeStyles({
 const ProductInCart = (props) => {
     const [open, setOpen] = React.useState(false)
     const classes = useStyles();
-
+    useEffect(() => {
+        let id = localStorage.getItem("user" );
+         
+        if (id && props.currentUser == null) {
+             
+            let a_id = localStorage.getItem("currentAuction");
+            //  let n_a_id = localStorage.getItem("newAuction");
+            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        }
+  
+    },[])
     let image_src = props.productInCart.image || defaultImg;
     let description = props.productInCart.description;
     let name = props.productInCart.name;
@@ -95,4 +108,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction
     }
 }
-export default connect(mapStateToProps, { updateShoppingCart })(ProductInCart);
+export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage , updateShoppingCart })(ProductInCart);

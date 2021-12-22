@@ -20,10 +20,8 @@ const AddPackageForm = (props) => {
         // else document.getElementById("discountInput").style.borderColor = "";
     }
     useEffect(() => {
-        // if (props.currentUser == null && localStorage.getItem("login") == "true")
-        //     props.signIn(localStorage.getItem("pass"), localStorage.getItem("email"));
-        // else if (props.currentUser == null && localStorage.getItem("login") == "google")
-        //     props.loginGoogle(localStorage.getItem("name"), localStorage.getItem("email"))
+       
+        
     }, [])
     // const checkGifts = () => { if (gifts.indexOf("") == -1) return false; return true; }
 

@@ -119,14 +119,17 @@ const MyLinkInList = ({ text, icon }) => {
 export const MiniDrawer = (props) => {
   useEffect(() => {
     let id = localStorage.getItem("user");
-    if (id) {
+
+    if (id && props.currentUser == null) {
+
       let a_id = localStorage.getItem("currentAuction");
       let n_a_id = localStorage.getItem("newAuction");
       if (a_id) props.setCurrentAuctionByStorage(a_id);
       if (n_a_id) props.setNewAuctionByStorage(n_a_id);
       props.setUserByStorage(id);
     }
-  },[])
+
+  }, [])
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -182,6 +185,7 @@ export const MiniDrawer = (props) => {
           </Link>
 
           <Link to={"/statistics"} ><MyLinkInList text="STATISTICS" /></Link>
+          {/* window.location */}
 
           <Link to={"/about"} ><MyLinkInList text="ABOUT" /></Link>
 

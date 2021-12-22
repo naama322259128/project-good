@@ -142,7 +142,8 @@ const addProductToCart = async (req, res) => {
     await user.save();
 
     let user2 = await User.findById(userId).populate([
-        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+        { path: "shoppingCart.productId", select: `name image description price` }]);
+        // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
 
     // if (!user2)
     let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
@@ -167,7 +168,8 @@ const removeProductFromCart = async (req, res) => {
         await user.save();
     }
     let user2 = await User.findById(userId).populate([
-        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+        { path: "shoppingCart.productId", select: `name image description price` }]);
+        // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
 
     // if (!user2)
     let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
@@ -187,7 +189,8 @@ const emptyTheCartByAuction = async (req, res) => {
         await user.save();
     }
     let user2 = await User.findById(userId).populate([
-        { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+        { path: "shoppingCart.productId", select: `name image description price` }]);
+        // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
 
     // if (!user2)
     let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
@@ -221,7 +224,8 @@ const getCart = async (req, res) => {
 
 
     let user = await User.findById(userId).populate([
-        { path: "shoppingCart.productId", select: `name image description price includedInPackages` },
+        { path: "shoppingCart.productId", select: `name image description price` },
+        // { path: "shoppingCart.productId", select: `name image description price includedInPackages` },
         "shoppingCart.auctionId"
     ]);
     if (!user) return res.send(null);

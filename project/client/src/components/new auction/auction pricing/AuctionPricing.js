@@ -8,14 +8,16 @@ import { useEffect } from 'react';
 const AuctionPricing = (props) => {
     //חבילות
     // useEffect(() => {
-    //     let id = localStorage.getItem("user");
-    //     if (id) {
-    //         let a_id = localStorage.getItem("currentAuction");
-    //         let n_a_id = localStorage.getItem("newAuction");
-    //         if (a_id) props.setCurrentAuctionByStorage(a_id);
-    //         if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-    //         props.setUserByStorage(id);
-    //     };
+    // let id = localStorage.getItem("user" );
+    //  
+    // if (id && props.currentUser == null) {
+    //      
+    //     let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
+    //     if (a_id) props.setCurrentAuctionByStorage(a_id);
+    //     if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+    //     props.setUserByStorage(id);
+    // }
+
     // },[])
     return (<>
 
@@ -40,6 +42,7 @@ const mapStateToProps = state => {
     return {
         showSetPackage: state.auction.showSetPackage,
         packagesList: state.auction.newAuction.purchasePackage,
+        currentUser:state.user.currentUser
 
     }
 }

@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import { emptyTheCartByAuction, addOrderToDB } from '../../utils/userUtils';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
-import { setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 const Cart = (props) => {
 
     const amountToPay = () => {
@@ -43,16 +43,24 @@ const Cart = (props) => {
 
     useEffect(() => {
         let id = localStorage.getItem("user");
-        if (id) {
+
+        if (id && props.currentUser == null) {
+
             let a_id = localStorage.getItem("currentAuction");
-            let n_a_id = localStorage.getItem("newAuction");
+            //  let n_a_id = localStorage.getItem("newAuction");
             if (a_id) props.setCurrentAuctionByStorage(a_id);
-            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
-        }        getProductsInCartByAuctionIdFromDB(props.user.currentUser._id, props.currentAuction._id).then(succ => {
+        }
+
+    }, [])
+
+
+    useEffect(() => {
+        if (props.currentUser) getProductsInCartByAuctionIdFromDB(props.user.currentUser._id, props.currentAuction._id).then(succ => {
             if (succ.status != 400) { props.updateShoppingCart(succ.data); }
         })
-    }, [])
+    }, [props.currentUser])
 
     return (
         <div>
@@ -78,7 +86,8 @@ const Cart = (props) => {
 const mapStateToProps = state => {
     return {
         user: state.user,
-        currentAuction: state.currentAuction.currentAuction
+        currentAuction: state.currentAuction.currentAuction,
+        currentUser: state.user.currentUser
     }
 }
-export default connect(mapStateToProps, { updateShoppingCart })(Cart);
+export default connect(mapStateToProps, { updateShoppingCart, setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage })(Cart);

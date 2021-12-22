@@ -87,6 +87,7 @@ const ProfileButton = (props) => {
 
 const mapStateToProps = state => {
     return {
+        currentUser: state.user.currentUser
     };
 }
 export default connect(mapStateToProps, { signOut })(ProfileButton);

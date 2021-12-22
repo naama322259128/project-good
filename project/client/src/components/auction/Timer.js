@@ -6,14 +6,17 @@ import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } 
 
 function MyTimer(props) {
     useEffect(() => {
-        let id = localStorage.getItem("user");
-        if (id) {
+        let id = localStorage.getItem("user" );
+         
+        if (id && props.currentUser == null) {
+             
             let a_id = localStorage.getItem("currentAuction");
-            let n_a_id = localStorage.getItem("newAuction");
+            //  let n_a_id = localStorage.getItem("newAuction");
             if (a_id) props.setCurrentAuctionByStorage(a_id);
-            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
+  
     },[])
     //פה נכניס את הזמן שנותר עד לתאריך ביצוע ההגרלות
     const time = props.currentAuction && new Date(props.currentAuction.registrationEndDate) || new Date('2021-12-20T03:24:00');
@@ -41,6 +44,8 @@ function MyTimer(props) {
 const mapStateToProps = state => {
     return {
         currentAuction: state.currentAuction.currentAuction,
+        currentUser:state.user.currentUser
+
     }
 }
 export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(MyTimer);

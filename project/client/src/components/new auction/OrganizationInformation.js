@@ -14,14 +14,17 @@ import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } 
 const OrganizationInformation = (props) => {
 
     useEffect(() => {
-        let id = localStorage.getItem("user");
-        if (id) {
-            let a_id = localStorage.getItem("currentAuction");
+        let id = localStorage.getItem("user" );
+         
+        if (id && props.currentUser == null) {
+             
+            // let a_id = localStorage.getItem("currentAuction");
             let n_a_id = localStorage.getItem("newAuction");
-            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            // if (a_id) props.setCurrentAuctionByStorage(a_id);
             if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
+  
     },[])
 
 
@@ -90,7 +93,9 @@ const OrganizationInformation = (props) => {
 const mapStateToProps = (state) => {
     return {
         auctionId: state.auction.newAuction._id,
-        auction: state.auction.newAuction
+        auction: state.auction.newAuction,
+        currentUser:state.user.currentUser
+
     };
 }
-export default connect(mapStateToProps, { setNewAuction, })(OrganizationInformation);
+export default connect(mapStateToProps, { setNewAuction, setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage})(OrganizationInformation);

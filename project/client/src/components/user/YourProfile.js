@@ -15,14 +15,16 @@ const YourProfile = (props) => {
 
     //TODO: לבדוק שהיוסר או הכרנט-יוסר לא אנדיפיינד
     useEffect(() => {
-        let id = localStorage.getItem("user");
-        if (id) {
-            let a_id = localStorage.getItem("currentAuction");
-            let n_a_id = localStorage.getItem("newAuction");
-            if (a_id) props.setCurrentAuctionByStorage(a_id);
-            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+        let id = localStorage.getItem("user" );
+         
+        if (id && props.currentUser == null) {
+             
+            // let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
+            // if (a_id) props.setCurrentAuctionByStorage(a_id);
+            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
-        };
+        }
+  
     },[])
     return (
         <Switch>
@@ -42,7 +44,8 @@ const YourProfile = (props) => {
 const mapStateToProps = (state) => {
     return {
         user: state.user.currentUser,
-        userId: state.user.currentUser._id
+        userId: state.user.currentUser._id,
+        currentUser:state.user.currentUser
 
     };
 }

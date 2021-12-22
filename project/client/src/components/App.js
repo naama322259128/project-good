@@ -19,17 +19,18 @@ import CartAll from './user/CartAll';
 import Login from './user/Login';
 import { setNewAuction } from '../store/actions/newAuction'
 import { setCurrentAuction } from '../store/actions/currentAuction'
-import {setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage}from '../store/actions/user'
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../store/actions/user'
 function App(props) {
 
   useEffect(() => {
     let id = localStorage.getItem("user");
-    if (id) {
-        let a_id = localStorage.getItem("currentAuction");
-        let n_a_id = localStorage.getItem("newAuction");
-        if (a_id) props.setCurrentAuctionByStorage(a_id);
-        if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-        props.setUserByStorage(id);
+
+    if (id && props.currentUser == null) {
+       
+      let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
+      if (a_id) props.setCurrentAuctionByStorage(a_id);
+      if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+      props.setUserByStorage(id);
     }
     window.addEventListener("dblclick", sodi)
   }, [])
@@ -37,8 +38,8 @@ function App(props) {
   const sodi = () => { props.signIn('m', 'm@gmail.com');/* window.removeEventListener("dblclick", sodi);*/ }
 
   return (
-    //TODO: למה כשמגיעים לדף הבית מתוך דף אחר, הוא פותח לוגין
-    // TODO: למחוק מהלוקל-סטורג' מיד שעוזבים את הקומפוננטה 
+
+    
     <>
       {props.loginIsOpen ? <Login /> : null}
       <Router>
@@ -62,7 +63,7 @@ function App(props) {
 
       </Router ></>
   );
-  
+
 }
 const mapStateToProps = (state) => {
   return {
@@ -71,4 +72,4 @@ const mapStateToProps = (state) => {
 
   };
 }
-export default connect(mapStateToProps, { signIn, setCurrentAuctionByStorage, setNewAuctionByStorage,setUserByStorage })(App);
+export default connect(mapStateToProps, { signIn, setCurrentAuctionByStorage, setNewAuctionByStorage, setUserByStorage })(App);

@@ -7,10 +7,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import React,{useEffect} from 'react';
 import { updateShoppingCart } from '../../store/actions/user';
 import { addProductToShoppingCartInDB } from '../../utils/userUtils';
 import defaultImg from '../../img/picture.png'
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 
 import { connect } from "react-redux";
 
@@ -25,7 +26,19 @@ const useStyles = makeStyles({
 });
 
 const Product = (props) => {
+  useEffect(() => {
+    let id = localStorage.getItem("user" );
+     
+    if (id && props.currentUser == null) {
+         
+        let a_id = localStorage.getItem("currentAuction");
+        //  let n_a_id = localStorage.getItem("newAuction");
+        if (a_id) props.setCurrentAuctionByStorage(a_id);
+        // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+        props.setUserByStorage(id);
+    }
 
+},[])
 
   const [open, setOpen] = React.useState(false)
   const classes = useStyles();
@@ -85,4 +98,4 @@ const mapStateToProps = state => {
     currentAuction: state.currentAuction.currentAuction
   }
 }
-export default connect(mapStateToProps, { updateShoppingCart })(Product);
+export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage , updateShoppingCart })(Product);

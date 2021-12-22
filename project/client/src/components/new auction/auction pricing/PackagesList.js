@@ -24,14 +24,9 @@ const PackagesList = (props) => {
     //         props.packagesList && props.packagesList.map((p) => { arr.push(createData(p)) });
     //         setRows(arr);
     //     }, [props.packagesList])
-    //    useEffect(() => {         let id = localStorage.getItem("user");
-    //         if (id) {
-    //             let a_id = localStorage.getItem("currentAuction");
-    //             let n_a_id = localStorage.getItem("newAuction");
-    //         if (a_id) props.setCurrentAuctionByStorage(a_id);
-    //         if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-    //         props.setUserByStorage(id);
-    //     }; },[])
+    //    useEffect(() => {      
+
+    //  },[])
 
     // const columns = [
     //     //  name,ticketsQuantity,discountPercenrages,gifts: []
@@ -123,7 +118,6 @@ return (
     </Paper>*/}
     </center>
 );
-}
 
 const myMapStateToProps = (state) => {
     return {

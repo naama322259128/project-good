@@ -12,7 +12,7 @@ import './yourProfile.scss'
 import OrderOptions from './OrderOptions';
 import moment from 'moment'
 import { getUserOrdersListFromDB } from '../../utils/userUtils'//מחזירה את ההזמנות של המשתמש
-import { setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 
 const UserTable = (props) => {
     const columns = [
@@ -56,23 +56,29 @@ const UserTable = (props) => {
         return { name: n, orderDate: d, sum: sum, options };
     }
     useEffect(() => {
-                let id = localStorage.getItem("user");
-        if (id) {
-            let a_id = localStorage.getItem("currentAuction");
-            let n_a_id = localStorage.getItem("newAuction");
-            if (a_id) props.setCurrentAuctionByStorage(a_id);
-            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+        let id = localStorage.getItem("user");
+
+        if (id && props.currentUser == null) {
+
+            // let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
+            // if (a_id) props.setCurrentAuctionByStorage(a_id);
+            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
-        };
-        getUserOrdersListFromDB(props.user._id).then(succ => {
-            if (succ.status != 400) {
-                let arr = [];
-                succ.data.map((o) => { arr.push(createData(o)) });
-                console.log(succ.data);
-                setRows(arr);
-            }
-        });
+        }
+
+
     }, [])
+    useEffect(() => {
+        if (props.user)
+            getUserOrdersListFromDB(props.user._id).then(succ => {
+                if (succ.status != 400) {
+                    let arr = [];
+                    succ.data.map((o) => { arr.push(createData(o)) });
+                    console.log(succ.data);
+                    setRows(arr);
+                }
+            });
+    }, [props.currentUser])
 
     const useStyles = makeStyles({
         root: {
@@ -137,7 +143,8 @@ const UserTable = (props) => {
 const mapStateToProps = (state) => {
     return {
         user: state.user.currentUser,
-        orders: state.user.ordersList
+        orders: state.user.ordersList,
+        currentUser: state.user.currentUser
     };
 }
-export default connect(mapStateToProps, { setNewAuctionByStorage,setCurrentAuctionByStorage,setUserByStorage})(UserTable);
+export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(UserTable);

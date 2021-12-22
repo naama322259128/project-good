@@ -7,14 +7,17 @@ import ProductsList from "./ProducstList";
 const UploadingProducts = (props) => {
     useEffect(() => {
         let id = localStorage.getItem("user");
-        if (id) {
-            let a_id = localStorage.getItem("currentAuction");
+
+        if (id && props.currentUser == null) {
+
+            // let a_id = localStorage.getItem("currentAuction"); 
             let n_a_id = localStorage.getItem("newAuction");
-            if (a_id) props.setCurrentAuctionByStorage(a_id);
+            // if (a_id) props.setCurrentAuctionByStorage(a_id);
             if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
-        };
-    },[])
+        }
+
+    }, [])
     return (<>
         {props.showSetProduct && <AddProductForm />}
         <br />
@@ -29,6 +32,7 @@ const mapStateToProps = (state) => {
     return {
         showSetProduct: state.auction.showSetProduct,
         productsList: state.auction.newAuction.productList
+        , currentUser: state.user.currentUser
 
     };
 }

@@ -10,23 +10,30 @@ import OneAuction from '../homePage/OneAuction';
 import { setNewAuction } from '../../store/actions/newAuction';
 import { setCurrentAuction } from '../../store/actions/currentAuction';
 import { signIn } from '../../store/actions/signIn';
-import { setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 const CartAll = (props) => {
 
     useEffect(() => {
-                let id = localStorage.getItem("user");
-        if (id) {
-            let a_id = localStorage.getItem("currentAuction");
-            let n_a_id = localStorage.getItem("newAuction");
-            if (a_id) props.setCurrentAuctionByStorage(a_id);
-            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-            props.setUserByStorage(id);
-        };
+        let id = localStorage.getItem("user");
 
-        getCartFromDB(props.currentUser._id).then(succ => {
+        if (id && props.currentUser == null) {
+
+            // let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
+            // if (a_id) props.setCurrentAuctionByStorage(a_id);
+            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+
+        }
+
+
+
+    }, [])
+
+    useEffect(() => {
+        if (props.currentUser) getCartFromDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) setArray(succ.data);
         })
-    }, [])
+    }, [props.currentUser])
 
     const [array, setArray] = React.useState(null);
 
@@ -64,4 +71,4 @@ const mapStateToProps = state => {
         currentUser: state.user.currentUser
     }
 }
-export default connect(mapStateToProps, {  signIn, setCurrentAuction, setNewAuction,  setNewAuctionByStorage,setCurrentAuctionByStorage,setUserByStorage })(CartAll);
+export default connect(mapStateToProps, { signIn, setCurrentAuction, setNewAuction, getAuctionFromDB, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(CartAll);

@@ -6,14 +6,16 @@ import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } 
 
 const YourOrders = (props) => {
     useEffect(() => {
-        let id = localStorage.getItem("user");
-        if (id) {
-            let a_id = localStorage.getItem("currentAuction");
-            let n_a_id = localStorage.getItem("newAuction");
-            if (a_id) props.setCurrentAuctionByStorage(a_id);
-            if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+        let id = localStorage.getItem("user" );
+         
+        if (id && props.currentUser == null) {
+             
+            // let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
+            // if (a_id) props.setCurrentAuctionByStorage(a_id);
+            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
-        };
+        }
+  
     },[])
     return (<div>
         <h1>Your Orders</h1>
@@ -22,6 +24,8 @@ const YourOrders = (props) => {
 
 const mapStateToProps = state => {
     return {
+        currentUser:state.user.currentUser
+
     };
 }
 export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(YourOrders);
