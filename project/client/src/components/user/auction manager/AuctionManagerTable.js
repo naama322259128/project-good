@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment'
 import Switch from '@material-ui/core/Switch';
@@ -14,7 +14,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { Link } from 'react-router-dom';
 import DeleteModal from './DeleteModal'
 import ApprovalModal from './ApprovalModal'
-import {saveApprovalAuctionInDB}from '../../../utils/newAuctionUtils'
+import { saveApprovalAuctionInDB } from '../../../utils/newAuctionUtils'
 import DisApprovalModal from './DisApprovalModal'
 import { getManagerAuctionsFromDB, setDeleteAuctionModal, setApprovalAuctionModal, setDisApprovalAuctionModal, setSelectedAuctionToOptions, getAuctionIsDoneFromDB, isAuctionApproved } from '../../../store/actions/auctionManager'
 import IconButton from '@material-ui/core/IconButton';
@@ -22,97 +22,124 @@ import edit from '../../../img/icons/edit-file.png'
 import st from '../../../img/icons/stadistics.png'
 import results from '../../../img/icons/results.png'
 import de from '../../../img/icons/dustbin.png'
-
+import { setUserByStorage } from '../../../store/actions/user';
+import { setNewAuction } from '../../../store/actions/newAuction';
 const useStyles = makeStyles({
-    root: { width: '80%', },
+    root: { width: '80%', marginBottom: '15vh' },
     container: { maxHeight: 440, }
 });
 
 
 const AuctionManagerTable = (props) => {
+
+    useEffect(() => {
+        let id = localStorage.getItem("user");
+
+        if (id && props.currentUser == null) {
+
+            // let a_id = localStorage.getItem("currentAuction");
+            // let n_a_id = localStorage.getItem("newAuction");
+            // if (a_id) props.setCurrentAuctionByStorage(a_id);
+            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+            props.setUserByStorage(id);
+        }
+
+
+    }, []);
+
+    useEffect(() => {
+        if (props.auctions && props.auctions.length) {
+            let tmp = [];
+            props.auctions.map(a => { tmp.push(createData(a)) })
+            setMyAuctions(tmp);
+        }
+    }, [props.auctions])
+
+    useEffect(() => {
+        if (props.currentUser)
+            props.getManagerAuctionsFromDB(props.currentUser._id);//also set props.auctions 
+    }, [props.currentUser])
+
+    const [myAuctions, setMyAuctions] = React.useState([]);
+
     const columns = [
-        { id: 'name', label: 'Name', minWidth: 80 },
+        { id: 'name', label: 'Name', align: 'left', minWidth: 80 },
         {
-            id: 'start_date',
+            id: 'registrationStartDate',
             label: 'Start Date',
             minWidth: 170,
-            align: 'right',
+            align: 'left',
             // format: (value) => moment(value).format('D/MM/YYYY')
         },
         {
-            id: 'end_date',
+            id: 'lotteriesDate',
             label: 'Lotteries date',
             minWidth: 170,
-            align: 'right',
+            align: 'left',
             //  format: (value) =>moment(value).format('D/MM/YYYY')
         },
         {
-            id: 'done',
-            label: 'Done',
+            id: 'approval',
+            label: 'Lottery Approval',
             minWidth: 170,
-            align: 'right',
+            align: 'left',
             format: (value) => value.toFixed(2),
         },
         {
             id: 'options',
             label: 'Options',
             minWidth: 170,
-            align: 'right',
+            align: 'left',
             format: (value) => value.toFixed(2),
         }
     ];
 
-    const deleteAuction = (_id) => {
+    const deleteAuction = (a) => {
         props.setDeleteAuctionModal(true);
-        props.setSelectedAuctionToOptions(_id);
+        props.setSelectedAuctionToOptions(a);
     }
 
-    const handleChange = (_id) => {
-        props.setSelectedAuctionToOptions(_id);
-        if (props.isAuctionApproved(_id)) props.setDisApprovalAuctionModal(true);//אם מאושר יציג את ביטול הגרלות
+    const handleChange = (a) => {
+        props.setSelectedAuctionToOptions(a);
+        if (a.lotteryApproval) props.setDisApprovalAuctionModal(true);//אם מאושר יציג את ביטול הגרלות
         else props.setApprovalAuctionModal(true);//אם לא מאושר יציג את אישור הגרלות
     }
 
-    function createData(name1, name2, start_date, end_date, done, _id) {
-        let isApproved = props.isAuctionApproved(_id);
-        let isDone = props.getAuctionIsDoneFromDB(_id);
+    function createData(a) {
+        let { name } = a;
+        let registrationStartDate = a.registrationStartDate ? moment(new Date(a.registrationStartDate)).format('D/MM/YYYY') : "";
+        let lotteriesDate = a.lotteriesDate ? moment(new Date(a.lotteriesDate)).format('D/MM/YYYY') : "";
+        let isDone = a.status == "DONE";
+        let isApproved = a.lotteryApproval;
+        let _id = a._id;
+        let approval = <Switch
+            checked={isApproved}
+            onChange={() => { handleChange(a) }}
+            name="checkedA"
+            inputProps={{ 'aria-label': 'secondary checkbox' }}
+            title="Approval lottery"
+            disabled={isDone}//אם המכירה בוצעה לא ניתן לשנות
+        />
+
+
         let options = <div className="optionsBtn">
-            <Switch
-                checked={isApproved}
-                onChange={(_id) => { handleChange(_id) }}
-                name="checkedA"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                title="Approval lottery"
-                disabled={isDone}//אם המכירה בוצעה לא ניתן לשנות
-            />
-            <Link onClick={() => props.setSelectedAuctionToOptions(_id)} to={isDone ? '#' : `/your_profile/edit_auction`}><IconButton disabled={isDone} title="Edit"><img className="my_icon" src={edit} ></img></IconButton></Link>
-            <Link onClick={() => props.setSelectedAuctionToOptions(_id)} to={isDone ? `/your_profile/results` : '#'}><IconButton title="Results" disabled={!isDone}><img className="my_icon" src={results} ></img></IconButton></Link>
-            <Link onClick={() => props.setSelectedAuctionToOptions(_id)} to={`/your_profile/statistics`}><IconButton title="Statistics"><img className="my_icon" src={st} ></img></IconButton></Link>
-            <IconButton onClick={() => deleteAuction(_id)} title="Delete" disabled={isDone} ><img className="my_icon" src={de} ></img></IconButton>
+            <Link to={a.publicationApproval ? '#' : `/new_auction`}><IconButton disabled={a.publicationApproval} title="Edit" onClick={() => { if (!a.publicationApproval) props.setNewAuction(a) }}><img className="my_icon" src={edit} ></img></IconButton></Link>
+            <Link onClick={() => props.setSelectedAuctionToOptions(a)} to={isDone ? `/your_profile/results` : '#'}><IconButton title="Results" disabled={!isDone}><img className="my_icon" src={results} ></img></IconButton></Link>
+            <Link onClick={() => props.setSelectedAuctionToOptions(a)} to={`/your_profile/statistics`}><IconButton title="Statistics"><img className="my_icon" src={st} ></img></IconButton></Link>
+            <IconButton onClick={() => deleteAuction(a)} title="Delete" disabled={isDone} ><img className="my_icon" src={de} ></img></IconButton>
         </div>
-        let name = name2 + " - " + name1;
-        return { name, start_date, end_date, done, options };
+        return { name, registrationStartDate, lotteriesDate, approval, options };
     }
 
-    const rows = [
-        // TODO: למה צריך לעשות כאן את המומנט
-        createData('לזכות ברגע', 'עזר מציון', moment(new Date(2021, 7, 1)).format('D/MM/YYYY'), moment(new Date(2021, 9, 1)).format('D/MM/YYYY'), 'false', 231321312),
-        createData('הרבה נחת', 'סמינר אלקיים', moment(new Date(2021, 8, 1)).format('D/MM/YYYY'), moment(new Date(2021, 10, 1)).format('D/MM/YYYY'), 'false', 3123123132),
-        createData('ועל גמילות חסדים', 'בית כנסת חזון עובדיה', moment(new Date(2020, 10, 1)).format('D/MM/YYYY'), moment(new Date(2020, 12, 1)).format('D/MM/YYYY'), 'true', 435435524)
-    ];
-
-    // TODO: sort by date
-  
     const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     return (
         <center>
+            <h1>Your Chiense Auctions</h1>
+
             {props.show_delete ? <DeleteModal /> : null}
             {props.show_approval ? <ApprovalModal /> : null}
             {props.show_disapproval ? <DisApprovalModal /> : null}
-            <h1>Chinese Auction Manager</h1>
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
@@ -130,7 +157,7 @@ const AuctionManagerTable = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            {myAuctions && myAuctions.length > 0 && myAuctions.map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                         {columns.map((column) => {
@@ -141,6 +168,7 @@ const AuctionManagerTable = (props) => {
                                                 </TableCell>
                                             );
                                         })}
+
                                     </TableRow>
                                 );
                             })}
@@ -157,13 +185,9 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser,
         show_delete: state.auctionManager.deleteAuctionModal,
         show_approval: state.auctionManager.approvalAuctionModal,
-        show_disapproval: state.auctionManager.disapprovalAuctionModal
+        show_disapproval: state.auctionManager.disapprovalAuctionModal,
+        auctions: state.auctionManager.auctions
     };
 }
-export default connect(mapStateToProps, { setDeleteAuctionModal,saveApprovalAuctionInDB, setSelectedAuctionToOptions, setDisApprovalAuctionModal, getAuctionIsDoneFromDB, setApprovalAuctionModal, getManagerAuctionsFromDB, isAuctionApproved })(AuctionManagerTable);
+export default connect(mapStateToProps, { setNewAuction, getManagerAuctionsFromDB, setUserByStorage, setDeleteAuctionModal, saveApprovalAuctionInDB, setSelectedAuctionToOptions, setDisApprovalAuctionModal, getAuctionIsDoneFromDB, setApprovalAuctionModal, isAuctionApproved })(AuctionManagerTable);
 
-
-
-//TODO:
-// ? אם המכירה כבר התחילה האם יכול לעשות שינויים
-// ? ומה יהיה עם האנשים שכבר הזמינו למוצרים שאותם רוצה לשנות

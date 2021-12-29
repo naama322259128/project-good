@@ -47,7 +47,7 @@ const getUnapprovedAuctionsByUser = async (req, res) => {
     return res.send(auctions);
 }
 const getpublicationApprovalAuctionsList = async (req, res) => {
-    let auctions = await Auction.find({ "publicationApproval": true });
+    let auctions = await Auction.find({ "publicationApproval": true, "status": "NOT_DONE" });
     return res.send(auctions);
 }
 const getById = async (req, res) => {
@@ -86,11 +86,31 @@ const getAuctionsByManagerId = async (req, res) => {
     let { manager_id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(manager_id))
         return res.status(404).send("Invalid ID number");
-    let auction = await Auction.find({ 'auctionManager': manager_id });
-    if (!auction)
+
+    //מחיקת מכירות שלו שאין בהם נתונים
+    let x = await Auction.deleteMany({
+        "name": "",
+        "auctionManager": manager_id,
+        "registrationStartDate": null,   //תאריך התחלה
+        "lotteriesDate": null,   //תאריך ביצוע ההגרלות
+        "registrationEndDate": null,//תאריך סיום הרשמה
+        // "purchasePackage": { $exists: true, $size: 0 },
+        "productList": { $exists: true, $size: 0 },
+        "lotteryApproval": false,
+        "organizationName": "",//
+        "organizationText": "",//
+        "organizationPhotos": { $exists: true, $size: 0 },
+        "terms": "",
+        "publicationApproval": false,
+        "logo": ""
+    });
+    console.log(x);
+
+    let auctions = await Auction.find({ 'auctionManager': manager_id });
+    if (!auctions)
         return res.status(404).send("There is no auction with such an manager ID number");
-    //if(auction==undefined)return res.send([]);
-    return res.send(auction);
+
+    return res.send(auctions);
 }
 
 //לקבל במערך את כל המכירות השייכות למנהל שנשלח
@@ -104,7 +124,7 @@ const getAuctionsByManagerId = async (req, res) => {
 /********************************************אישורים**************************************** */
 const getAuctionIsApproved = async (req, res) => {
     let { _id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(a_id))
+    if (!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send("Invalid ID number");
     let auction = await Auction.findOne({ '_id': _id });
     if (!auction)
@@ -141,7 +161,6 @@ const addAuctionInformation = async (req, res) => {
             lotteriesDate: details.lotteriesDate,
             terms: details.terms,
             name: details.name,
-            publicationApproval: details.publicationApproval,
             lotteryApproval: details.lotteryApproval
         }
         let doc = await Auction.findOneAndUpdate(filter, update, { new: true });
@@ -153,6 +172,8 @@ const addAuctionInformation = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
+
+
 const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;
@@ -193,19 +214,24 @@ const setApprovalAuction = async (req, res) => {
     let { status } = req.params;
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
-    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
+    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
     if (!auction)
         return res.status(404).send("There is no auction with such an ID number");
+    console.log(auction)
     return res.send(auction);
 }
 const setApprovalLotteries = async (req, res) => {
     let { a_id } = req.params;
     let { status } = req.params;
+    console.log("-------------------------------------------------------------")
+    console.log(a_id)
+    console.log(status)
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
-    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
+    let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'lotteryApproval': status })
     if (!auction)
         return res.status(404).send("There is no auction with such an ID number");
+    console.log(auction)
     return res.send(auction);
 }
 
@@ -237,12 +263,6 @@ const deletePackage = async (req, res) => {
 
 
 /********************************************מיונים סטטיסטיקות ותרשימים**************************************** */
-// const sortProductsByName=async(req,res)=>{
-//     let productList = await Auction.find({}).sort({""});
-//     return res.send(productList);
-// }
-
-
 //הכנסות של מכירה
 const getTotalRevenueOneAuction = async (req, res) => {
     let { _id } = req.params;
@@ -267,21 +287,20 @@ const getTotalRevenueAllAuctions = async (req, res) => {
     return res.send(a)
 }
 
+
+//----------------לא למחוק
+//זה מתאים להכנסות של מכירה אחת
+// {    $match: { auctionId: mongoose.Types.ObjectId("6199851fae43b64838d52887") } },
+
 //מחזיר מערך של
 //אם כמה מכירות באותו סכום של הכנסות, כולן תחזורנה
 const getHighestRevenueAuctions = async (req, res) => {
 
     let auctions = await Order.aggregate(
         [
-            //----------------לא למחוק
-            //זה מתאים להכנסות של מכירה אחת
-            // {    $match: { auctionId: mongoose.Types.ObjectId("6199851fae43b64838d52887") } },
             { $group: { _id: '$auctionId', totalAmount: { $sum: "$amountToPay" } } },
             { $sort: { totalAmount: -1 } }
-
-            //TODO להביא את שם המכירה
-        ]
-    )
+        ]);
 
     if (!auctions) return res.status(404).send("There is no orders");
 
@@ -303,6 +322,10 @@ const getHighestRevenueAuctions = async (req, res) => {
 
     return res.json(max_auctions);
 }
+
+
+
+
 
 //מוצר הכי נמכר בכל מכירה
 //TODO מביא שגיאה Cannot read property 'toString' of undefined
@@ -361,7 +384,7 @@ const getBestSellingProduct = async (req, res) => {
         console.log(maxTmp.productId);
         let product = await Product.findById(maxTmp.productId); console.log(product)
         let auction = await Auction.findById(maxTmp.a);
-        
+
         return res.send({ product: product, qty: maxTmp.qty, auction: auction });
     }
     catch (err) { return res.status(400).send(err.message) }
@@ -384,7 +407,7 @@ const getAuctionWithWinners = async (req, res) => {
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send("Invalid ID number");
-    let auction = await Auction.findOne({ '_id': _id }).populate([{ path: "productList.winnerId", select: "userName confidentiality" }]);
+    let auction = await Auction.findOne({ '_id': _id }).populate([{ path: "productList.winnerId", select: "userName confidentiality city" }]);
     if (!auction) return res.status(404).send("There is no auction with such an ID number");
     return res.send(auction);
 }
@@ -398,7 +421,6 @@ const getAuctionWithWinnersForManager = async (req, res) => {
         populate([{
             path: "productList.winnerId",
             select: `userName
-            confidentiality
             email
             phone
             city`
@@ -447,10 +469,16 @@ const performLotteries = async (req, res) => {
             let rnd = Math.floor(Math.random() * arr.length);//ההגרלה!!!
             let winnerId = arr[rnd].userId;//הזוכה
             pro.winnerId = winnerId;//רישום הזוכה
+
+            //TODO חשוב
+            // let xxx = await Product.findOneAndUpdate({ "_id": pro._id }, { "winnerId": winnerId });
+            xxx.save();
         }
         //מוצר שאין לו זוכים, יוכנס אליו קוד מנהל
         //כי אחרי זה בפונקציות אחרות זה עושה שגיאות שעושים פופולייט לפי קוד זוכה
-        else pro.winnerId = auction.auctionManager;
+
+        //TODO   אנשים יחשבו שהמנהל זכה בהרבה דברים  :(
+        // else pro.winnerId = auction.auctionManager;
     })
 
     auction.status = "DONE";

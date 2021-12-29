@@ -131,9 +131,15 @@ const addProductToCart = async (req, res) => {
     let { productId } = req.params;
     let { userId } = req.params;
     let { cnt } = req.params;//כמה להוסיף
-    let user = await User.findById(userId);
-    let tmp = user.shoppingCart
 
+    let user = await User.findById(userId);
+    if (!mongoose.Types.ObjectId.isValid(userId))
+        return res.status(404).send("Invalid ID number");
+    if (!user)
+        return res.status(404).send("There is no user with such an ID number");
+
+    let tmp = user.shoppingCart
+console.log(tmp)
     let obj = tmp.find(x => x.productId.toString() === productId.toString());
     let index = tmp.indexOf(obj);
     if (index == -1) tmp.push({ productId: productId, qty: cnt, auctionId: auctionId })
@@ -143,9 +149,11 @@ const addProductToCart = async (req, res) => {
 
     let user2 = await User.findById(userId).populate([
         { path: "shoppingCart.productId", select: `name image description price` }]);
-        // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+    // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
 
-    // if (!user2)
+    if (!user2)
+        return res.status(404).send("There is no user with such an ID number");
+
     let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
 
     return res.send(arr);
@@ -169,7 +177,7 @@ const removeProductFromCart = async (req, res) => {
     }
     let user2 = await User.findById(userId).populate([
         { path: "shoppingCart.productId", select: `name image description price` }]);
-        // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+    // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
 
     // if (!user2)
     let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
@@ -190,7 +198,7 @@ const emptyTheCartByAuction = async (req, res) => {
     }
     let user2 = await User.findById(userId).populate([
         { path: "shoppingCart.productId", select: `name image description price` }]);
-        // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
+    // { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
 
     // if (!user2)
     let arr = user2.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());

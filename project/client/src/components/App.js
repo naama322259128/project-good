@@ -1,8 +1,8 @@
 import 'semantic-ui-css/semantic.min.css'
 import Home from './homePage/Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Auction from '../components/auction/Auction';
-import NewAuction from '../components/new auction/NewAuction';
+import Auction from './auction/Auction';
+import NewAuction from './new auction/NewAuction';
 import About from './main/About'
 import YourProfile from './user/YourProfile';
 import UpdateDetails from './user/UpdateDetails';
@@ -13,7 +13,7 @@ import { LoginFromStorage, GetDataFromStorage } from '../store/actions/home';
 import { getUserByIDFromDB } from '../utils/userUtils';
 import { getAuctionByIdFromDB } from '../utils/auctionUtils';
 import { signIn } from '../store/actions/signIn';
-import MiniDrawer from '../components/main/Drawer'
+import MiniDrawer from './main/Drawer'
 import Statistics from './main/Statistics';
 import CartAll from './user/CartAll';
 import Login from './user/Login';
@@ -26,7 +26,7 @@ function App(props) {
     let id = localStorage.getItem("user");
 
     if (id && props.currentUser == null) {
-       
+
       let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
       if (a_id) props.setCurrentAuctionByStorage(a_id);
       if (n_a_id) props.setNewAuctionByStorage(n_a_id);
@@ -39,11 +39,11 @@ function App(props) {
 
   return (
 
-    
+
     <>
+
       {props.loginIsOpen ? <Login /> : null}
       <Router>
-
         <Switch>
           <Route exact path={`/home`}><Home /></Route>
           <Route exact path={`/`}><Home /></Route>

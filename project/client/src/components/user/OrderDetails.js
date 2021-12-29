@@ -12,9 +12,25 @@ import viewOrder from '../../img/icons/view-order.png'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import './yourProfile.scss';
+import pic from '../../img/‏‏picture2.png'
 
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 
 export default function OrerDetails(props) {
+
+    useEffect(() => {
+        console.log(props.details)
+        console.log("props.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.details")
+        if (!props.details) window.location = "http://localhost:3000/your_profile"
+    }, []);
+
+
     const [anchorEl1, setAnchorEl1] = React.useState(null);
     const open1 = Boolean(anchorEl1);
 
@@ -32,29 +48,46 @@ export default function OrerDetails(props) {
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
+            style={{ paddingRight: '2vw', paddingLeft: '2vw' }}
         >
+            <br />
+            <br />
+            <br />
 
-            <TableContainer component={Paper} sx={{ width: '500' }}  >
-                <Table sx={{ minWidth: 500 }} aria-label="caption table">
-                    <TableCell component="th" scope="row" style={style1}> qty</TableCell>
-                    <TableCell component="th" scope="row" style={style1}>prod</TableCell>
-                    <TableBody>
+            <h3>{props.auctionName}</h3>
+            {
+                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    {props.details.map((p, index) => {
+                        return (<>
+                            <ListItem key={index} alignItems="flex-start">
+                                <ListItemAvatar>
+                                    <Avatar alt="Remy Sharp" src={p.productId?.image || pic} />
+                                    {/* TODO default image */}
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={p.productId?.name}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                sx={{ display: 'inline' }}
+                                                component="span"
+                                                variant="body2"
+                                                color="text.primary"
+                                            >
+                                                {p.productId?.name}
+                                            </Typography>
+                                            {`: ${p.ticketsQuantity} tickets`}
+                                        </React.Fragment>
+                                    }
+                                />
+                            </ListItem>
+                            <Divider variant="inset" component="li" /><br />
+                        </>)
+                    })}
+                </List>
+            }
 
-                        {props.details.map((row, index) => (
-                            <TableRow key={index} >
-                                <TableCell component="th" scope="row" >{row.ticketsQuantity}</TableCell>
-                                <TableCell component="th" scope="row">{row.productName}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                    <TableCell style={style1} component="th" scope="row">Gifts:</TableCell>
-                    <TableBody>
-                        {props.gifts.map((row, index) => (
-                            <TableRow key={index}><TableCell component="th" scope="row">{row}</TableCell></TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+
         </Box >
     );
     const divStyle = { display: 'inline-block' };
@@ -77,3 +110,37 @@ export default function OrerDetails(props) {
     </ div>)
 
 }
+
+
+{/* <TableContainer component={Paper} sx={{ width: '500' }}  >
+
+<br />
+<br />
+
+<br />
+<Table sx={{ minWidth: 500 }} aria-label="caption table">
+
+    <TableCell component="th" scope="row" style={style1}>tickets quantity</TableCell>
+    <TableCell component="th" scope="row" style={style1}>product</TableCell>
+    <TableBody>
+
+        {props.details.map((row, index) => (
+            <TableRow key={index} >
+                <TableCell component="th" scope="row" >{row.ticketsQuantity}</TableCell>
+                <TableCell component="th" scope="row">{row.productId?.name}</TableCell>
+            </TableRow>
+        ))}
+    </TableBody> */}
+
+
+{/* <TableCell style={style1} component="th" scope="row">Gifts:</TableCell>
+    <TableBody>
+        {props.gifts.map((row, index) => (
+            <TableRow key={index}><TableCell component="th" scope="row">{row}</TableCell></TableRow>
+        ))}
+    </TableBody> */}
+
+
+{/* 
+</Table>
+</TableContainer> */}

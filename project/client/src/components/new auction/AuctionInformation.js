@@ -17,7 +17,7 @@ import Alert from '@mui/material/Alert';
 import { setNewAuction } from '../../store/actions/newAuction';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { setUserByStorage,setCurrentAuctionByStorage,setNewAuctionByStorage } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 //TODO שהתאריכים יהיו הגיוניים
 
 const useStyles = makeStyles((theme) => ({
@@ -25,33 +25,39 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(1)
         },
+        width: '30vw',
+        marginRight: 'auto',
+        marginLeft: 'auto'
     },
 }));
 
 const AuctionInformation = (props) => {
 
     useEffect(() => {
-        let id = localStorage.getItem("user" );
-         
+        let id = localStorage.getItem("user");
+
         if (id && props.currentUser == null) {
-             
+
             let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
             if (a_id) props.setCurrentAuctionByStorage(a_id);
             if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
-  
-    },[])
 
+    }, [])
+    useEffect(() => {
+        return () => {
+            saveDetails();
+        };
+    }, [])
     let saveDetails = () => {
 
-
+        debugger;
         let details = {
             registrationStartDate: selectedDate2,
             lotteriesDate: selectedDate1,
             registrationEndDate: selectedDate3,
             lotteryApproval: lotteryApproval,
-            publicationApproval: publicationApproval,
             name: name
         }
 
@@ -61,90 +67,93 @@ const AuctionInformation = (props) => {
     }
     const classes = useStyles();
 
-    const [selectedDate1, setSelectedDate1] = React.useState(props.auction.lotteriesDate || null);//lotery
-    const [selectedDate2, setSelectedDate2] = React.useState(props.auction.registrationStartDate || null);//start
-    const [selectedDate3, setSelectedDate3] = React.useState(props.auction.registrationEndDate || null);//end
+    const [selectedDate1, setSelectedDate1] = useState(props.auction.lotteriesDate || null);//lotery
+    const [selectedDate2, setSelectedDate2] = useState(props.auction.registrationStartDate || null);//start
+    const [selectedDate3, setSelectedDate3] = useState(props.auction.registrationStartDate || null);//end
     const [lotteryApproval, setLotteryApproval] = React.useState(props.auction.lotteryApproval || false);
-    const [publicationApproval, setPublicationApproval] = React.useState(props.auction.publicationApproval || false);
     const [name, setName] = React.useState(props.auction.name || "");
 
     return (
-        <><form className={classes.root} noValidate autoComplete="off" >
-            <h1>Auction information</h1>
-            <div className={"inputs-in-form-container"} >
-                <TextField className="txt" type="text" variant="standard" defaultValue={name} id="input-with-icon-grid" label="Auction name" onChange={(e) => { setName(e.target.value) }} />
+        <>
+            <form className={classes.root} noValidate autoComplete="off" >
+                <div className={"form-container "} >
 
-                <MuiPickersUtilsProvider utils={DateFnsUtils} className="auctionInformationDate">
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="dd/MM/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="Date of the lottery"
-                        value={selectedDate1}
-                        onChange={(date) => { setSelectedDate1(date) }}
+                    <TextField className="txt" type="text" variant="standard" defaultValue={name} id="input-with-icon-grid" label="Auction name" onChange={(e) => { setName(e.target.value) }} />
 
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="dd/MM/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Date of the lottery"
+                            value={selectedDate1}
+                            onChange={(date) => { setSelectedDate1(date) }}
 
-                </MuiPickersUtilsProvider>
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
 
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="dd/MM/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="Registration start date"
-                        value={selectedDate2}
-                        onChange={(date) => { setSelectedDate2(date) }}
+                    </MuiPickersUtilsProvider>
 
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                    />
-                </MuiPickersUtilsProvider>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="dd/MM/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Registration start date"
+                            value={selectedDate2}
+                            onChange={(date) => { setSelectedDate2(date) }}
 
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="dd/MM/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="Registration end date"
-                        value={selectedDate3}
-                        onChange={(date) => { setSelectedDate3(date) }}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
 
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="dd/MM/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Registration end date"
+                            value={selectedDate3}
+                            onChange={(date) => { setSelectedDate3(date) }}
 
-                    />
-                </MuiPickersUtilsProvider>
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
 
-                <Button
-                    variant="contained"
-                    color="default"
-                    className={classes.button}
-                    startIcon={<CloudUploadIcon />}
+                        />
+                    </MuiPickersUtilsProvider>
 
-                >
-                    Upload Terms
-                </Button>
 
-                <FormControlLabel control={<Checkbox checked={publicationApproval} onChange={(e) => { setPublicationApproval(e.target.checked) }} />} label="Publication approval" />
+                    <br />
+                    <FormControlLabel control={<Checkbox checked={lotteryApproval} onChange={(e) => { setLotteryApproval(e.target.checked) }} />} label="Lottery approval" />
 
-                <FormControlLabel control={<Checkbox checked={lotteryApproval} onChange={(e) => { setLotteryApproval(e.target.checked) }} />} label="Lottery approval" />
-            </div>
+                    <br />
+                    <Button
+                        variant="contained"
+                        color="default"
+                        style={{ width: '15vw' }}
+                        startIcon={<CloudUploadIcon />}
 
-        </form >
-            <button onClick={saveDetails} className="positive ui button">Save</button>
+                    >
+                        Upload Terms
+                    </Button>
+
+                </div>
+
+            </form >
+            {/* <button onClick={saveDetails} style={{ width: '5vw !important', marginLeft: 'auto !important', marginRight: 'auto !important' }} className="positive ui button">Save</button> */}
         </>
+
     );
 
 
@@ -155,9 +164,9 @@ const AuctionInformation = (props) => {
 const mapStateToProps = (state) => {
     return {
         auctionId: state.auction.newAuction._id,
-        currentUser:state.user.currentUser,
+        currentUser: state.user.currentUser,
         auction: state.auction.newAuction
     }
 }
-export default connect(mapStateToProps, { setNewAuction , setNewAuctionByStorage,setCurrentAuctionByStorage,setUserByStorage})(AuctionInformation);
+export default connect(mapStateToProps, { setNewAuction, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(AuctionInformation);
 

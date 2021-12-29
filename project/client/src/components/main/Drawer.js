@@ -38,8 +38,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import ProfileButton from '../user/ProfileButton';
 import Button from '@material-ui/core/Button';
 import './Drawer.scss'
-import YourOrders from '../user/YourOrders'
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -145,6 +145,9 @@ export const MiniDrawer = (props) => {
 
   return (
     <Box sx={{ display: 'flex' }}>
+
+
+
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar id="drawer-top">
@@ -203,7 +206,6 @@ export const MiniDrawer = (props) => {
             <Route path={`/your_profile`}><YourProfile /></Route>
             <Route path={`/update_your_details`}><UpdateDetails /></Route>
             <Route path={`/shoppingCart`}><CartAll /></Route>
-            <Route path={`/orders`}><YourOrders /></Route>
             <Route path={`/statistics`}><Statistics /></Route>
           </Switch>
         </Router >

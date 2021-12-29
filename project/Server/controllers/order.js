@@ -20,10 +20,8 @@ const getById = async (req, res) => {
     return res.send(order);
 }
 
+//הפונקציה הזו מוסיפה לטבלת ההזמנות ומוחקת למשתמש את המוצרים של המכירה הזו מהסל
 const addOrder = async (req, res) => {
-
-    //הפונקציה הזו מוסיפה לטבלת ההזמנות ומוחקת למשתמש את המוצרים של המכירה הזו מהסל
-
     let order = req.body;
     let newOrder = new Order(order);
     try {
@@ -59,9 +57,10 @@ const getUserOrdersList = async (req, res) => {
     let orders = await Order.find({ "userId": _id }).
         populate([
             { path: 'auctionId', select: 'name organizationName' },
-            { path: 'productId', select: 'name' }
+            { path: 'orderDetails.productId', select: 'name image' }
         ]);
-    return res.send(orders);
+
+        return res.send(orders);
 }
 
 //מחזירה הזמנה עפ"י קוד משתמש ומכירה

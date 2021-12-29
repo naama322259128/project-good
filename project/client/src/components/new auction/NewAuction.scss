@@ -1,3 +1,6 @@
+* {
+  vertical-align: top;
+}
 body {
   //text-align: center !important;
   font-family: Arial, Helvetica, sans-serif;
@@ -51,8 +54,6 @@ body {
   margin-bottom: 2vh;
 }
 
-.auctionInformationDate {
-}
 #imgPreview {
   text-align: center;
   margin: 5px 15px;
@@ -90,25 +91,46 @@ body {
 //   box-shadow: 0px 0px 3px 0.2px black;
 // }
 
-//
-.inputs-in-form-container {
-  display: grid;
-  grid-template-columns: repeat(3, 5fr);
-  grid-gap: 1rem;
-  margin-bottom: 2vh;
-  margin-top: 1vh;
+#add-product-form {
+  width: 28vw;
+  display: inline-block !important;
+  padding-right: 2vw;
+  padding-left: 2vw;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+
+  margin-left: 2vw;
+  min-height: 52vh;
+  // max-height: 52vh;
 }
-.inputs-in-form-container .MuiFormControl-root.MuiTextField-root.txt.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+.form-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 100%;
+}
+.form-container > * {
+  flex: 1 !important;
+  margin-bottom: 0.6vh !important;
+  margin-top: 0.6vh !important;
+}
+#products-table-paper {
+  width: 50vw;
+  display: inline-block !important;
+}
+.box-shadow {
+  border-radius: 5px;
+
+  -moz-box-shadow: 3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
+#newAuctionAllSteps {
+  width: 80vw;
+  margin-left: 7vw;
 }
 
-#newAuctionAllSteps {
-  width: 90vw;
-  //יירקתי בגלל הדרוואר
-  // width:100%;
-  // padding-right: 7vw;
-  // padding-left: 7vw;
-  // padding-top: 3vh;
-}
 
 /*************************************************************************************************************/
 .view-details-icon {
@@ -130,3 +152,6 @@ body {
 //     margin-right: auto;
 //     margin-top:15vh;
 // }
+button.MuiButtonBase-root.MuiFab-root.MuiFab-circular.MuiFab-sizeLarge.MuiFab-primary.css-1nacmhh-MuiButtonBase-root-MuiFab-root{
+  border-radius: 50%;
+}

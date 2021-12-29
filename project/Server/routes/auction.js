@@ -33,7 +33,10 @@ route.post("/createNewAuction/:manager_id", auctionController.addAuction)
 
 route.delete("/:id", auctionController.deleteAuction)
 // route.delete("/deletePackage/:auction_id&:package_id", auctionController.deletePackage)
-// route.delete("/deleteProduct/:auction_id&:product_id", auctionController.deleteProduct)
+route.delete("/deleteProduct/:auction_id&:product_id", auctionController.deleteProduct)
 
 
 module.exports = route;
+
+    //TODO   אנשים יחשבו שהמנהל זכה בהרבה דברים  :(
+        // else pro.winnerId = auction.auctionManager;

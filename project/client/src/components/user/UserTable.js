@@ -28,8 +28,6 @@ const UserTable = (props) => {
             label: 'Order Date',
             minWidth: 100,
             align: 'left',
-            //    formatDate: (date) => Moment(date).format('DD-MM-YYYY')
-            // format: v => v.toLocaleDateString("en-US")
 
         },
         {
@@ -55,6 +53,7 @@ const UserTable = (props) => {
         let sum = order.amountToPay;
         return { name: n, orderDate: d, sum: sum, options };
     }
+
     useEffect(() => {
         let id = localStorage.getItem("user");
 
@@ -81,25 +80,18 @@ const UserTable = (props) => {
     }, [props.currentUser])
 
     const useStyles = makeStyles({
-        root: {
-            width: '60%',
-        },
-        container: {
-            maxHeight: 440,
-        },
+        root: { width: '80%',marginBottom:'15vh' },
+        container: { maxHeight: 440, }
     });
 
     const [rows, setRows] = useState([]);
 
     const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-
-    const style1 = { marginLeft: '36vw', marginTop: '4vh' }
+    
+    const style1 = { marginTop: '4vh' }
     return (
         <center>
-            <h1>UserTable</h1>
+           <h1>Your Orders</h1> 
             <Paper className={classes.root} style={style1}>
                 <TableContainer className={classes.container} >
                     <Table stickyHeader aria-label="sticky table">
@@ -117,11 +109,10 @@ const UserTable = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows && rows.length && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            {rows && rows.length && rows.map((row) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                                         {columns.map((column) => {
-
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>

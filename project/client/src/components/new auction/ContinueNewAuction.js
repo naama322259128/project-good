@@ -11,12 +11,13 @@ import { setMyAuctionsToSet } from '../../store/actions/newAuction'
 import { getUnapprovedAuctionsByUserFromDB } from '../../utils/auctionManagerUtils';
 import Row from './ContinueNewAuctionRow'
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
+import moment from 'moment'
 
 const createData = (auction) => {
     let name = auction.name;
     let productsQty = auction.productList;
     // let purchasePackagesQty = auction.purchasePackage;
-    let lotteriesDate = auction.lotteriesDate;
+    let lotteriesDate = auction.lotteriesDate? moment(new Date(auction.lotteriesDate)).format('D/MM/YYYY') : "";
     if (productsQty) productsQty = productsQty.length;
     else productsQty = 0;
     // if (purchasePackagesQty) purchasePackagesQty = purchasePackagesQty.length;

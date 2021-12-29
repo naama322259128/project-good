@@ -84,13 +84,13 @@ const UpdateDetails = (props) => {
     },[])
 
     //עדכון משתמש קיים
-    let password = props.currentUser.password;
-    let userName = props.currentUser.userName;
-    let email = props.currentUser.email;
-    let phone = props.currentUser.phone;
-    let city = props.currentUser.city;
-    let birthYear = props.currentUser.birthYear;
-    let confidentiality = props.currentUser.confidentiality;
+    let password = props.currentUser?.password;
+    let userName = props.currentUser?.userName;
+    let email = props.currentUser?.email;
+    let phone = props.currentUser?.phone;
+    let city = props.currentUser?.city;
+    let birthYear = props.currentUser?.birthYear;
+    let confidentiality = props.currentUser?.confidentiality;
 
     //מה נציג אם לא חוזר כלום מהשרת, לדוגמא הוא לא עובד עכשיו
     const updateUser = () => {

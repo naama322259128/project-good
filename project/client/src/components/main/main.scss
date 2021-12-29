@@ -61,8 +61,11 @@
     grid-column-gap: 0.2vw;
     grid-row-gap: 1vw;
     margin-bottom: 2vh;
+    height: 50vh;
+    margin-bottom: 5vh;
+
 }
-div.one-step div {
+div.one-step div,div.one-step img {
     display: flex;
     // justify-content: center;//האמצע מימין ושמאל
     // align-items: center;//האמצע מלמעלה ולמטה
@@ -70,6 +73,8 @@ div.one-step div {
     line-height: 1;
     font-weight: 200;
     transition: all 0.3s ease;
+    height: 50vh;
+
 }
 div.one-step h3 {
     margin-bottom: 3vh;

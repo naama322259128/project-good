@@ -26,7 +26,6 @@ const ProfileButton = (props) => {
 
     const out = () => {
         handleClose();
-        //TODO: חשוב מאוד, לשמור לו נתונים לפני שמוחקים לו הכל
         props.signOut();
     }
 
@@ -71,9 +70,6 @@ const ProfileButton = (props) => {
             }
             <Link to={'/shoppingCart'}>
                 <MenuItem key={'Shopping cart'} onClick={handleClose}>Shopping cart</MenuItem>
-            </Link>
-            <Link to={'/orders'}>
-                <MenuItem key={'Your Orders'} onClick={handleClose}>Your Orders</MenuItem>
             </Link>
             <Link to={'/home'}>
                 <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>

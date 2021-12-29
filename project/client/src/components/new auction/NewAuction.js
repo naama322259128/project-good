@@ -19,6 +19,7 @@ import { setNewAuction } from '../../store/actions/newAuction'
 import { setCurrentUser } from '../../store/actions/user';
 import { useHistory } from "react-router-dom";
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user'
+import PublicationApproval from './PublicationApproval';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getSteps = () => {
-    return [/*'Purchase packages',*/ 'Products', 'Organization details', 'Chinese Auction Details'];
+    return [/*'Purchase packages',*/ 'Products', 'Organization details', 'Chinese Auction Details','Publication Approval'];
 }
 const getStepContent = (step) => {
     switch (step) {
@@ -46,6 +47,8 @@ const getStepContent = (step) => {
             return <OrganizationInformation />;
         case 2:
             return <AuctionInformation />;
+        case 3:
+            return <PublicationApproval />
         default:
             return 'Unknown step';
     }
@@ -53,18 +56,18 @@ const getStepContent = (step) => {
 const NewAuction = (props) => {
 
     useEffect(() => {
-        let id = localStorage.getItem("user" );
-         
+        let id = localStorage.getItem("user");
+
         if (id && props.currentUser == null) {
-             
+
             // let a_id = localStorage.getItem("currentAuction");
             let n_a_id = localStorage.getItem("newAuction");
             // if (a_id) props.setCurrentAuctionByStorage(a_id);
             if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
-  
-    },[])
+
+    }, [])
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -75,22 +78,17 @@ const NewAuction = (props) => {
     const isStepSkipped = (step) => { return skipped.has(step); };
 
     const handleNext = () => {
-        if (activeStep == 2) alert("save Organization details")
-
         let newSkipped = skipped;
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
     };
 
     const handleBack = () => {
-        if (activeStep == 2) alert("save Organization details")
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
 
-    return (<><div id="newAuctionAllSteps" >
-        <br />
-        <center><h1>Build Your own chinese auction</h1></center>
-        <br />
+    return (<>
+        <center><h3>Build Your own chinese auction</h3></center>
         <div className={classes.root}>
             <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => {
@@ -106,9 +104,11 @@ const NewAuction = (props) => {
                     );
                 })}
             </Stepper>
+
             <div>
                 <div>
-                    <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                    <Typography id="newAuctionAllSteps" className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                    <br />
                     <div>
                         {activeStep > 0 ?
                             <Button
@@ -130,7 +130,6 @@ const NewAuction = (props) => {
                 </div>
             </div>
         </div>
-    </div>
 
         {/* <footer id="new_auction_footer" /> */}
     </>

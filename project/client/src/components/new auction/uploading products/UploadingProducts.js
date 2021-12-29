@@ -19,12 +19,13 @@ const UploadingProducts = (props) => {
 
     }, [])
     return (<>
+        {props.productsList && props.productsList.length > 0 && <ProductsList />}
+
         {props.showSetProduct && <AddProductForm />}
         <br />
         <br />
-        <input type="button" className="ui button" onClick={() => { props.showAddProduct(true) }} value="add product" />
+        <input type="button"className="ui button" onClick={() => { props.showAddProduct(true) }} value="New product" />
 
-        {props.productsList && props.productsList.length > 0 && <ProductsList />}
     </>);
 }
 

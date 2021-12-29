@@ -12,6 +12,16 @@ import add from '../../img/icons/add-order.png'
 import { Item } from "semantic-ui-react";
 import { getInputAdornmentUtilityClass } from "@mui/material";
 import OrderDetails from './OrderDetails'
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+
+
+
 export default function OrderOptions(props) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,7 +32,7 @@ export default function OrderOptions(props) {
 
   let [productsList, setProductsList] = useState([]);
   let [details, setDetails] = useState([]);
-  let [gifts, setGifts] = useState([]);
+  // let [gifts, setGifts] = useState([]);
   let [status, setStatus] = useState("");
 
   useEffect(() => {
@@ -30,16 +40,18 @@ export default function OrderOptions(props) {
     getAuctionWithWinnersFromDB(props.order.auctionId._id).then(succ => {
       setProductsList(succ.data.productList);//רשיתמ מוצרים עם הזוכים של מכירה זו
       setStatus(succ.data.status);
+      console.log(productsList)
     });
 
     setDetails(props.order.orderDetails);//פרטי הזמנה זו
-    setGifts(props.order.giftCodes)//מתנות של הזמנה זו
+    // setGifts(props.order.giftCodes)//מתנות של הזמנה זו
+
   }, []);
 
   return (
     <div>
-      <OrderDetails details={details} gifts={gifts} />
-      <IconButton aria-describedby={id} variant="contained" onClick={handleClick} disabled={status == "DONE"}><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
+      <OrderDetails auctionName={props.order.auctionId.name+" "+props.order.auctionId.organizationName} details={details} /*gifts={gifts}*/ />
+      <IconButton aria-describedby={id} variant="contained" onClick={handleClick} disabled={status == "NOT_DONE"}><img title="Chiense auction results" className="table_options_icon" src={results} /></IconButton>
       <Popover
         id={id}
         open={open}
@@ -50,10 +62,164 @@ export default function OrderOptions(props) {
           horizontal: 'left',
         }}
       >
-        <Typography sx={{ p: 2 }}>{
-          productsList.map((p, index) => { return <p key={index}>{p.name}:{p.winnerId.confidentiality ? "Anonymous" : p.winnerId.userName}</p> }
-          )
-        }
+        <Typography sx={{ p: 2 }}>
+
+          {/* {productsList.map((p, index) => { if (p.winnerId) return <p key={index}>{p.name}:{p.winnerId.confidentiality ? "Anonymous" : p.winnerId.userName</p> }
+          )} */}
+          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            {productsList.map((p, index) => {
+              return (<>
+                <ListItem key={index} alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={p.image} />
+                    {/* TODO default image */}
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={p.name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+
+
+                          {p.winnerId ? p.winnerId.confidentiality || p.winnerId.Confidentiality ? "Anonymous" : p.winnerId.userName : ""}
+
+
+                        </Typography>
+                        {p.winnerId ? ` - ${p.winnerId.city}` : ""}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" /><br />
+
+
+
+                <ListItem key={index} alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={p.image} />
+                    {/* TODO default image */}
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={p.name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+
+
+                          {p.winnerId ? p.winnerId.confidentiality || p.winnerId.Confidentiality ? "Anonymous" : p.winnerId.userName : ""}
+
+
+                        </Typography>
+                        {p.winnerId ? ` - ${p.winnerId.city}` : ""}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" /><br />
+                <ListItem key={index} alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={p.image} />
+                    {/* TODO default image */}
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={p.name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+
+
+                          {p.winnerId ? p.winnerId.confidentiality || p.winnerId.Confidentiality ? "Anonymous" : p.winnerId.userName : ""}
+
+
+                        </Typography>
+                        {p.winnerId ? ` - ${p.winnerId.city}` : ""}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" /><br />  <ListItem key={index} alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={p.image} />
+                    {/* TODO default image */}
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={p.name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+
+
+                          {p.winnerId ? p.winnerId.confidentiality || p.winnerId.Confidentiality ? "Anonymous" : p.winnerId.userName : ""}
+
+
+                        </Typography>
+                        {p.winnerId ? ` - ${p.winnerId.city}` : ""}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" /><br />  <ListItem key={index} alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={p.image} />
+                    {/* TODO default image */}
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={p.name}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+
+
+                          {p.winnerId ? p.winnerId.confidentiality || p.winnerId.Confidentiality ? "Anonymous" : p.winnerId.userName : ""}
+
+
+                        </Typography>
+                        {p.winnerId ? ` - ${p.winnerId.city}` : ""}
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+                <Divider variant="inset" component="li" /><br />
+
+
+
+
+
+
+
+
+
+
+
+              </>)
+            })}
+          </List>
+
 
         </Typography>
       </Popover>

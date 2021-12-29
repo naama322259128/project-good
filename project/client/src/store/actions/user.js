@@ -60,11 +60,12 @@ export const setUserByStorage = (id) => {
 }
 
 
-    
+
 export const signOut = () => {
     localStorage.removeItem("user")
     localStorage.removeItem("newAuction")
     localStorage.removeItem("currentAuction")
+    window.location = "http://localhost:3000/home";
     return {
         type: actionTypes.SIGN_OUT
     }
@@ -75,4 +76,4 @@ export const updateShoppingCart = (arr) => {
         type: actionTypes.UPDATE_SHOPPING_CART,
         payload: arr
     }
-}    
+}

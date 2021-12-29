@@ -2,45 +2,40 @@ import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 
 //מביא את כל המכירות של המנהל הזה
-export const getManagerAuctionsFromDB = (user) => {
-    //let manager_id='611c2f2e18f13934fc07bc27';
-    let manager_id = user._id;
+export const getManagerAuctionsFromDB = (_id) => {
+
     return (dispatch) => {
-        axios.get(`http://localhost:5000/auctions/getAuctionsByManagerId/${manager_id}`).then(succ => {
+        axios.get(`http://localhost:5000/auctions/getAuctionsByManagerId/${_id}`).then(succ => {
             console.log(succ.data);
             if (succ.status != 400) dispatch(setManagerAuctions(succ.data));
         })
     }
 }
+
+
 //הצגת מודלים
-export const setEditAuctionModal = (b, _id) => {
-    return {
-        type: actionTypes.SET_EDIT_AUCTION_MODAL,
-        payload: { b: b, _id: _id }
-    }
-}
-export const setDeleteAuctionModal = (b, _id) => {
+export const setDeleteAuctionModal = (b) => {
     return {
         type: actionTypes.SET_DELETE_AUCTION_MODAL,
-        payload: { b: b, _id: _id }
+        payload: b
     }
 }
-export const setApprovalAuctionModal = (b, _id) => {
+export const setApprovalAuctionModal = (b) => {
     return {
         type: actionTypes.SET_APPROVAL_AUCTION_MODAL,
-        payload: { b: b, _id: _id }
+        payload: b
     }
 }
-export const setDisApprovalAuctionModal = (b, _id) => {
+export const setDisApprovalAuctionModal = (b) => {
     return {
         type: actionTypes.SET_DISAPPROVAL_AUCTION_MODAL,
-        payload: { b: b, _id: _id }
+        payload: b
     }
 }
-export const setSelectedAuctionToOptions = (_id) => {
+export const setSelectedAuctionToOptions = (a) => {
     return {
         type: actionTypes.SET_SELECTED_AUCTION_TO_OPTIONS,
-        payload: _id
+        payload: a
     }
 }
 export const deleteAuction = (_id) => {
@@ -54,21 +49,11 @@ export const deleteAuction = (_id) => {
         payload: false
     }
 }
-export const updateAuction = (_id, auction) => {
-    //TODO
-    alert("updated!!");
-    return {
-        //זה סתם רק בגלל השגיאה
-        //לעשות עדכון במסד נתונים
-        //ואז למחוק את הרטרן הזה
-        type: actionTypes.SET_EDIT_AUCTION_MODAL,
-        payload: false
-    }
-}
-export const setManagerAuctions = (list) => {
+
+export const setManagerAuctions = (arr) => {
     return {
         type: actionTypes.SET_MANAGER_AUCTIONS,
-        payload: list
+        payload: arr
     }
 }
 

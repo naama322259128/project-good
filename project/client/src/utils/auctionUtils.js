@@ -1,14 +1,16 @@
 import axios from 'axios';
 
-export const getAuctionByIdFromDB = async(_id) => {
+export const getAuctionByIdFromDB = async (_id) => {
   return axios.get(`http://localhost:5000/auctions/${_id}`)
 }
-
 
 export const getpublicationApprovalAuctionsListFromDB = async () => {
   return axios.get(`http://localhost:5000/auctions/getpublicationApprovalAuctionsList/`)
 }
 
+export const getAuctionWithWinnersForManagerFromDB = async (_id) => {
+  return axios.get(`http://localhost:5000/auctions/getAuctionWithWinnersForManager/${_id}`);
+}
 
 export const getAuctionWithWinnersFromDB = async (_id) => {
   return axios.get(`http://localhost:5000/auctions/getAuctionWithWinners/${_id}`);

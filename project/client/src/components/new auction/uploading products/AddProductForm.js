@@ -21,7 +21,7 @@ const AddProductForm = (props) => {
 
     let submit = (data, e) => {
         e.preventDefault();
-        let newProduct = { image: "", name: "", description: "", price: 0/*, includedInPackages: true */};
+        let newProduct = { image: "", name: "", description: "", price: 0/*, includedInPackages: true */ };
 
         newProduct.name = data.name;
         newProduct.description = data.description;
@@ -47,30 +47,24 @@ const AddProductForm = (props) => {
 
 
     return (
-        <form autoComplete="off" noValidate onSubmit={handleSubmit(submit)}>
-            <div className={"inputs-in-form-container"}>
-                <TextField className="txt" variant="standard"  {...register('name', { required: true })} id="input-with-icon-grid" label="Name" />
+        <form autoComplete="off" noValidate onSubmit={handleSubmit(submit)} id="add-product-form" className="box-shadow">
+            <div className="form-container" >
+                <TextField className="txt" variant="standard" {...register('name', { required: true })} id="input-with-icon-grid" label="Name" />
+                <TextField className="txt" type="number" variant="standard" {...register('price', { required: true })} id="input-with-icon-grid" label="Price" />
                 <TextField className="txt" variant="standard" multiline {...register('description', { required: false })} id="input-with-icon-grid" label="Description" />
-                <TextField className="txt" type="number" variant="standard"{...register('price', { required: true })} id="input-with-icon-grid" label="Price" />
-            </div>
-
-            <img src={imagePath || uploadImg} style={{ width: 'auto', height: 'auto', maxHeight: '25vh', maxWidth: '15vw' }} />
-            <input style={{ display: "none" }} id="contained-button-file"  accept="image/*" type="file" onChange={onChangeHandler} />
-            <label htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">
-                    Upload
-                </Button>
-            </label>
+                <input style={{ display: "none" }} id="contained-button-file" accept="image/*" type="file" onChange={onChangeHandler} />
+                <label htmlFor="contained-button-file" >
+                    <img src={imagePath || uploadImg} style={{ width: 'auto', height: 'auto', maxHeight: '20vh', maxWidth: '12vw', display: 'inline-block' }} />
+                </label>
 
 
-
-            {/* <FormControlLabel
+                {/* <FormControlLabel
                 control={<Checkbox defaultChecked {...register('includedInPackages')} id="input-with-icon-grid" />}
                 label="Included in packages" />
             <br /> */}
 
-            <button type="submit">Add</button>
-
+                <button type="submit" style={{ width: '5vw', marginRight: 'auto', marginLeft: 'auto' }}  >Add</button>
+            </div>
         </form>
     )
 }

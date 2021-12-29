@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const user = require("./routes/user");
-// const product=require("./routes/product");
 // const purchasePackage=require("./routes/purchasePackage");
 const auction = require("./routes/auction");
 const order = require("./routes/order");

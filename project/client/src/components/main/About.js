@@ -14,19 +14,24 @@ import { createNewAuctionInDB } from "../../utils/newAuctionUtils";
 import { setNewAuction } from "../../store/actions/newAuction";
 import { setWantContact } from "../../store/actions/user"
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from "../../store/actions/user";
+import p1 from '../../img/הוספת מוצרים.jpg';
+import p2 from '../../img/הגדרת פרטי ארגון.jpg';
+import p3 from '../../img/הגדרת פרטי מכירה.jpg';
+
+
 const About = (props) => {
 
 
   useEffect(() => {
-    let id = localStorage.getItem("user" );
-     
+    let id = localStorage.getItem("user");
+
     if (id && props.currentUser == null) {
-         
-        let a_id = localStorage.getItem("currentAuction");
-        //  let n_a_id = localStorage.getItem("newAuction");
-        if (a_id) props.setCurrentAuctionByStorage(a_id);
-        // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-        props.setUserByStorage(id);
+
+      let a_id = localStorage.getItem("currentAuction");
+      //  let n_a_id = localStorage.getItem("newAuction");
+      if (a_id) props.setCurrentAuctionByStorage(a_id);
+      // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+      props.setUserByStorage(id);
     }
 
   }, []);
@@ -79,11 +84,11 @@ const About = (props) => {
         <div className="one-step">
           <div>
             <p>
-              <h3>Prizes</h3>
-              Choose the prizes for your Chinese auction.
+              <h3>Products</h3>
+              Choose the products for your Chinese auction.
             </p>
           </div>
-          <div style={{ backgroundColor: "powderblue" }}>image</div>
+          <img src={p1} style={{ width: '40vw' }} />
         </div>
 
         <div className="one-step">
@@ -93,7 +98,7 @@ const About = (props) => {
               Enter the details of your organization, to which all your Chinese auction proceeds will be transferred.
             </p>
           </div>
-          <div style={{ backgroundColor: "powderblue" }}>image</div>
+          <img src={p2} style={{ width: '40vw' }} />
         </div>
 
         <div className="one-step">
@@ -104,7 +109,7 @@ const About = (props) => {
               Such as, start date, end date, rules, etc.
             </p>
           </div>
-          <div style={{ backgroundColor: "powderblue" }}>image</div>
+          <img src={p3} style={{ width: '40vw' }} />
         </div>
       </div>
 

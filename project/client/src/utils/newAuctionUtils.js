@@ -31,7 +31,7 @@ export const saveOrganizationInformationInDB = (_id, d) => {
 
 //מידע על המכירה
 export const savePublicationApprovalInDB = (_id, b) => {
-    return axios.post(`http://localhost:5000/auctions/setPublicationApproval/${_id}&${b}`);
+    return axios.post(`http://localhost:5000/auctions/approvalAuction/${_id}&${b}`);
 }
 export const saveLotteryApprovalInDB = (_id, b) => {
     return axios.post(`http://localhost:5000/auctions/setLotteryApproval/${_id}&${b}`);
@@ -47,11 +47,11 @@ export const saveAuctionInformationInDB = (_id, details) => {
     registrationEndDate: */
 
 export const saveApprovalAuctionInDB = (a_id, status) => {
-    return axios.put(`http://localhost:5000/auctions/approvalAuction/${a_id}&${status}`);
+    return axios.post(`http://localhost:5000/auctions/approvalAuction/${a_id}&${status}`);
 }
 
 export const saveApprovalLotteriesInDB = (a_id, status) => {
-    return axios.put(`http://localhost:5000/auctions/approvalLotteries/${a_id}&${status}`);
+    return axios.post(`http://localhost:5000/auctions/approvalLotteries/${a_id}&${status}`);
 }
 
 export const addOrderToDB = (order) => {

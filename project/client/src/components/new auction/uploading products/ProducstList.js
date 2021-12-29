@@ -15,15 +15,16 @@ import de from '../../../img/icons/dustbin.png'
 import '../NewAuction.scss'
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from "../../../store/actions/user";
 const useStyles = makeStyles({
-    root: { width: '80%', },
-    container: { maxHeight: 440, }
+ container: { maxHeight: '52vh', width: '50vw', height: '52vh'}
 });
 const ProductsList = (props) => {
+
     useEffect(() => {
         let arr = [];
         props.productsList && props.productsList.map((p) => { arr.push(createData(p)) });
         setRows(arr);
     }, [props.productsList])
+
     useEffect(() => {
         let id = localStorage.getItem("user");
 
@@ -42,8 +43,9 @@ const ProductsList = (props) => {
         {
             id: 'description',
             label: 'Description',
-            minWidth: 550,
+            minWidth: 300,
             align: 'left',
+            maxWidth:500,
             format: (value) => value.toFixed(2)
         },
         // {
@@ -92,42 +94,39 @@ const ProductsList = (props) => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const style1 = { width: "80vw", marginLeft: "3vw", marginTop: '8vh' }
 
     return (
-        <center>
-            <Paper className={classes.root} style={style1}>
-                <TableContainer className={classes.container} >
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (<TableCell key={column.id} align={column.align}>{value}</TableCell>);
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Paper>
-        </center>
+        <Paper id="products-table-paper">
+            <TableContainer className={classes.container} >
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            {columns.map((column) => (
+                                <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth }}
+                                >
+                                    {column.label}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows && rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                            return (
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    {columns.map((column) => {
+                                        const value = row[column.id];
+                                        return (<TableCell key={column.id} align={column.align}>{value}</TableCell>);
+                                    })}
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Paper>
     );
 }
 

@@ -75,9 +75,8 @@ const Cart = (props) => {
                 })}
             </div>
 
-            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay() != 0 && <Button onClick={orderCompletion}>PAY</Button>}
+            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay() != 0 && <Link to={'/auction/payment'}><Button>PAY</Button></Link>}
 
-            {/* TODO: איך התצוגה תתרענן פה */}
             {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay() != 0 && <h1>{amountToPay() + "₪"}</h1>}
             {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
         </div>);

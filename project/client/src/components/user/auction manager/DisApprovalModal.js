@@ -8,8 +8,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { setDisApprovalAuctionModal } from '../../../store/actions/auctionManager'
-import { saveApprovalAuctionInDB } from '../../../utils/newAuctionUtils'
+import { setDisApprovalAuctionModal, getManagerAuctionsFromDB } from '../../../store/actions/auctionManager'
+import { saveApprovalLotteriesInDB } from '../../../utils/newAuctionUtils';
 import './auctionManager.scss'
 const DisApprovalModal = (props) => {
     const theme = useTheme();
@@ -32,12 +32,13 @@ const DisApprovalModal = (props) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" size="medium" onClick={() => props.setDisApprovalAuctionModal(false)} color="primary">
+                    <Button variant="contained" size="medium" onClick={() => saveApprovalLotteriesInDB(props.auction_id, false).then(succ => { if (succ.status != 400) { props.getManagerAuctionsFromDB(props.userId) } })} color="primary">
+                        Ok
+                    </Button>
+                    <Button variant="contained" size="medium" color="primary">
                         Cancle
                     </Button>
-                    <Button variant="contained" size="medium" onClick={() => { props.saveApprovalAuctionInDB(props.auction_id, false); props.setApprovalAuctionModal(false) }} color="primary">
-                        Cancle
-                    </Button>
+
 
                 </DialogActions>
             </Dialog>
@@ -46,10 +47,11 @@ const DisApprovalModal = (props) => {
 }
 const mapStateToProps = (state) => {
     return {
-        auction_id: state.auctionManager.selected_auction_to_options
+        auction_id: state.auctionManager.selected_auction_to_options._id,
+        userId: state.user.currentUser._id
     };
 }
-export default connect(mapStateToProps, { setDisApprovalAuctionModal, saveApprovalAuctionInDB })(DisApprovalModal);
+export default connect(mapStateToProps, { setDisApprovalAuctionModal, getManagerAuctionsFromDB })(DisApprovalModal);
 
 
 
