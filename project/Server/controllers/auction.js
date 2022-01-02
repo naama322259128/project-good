@@ -38,7 +38,7 @@ const getUnapprovedAuctionsByUser = async (req, res) => {
             "logo": ""
         });
         console.log(x);
-        auctions = await Auction.find({ "auctionManager": _id, "publicationApproval": 'false' });
+        auctions = await Auction.find({ "auctionManager": _id, "publicationApproval": 'false', status: "NOT_DONE" });//ברור מאליו שלא בוצע 
         if (!auctions)
             return res.status(404).send("There is no auction with such an manager ID number");
 
@@ -80,8 +80,10 @@ const deleteAuction = async (req, res) => {
     let auction = await Auction.findByIdAndRemove(id);
     if (!auction)
         return res.status(404).send("There is no auction with such an ID number");
+    console.log("delete ", auction.organizationName)
     return res.send(auction);
 }
+
 const getAuctionsByManagerId = async (req, res) => {
     let { manager_id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(manager_id))
@@ -112,13 +114,6 @@ const getAuctionsByManagerId = async (req, res) => {
 
     return res.send(auctions);
 }
-
-//לקבל במערך את כל המכירות השייכות למנהל שנשלח
-
-
-//לקבל האם ההגרלות של המכירה מאושרות
-
-//לאשר/לא לאשר מכירה
 
 
 /********************************************אישורים**************************************** */
@@ -172,8 +167,6 @@ const addAuctionInformation = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
-
-
 const addPurchasePackage = async (req, res) => {
 
     let { a_id } = req.params;
@@ -208,10 +201,10 @@ const addProduct = async (req, res) => {
         return res.status(400).send(err.message)
     }
 }
-
 const setApprovalAuction = async (req, res) => {
     let { a_id } = req.params;
     let { status } = req.params;
+    console.log("a_id: " + a_id + " status: " + status)
     if (!mongoose.Types.ObjectId.isValid(a_id))
         return res.status(404).send("Invalid ID number");
     let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
@@ -268,10 +261,11 @@ const getTotalRevenueOneAuction = async (req, res) => {
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send("Invalid ID number");
+    console.log(_id);
     let sum = 0;
     let orders = await Order.find({ "auctionId": _id });
     for (var i = 0; i < orders.length; i++) sum += orders[i].amountToPay;
-
+    console.log(sum);
     return res.send(sum.toString());
 }
 
@@ -286,11 +280,6 @@ const getTotalRevenueAllAuctions = async (req, res) => {
 
     return res.send(a)
 }
-
-
-//----------------לא למחוק
-//זה מתאים להכנסות של מכירה אחת
-// {    $match: { auctionId: mongoose.Types.ObjectId("6199851fae43b64838d52887") } },
 
 //מחזיר מערך של
 //אם כמה מכירות באותו סכום של הכנסות, כולן תחזורנה
@@ -328,40 +317,41 @@ const getHighestRevenueAuctions = async (req, res) => {
 
 
 //מוצר הכי נמכר בכל מכירה
-//TODO מביא שגיאה Cannot read property 'toString' of undefined
+//גם אם יש כמה מוצרים בעלי אותה כמות הזמנות, יחזור רק אחד מהם.
 const getBestSellingProductByAuction = async (req, res) => {
+
     let { _id } = req.params;
     try {
-        if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Invalid ID number");
-        let auctions = await Auction.findOne({ "_id": _id });//מכירה הנוכחית
-        if (!auctions) return res.status(404).send("There is no auction with such an manager ID number");
-        let orders = await Order.find({ 'auctionId': _id });//כל ההזמנות של המכירה הנוכחית
+        console.log("---------------------------------------------------------------")
+        // console.log("best selling")
+        // console.log('auction _id:', _id)
+        let orders = await Order.find({ auctionId: _id });//כל ההזמנות
+        // console.log("orders:")
+        // console.log(orders)
         let tmp = [];
-        let products = auctions.productList;
-        let max = 0;
-        let max_p;
-        orders.map(p => {
-            let details = { productId: p.orderDetails.productId, ticketsQuantity: p.orderDetails.ticketsQuantity }
-            tmp.push(details);//הכנסה למערך את המוצר והכמות שנמכר
-        })
-
-        products.map(p => {
-            let c = tmp.filter(l => l.productId.toString() == p._id.toString());
-            // let c = tmp.filter(l => l.details.productId.toString() == p._id.toString());
-            let cnt = 0;
-            c.map(i => {
-                cnt += i.ticketsQuantity;//כמות מוצר אחד
-                // cnt += i.details.ticketsQuantity;//כמות מוצר אחד
+        orders.map(order => {
+            order.orderDetails.map(ord => {
+                let ind = tmp.findIndex(item => item.productId.toString() === ord.productId.toString());
+                if (ind === -1) tmp.push({ productId: ord.productId, qty: parseInt(ord.ticketsQuantity), a: order.auctionId });
+                else tmp[ind].qty += parseInt(ord.ticketsQuantity)
             })
-            if (cnt > max) {
-                max = cnt;
-                max_p = p.name;//שם מוצר בו נרשמו הכי הרבה אנשים
-            }
         })
-        return res.send(max_p, max);
+        // console.log("tmp:")
+        // console.log(tmp)
 
+        let maxTmp = tmp.reduce((p, c) => p.qty > c.qty ? p : c);
+        // console.log("maxTmp.productId");
+        // console.log(maxTmp.productId);
+        let product = await Product.findById(maxTmp.productId);
+        console.log("This is the best selling product:")
+        console.log(product)
+        console.log("The qty is: ", maxTmp.qty)
+
+        return res.send({ product: product, qty: maxTmp.qty });
     }
     catch (err) { return res.status(400).send(err.message) }
+
+
 }
 
 //גם אם יש כמה מוצרים בעלי אותה כמות הזמנות, יחזור רק אחד מהם.

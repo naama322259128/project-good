@@ -46,6 +46,7 @@ export const SET_DISAPPROVAL_AUCTION_MODAL = "SET_DISAPPROVAL_AUCTION_MODAL"//ה
 export const SET_APPROVAL_AUCTION_MODAL = "SET_APPROVAL_AUCTION_MODAL";//האם להציג מודל אישור אישור מכירה
 export const SET_SELECTED_AUCTION_TO_OPTIONS = "SET_SELECTED_AUCTION_TO_OPTIONS"//איזו מכירה תימחק/תתעדכן/תאושר
 export const SET_MANAGER_AUCTIONS = "SET_MANAGER_AUCTIONS"//הגדרה בסטייט של מכירות של המנהל
+export const DELETE_AUCTION_OF_MANAGER = "DELETE_AUCTION_OF_MANAGER"
 
 /******************************************   SITE MANAGER   ****************************************************/
 export const UPDATE_SITE_MANAGER_STATE = "UPDATE_SITE_MANAGER_STATE"

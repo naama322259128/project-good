@@ -56,7 +56,7 @@ const getUserOrdersList = async (req, res) => {
         return res.status(404).send("Invalid ID number");
     let orders = await Order.find({ "userId": _id }).
         populate([
-            { path: 'auctionId', select: 'name organizationName' },
+            { path: 'auctionId', select: 'name organizationName status' },
             { path: 'orderDetails.productId', select: 'name image' }
         ]);
 

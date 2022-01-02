@@ -3,51 +3,72 @@ import { connect } from "react-redux";
 import React, { useEffect } from 'react';
 import './about.scss'
 import AuctionTerms from "./AuctionTerms";
-import organizationPhotos from "./organizationPhotos";
+// import organizationPhotos from "./organizationPhotos";
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../../store/actions/user';
+import moment from 'moment'
+
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+
 
 const AboutAuction = (props) => {
   useEffect(() => {
-    let id = localStorage.getItem("user" );
-     
+    let id = localStorage.getItem("user");
+
     if (id && props.currentUser == null) {
-         
-        let a_id = localStorage.getItem("currentAuction");
-        //  let n_a_id = localStorage.getItem("newAuction");
-        if (a_id) props.setCurrentAuctionByStorage(a_id);
-        // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-        props.setUserByStorage(id);
+
+      let a_id = localStorage.getItem("currentAuction");
+      //  let n_a_id = localStorage.getItem("newAuction");
+      if (a_id) props.setCurrentAuctionByStorage(a_id);
+      // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
+      props.setUserByStorage(id);
     }
 
   }, []);
 
   return (<>
-    <main>
+    {props.auction && <main>
 
       <h1>About Us</h1>
       <br />
-      <h2>Chiense Auction: מצילים חיים{/*localStorage.getItem("")*/}</h2>      {/* שם מכירה */}
-      <h2>Organization: איחוד הצלה</h2>{/* שם ארגון */}
-      <br />
-      <br />
+      <h2>Chiense Auction: {props.auction.name} </h2>
+      <h2>Organization: {props.auction.organizationName}</h2>
 
-      <div>      {/* {arr.map....} */}      {/* רשימת הפרסים */}
-        <h3>Prizes:</h3>
-        <li>Car</li>
-        <li>Mixer</li>
-        <li>Books</li>
+      {props.logo &&
+        <Card sx={{ maxWidth: 345 }} id="logo">
+          <CardMedia
+            component="img"
+            height="140"
+            image={props.logo}
+          />
+        </Card>}
+
+
+      <div>
+        <h3>Products:</h3>
+        {props.arr && props.arr.map(item => <li key={item._id}>{item.name}</li>)}
       </div>
       <br />
       <br />
       <br />
       <br />
 
-      <AuctionTerms file={file} />{/* קובץ תקנון */}
+      {props.auction.terms &&
+        <AuctionTerms file={props.auction.terms} />}{/* קובץ תקנון */}
+      {/* <AuctionTerms file={file} />קובץ תקנון */}
 
 
-      <p>registration start date: 4/9/21</p>    {/* תאריך התחלה */}
-      <p>registration end date: 28/10/21</p>    {/* תאריך סיום */}
-      <p>lotteries date: 1/11/21</p>    {/* תאריך הגרלות */}
+      <p>registration start date: {props.auction.registrationStartDate &&
+        moment(new Date(props.auction.registrationStartDate)).format('D/MM/YYYY')}</p>  {/* תאריך התחלה */}
+
+      <p>registration end date:{props.auction.registrationEndDate &&
+        moment(new Date(props.auction.registrationEndDate)).format('D/MM/YYYY')}</p>   {/* תאריך סיום */}
+
+      <p>lotteries date: {props.auction.lotteriesDate &&
+        moment(new Date(props.auction.lotteriesDate)).format('D/MM/YYYY')}</p>  {/* תאריך הגרלות */}
+
       <br />
       <br />
 
@@ -63,21 +84,24 @@ const AboutAuction = (props) => {
       <br />
       <br /> */}
 
-      <organizationPhotos />    {/* תמונות ארגון */}
+      {/* <organizationPhotos />    תמונות ארגון */}
       <br />
       <br />
       <br />
       <br />
 
     </main>
-
+    }
   </>);
 }
 
 const mapStateToProps = (state) => {
   return {
     loginIsOpen: state.user.loginIsOpen,
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    auction: state.currentAuction.currentAuction,
+    arr: state.currentAuction.currentAuction.productList,
+    logo: state.currentAuction.currentAuction.logo
   };
 }
 export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(AboutAuction);

@@ -3,8 +3,7 @@ const route = express.Router();
 const auctionController = require("../controllers/auction");
 const myEmailMessagesController = require("../controllers/email")
 
-route.get("/getBestSellingProduct", auctionController.getBestSellingProduct)
-route.get("/getBestSellingProductByAuction/:_id", auctionController.getBestSellingProductByAuction)
+
 route.get("/getpublicationApprovalAuctionsList", auctionController.getpublicationApprovalAuctionsList)
 route.get("/getAuctionIsApproved/:_id", auctionController.getAuctionIsApproved)
 route.get("/getAuctionsByManagerId/:manager_id", auctionController.getAuctionsByManagerId)
@@ -15,11 +14,16 @@ route.get("/getUnapprovedAuctionsByUser/:_id", auctionController.getUnapprovedAu
 route.get("/sendEmailToWinners/:_id", myEmailMessagesController.sendEmailToWinners)
 route.get("/sendWinnersListToManager/:_id", myEmailMessagesController.sendWinnersListToManager)
 route.get("/sendWinnersListToUsers/:_id", myEmailMessagesController.sendWinnersListToUsers)
-route.get("/getTotalRevenueOneAuction/:_id", auctionController.getTotalRevenueOneAuction)
-route.get("/getTotalRevenueAllAuctions", auctionController.getTotalRevenueAllAuctions)
-route.get("/getHighestRevenueAuctions", auctionController.getHighestRevenueAuctions)
+
+route.get("/getBestSellingProduct", auctionController.getBestSellingProduct)//מוצר עם הכי הרבה הכנסות
+route.get("/getBestSellingProductByAuction/:_id", auctionController.getBestSellingProductByAuction)//מוצר עם הכי הרבה הכנסות במכירה ספציפית
+route.get("/getTotalRevenueOneAuction/:_id", auctionController.getTotalRevenueOneAuction)//סך הכנסות ממכירה ספציפית
+route.get("/getTotalRevenueAllAuctions", auctionController.getTotalRevenueAllAuctions)//סך הכנסות מכלל המכירות
+route.get("/getHighestRevenueAuctions", auctionController.getHighestRevenueAuctions)//מכירה בעלת הכי הרבה הכנסות
+
 route.get("/:id", auctionController.getById)
 route.get("/", auctionController.getAll)
+
 
 route.put("/performLotteries/:_id", auctionController.performLotteries)
 

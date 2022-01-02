@@ -15,7 +15,7 @@ import pic from '../../../img/‏‏picture2.png'
 const AuctionResults = (props) => {
 
     useEffect(() => {
-        if (props.auction)
+        if (props.auction!=null)
             getAuctionWithWinnersForManagerFromDB(props.auction._id).then(succ => {
                 setProductsList(succ.data.productList);//רשיתמ מוצרים עם הזוכים של מכירה זו
                 console.log(succ.data)

@@ -17,7 +17,6 @@ export const userReducer = (state = initialState, action) => {
                 loginIsOpen: action.payload
             }
         case actionTypes.SET_WANT_CONTACT:
-            debugger;
             return {
                 ...state,
                 wantContact: action.payload

@@ -31,6 +31,7 @@ export const saveOrganizationInformationInDB = (_id, d) => {
 
 //מידע על המכירה
 export const savePublicationApprovalInDB = (_id, b) => {
+    debugger;
     return axios.post(`http://localhost:5000/auctions/approvalAuction/${_id}&${b}`);
 }
 export const saveLotteryApprovalInDB = (_id, b) => {

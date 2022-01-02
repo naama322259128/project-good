@@ -16,6 +16,7 @@ import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } 
 
 const UserTable = (props) => {
     const columns = [
+        { id: 'status', label: "Status", align: 'left', minWidth: 26 },
         {
             id: 'name',
             label: 'Name',
@@ -51,7 +52,7 @@ const UserTable = (props) => {
         const n = order.auctionId.organizationName + " : " + order.auctionId.name;
         let d = moment(new Date(order.orderDate)).format('D/MM/YYYY');
         let sum = order.amountToPay;
-        return { name: n, orderDate: d, sum: sum, options };
+        return {status: order.auctionId.status.replace(/_/g, " "), name: n, orderDate: d, sum: sum, options };
     }
 
     useEffect(() => {

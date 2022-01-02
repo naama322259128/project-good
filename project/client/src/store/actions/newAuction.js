@@ -106,7 +106,7 @@ export const setNewAuction = (newAuction) => {
 
 //להפוך סטטוס של משתמש רגיל למנהל
 export const beManagerInDB = (_id) => {
-    return axios.put(`http://localhost:5000/users/beManager/${_id}`)
+    return axios.post(`http://localhost:5000/users/beManager/${_id}`)
 }
 
 

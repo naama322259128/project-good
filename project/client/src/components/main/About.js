@@ -6,10 +6,7 @@ import video from '../../img/vvv.mp4';
 import img from '../../img/logo_blue_orange.webp';
 import { Link } from 'react-router-dom';
 import { setLogin } from '../../store/actions/home';
-import SmallFooter from "./SmallFooter";
-import SmallHeader from "./SmallHeader";
 import ContactForm from "./ContactForm";
-import { resetNewAuctionState } from "../../store/actions/newAuction";
 import { createNewAuctionInDB } from "../../utils/newAuctionUtils";
 import { setNewAuction } from "../../store/actions/newAuction";
 import { setWantContact } from "../../store/actions/user"
@@ -21,19 +18,16 @@ import p3 from '../../img/הגדרת פרטי מכירה.jpg';
 
 const About = (props) => {
 
-
   useEffect(() => {
     let id = localStorage.getItem("user");
 
-    if (id && props.currentUser == null) {
+    if (id && props.currentUser == null) props.setUserByStorage(id);
 
-      let a_id = localStorage.getItem("currentAuction");
-      //  let n_a_id = localStorage.getItem("newAuction");
-      if (a_id) props.setCurrentAuctionByStorage(a_id);
-      // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-      props.setUserByStorage(id);
-    }
+    window.scrollTo(0, 0)
 
+    if (props.wantContact) window.scrollTo(0, 2350)
+
+    return () => props.setWantContact(false);
   }, []);
 
 
@@ -41,6 +35,7 @@ const About = (props) => {
 
     <center>
       <img src={p} id="logo-about" />
+
       <div id="txt-about">
         <br />
         <h3>  Building Chinese auctions, And a database of all auctions built.

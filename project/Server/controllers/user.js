@@ -1,6 +1,7 @@
 const User = require("../models/user");
 
 const mongoose = require("mongoose");
+const Auction = require("../models/auction");
 const getAll = async (req, res) => {
     let users = await User.find();
     return res.send(users);
@@ -83,12 +84,18 @@ const deleteUser = async (req, res) => {
     return res.send(user);
 }
 
+//signIn
 //בודקת האם משתמש קיים לפי סיסמא ומייל
 const isUserExist = async (req, res) => {
     let { password, email } = req.params;
     let user = await User.findOne({ "password": password, "email": email });
     if (!user)
         return res.status(400).send("Incorrect details entered");
+    let arr = await Auction.find({ 'auctionManager': user._id })
+    if (arr && arr.length > 0) {
+        user = await User.findOneAndUpdate({ _id: user._id }, { status: 'AUCTION_MANAGER' });
+        user.save();
+    }
     return res.send(user);
 }
 
@@ -115,8 +122,7 @@ const beManager = async (req, res) => {
     let filter = { _id: userId };
     let update = { status: 'AUCTION_MANAGER' };
 
-    // `doc` is the document _after_ `update` was applied because of
-    // `returnOriginal: false`
+
     let doc = await User.findOneAndUpdate(filter, update, {
         returnOriginal: false
     });
@@ -139,7 +145,7 @@ const addProductToCart = async (req, res) => {
         return res.status(404).send("There is no user with such an ID number");
 
     let tmp = user.shoppingCart
-console.log(tmp)
+    console.log(tmp)
     let obj = tmp.find(x => x.productId.toString() === productId.toString());
     let index = tmp.indexOf(obj);
     if (index == -1) tmp.push({ productId: productId, qty: cnt, auctionId: auctionId })
@@ -214,13 +220,14 @@ const getProductsInCartByAuction = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(userId) || !mongoose.Types.ObjectId.isValid(auctionId))
         return res.status(404).send("Invalid ID number");
 
-
     let user = await User.findById(userId).populate([
         { path: "shoppingCart.productId", select: `name image description price includedInPackages` }]);
 
     // if (!user)
     let arr = user.shoppingCart.filter(obj => obj.auctionId.toString() == auctionId.toString());
+    console.log("arr in getProductsInCartByAuction");
     console.log(arr);
+
     return res.send(arr);
 }
 const getCart = async (req, res) => {
@@ -240,9 +247,12 @@ const getCart = async (req, res) => {
 
 
     //מחיקת כל המוצרים שבסל, אם התאריך האחורן להרשמה של המכירה לה הם שייכים, כבר עבר
-    let arr = user.shoppingCart.filter(item => new Date(item.auctionId.registrationEndDate).valueOf() > new Date().valueOf())
+    let arr = user.shoppingCart.filter(item => item.auctionId.registrationEndDate === null || new Date(item.auctionId.registrationEndDate).valueOf() > new Date().valueOf())
     user.shoppingCart = arr;
     await user.save();
+
+
+
 
     let tmp = user.shoppingCart;
 

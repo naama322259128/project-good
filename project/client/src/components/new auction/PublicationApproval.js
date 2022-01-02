@@ -79,16 +79,40 @@ const PublicationApproval = (props) => {
     }, [])
 
     useEffect(() => {
-        return (savePublicationApprovalInDB(props.auctionId, publicationApproval).then(succ => {
-            if (succ.status != 400) props.setNewAuction(succ.data);
-        }))
+        debugger
+        return () => savePublicationApprovalInDB(props.auctionId, publicationApproval).then(succ => {
+            if (succ.status != 400) {
+                props.setNewAuction(succ.data);
+                window.location = "http://localhost:3000/home"
+            }
+        })
     }, [])
+
     const [publicationApproval, setPublicationApproval] = React.useState(props.auction.publicationApproval || false);
     const [succses, setSuccses] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const check = () => {
-        setLoading(!loading)
-        // setLoading(true)
+        // setLoading(!loading)
+        setLoading(true)
+        if (props.auction.productList &&
+            props.auction.productList.length > 0) {
+            //TODO לבדוק תקינות תאריכים, שיהיה לפחות מוצר אחד, 
+            //ולהציג הודעות בהתאם
+            setTimeout(() => {
+                setLoading(false)
+                setSuccses(true)
+            }, 1000);
+
+        }
+        else {
+            setTimeout(() => {
+                alert("invalid auction")
+                setLoading(false)
+            }, 1000);
+
+        }
+
+
     }
 
 
@@ -101,13 +125,13 @@ const PublicationApproval = (props) => {
             <button onClick={check}>Check auction</button>
             {loading && <Box sx={{ flexGrow: 1 }}>
                 <FacebookCircularProgress />
-                {/* <br /> */}
-                {/* <BorderLinearProgress variant="determinate" value={time} /> */}
+                {/* <br /> 
+                 <BorderLinearProgress variant="determinate" value={time} /> */}
             </Box>}
             <br />
 
             <FormControlLabel control={<Checkbox checked={publicationApproval}
-                disabled={true} onChange={(e) => { setPublicationApproval(e.target.checked) }} />} label="I confirm that my auction is displayed on the site" />
+                disabled={!succses} onChange={(e) => { setPublicationApproval(e.target.checked) }} />} label="I confirm that my auction is displayed on the site" />
             <br />
         </>
 

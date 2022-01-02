@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import { setDeleteAuctionModal, deleteAuction } from '../../../store/actions/auctionManager'
+import { setDeleteAuctionModal, deleteAuctionFromDB } from '../../../store/actions/auctionManager'
 import './auctionManager.scss'
 
 const DeleteModal = (props) => {
@@ -32,7 +32,7 @@ const DeleteModal = (props) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => { props.deleteAuction(props.auction_id) }} color="primary" autoFocus>
+                    <Button onClick={() => { props.deleteAuctionFromDB(props.auction_id) }} color="primary" autoFocus>
                         Ok
                     </Button>
                     <Button autoFocus color="primary">
@@ -49,4 +49,4 @@ const mapStateToProps = (state) => {
         auction_id: state.auctionManager.selected_auction_to_options._id
     };
 }
-export default connect(mapStateToProps, { setDeleteAuctionModal, deleteAuction })(DeleteModal);
+export default connect(mapStateToProps, { setDeleteAuctionModal, deleteAuctionFromDB })(DeleteModal);

@@ -20,7 +20,6 @@ import { setCurrentUser } from '../../store/actions/user';
 import { useHistory } from "react-router-dom";
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user'
 import PublicationApproval from './PublicationApproval';
-
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const getSteps = () => {
-    return [/*'Purchase packages',*/ 'Products', 'Organization details', 'Chinese Auction Details','Publication Approval'];
+    return [/*'Purchase packages',*/ 'Products', 'Organization details', 'Chinese Auction Details', 'Publication Approval'];
 }
 const getStepContent = (step) => {
     switch (step) {
@@ -65,8 +64,10 @@ const NewAuction = (props) => {
             // if (a_id) props.setCurrentAuctionByStorage(a_id);
             if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
+            beManagerInDB(id).then(succ => {
+                if (succ.status != 400) props.setCurrentUser(succ.data);
+            })
         }
-
     }, [])
 
     const classes = useStyles();

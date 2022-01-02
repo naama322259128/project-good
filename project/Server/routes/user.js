@@ -14,8 +14,8 @@ route.post("/sendContactToSiteManager/", myEmailMessagesController.sendContactTo
 route.post("/", userController.addUser)
 route.post(`/addProductToCart/:auctionId&:userId&:productId&:cnt`, userController.addProductToCart);
 route.post(`/removeProductFromCart/:auctionId&:userId&:productId&:cnt`, userController.removeProductFromCart);
+route.post("/beManager/:_id", userController.beManager)
 
-route.put("/beManager/:_id", userController.beManager)
 route.put("/:id", userController.updateUser)
 route.put("/emptyTheCartByAuction/:auctionId&:userId", userController.emptyTheCartByAuction)
 

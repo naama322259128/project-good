@@ -63,6 +63,7 @@ const AuctionManagerTable = (props) => {
     const [myAuctions, setMyAuctions] = React.useState([]);
 
     const columns = [
+        { id: 'status', label: "Status", align: 'left', minWidth: 26 },
         { id: 'name', label: 'Name', align: 'left', minWidth: 80 },
         {
             id: 'registrationStartDate',
@@ -128,7 +129,7 @@ const AuctionManagerTable = (props) => {
             <Link onClick={() => props.setSelectedAuctionToOptions(a)} to={`/your_profile/statistics`}><IconButton title="Statistics"><img className="my_icon" src={st} ></img></IconButton></Link>
             <IconButton onClick={() => deleteAuction(a)} title="Delete" disabled={isDone} ><img className="my_icon" src={de} ></img></IconButton>
         </div>
-        return { name, registrationStartDate, lotteriesDate, approval, options };
+        return { status: a.status.replace(/_/g, " "), name, registrationStartDate, lotteriesDate, approval, options };
     }
 
     const classes = useStyles();

@@ -8,7 +8,7 @@ export const currentAuctionReducer = (state = initialState, action) => {
         case actionTypes.SET_CURRENT_AUCTION:
             {
                 return {
-                    currentAuction: action.payload                    //קיבלנו לכאן קוד מכירה
+                    currentAuction: action.payload
                 }
 
             }

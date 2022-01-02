@@ -39,6 +39,7 @@ import ProfileButton from '../user/ProfileButton';
 import Button from '@material-ui/core/Button';
 import './Drawer.scss'
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
+import CustomizedBadges from '../auction/CustomizedBadges';
 
 const drawerWidth = 240;
 
@@ -166,6 +167,7 @@ export const MiniDrawer = (props) => {
           {props.currentUser ? <ProfileButton /> : <Button type="button" id="btnLoginInDrower" onClick={() => props.setLogin(true)}>Login</Button>}
           <Typography variant="h6" noWrap component="div" >Chinese auctions</Typography>
           {location.pathname.startsWith('/auction') && <Timer />}
+          {location.pathname.startsWith('/auction') && <CustomizedBadges  />}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

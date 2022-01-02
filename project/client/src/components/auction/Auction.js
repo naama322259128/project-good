@@ -6,14 +6,19 @@ import Cart from '../auction/Cart';
 import './Auction.scss';
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 import PaymentForm from './PaymentForm';
+import AboutAuction from './about/AboutAuction'
+import { updateShoppingCart } from '../../store/actions/user';
+
+import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
+
 const Auction = (props) => {
 
 
     useEffect(() => {
-        let id = localStorage.getItem("user" );
-         
+        let id = localStorage.getItem("user");
+
         if (id && props.currentUser == null) {
-             
+
             let a_id = localStorage.getItem("currentAuction");
             //let n_a_id = localStorage.getItem("newAuction");
             if (a_id) props.setCurrentAuctionByStorage(a_id);
@@ -22,9 +27,16 @@ const Auction = (props) => {
         }
     }, [])
 
+    useEffect(() => {
+        if (props.currentUser && props.currentAuction) getProductsInCartByAuctionIdFromDB(props.currentUser._id, props.currentAuction._id).then(succ => {
+            if (succ.status != 400) { props.updateShoppingCart(succ.data); }
+        })
+    }, [props.currentAuction])
+
     return (<>
         <Switch>
-            <Route path={'/auction/payment'}><PaymentForm/></Route>
+            <Route path={'/auction/payment'}><PaymentForm /></Route>
+            <Route path={'/auction/about'}><AboutAuction /></Route>
             <Route path={`/auction/cart`}><Cart /></Route>
             <Route path={`/auction`}><CurrentAuction /></Route>
         </Switch>
@@ -37,4 +49,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction
     }
 }
-export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(Auction);
+export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage, updateShoppingCart })(Auction);
