@@ -1,5 +1,4 @@
 import 'semantic-ui-css/semantic.min.css'
-import Home from '../homePage/Home';
 import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
 import Auction from '../auction/Auction';
 import NewAuction from '../new auction/NewAuction';
@@ -14,8 +13,6 @@ import CartAll from '../user/CartAll';
 import { setLogin } from '../../store/actions/home';
 import { setNewAuction } from '../../store/actions/newAuction';
 import { createNewAuctionInDB } from '../../utils/newAuctionUtils';
-import { Link } from 'react-router-dom';
-import Login from '../user/Login';
 import Timer from '../auction/Timer'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -33,8 +30,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import ProfileButton from '../user/ProfileButton';
 import Button from '@material-ui/core/Button';
 import './Drawer.scss'
@@ -45,7 +40,8 @@ import statisticsIcon from '../../img/icons/statistics.png'
 import buildingIcon from '../../img/icons/building.png'
 import homeIcon from '../../img/icons/home.png'
 import aboutIcon from '../../img/icons/about.png'
-
+import Arrows from './Arrows';
+import { useHistory } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -113,15 +109,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
   }),
 );
-const MyLinkInList = ({ text, iconSrc }) => {
+const MyLinkInList = ({ text, iconSrc, to }) => {
+  const history = useHistory();
 
   return (
-    <ListItem title={text.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} button style={{marginBottom:'1.8vh'}}>
-      <ListItemIcon  className="links-icons"><img src={iconSrc} className={"icon-link-in-list"} /></ListItemIcon>
+    <ListItem
+      onClick={() => window.location = "http://localhost:3000"+to}
+      title={text.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} button style={{ marginBottom: '1.8vh' }}>
+      <ListItemIcon className="links-icons"><img src={iconSrc} className={"icon-link-in-list"} /></ListItemIcon>
       <ListItemText primary={text} />
     </ListItem>)
 }
 export const MiniDrawer = (props) => {
+
+
+
   useEffect(() => {
     let id = localStorage.getItem("user");
 
@@ -169,9 +171,10 @@ export const MiniDrawer = (props) => {
             <MenuIcon />
           </IconButton>
           {props.currentUser ? <ProfileButton /> : <Button type="button" id="btnLoginInDrower" onClick={() => props.setLogin(true)}>Login</Button>}
-          <Typography variant="h6" noWrap component="div" >Chinese auctions</Typography>
+          <Typography variant="h6" noWrap component="div" > Chinese auctions</Typography>
           {location.pathname.startsWith('/auction') && <Timer />}
           {location.pathname.startsWith('/auction') && <CustomizedBadges />}
+          <Arrows />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -185,20 +188,32 @@ export const MiniDrawer = (props) => {
 
         <List id="links-list">
 
-          <Link to={"/home"}><MyLinkInList text="HOME" iconSrc={homeIcon} /></Link>
+          <MyLinkInList text="HOME" iconSrc={homeIcon} to={"/home"} />
 
-          <Link to={"/home"}><MyLinkInList text="AUCTIONS" iconSrc={auctionsIcon} /></Link>
+          <MyLinkInList text="AUCTIONS" iconSrc={auctionsIcon} to={"/toAuctions"} />
 
-          <Link onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
-            if (succ.status != 400) props.setNewAuction(succ.data);
-          }) : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
-            <MyLinkInList text="BUILDING" iconSrc={buildingIcon} />
-          </Link>
+          <ListItem
+            onClick={props.currentUser ?
+              () => createNewAuctionInDB(props.currentUser._id).then(succ => {
+                if (succ.status != 400) {
+                  props.setNewAuction(succ.data);
+                  window.location = "http://localhost:3000/new_auction"
+                }
+              }) :
+              () => {
+                window.scrollTo(0, 0);
+                props.setLogin(true)
+              }}
+            title={"BUILDING".toLowerCase().replace(/\b\w/g, l => l.toUpperCase())}
+            button
+            style={{ marginBottom: '1.8vh' }}>
+            <ListItemIcon className="links-icons"><img src={buildingIcon} className={"icon-link-in-list"} /></ListItemIcon>
+            <ListItemText primary={"BUILDING"} />
+          </ListItem>
 
-          <Link to={"/statistics"} ><MyLinkInList text="STATISTICS" iconSrc={statisticsIcon} /></Link>
-          {/* window.location */}
+          <MyLinkInList text="STATISTICS" iconSrc={statisticsIcon} to={"/statistics"} />
 
-          <Link to={"/about"} ><MyLinkInList text="ABOUT" iconSrc={aboutIcon} /></Link>
+          <MyLinkInList text="ABOUT" iconSrc={aboutIcon} to={"/about"} />
 
         </List>
 
@@ -206,7 +221,6 @@ export const MiniDrawer = (props) => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-
         <Router>
           <Switch>
             <Route path={`/auction`} ><Auction /></Route>
@@ -217,6 +231,7 @@ export const MiniDrawer = (props) => {
             <Route path={`/update_your_details`}><UpdateDetails /></Route>
             <Route path={`/shoppingCart`}><CartAll /></Route>
             <Route path={`/statistics`}><Statistics /></Route>
+            <Route path={`/`}><About /></Route>
           </Switch>
         </Router >
       </Box>

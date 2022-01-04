@@ -14,6 +14,8 @@ import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } 
 import p1 from '../../img/הוספת מוצרים.jpg';
 import p2 from '../../img/הגדרת פרטי ארגון.jpg';
 import p3 from '../../img/הגדרת פרטי מכירה.jpg';
+import c from '../../img/icons/copy_right.png'
+import { useHistory } from "react-router-dom";
 
 
 const About = (props) => {
@@ -29,6 +31,7 @@ const About = (props) => {
 
     return () => props.setWantContact(false);
   }, []);
+  const history = useHistory();
 
 
   return (<>
@@ -47,18 +50,22 @@ const About = (props) => {
         <p><b>What? </b>Chinese Auction: A raffle that allows you to buy tickets for the prizes you are interested in from the catalog.</p>
         <p><b>Why? </b>The money with which you purchase tickets for auction (s) you would like to continue their operations and reach new destinations.</p>
         <p><b>How? </b>Choose here on the site the sale (s) you would like to participate in, buy tickets for the prizes you would like to win {/*(depending on the packages, if any)*/}, fill in the credit card details and you are in!</p>
-        <b>Want to get started? </b><Link to={"/home"}>Click here!</Link>
+        <b>Want to get started? </b><p style={{ fontSize: '2vh', color: "#262b96", display: "inline-block", cursor: 'pointer' }} onClick={() => window.location = "http://localhost:3000/toAuctions"}>Click here!</p>
         <br />        <br />
         <h2>Build your own Chinese auction:</h2>
         <p><b>What? </b>Build a Chinese auction so that others can buy tickets for the prizes they are interested in from the catalog.</p>
         <p><b>Why? </b>The money with which they purchased the tickets will allow you to continue your operations and reach new destinations.</p>
         <p><b>How? </b>Choose a name for your Chinese auction, set prizes, prices and dates, tell about your organization / purpose. Confirm the auction and the auction in the air!</p>
-        <b>Want to get started?</b>
-        <Link to={props.currentUser ? "/new_auction" : '#'}
+        <b>Want to get started? </b>
+        <p style={{ fontSize: '2vh', color: "#262b96", display: "inline-block", cursor: 'pointer' }}
           onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
-            if (succ.status != 400) props.setNewAuction(succ.data);
+            if (succ.status != 400) { props.setNewAuction(succ.data); history.push("/new_auction") }
           })
-            : () => props.setLogin(true)}>Click here!</Link>
+            : () => props.setLogin(true)}>
+          Click here!
+        </p>
+
+
       </div>
 
       <h2>Building a Chinese auction:</h2>
@@ -109,6 +116,11 @@ const About = (props) => {
       </div>
 
       <ContactForm />
+
+      <h4 id="made">
+        N.Merahavi and M.Katan. Israel 2021.
+        <img id="copy-right-icon" src={c} /> All rights reserved.
+      </h4>
     </center>
     <br />
     <br />

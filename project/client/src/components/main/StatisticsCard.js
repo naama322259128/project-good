@@ -26,7 +26,7 @@ const StatisticsCard = (props) => {
                 <Link
                     onClick={() => props.getAuctionFromDB(props._id)}
                     to={`/auction`}>
-                    <Button size="large" style={{ backgroundColor: "#e0e0e0", color: "#262b96" }}>Join up</Button>
+                    <Button size="large" style={{ color: "#e0e0e0", backgroundColor: "#262b96" }}>Join up</Button>
                 </Link>
             </CardActions>}
         </Card>

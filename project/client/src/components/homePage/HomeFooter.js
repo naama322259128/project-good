@@ -14,8 +14,7 @@ const HomeFooter = (props) => {
             <div id="logo_in_home_footer" ></div>
             <Link to={'/about'}><div id="contact_us" onClick={() => { props.setWantContact(true) }}><p>CONTACT US</p></div></Link>
             <div id="menu_footer">
-                <Link to={"/home"}><p className="menu_footer_link">HOME</p></Link>
-                <Link to={"/home"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
+                <Link to={"/toAuctions"} onClick={() => window.scrollTo(0, 900)}><p className="menu_footer_link">AUCTIONS</p></Link>
                 <Link onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
                     if (succ.status != 400) {
                         props.setNewAuction(succ.data);

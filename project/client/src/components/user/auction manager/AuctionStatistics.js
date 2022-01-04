@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { connect } from "react-redux";
 import React, { useEffect, useState, useRef } from 'react';
-import pic from '../../../img/picture2.png'
+import pic from '../../../img/x2.png'
 import { getBestSellingProductByAuctionFromDB, getTotalRevenueFromDB } from '../../../utils/auctionManagerUtils'
 import { setSelectedAuctionToOptions } from '../../../store/actions/auctionManager'
 

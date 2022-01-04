@@ -16,7 +16,7 @@ import { beManagerInDB } from "../../store/actions/newAuction";
 import { createNewAuctionInDB } from '../../utils/newAuctionUtils'
 import { signIn, loginGoogle } from '../../store/actions/signIn';
 import { setNewAuction } from '../../store/actions/newAuction'
-import { setCurrentUser } from '../../store/actions/user';
+import { setCurrentUser } from '../../store/actions/signUp';
 import { useHistory } from "react-router-dom";
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user'
 import PublicationApproval from './PublicationApproval';

@@ -94,30 +94,29 @@ const OneAuction = (props) => {
       focusVisibleClassName={classes.focusVisible}
       style={{
         width: '100%',
-
       }}
     >
-      <span
-        className={classes.imageSrc}
-        style={{
-          backgroundRepeat: 'no-repeat',
-          backgroundImage: `url('${props.item.logo || defaultLogo}')`,
-          backgroundSize: '100%'
-        }}
-      />
-      <span className={classes.imageBackdrop} />
-      <span className={classes.imageButton}>
-        <Typography
-          component="span"
-          variant="subtitle1"
-          color="inherit"
-          className={classes.imageTitle}
-        >
-          {props.item.name}
-          <span className={classes.imageMarked} />
-        </Typography>
-      </span>
-    </ButtonBase>
+    <span
+      className={classes.imageSrc}
+      style={{
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: `url('${props.item.logo || defaultLogo}')`,
+        backgroundSize: '100%'
+      }}
+    />
+    <span className={classes.imageBackdrop} />
+    <span className={classes.imageButton}>
+      <Typography
+        component="span"
+        variant="subtitle1"
+        color="inherit"
+        className={classes.imageTitle}
+      >
+        {props.item.name}
+        <span className={classes.imageMarked} />
+      </Typography>
+    </span>
+  </ButtonBase>
 
   </>
   )

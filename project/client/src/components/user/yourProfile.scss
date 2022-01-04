@@ -43,10 +43,7 @@
   margin-bottom: 1.9vh !important;
 }
 
-// #long-menu .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
-//   left: 14.5vw ​ !important;
-//   background-color: crimson;
-// }
+
 
 /************************************************** userTable *****************************************************/
 .table_options_icon {
@@ -61,4 +58,10 @@
 }
 .table_options_icon:not(:root) {
   overflow: hidden;
+}
+
+
+
+li.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button.user-menu{
+  color: #262b96 !important;
 }

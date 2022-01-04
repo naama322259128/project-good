@@ -7,7 +7,6 @@ import { signIn } from '../store/actions/signIn';
 import MiniDrawer from './main/Drawer'
 import Login from './user/Login';
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../store/actions/user'
-
 // #e0e0e0
 
 
@@ -16,7 +15,7 @@ function App(props) {
   useEffect(() => {
     let id = localStorage.getItem("user");
     if (id && props.currentUser == null) {
-      let a_id = localStorage.getItem("currentAuction"); 
+      let a_id = localStorage.getItem("currentAuction");
       let n_a_id = localStorage.getItem("newAuction");
       if (a_id) props.setCurrentAuctionByStorage(a_id);
       if (n_a_id) props.setNewAuctionByStorage(n_a_id);
@@ -28,14 +27,12 @@ function App(props) {
   const sodi = () => { props.signIn('m', 'm@gmail.com'); }
 
   return (
-
-
     <>
-
       {props.loginIsOpen ? <Login /> : null}
       <Router>
         <Switch>
           <Route exact path={`/home`}><Home /></Route>
+          <Route exact path={`/toAuctions`}><Home /></Route>
           <Route exact path={`/`}><Home /></Route>
           <Route path={`/`}><MiniDrawer /></Route>
 

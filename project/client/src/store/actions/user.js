@@ -4,12 +4,7 @@ import { signIn } from './signIn';
 import { setCurrentAuction } from './currentAuction';
 import { setNewAuction } from './newAuction';
 
-export const setCurrentUser = (user) => {
-    return {
-        type: actionTypes.SET_CURRENT_USER,
-        payload: user
-    }
-}
+
 export const setWantContact = (b) => {
     return {
         type: actionTypes.SET_WANT_CONTACT,

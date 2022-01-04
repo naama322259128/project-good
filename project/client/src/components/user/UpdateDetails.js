@@ -16,8 +16,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
-// import CloseIcon from '@mui/icons-material/Close';
-import { setCurrentUser } from '../../store/actions/user';
+import { setCurrentUser } from '../../store/actions/signUp';
 import { setUserByStorage, setNewAuctionByStorage, setCurrentAuctionByStorage } from '../../store/actions/user';
 const useStyles = makeStyles((theme) => (
     {

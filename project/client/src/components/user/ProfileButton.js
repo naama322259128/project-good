@@ -58,22 +58,22 @@ const ProfileButton = (props) => {
             }}
         >
             <Link to={'/your_profile'}>
-                <MenuItem key={'Your profile'} onClick={handleClose}>Your profile</MenuItem>
+                <MenuItem key={'Your profile'} className="user-menu" onClick={handleClose}>Your profile</MenuItem>
             </Link>
 
             <Link to={'/update_your_details'}>
-                <MenuItem key={'Update your details'} onClick={handleClose}>Update your details</MenuItem>
+                <MenuItem key={'Update your details'}  className="user-menu" onClick={handleClose}>Update your details</MenuItem>
             </Link>
             {props.currentUser && props.currentUser.status != "USER" &&
                 <Link to={'/continue_new_auction'}>
-                    <MenuItem key={'Continue building'} onClick={handleClose}>Continue building</MenuItem>
+                    <MenuItem key={'Continue building'}  className="user-menu" onClick={handleClose}>Continue building</MenuItem>
                 </Link>
             }
             <Link to={'/shoppingCart'}>
-                <MenuItem key={'Shopping cart'} onClick={handleClose}>Shopping cart</MenuItem>
+                <MenuItem key={'Shopping cart'} className="user-menu"  onClick={handleClose}>Shopping cart</MenuItem>
             </Link>
             <Link to={'/home'}>
-                <MenuItem key={'Sign out'} onClick={out}>Sign out</MenuItem>
+                <MenuItem key={'Sign out'} className="user-menu"  onClick={out}>Sign out</MenuItem>
             </Link>
 
         </Menu>

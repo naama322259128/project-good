@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import OneAuction from './OneAuction';
 import { Link } from 'react-router-dom';
 import './home.scss';
-import { getpublicationApprovalAuctionsListFromDB} from "../../utils/auctionUtils";
+import { getpublicationApprovalAuctionsListFromDB } from "../../utils/auctionUtils";
 import { setLogin } from '../../store/actions/home';
 import { getAuctionFromDB } from '../../store/actions/currentAuction'
 import React, { useEffect, useState } from "react";
@@ -12,8 +12,8 @@ const AuctionsList = (props) => {
     let [auctionsList, setAuctionsList] = useState([]);
     //הכנסת רשימה של כל המכירות הקיימות במסד נתונים
     useEffect(() => {
-        getpublicationApprovalAuctionsListFromDB().then(succ => {console.log(succ.data); setAuctionsList(succ.data) })
-    },[] );
+        getpublicationApprovalAuctionsListFromDB().then(succ => { console.log(succ.data); setAuctionsList(succ.data) })
+    }, []);
 
     return (<div id="auctions-container">
         {auctionsList && auctionsList.map((item) => {

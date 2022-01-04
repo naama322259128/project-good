@@ -173,8 +173,13 @@ div.one-step h3 {
     position: absolute !important;
     cursor: pointer !important;
     background-color: #7376c0 !important ; //אפרפר
-    background-color: #e0e0e0 !important ; //אפרפר
     right: 3vw !important;
     top: 2.2vh !important;
     display: inline-block !important;
+}
+
+svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root.history-arrow {
+    color: #7376c0 !important;
+    margin-right: 1vw;
+    cursor: pointer;
 }

@@ -1,4 +1,4 @@
- 
+
 import React, { useState } from 'react';
 import { addUserToDB } from '../../utils/userUtils';//הוספת משתמש למאגר
 import Visibility from '@material-ui/icons/Visibility';
@@ -11,13 +11,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import FilledInput from '@material-ui/core/FilledInput';
 import './User.scss';
 import User from '../../models/user'
- 
+
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { setCurrentUser } from '../../store/actions/signUp';
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
- 
+import { setLogin } from '../../store/actions/home';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -44,20 +44,20 @@ const useStyles = makeStyles((theme) => ({
         alignSelf: 'flex-end',
         marginRight: 'auto',
         marginLeft: 'auto'
- 
+
     },
     eye: {
         color: '#8e8e95',
- 
+
     },
     placeholder_in_form: {
         marginLeft: '3% !important',
         marginBottom: ' -2% !important'
     }
 }));
- 
+
 const SignUp = (props) => {
- 
+
     const classes = useStyles();
     // const handleChangePassword = (prop) => (event) => {
     //     setValues({ ...values, [prop]: event.target.value });
@@ -75,9 +75,9 @@ const SignUp = (props) => {
         weightRange: '',
         showPassword: false,
     });
- 
+
     // const [newUser, setNewUser] = useState({ password: "", userName: "", email: "", phone: "", birthYear: "", city: "", confidentiality: false })
- 
+
     // const handleChange = e => {
     //     const { name, value } = e.target;
     //     setNewUser(prevState => ({
@@ -86,7 +86,7 @@ const SignUp = (props) => {
     //     }))
     // }
     const { register, handleSubmit, formState: { errors } } = useForm();
- 
+
     let password = "";
     let email = "";
     let name = "";
@@ -94,10 +94,10 @@ const SignUp = (props) => {
     let birthYear = "";
     let phone = "";
     let confidentiality = false;
- 
+
     let submit = (data, e) => {
         e.preventDefault();
-        debugger;
+
         password = data.password;
         email = data.email;
         name = data.name;
@@ -105,18 +105,21 @@ const SignUp = (props) => {
         birthYear = data.birthYear;
         phone = data.phone;
         confidentiality = data.confidentiality;
-        let addNewUser =new User(password,name,email,phone,birthYear,city,confidentiality)
-        debugger;
+        let addNewUser = new User(password, name, email, phone, birthYear, city, confidentiality)
+
         console.log(addNewUser)
         addUserToDB(addNewUser).then(succ => {
-            props.setCurrentUser(succ.data);
+            if (succ.status != 400) {
+                props.setCurrentUser(succ.data);
+                props.setLogin(false)
+            }
         });
     }
     return (
         <center>
             <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit(submit)}>
                 <div className={"inputs_btns"}>
- 
+
                     <FilledInput
                         name="name"
                         type={'text'}
@@ -131,7 +134,7 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                         {...register('name', { required: true })}
- 
+
                     />
                     <FilledInput
                         name="email"
@@ -147,7 +150,7 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                         {...register('email', { required: true })}
- 
+
                     />
                     <FilledInput
                         name="city"
@@ -163,7 +166,7 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                         {...register('city', { required: true })}
- 
+
                     />
                     <FilledInput
                         name="birthYear"
@@ -179,7 +182,7 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                         {...register('birthYear', { required: true })}
- 
+
                     />
                     <FilledInput
                         type={'text'}
@@ -195,7 +198,7 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                         {...register('phone', { required: true })}
- 
+
                     />
                     <FilledInput
                         name="password"
@@ -222,7 +225,7 @@ const SignUp = (props) => {
                             </InputAdornment>
                         }
                         {...register('password', { required: true })}
- 
+
                     />
                     <FormControlLabel
                         control=
@@ -232,27 +235,27 @@ const SignUp = (props) => {
                         }))}*/ />}
                         label="Confidentiality"
                         {...register('confidentiality', { required: false })}
- 
+
                     />
- 
+
                     <Button type="submit" variant="contained" className={"login_btn"} >Login</Button>
- 
+
                     {/* <Button type="button" variant="contained" className={"login_btn"} onClick={createUser}>Login</Button> */}
                 </div>
- 
+
             </form>
         </center>
- 
+
     );
- 
+
 }
- 
+
 const mapStateToProps = state => {
     return {
- 
+
     }
 }
-export default connect(mapStateToProps, { setCurrentUser })(SignUp);
+export default connect(mapStateToProps, { setCurrentUser, setLogin })(SignUp);
 
 
 

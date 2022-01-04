@@ -33,9 +33,8 @@ const ContactForm = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     return (
-        <form noValidate autoComplete="off" onSubmit={handleSubmit(submit)} id={"contact-form"} style={{ width: '70vw' }}>
+  <form noValidate autoComplete="off" onSubmit={handleSubmit(submit)} id={"contact-form"} style={{ width: '70vw'}}>
             <h3 style={{ color: "#262b96" }}>
-                {/* icon  */}
                 Write to us:
             </h3>
             <div className={"inputs-in-contact-form-container"}>
