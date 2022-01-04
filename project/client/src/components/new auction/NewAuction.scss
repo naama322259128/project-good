@@ -6,29 +6,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.glass_final_step {
-  background-color: rgba(226, 226, 226, 0.15);
-  backdrop-filter: blur(5px);
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 10vh; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-size: 100% 100%;
-}
-
-/* Modal Content */
-.modal-content_final_step {
-  opacity: 1 !important;
-  margin: auto;
-  width: 31%;
-  height: 80%;
-  z-index: 30;
-}
-
 #new_auction_header {
   width: 100vw;
   height: 9vh;
@@ -131,27 +108,53 @@ body {
   margin-left: 7vw;
 }
 
-
 /*************************************************************************************************************/
 .view-details-icon {
   fill: currentColor;
   width: 1em;
   height: 1em;
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   flex-shrink: 0;
   user-select: none;
-  margin-left: 0.26vw;
-  margin-right: 0.08vw;
 }
-//יירקתי בגלל הדרוואר
-// .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-11xur9t-MuiPaper-root-MuiTableContainer-root#unapproved-auctions-list{
-//     width:80vw;
-//     margin-left: auto;
-//     margin-right: auto;
-//     margin-top:15vh;
+.view-details-icon:not(:root) {
+  overflow: hidden;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiTableContainer-root.css-11xur9t-MuiPaper-root-MuiTableContainer-root#unapproved-auctions-list {
+  width: 70vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+// button.MuiButtonBase-root.MuiFab-root.MuiFab-circular.MuiFab-sizeLarge.MuiFab-primary.css-1nacmhh-MuiButtonBase-root-MuiFab-root {
+//   border-radius: 50%;
 // }
-button.MuiButtonBase-root.MuiFab-root.MuiFab-circular.MuiFab-sizeLarge.MuiFab-primary.css-1nacmhh-MuiButtonBase-root-MuiFab-root{
-  border-radius: 50%;
+
+//לא השתמשתי, עיצוב ברירת מחדלל של ICONBUTTON
+#dd {
+  flex: 0 0 auto !important;
+  color: rgba(0, 0, 0, 0.54) !important;
+  padding: 12px !important;
+  overflow: visible !important;
+  font-size: 1.5rem !important;
+  text-align: center !important;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+  border-radius: 50% !important;
+
+  border: 0 !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  outline: 0 !important;
+
+  position: relative !important;
+  align-items: center !important;
+  user-select: none !important;
+
+  vertical-align: middle !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  background-color: transparent !important;
 }

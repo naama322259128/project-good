@@ -30,6 +30,7 @@ const ProfileButton = (props) => {
     }
 
 
+    // color: "#262b96 !important",//TODO
 
     return (<div>
         <AccountCircleIcon
@@ -52,7 +53,7 @@ const ProfileButton = (props) => {
                 style: {
                     maxHeight: ITEM_HEIGHT * 4.5,
                     width: '25ch',
-                    marginTop: '4vh'
+                    marginTop: '4vh',
                 },
             }}
         >

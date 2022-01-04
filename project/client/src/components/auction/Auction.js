@@ -1,28 +1,22 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { Link, Route, useRouteMatch, Switch } from 'react-router-dom'
-import CurrentAuction from '../auction/CurrentAuction';
 import Cart from '../auction/Cart';
 import './Auction.scss';
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 import PaymentForm from './PaymentForm';
 import AboutAuction from './about/AboutAuction'
 import { updateShoppingCart } from '../../store/actions/user';
-
+import ProductList from './ProductList';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
 
 const Auction = (props) => {
 
-
     useEffect(() => {
         let id = localStorage.getItem("user");
-
         if (id && props.currentUser == null) {
-
             let a_id = localStorage.getItem("currentAuction");
-            //let n_a_id = localStorage.getItem("newAuction");
             if (a_id) props.setCurrentAuctionByStorage(a_id);
-            //if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
     }, [])
@@ -34,11 +28,16 @@ const Auction = (props) => {
     }, [props.currentAuction])
 
     return (<>
+        <center style={{ color: "#262b96", fontSize: '5vh' }}>{props.currentAuction.name || props.currentAuction.organizationName}</center>
+        <Link to={`/auction/about`} >
+            <p style={{ position: 'fixed', "top": '12vh', color: "#262b96" }}>About us</p>
+            <img src={props.currentAuction.logo} style={{ width: '3vw', height: 'auto', position: 'fixed', "top": '15vh' }} />
+        </Link>
         <Switch>
             <Route path={'/auction/payment'}><PaymentForm /></Route>
             <Route path={'/auction/about'}><AboutAuction /></Route>
             <Route path={`/auction/cart`}><Cart /></Route>
-            <Route path={`/auction`}><CurrentAuction /></Route>
+            <Route path={`/auction`}><ProductList /></Route>
         </Switch>
     </>
     );

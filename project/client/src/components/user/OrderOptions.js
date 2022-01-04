@@ -7,10 +7,7 @@ import { getAuctionWithWinnersFromDB } from '../../utils/auctionUtils'
 import { getAuctionIsDoneFromDB } from '../../store/actions/auctionManager';
 import IconButton from '@material-ui/core/IconButton';
 import results from '../../img/icons/results.png'
-import viewOrder from '../../img/icons/view-order.png'
-import add from '../../img/icons/add-order.png'
-import { Item } from "semantic-ui-react";
-import { getInputAdornmentUtilityClass } from "@mui/material";
+
 import OrderDetails from './OrderDetails'
 
 import List from '@mui/material/List';
@@ -63,9 +60,6 @@ export default function OrderOptions(props) {
         }}
       >
         <Typography sx={{ p: 2 }}>
-
-          {/* {productsList.map((p, index) => { if (p.winnerId) return <p key={index}>{p.name}:{p.winnerId.confidentiality ? "Anonymous" : p.winnerId.userName</p> }
-          )} */}
           <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             {productsList.map((p, index) => {
               return (<>
@@ -84,11 +78,7 @@ export default function OrderOptions(props) {
                           variant="body2"
                           color="text.primary"
                         >
-
-
                           {p.winnerId ? p.winnerId.confidentiality || p.winnerId.Confidentiality ? "Anonymous" : p.winnerId.userName : ""}
-
-
                         </Typography>
                         {p.winnerId ? ` - ${p.winnerId.city}` : ""}
                       </React.Fragment>
@@ -114,11 +104,7 @@ export default function OrderOptions(props) {
                           variant="body2"
                           color="text.primary"
                         >
-
-
                           {p.winnerId ? p.winnerId.confidentiality || p.winnerId.Confidentiality ? "Anonymous" : p.winnerId.userName : ""}
-
-
                         </Typography>
                         {p.winnerId ? ` - ${p.winnerId.city}` : ""}
                       </React.Fragment>

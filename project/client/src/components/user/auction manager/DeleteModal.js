@@ -32,10 +32,10 @@ const DeleteModal = (props) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => { props.deleteAuctionFromDB(props.auction_id) }} color="primary" autoFocus>
+                    <Button style={{ color: "#e0e0e0", backgroundColor: "#262b96" }} onClick={() => { props.deleteAuctionFromDB(props.auction_id) }} color="primary" autoFocus>
                         Ok
                     </Button>
-                    <Button autoFocus color="primary">
+                    <Button style={{ color: "#e0e0e0", backgroundColor: "#262b96" }} autoFocus color="primary">
                         Cancle
                     </Button>
 

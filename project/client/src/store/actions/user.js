@@ -11,14 +11,29 @@ export const setCurrentUser = (user) => {
     }
 }
 export const setWantContact = (b) => {
-    debugger;
     return {
         type: actionTypes.SET_WANT_CONTACT,
         payload: b
     }
 }
-
-
+export const setShowDeleteAuctionFromCartModal = (b) => {
+    return {
+        type: actionTypes.SET_SHOW_DELETE_AUCTION_FROM_CART_MODAL,
+        payload: b
+    }
+}
+export const setAllCartArray = (arr) => {
+    return {
+        type: actionTypes.SET_ALL_CART_ARRAY,
+        payload: arr
+    }
+}
+export const setDeleteAuctionFromCart = (auction) => {
+    return {
+        type: actionTypes.SET_DELETE_AUCTION_FROM_CART,
+        payload: auction
+    }
+}
 export const setUserOrders = (orders) => {
     return {
         type: actionTypes.SET_USER_ORDERS,

@@ -9,6 +9,8 @@ import React, { useEffect, useState } from 'react';
 import { emptyTheCartByAuction, addOrderToDB } from '../../utils/userUtils';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
+import payIcon from '../../img/icons/wallet.png'
+
 const Cart = (props) => {
 
     const amountToPay = () => {
@@ -43,16 +45,11 @@ const Cart = (props) => {
 
     useEffect(() => {
         let id = localStorage.getItem("user");
-
         if (id && props.currentUser == null) {
-
             let a_id = localStorage.getItem("currentAuction");
-            //  let n_a_id = localStorage.getItem("newAuction");
             if (a_id) props.setCurrentAuctionByStorage(a_id);
-            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
-
     }, [])
 
 
@@ -65,21 +62,23 @@ const Cart = (props) => {
     return (
         <div>
 
-            <h1>Cart Component</h1>
-            <Link to={'/auction'}>Back</Link>{/*לצאת מהסל, חזרה לכל המוצרים*/}
+            <center style={{ "fontSize": '3vh', color: "#262b96" }}>Your Cart</center>
 
             <div id="cart-products-container">
-                {/* מערך רק של המוצרים מהמכירה הזו */}
                 {props.user && props.user.shoppingCartOfCurrentAuction && props.user.shoppingCartOfCurrentAuction.map((item, index) => {
                     return (<ProductInCart key={parseInt(index)} qty={item.qty} productInCart={item.productId} />)
                 })}
             </div>
 
-            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay() != 0 && <Link to={'/auction/payment'}><Button>PAY</Button></Link>}
+            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay() != 0 &&
+                <center style={{ position: 'fixed', "top": '12vh', color: "#262b96", right: '2vw' }}> <Link to={'/auction/payment'}>
+                    <Button variant="contained" style={{ color: "#262b96" }} endIcon={<img src={payIcon} className={'my_icon'} />}>Pay</Button>
+                </Link>
+                    <p style={{ marginTop: '1.2vh', "fontSize": '1.8vh', color: "#262b96" }}>Amount to pay: <br />{amountToPay() + "$"}</p>
+                </center>
+            }
 
-            {props.user && props.user.shoppingCartOfCurrentAuction && amountToPay() != 0 && <h1>{amountToPay() + "₪"}</h1>}
-            {/* ולשלוח את הסכום שנדרש לשלם pay apl-פה צריך להתממשק ל */}
-        </div>);
+        </div >);
 }
 
 const mapStateToProps = state => {

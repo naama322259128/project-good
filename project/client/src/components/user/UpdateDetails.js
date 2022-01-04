@@ -17,6 +17,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 // import CloseIcon from '@mui/icons-material/Close';
+import { setCurrentUser } from '../../store/actions/user';
 import { setUserByStorage, setNewAuctionByStorage, setCurrentAuctionByStorage } from '../../store/actions/user';
 const useStyles = makeStyles((theme) => (
     {
@@ -27,14 +28,14 @@ const useStyles = makeStyles((theme) => (
             marginTop: theme.spacing(3),
         },
         input_pas_ma: {
-            color: '#8e8e95',
             height: '4vh !important',
             background: 'none !important',
             color: '#8e8e95 !important',
             padding: '0vw !important',
-            borderBottomColor: '8e8e95 !important',
+            borderBottomColor: '#262b96 !important',
             background: 'none !important',
-            alignSelf: 'flex-end'
+            alignSelf: 'flex-end',
+            marginBottom: '1.5vh !important'
         },
         eye: {
             color: '#8e8e95',
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => (
         },
         placeholder_in_form: {
             marginLeft: '3% !important',
-            marginBottom: ' -2% !important'
+            marginBottom: '-2% !important'
         }
     }
 ));
@@ -71,17 +72,19 @@ const UpdateDetails = (props) => {
     });
 
     useEffect(() => {
-               let id = localStorage.getItem("user" );
-         
-        if (id && props.currentUser == null) {
-             
-            // let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
-            // if (a_id) props.setCurrentAuctionByStorage(a_id);
-            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-            props.setUserByStorage(id);
-        }
-  
-    },[])
+        let id = localStorage.getItem("user");
+        if (id && props.currentUser == null) props.setUserByStorage(id)
+    }, [])
+
+    // useEffect(() => {
+    //     password = props.currentUser?.password;
+    //     userName = props.currentUser?.userName;
+    //     email = props.currentUser?.email;
+    //     phone = props.currentUser?.phone;
+    //     city = props.currentUser?.city;
+    //     birthYear = props.currentUser?.birthYear;
+    //     confidentiality = props.currentUser?.confidentiality;
+    // }, [props.currentUser])
 
     //עדכון משתמש קיים
     let password = props.currentUser?.password;
@@ -92,7 +95,7 @@ const UpdateDetails = (props) => {
     let birthYear = props.currentUser?.birthYear;
     let confidentiality = props.currentUser?.confidentiality;
 
-    //מה נציג אם לא חוזר כלום מהשרת, לדוגמא הוא לא עובד עכשיו
+    //TODO מה נציג אם לא חוזר כלום מהשרת, לדוגמא הוא לא עובד עכשיו
     const updateUser = () => {
         setOpen(false);
         setOpen2(false);
@@ -122,30 +125,31 @@ const UpdateDetails = (props) => {
             });
         }
     };
+
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const [openEror, setOpenEror] = React.useState(false);
 
     return (
         <>
-
-
             <center>
-                <br />
                 <form autoComplete="off" id="update_user_details_form" >
 
+                    <br/>
                     <h1 id="h1_profile">Update your details</h1>
+                    <br/>
                     <div id="grid-inputs-in-update-form">
                         <FilledInput
                             type={'text'}
                             placeholder="Name"
+
                             required
                             className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                             variant="filled"
                             onChange={(e) => { userName = e.target.value }}
                             startAdornment={
                                 <InputAdornment position="start">
-                                    <i className="user icon"></i>
+                                    <i className="user icon" style={{ color: '#262b96 !important' }}></i>
                                 </InputAdornment>
                             }
                             defaultValue={userName}
@@ -156,6 +160,7 @@ const UpdateDetails = (props) => {
                             placeholder="Email address"
                             className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                             variant="filled"
+
                             required
                             onChange={(e) => { email = e.target.value }}
                             startAdornment={
@@ -167,6 +172,7 @@ const UpdateDetails = (props) => {
 
                         <FilledInput
                             type={'text'}
+
                             required
                             placeholder='City'
                             className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
@@ -182,6 +188,7 @@ const UpdateDetails = (props) => {
                         <FilledInput
                             type={'text'}
                             placeholder="Year Of Birth"
+
                             required
                             className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                             variant="filled"
@@ -196,6 +203,7 @@ const UpdateDetails = (props) => {
                         <FilledInput
                             type={'text'}
                             placeholder="Phone Number"
+
                             required
                             className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                             variant="filled"
@@ -212,6 +220,7 @@ const UpdateDetails = (props) => {
                             onChange={handleChange('password')}
                             placeholder="Password"
                             required
+
                             className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
                             variant="filled"
                             onChange={(e) => { password = e.target.value }}
@@ -233,15 +242,18 @@ const UpdateDetails = (props) => {
                             }
                             defaultValue={password} />
 
-                        <FormControlLabel style={{ marginLeft: '0vw' }}
-                            control=
-                            {<Checkbox onChange={(e) => { confidentiality = e.target.checked }} />}
+                        <FormControlLabel
+                            style={{ color: '#8e8e95', marginLeft: '0vw', marginTop: '1vh' }}
+                            control={<Checkbox
+                                style={{ color: "#262b96", marginRight: '0.2vw' }}
+                                onChange={(e) => { confidentiality = e.target.checked }} />}
                             label="Confidentiality" />
                     </div>
                     <br />
                     <br />
-                    <Button type="button" variant="contained" id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
-
+                    <Button type="button" variant="contained" style={{ backgroundColor: '#e0e0e0', color: '#262b96' }} id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
+                    <br/>
+                    <br/>
 
                 </form>
                 <Box sx={{ width: '71%' }}>
@@ -314,7 +326,7 @@ const mapStateToProps = (state) => {
         currentUser: state.user.currentUser,
     };
 }
-export default connect(mapStateToProps, { setUserByStorage, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(UpdateDetails);
+export default connect(mapStateToProps, { setCurrentUser, setUserByStorage, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(UpdateDetails);
 
 
 

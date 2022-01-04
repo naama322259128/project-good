@@ -10,6 +10,10 @@ import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 
+import locationIcon from '../../img/icons/location-sign.png'
+import phoneIcon from '../../img/icons/phone.png'
+import emailIcon from '../../img/icons/email.png'
+
 const ContactForm = () => {
     const [open, setOpen] = React.useState(false);
 
@@ -30,7 +34,7 @@ const ContactForm = () => {
 
     return (
         <form noValidate autoComplete="off" onSubmit={handleSubmit(submit)} id={"contact-form"} style={{ width: '70vw' }}>
-            <h3>
+            <h3 style={{ color: "#262b96" }}>
                 {/* icon  */}
                 Write to us:
             </h3>
@@ -42,29 +46,29 @@ const ContactForm = () => {
             </div>
             <TextField className="txt" variant="standard"{...register('message', { required: true })} id="input-with-icon-grid" label="Your message" multiline />
 
-            <h3>Contact information</h3>
+            <h3 style={{ color: "#262b96" }}>Contact information</h3>
 
 
             <p>
-                {/* icon */}
+                <img className="icon-in-contact" src={locationIcon} />
                 Israel, Bnei brak
             </p>
 
 
             <p>
-                {/* icon */}
-                +972 315 7271 / +972 316 4376
+                <img className="icon-in-contact" src={phoneIcon} />
+                +972 315 7271  /  +972 316 4376
             </p>
 
 
             <p>
-                {/* icon */}
+                <img className="icon-in-contact" src={emailIcon} />
                 chinese.auctions1@gmail.com
             </p>
 
 
 
-            <button type="submit" className="positive ui button">Send</button>
+            <button type="submit" className="positive ui button" style={{ backgroundColor: "#e0e0e0", color: "#262b96" }}>Send</button>
             <Box sx={{ width: '100%', marginTop: '5vh' }}>
                 <Collapse in={open}>
                     <Alert

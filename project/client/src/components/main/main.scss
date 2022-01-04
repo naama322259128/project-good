@@ -62,9 +62,9 @@
     margin-bottom: 2vh;
     height: 50vh;
     margin-bottom: 5vh;
-
 }
-div.one-step div,div.one-step img {
+div.one-step div,
+div.one-step img {
     display: flex;
     // justify-content: center;//האמצע מימין ושמאל
     // align-items: center;//האמצע מלמעלה ולמטה
@@ -73,7 +73,6 @@ div.one-step div,div.one-step img {
     font-weight: 200;
     transition: all 0.3s ease;
     height: 50vh;
-
 }
 div.one-step h3 {
     margin-bottom: 3vh;
@@ -132,8 +131,6 @@ div.one-step h3 {
     padding: 20px;
     // margin:0vh !important;
 }
-/**************************************************************************/
-
 .inputs-in-contact-form-container {
     display: grid;
     grid-template-columns: repeat(2, 5fr);
@@ -163,14 +160,20 @@ div.one-step h3 {
     // 0 20px 15px -10px #8c92f7 inset,
     // 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.icon-in-contact {
+    width: 1vw;
+    height: auto;
+    margin-right: 0.5vw;
+}
 
 #btnLoginInDrower {
-        color: #ffffff !important;
+    color: #ffffff !important;
     width: 8vw !important;
     border-radius: 5vw !important;
     position: absolute !important;
     cursor: pointer !important;
     background-color: #7376c0 !important ; //אפרפר
+    background-color: #e0e0e0 !important ; //אפרפר
     right: 3vw !important;
     top: 2.2vh !important;
     display: inline-block !important;

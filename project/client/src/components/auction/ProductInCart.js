@@ -12,7 +12,7 @@ import { updateShoppingCart } from '../../store/actions/user';
 import { addProductToShoppingCartInDB, deleteProductFromShoppingCartInDB } from '../../utils/userUtils';
 import deleteIcon from '../../img/icons/dustbin.png'
 import { connect } from "react-redux";
-import defaultImg from '../../img/picture.png'
+import defaultImg from '../../img/‏‏picture.png'
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 
 const useStyles = makeStyles({
@@ -28,18 +28,14 @@ const ProductInCart = (props) => {
     const [open, setOpen] = React.useState(false)
     const classes = useStyles();
     useEffect(() => {
-        let id = localStorage.getItem("user" );
-         
+        let id = localStorage.getItem("user");
         if (id && props.currentUser == null) {
-             
             let a_id = localStorage.getItem("currentAuction");
-            //  let n_a_id = localStorage.getItem("newAuction");
             if (a_id) props.setCurrentAuctionByStorage(a_id);
-            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
-  
-    },[])
+    }, [])
+
     let image_src = props.productInCart.image || defaultImg;
     let description = props.productInCart.description;
     let name = props.productInCart.name;
@@ -54,48 +50,59 @@ const ProductInCart = (props) => {
             trigger={
                 <Card className={classes.root, "cart-product-in-list"} >
 
-                    <center>{name}</center>
-                    <Typography gutterBottom variant="h5" component="h2">{price+ "₪"}</Typography>
+                    <center style={{ color: "#262b96" }}>{name}</center>
+                    <Typography gutterBottom variant="h5" component="h2" style={{ color: "#262b96" }}>{price + "$"}</Typography>
                     <CardMedia className={classes.media} image={image_src} title={name} />
 
-                    {/* מחיקת אחד */}
-                    <IconButton color="primary" onClick={(e) => {
-                        e.stopPropagation();
-                        deleteProductFromShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, 1).then(succ => {
-                            if (succ.status != 400) props.updateShoppingCart(succ.data);
-                        })
-                    }} >-</IconButton>
 
-                    <h2 style={{ display: "inline-block", fontSize: '2vh' }}>{qty}</h2>
+                    <div className={"qty-container"}>
 
-                    {/* הוספת אחד */}
-                    <IconButton color="primary" onClick={(e) => {
-                        e.stopPropagation();
-                        addProductToShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, 1).then(succ => {
-                            if (succ.status != 400) props.updateShoppingCart(succ.data);
-                        })
-                    }}>+</IconButton>
+                        <IconButton
+                            color="primary"
+                            style={{ color: "#262b96" }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                deleteProductFromShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, 1).then(succ => {
+                                    if (succ.status != 400) props.updateShoppingCart(succ.data);
+                                })
+                            }} >-
+                        </IconButton>
 
-                    {/* מחיקה מהסל */}
-                    <IconButton color="primary" aria-label="delete from shopping cart" onClick={(e) => {
-                        e.stopPropagation();
-                        deleteProductFromShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, qty).then(succ => {
-                            if (succ.status != 400) props.updateShoppingCart(succ.data);
-                        })
-                    }}>
-                        <img src={deleteIcon} className="my_icon" />
-                    </IconButton>
+                        <h2 style={{ display: "inline-block", fontSize: '2.6vh', color: "#262b96" }}>{qty}</h2>
 
+                        <IconButton
+                            style={{ color: "#262b96" }}
+                            color="primary"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                addProductToShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, 1).then(succ => {
+                                    if (succ.status != 400) props.updateShoppingCart(succ.data);
+                                })
+                            }}>+
+                        </IconButton>
+
+                        <IconButton
+                            color="primary"
+                            aria-label="delete from shopping cart"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                deleteProductFromShoppingCartInDB(props.currentAuction._id, props.currentUser._id, _id, qty).then(succ => {
+                                    if (succ.status != 400) props.updateShoppingCart(succ.data);
+                                })
+                            }}>
+                            <img src={deleteIcon} className="my_icon" />
+                        </IconButton>
+                    </div>
 
                 </Card>}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
         >
 
-            <Header ><h1>{name}</h1></Header>
+            <Header ><h1 style={{ color: "#262b96" }}>{name}</h1></Header>
             <Modal.Content>
                 <img src={image_src} style={{ width: '30%', height: 'auto' }} />
-                <div style={{ marginLeft: '2vw', marginTop: '2vh', overflowWrap: 'break-word' }}>{description}</div>
+                <div style={{ marginLeft: '2vw', marginTop: '2vh', overflowWrap: 'break-word', color: "#262b96" }}>{description}</div>
             </Modal.Content>
 
         </Modal>
@@ -108,4 +115,4 @@ const mapStateToProps = state => {
         currentAuction: state.currentAuction.currentAuction
     }
 }
-export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage , updateShoppingCart })(ProductInCart);
+export default connect(mapStateToProps, { setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage, updateShoppingCart })(ProductInCart);

@@ -16,7 +16,7 @@ import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } 
 
 const UserTable = (props) => {
     const columns = [
-        { id: 'status', label: "Status", align: 'left', minWidth: 26 },
+        { id: 'status', label: "Auction status", align: 'left', minWidth: 26 },
         {
             id: 'name',
             label: 'Name',
@@ -33,15 +33,15 @@ const UserTable = (props) => {
         },
         {
             id: 'sum',//
-            label: 'Sum',//מה יהיה רשום
-            minWidth: 170,
+            label: 'Amount to pay',//מה יהיה רשום
+            minWidth: 70,
             align: 'left',
             format: (value) => value.toLocaleString('en-US'),
         },
         {
             id: 'options',
             label: 'Options',
-            minWidth: 170,
+            minWidth: 70,
             align: 'left',
             format: (value) => value.toLocaleString('en-US'),
         }
@@ -51,7 +51,7 @@ const UserTable = (props) => {
         const options = <OrderOptions order={order} key={order._id} />;//הכפתורים
         const n = order.auctionId.organizationName + " : " + order.auctionId.name;
         let d = moment(new Date(order.orderDate)).format('D/MM/YYYY');
-        let sum = order.amountToPay;
+        let sum = order.amountToPay+"$";
         return {status: order.auctionId.status.replace(/_/g, " "), name: n, orderDate: d, sum: sum, options };
     }
 
@@ -92,7 +92,7 @@ const UserTable = (props) => {
     const style1 = { marginTop: '4vh' }
     return (
         <center>
-           <h1>Your Orders</h1> 
+           <h1 style={{color:"#262b96"}}>Your Orders</h1> 
             <Paper className={classes.root} style={style1}>
                 <TableContainer className={classes.container} >
                     <Table stickyHeader aria-label="sticky table">
@@ -102,7 +102,7 @@ const UserTable = (props) => {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{ minWidth: column.minWidth }}
+                                        style={{ minWidth: column.minWidth,color:"#262b96",fontWeight: 'bold' }}
                                     >
                                         {column.label}
                                     </TableCell>

@@ -31,7 +31,6 @@ export const saveOrganizationInformationInDB = (_id, d) => {
 
 //מידע על המכירה
 export const savePublicationApprovalInDB = (_id, b) => {
-    debugger;
     return axios.post(`http://localhost:5000/auctions/approvalAuction/${_id}&${b}`);
 }
 export const saveLotteryApprovalInDB = (_id, b) => {
@@ -40,12 +39,6 @@ export const saveLotteryApprovalInDB = (_id, b) => {
 export const saveAuctionInformationInDB = (_id, details) => {
     return axios.post(`http://localhost:5000/auctions/setAuctionInformation/${_id}`, details);
 }
-
-
-
-/*registrationStartDate: { type: Date },   //תאריך התחלה
-    lotteriesDate: Date,   //תאריך ביצוע ההגרלות
-    registrationEndDate: */
 
 export const saveApprovalAuctionInDB = (a_id, status) => {
     return axios.post(`http://localhost:5000/auctions/approvalAuction/${a_id}&${status}`);

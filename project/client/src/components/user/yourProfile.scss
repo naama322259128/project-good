@@ -17,10 +17,7 @@
 
 // }
 #h1_profile {
-  // color: #21ba45 !important;//ירוק
-  // color: #c9d032 !important;//חרדל
-  // color: #eb8030 !important ;//כתום
-  color: #7376c0 !important ; //אפרפר
+  color: #262b96 !important ; //אפרפר
 }
 
 #update_user_details_form {
@@ -30,7 +27,7 @@
   padding-bottom: 2vh;
   padding-right: 2vw;
   padding-left: 2vw;
-  margin-top: 10vh;
+  margin-top: 2vh;
   margin-bottom: 10vh;
 
   -moz-box-shadow: 3px 3px 5px 6px #ccc;
@@ -41,6 +38,9 @@
   display: grid;
   grid-template-columns: repeat(2, 5fr);
   grid-gap: 0.5rem;
+}
+#update_user_details_form input.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputAdornedStart.MuiFilledInput-inputAdornedStart{
+  margin-bottom: 1.9vh !important;
 }
 
 // #long-menu .MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {

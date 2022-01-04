@@ -40,6 +40,12 @@ import Button from '@material-ui/core/Button';
 import './Drawer.scss'
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 import CustomizedBadges from '../auction/CustomizedBadges';
+import auctionsIcon from '../../img/icons/auctions.png'
+import statisticsIcon from '../../img/icons/statistics.png'
+import buildingIcon from '../../img/icons/building.png'
+import homeIcon from '../../img/icons/home.png'
+import aboutIcon from '../../img/icons/about.png'
+
 
 const drawerWidth = 240;
 
@@ -107,13 +113,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
   }),
 );
-const MyLinkInList = ({ text, icon }) => {
+const MyLinkInList = ({ text, iconSrc }) => {
 
   return (
-    <ListItem button>
-      <ListItemIcon className="links-icons">
-        <InboxIcon />
-      </ListItemIcon>
+    <ListItem title={text.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} button style={{marginBottom:'1.8vh'}}>
+      <ListItemIcon  className="links-icons"><img src={iconSrc} className={"icon-link-in-list"} /></ListItemIcon>
       <ListItemText primary={text} />
     </ListItem>)
 }
@@ -167,7 +171,7 @@ export const MiniDrawer = (props) => {
           {props.currentUser ? <ProfileButton /> : <Button type="button" id="btnLoginInDrower" onClick={() => props.setLogin(true)}>Login</Button>}
           <Typography variant="h6" noWrap component="div" >Chinese auctions</Typography>
           {location.pathname.startsWith('/auction') && <Timer />}
-          {location.pathname.startsWith('/auction') && <CustomizedBadges  />}
+          {location.pathname.startsWith('/auction') && <CustomizedBadges />}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -177,24 +181,28 @@ export const MiniDrawer = (props) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
+
+
         <List id="links-list">
 
-          <Link to={"/home"}><MyLinkInList text="HOME" /></Link>
+          <Link to={"/home"}><MyLinkInList text="HOME" iconSrc={homeIcon} /></Link>
 
-          <Link to={"/home"}><MyLinkInList text="AUCTIONS" /></Link>
+          <Link to={"/home"}><MyLinkInList text="AUCTIONS" iconSrc={auctionsIcon} /></Link>
 
           <Link onClick={props.currentUser ? () => createNewAuctionInDB(props.currentUser._id).then(succ => {
             if (succ.status != 400) props.setNewAuction(succ.data);
           }) : () => { window.scrollTo(0, 0); props.setLogin(true) }} to={props.currentUser ? "/new_auction" : '#'}>
-            <MyLinkInList text="BUILDING" />
+            <MyLinkInList text="BUILDING" iconSrc={buildingIcon} />
           </Link>
 
-          <Link to={"/statistics"} ><MyLinkInList text="STATISTICS" /></Link>
+          <Link to={"/statistics"} ><MyLinkInList text="STATISTICS" iconSrc={statisticsIcon} /></Link>
           {/* window.location */}
 
-          <Link to={"/about"} ><MyLinkInList text="ABOUT" /></Link>
+          <Link to={"/about"} ><MyLinkInList text="ABOUT" iconSrc={aboutIcon} /></Link>
 
         </List>
+
+
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

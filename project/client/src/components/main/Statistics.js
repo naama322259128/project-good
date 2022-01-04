@@ -35,7 +35,7 @@ const Statistics = (props) => {
 
       <StatisticsCard logo={s}
         title={"Total revenue all chienes auctions: "
-          + totalRevenueAllAuctions[0].total + "₪"}
+          + totalRevenueAllAuctions[0].total + "$"}
         content={"All proceeds from the purchase of the site's users in all Chinese auctions since the site was established."} />
       {highestRevenueAuctions && highestRevenueAuctions.map(item => {
         return <StatisticsCard
@@ -43,7 +43,7 @@ const Statistics = (props) => {
           key={item.auctionId}
           _id={item.auctionId}
           logo={item.logo}
-          title={item.auctionName + ": " + item.total + "₪"}
+          title={item.auctionName + ": " + item.total + "$"}
           content={"The Chinese auction that managed to get the most money. The chiense auction with the most revenue. From the purchases of the site's users"} />
       })}
     </div>

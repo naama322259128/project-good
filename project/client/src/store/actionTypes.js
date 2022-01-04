@@ -14,6 +14,9 @@ export const ADD_ORDER = "ADD_ORDER"//הוספת הזמנה לסטייט
 export const SET_USER_ORDERS = "SET_USER_ORDERS"
 export const SIGN_IN_OF_STATE = "SIGN_IN_OF_STATE"
 export const SET_WANT_CONTACT = "SET_WANT_CONTACT"//כדישנדע האם לגלול את דף האודות לתחתיתו
+export const SET_SHOW_DELETE_AUCTION_FROM_CART_MODAL = "SET_SHOW_DELETE_AUCTION_FROM_CART_MODAL"
+export const SET_ALL_CART_ARRAY = "SET_ALL_CART_ARRAY"
+export const SET_DELETE_AUCTION_FROM_CART = "SET_DELETE_AUCTION_FROM_CART"
 
 /******************************************   NEW AUCTION   ****************************************************/
 export const SET_MY_AUCTIONS_TO_SET = "SET_MY_AUCTIONS_TO_SET"
@@ -32,7 +35,6 @@ export const SET_START_DATE = "SET_START_DATE";
 export const SET_END_DATE = "SET_END_DATE";
 export const SET_LOTERY_DATE = "SET_LOTERY_DATE";
 export const SET_TERMS = "SET_TERMS"
-export const SET_FINAL_STEP = "SET_FINAL_STEP"//האם להציג את המודל של אישור סיום בניית המכירה
 export const RESET_NEW_AUCTION_STATE = "RESET_NEW_AUCTION_STATE"//איפוס הסטייט של מכירה חדשה לאחר בניית מכירה
 export const SET_PRODUCTS_LIST = "SET_PRODUCTS_LIST"// מעדכנת את רשימת המוצרים בסטייט 
 // export const SET_PACKAGES_LIST = "SET_PACKAGES_LIST"// מעדכנת את רשימת החבילות בסטייט 

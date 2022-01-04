@@ -1,7 +1,6 @@
-
-#logo_home_header{
-  background-image: url('../../img/logo.webp');
-  background-size:100%;
+#logo_home_header {
+  background-image: url("../../img/logo.webp");
+  background-size: 100%;
   background-repeat: no-repeat;
   height: 8vh;
   width: 13vw;
@@ -11,164 +10,163 @@
   margin-left: 2vw;
 }
 
-.btn{
-  color: #ffffff !important;   
-  width:8vw !important;   
+.btn {
+  color: #ffffff !important;
+  width: 8vw !important;
   border-radius: 5vw !important;
   position: absolute !important;
-  cursor: pointer !important;     
+  cursor: pointer !important;
 
   // background-color: #21ba45 !important ;//ירוק
   // background-color: #c9d032 !important ;//חרדל
   // background-color: #eb8030 !important ;//כתום
-  background-color: #7376c0 !important ;//אפרפר
+  //  background-color: #7376c0 !important ; //אפרפר
+  background-color: #e0e0e0 !important ; //אפרפר
 }
-#btnMoreInfo{
+#btnMoreInfo {
   left: 14% !important;
   width: 10vw !important;
   height: 5vh;
 }
-#btnNewAuction{
-  right:0% !important;
-  height:5vh ;
+#btnNewAuction {
+  right: 0% !important;
+  height: 5vh;
   width: 16vw !important;
 }
-#btnLogin{
+#btnLogin {
   right: 3vw !important;
   top: 3vh !important;
   display: inline-block !important;
 }
-#home_text>p{
-  line-height:0.8 !important;
+#home_text > p {
+  line-height: 0.8 !important;
   color: white;
-  font-size: 3vh; 
-   font-family: 'Centaur';
-   text-align: right !important;
-   line-height:1 !important;
+  font-size: 3vh;
+  font-family: "Centaur";
+  text-align: right !important;
+  line-height: 1 !important;
 }
 
-#home_text>h5{
-  line-height:0.8 !important;
+#home_text > h5 {
+  line-height: 0.8 !important;
   color: white;
-  font-size: 9vh; 
-   font-family: 'Centaur';
-   text-align: right !important;
-
+  font-size: 9vh;
+  font-family: "Centaur";
+  text-align: right !important;
 }
-#home_text>h3{
-  line-height:0.8 !important;
+#home_text > h3 {
+  line-height: 0.8 !important;
   color: white;
-  font-size: 14vh; 
-   font-family: 'Centaur';
-   text-align: right !important;
+  font-size: 14vh;
+  font-family: "Centaur";
+  text-align: right !important;
 }
 
-#home_text{
+#home_text {
   width: 32%;
-  left:12%;
-  top:12%;
+  left: 12%;
+  top: 12%;
   position: relative;
   text-align: center;
 }
 
-#home_header{
-  background-image: url('../../img/home_header_backgroung.webp');
+#home_header {
+  background-image: url("../../img/home_header_backgroung.webp");
   background-size: 100%;
   background-repeat: no-repeat;
-  height:136vh;
+  height: 136vh;
   width: 100vw;
   position: relative !important;
   z-index: 200;
 }
 
-
-  #right_pic{  
-    position: absolute;
-    display: inline-block;
-    width: 50%;
-    height: 90%;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    right: 0vw;
-    top: 4%;
-    background-image: url('../../img/right_header_home.webp');
-
-  }
-   #left_pic{
-    background-image: url('../../img/left_circle_header_home.webp');
-    position: absolute;
-    display: inline-block;
-    height: 50%;
-    width: 11%;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    left: 0vw;
-    top: 52%
-  }
-  .home_footer{
-     background-image: url('../../img/footer.webp');
-    // background-color: #3e2626;
-    background-size: 100%;
-    height:40vh;
-    background-repeat: no-repeat;
-    width: 100vw;
-    position: relative;
-  }
-  
- #logo_in_home_footer{
-    background-image: url('../../img/logo_blue_orange.webp');
-    background-size: 100%;
-    background-repeat: no-repeat;
-    position: absolute;
-    height: 7vh;
-    width: 12vw;
-    display: inline-block;
-    top: 55%;
-    left: 12%;
-} 
-#contact_us{
-    position: absolute;
-    height:12%;
-    width: 17%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    top: 75%;
-    left: 12%;
-    border: #262b96 1px solid;
+#right_pic {
+  position: absolute;
+  display: inline-block;
+  width: 50%;
+  height: 90%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  right: 0vw;
+  top: 4%;
+  background-image: url("../../img/right_header_home.webp");
 }
-#contact_us>p{
-    margin: auto;
-    color: #262b96;
-    font-size: 2vh;
+#left_pic {
+  background-image: url("../../img/left_circle_header_home.webp");
+  position: absolute;
+  display: inline-block;
+  height: 50%;
+  width: 11%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  left: 0vw;
+  top: 52%;
 }
-#menu_footer, #text_footer{
+.home_footer {
+  background-image: url("../../img/footer.webp");
+  // background-color: #3e2626;
+  background-size: 100%;
+  height: 40vh;
+  background-repeat: no-repeat;
+  width: 100vw;
+  position: relative;
+}
+
+#logo_in_home_footer {
+  background-image: url("../../img/logo_blue_orange.webp");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  height: 7vh;
+  width: 12vw;
+  display: inline-block;
+  top: 55%;
+  left: 12%;
+}
+#contact_us {
+  position: absolute;
+  height: 12%;
+  width: 17%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  top: 75%;
+  left: 12%;
+  border: #262b96 1px solid;
+}
+#contact_us > p {
+  margin: auto;
+  color: #262b96;
+  font-size: 2vh;
+}
+#menu_footer,
+#text_footer {
   width: 20%;
   height: 42%;
   position: absolute;
   top: 48%;
-  border-left: 2px solid #262b96; 
+  border-left: 2px solid #262b96;
   padding-left: 2%;
 }
-#text_footer{
-  right: 16%; 
-  font-size: 1.7vh ;
-  color: #262b96 ;
+#text_footer {
+  right: 16%;
+  font-size: 1.7vh;
+  color: #262b96;
 }
-#menu_footer{
+#menu_footer {
   display: grid;
-  grid-template-columns:1%;
+  grid-template-columns: 1%;
   row-gap: 1%;
   right: 34%;
 }
 
-.menu_footer_link{
-  color: #262b96 ;
-  font-size: 1.7vh ;  
+.menu_footer_link {
+  color: #262b96;
+  font-size: 1.7vh;
   cursor: pointer;
 }
 
-#auctions-container{
+#auctions-container {
   display: grid;
   grid-template-columns: repeat(3, 25fr) !important;
   grid-gap: 2vh;

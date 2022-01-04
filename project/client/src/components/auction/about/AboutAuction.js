@@ -8,8 +8,6 @@ import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } 
 import moment from 'moment'
 
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 
 
@@ -31,24 +29,24 @@ const AboutAuction = (props) => {
   return (<>
     {props.auction && <main>
 
-      <h1>About Us</h1>
+      <h1 style={{ color: "#262b96", fontWeight: 'bold' }}>About Us</h1>
       <br />
-      <h2>Chiense Auction: {props.auction.name} </h2>
-      <h2>Organization: {props.auction.organizationName}</h2>
+      <h2 style={{ color: "#262b96" }}>Chiense Auction: {props.auction.name} </h2>
+      <h2 style={{ color: "#262b96" }}>Organization: {props.auction.organizationName}</h2>
 
       {props.logo &&
-        <Card sx={{ maxWidth: 345 }} id="logo">
+        <Card sx={{ maxWidth: 345, height: 'auto' }} id="logo">
           <CardMedia
             component="img"
-            height="140"
             image={props.logo}
           />
         </Card>}
 
+      <p style={{ color: "#262b96" }}>{props.auction.organizationText}</p>
 
       <div>
-        <h3>Products:</h3>
-        {props.arr && props.arr.map(item => <li key={item._id}>{item.name}</li>)}
+        <h3 style={{ color: "#262b96" }}>Products:</h3>
+        {props.arr && props.arr.map(item => <li style={{ color: "#262b96" }} key={item._id}>{item.name}</li>)}
       </div>
       <br />
       <br />
@@ -60,13 +58,13 @@ const AboutAuction = (props) => {
       {/* <AuctionTerms file={file} />קובץ תקנון */}
 
 
-      <p>registration start date: {props.auction.registrationStartDate &&
+      <p style={{ color: "#262b96" }}>registration start date: {props.auction.registrationStartDate &&
         moment(new Date(props.auction.registrationStartDate)).format('D/MM/YYYY')}</p>  {/* תאריך התחלה */}
 
-      <p>registration end date:{props.auction.registrationEndDate &&
+      <p style={{ color: "#262b96" }}>registration end date:{props.auction.registrationEndDate &&
         moment(new Date(props.auction.registrationEndDate)).format('D/MM/YYYY')}</p>   {/* תאריך סיום */}
 
-      <p>lotteries date: {props.auction.lotteriesDate &&
+      <p style={{ color: "#262b96" }}>lotteries date: {props.auction.lotteriesDate &&
         moment(new Date(props.auction.lotteriesDate)).format('D/MM/YYYY')}</p>  {/* תאריך הגרלות */}
 
       <br />

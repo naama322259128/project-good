@@ -19,14 +19,26 @@ import DisApprovalModal from './DisApprovalModal'
 import { getManagerAuctionsFromDB, setDeleteAuctionModal, setApprovalAuctionModal, setDisApprovalAuctionModal, setSelectedAuctionToOptions, getAuctionIsDoneFromDB, isAuctionApproved } from '../../../store/actions/auctionManager'
 import IconButton from '@material-ui/core/IconButton';
 import edit from '../../../img/icons/edit-file.png'
-import st from '../../../img/icons/stadistics.png'
+import st from '../../../img/icons/statistics.png'
 import results from '../../../img/icons/results.png'
 import de from '../../../img/icons/dustbin.png'
 import { setUserByStorage } from '../../../store/actions/user';
 import { setNewAuction } from '../../../store/actions/newAuction';
 const useStyles = makeStyles({
     root: { width: '80%', marginBottom: '15vh' },
-    container: { maxHeight: 440, }
+    container: { maxHeight: 440, },
+    switchBase: {
+        color: "#262b96",
+        "&$checked": {
+            color: "#262b96"
+        },
+        "&$checked + $track": {
+            backgroundColor: "#262b96"
+        },
+
+    },
+    checked: {},
+    track: {}
 });
 
 
@@ -64,25 +76,24 @@ const AuctionManagerTable = (props) => {
 
     const columns = [
         { id: 'status', label: "Status", align: 'left', minWidth: 26 },
+        { id: 'published', label: "Published", align: 'left', minWidth: 26 },
         { id: 'name', label: 'Name', align: 'left', minWidth: 80 },
         {
             id: 'registrationStartDate',
             label: 'Start Date',
-            minWidth: 170,
+            minWidth: 150,
             align: 'left',
-            // format: (value) => moment(value).format('D/MM/YYYY')
         },
         {
             id: 'lotteriesDate',
             label: 'Lotteries date',
-            minWidth: 170,
+            minWidth: 150,
             align: 'left',
-            //  format: (value) =>moment(value).format('D/MM/YYYY')
         },
         {
             id: 'approval',
             label: 'Lottery Approval',
-            minWidth: 170,
+            minWidth: 70,
             align: 'left',
             format: (value) => value.toFixed(2),
         },
@@ -114,6 +125,12 @@ const AuctionManagerTable = (props) => {
         let isApproved = a.lotteryApproval;
         let _id = a._id;
         let approval = <Switch
+            classes={{
+                switchBase: classes.switchBase,
+                thumb: classes.thumb,
+                track: classes.track,
+                checked: classes.checked,
+            }}
             checked={isApproved}
             onChange={() => { handleChange(a) }}
             name="checkedA"
@@ -129,14 +146,14 @@ const AuctionManagerTable = (props) => {
             <Link onClick={() => props.setSelectedAuctionToOptions(a)} to={`/your_profile/statistics`}><IconButton title="Statistics"><img className="my_icon" src={st} ></img></IconButton></Link>
             <IconButton onClick={() => deleteAuction(a)} title="Delete" disabled={isDone} ><img className="my_icon" src={de} ></img></IconButton>
         </div>
-        return { status: a.status.replace(/_/g, " "), name, registrationStartDate, lotteriesDate, approval, options };
+        return { status: a.status.replace(/_/g, " "), published: a.publicationApproval.toString(), name, registrationStartDate, lotteriesDate, approval, options };
     }
 
     const classes = useStyles();
 
     return (
         <center>
-            <h1>Your Chiense Auctions</h1>
+            <h1 style={{color:"#262b96"}}>Your Chiense Auctions</h1>
 
             {props.show_delete ? <DeleteModal /> : null}
             {props.show_approval ? <ApprovalModal /> : null}
@@ -150,7 +167,7 @@ const AuctionManagerTable = (props) => {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{ minWidth: column.minWidth }}
+                                        style={{ minWidth: column.minWidth,color:"#262b96",fontWeight: 'bold' }}
                                     >
                                         {column.label}
                                     </TableCell>

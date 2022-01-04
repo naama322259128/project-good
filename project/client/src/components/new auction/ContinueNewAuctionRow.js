@@ -17,18 +17,22 @@ import { connect } from "react-redux";
 import { setNewAuction, setMyAuctionsToSet } from '../../store/actions/newAuction'
 import { deleteAuctionFromDB } from '../../utils/auctionUtils'
 import { getUnapprovedAuctionsByUserFromDB } from '../../utils/auctionManagerUtils';
+import { setDeleteAuctionModal, setSelectedAuctionToOptions } from '../../store/actions/auctionManager';
 
 const ContinueNewAuctionRow = (props) => {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
-
+    const deleteAuction = (a) => {
+        props.setDeleteAuctionModal(true);
+        props.setSelectedAuctionToOptions(a);
+    }
     return (
         <React.Fragment >
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+            <TableRow sx={{ '& > *': { borderBottom: 'unset', fontSize: '2vh' } }}>
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
-                        size="small"
+                        size="large"
                         onClick={() => setOpen(!open)}
                     >
                         {open ?
@@ -42,21 +46,15 @@ const ContinueNewAuctionRow = (props) => {
                 <TableCell align="left" component="th" scope="row">{row.lotteriesDate}</TableCell>
 
                 <TableCell align="left" component="th" scope="row">
-                    <IconButton aria-label="expand row" size="small" onClick={() => deleteAuctionFromDB(props.auction._id).then(succ => {
-                        if (succ.status != 400) {
-
-                            getUnapprovedAuctionsByUserFromDB(props.currentUser._id).then(succ => {
-                                if (succ.status != 400) { props.setMyAuctionsToSet(succ.data); }
-                            });
-                        }
-                    })}>
+                    <IconButton aria-label="expand row" size="large" 
+                        onClick={() => deleteAuction(props.auction)}                    >
                         <img className="view-details-icon" src={deleteSrc} />
                     </IconButton>
                 </TableCell>
 
                 <TableCell align="left" component="th" scope="row">
                     <Link to={'/new_auction'}>
-                        <IconButton aria-label="expand row" size="small" onClick={() => props.setNewAuction(props.auction)}>
+                        <IconButton /*aria-label="expand row" size="large" */onClick={() => props.setNewAuction(props.auction)}>
                             <img className="view-details-icon" src={Continue} />
                         </IconButton>
                     </Link>
@@ -125,4 +123,4 @@ const mapStateToProps = (state) => {
 
     };
 }
-export default connect(mapStateToProps, { setNewAuction, deleteAuctionFromDB, setMyAuctionsToSet })(ContinueNewAuctionRow);
+export default connect(mapStateToProps, { setNewAuction, deleteAuctionFromDB, setMyAuctionsToSet, setDeleteAuctionModal, setSelectedAuctionToOptions })(ContinueNewAuctionRow);

@@ -18,6 +18,9 @@ import { setNewAuction } from '../../store/actions/newAuction';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
+import axios from 'axios';
+
+
 //TODO שהתאריכים יהיו הגיוניים
 
 const useStyles = makeStyles((theme) => ({
@@ -52,13 +55,13 @@ const AuctionInformation = (props) => {
     }, [])
     let saveDetails = () => {
 
-        debugger;
         let details = {
             registrationStartDate: selectedDate2,
             lotteriesDate: selectedDate1,
             registrationEndDate: selectedDate3,
             lotteryApproval: lotteryApproval,
-            name: name
+            name: name,
+            terms: filePath
         }
 
         saveAuctionInformationInDB(props.auctionId, details).then(succ => {
@@ -69,9 +72,21 @@ const AuctionInformation = (props) => {
 
     const [selectedDate1, setSelectedDate1] = useState(props.auction.lotteriesDate || null);//lotery
     const [selectedDate2, setSelectedDate2] = useState(props.auction.registrationStartDate || null);//start
-    const [selectedDate3, setSelectedDate3] = useState(props.auction.registrationStartDate || null);//end
+    const [selectedDate3, setSelectedDate3] = useState(props.auction.registrationEndDate || null);//end
     const [lotteryApproval, setLotteryApproval] = React.useState(props.auction.lotteryApproval || false);
     const [name, setName] = React.useState(props.auction.name || "");
+    const [filePath, setFilePath] = useState(props.auction.terms || "");
+
+    const onChangeHandler = event => {
+        const data = new FormData()
+        data.append('file', event.target.files[0]);
+        axios.post("http://localhost:5000/upload", data, { // receive two parameter endpoint url ,form data 
+        }).then(res => { // then print response status
+            console.log(res);
+            setFilePath("http://localhost:5000/files/" + res.data.filename);
+            alert("filePath: " + filePath)
+        })
+    }
 
     return (
         <>
@@ -79,24 +94,6 @@ const AuctionInformation = (props) => {
                 <div className={"form-container "} >
 
                     <TextField className="txt" type="text" variant="standard" defaultValue={name} id="input-with-icon-grid" label="Auction name" onChange={(e) => { setName(e.target.value) }} />
-
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            disableToolbar
-                            variant="inline"
-                            format="dd/MM/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            label="Date of the lottery"
-                            value={selectedDate1}
-                            onChange={(date) => { setSelectedDate1(date) }}
-
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                        />
-
-                    </MuiPickersUtilsProvider>
 
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -133,17 +130,33 @@ const AuctionInformation = (props) => {
                         />
                     </MuiPickersUtilsProvider>
 
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="dd/MM/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Date of the lottery"
+                            value={selectedDate1}
+                            onChange={(date) => { setSelectedDate1(date) }}
 
-                    <br />
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+
+                    </MuiPickersUtilsProvider>
+
                     <FormControlLabel control={<Checkbox checked={lotteryApproval} onChange={(e) => { setLotteryApproval(e.target.checked) }} />} label="Lottery approval" />
 
-                    <br />
+                    <input type="file"  onChange={onChangeHandler} id="file-btn" />
                     <Button
+                        htmlFor="file-btn"
                         variant="contained"
-                        color="default"
-                        style={{ width: '15vw' }}
+                        // color="default"
+                        style={{ width: '15vw', backgroundColor: "#e0e0e0", color: "#262b96" }}
                         startIcon={<CloudUploadIcon />}
-
                     >
                         Upload Terms
                     </Button>

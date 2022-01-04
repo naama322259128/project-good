@@ -63,7 +63,7 @@ const AddProductForm = (props) => {
                 label="Included in packages" />
             <br /> */}
 
-                <button type="submit" style={{ width: '5vw', marginRight: 'auto', marginLeft: 'auto' }}  >Add</button>
+                <button type="submit" style={{ width: '5vw', marginRight: 'auto', marginLeft: 'auto',color:"#262b96" }}  >Add</button>
             </div>
         </form>
     )

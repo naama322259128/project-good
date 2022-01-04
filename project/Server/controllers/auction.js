@@ -83,7 +83,6 @@ const deleteAuction = async (req, res) => {
     console.log("delete ", auction.organizationName)
     return res.send(auction);
 }
-
 const getAuctionsByManagerId = async (req, res) => {
     let { manager_id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(manager_id))
@@ -147,6 +146,7 @@ const addOrganizationInformation = async (req, res) => {
 const addAuctionInformation = async (req, res) => {
     let { a_id } = req.params;
     let details = req.body;
+    console.log("888888888888888888888888888888888888888888")
     console.log(details)
     try {
         const filter = { _id: a_id };
@@ -210,7 +210,6 @@ const setApprovalAuction = async (req, res) => {
     let auction = await Auction.findOneAndUpdate({ '_id': a_id }, { 'publicationApproval': status })
     if (!auction)
         return res.status(404).send("There is no auction with such an ID number");
-    console.log(auction)
     return res.send(auction);
 }
 const setApprovalLotteries = async (req, res) => {

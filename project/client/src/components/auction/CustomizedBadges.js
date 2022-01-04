@@ -2,9 +2,10 @@ import * as React from 'react';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { connect } from "react-redux";
-
+import cartIcon from '../../img/icons/cart.png'
+import "./Cart.scss"
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     right: -3,
@@ -28,9 +29,9 @@ function CustomizedBadges(props) {
 
 
   return (
-    <IconButton aria-label="cart" style={{marginLeft:'1.5vw'}} onClick={() => window.location.replace("http://localhost:3000/auction/cart")}>
-      <StyledBadge badgeContent={cnt} color="secondary">
-        <ShoppingCartIcon />
+    <IconButton aria-label="cart" style={{ marginLeft: '1.5vw' }} title="Shopping Cart" onClick={() => window.location.replace("http://localhost:3000/auction/cart")}>
+      <StyledBadge badgeContent={cnt} color="secondary" id="cnt-cart-icon" >
+        <img src={cartIcon} id="go-to-cart-icon" />
       </StyledBadge>
     </IconButton>
   );

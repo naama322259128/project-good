@@ -4,7 +4,6 @@ export const initialState = {
     newAuction: new Auction(),
     // showSetPackage: false,//האם להציג את קומפוננטת קביעת כמות לחבילה AddPackage
     showSetProduct: true,//האם להציג את קומפוננטת  AddProductForm
-    finalStepModalIsOpen: true//האם להציג את המודל של האישור הסופי
 }
 export const newAuctionReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -84,11 +83,6 @@ export const newAuctionReducer = (state = initialState, action) => {
                 newAuction: tmp
             };
         }
-        case actionTypes.SET_FINAL_STEP:
-            return {
-                ...state,
-                finalStepModalIsOpen: action.payload
-            }
         case actionTypes.UPDATE_NEW_AUCTION_STATE:
             return {
                 ...state,
@@ -103,7 +97,6 @@ export const newAuctionReducer = (state = initialState, action) => {
                 //showSetPrice: false,
                 // showSetPackage: false,
                 showSetProduct: true,
-                finalStepModalIsOpen: true
             }
     }
     return state;

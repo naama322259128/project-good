@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         marginRight: theme.spacing(1),
+        color: "#e0e0e0",
+        backgroundColor: "#262b96"
     },
     instructions: {
         marginTop: theme.spacing(1),
@@ -58,10 +60,7 @@ const NewAuction = (props) => {
         let id = localStorage.getItem("user");
 
         if (id && props.currentUser == null) {
-
-            // let a_id = localStorage.getItem("currentAuction");
             let n_a_id = localStorage.getItem("newAuction");
-            // if (a_id) props.setCurrentAuctionByStorage(a_id);
             if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
             beManagerInDB(id).then(succ => {
@@ -111,7 +110,7 @@ const NewAuction = (props) => {
                     <Typography id="newAuctionAllSteps" className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                     <br />
                     <div>
-                        {activeStep > 0 ?
+                        {activeStep > 0 && (activeStep != steps.length - 1 || !props.newAuction.publicationApproval) ?
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -139,10 +138,9 @@ const NewAuction = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        finalStepModalIsOpen: state.auction.finalStepModalIsOpen,
         currentUser: state.user.currentUser,
         auctionId: state.auction.newAuction._id,
-
+        newAuction: state.auction.newAuction
     };
 }
 export default connect(mapStateToProps, {

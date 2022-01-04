@@ -6,8 +6,10 @@ export const initialState = {
     shoppingCartOfCurrentAuction: [],
     wantContact: false,
     shoppingCartAll: [],
-    myAuctionsToSet:[]//המכירות שלו שעדיין לא אושרו לתצוגה
-
+    myAuctionsToSet: [],//המכירות שלו שעדיין לא אושרו לתצוגה
+    showDeleteAuctionFromCartModal: false,
+    allCartArray: [],
+    deleteAuctionFromCart: null
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -40,7 +42,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 shoppingCartOfCurrentAuction: action.payload
             }
-        }    
+        }
         case actionTypes.SET_MY_AUCTIONS_TO_SET: {
             return {
                 ...state,
@@ -70,6 +72,24 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ordersList: action.payload
+            }
+        }
+        case actionTypes.SET_SHOW_DELETE_AUCTION_FROM_CART_MODAL: {
+            return {
+                ...state,
+                showDeleteAuctionFromCartModal: action.payload
+            }
+        }
+        case actionTypes.SET_ALL_CART_ARRAY: {
+            return {
+                ...state,
+                allCartArray: action.payload
+            }
+        }
+        case actionTypes.SET_DELETE_AUCTION_FROM_CART: {
+            return {
+                ...state,
+                deleteAuctionFromCart: action.payload
             }
         }
     }

@@ -1,15 +1,65 @@
 //drawer-top
-.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-1t29gy6-MuiToolbar-root#drawer-top{
-    background-color: #262b96 !important;
+.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.css-1t29gy6-MuiToolbar-root#drawer-top {
+  background-color: #262b96 !important;
 }
 
 //links text
-#links-list .MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.MuiListItem-button.css-bshv44-MuiButtonBase-root-MuiListItem-root{
-        color:#262b96 !important;
+#links-list
+  .MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.MuiListItem-button.css-bshv44-MuiButtonBase-root-MuiListItem-root {
+  color: #262b96 !important;
 }
 
-//links icons
-.links-icons svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root{
-    color:#262b96 !important;
+.icon-link-in-list {
+  fill: currentColor;
+  width: 0.9em;
+  height: 0.9em;
+  display: inline-block;
+  font-size: 1.4rem;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  flex-shrink: 0;
+  user-select: none;
+  margin-left: 0.7vw;
+}
+.icon-link-in-list:not(:root) {
+  overflow: hidden;
 }
 
+#cnt-cart-icon
+  span.MuiBadge-colorSecondary.MuiBadge-badge.MuiBadge-standard.MuiBadge-anchorOriginTopRightRectangular.css-jcn4dz-MuiBadge-badge {
+  background-color: #262b96 !important;
+  color: white;
+  border-color: white;
+}
+#go-to-cart-icon {
+  fill: currentColor;
+  width: 1.1em;
+  height: 1.1em;
+  display: inline-block;
+  font-size: 1.6rem;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  flex-shrink: 0;
+  user-select: none;
+}
+#go-to-cart-icon:not(:root) {
+  overflow: hidden;
+}
+#go-to-cart-icon {
+  fill: currentColor;
+  width: 1.1em;
+  height: 1.1em;
+  display: inline-block;
+  font-size: 1.6rem;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled{
+  cursor: not-allowed !important;
+  // pointer-events: all !important;
+  // background-color: purple !important;
+}

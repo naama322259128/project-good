@@ -50,3 +50,4 @@ app.post('/upload',function(req, res) {
 });
 app.use(express.static('public')); 
 app.use('/images', express.static('public'));
+app.use('/files', express.static('public'));

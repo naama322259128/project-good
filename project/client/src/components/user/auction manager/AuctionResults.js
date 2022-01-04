@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import pic from '../../../img/‏‏picture2.png'
+import pic from '../../../img/picture2.png'
 const AuctionResults = (props) => {
 
     useEffect(() => {

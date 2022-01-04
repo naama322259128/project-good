@@ -83,13 +83,6 @@ export const deleteProduct = (p_id) => {
         payload: p_id
     }
 }
-
-export const setLastModal = (b) => {
-    return {
-        type: actionTypes.SET_FINAL_STEP,
-        payload: b
-    }
-}
 export const resetNewAuctionState = () => {
     return {
         type: actionTypes.RESET_NEW_AUCTION_STATE

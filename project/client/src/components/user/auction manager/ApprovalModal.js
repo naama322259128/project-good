@@ -31,10 +31,11 @@ const ApprovalModal = (props) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" size="medium" onClick={() => saveApprovalLotteriesInDB(props.auction_id, true).then(succ => { if (succ.status != 400) { props.getManagerAuctionsFromDB(props.userId) } })} color="primary">
+                
+                    <Button      style={{ color: "#e0e0e0", backgroundColor: "#262b96" }}variant="contained" size="medium" onClick={() => saveApprovalLotteriesInDB(props.auction_id, true).then(succ => { if (succ.status != 400) { props.getManagerAuctionsFromDB(props.userId) } })} color="primary">
                         Ok
                     </Button>
-                    <Button variant="contained" size="medium" color="primary">
+                    <Button     style={{ color: "#e0e0e0", backgroundColor: "#262b96" }}variant="contained" size="medium" color="primary">
                         Cancle
                     </Button>
                 </DialogActions>
