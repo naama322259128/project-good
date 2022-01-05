@@ -51,7 +51,7 @@ export const SET_MANAGER_AUCTIONS = "SET_MANAGER_AUCTIONS"//הגדרה בסטי�
 export const DELETE_AUCTION_OF_MANAGER = "DELETE_AUCTION_OF_MANAGER"
 
 /******************************************   SITE MANAGER   ****************************************************/
-export const UPDATE_SITE_MANAGER_STATE = "UPDATE_SITE_MANAGER_STATE"
+export const SET_SITE_MANAGER_AUCTIONS = "SET_SITE_MANAGER_AUCTIONS"
 
 
 

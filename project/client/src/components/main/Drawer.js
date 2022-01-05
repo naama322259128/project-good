@@ -42,6 +42,7 @@ import homeIcon from '../../img/icons/home.png'
 import aboutIcon from '../../img/icons/about.png'
 import Arrows from './Arrows';
 import { useHistory } from 'react-router-dom';
+import Error from './Error';
 
 const drawerWidth = 240;
 
@@ -114,7 +115,7 @@ const MyLinkInList = ({ text, iconSrc, to }) => {
 
   return (
     <ListItem
-      onClick={() => window.location = "http://localhost:3000"+to}
+      onClick={() => window.location = "http://localhost:3000" + to}
       title={text.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())} button style={{ marginBottom: '1.8vh' }}>
       <ListItemIcon className="links-icons"><img src={iconSrc} className={"icon-link-in-list"} /></ListItemIcon>
       <ListItemText primary={text} />
@@ -153,9 +154,7 @@ export const MiniDrawer = (props) => {
   return (
     <Box sx={{ display: 'flex' }}>
 
-
-
-      <CssBaseline />
+     <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar id="drawer-top">
           <IconButton
@@ -231,7 +230,7 @@ export const MiniDrawer = (props) => {
             <Route path={`/update_your_details`}><UpdateDetails /></Route>
             <Route path={`/shoppingCart`}><CartAll /></Route>
             <Route path={`/statistics`}><Statistics /></Route>
-            <Route path={`/`}><About /></Route>
+            <Route path={`/`}><Error /></Route>
           </Switch>
         </Router >
       </Box>

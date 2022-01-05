@@ -92,7 +92,7 @@ const isUserExist = async (req, res) => {
     if (!user)
         return res.status(400).send("Incorrect details entered");
     let arr = await Auction.find({ 'auctionManager': user._id })
-    if (arr && arr.length > 0) {
+    if (arr && arr.length > 0 && user.status != "SITE_MANAGER") {
         user = await User.findOneAndUpdate({ _id: user._id }, { status: 'AUCTION_MANAGER' });
         user.save();
     }

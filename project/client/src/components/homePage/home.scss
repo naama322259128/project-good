@@ -133,35 +133,15 @@
   left: 12%;
   border: #262b96 1px solid;
   border-radius: 5px;
+  transition: 0.6s;
 }
-#contact_us {
+#contact_us:hover {
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
-#contact_us:before,
-#contact_us:after {
-  content: "";
-  z-index: -1;
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-  top: 10px;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  -moz-border-radius: 100px / 10px;
-  border-radius: 100px / 10px;
-}
-#contact_us:after {
-  right: 10px;
-  left: auto;
-  -webkit-transform: skew(8deg) rotate(3deg);
-  -moz-transform: skew(8deg) rotate(3deg);
-  -ms-transform: skew(8deg) rotate(3deg);
-  -o-transform: skew(8deg) rotate(3deg);
-  transform: skew(8deg) rotate(3deg);
-}
+
+
 #contact_us > p {
   margin: auto;
   color: #262b96;

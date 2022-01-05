@@ -1,0 +1,13 @@
+.site-m-icon{
+    fill: currentColor !important;
+    width: 0.7em !important;
+    height: 0.7em !important;
+    display: inline-block !important;
+    font-size: 1.3em !important;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+    flex-shrink: 0 !important;
+    user-select: none !important;
+}
+.site-m-icon:not(:root) {
+    overflow: hidden !important;
+}

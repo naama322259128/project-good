@@ -27,6 +27,7 @@ const ProfileButton = (props) => {
     const out = () => {
         handleClose();
         props.signOut();
+        window.location = "http://localhost:3000/home"
     }
 
 
@@ -57,25 +58,34 @@ const ProfileButton = (props) => {
                 },
             }}
         >
-            <Link to={'/your_profile'}>
-                <MenuItem key={'Your profile'} className="user-menu" onClick={handleClose}>Your profile</MenuItem>
-            </Link>
 
-            <Link to={'/update_your_details'}>
-                <MenuItem key={'Update your details'}  className="user-menu" onClick={handleClose}>Update your details</MenuItem>
-            </Link>
+            <MenuItem key={'Your profile'}
+                className="user-menu"
+                onClick={() => { handleClose(); window.location = "http://localhost:3000/your_profile" }}>
+                Your profile
+            </MenuItem>
+
+            <MenuItem key={'Update your details'}
+                className="user-menu"
+                onClick={() => { handleClose(); window.location = "http://localhost:3000/update_your_details"; }}>
+                Update your details
+            </MenuItem>
+
             {props.currentUser && props.currentUser.status != "USER" &&
-                <Link to={'/continue_new_auction'}>
-                    <MenuItem key={'Continue building'}  className="user-menu" onClick={handleClose}>Continue building</MenuItem>
-                </Link>
-            }
-            <Link to={'/shoppingCart'}>
-                <MenuItem key={'Shopping cart'} className="user-menu"  onClick={handleClose}>Shopping cart</MenuItem>
-            </Link>
-            <Link to={'/home'}>
-                <MenuItem key={'Sign out'} className="user-menu"  onClick={out}>Sign out</MenuItem>
-            </Link>
+                <MenuItem key={'Continue building'}
+                    className="user-menu"
+                    onClick={() => { handleClose(); window.location = "http://localhost:3000/continue_new_auction" }}>
+                    Continue building
+                </MenuItem>}
 
+
+            <MenuItem key={'Shopping cart'}
+                className="user-menu"
+                onClick={() => { handleClose(); window.location = "http://localhost:3000/shoppingCart" }} >
+                Shopping cart
+            </MenuItem>
+
+            <MenuItem key={'Sign out'} className="user-menu" onClick={out}>Sign out</MenuItem>
         </Menu>
 
 

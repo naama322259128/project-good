@@ -7,7 +7,10 @@ const Product = require("../models/product")
 
 /********************************************כללי**************************************** */
 const getAll = async (req, res) => {
-    let auctions = await Auction.find();
+    let auctions = await Auction.find().populate([{
+        path: "auctionManager",
+        select: `userName email`
+    }]);
     return res.send(auctions);
 }
 

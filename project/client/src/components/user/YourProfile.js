@@ -11,27 +11,17 @@ import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } 
 
 
 const YourProfile = (props) => {
-
-    //TODO: לבדוק שהיוסר או הכרנט-יוסר לא אנדיפיינד
     useEffect(() => {
         let id = localStorage.getItem("user");
-
-        if (id && props.currentUser == null) {
-
-            // let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
-            // if (a_id) props.setCurrentAuctionByStorage(a_id);
-            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
-            props.setUserByStorage(id);
-        }
-
+        if (id && props.currentUser == null) props.setUserByStorage(id)
     }, [])
     return (props.user &&
         (<Switch>
-            {props.user.status === 'AUCTION_MANAGER' && <Route path={'/your_profile/statistics'}>< AuctionStatistics /> </Route>}
-            {props.user.status === 'AUCTION_MANAGER' && <Route path={'/your_profile/results'}><AuctionResults /></Route>}
+            {(props.user.status === 'AUCTION_MANAGER' || props.user.status === 'SITE_MANAGER') && <Route path={'/your_profile/statistics'}>< AuctionStatistics /> </Route>}
+            {(props.user.status === 'AUCTION_MANAGER' || props.user.status === 'SITE_MANAGER') && <Route path={'/your_profile/results'}><AuctionResults /></Route>}
             <Route path={'/your_profile'}>
                 {
-                    props.user.status === 'SITE_MANAGER' ? (<SiteManagerTable />) :
+                    props.user.status === 'SITE_MANAGER' ? (<><SiteManagerTable /><AuctionManagerTable /></>) :
                         props.user.status === 'AUCTION_MANAGER' ? (<AuctionManagerTable />) :
                             null
                 }
