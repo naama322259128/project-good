@@ -16,4 +16,3 @@ export const setAllAuctions = (arr) => {
         payload: arr
     }
 }
-

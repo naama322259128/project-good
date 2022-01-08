@@ -3,13 +3,14 @@ const User = require("../models/user");
 const Order = require("../models/order");
 const mongoose = require("mongoose");
 const { addUser } = require("./user");
-const Product = require("../models/product")
+const Product = require("../models/product");
+const { sendEmailToWinners, sendWinnersListToManager, sendWinnersListToUsers } = require("./email");
 
 /********************************************כללי**************************************** */
 const getAll = async (req, res) => {
     let auctions = await Auction.find().populate([{
         path: "auctionManager",
-        select: `userName email`
+        select: `userName email phone`
     }]);
     return res.send(auctions);
 }
@@ -50,7 +51,12 @@ const getUnapprovedAuctionsByUser = async (req, res) => {
     return res.send(auctions);
 }
 const getpublicationApprovalAuctionsList = async (req, res) => {
-    let auctions = await Auction.find({ "publicationApproval": true, "status": "NOT_DONE" });
+
+    let auctions = await Auction.find({
+        "publicationApproval": true,
+        "status": "NOT_DONE",
+        "registrationEndDate": { $gte: new Date() }
+    });
     return res.send(auctions);
 }
 const getById = async (req, res) => {
@@ -63,9 +69,6 @@ const getById = async (req, res) => {
     return res.send(auction);
 }
 const addAuction = async (req, res) => {
-    // let _id = req.body;
-    // console.log(req.body)
-
     let { manager_id } = req.params;
     try {
         let newAuction = new Auction({ auctionManager: manager_id });
@@ -83,7 +86,7 @@ const deleteAuction = async (req, res) => {
     let auction = await Auction.findByIdAndRemove(id);
     if (!auction)
         return res.status(404).send("There is no auction with such an ID number");
-    console.log("delete ", auction.organizationName)
+    console.log("delete " + auction.organizationName)
     return res.send(auction);
 }
 const getAuctionsByManagerId = async (req, res) => {
@@ -258,7 +261,7 @@ const deletePackage = async (req, res) => {
 
 
 /********************************************מיונים סטטיסטיקות ותרשימים**************************************** */
-//הכנסות של מכירה
+//הכנסות של מכירה אחת
 const getTotalRevenueOneAuction = async (req, res) => {
     let { _id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(_id))
@@ -284,6 +287,7 @@ const getTotalRevenueAllAuctions = async (req, res) => {
 }
 
 //מחזיר מערך של
+//מכירות בעלי הכי הרבה הכנסות
 //אם כמה מכירות באותו סכום של הכנסות, כולן תחזורנה
 const getHighestRevenueAuctions = async (req, res) => {
 
@@ -306,6 +310,7 @@ const getHighestRevenueAuctions = async (req, res) => {
                     auctionName: n.name,
                     total: auctions[i].totalAmount,
                     logo: n.logo,
+                    isActive: n.registrationEndDate >= new Date()
                 });
         }
         else break;
@@ -323,32 +328,26 @@ const getHighestRevenueAuctions = async (req, res) => {
 const getBestSellingProductByAuction = async (req, res) => {
 
     let { _id } = req.params;
+    console.log("dsdddddddddddddddddddddddddddddd");
+
     try {
-        console.log("---------------------------------------------------------------")
-        // console.log("best selling")
-        // console.log('auction _id:', _id)
         let orders = await Order.find({ auctionId: _id });//כל ההזמנות
-        // console.log("orders:")
-        // console.log(orders)
+        console.log("44444444444444");
+        console.log(orders);
         let tmp = [];
         orders.map(order => {
             order.orderDetails.map(ord => {
                 let ind = tmp.findIndex(item => item.productId.toString() === ord.productId.toString());
-                if (ind === -1) tmp.push({ productId: ord.productId, qty: parseInt(ord.ticketsQuantity), a: order.auctionId });
-                else tmp[ind].qty += parseInt(ord.ticketsQuantity)
+                if (ind === -1) tmp.push({ productId: ord.productId, qty: parseInt(ord.qty), a: order.auctionId });
+                else tmp[ind].qty += parseInt(ord.qty)
             })
         })
-        // console.log("tmp:")
-        // console.log(tmp)
 
         let maxTmp = tmp.reduce((p, c) => p.qty > c.qty ? p : c);
-        // console.log("maxTmp.productId");
-        // console.log(maxTmp.productId);
         let product = await Product.findById(maxTmp.productId);
-        console.log("This is the best selling product:")
+        console.log("***************************");
         console.log(product)
-        console.log("The qty is: ", maxTmp.qty)
-
+        console.log("qty: " + maxTmp.qty)
         return res.send({ product: product, qty: maxTmp.qty });
     }
     catch (err) { return res.status(400).send(err.message) }
@@ -356,17 +355,18 @@ const getBestSellingProductByAuction = async (req, res) => {
 
 }
 
+//המוצר הכי נמכר מכל המכירות
 //גם אם יש כמה מוצרים בעלי אותה כמות הזמנות, יחזור רק אחד מהם.
 const getBestSellingProduct = async (req, res) => {
 
     try {
-        let orders = await Order.find();//כל ההזמנות
+        let orders = await Order.find().populate([{ path: "auctionId", select: "registrationEndDate" }]);//כל ההזמנות
         let tmp = [];
         orders.map(order => {
             order.orderDetails.map(ord => {
                 let ind = tmp.findIndex(item => item.productId.toString() === ord.productId.toString());
-                if (ind === -1) tmp.push({ productId: ord.productId, qty: parseInt(ord.ticketsQuantity), a: order.auctionId });
-                else tmp[ind].qty += parseInt(ord.ticketsQuantity)
+                if (ind === -1) tmp.push({ productId: ord.productId, qty: parseInt(ord.qty), a: order.auctionId._id, isActive: order.auctionId.registrationEndDate >= new Date() });
+                else tmp[ind].qty += parseInt(ord.qty)
             })
         })
         console.log(tmp)
@@ -374,10 +374,10 @@ const getBestSellingProduct = async (req, res) => {
         let maxTmp = tmp.reduce((p, c) => p.qty > c.qty ? p : c);
         console.log("maxTmp.productId");
         console.log(maxTmp.productId);
-        let product = await Product.findById(maxTmp.productId); console.log(product)
+        let product = await Product.findById(maxTmp.productId);
         let auction = await Auction.findById(maxTmp.a);
 
-        return res.send({ product: product, qty: maxTmp.qty, auction: auction });
+        return res.send({ product: product, qty: maxTmp.qty, auction: auction, isActive: maxTmp.isActive });
     }
     catch (err) { return res.status(400).send(err.message) }
 }
@@ -421,9 +421,18 @@ const getAuctionWithWinnersForManager = async (req, res) => {
     return res.send(auction);
 }
 
+//בדיקת ביצוע הגרלות
+const checkExecutionLotteries = async (req, res) => {
+    let auctions = await Auction.find({ "lotteriesDate": { $gte: new Date() }, "lotteryApproval": true, "status": "NOT_DONE" });
+    auctions.map(async p => {
+        await performLotteries(p._id);
+        await sendWinnersListToManager(p._id);
+        await sendEmailToWinners(p._id);
+        await sendWinnersListToUsers(p._id);
+    })
+}
 //בצע הגרלות
-const performLotteries = async (req, res) => {
-    let { _id } = req.params;//מכירה
+const performLotteries = async (_id) => {
     let auction = await Auction.findById(_id);
     // if (auction.status == "DONE")
     //     return res.send(null);
@@ -436,7 +445,7 @@ const performLotteries = async (req, res) => {
         let user_id = order.userId//קוד נרשם
 
         orders_details.map(details => {
-            let qty = details.ticketsQuantity;//מספר כרטיסים
+            let qty = details.qty;//מספר כרטיסים
             let prodId = details.productId//קוד מוצר
             for (var i = 0; i < qty; i++)
                 lott.push({ userId: user_id, productId: prodId });//הכנסה למערך כמספר הכרטיסים שקנה
@@ -448,34 +457,27 @@ const performLotteries = async (req, res) => {
 
     let products = auction.productList;//המוצרים של המכירה הזו
 
-    products.map(pro => {//מעבר על כל המוצרים
+    products.map(async pro => {//מעבר על כל המוצרים
         productId = pro._id;//קוד מוצר
 
         let arr = lott.filter(l => l.productId.toString() == productId.toString());//כל הכרטיסים למוצר הזה
-        // let arr = [];
-        // for (var i = 0; i < arr.length; i++)
-        //     if (lott[i].productId == productId)
-        //         arr.push(lott[i]);
 
         if (arr.length > 0) {
             let rnd = Math.floor(Math.random() * arr.length);//ההגרלה!!!
             let winnerId = arr[rnd].userId;//הזוכה
             pro.winnerId = winnerId;//רישום הזוכה
 
-            //TODO חשוב
-            // let xxx = await Product.findOneAndUpdate({ "_id": pro._id }, { "winnerId": winnerId });
+            let xxx = await Product.findByIdAndUpdate(pro._id, { "winnerId": winnerId });
             xxx.save();
         }
-        //מוצר שאין לו זוכים, יוכנס אליו קוד מנהל
-        //כי אחרי זה בפונקציות אחרות זה עושה שגיאות שעושים פופולייט לפי קוד זוכה
 
-        //TODO   אנשים יחשבו שהמנהל זכה בהרבה דברים  :(
-        // else pro.winnerId = auction.auctionManager;
     })
 
     auction.status = "DONE";
     await auction.save();
-    res.send(auction);
+    console.log("Do lotteries for " + auction.name)
+    console.log(new Date())
+
 }
 
 
@@ -487,5 +489,5 @@ module.exports = {
     getAuctionWithWinnersForManager, performLotteries, getUnapprovedAuctionsByUser,
     addPurchasePackage,
     getTotalRevenueOneAuction, getTotalRevenueAllAuctions, getHighestRevenueAuctions,
-    getBestSellingProductByAuction, getBestSellingProduct
+    getBestSellingProductByAuction, getBestSellingProduct, checkExecutionLotteries
 }

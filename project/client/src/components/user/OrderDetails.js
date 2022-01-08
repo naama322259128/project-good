@@ -12,7 +12,7 @@ import viewOrder from '../../img/icons/view-order.png'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import './yourProfile.scss';
-import pic from '../../img/x2.png'
+import pic from '../../img/x2.jpg'
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -25,8 +25,6 @@ import Typography from '@mui/material/Typography';
 export default function OrerDetails(props) {
 
     useEffect(() => {
-        console.log(props.details)
-        console.log("props.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.detailsprops.details")
         if (!props.details) window.location = "http://localhost:3000/your_profile"
     }, []);
 
@@ -62,7 +60,6 @@ export default function OrerDetails(props) {
                             <ListItem key={index} alignItems="flex-start">
                                 <ListItemAvatar>
                                     <Avatar alt="Remy Sharp" src={p.productId?.image || pic} />
-                                    {/* TODO default image */}
                                 </ListItemAvatar>
                                 <ListItemText
                                     primary={p.productId?.name}
@@ -76,7 +73,7 @@ export default function OrerDetails(props) {
                                             >
                                                 {p.productId?.name}
                                             </Typography>
-                                            {`: ${p.ticketsQuantity} tickets`}
+                                            {`: ${p.qty} tickets`}
                                         </React.Fragment>
                                     }
                                 />
@@ -111,36 +108,3 @@ export default function OrerDetails(props) {
 
 }
 
-
-{/* <TableContainer component={Paper} sx={{ width: '500' }}  >
-
-<br />
-<br />
-
-<br />
-<Table sx={{ minWidth: 500 }} aria-label="caption table">
-
-    <TableCell component="th" scope="row" style={style1}>tickets quantity</TableCell>
-    <TableCell component="th" scope="row" style={style1}>product</TableCell>
-    <TableBody>
-
-        {props.details.map((row, index) => (
-            <TableRow key={index} >
-                <TableCell component="th" scope="row" >{row.ticketsQuantity}</TableCell>
-                <TableCell component="th" scope="row">{row.productId?.name}</TableCell>
-            </TableRow>
-        ))}
-    </TableBody> */}
-
-
-{/* <TableCell style={style1} component="th" scope="row">Gifts:</TableCell>
-    <TableBody>
-        {props.gifts.map((row, index) => (
-            <TableRow key={index}><TableCell component="th" scope="row">{row}</TableCell></TableRow>
-        ))}
-    </TableBody> */}
-
-
-{/* 
-</Table>
-</TableContainer> */}

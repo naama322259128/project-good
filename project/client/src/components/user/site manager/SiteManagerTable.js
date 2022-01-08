@@ -24,6 +24,9 @@ import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 import managerIcon from '../../../img/icons/businessman.png'
+import { getTotalRevenueFromDB } from '../../../utils/auctionManagerUtils'
+
+
 const useStyles = makeStyles({
     root: { width: '80%', marginBottom: '15vh' },
     container: { maxHeight: 440, },
@@ -70,7 +73,6 @@ const SiteManagerTable = (props) => {
         { id: 'published', label: "Published", align: 'left', minWidth: 18 },
         { id: 'lotteriesDate', label: 'Lotteries date', minWidth: 101, align: 'left', },
         { id: 'approval', label: 'Lottery Approval', minWidth: 70, align: 'left', format: (value) => value.toFixed(2) },
-        { id: 'total', label: 'Total revenue', minWidth: 70, align: 'left', format: (value) => value.toFixed(2) },
         { id: 'op', label: 'Options', minWidth: 120, align: 'left', format: (value) => value.toFixed(2) }
     ];
 
@@ -80,8 +82,7 @@ const SiteManagerTable = (props) => {
         let status = a.status.replace(/_/g, " ");
         let published = a.publicationApproval.toString();
         let lotteriesDate = a.lotteriesDate ? moment(new Date(a.lotteriesDate)).format('D/MM/YYYY') : "";
-        let approval = a.lotteryApproval.toString();
-        let total = 0;
+        let approval = a.lotteryApproval?.toString();
         let isDone = a.status == "DONE";
 
         let op = <div className="optionsBtnsDiv">
@@ -89,7 +90,6 @@ const SiteManagerTable = (props) => {
             <Link onClick={() => props.setSelectedAuctionToOptions(a)} to={"/your_profile/statistics"}>  <IconButton size="small" title="Statistics"><img className="site-m-icon" src={st} ></img></IconButton></Link>
             <Link to={a.publicationApproval && !isDone ? "/auction" : "#"} onClick={() => props.getAuctionFromDB(a._id)}><IconButton disabled={a.publicationApproval == false || isDone} title="Continue" size="small"><img className="site-m-icon" src={con} ></img></IconButton></Link>
         </div >
-
 
         let man = (<>
             <PopupState variant="popover" popupId="demo-popup-popover">
@@ -124,54 +124,56 @@ const SiteManagerTable = (props) => {
             </PopupState>
         </>)
 
-        return { auctionName, oName, man, status, published, lotteriesDate, approval, total, op };
+        return { auctionName, oName, man, status, published, lotteriesDate, approval, op };
     }
 
     const classes = useStyles();
 
     return (
         <center>
-            <h1 style={{ color: "#262b96" }}>Site Manager</h1>
-
-            <Paper className={classes.root}>
-                <TableContainer className={classes.container}>
-                    <Table stickyHeader aria-label="sticky table">
-                        <TableHead className='auctionManagerTableCls'>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth, color: "#262b96", fontWeight: 'bold' }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {myAuctions && myAuctions.length > 0 && myAuctions.map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                </TableCell>
-                                            );
-                                        })}
-
+            {props.auctions && props.auctions.length > 0 ?
+                <>
+                    <h1 style={{ color: "#262b96" }}>Site Manager</h1>
+                    <Paper className={classes.root}>
+                        <TableContainer className={classes.container}>
+                            <Table stickyHeader aria-label="sticky table">
+                                <TableHead className='auctionManagerTableCls'>
+                                    <TableRow>
+                                        {columns.map((column) => (
+                                            <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                                style={{ minWidth: column.minWidth, color: "#262b96", fontWeight: 'bold' }}
+                                            >
+                                                {column.label}
+                                            </TableCell>
+                                        ))}
                                     </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                                </TableHead>
+                                <TableBody>
+                                    {myAuctions && myAuctions.length > 0 && myAuctions.map((row) => {
+                                        return (
+                                            <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                                {columns.map((column) => {
+                                                    const value = row[column.id];
+                                                    return (
+                                                        <TableCell key={column.id} align={column.align}>
+                                                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                        </TableCell>
+                                                    );
+                                                })}
 
-            </Paper>
+                                            </TableRow>
+                                        );
+                                    })}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
 
-        </center>);
+                    </Paper></> : <h1 style={{ color: "#262b96" }}>No auctions in site!</h1>
+            }
+
+        </center >);
 }
 const mapStateToProps = (state) => {
     return {

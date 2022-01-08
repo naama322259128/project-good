@@ -22,13 +22,11 @@ const AuctionTerms = (props) => {
         <center id="terms">
             <h3>Auction Terms</h3>
             <nav>
-                {/* <button onClick={goToPrevPage}>Prev</button>
-                <button onClick={goToNextPage}>Next</button> */}
-                <Button variant="contained" style={{ color: "#262b96" }}>Prev</Button>
-                <Button variant="contained" style={{ color: "#262b96" }}>Next</Button>
+                <Button onClick={goToPrevPage} variant="contained" style={{ color: "#262b96" ,marginRight:'1vw'}}>Prev</Button>
+                <Button onClick={goToNextPage} variant="contained" style={{ color: "#262b96" }}>Next</Button>
             </nav>
 
-            <div style={{ width: 800 }}>
+            <div style={{ width: 800,marginTop:'2vh' }}>
                 <Document
                     file={props.file}
                     onLoadSuccess={onDocumentLoadSuccess}
@@ -37,9 +35,9 @@ const AuctionTerms = (props) => {
                 </Document>
             </div>
 
-            {/* <p>
+            <p>
                 Page {pageNumber} of {numPages}
-            </p> */}
+            </p> 
         </center>
     );
 }

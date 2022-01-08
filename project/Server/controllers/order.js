@@ -22,11 +22,12 @@ const getById = async (req, res) => {
 
 //הפונקציה הזו מוסיפה לטבלת ההזמנות ומוחקת למשתמש את המוצרים של המכירה הזו מהסל
 const addOrder = async (req, res) => {
+
     let order = req.body;
-    let newOrder = new Order(order);
+    let newOrder =new Order(order);
+
     try {
         await newOrder.save();
-        console.log(newOrder)
         let user = await User.findById(newOrder.userId);
         let arr = user.shoppingCart.filter(item => item.auctionId.toString() != order.auctionId);
         user.shoppingCart = arr;
@@ -60,7 +61,7 @@ const getUserOrdersList = async (req, res) => {
             { path: 'orderDetails.productId', select: 'name image' }
         ]);
 
-        return res.send(orders);
+    return res.send(orders);
 }
 
 //מחזירה הזמנה עפ"י קוד משתמש ומכירה
@@ -82,7 +83,7 @@ const getAuctionSoldMostTickets = async (req, res) => {
         {
             $group: {
                 _id: "$auctionId",
-                count: { $sum: "$orderDetails.ticketsQuantity" }
+                count: { $sum: "$orderDetails.qty" }
             }
             // },
             // {

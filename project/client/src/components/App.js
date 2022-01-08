@@ -7,7 +7,6 @@ import { signIn } from '../store/actions/signIn';
 import MiniDrawer from './main/Drawer'
 import Login from './user/Login';
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../store/actions/user'
-
 // #e0e0e0
 
 
@@ -22,10 +21,8 @@ function App(props) {
       if (n_a_id) props.setNewAuctionByStorage(n_a_id);
       props.setUserByStorage(id);
     }
-    window.addEventListener("dblclick", sodi)
   }, [])
 
-  const sodi = () => { props.signIn('m', 'm@gmail.com'); }
 
   return (
     <>

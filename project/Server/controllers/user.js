@@ -96,6 +96,10 @@ const isUserExist = async (req, res) => {
         user = await User.findOneAndUpdate({ _id: user._id }, { status: 'AUCTION_MANAGER' });
         user.save();
     }
+    else if (user.status != "SITE_MANAGER") {
+        user = await User.findOneAndUpdate({ _id: user._id }, { status: 'USER' });
+        user.save();
+    }
     return res.send(user);
 }
 
@@ -106,6 +110,7 @@ const isLoginGoogle = async (req, res) => {
     if (!user) {
         user = { "userName": name, "email": email };
         let newUser = new User(user);
+        newUser.password = newUser._id.toString();
         try {
             await newUser.save();
             return res.send(newUser);
@@ -122,14 +127,17 @@ const beManager = async (req, res) => {
     let filter = { _id: userId };
     let update = { status: 'AUCTION_MANAGER' };
 
+    let user = await User.findById(userId);
+    if (user.status != "SITE_MANAGER") {
+        let doc = await User.findOneAndUpdate(filter, update, {
+            returnOriginal: false
+        });
 
-    let doc = await User.findOneAndUpdate(filter, update, {
-        returnOriginal: false
-    });
-
-    if (!doc)
-        return res.status(400).send("Incorrect details entered");
-    return res.send(doc);
+        if (!doc)
+            return res.status(400).send("Incorrect details entered");
+        return res.send(doc);
+    }
+    else return res.send(user);
 }
 
 const addProductToCart = async (req, res) => {
@@ -269,6 +277,7 @@ const getCart = async (req, res) => {
 
     return res.send(toReturn);
 }
+
 module.exports = {
     getAll, getById, addUser, updateUser, deleteUser, updateUserStatus, isUserExist, beManager, isLoginGoogle,
     removeProductFromCart, addProductToCart, getProductsInCartByAuction, emptyTheCartByAuction, getCart

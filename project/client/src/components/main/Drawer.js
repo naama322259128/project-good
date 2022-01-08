@@ -170,7 +170,7 @@ export const MiniDrawer = (props) => {
             <MenuIcon />
           </IconButton>
           {props.currentUser ? <ProfileButton /> : <Button type="button" id="btnLoginInDrower" onClick={() => props.setLogin(true)}>Login</Button>}
-          <Typography variant="h6" noWrap component="div" > Chinese auctions</Typography>
+          <Typography variant="h6" noWrap component="div">Chinese auctions</Typography>
           {location.pathname.startsWith('/auction') && <Timer />}
           {location.pathname.startsWith('/auction') && <CustomizedBadges />}
           <Arrows />

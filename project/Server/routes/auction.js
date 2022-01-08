@@ -27,6 +27,8 @@ route.get("/", auctionController.getAll)
 
 route.put("/performLotteries/:_id", auctionController.performLotteries)
 
+
+
 route.post("/setOrganizationInformation/:a_id", auctionController.addOrganizationInformation)
 route.post("/setAuctionInformation/:a_id", auctionController.addAuctionInformation)
 route.post("/approvalAuction/:a_id&:status", auctionController.setApprovalAuction)

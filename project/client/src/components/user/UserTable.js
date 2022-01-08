@@ -51,24 +51,30 @@ const UserTable = (props) => {
         const options = <OrderOptions order={order} key={order._id} />;//הכפתורים
         const n = order.auctionId.organizationName + " : " + order.auctionId.name;
         let d = moment(new Date(order.orderDate)).format('D/MM/YYYY');
-        let sum = order.amountToPay+"$";
-        return {status: order.auctionId.status.replace(/_/g, " "), name: n, orderDate: d, sum: sum, options };
+        let sum = order.amountToPay + "$";
+        return { status: order.auctionId.status.replace(/_/g, " "), name: n, orderDate: d, sum: sum, options };
     }
 
     useEffect(() => {
         let id = localStorage.getItem("user");
 
         if (id && props.currentUser == null) {
-
-            // let a_id = localStorage.getItem("currentAuction"); let n_a_id = localStorage.getItem("newAuction");
-            // if (a_id) props.setCurrentAuctionByStorage(a_id);
-            // if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
 
-
+        if (props.user)
+        getUserOrdersListFromDB(props.user._id).then(succ => {
+            if (succ.status != 400) {
+                let arr = [];
+                succ.data.map((o) => { arr.push(createData(o)) });
+                console.log(succ.data);
+                setRows(arr);
+            }
+        });
     }, [])
+    
     useEffect(() => {
+        console.log(props.orders);
         if (props.user)
             getUserOrdersListFromDB(props.user._id).then(succ => {
                 if (succ.status != 400) {
@@ -81,18 +87,18 @@ const UserTable = (props) => {
     }, [props.currentUser])
 
     const useStyles = makeStyles({
-        root: { width: '80%',marginBottom:'15vh' },
+        root: { width: '80%', marginBottom: '15vh' },
         container: { maxHeight: 440, }
     });
 
     const [rows, setRows] = useState([]);
 
     const classes = useStyles();
-    
+
     const style1 = { marginTop: '4vh' }
-    return (
-        <center>
-           <h1 style={{color:"#262b96"}}>Your Orders</h1> 
+    return (<center> {rows && rows.length > 0 ?
+        <>
+            <h1 style={{ color: "#262b96" }}>Your Orders</h1>
             <Paper className={classes.root} style={style1}>
                 <TableContainer className={classes.container} >
                     <Table stickyHeader aria-label="sticky table">
@@ -102,7 +108,7 @@ const UserTable = (props) => {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{ minWidth: column.minWidth,color:"#262b96",fontWeight: 'bold' }}
+                                        style={{ minWidth: column.minWidth, color: "#262b96", fontWeight: 'bold' }}
                                     >
                                         {column.label}
                                     </TableCell>
@@ -127,8 +133,9 @@ const UserTable = (props) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </Paper>
-        </center>
+            </Paper></> : <h1 style={{ color: "#262b96" }}>You have no orders!</h1>}
+           
+    </center>
     );
 }
 

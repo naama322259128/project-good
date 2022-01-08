@@ -29,9 +29,8 @@ var mailOptions = {
 
 //מייל לכל זוכה בנפרד
 //עובר על כל הזוכים לפי קוד מכירה
-const sendEmailToWinners = async (req, res) => {
+const sendEmailToWinners = async (_id) => {
 
-    let { _id } = req.params;
     let auction = await Auction.findById(_id).
         populate([
             { path: "productList.winnerId", select: `userName email` },
@@ -41,23 +40,27 @@ const sendEmailToWinners = async (req, res) => {
 
     mailOptions.subject = `Congratulations! You won the Chinese auction ${auction.organizationName + " : " + auction.name}`;
     arr.map(p => {
-        mailOptions.text = `Hi ${p.winnerId.userName}.
+        if (p.winnerId) {
+
+            mailOptions.text = `Hi ${p.winnerId.userName}.
           We are happy to inform you that you have won ${p.name}
           Please contact us soon to receive the product.
           By email ${auctionManager.email}
           Thank you for your contribution.`
-        mailOptions.bcc = p.winnerId.email;
-        try {
-            transporter.sendMail(mailOptions, function (error, info) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log('Email sent: ' + info.response);
-                }
+            mailOptions.bcc = p.winnerId.email;
+            try {
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
 
-            })
+                })
+            }
+            catch (err) { console.log(err.message) }
+
         }
-        catch (err) { console.log(err.message) }
         //ברכות! זכית במכירה הפומבית הסינית "_______"
 
         // שלום _____
@@ -71,12 +74,11 @@ const sendEmailToWinners = async (req, res) => {
 
 //TODO לא עובד!
 //שלח רשימת זוכים מפורטת למנהל המכירה
-const sendWinnersListToManager = async (req, res) => {
+const sendWinnersListToManager = async (_id) => {
 
-    let { _id } = req.params;
     let auction = await Auction.findById(_id).
         populate([
-            { path: "productList.winnerId", select: `userName confidentiality email phone address` },
+            { path: "productList.winnerId", select: `userName confidentiality email phone city` },
             { path: "auctionManager", select: `email` }
         ]);
     let arr = auction.productList;
@@ -124,11 +126,11 @@ const sendWinnersListToManager = async (req, res) => {
         message += `<tr>
         <td>${i + 1}</td>
         <td>${arr[i].name}</td>
-        <td>${arr[i].winnerId.userName}</td>
-        <td>${arr[i].winnerId.confidentiality}</td>
-        <td>${arr[i].winnerId.address}</td>
-        <td>${arr[i].winnerId.phone}</td>
-        <td>${arr[i].winnerId.email}</td>
+        <td>${arr[i].winnerId ? arr[i].winnerId.userName : ""}</td>
+        <td>${arr[i].winnerId ? arr[i].winnerId.confidentiality : ""}</td>
+        <td>${arr[i].winnerId ? arr[i].winnerId.city : ""}</td>
+        <td>${arr[i].winnerId ? arr[i].winnerId.phone : ""}</td>
+        <td>${arr[i].winnerId ? arr[i].winnerId.email : ""}</td>
         </tr>`
 
     message += `</table> 
@@ -156,7 +158,7 @@ const getWinnersTable = async (_id) => {
 
     let auction = await Auction.findById(_id).
         populate([
-            { path: "productList.winnerId", select: `userName confidentiality email phone address` },
+            { path: "productList.winnerId", select: `userName confidentiality email phone city` },
             { path: "auctionManager", select: `email` }
         ]);
     let arr = auction.productList;
@@ -201,28 +203,31 @@ const getWinnersTable = async (_id) => {
         <td>${i + 1}</td>
         <td>${arr[i].name}</td>`
         if (arr[i].confidentiality == false)
-            message += `<td>${arr[i].winnerId.userName}</td>`
+            message += `<td>${arr[i].winnerId ? arr[i].winnerId.userName : ""}</td>`
         else message += `<td>Anonymies</td>`
-        message += `<td> ${arr[i].winnerId.address}</td></tr> `
+        message += `<td> ${arr[i].winnerId ? arr[i].winnerId.city : ""}</td></tr> `
     }
     message += `</table > 
 
     </body > `;
 
-   return message;
+    return message;
 }
 
 //שולחת טבלת זוכים לכל משתתפי המכירה
-const sendWinnersListToUsers = async (req, res) => {
+const sendWinnersListToUsers = async (_id) => {
 
-    let { _id } = req.params;
+    //TODO שישלח לכל משתתף הודעה אחת, אפילו אם י שלו כמה הזמנות
     mailOptions.html = getWinnersTable(_id);
     let ordersList = await Order.find({ 'auctionId': _id }).
         populate([{ path: "userId", select: `email` }]);
 
-    let arr = [];
-    ordersList.map(e => arr.push(e.userId.email));
-    var uniqueEmails = arr.filter((v, i, a) => a.indexOf(v) === i);
+    // let arr = [];
+    // ordersList.map(e => arr.push(e.userId.email));
+    // var uniqueEmails = arr.filter((v, i, a) => a.indexOf(v) === i);
+
+    let uniqueEmails = []
+    ordersList.map(e => { if (uniqueEmails.indexOf(e.userId.email) === -1) uniqueEmails.push(e.userId.email) });
 
     mailOptions.subject = `The Chinese auction ${auction.organizationName + " : " + auction.name} results`;
     uniqueEmails.map(email => { mailOptions.bcc += `${email}, ` })
@@ -252,7 +257,7 @@ const sendContactToSiteManager = async (req, res) => {
     mailOptions.subject = details.subject;
     mailOptions.text = details.message + "from " + details.name;
     mailOptions.to = 'chinese.auctions1@gmail.com‬';
-    mailOptions.from = details.email;
+    mailOptions.from = 'chinese.auctions1@gmail.com';
 
     try {
         transporter.sendMail(mailOptions, function (error, info) {
@@ -276,5 +281,5 @@ const sendContactToSiteManager = async (req, res) => {
 
 
 module.exports = {
-    sendEmailToWinners, sendWinnersListToManager, sendContactToSiteManager,sendWinnersListToUsers,
+    sendEmailToWinners, sendWinnersListToManager, sendContactToSiteManager, sendWinnersListToUsers,
 }

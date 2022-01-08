@@ -9,7 +9,8 @@ import AboutAuction from './about/AboutAuction'
 import { updateShoppingCart } from '../../store/actions/user';
 import ProductList from './ProductList';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
-
+import de from '../../img/defaultLogo.jpg'
+import Success from './Success';
 const Auction = (props) => {
 
     useEffect(() => {
@@ -19,6 +20,8 @@ const Auction = (props) => {
             if (a_id) props.setCurrentAuctionByStorage(a_id);
             props.setUserByStorage(id);
         }
+        window.scrollTo(0, 0);
+
     }, [])
 
     useEffect(() => {
@@ -31,9 +34,10 @@ const Auction = (props) => {
         <center style={{ color: "#262b96", fontSize: '5vh' }}>{props.currentAuction.name || props.currentAuction.organizationName}</center>
         <Link to={`/auction/about`} >
             <p style={{ position: 'fixed', "top": '12vh', color: "#262b96" }}>About us</p>
-            <img src={props.currentAuction.logo} style={{ width: '3vw', height: 'auto', position: 'fixed', "top": '15vh' }} />
+            <img src={props.currentAuction.logo||de} style={{ width: '3vw', height: 'auto', position: 'fixed', "top": '15vh' }} />
         </Link>
         <Switch>
+            <Route path={'/auction/payment/success'}><Success /></Route>
             <Route path={'/auction/payment'}><PaymentForm /></Route>
             <Route path={'/auction/about'}><AboutAuction /></Route>
             <Route path={`/auction/cart`}><Cart /></Route>

@@ -11,6 +11,7 @@
     "@material-ui/pickers": "^3.3.10",
     "@mui/icons-material": "^5.2.0",
     "@mui/material": "^5.0.3",
+    "@paypal/react-paypal-js": "^7.5.0",
     "@rpldy/upload-button": "^0.13.3",
     "@rpldy/upload-preview": "^0.13.3",
     "@rpldy/uploady": "^0.13.3",

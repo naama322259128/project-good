@@ -65,11 +65,13 @@ const ProfileButton = (props) => {
                 Your profile
             </MenuItem>
 
-            <MenuItem key={'Update your details'}
-                className="user-menu"
-                onClick={() => { handleClose(); window.location = "http://localhost:3000/update_your_details"; }}>
-                Update your details
-            </MenuItem>
+            <Link to={'/update_your_details'}>
+                <MenuItem key={'Update your details'}
+                    className="user-menu"
+                    onClick={() => { handleClose() }}>
+                    Update your details
+                </MenuItem>
+            </Link>
 
             {props.currentUser && props.currentUser.status != "USER" &&
                 <MenuItem key={'Continue building'}

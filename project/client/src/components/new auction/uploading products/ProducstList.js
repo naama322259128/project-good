@@ -87,12 +87,12 @@ const ProductsList = (props) => {
             title="Delete" > <img className="my_icon" src={de} />
         </IconButton >
         const img = pro.image ? <img src={pro.image} style={{ width: 'auto', height: 'auto', maxWidth: '7vw', maxHeight: '6vh' }} /> : "";
-        return { name: pro.name, description: pro.description/*, includedInPackages: pro.includedInPackages.toString()*/, price: pro.price, img, del };
+        return { name: pro.name, description: pro.description/*, includedInPackages: pro.includedInPackages.toString()*/, price: pro.price+"$", img, del };
     }
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(1000);
 
 
     return (

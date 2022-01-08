@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import React, { useEffect } from 'react';
 import { updateShoppingCart } from '../../store/actions/user';
 import { addProductToShoppingCartInDB } from '../../utils/userUtils';
-import defaultImg from '../../img/x.png'
+import defaultImg from '../../img/x.jpg'
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 import { connect } from "react-redux";
 import addToCartIcon from '../../img/icons/add to cart.png'

@@ -6,45 +6,32 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { connect } from "react-redux";
 import React, { useEffect, useState, useRef } from 'react';
-import pic from '../../../img/x2.png'
+import pic from '../../../img/x2.jpg'
+import pic2 from '../../../img/defaultLogo.jpg'
 import { getBestSellingProductByAuctionFromDB, getTotalRevenueFromDB } from '../../../utils/auctionManagerUtils'
 import { setSelectedAuctionToOptions } from '../../../store/actions/auctionManager'
 
 const AuctionStatistics = (props) => {
+
     useEffect(() => {
-        if (props.auction) {
-            getBestSellingProductByAuctionFromDB(props.auction._id).then(succ => {
+        if (!props.auction) window.location = "http://localhost:3000/your_profile"
+        getBestSellingProductByAuctionFromDB(props.auction._id).then(succ => {
+            if (succ.status != 400) {
                 setBestProduct(succ.data);
-                console.log("best product")
                 console.log(succ.data)
-            });
-            getTotalRevenueFromDB(props.auction._id).then(succ => {
-                if (succ.status != 400) setSum(succ.data);
-                console.log("total")
-                console.log(succ.data)
-            })
-        }
-        else window.location = "http://localhost:3000/your_profile"
+            }
+        });
+        getTotalRevenueFromDB(props.auction._id).then(succ => {
+            if (succ.status != 400) {
+                setSum(succ.data);
+            }
+        })
+
     }, []);
 
-
+    
     useEffect(() => {
-        if (props.auction) {
-            getBestSellingProductByAuctionFromDB(props.auction._id).then(succ => {
-                setBestProduct(succ.data);
-                console.log("best product")
-                console.log(succ.data)
-            });
-            getTotalRevenueFromDB(props.auction._id).then(succ => {
-                if (succ.status != 400) setSum(succ.data);
-                console.log("total")
-                console.log(succ.data)
-            })
-        }
-    }, [props.auction])
-
-    useEffect(() => {
-        return props.setSelectedAuctionToOptions(null);
+        return () => props.setSelectedAuctionToOptions(null);
     }, [])
 
     const [bestProduct, setBestProduct] = useState(null);
@@ -53,7 +40,7 @@ const AuctionStatistics = (props) => {
     return (
         <>
 
-            <h1>Chinese auction statistics</h1>
+            <h1>{props.auction?.name} statistics</h1>
 
             <div id="st-container">
 
@@ -62,25 +49,25 @@ const AuctionStatistics = (props) => {
                         <CardMedia
                             component="img"
                             height="140"
-                            image={props.auction.logo || pic}
+                            image={props.auction.logo || pic2}
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">Total revenue</Typography>
-                            <Typography variant="body2" color="text.secondary">summmm{sum}</Typography>
+                            <Typography variant="body2" color="text.secondary">{sum}$</Typography>
                         </CardContent>
-                        {"logo:" + props.auction.logo}
                     </Card>}
 
-                {bestProduct &&
+
+                {bestProduct &&bestProduct.product&&
                     <Card sx={{ maxWidth: 345 }}>
                         <CardMedia
                             component="img"
                             height="140"
-                            image={bestProduct.image || pic}
+                            image={bestProduct.product.image || pic}
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">Best selling product</Typography>
-                            <Typography variant="body2" color="text.secondary">summmmmmm{bestProduct.sum}</Typography>
+                            <Typography variant="body2" color="text.secondary">{bestProduct.qty} tickets for <b>{bestProduct.product.name}</b></Typography>
                         </CardContent>
                     </Card>}
 

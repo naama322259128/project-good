@@ -30,6 +30,7 @@ export const auctionManagerReducer = (state = initialState, action) => {
         case actionTypes.DELETE_AUCTION_OF_MANAGER: {
             let arr = state.auctions.
                 filter(a => a._id !== action.payload);
+            debugger;
             return {
                 ...state,
                 selected_auction_to_options: null,

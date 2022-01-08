@@ -16,7 +16,7 @@ const StatisticsCard = (props) => {
             <CardMedia
                 component="img"
                 height="140"
-                image={props.logo || defaultLogo}
+                image={props.logo}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">{props.title}</Typography>

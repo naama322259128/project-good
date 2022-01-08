@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState, useRef } from 'react';
 import './main.scss';
-import p from '../../img/logo.webp';
+import p from '../../img/logo_blue_orange.webp';
 import video from '../../img/vvv.mp4';
 import img from '../../img/logo_blue_orange.webp';
 import { Link } from 'react-router-dom';
@@ -117,8 +117,8 @@ const About = (props) => {
 
       <ContactForm />
 
-      <h4 id="made">
-        N.Merahavi and M.Katan. Israel 2021.
+      <h4 id="made2">
+        N.Merahavi and M.Katan. Israel 2021.<br/>
         <img id="copy-right-icon" src={c} /> All rights reserved.
       </h4>
     </center>

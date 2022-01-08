@@ -10,10 +10,13 @@ import { makeStyles } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import axios from 'axios';
 import uploadImg from '../../img/upload.png'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 const OrganizationInformation = (props) => {
 
     useEffect(() => {
+
         let id = localStorage.getItem("user");
 
         if (id && props.currentUser == null) {
@@ -21,6 +24,9 @@ const OrganizationInformation = (props) => {
             if (n_a_id) props.setNewAuctionByStorage(n_a_id);
             props.setUserByStorage(id);
         }
+        localStorage.setItem("organizationName", props.auction.organizationName || "")
+        localStorage.setItem("organizationText", props.auction.organizationText || "")
+        localStorage.setItem("logo", props.auction.logo || "")
 
     }, [])
 
@@ -28,18 +34,23 @@ const OrganizationInformation = (props) => {
     useEffect(() => {
         return () => {
             let details = {
-                organizationName: organizationName,
-                organizationText: organizationText,
-                organizationPhotos: [],
-                logo: imagePath
+
+                organizationName: localStorage.getItem("organizationName"),
+                organizationText: localStorage.getItem("organizationText"),
+                logo: localStorage.getItem("logo")
             };
             console.log(details);
             debugger;
             saveOrganizationInformationInDB(props.auctionId, details).then(succ => {
                 if (succ.status != 400) props.setNewAuction(succ.data)
             })
+
+            localStorage.removeItem("organizationName")
+            localStorage.removeItem("organizationText")
+            localStorage.removeItem("logo")
         }
-    }, [])
+
+    }, []);
 
 
     const [organizationName, setOrganizationName] = useState(props.auction.organizationName || "");
@@ -53,6 +64,7 @@ const OrganizationInformation = (props) => {
         }).then(res => { // then print response status
             console.log(res);
             setImagePath("http://localhost:5000/images/" + res.data.filename);
+            localStorage.setItem("logo", "http://localhost:5000/images/" + res.data.filename)
         })
     }
 
@@ -60,8 +72,8 @@ const OrganizationInformation = (props) => {
     return (<div style={{ marginTop: '3vh' }} >
         <form noValidation id="myForm" style={{ display: 'inline-block', width: '40%', minHeight: '60%', padding: '2vh' }} >
             <div className={"form-container"}>
-                <TextField className="txt" onChange={(e) => { setOrganizationName(e.target.value) }} variant="standard" defaultValue={organizationName} id="input-with-icon-grid" label="Organization Name" />
-                <TextField className="txt" onChange={(e) => { setOrganizationText(e.target.value) }} multiline variant="standard" defaultValue={organizationText} id="input-with-icon-grid" label="Organization Text" />
+                <TextField className="txt" onChange={(e) => { setOrganizationName(e.target.value); localStorage.setItem("organizationName", e.target.value) }} variant="standard" defaultValue={organizationName} id="input-with-icon-grid" label="Organization Name" />
+                <TextField className="txt" onChange={(e) => { setOrganizationText(e.target.value); localStorage.setItem("organizationText", e.target.value) }} multiline variant="standard" defaultValue={organizationText} id="input-with-icon-grid" label="Organization Text" />
             </div>
 
             {/* <label>Upload photos of the organization</label> */}{/* TODO */}
@@ -70,7 +82,7 @@ const OrganizationInformation = (props) => {
             <input style={{ display: "none" }} id="contained-button-file" accept="image/*" type="file" onChange={onChangeHandler} />
 
             <label htmlFor="contained-button-file">
-                <Button style={{ backgroundColor: "#e0e0e0", color: "#262b96" }} variant="contained" color="primary" component="span">Upload organization's logo</Button>
+                <Button  startIcon={<CloudUploadIcon />} style={{ backgroundColor: "#e0e0e0", color: "#262b96" }} variant="contained" color="primary" component="span">Upload organization's logo</Button>
             </label>
 
         </form >

@@ -42,5 +42,6 @@ export const emptyTheCartByAuction = (auctionId, userId) => {
 }
 
 export const addOrderToDB = (order) => {
+    debugger;
     return axios.post(`http://localhost:5000/orders`, order);
 }

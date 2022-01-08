@@ -20,6 +20,7 @@ export const deleteAuctionFromDB = (_id) => {
 }
 
 export const deleteAuction = (_id) => {
+    debugger;
     return {
         type: actionTypes.DELETE_AUCTION_OF_MANAGER,
         payload: _id

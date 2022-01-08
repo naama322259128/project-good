@@ -9,7 +9,7 @@ import moment from 'moment'
 
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-
+import de from '../../../img/defaultLogo.jpg'
 
 const AboutAuction = (props) => {
   useEffect(() => {
@@ -34,13 +34,9 @@ const AboutAuction = (props) => {
       <h2 style={{ color: "#262b96" }}>Chiense Auction: {props.auction.name} </h2>
       <h2 style={{ color: "#262b96" }}>Organization: {props.auction.organizationName}</h2>
 
-      {props.logo &&
-        <Card sx={{ maxWidth: 345, height: 'auto' }} id="logo">
-          <CardMedia
-            component="img"
-            image={props.logo}
-          />
-        </Card>}
+      <img style={{ 'maxWidth': 345, 'height': 'auto', boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)'}}  src={props.logo || de}/>
+      <br />
+      <br />
 
       <p style={{ color: "#262b96" }}>{props.auction.organizationText}</p>
 
@@ -55,8 +51,8 @@ const AboutAuction = (props) => {
 
       {props.auction.terms &&
         <AuctionTerms file={props.auction.terms} />}{/* קובץ תקנון */}
-      {/* <AuctionTerms file={file} />קובץ תקנון */}
-
+      <br />
+      <br />
 
       <p style={{ color: "#262b96" }}>registration start date: {props.auction.registrationStartDate &&
         moment(new Date(props.auction.registrationStartDate)).format('D/MM/YYYY')}</p>  {/* תאריך התחלה */}

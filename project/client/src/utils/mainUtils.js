@@ -12,3 +12,4 @@ export const getBestSellingProductFromDB = async () => {
   return axios.get(`http://localhost:5000/auctions/getBestSellingProduct`)
 }
 
+

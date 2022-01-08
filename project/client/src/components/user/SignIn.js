@@ -153,7 +153,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import LoginGoogle from './LoginGoogle';
 import { useForm } from "react-hook-form";
- 
+
 import { setCurrentUser } from '../../store/actions/signUp';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -185,10 +185,10 @@ const useStyles = makeStyles((theme) => ({
   },
   eye: {
     color: '#8e8e95',
- 
+
   }
 }));
- 
+
 const SignIn = (props) => {
   const [values, setValues] = React.useState({
     amount: '',
@@ -197,34 +197,34 @@ const SignIn = (props) => {
     weightRange: '',
     showPassword: false,
   });
- 
+
   const handleChange = (prop) => (event) => { setValues({ ...values, [prop]: event.target.value }); };
- 
+
   const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }); };
- 
+
   const handleMouseDownPassword = (event) => { event.preventDefault(); };
- 
-   let password= "";
-   let email= "";
- 
+
+  let password = "";
+  let email = "";
+
   let submit = (data, e) => {
     e.preventDefault();
- 
+
     password = data.password;
     email = data.email;
     props.signIn(password, email)
- 
+
   }
   const { register, handleSubmit, formState: { errors } } = useForm();
- 
+
   const classes = useStyles();
- 
+
   return (
     <center>
       <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit(submit)} /*onLoad={() => { document.getElementById('emailInput').focus()}}*/>
- 
+
         <img className='profile_img' src={p} />
- 
+
         <div className={"inputs_btns"}>
           <FilledInput
             id="emailInput"
@@ -240,7 +240,7 @@ const SignIn = (props) => {
               </InputAdornment>
             }
             {...register('email', { required: true })}
- 
+
           />
           <FilledInput
             id="passInput"
@@ -257,7 +257,7 @@ const SignIn = (props) => {
             }
             endAdornment={
               <InputAdornment position="end">
- 
+
                 <IconButton
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
@@ -268,17 +268,17 @@ const SignIn = (props) => {
               </InputAdornment>
             }
             {...register('password', { required: true })}
- 
+
           />
         </div>
-<Button type="submit" variant="contained" className={"login_btn_sign_in"} id="btnSubmit">Login</Button>
- 
-        {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null}
+        <Button type="submit" variant="contained" className={"login_btn_sign_in"} id="btnSubmit">Login</Button>
+
+        {/* {password == "" ? <h2 id="forgot">Forgot Password?</h2> : null} */}
         <br />
- 
-        {/* <LoginGoogle /> */}
- 
+
       </form>
+      <LoginGoogle />
+
     </center >
   );
 }
@@ -287,7 +287,7 @@ const mapStateToProps = (state) => {
   };
 }
 export default connect(mapStateToProps, { signIn, setCurrentUser })(SignIn);
- 
+
 
 
 

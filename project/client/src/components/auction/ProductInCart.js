@@ -12,7 +12,7 @@ import { updateShoppingCart } from '../../store/actions/user';
 import { addProductToShoppingCartInDB, deleteProductFromShoppingCartInDB } from '../../utils/userUtils';
 import deleteIcon from '../../img/icons/dustbin.png'
 import { connect } from "react-redux";
-import defaultImg from '../../img/x.png'
+import defaultImg from '../../img/x.jpg'
 import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
 
 const useStyles = makeStyles({

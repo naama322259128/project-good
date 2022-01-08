@@ -6,6 +6,11 @@ const user = require("./routes/user");
 const auction = require("./routes/auction");
 const order = require("./routes/order");
 var multer = require('multer')
+const schedule = require('node-schedule');
+const ExecutionLotteries=require('./controllers/auction')
+const job = schedule.scheduleJob('* 16 * * *', function(){
+    ExecutionLotteries.checkExecutionLotteries()
+});
 
 mongoose.connect("mongodb://localhost:27017/projectDB").then(() => {
     console.log("connected to mongoDB");

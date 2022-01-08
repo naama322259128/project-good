@@ -1,7 +1,7 @@
 // import Stack from '@mui/material/Stack';
 import './yourProfile.scss'
 import { connect } from 'react-redux';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => (
 
 const UpdateDetails = (props) => {
 
+
+// לקומפוננטה הזו יש להגיע רק מתוך דף הבית
+
     const classes = useStyles();
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -72,7 +75,11 @@ const UpdateDetails = (props) => {
 
     useEffect(() => {
         let id = localStorage.getItem("user");
-        if (id && props.currentUser == null) props.setUserByStorage(id)
+        if (id && props.currentUser == null) props.setUserByStorage(id);
+        setDetails(props.currentUser);
+        // console.log(props.currentUser);
+
+        localStorage.setItem("namssswwe", details?.userName || "");//name
     }, [])
 
     // useEffect(() => {
@@ -85,14 +92,6 @@ const UpdateDetails = (props) => {
     //     confidentiality = props.currentUser?.confidentiality;
     // }, [props.currentUser])
 
-    //עדכון משתמש קיים
-    let password = props.currentUser?.password;
-    let userName = props.currentUser?.userName;
-    let email = props.currentUser?.email;
-    let phone = props.currentUser?.phone;
-    let city = props.currentUser?.city;
-    let birthYear = props.currentUser?.birthYear;
-    let confidentiality = props.currentUser?.confidentiality;
 
     //TODO מה נציג אם לא חוזר כלום מהשרת, לדוגמא הוא לא עובד עכשיו
     const updateUser = () => {
@@ -100,20 +99,20 @@ const UpdateDetails = (props) => {
         setOpen2(false);
         setOpenEror(false);
         let user = props.currentUser;
-        if (user.password == password && user.email == email && user.phone == phone &&
-            user.city == city &&
-            user.userName == userName &&
-            user.birthYear == birthYear &&
-            user.confidentiality == confidentiality)
+        if (user.password == details.password && user.email == details.email && user.phone == details.phone &&
+            user.city == details.city &&
+            user.userName == details.userName &&
+            user.birthYear == details.birthYear &&
+            user.confidentiality == details.confidentiality)
             setOpen2(true);
         else {
-            user.password = password;
-            user.email = email;
-            user.phone = phone;
-            user.city = city;
-            user.userName = userName;
-            user.birthYear = birthYear;
-            user.confidentiality = confidentiality//TODO למה לא טוב
+            user.password = details.password;
+            user.email = details.email;
+            user.phone = details.phone;
+            user.city = details.city;
+            user.userName = details.userName;
+            user.birthYear = details.birthYear;
+            user.confidentiality = details.confidentiality//TODO למה לא טוב
 
             updateUserInDB(user).then(succ => {
                 if (succ.status != 400) {
@@ -129,192 +128,205 @@ const UpdateDetails = (props) => {
     const [open2, setOpen2] = React.useState(false);
     const [openEror, setOpenEror] = React.useState(false);
 
+    //עדכון משתמש קיים
+    const [details, setDetails] = useState(props.currentUser);
+
+    const setState = (key, value) => {
+        setDetails((prevState) => ({
+            ...prevState,
+            [key]: value
+        }));
+    }
+
+
     return (
         <>
             <center>
-                <form autoComplete="off" id="update_user_details_form" >
+                {details &&
+                    <><form autoComplete="off" id="update_user_details_form" >
 
-                    <br/>
-                    <h1 id="h1_profile">Update your details</h1>
-                    <br/>
-                    <div id="grid-inputs-in-update-form">
-                        <FilledInput
-                            type={'text'}
-                            placeholder="Name"
+                        <br />
+                        <h1 id="h1_profile">Update your details</h1>
+                        <h3>{details.userName}</h3>
+                        <br />
+                        <div id="grid-inputs-in-update-form">
+                            <FilledInput
+                                type={'text'}
+                                placeholder="Name"
 
-                            required
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { userName = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="user icon" style={{ color: '#262b96 !important' }}></i>
-                                </InputAdornment>
-                            }
-                            defaultValue={userName}
-                        />
+                                required
+                                className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                                variant="filled"
+                                onChange={(e) => { setState("userName", e.target.value) }}
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <i className="user icon" style={{ color: '#262b96 !important' }}></i>
+                                    </InputAdornment>
+                                }
+                                defaultValue={details.userName}
+                            />
 
-                        <FilledInput
-                            type={'email'}
-                            placeholder="Email address"
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
+                            <FilledInput
+                                type={'email'}
+                                placeholder="Email address"
+                                className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                                variant="filled"
 
-                            required
-                            onChange={(e) => { email = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="envelope icon"></i>
-                                </InputAdornment>
-                            }
-                            defaultValue={email} />
+                                required
+                                onChange={(e) => { setState("email", e.target.value) }}
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <i className="envelope icon"></i>
+                                    </InputAdornment>
+                                }
+                                defaultValue={details.email} />
 
-                        <FilledInput
-                            type={'text'}
+                            <FilledInput
+                                type={'text'}
 
-                            required
-                            placeholder='City'
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { city = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="map marker alternate icon"></i>
-                                </InputAdornment>
-                            }
-                            defaultValue={city} />
+                                required
+                                placeholder='City'
+                                className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                                variant="filled"
+                                onChange={(e) => { setState("city", e.target.value) }}
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <i className="map marker alternate icon"></i>
+                                    </InputAdornment>
+                                }
+                                defaultValue={details.city} />
 
-                        <FilledInput
-                            type={'text'}
-                            placeholder="Year Of Birth"
+                            <FilledInput
+                                type={'text'}
+                                placeholder="Year Of Birth"
 
-                            required
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { birthYear = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="calendar alternate outline icon"></i>
-                                </InputAdornment>
-                            }
-                            defaultValue={birthYear} />
+                                required
+                                className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                                variant="filled"
+                                onChange={(e) => { setState("birthYear", e.target.value) }}
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <i className="calendar alternate outline icon"></i>
+                                    </InputAdornment>
+                                }
+                                defaultValue={details.birthYear} />
 
-                        <FilledInput
-                            type={'text'}
-                            placeholder="Phone Number"
+                            <FilledInput
+                                type={'text'}
+                                placeholder="Phone Number"
 
-                            required
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { phone = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="mobile alternate icon"></i>
-                                </InputAdornment>
-                            }
-                            defaultValue={phone} />
+                                required
+                                className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                                variant="filled"
+                                onChange={(e) => { setState("phone", e.target.value) }}
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <i className="mobile alternate icon"></i>
+                                    </InputAdornment>
+                                }
+                                defaultValue={details.phone} />
 
-                        <FilledInput
-                            type={values.showPassword ? 'text' : 'password'}
-                            onChange={handleChange('password')}
-                            placeholder="Password"
-                            required
+                            <FilledInput
+                                type={values.showPassword ? 'text' : 'password'}
+                                onChange={handleChange('password')}
+                                placeholder="Password"
+                                required
 
-                            className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
-                            variant="filled"
-                            onChange={(e) => { password = e.target.value }}
-                            startAdornment={
-                                <InputAdornment position="start">
-                                    <i className="lock icon"></i>
-                                </InputAdornment>
-                            }
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        className={classes.eye}
-                                    >
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            defaultValue={password} />
+                                className={clsx(classes.margin, classes.textField, classes.input_pas_ma)}
+                                variant="filled"
+                                onChange={(e) => { setState("password", e.target.value) }}
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <i className="lock icon"></i>
+                                    </InputAdornment>
+                                }
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            className={classes.eye}
+                                        >
+                                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                defaultValue={details.password} />
 
-                        <FormControlLabel
-                            style={{ color: '#8e8e95', marginLeft: '0vw', marginTop: '1vh' }}
-                            control={<Checkbox
-                                style={{ color: "#262b96", marginRight: '0.2vw' }}
-                                onChange={(e) => { confidentiality = e.target.checked }} />}
-                            label="Confidentiality" />
-                    </div>
-                    <br />
-                    <br />
-                    <Button type="button" variant="contained" style={{ backgroundColor: '#e0e0e0', color: '#262b96' }} id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
-                    <br/>
-                    <br/>
+                            <FormControlLabel
+                                style={{ color: '#8e8e95', marginLeft: '0vw', marginTop: '1vh' }}
+                                control={<Checkbox
+                                    style={{ color: "#262b96", marginRight: '0.2vw' }}
+                                    onChange={(e) => { setState("confidentiality", e.target.value) }} />}
+                                label="Confidentiality" />
+                        </div>
+                        <br />
+                        <br />
+                        <Button type="button" variant="contained" style={{ backgroundColor: '#e0e0e0', color: '#262b96' }} id="update_details_btn" onClick={() => { updateUser() }}>Update</Button>
+                        <br />
+                        <br />
 
-                </form>
-                <Box sx={{ width: '71%' }}>
-                    <Collapse in={openEror}>
-                        <Alert
-                            severity="error"
-                            action={
-                                <IconButton
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    onClick={() => {
-                                        setOpenEror(false);
-                                    }}
+                    </form>
+                        <Box sx={{ width: '71%' }}>
+                            <Collapse in={openEror}>
+                                <Alert
+                                    severity="error"
+                                    action={
+                                        <IconButton
+                                            aria-label="close"
+                                            color="inherit"
+                                            size="small"
+                                            onClick={() => {
+                                                setOpenEror(false);
+                                            }}
+                                        >
+                                            x
+                                        </IconButton>
+                                    }
+                                    sx={{ mb: 2 }}
                                 >
-                                    x
-                                </IconButton>
-                            }
-                            sx={{ mb: 2 }}
-                        >
-                            Error! Please check that the details are standard and try again.
-                        </Alert>
-                    </Collapse>
-                    <Collapse in={open2}>
-                        <Alert
-                            severity="info"
-                            action={
-                                <IconButton
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    onClick={() => {
-                                        setOpen2(false);
-                                    }}
+                                    Error! Please check that the details are standard and try again.
+                                </Alert>
+                            </Collapse>
+                            <Collapse in={open2}>
+                                <Alert
+                                    severity="info"
+                                    action={
+                                        <IconButton
+                                            aria-label="close"
+                                            color="inherit"
+                                            size="small"
+                                            onClick={() => {
+                                                setOpen2(false);
+                                            }}
+                                        >
+                                            x
+                                        </IconButton>
+                                    }
+                                    sx={{ mb: 2 }}
                                 >
-                                    x
-                                </IconButton>
-                            }
-                            sx={{ mb: 2 }}
-                        >
-                            No change in details found. </Alert>
-                    </Collapse>
-                    <Collapse in={open}>
-                        <Alert
-                            action={
-                                <IconButton
-                                    aria-label="close"
-                                    color="inherit"
-                                    size="small"
-                                    onClick={() => {
-                                        setOpen(false);
-                                    }}
+                                    No change in details found. </Alert>
+                            </Collapse>
+                            <Collapse in={open}>
+                                <Alert
+                                    action={
+                                        <IconButton
+                                            aria-label="close"
+                                            color="inherit"
+                                            size="small"
+                                            onClick={() => {
+                                                setOpen(false);
+                                            }}
+                                        >
+                                            x
+                                        </IconButton>
+                                    }
+                                    sx={{ mb: 2 }}
                                 >
-                                    x
-                                </IconButton>
-                            }
-                            sx={{ mb: 2 }}
-                        >
-                            Your details have been successfully updated.       </Alert>
-                    </Collapse>
-                </Box>
-            </center >
+                                    Your details have been successfully updated.       </Alert>
+                            </Collapse>
+                        </Box>
+                    </>} </center >
         </>
     );
 
@@ -326,7 +338,5 @@ const mapStateToProps = (state) => {
     };
 }
 export default connect(mapStateToProps, { setCurrentUser, setUserByStorage, setNewAuctionByStorage, setCurrentAuctionByStorage, setUserByStorage })(UpdateDetails);
-
-
 
 

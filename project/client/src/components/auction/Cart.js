@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import { emptyTheCartByAuction, addOrderToDB } from '../../utils/userUtils';
 import { getProductsInCartByAuctionIdFromDB } from '../../utils/userUtils';
-import { setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage } from '../../store/actions/user';
+import { setUserByStorage, setCurrentAuctionByStorage } from '../../store/actions/user';
 import payIcon from '../../img/icons/wallet.png'
 
 const Cart = (props) => {
@@ -22,25 +22,7 @@ const Cart = (props) => {
 
 
 
-    const orderCompletion = () => {
-        const newOrder = new Order(
-            props.currentUser,
-            props.user.shoppingCartOfCurrentAuction,
-            "",//אחרי זה להכניס קוד תשלום
-            amountToPay(),
-            props.currentAuction._id,
-            [],//להוסיף בחירת מתנות
-            new Date()
-        );
-
-        //הפונקציה הזו מוסיפה לטבלת ההזמנות ומוחקת למשתמש את המוצרים של המכירה הזו מהסל
-        addOrderToDB(newOrder).then(succ => {
-            if (succ.status != 400) {
-                props.updateShoppingCart([]);
-            }
-        })
-
-    }
+    
 
 
     useEffect(() => {
@@ -88,4 +70,4 @@ const mapStateToProps = state => {
         currentUser: state.user.currentUser
     }
 }
-export default connect(mapStateToProps, { updateShoppingCart, setUserByStorage, setCurrentAuctionByStorage, setNewAuctionByStorage })(Cart);
+export default connect(mapStateToProps, { updateShoppingCart, setUserByStorage, setCurrentAuctionByStorage })(Cart);

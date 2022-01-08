@@ -24,6 +24,11 @@ import results from '../../../img/icons/results.png'
 import de from '../../../img/icons/dustbin.png'
 import { setUserByStorage } from '../../../store/actions/user';
 import { setNewAuction } from '../../../store/actions/newAuction';
+
+
+//TODO למה לא מרענן את התצוגה כשמוחקים את המכירה האחרונה
+
+
 const useStyles = makeStyles({
     root: { width: '80%', marginBottom: '15vh' },
     container: { maxHeight: 440, },
@@ -144,7 +149,7 @@ const AuctionManagerTable = (props) => {
             <Link to={a.publicationApproval ? '#' : `/new_auction`}><IconButton disabled={a.publicationApproval} title="Edit" onClick={() => { if (!a.publicationApproval) props.setNewAuction(a) }}><img className="my_icon" src={edit} ></img></IconButton></Link>
             <Link onClick={() => props.setSelectedAuctionToOptions(a)} to={isDone ? `/your_profile/results` : '#'}><IconButton title="Results" disabled={!isDone}><img className="my_icon" src={results} ></img></IconButton></Link>
             <Link onClick={() => props.setSelectedAuctionToOptions(a)} to={`/your_profile/statistics`}><IconButton title="Statistics"><img className="my_icon" src={st} ></img></IconButton></Link>
-            <IconButton onClick={() => deleteAuction(a)} title="Delete" disabled={isDone} ><img className="my_icon" src={de} ></img></IconButton>
+            <IconButton onClick={() => deleteAuction(a)} title="Delete" disabled={a.publicationApproval} ><img className="my_icon" src={de} ></img></IconButton>
         </div>
         return { status: a.status.replace(/_/g, " "), published: a.publicationApproval.toString(), name, registrationStartDate, lotteriesDate, approval, options };
     }
@@ -153,7 +158,10 @@ const AuctionManagerTable = (props) => {
 
     return (
         <center>
-            <h1 style={{color:"#262b96"}}>Your Chiense Auctions</h1>
+            {
+             props.auctions&&props.auctions.length>0?   
+           
+        <>    <h1 style={{color:"#262b96"}}>Your Chiense Auctions</h1>
 
             {props.show_delete ? <DeleteModal /> : null}
             {props.show_approval ? <ApprovalModal /> : null}
@@ -194,7 +202,7 @@ const AuctionManagerTable = (props) => {
                     </Table>
                 </TableContainer>
 
-            </Paper>
+            </Paper></>:<h1  style={{color:"#262b96"}}>You have no auctions!</h1>}
 
         </center>);
 }
