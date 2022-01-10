@@ -277,27 +277,13 @@ const SignIn = (props) => {
         <br />
 
       </form>
-      <LoginGoogle />
+      {/* <LoginGoogle /> */}
 
     </center >
-  );
-}
+  );}
+
 const mapStateToProps = (state) => {
   return {
   };
 }
 export default connect(mapStateToProps, { signIn, setCurrentUser })(SignIn);
-
-
-
-
-
-
-
-
-
-
-
-
-
-

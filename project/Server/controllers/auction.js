@@ -423,7 +423,7 @@ const getAuctionWithWinnersForManager = async (req, res) => {
 
 //בדיקת ביצוע הגרלות
 const checkExecutionLotteries = async (req, res) => {
-    let auctions = await Auction.find({ "lotteriesDate": { $gte: new Date() }, "lotteryApproval": true, "status": "NOT_DONE" });
+    let auctions = await Auction.find({ "publicationApproval": true, "lotteriesDate": { $lte: new Date() }, "lotteryApproval": true, "status": "NOT_DONE" });
     auctions.map(async p => {
         await performLotteries(p._id);
         await sendWinnersListToManager(p._id);
@@ -435,8 +435,7 @@ const checkExecutionLotteries = async (req, res) => {
 const performLotteries = async (_id) => {
     let auction = await Auction.findById(_id);
     // if (auction.status == "DONE")
-    //     return res.send(null);
-
+    //     return;
     let orders = await Order.find({ 'auctionId': _id });//כל ההזמנות של המכירה הזו
     if (!_id) res.send("id is not exist");
     let lott = [];

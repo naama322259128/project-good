@@ -8,7 +8,7 @@ const order = require("./routes/order");
 var multer = require('multer')
 const schedule = require('node-schedule');
 const ExecutionLotteries=require('./controllers/auction')
-const job = schedule.scheduleJob('* 16 * * *', function(){
+const job = schedule.scheduleJob('* 23 * * *', function(){
     ExecutionLotteries.checkExecutionLotteries()
 });
 
